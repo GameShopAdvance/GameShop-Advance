@@ -8,7 +8,10 @@ package gameshop.advance.technicalservices.db;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectServer;
+import com.db4o.ObjectSet;
 import com.db4o.cs.Db4oClientServer;
+import com.db4o.query.Query;
+import java.util.Iterator;
 
 /**
  *
@@ -18,7 +21,7 @@ public class DbManagerSingleton {
     
     private static DbManagerSingleton instance;
     
-    private final String dbName = "./src/gameshop/advance/tecnicalservices/db/GSA.db";
+    private final String dbName = "src/gameshop/advance/technicalservices/db/GSA.db";
     
     private ObjectServer server;
     
@@ -26,7 +29,9 @@ public class DbManagerSingleton {
     
     private DbManagerSingleton()
     {
+        System.err.println("SERVER DB OPENING");
         this.server = Db4oClientServer.openServer(Db4oClientServer.newServerConfiguration(), this.dbName, 0);
+        System.err.println("SERVER DB: "+this.server);
     }
     
     public synchronized static DbManagerSingleton getInstance()
@@ -40,5 +45,18 @@ public class DbManagerSingleton {
     public ObjectContainer getClient()
     {
         return this.server.openClient();
+    }
+    
+    public void printObjects(String Name)
+    {
+        ObjectContainer client = this.server.openClient();
+        Query query = client.query();
+        query.constrain(Name);
+        ObjectSet list = query.execute();
+        Iterator iter = list.iterator();
+        while(iter.hasNext())
+        {
+            System.err.println(Name+": "+iter.next());
+        }
     }
 }

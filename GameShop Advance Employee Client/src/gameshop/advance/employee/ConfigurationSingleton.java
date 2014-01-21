@@ -13,7 +13,7 @@ import org.xml.sax.SAXException;
  */
 public class ConfigurationSingleton {
     
-    private String configurationFile = "./configuration.xml";
+    private String configurationFile = "./src/gameshop/advance/employee/config/clientConfiguration.xml";
     private static ConfigurationSingleton instance;
     private String serverAddress;
     private int serverPort;

@@ -1,9 +1,13 @@
 package gameshop.advance.model;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.model.vendita.Vendita;
+import gameshop.advance.technicalservices.db.DbVenditaSingleton;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Il Negozio rappresenta il vero Negozio fisico.Dato che il negozio è uno e uno solo,
@@ -88,7 +92,11 @@ public class NegozioSingleton
      */
     public void aggiungiVendita(Vendita v)
     {
-        this.venditeCompletate.add(v);            
+        try {
+            DbVenditaSingleton.getInstance().create(v);
+        } catch (ObjectAlreadyExistsDbException ex) {
+            Logger.getLogger(NegozioSingleton.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }

@@ -65,7 +65,10 @@ public class Vendita implements IVenditaRemote
      * @param obs
      */
      public void rimuoviListener(IRemoteObserver obs){
-         this.observers.remove(obs);
+         if(obs == null)
+             this.observers = null;
+         else
+            this.observers.remove(obs);
      }
 
     /**

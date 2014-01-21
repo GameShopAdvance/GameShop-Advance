@@ -116,6 +116,8 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
     @Override
     public void gestisciPagamento(Money ammontare) throws RemoteException, InvalidMoneyException {
         this.venditaCorrente.gestisciPagamento(ammontare);
+        System.err.println("Vendita: "+this.venditaCorrente.getResto());
+        this.venditaCorrente.rimuoviListener(null);
         NegozioSingleton.getInstance().aggiungiVendita(this.venditaCorrente);
     }
 
