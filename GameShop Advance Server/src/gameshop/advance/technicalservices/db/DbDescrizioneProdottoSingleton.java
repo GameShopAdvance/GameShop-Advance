@@ -6,10 +6,43 @@
 
 package gameshop.advance.technicalservices.db;
 
+import com.db4o.ObjectContainer;
+import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.model.DescrizioneProdotto;
+
 /**
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class DbDescrizioneProdottoSingleton {
     
+    private static DbDescrizioneProdottoSingleton instance;
+    
+    private DbDescrizioneProdottoSingleton(){};
+        
+    public static DbDescrizioneProdottoSingleton getInstance()
+    {
+            if( instance == null)
+                instance = new DbDescrizioneProdottoSingleton();
+        
+             return instance;
+    }
+        
+    public void create(DescrizioneProdotto desc) throws ObjectAlreadyExistsDbException{
+            ObjectContainer client = DbManagerSingleton.getInstance().getClient();
+            int result = client.queryByExample(desc).size();
+            if(result > 0)
+                throw new ObjectAlreadyExistsDbException();
+            client.store(desc);
+            client.commit();
+            client.close();
+            DbManagerSingleton.getInstance().printObjects(DescrizioneProdotto.class);
+    }
+    
+    
+    public void read() throws ObjectAlreadyExistsDbException {
+            ObjectContainer client = DbManagerSingleton.getInstance().getClient();
+            
+    }
 }
+

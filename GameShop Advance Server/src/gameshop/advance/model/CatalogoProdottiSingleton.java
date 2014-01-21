@@ -1,10 +1,13 @@
 package gameshop.advance.model;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.exceptions.ProdottoNotFoundException;
-import gameshop.advance.utility.Money;
+import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
 import gameshop.advance.utility.IDProdotto;
-import java.util.*;
+import gameshop.advance.utility.Money;
+import java.util.HashMap;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * Il CatalogoProdotti rappresenta il vero catalogo di un negozio, e consente di
@@ -32,7 +35,13 @@ public class CatalogoProdottiSingleton
            Money money = new Money(new Double(i*5));
            DescrizioneProdotto desc = new DescrizioneProdotto(id, money, "Prodotto "+i);
            this.descrizioni.put(id, desc);
+           try {
+               DbDescrizioneProdottoSingleton.getInstance().create(desc);
+           } catch (ObjectAlreadyExistsDbException ex) {
+               Logger.getLogger(CatalogoProdottiSingleton.class.getName()).log(Level.SEVERE, null, ex);
+           }
        }
+       
     }
 
     /**
