@@ -6,10 +6,17 @@
 
 package gameshop.advance.technicalservices.db;
 
+import gameshop.advance.remote.interfaces.IVenditaRemote;
+
 /**
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class DbVenditaSingleton {
+    
+    public void save(IVenditaRemote sale)
+    {
+        
+    }
     
 }
