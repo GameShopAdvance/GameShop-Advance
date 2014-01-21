@@ -47,16 +47,18 @@ public class DbManagerSingleton {
         return this.server.openClient();
     }
     
-    public void printObjects(String Name)
+    public void printObjects(Class c)
     {
         ObjectContainer client = this.server.openClient();
         Query query = client.query();
-        query.constrain(Name);
+        query.constrain(c);
         ObjectSet list = query.execute();
         Iterator iter = list.iterator();
+        System.out.println("PRINTING OBJECTS IN DB");
         while(iter.hasNext())
         {
-            System.err.println(Name+": "+iter.next());
+            System.err.println(c.getName()+": "+iter.next());
         }
+        client.close();
     }
 }
