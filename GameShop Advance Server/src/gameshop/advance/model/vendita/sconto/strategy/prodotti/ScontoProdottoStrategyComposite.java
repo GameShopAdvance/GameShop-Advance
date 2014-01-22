@@ -6,8 +6,8 @@
 
 package gameshop.advance.model.vendita.sconto.strategy.prodotti;
 
+import gameshop.advance.model.vendita.IVendita;
 import gameshop.advance.model.vendita.RigaDiVendita;
-import gameshop.advance.model.vendita.Vendita;
 import gameshop.advance.utility.Money;
 import java.util.LinkedList;
 import java.util.List;
@@ -42,5 +42,10 @@ public abstract class ScontoProdottoStrategyComposite implements IScontoProdotto
     }
     
     @Override
-    public abstract Money getSubtotal(Vendita v, RigaDiVendita rdv);
+    public abstract Money getSubtotal(IVendita v, RigaDiVendita rdv);
+    
+    public Money getRealSubtotal(RigaDiVendita rdv)
+    {
+        return rdv.getDescrizione().getPrezzo().multiply(rdv.getQuantity());
+    }
 }

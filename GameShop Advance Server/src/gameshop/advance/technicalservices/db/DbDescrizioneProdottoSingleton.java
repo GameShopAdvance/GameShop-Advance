@@ -7,8 +7,11 @@
 package gameshop.advance.technicalservices.db;
 
 import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import com.db4o.query.Query;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.model.DescrizioneProdotto;
+import gameshop.advance.utility.IDProdotto;
 
 /**
  *
@@ -39,10 +42,24 @@ public class DbDescrizioneProdottoSingleton {
             DbManagerSingleton.getInstance().printObjects(DescrizioneProdotto.class);
     }
     
-    
-    public void read() throws ObjectAlreadyExistsDbException {
+    //metodo provvisorio
+    public void update(DescrizioneProdotto desc) throws ObjectAlreadyExistsDbException{
             ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-            
+            int result = client.queryByExample(desc).size();
+            client.store(desc);
+            client.commit();
+            client.close();
+            DbManagerSingleton.getInstance().printObjects(DescrizioneProdotto.class);
+    }
+    
+    public DescrizioneProdotto read(IDProdotto code) throws ObjectAlreadyExistsDbException {
+        ObjectContainer client = DbManagerSingleton.getInstance().getClient();
+        Query query=client.query();
+        query.constrain(DescrizioneProdotto.class);
+        query.descend("codiceProdotto").constrain(code);
+        ObjectSet results = query.execute();
+        System.err.println("Descrizioni trovate: "+results.size());
+        return (DescrizioneProdotto) results.get(0);
     }
 }
 

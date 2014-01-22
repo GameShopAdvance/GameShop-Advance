@@ -4,11 +4,9 @@ import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
 import gameshop.advance.utility.IDProdotto;
-import gameshop.advance.utility.Money;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import org.joda.time.DateTime;
 
 /**
  * Il CatalogoProdotti rappresenta il vero catalogo di un negozio, e consente di
@@ -30,7 +28,8 @@ public class CatalogoProdottiSingleton
      */
     private CatalogoProdottiSingleton () throws InvalidMoneyException {
        //  Dobbiamo recuperare i prodotti dalla cache o dal db
-       for(int i=1; i<5;i++)
+        /**
+       for(int i=1; i<6;i++)
        {
            IDProdotto id = new IDProdotto("AB"+i);
            Money money = new Money(new Double(i*5));
@@ -43,7 +42,7 @@ public class CatalogoProdottiSingleton
                Logger.getLogger(CatalogoProdottiSingleton.class.getName()).log(Level.SEVERE, null, ex);
            }
        }
-       
+       */
     }
 
     /**
@@ -68,7 +67,12 @@ public class CatalogoProdottiSingleton
      */
     public DescrizioneProdotto getDescrizioneProdotto(IDProdotto codiceProdotto)
     {
-        DescrizioneProdotto desc = this.descrizioni.get(codiceProdotto);
+        DescrizioneProdotto desc = null;
+        try {
+            desc = DbDescrizioneProdottoSingleton.getInstance().read(codiceProdotto);
+        } catch (ObjectAlreadyExistsDbException ex) {
+            Logger.getLogger(CatalogoProdottiSingleton.class.getName()).log(Level.SEVERE, null, ex);
+        }
         return desc;
     }
 }

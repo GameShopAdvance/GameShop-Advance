@@ -2,7 +2,9 @@ package gameshop.advance.model;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.model.vendita.CartaCliente;
 import gameshop.advance.model.vendita.Vendita;
+import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
 import gameshop.advance.technicalservices.db.DbVenditaSingleton;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
@@ -97,6 +99,11 @@ public class NegozioSingleton
         } catch (ObjectAlreadyExistsDbException ex) {
             Logger.getLogger(NegozioSingleton.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+    
+    public CartaCliente getCliente(int codiceTessera) {
+        System.err.println("Negozio ---- looking for client");
+            return DbCartaClienteSingleton.getInstance().read(codiceTessera);
     }
 
 }

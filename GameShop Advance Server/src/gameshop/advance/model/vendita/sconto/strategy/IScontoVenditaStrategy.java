@@ -6,7 +6,7 @@
 
 package gameshop.advance.model.vendita.sconto.strategy;
 
-import gameshop.advance.remote.interfaces.IVenditaRemote;
+import gameshop.advance.model.vendita.IVendita;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 
@@ -16,6 +16,6 @@ import java.rmi.RemoteException;
  */
 public interface IScontoVenditaStrategy {
     
-    Money getTotal(IVenditaRemote vendita) throws RemoteException;
+    Money getTotal(IVendita vendita) throws RemoteException;
 
 }

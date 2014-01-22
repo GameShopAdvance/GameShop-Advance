@@ -7,6 +7,7 @@
 package gameshop.advance.model.vendita.sconto.strategy;
 
 import gameshop.advance.model.vendita.sconto.strategy.prodotti.IScontoProdottoStrategy;
+import gameshop.advance.model.vendita.sconto.strategy.prodotti.ScontoProdottoMigliorePerClienteStrategyComposite;
 
 /**
  *
@@ -27,13 +28,14 @@ public class ScontoFactorySingleton {
     
     public IScontoVenditaStrategy getStrategiaScontoVendita()
     {
-        return null;
+        return new ScontoVenditaMigliorePerClienteStrategyComposite();
     }
     
     public IScontoProdottoStrategy getStrategiaScontoProdotto() throws ClassNotFoundException, InstantiationException, IllegalAccessException
     {
-        String className = System.getProperty( "strategiadiscontoprodotti.class.name" );
-        IScontoProdottoStrategy strategy = (IScontoProdottoStrategy) Class.forName( className ).newInstance();
-        return strategy;
+        //String className = System.getProperty( "strategiadiscontoprodotti.class.name" );
+        //IScontoProdottoStrategy strategy = (IScontoProdottoStrategy) Class.forName( className ).newInstance();
+        //return strategy;
+        return new ScontoProdottoMigliorePerClienteStrategyComposite();
     }
 }

@@ -7,9 +7,10 @@
 package gameshop.advance.model.vendita.sconto.strategy;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.remote.interfaces.IVenditaRemote;
+import gameshop.advance.model.vendita.IVendita;
+import gameshop.advance.model.vendita.RigaDiVendita;
 import gameshop.advance.utility.Money;
-import java.rmi.RemoteException;
+import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -37,25 +38,18 @@ public class ScontoPercentualeStrategy implements IScontoVenditaStrategy {
     }
     
     @Override
-    public Money getTotal(IVenditaRemote vendita) throws RemoteException{
-        
-        Money prezzoScontato = this.calcolaSconto(vendita);
-        return prezzoScontato;
+    public Money getTotal(IVendita vendita){
+        List<RigaDiVendita> righe = vendita.getRigheDiVendita();
+        Money totale = new Money();
+        for(RigaDiVendita riga:righe)
+        {
+            try {
+                totale = totale.add(riga.getSubTotal(vendita));
+            } catch (InvalidMoneyException ex) {
+                Logger.getLogger(ScontoPercentualeStrategy.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+        return totale.subtract(totale.multiply(percentuale).divide(100));
     }
     
-    public Money calcolaSconto (IVenditaRemote vendita) throws RemoteException{
-        
-        Money prezzoPieno = new Money();
-        
-        try {
-            prezzoPieno = vendita.getTotal();
-        } catch (InvalidMoneyException ex) {
-            Logger.getLogger(ScontoPercentualeStrategy.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        
-        prezzoPieno.divide(100);
-        prezzoPieno.multiply(this.percentuale);
-        return prezzoPieno;
-  
-    }
 }

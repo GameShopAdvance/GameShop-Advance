@@ -35,6 +35,8 @@ public class GameShopAdvance {
             //bind to a specific ip
             // System.setProperty("java.rmi.server.hostname", "10.154.42.76");
             
+            
+            
             if(System.getSecurityManager() == null)
                 System.setSecurityManager(new SecurityManager());
             

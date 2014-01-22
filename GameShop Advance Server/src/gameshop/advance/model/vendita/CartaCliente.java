@@ -17,15 +17,26 @@ public class CartaCliente {
     private TipologiaCliente tipo;
     private int codice;
     
-    public CartaCliente(String name, String surname, int code)
+    public CartaCliente(String name, String surname, int code, TipologiaCliente tipo)
     {
         this.nomeCliente = name;
         this.cognomeCliente = surname;
         this.codice = code;
+        this.tipo = tipo;
+    }
+    
+    public CartaCliente(int id)
+    {
+        this.codice = id;
     }
     
     public TipologiaCliente getTipo()
     {
         return tipo;
+    }
+    
+    public int getId()
+    {
+        return this.codice;
     }
 }

@@ -8,11 +8,12 @@ package gameshop.advance.model.vendita.sconto.strategy.prodotti;
 
 import gameshop.advance.model.IntervalloDiTempo;
 import gameshop.advance.model.vendita.CartaCliente;
+import gameshop.advance.model.vendita.IVendita;
 import gameshop.advance.model.vendita.RigaDiVendita;
 import gameshop.advance.model.vendita.TipologiaCliente;
-import gameshop.advance.model.vendita.Vendita;
 import gameshop.advance.utility.Money;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -24,8 +25,27 @@ public class ScontoPrendiPaghiClienteProdottoStrategy implements IScontoProdotto
     private IntervalloDiTempo periodo;
     private LinkedList<TipologiaCliente> applicabile;
 
+    public ScontoPrendiPaghiClienteProdottoStrategy(int take, int pay, IntervalloDiTempo period, List<TipologiaCliente> applicable)
+    {
+        this.paghi = pay;
+        this.prendi = take;
+        this.periodo = period;
+        this.applicabile = (LinkedList<TipologiaCliente>) applicable;
+    }
+    
+    public ScontoPrendiPaghiClienteProdottoStrategy(int take, int pay, IntervalloDiTempo period, TipologiaCliente applicable)
+    {
+        this.paghi = pay;
+        this.prendi = take;
+        this.periodo = period;
+        LinkedList<TipologiaCliente> list = new LinkedList<>();
+        list.add(applicable);
+        this.applicabile = list;
+    }
+    
     @Override
-    public Money getSubtotal(Vendita v, RigaDiVendita rdv) {
+    public Money getSubtotal(IVendita v, RigaDiVendita rdv) {
+        System.out.println("Strategia prendi "+this.prendi+" paghi "+this.paghi);
         CartaCliente c = v.getCliente();
         int quantity = rdv.getQuantity();
         if(c!=null && this.checkApplicable(c.getTipo()))

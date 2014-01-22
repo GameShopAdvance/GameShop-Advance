@@ -70,10 +70,15 @@ public class DescrizioneProdotto
      public List<IScontoProdottoStrategy> getSconti()
      {
          LinkedList<IScontoProdottoStrategy> scontiValidi = new LinkedList<>();
+         System.err.println("getSconti()");
          for(IScontoProdottoStrategy sconto: this.sconti)
          {
+             System.out.println("Sconto: "+sconto.getClass().toString());
              if(sconto.isValid())
+             {
                  scontiValidi.add(sconto);
+                 System.err.println("Sconto Valido");
+             }
          }
          return scontiValidi;
      }
@@ -86,5 +91,10 @@ public class DescrizioneProdotto
                 return prezzo;
         }
         return null;
+    }
+    
+    public  void addPrezzo(Prezzo p)
+    {
+        
     }
 }

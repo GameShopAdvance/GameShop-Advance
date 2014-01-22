@@ -13,6 +13,11 @@ import java.util.Objects;
 public class IDProdotto implements Serializable{
     private String codice;
 
+    public IDProdotto(String id)
+    {
+        this.codice = id;
+    }
+
     public String getCodice() {
         return codice;
     }
@@ -63,8 +68,5 @@ public class IDProdotto implements Serializable{
         this.codice = codice;
     }
     
-    public IDProdotto(String id)
-    {
-        this.codice = id;
-    }
+    
 }

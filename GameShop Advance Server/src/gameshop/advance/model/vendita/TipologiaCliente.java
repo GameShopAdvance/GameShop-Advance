@@ -15,10 +15,11 @@ public class TipologiaCliente {
     private String name;
     private String description;
     
-    public TipologiaCliente(String name, String description)
+    public TipologiaCliente(String name, String description, int code)
     {
         this.name = name;
         this.description = description;
+        this.code = code;
     }
     
     /**
@@ -30,8 +31,13 @@ public class TipologiaCliente {
     {
         return this.code == tc.getCodice();           
     }
+    
+    public String getNome()
+    {
+        return this.name;
+    }
 
-    private int getCodice() {
+    public int getCodice() {
         return this.code;
     }
 }

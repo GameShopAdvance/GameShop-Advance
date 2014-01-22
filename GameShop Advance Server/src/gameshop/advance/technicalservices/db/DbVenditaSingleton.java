@@ -11,7 +11,6 @@ import com.db4o.query.Query;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.model.vendita.Vendita;
 import gameshop.advance.remote.interfaces.IVenditaRemote;
-import java.util.Iterator;
 
 /**
  *
@@ -46,13 +45,13 @@ public class DbVenditaSingleton {
         client.close();
     }
     
-    public Iterator read(Integer id)
+    public IVenditaRemote read(Integer id)
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         Query query=client.query();
         query.constrain(IVenditaRemote.class);
         query.descend("id").constrain(id);
-        return query.execute().iterator();
+        return (IVenditaRemote) query.execute().get(0);
     }
     
 }

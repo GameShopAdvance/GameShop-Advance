@@ -3,8 +3,8 @@ package gameshop.advance.model.vendita;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.Pagamento;
-import gameshop.advance.model.vendita.sconto.strategy.IScontoVenditaStrategy;
 import gameshop.advance.model.vendita.sconto.strategy.ScontoFactorySingleton;
+import gameshop.advance.model.vendita.sconto.strategy.ScontoVenditaStrategyComposite;
 import gameshop.advance.remote.interfaces.IRemoteObserver;
 import gameshop.advance.remote.interfaces.IVenditaRemote;
 import gameshop.advance.utility.Money;
@@ -22,14 +22,14 @@ import java.util.logging.Logger;
  * bisogno dei cambi di stato della vendita.
  * @author Salx
  */
-public class Vendita implements IVenditaRemote
+public class Vendita implements IVenditaRemote, IVendita
 {
     private LinkedList<RigaDiVendita> righeDiVendita = new LinkedList<>();
     private LinkedList<IRemoteObserver> observers = new LinkedList<>();
     private CartaCliente cliente;
     private Pagamento pagamento;
     private Date date;
-    private IScontoVenditaStrategy strategiaDiSconto;
+    private ScontoVenditaStrategyComposite strategiaDiSconto;
     private boolean completata;
 
     /**
@@ -40,7 +40,8 @@ public class Vendita implements IVenditaRemote
     {
         this.date = new Date();
         this.completata = false;
-        this.strategiaDiSconto = ScontoFactorySingleton.getInstance().getStrategiaScontoVendita();
+        this.strategiaDiSconto = (ScontoVenditaStrategyComposite) ScontoFactorySingleton.getInstance().getStrategiaScontoVendita();
+        //this.strategiaDiSconto.add(new ScontoTotaleStrategy(new Money(10.0)));
     }
 
     /**
@@ -58,11 +59,7 @@ public class Vendita implements IVenditaRemote
             RigaDiVendita rdv = new RigaDiVendita(desc, quantity);
             this.righeDiVendita.add(rdv); 
             this.notificaListeners();
-        } catch (ClassNotFoundException ex) {
-            Logger.getLogger(Vendita.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (InstantiationException ex) {
-            Logger.getLogger(Vendita.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (IllegalAccessException ex) {
+        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(Vendita.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -156,11 +153,13 @@ public class Vendita implements IVenditaRemote
         }
     }
     
+    @Override
     public List getRigheDiVendita()
     {
         return this.righeDiVendita;
     }
     
+    @Override
     public CartaCliente getCliente()
     {
         return this.cliente;
@@ -168,6 +167,7 @@ public class Vendita implements IVenditaRemote
 
     public void setCliente(CartaCliente c)
     {
+        System.err.println("Vendita --- setting client: "+c);
         this.cliente = c;
     }
 }

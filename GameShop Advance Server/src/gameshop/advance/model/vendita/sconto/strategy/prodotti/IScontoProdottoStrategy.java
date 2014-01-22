@@ -6,8 +6,8 @@
 
 package gameshop.advance.model.vendita.sconto.strategy.prodotti;
 
+import gameshop.advance.model.vendita.IVendita;
 import gameshop.advance.model.vendita.RigaDiVendita;
-import gameshop.advance.model.vendita.Vendita;
 import gameshop.advance.utility.Money;
 
 /**
@@ -16,7 +16,7 @@ import gameshop.advance.utility.Money;
  */
 public interface IScontoProdottoStrategy {
     
-    public Money getSubtotal( Vendita v, RigaDiVendita rdv );
+    public Money getSubtotal(IVendita v, RigaDiVendita rdv );
     
     public boolean isValid();
     

@@ -55,7 +55,7 @@ public class RigaDiVendita
         this.quantity = quantity;
     }
 
-    public Money getSubTotal(Vendita v) throws InvalidMoneyException
+    public Money getSubTotal(IVendita v) throws InvalidMoneyException
     {
         return this.strategiaDiSconto.getSubtotal(v, this);
     }

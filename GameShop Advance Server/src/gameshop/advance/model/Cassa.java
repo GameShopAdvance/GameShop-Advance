@@ -3,6 +3,7 @@ package gameshop.advance.model;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.model.vendita.CartaCliente;
 import gameshop.advance.model.vendita.Vendita;
 import gameshop.advance.remote.interfaces.ICassaRemote;
 import gameshop.advance.remote.interfaces.IRemoteObserver;
@@ -10,6 +11,8 @@ import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * La classe Cassa svolge tutti i ruoli di un terminale cassa all'interno di un negozio.Gestisce 
@@ -48,6 +51,9 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
     @Override
     public void avviaNuovaVendita() {
         this.venditaCorrente = new Vendita();
+        System.out.println("Vendita creata correttamente!");
+        this.inserisciTesseraCliente(1);
+        System.err.println("Tessera inserita");
     }
 
     /**
@@ -127,6 +133,23 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
 
     public int getIdCassa() {
         return numeroCassa;
+    }
+    
+    public void inserisciTesseraCliente(int codiceTessera)
+    {
+        try {
+            CartaCliente carta = NegozioSingleton.getInstance().getCliente(codiceTessera);
+            System.err.println("Tessera: "+carta);
+            if(carta!=null)
+            {
+                System.err.println("Carta cliente:"+carta);
+                this.venditaCorrente.setCliente(carta);
+            }
+        } catch (RemoteException ex) {
+            Logger.getLogger(Cassa.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InvalidMoneyException ex) {
+            Logger.getLogger(Cassa.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
 }
