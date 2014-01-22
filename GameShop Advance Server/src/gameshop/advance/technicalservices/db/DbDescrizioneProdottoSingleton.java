@@ -12,7 +12,7 @@ import gameshop.advance.model.DescrizioneProdotto;
 
 /**
  *
- * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
+ * @author matteog
  */
 public class DbDescrizioneProdottoSingleton {
     
