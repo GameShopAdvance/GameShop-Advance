@@ -8,6 +8,7 @@ import gameshop.advance.utility.Money;
 import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.joda.time.DateTime;
 
 /**
  * Il CatalogoProdotti rappresenta il vero catalogo di un negozio, e consente di
@@ -33,7 +34,8 @@ public class CatalogoProdottiSingleton
        {
            IDProdotto id = new IDProdotto("AB"+i);
            Money money = new Money(new Double(i*5));
-           DescrizioneProdotto desc = new DescrizioneProdotto(id, money, "Prodotto "+i);
+           Prezzo p = new Prezzo(money, new IntervalloDiTempo(new DateTime(), new DateTime().plusDays(5)));
+           DescrizioneProdotto desc = new DescrizioneProdotto(id, p, "Prodotto "+i);
            this.descrizioni.put(id, desc);
            try {
                DbDescrizioneProdottoSingleton.getInstance().create(desc);

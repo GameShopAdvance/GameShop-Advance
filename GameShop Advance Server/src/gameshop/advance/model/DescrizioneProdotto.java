@@ -28,7 +28,7 @@ public class DescrizioneProdotto
      */
     public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione ){
         this.descrizione = descrizione;
-        this.prezzo.add(prezzo);
+        this.prezzi.add(prezzo);
         this.codiceProdotto = codiceProdotto;
     }
 
@@ -37,7 +37,11 @@ public class DescrizioneProdotto
      */
     public Money getPrezzo()
     {
-        return this.getPrezzoAttuale().getMoney();
+        Prezzo p = this.getPrezzoAttuale();
+        if(p!=null)
+            return p.getMoney();
+        else
+            return null;
     }
 
     /**
@@ -81,7 +85,6 @@ public class DescrizioneProdotto
             if(prezzo.isActual())
                 return prezzo;
         }
-        else
-            return null;
+        return null;
     }
 }

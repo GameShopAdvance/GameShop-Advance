@@ -21,6 +21,15 @@ public class Prezzo {
         this.ammontare = m;
         this.periodo = time;
     }
+
+    public Money getMoney() {
+        return this.ammontare;        
+    }
+
+    public boolean isActual() 
+    {
+        return this.periodo.isActual();
+    }
     
     
 }

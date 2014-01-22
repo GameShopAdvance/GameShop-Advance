@@ -6,9 +6,6 @@
 
 package gameshop.advance.model;
 import org.joda.time.DateTime;
-import org.joda.time.Duration;
-import org.joda.time.Interval;
-import org.joda.time.Months;
 
 /**
  *
@@ -16,17 +13,20 @@ import org.joda.time.Months;
  */
 public class IntervalloDiTempo {
     
-     DateTime startDate = new DateTime();
-     DateTime endDate = startDate.plus(Months.months(2));
+     DateTime startDate;
+     DateTime endDate;
      
-     Interval interval = new Interval(startDate, endDate);
+     public IntervalloDiTempo(DateTime start, DateTime end)
+     {
+         this.startDate = start;
+         this.endDate = end;
+     }
         
      public boolean isActual(){
-         Duration duration = this.interval.toDuration();
-         if(duration.equals(0))
-             return false;
-         else
+         if(this.startDate.isBeforeNow() && this.endDate.isAfterNow())
              return true;
+         else
+             return false;
      }
     
     
