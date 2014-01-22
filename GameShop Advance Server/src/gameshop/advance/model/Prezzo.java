@@ -22,5 +22,4 @@ public class Prezzo {
         this.periodo = time;
     }
     
-    
 }

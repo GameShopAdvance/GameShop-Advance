@@ -28,7 +28,7 @@ public class DescrizioneProdotto
      */
     public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione ){
         this.descrizione = descrizione;
-        this.prezzo.add(prezzo);
+        this.prezzi.add(prezzo);
         this.codiceProdotto = codiceProdotto;
     }
 
