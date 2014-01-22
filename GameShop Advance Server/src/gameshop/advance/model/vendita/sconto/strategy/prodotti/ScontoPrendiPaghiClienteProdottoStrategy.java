@@ -12,37 +12,32 @@ import gameshop.advance.model.vendita.RigaDiVendita;
 import gameshop.advance.model.vendita.TipologiaCliente;
 import gameshop.advance.model.vendita.Vendita;
 import gameshop.advance.utility.Money;
-import java.util.List;
+import java.util.LinkedList;
 
 /**
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class ScontoPercentualeClienteProdottoStrategy implements IScontoProdottoStrategy{
-    
-    private List<TipologiaCliente> applicabile;
+public class ScontoPrendiPaghiClienteProdottoStrategy implements IScontoProdottoStrategy {
+    private int prendi;
+    private int paghi;
     private IntervalloDiTempo periodo;
-    private int percentuale;
-    
-    public ScontoPercentualeClienteProdottoStrategy(int percentuale, List applicable)
-    {
-        this.percentuale = percentuale;
-        this.applicabile = applicable;
-    }
+    private LinkedList<TipologiaCliente> applicabile;
 
     @Override
     public Money getSubtotal(Vendita v, RigaDiVendita rdv) {
         CartaCliente c = v.getCliente();
-        Money subtotal = rdv.getDescrizione().getPrezzo().multiply(rdv.getQuantity());
+        int quantity = rdv.getQuantity();
         if(c!=null && this.checkApplicable(c.getTipo()))
-            return subtotal.subtract(subtotal.multiply(percentuale).divide(100));
-        else
-            return subtotal;
+        {
+            int quantityOnOffer = rdv.getQuantity()/this.prendi;
+            int notPayedQuantity = quantityOnOffer*(this.prendi-this.paghi);
+            quantity = rdv.getQuantity()-notPayedQuantity;
+        }
+
+        return rdv.getDescrizione().getPrezzo().multiply(quantity);
     }
-    
-    @Override
-    public void add(IScontoProdottoStrategy sp){}
-    
+
     private boolean checkApplicable(TipologiaCliente tc)
     {
         for(TipologiaCliente tcliente: applicabile)
@@ -52,9 +47,17 @@ public class ScontoPercentualeClienteProdottoStrategy implements IScontoProdotto
         }
         return false;
     }
-
+    
     @Override
     public boolean isValid() {
-        return periodo.isActual();
+        return this.periodo.isActual();
     }
+
+    @Override
+    public void add(IScontoProdottoStrategy sp) {
+        
+    }
+    
+    
+    
 }

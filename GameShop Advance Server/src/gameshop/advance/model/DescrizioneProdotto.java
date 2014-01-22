@@ -15,7 +15,7 @@ public class DescrizioneProdotto
 {
 
     private IDProdotto codiceProdotto;
-    private LinkedList<Prezzo> prezzo = new LinkedList<>();
+    private LinkedList<Prezzo> prezzi = new LinkedList<>();
     private String descrizione;
     private LinkedList<IScontoProdottoStrategy> sconti = new LinkedList<>();
 
@@ -65,11 +65,23 @@ public class DescrizioneProdotto
          
      public List<IScontoProdottoStrategy> getSconti()
      {
-         LinkedList<IScontoProdottoStrategy>
-         return this.sconti;
+         LinkedList<IScontoProdottoStrategy> scontiValidi = new LinkedList<>();
+         for(IScontoProdottoStrategy sconto: this.sconti)
+         {
+             if(sconto.isValid())
+                 scontiValidi.add(sconto);
+         }
+         return scontiValidi;
      }
 
-    private Object getPrezzoAttuale() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    private Prezzo getPrezzoAttuale() {
+        Prezzo p;
+        for(Prezzo prezzo: this.prezzi)
+        {
+            if(prezzo.isActual())
+                return prezzo;
+        }
+        else
+            return null;
     }
 }
