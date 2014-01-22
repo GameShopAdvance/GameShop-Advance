@@ -31,5 +31,4 @@ public class Prezzo {
         return this.periodo.isActual();
     }
     
-    
 }

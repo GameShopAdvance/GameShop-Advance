@@ -13,21 +13,21 @@ import org.joda.time.DateTime;
  */
 public class IntervalloDiTempo {
     
-     DateTime startDate;
+     DateTime startDate; 
      DateTime endDate;
-     
-     public IntervalloDiTempo(DateTime start, DateTime end)
-     {
-         this.startDate = start;
-         this.endDate = end;
-     }
-        
-     public boolean isActual(){
+          
+     public IntervalloDiTempo(DateTime start, DateTime end) {
+        this.endDate = end;
+        this.startDate = start;
+    }
+  
+    public boolean isActual(){
          if(this.startDate.isBeforeNow() && this.endDate.isAfterNow())
              return true;
          else
              return false;
      }
     
+
     
 }

@@ -10,6 +10,6 @@ package gameshop.advance.exceptions;
  *
  * @author matteog
  */
-public class ObjectNotExistsDbException {
+public class ObjectNotExistsDbException extends Exception{
     
 }
