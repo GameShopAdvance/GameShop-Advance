@@ -3,12 +3,15 @@ package gameshop.advance.model.vendita;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.Pagamento;
+import gameshop.advance.model.vendita.sconto.strategy.IScontoVenditaStrategy;
+import gameshop.advance.model.vendita.sconto.strategy.ScontoFactorySingleton;
 import gameshop.advance.remote.interfaces.IRemoteObserver;
 import gameshop.advance.remote.interfaces.IVenditaRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  * La classe Vendita implementa l'interfaccia remota IVenditaRemote.Gestisce tutte le
@@ -19,11 +22,12 @@ import java.util.LinkedList;
  */
 public class Vendita implements IVenditaRemote
 {
-
     private LinkedList<RigaDiVendita> righeDiVendita = new LinkedList<>();
     private LinkedList<IRemoteObserver> observers = new LinkedList<>();
+    private CartaCliente cliente;
     private Pagamento pagamento;
     private Date date;
+    private IScontoVenditaStrategy strategiaDiSconto;
     private boolean completata;
 
     /**
@@ -33,7 +37,8 @@ public class Vendita implements IVenditaRemote
     public Vendita()
     {
         this.date = new Date();
-        this.completata = false;            
+        this.completata = false;
+        this.strategiaDiSconto = ScontoFactorySingleton.getInstance().getStrategiaScontoVendita();
     }
 
     /**
@@ -82,12 +87,7 @@ public class Vendita implements IVenditaRemote
     @Override
     public Money getTotal() throws RemoteException, InvalidMoneyException
     {
-        Money total = new Money();
-        for(RigaDiVendita rdv : this.righeDiVendita)
-        {
-            total = total.add(rdv.getSubTotal());
-        }
-        return total;
+        return this.strategiaDiSconto.getTotal(this);
     }
 
     /**
@@ -145,5 +145,19 @@ public class Vendita implements IVenditaRemote
             o.notifica(this);
         }
     }
+    
+    public List getRigheDiVendita()
+    {
+        return this.righeDiVendita;
+    }
+    
+    public CartaCliente getCliente()
+    {
+        return this.cliente;
+    }
 
+    public void setCliente(CartaCliente c)
+    {
+        this.cliente = c;
+    }
 }
