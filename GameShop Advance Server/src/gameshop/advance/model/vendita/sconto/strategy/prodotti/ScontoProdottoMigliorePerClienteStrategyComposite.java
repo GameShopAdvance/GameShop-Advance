@@ -31,5 +31,6 @@ public class ScontoProdottoMigliorePerClienteStrategyComposite extends ScontoPro
         }
         return minimaSpesa;
     }
+
     
 }

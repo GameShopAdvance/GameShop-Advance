@@ -2,7 +2,10 @@ package gameshop.advance.model.vendita;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.model.DescrizioneProdotto;
+import gameshop.advance.model.vendita.sconto.strategy.ScontoFactorySingleton;
+import gameshop.advance.model.vendita.sconto.strategy.prodotti.IScontoProdottoStrategy;
 import gameshop.advance.utility.Money;
+import java.util.List;
 
 /**
  * Rappresenta la riga di vendita che verrà stampata sullo scontrino.Contiene
@@ -11,7 +14,7 @@ import gameshop.advance.utility.Money;
  */
 public class RigaDiVendita
 {
-
+    private IScontoProdottoStrategy strategiaDiSconto;
     private DescrizioneProdotto descrizione;
     private int quantity;
 
@@ -20,11 +23,20 @@ public class RigaDiVendita
      * quantità) per creare una nuova riga di vendita.
      * @param desc
      * @param quantity
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.lang.InstantiationException
+     * @throws java.lang.IllegalAccessException
      */
-    public RigaDiVendita(DescrizioneProdotto desc, int quantity)
+    public RigaDiVendita(DescrizioneProdotto desc, int quantity) throws ClassNotFoundException, InstantiationException, IllegalAccessException
     {
         this.descrizione = desc;
         this.quantity = quantity;
+        this.strategiaDiSconto = ScontoFactorySingleton.getInstance().getStrategiaScontoProdotto();
+        List<IScontoProdottoStrategy> sconti = desc.getSconti();
+        for(IScontoProdottoStrategy sconto:sconti)
+        {
+            this.strategiaDiSconto.add(sconto);
+        }
     }
 
     public DescrizioneProdotto getDescrizione() {
@@ -43,9 +55,9 @@ public class RigaDiVendita
         this.quantity = quantity;
     }
 
-    public Money getSubTotal() throws InvalidMoneyException
+    public Money getSubTotal(Vendita v) throws InvalidMoneyException
     {
-        return this.descrizione.getPrezzo().multiply(this.quantity);
+        return this.strategiaDiSconto.getSubtotal(v, this);
     }
 
 }

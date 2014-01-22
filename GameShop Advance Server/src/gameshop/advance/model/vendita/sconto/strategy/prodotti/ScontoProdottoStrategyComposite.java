@@ -25,14 +25,20 @@ public abstract class ScontoProdottoStrategyComposite implements IScontoProdotto
         return this.components;
     }
     
-    public void addComponent(IScontoProdottoStrategy sconto)
+    public void add(IScontoProdottoStrategy sconto)
     {
         this.components.add(sconto);
     }
     
-    public void addComponent(List<IScontoProdottoStrategy> components)
+    public void add(List<IScontoProdottoStrategy> components)
     {
         this.components.addAll(components);
+    }
+    
+    @Override
+    public boolean isValid()
+    {
+        return true;
     }
     
     @Override

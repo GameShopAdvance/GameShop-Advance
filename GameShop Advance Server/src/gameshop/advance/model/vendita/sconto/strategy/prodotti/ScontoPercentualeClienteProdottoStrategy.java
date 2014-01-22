@@ -20,6 +20,7 @@ import java.util.List;
 public class ScontoPercentualeClienteProdottoStrategy implements IScontoProdottoStrategy{
     
     private List<TipologiaCliente> applicabile;
+    private IntervalloDiTempo periodo;
     private int percentuale;
     
     public ScontoPercentualeClienteProdottoStrategy(int percentuale, List applicable)
@@ -38,6 +39,9 @@ public class ScontoPercentualeClienteProdottoStrategy implements IScontoProdotto
             return subtotal;
     }
     
+    @Override
+    public void add(IScontoProdottoStrategy sp){}
+    
     public boolean checkApplicable(TipologiaCliente tc)
     {
         for(TipologiaCliente tcliente: applicabile)
@@ -46,5 +50,10 @@ public class ScontoPercentualeClienteProdottoStrategy implements IScontoProdotto
                 return true;
         }
         return false;
+    }
+
+    @Override
+    public boolean isValid() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

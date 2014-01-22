@@ -12,6 +12,8 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * La classe Vendita implementa l'interfaccia remota IVenditaRemote.Gestisce tutte le
@@ -52,9 +54,17 @@ public class Vendita implements IVenditaRemote
      */
     public void creaRigaDiVendita(DescrizioneProdotto desc, int quantity) throws RemoteException 
     {
-        RigaDiVendita rdv = new RigaDiVendita(desc, quantity);
-        this.righeDiVendita.add(rdv);
-        this.notificaListeners(); 
+        try {
+            RigaDiVendita rdv = new RigaDiVendita(desc, quantity);
+            this.righeDiVendita.add(rdv); 
+            this.notificaListeners();
+        } catch (ClassNotFoundException ex) {
+            Logger.getLogger(Vendita.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (InstantiationException ex) {
+            Logger.getLogger(Vendita.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (IllegalAccessException ex) {
+            Logger.getLogger(Vendita.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     /**

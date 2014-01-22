@@ -31,4 +31,5 @@ public class ScontoProdottoMigliorePerVenditoreStrategyComposite extends ScontoP
         }
         return massimaSpesa;
     }
+
 }
