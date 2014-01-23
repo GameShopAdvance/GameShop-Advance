@@ -43,6 +43,11 @@ public class DescrizioneProdotto
         else
             return null;
     }
+    
+    public IDProdotto getCodiceProdotto()
+    {
+        return this.codiceProdotto;
+    }
 
     /**
      * @return la descizione di un prodotto.
@@ -96,5 +101,23 @@ public class DescrizioneProdotto
     public  void addPrezzo(Prezzo p)
     {
         
+    }
+    
+    public List<Prezzo> getTuttiPrezzi()
+    {
+        return this.prezzi;
+    }
+    
+    public List<IScontoProdottoStrategy> getTuttiSconti()
+    {
+        return this.sconti;
+    }
+    
+    public void clone(DescrizioneProdotto d)
+    {
+        this.codiceProdotto = d.getCodiceProdotto();
+        this.descrizione = d.getDescrizione();
+        this.prezzi = (LinkedList <Prezzo>) d.getTuttiPrezzi();
+        this.sconti = (LinkedList<IScontoProdottoStrategy>) d.getTuttiSconti();
     }
 }

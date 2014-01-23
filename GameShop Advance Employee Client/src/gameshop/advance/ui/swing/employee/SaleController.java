@@ -93,11 +93,9 @@ public class SaleController extends UnicastRemoteObject implements IRemoteClient
     
     public void effettuaPagamento(Double payment) throws RemoteException, InvalidMoneyException
     {
-        cassa.rimuoviListener(this.saleTotalObserver);
         cassa.aggiungiListener(this.saleRestObserver);
         cassa.gestisciPagamento(new Money(payment));
         aggiornaWindow(new EndSalePanel());
-        cassa.rimuoviListener(this.saleRestObserver);
     }
     
     /**

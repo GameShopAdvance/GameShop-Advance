@@ -4,6 +4,7 @@ import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.Pagamento;
 import gameshop.advance.model.vendita.sconto.ScontoFactorySingleton;
+import gameshop.advance.model.vendita.sconto.vendita.ScontoTotaleStrategy;
 import gameshop.advance.model.vendita.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.remote.interfaces.IRemoteObserver;
 import gameshop.advance.remote.interfaces.IVenditaRemote;
@@ -41,7 +42,7 @@ public class Vendita implements IVenditaRemote, IVendita
         this.date = new Date();
         this.completata = false;
         this.strategiaDiSconto = (ScontoVenditaStrategyComposite) ScontoFactorySingleton.getInstance().getStrategiaScontoVendita();
-        //this.strategiaDiSconto.add(new ScontoTotaleStrategy(new Money(10.0)));
+        this.strategiaDiSconto.add(new ScontoTotaleStrategy(new Money(10.0)));
     }
 
     /**

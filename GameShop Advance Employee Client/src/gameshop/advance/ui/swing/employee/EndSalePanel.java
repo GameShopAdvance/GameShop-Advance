@@ -23,11 +23,13 @@ public class EndSalePanel extends JPanel {
         try {
             this.displayRest.setText(SaleController.getInstance().getResto().toString());
         } catch (NullPointerException ex) {
+            Logger.getLogger(EndSalePanel.class.getName()).log(Level.SEVERE, null, ex);
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
                     + " si prega di controllare la configurazione del sistema.");
         } catch (RemoteException ex) {
             Logger.getLogger(EndSalePanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ConfigurationException ex) {
+            Logger.getLogger(EndSalePanel.class.getName()).log(Level.SEVERE, null, ex);
             UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
                     + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
         }

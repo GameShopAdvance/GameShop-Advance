@@ -45,8 +45,18 @@ public class DbDescrizioneProdottoSingleton {
     //metodo provvisorio
     public void update(DescrizioneProdotto desc) throws ObjectAlreadyExistsDbException{
             ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-            int result = client.queryByExample(desc).size();
-            client.store(desc);
+            Query query = client.query();
+            query.constrain(DescrizioneProdotto.class);
+            query.descend("codiceProdotto").constrain(desc.getCodiceProdotto());
+            DescrizioneProdotto result = (DescrizioneProdotto) query.execute().get(0);
+            if(result != null)
+            {
+                result.clone(desc);
+                client.store(result);
+            }
+            else{
+                this.create(desc);
+            }
             client.commit();
             client.close();
             DbManagerSingleton.getInstance().printObjects(DescrizioneProdotto.class);
