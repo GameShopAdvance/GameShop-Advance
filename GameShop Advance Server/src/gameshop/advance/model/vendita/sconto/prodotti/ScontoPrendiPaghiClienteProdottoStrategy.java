@@ -6,6 +6,7 @@
 
 package gameshop.advance.model.vendita.sconto.prodotti;
 
+import gameshop.advance.model.vendita.sconto.IScontoProdottoStrategy;
 import gameshop.advance.model.IntervalloDiTempo;
 import gameshop.advance.model.vendita.CartaCliente;
 import gameshop.advance.model.vendita.IVendita;

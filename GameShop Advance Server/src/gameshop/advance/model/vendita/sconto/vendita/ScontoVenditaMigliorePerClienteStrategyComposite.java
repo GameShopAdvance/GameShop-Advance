@@ -6,6 +6,7 @@
 
 package gameshop.advance.model.vendita.sconto.vendita;
 
+import gameshop.advance.model.vendita.sconto.IScontoVenditaStrategy;
 import gameshop.advance.model.vendita.IVendita;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;

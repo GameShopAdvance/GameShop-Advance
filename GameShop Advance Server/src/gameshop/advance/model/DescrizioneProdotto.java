@@ -1,6 +1,6 @@
 package gameshop.advance.model;
 
-import gameshop.advance.model.vendita.sconto.prodotti.IScontoProdottoStrategy;
+import gameshop.advance.model.vendita.sconto.IScontoProdottoStrategy;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.util.LinkedList;

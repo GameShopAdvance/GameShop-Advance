@@ -13,7 +13,7 @@ import gameshop.advance.model.IntervalloDiTempo;
 import gameshop.advance.model.Prezzo;
 import gameshop.advance.model.vendita.CartaCliente;
 import gameshop.advance.model.vendita.TipologiaCliente;
-import gameshop.advance.model.vendita.sconto.prodotti.IScontoProdottoStrategy;
+import gameshop.advance.model.vendita.sconto.IScontoProdottoStrategy;
 import gameshop.advance.model.vendita.sconto.prodotti.ScontoPrendiPaghiClienteProdottoStrategy;
 import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
 import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;

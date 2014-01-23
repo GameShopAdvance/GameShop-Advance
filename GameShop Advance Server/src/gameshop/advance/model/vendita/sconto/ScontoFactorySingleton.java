@@ -6,9 +6,7 @@
 
 package gameshop.advance.model.vendita.sconto;
 
-import gameshop.advance.model.vendita.sconto.prodotti.IScontoProdottoStrategy;
 import gameshop.advance.model.vendita.sconto.prodotti.ScontoProdottoMigliorePerClienteStrategyComposite;
-import gameshop.advance.model.vendita.sconto.vendita.IScontoVenditaStrategy;
 import gameshop.advance.model.vendita.sconto.vendita.ScontoVenditaMigliorePerClienteStrategyComposite;
 
 /**

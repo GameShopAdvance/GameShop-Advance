@@ -6,6 +6,7 @@
 
 package gameshop.advance.model.vendita.sconto.vendita;
 
+import gameshop.advance.model.vendita.sconto.IScontoVenditaStrategy;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.model.vendita.IVendita;
 import gameshop.advance.model.vendita.RigaDiVendita;
@@ -18,23 +19,23 @@ import java.util.logging.Logger;
  *
  * @author Salx
  */
-public class ScontoPercentualeStrategy implements IScontoVenditaStrategy {
+public class ScontoTotaleVenditaStrategy implements IScontoVenditaStrategy {
     
-    private int percentuale;
+    private Money ammontare;
     
-    public ScontoPercentualeStrategy(int p){
+    public ScontoTotaleVenditaStrategy(Money m){
         
-        this.percentuale = p;
+        this.ammontare = m;
     }
     
-    public void setScontoPercentuale(int p){
+    public void setScontoTotale(Money m){
         
-        this.percentuale = p;
+        this.ammontare = m;
     }
     
-    public int getScontoPercentuale(){
+    public Money getScontoTotale(){
         
-        return this.percentuale;
+        return this.ammontare;
     }
     
     @Override
@@ -46,10 +47,10 @@ public class ScontoPercentualeStrategy implements IScontoVenditaStrategy {
             try {
                 totale = totale.add(riga.getSubTotal(vendita));
             } catch (InvalidMoneyException ex) {
-                Logger.getLogger(ScontoPercentualeStrategy.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ScontoTotaleVenditaStrategy.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
-        return totale.subtract(totale.multiply(percentuale).divide(100));
+        return totale.subtract(this.ammontare);
     }
     
 }
