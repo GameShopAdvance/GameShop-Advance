@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.model.vendita.sconto.strategy.prodotti;
+package gameshop.advance.model.vendita.sconto.prodotti;
 
 import gameshop.advance.model.IntervalloDiTempo;
 import gameshop.advance.model.vendita.CartaCliente;

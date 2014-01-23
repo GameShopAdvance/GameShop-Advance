@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.model.vendita.sconto.strategy.prodotti;
+package gameshop.advance.model.vendita.sconto.prodotti;
 
 import gameshop.advance.model.vendita.IVendita;
 import gameshop.advance.model.vendita.RigaDiVendita;
@@ -15,21 +15,24 @@ import java.util.List;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class ScontoProdottoMigliorePerVenditoreStrategyComposite extends ScontoProdottoStrategyComposite {
-    
+public class ScontoProdottoMigliorePerClienteStrategyComposite extends ScontoProdottoStrategyComposite {
+
     
     @Override
     public Money getSubtotal(IVendita v, RigaDiVendita rdv) 
     {
         List<IScontoProdottoStrategy> components = super.getComponents();
-        Money massimaSpesa = super.getRealSubtotal(rdv);
+        Money minimaSpesa = super.getRealSubtotal(rdv);
         for(IScontoProdottoStrategy sconto: components)
         {
+            System.err.println("Ciclo calcolo totale");
             Money subtotal = sconto.getSubtotal(v, rdv);
-            if(subtotal.greater(massimaSpesa))
-                massimaSpesa = subtotal;
+            if(minimaSpesa.greater(subtotal))
+                minimaSpesa = subtotal;
         }
-        return massimaSpesa;
+        System.err.println("Minima spesa: "+minimaSpesa);
+        return minimaSpesa;
     }
 
+    
 }

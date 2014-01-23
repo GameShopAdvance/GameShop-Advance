@@ -2,8 +2,8 @@ package gameshop.advance.model.vendita;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.model.DescrizioneProdotto;
-import gameshop.advance.model.vendita.sconto.strategy.ScontoFactorySingleton;
-import gameshop.advance.model.vendita.sconto.strategy.prodotti.IScontoProdottoStrategy;
+import gameshop.advance.model.vendita.sconto.ScontoFactorySingleton;
+import gameshop.advance.model.vendita.sconto.prodotti.IScontoProdottoStrategy;
 import gameshop.advance.utility.Money;
 import java.util.List;
 

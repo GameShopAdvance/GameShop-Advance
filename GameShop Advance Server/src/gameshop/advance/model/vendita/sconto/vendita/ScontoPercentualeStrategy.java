@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.model.vendita.sconto.strategy;
+package gameshop.advance.model.vendita.sconto.vendita;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.model.vendita.IVendita;

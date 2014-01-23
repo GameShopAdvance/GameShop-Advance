@@ -4,10 +4,12 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.model.vendita.sconto.strategy;
+package gameshop.advance.model.vendita.sconto;
 
-import gameshop.advance.model.vendita.sconto.strategy.prodotti.IScontoProdottoStrategy;
-import gameshop.advance.model.vendita.sconto.strategy.prodotti.ScontoProdottoMigliorePerClienteStrategyComposite;
+import gameshop.advance.model.vendita.sconto.prodotti.IScontoProdottoStrategy;
+import gameshop.advance.model.vendita.sconto.prodotti.ScontoProdottoMigliorePerClienteStrategyComposite;
+import gameshop.advance.model.vendita.sconto.vendita.IScontoVenditaStrategy;
+import gameshop.advance.model.vendita.sconto.vendita.ScontoVenditaMigliorePerClienteStrategyComposite;
 
 /**
  *
