@@ -1,10 +1,10 @@
-package gameshop.advance.remote.interfaces;
+package gameshop.advance.interfaces.remote;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- * Interfaccia remota per l'esportazione delle classi che la implementano tramite
+ * Interfaccia remota per l'esportazione delle classi factory che la implementano tramite
  * Java RMI.
  * @author Salx
  */

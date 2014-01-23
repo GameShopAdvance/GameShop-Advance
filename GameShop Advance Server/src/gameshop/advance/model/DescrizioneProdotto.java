@@ -1,6 +1,5 @@
 package gameshop.advance.model;
 
-import gameshop.advance.utility.Prezzo;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;

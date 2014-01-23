@@ -1,4 +1,4 @@
-package gameshop.advance.remote.interfaces;
+package gameshop.advance.interfaces.remote;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
@@ -18,16 +18,38 @@ public interface ICassaRemote extends Remote {
 
     void concludiVendita() throws RemoteException;
 
+    /**
+     *
+     * @param ammontare
+     * @throws RemoteException
+     * @throws InvalidMoneyException
+     */
     void gestisciPagamento(Money ammontare) throws RemoteException, InvalidMoneyException;
 
+    /**
+     *
+     * @param obs
+     * @throws RemoteException
+     */
     void aggiungiListener(IRemoteObserver obs) throws RemoteException;
     
+    /**
+     *
+     * @param obs
+     * @throws RemoteException
+     */
     void rimuoviListener(IRemoteObserver obs) throws RemoteException;
+    
     /**
      *
      * @param codiceProdotto
      * @param quantity
+     * @throws java.rmi.RemoteException
+     * @throws gameshop.advance.exceptions.ProdottoNotFoundException
+     * @throws gameshop.advance.exceptions.QuantityException
      */
     void inserisciProdotto(IDProdotto codiceProdotto, Integer quantity) throws RemoteException, ProdottoNotFoundException, QuantityException;
+    
+    void inserisciTesseraCliente(int codiceTessera) throws RemoteException;
     
 }

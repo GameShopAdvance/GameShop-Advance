@@ -50,9 +50,6 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
     @Override
     public void avviaNuovaVendita() throws RemoteException {
         this.venditaCorrente = new Vendita();
-        System.out.println("Vendita creata correttamente!");
-        this.inserisciTesseraCliente(1);
-        System.err.println("Tessera inserita");
     }
 
     /**
@@ -104,7 +101,6 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
      */
     @Override
     public void concludiVendita() throws RemoteException {
-        System.err.print("Cassa n." + this.numeroCassa + " ");
         this.venditaCorrente.completaVendita();
     }
 
@@ -121,7 +117,6 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
     @Override
     public void gestisciPagamento(Money ammontare) throws RemoteException, InvalidMoneyException {
         this.venditaCorrente.gestisciPagamento(ammontare);
-        System.err.println("Vendita: "+this.venditaCorrente.getResto());
         this.venditaCorrente.rimuoviListener(null);
         NegozioSingleton.getInstance().aggiungiVendita(this.venditaCorrente);
     }

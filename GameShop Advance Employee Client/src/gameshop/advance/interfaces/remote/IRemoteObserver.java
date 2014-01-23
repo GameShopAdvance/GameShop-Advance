@@ -4,17 +4,23 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.remote.interfaces;
+package gameshop.advance.interfaces.remote;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- * 
+ * Interfaccia remota per l'esportazione delle classiobserver che la implementano tramite
+ * Java RMI.
  * @author Salx
  */
 public interface IRemoteObserver extends Remote {
 
+    /**
+     *
+     * @param o
+     * @throws RemoteException
+     */
     void notifica(Object o) throws RemoteException;
 
 }

@@ -6,12 +6,12 @@ import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.interfaces.remote.ICassaRemote;
+import gameshop.advance.interfaces.remote.IRemoteClient;
+import gameshop.advance.interfaces.remote.IRemoteFactory;
+import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.vendita.SaleObserver;
 import gameshop.advance.model.vendita.SaleRestObserver;
-import gameshop.advance.remote.interfaces.ICassaRemote;
-import gameshop.advance.remote.interfaces.IRemoteClient;
-import gameshop.advance.remote.interfaces.IRemoteFactory;
-import gameshop.advance.remote.interfaces.IRemoteObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
@@ -70,6 +70,7 @@ public class SaleController extends UnicastRemoteObject implements IRemoteClient
     {
         this.cassa.avviaNuovaVendita();
         this.cassa.aggiungiListener(this.saleTotalObserver);
+        this.cassa.inserisciTesseraCliente(1);
         aggiornaWindow(new InsertItemPanel());
     }
     

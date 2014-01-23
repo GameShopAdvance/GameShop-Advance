@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.utility;
+package gameshop.advance.model;
 
 import gameshop.advance.utility.Money;
 
