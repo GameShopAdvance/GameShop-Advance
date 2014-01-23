@@ -6,9 +6,9 @@
 
 package gameshop.advance.model.vendita.sconto.vendita;
 
-import gameshop.advance.model.vendita.sconto.IScontoVenditaStrategy;
+import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.model.vendita.IVendita;
+import gameshop.advance.interfaces.IVendita;
 import gameshop.advance.model.vendita.RigaDiVendita;
 import gameshop.advance.utility.Money;
 import java.util.List;

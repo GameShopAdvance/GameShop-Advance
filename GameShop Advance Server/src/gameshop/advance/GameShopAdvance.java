@@ -7,7 +7,7 @@
 package gameshop.advance;
 
 import gameshop.advance.model.RemoteFactorySingleton;
-import gameshop.advance.remote.interfaces.IRemoteFactory;
+import gameshop.advance.interfaces.remote.IRemoteFactory;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;

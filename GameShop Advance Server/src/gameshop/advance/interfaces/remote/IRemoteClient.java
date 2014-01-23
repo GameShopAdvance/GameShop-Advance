@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.remote.interfaces;
+package gameshop.advance.interfaces.remote;
 
 import gameshop.advance.utility.Money;
 import java.rmi.Remote;

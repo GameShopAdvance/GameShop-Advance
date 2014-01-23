@@ -4,9 +4,9 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.model.vendita.sconto;
+package gameshop.advance.interfaces;
 
-import gameshop.advance.model.vendita.IVendita;
+import gameshop.advance.interfaces.IVendita;
 import gameshop.advance.model.vendita.RigaDiVendita;
 import gameshop.advance.utility.Money;
 

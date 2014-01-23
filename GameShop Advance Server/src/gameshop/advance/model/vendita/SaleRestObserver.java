@@ -7,9 +7,9 @@
 package gameshop.advance.model.vendita;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.remote.interfaces.IRemoteClient;
-import gameshop.advance.remote.interfaces.IRemoteObserver;
-import gameshop.advance.remote.interfaces.IVenditaRemote;
+import gameshop.advance.interfaces.remote.IRemoteClient;
+import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.interfaces.remote.IVenditaRemote;
 import java.io.Serializable;
 import java.rmi.RemoteException;
 import java.util.logging.Level;

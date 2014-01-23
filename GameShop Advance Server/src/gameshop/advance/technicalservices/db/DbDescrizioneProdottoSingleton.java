@@ -62,7 +62,7 @@ public class DbDescrizioneProdottoSingleton {
             DbManagerSingleton.getInstance().printObjects(DescrizioneProdotto.class);
     }
     
-    public DescrizioneProdotto read(IDProdotto code) throws ObjectAlreadyExistsDbException {
+    public DescrizioneProdotto read(IDProdotto code) {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         Query query=client.query();
         query.constrain(DescrizioneProdotto.class);

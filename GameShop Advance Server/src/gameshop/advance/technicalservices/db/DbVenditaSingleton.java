@@ -9,8 +9,8 @@ package gameshop.advance.technicalservices.db;
 import com.db4o.ObjectContainer;
 import com.db4o.query.Query;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.interfaces.IVendita;
 import gameshop.advance.model.vendita.Vendita;
-import gameshop.advance.remote.interfaces.IVenditaRemote;
 
 /**
  *
@@ -32,7 +32,7 @@ public class DbVenditaSingleton {
         return DbVenditaSingleton.instance;
     }
     
-    public void create(IVenditaRemote sale) throws ObjectAlreadyExistsDbException
+    public void create(IVendita sale) throws ObjectAlreadyExistsDbException
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         System.err.println("PreQuery");
@@ -45,13 +45,18 @@ public class DbVenditaSingleton {
         client.close();
     }
     
-    public IVenditaRemote read(Integer id)
+    public IVendita read(Integer id)
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         Query query=client.query();
-        query.constrain(IVenditaRemote.class);
+        query.constrain(IVendita.class);
         query.descend("id").constrain(id);
-        return (IVenditaRemote) query.execute().get(0);
+        return (IVendita) query.execute().get(0);
     }
     
+    public Integer count()
+    {
+        ObjectContainer client = DbManagerSingleton.getInstance().getClient();
+        return client.queryByExample(IVendita.class).size();
+    }
 }

@@ -6,8 +6,8 @@
 
 package gameshop.advance.model.vendita.sconto.prodotti;
 
-import gameshop.advance.model.vendita.sconto.IScontoProdottoStrategy;
-import gameshop.advance.model.vendita.IVendita;
+import gameshop.advance.interfaces.IScontoProdottoStrategy;
+import gameshop.advance.interfaces.IVendita;
 import gameshop.advance.model.vendita.RigaDiVendita;
 import gameshop.advance.utility.Money;
 import java.util.List;

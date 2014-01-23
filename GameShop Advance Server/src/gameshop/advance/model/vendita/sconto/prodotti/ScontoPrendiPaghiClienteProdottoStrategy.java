@@ -6,10 +6,10 @@
 
 package gameshop.advance.model.vendita.sconto.prodotti;
 
-import gameshop.advance.model.vendita.sconto.IScontoProdottoStrategy;
-import gameshop.advance.model.IntervalloDiTempo;
+import gameshop.advance.interfaces.IScontoProdottoStrategy;
+import gameshop.advance.utility.IntervalloDiTempo;
 import gameshop.advance.model.vendita.CartaCliente;
-import gameshop.advance.model.vendita.IVendita;
+import gameshop.advance.interfaces.IVendita;
 import gameshop.advance.model.vendita.RigaDiVendita;
 import gameshop.advance.model.vendita.TipologiaCliente;
 import gameshop.advance.utility.Money;

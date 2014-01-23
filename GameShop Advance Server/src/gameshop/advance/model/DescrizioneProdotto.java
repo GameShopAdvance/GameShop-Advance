@@ -1,6 +1,7 @@
 package gameshop.advance.model;
 
-import gameshop.advance.model.vendita.sconto.IScontoProdottoStrategy;
+import gameshop.advance.utility.Prezzo;
+import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.util.LinkedList;
@@ -96,11 +97,6 @@ public class DescrizioneProdotto
                 return prezzo;
         }
         return null;
-    }
-    
-    public  void addPrezzo(Prezzo p)
-    {
-        
     }
     
     public List<Prezzo> getTuttiPrezzi()

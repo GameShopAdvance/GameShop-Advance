@@ -1,4 +1,4 @@
-package gameshop.advance.remote.interfaces;
+package gameshop.advance.interfaces.remote;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

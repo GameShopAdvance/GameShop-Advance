@@ -1,13 +1,14 @@
 package gameshop.advance.model.vendita;
 
+import gameshop.advance.interfaces.IVendita;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.Pagamento;
 import gameshop.advance.model.vendita.sconto.ScontoFactorySingleton;
 import gameshop.advance.model.vendita.sconto.vendita.ScontoTotaleVenditaStrategy;
 import gameshop.advance.model.vendita.sconto.vendita.ScontoVenditaStrategyComposite;
-import gameshop.advance.remote.interfaces.IRemoteObserver;
-import gameshop.advance.remote.interfaces.IVenditaRemote;
+import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.interfaces.remote.IVenditaRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.util.Date;
@@ -25,6 +26,8 @@ import java.util.logging.Logger;
  */
 public class Vendita implements IVenditaRemote, IVendita
 {
+
+    private Integer idVendita;
     private LinkedList<RigaDiVendita> righeDiVendita = new LinkedList<>();
     private LinkedList<IRemoteObserver> observers = new LinkedList<>();
     private CartaCliente cliente;
@@ -45,6 +48,15 @@ public class Vendita implements IVenditaRemote, IVendita
         this.strategiaDiSconto.add(new ScontoTotaleVenditaStrategy(new Money(10.0)));
     }
 
+    public Integer getIdVendita() {
+        return idVendita;
+    }
+
+    public void setIdVendita(Integer idVendita) {
+        this.idVendita = idVendita;
+    }
+    
+    
     /**
      * Utilizza i parametri ricevuti in ingresso (descrizione prodotto e quantità) per
      * creare una riga di vendita.Aggiunge poi questa riga di vendita all'elenco di righe della

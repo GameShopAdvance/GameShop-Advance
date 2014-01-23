@@ -20,19 +20,14 @@ import java.util.logging.Logger;
 public class NegozioSingleton
 {
     private static NegozioSingleton store = null;
-    
     private LinkedList<Cassa> casse;
-    private CatalogoProdottiSingleton catalogo;
-    private LinkedList<Vendita> venditeCompletate;
 
     /**
      * Il Costruttore imposta tutte le variabili di Negozio.
      */
-    private NegozioSingleton() throws RemoteException, InvalidMoneyException
+    private NegozioSingleton()
     {
-        this.catalogo = CatalogoProdottiSingleton.getInstance();
         this.casse = new LinkedList<>();
-        this.venditeCompletate = new LinkedList<>();
     }
 
     /**
@@ -41,7 +36,7 @@ public class NegozioSingleton
      * @throws RemoteException
      * @throws InvalidMoneyException
      */
-    public static synchronized NegozioSingleton getInstance() throws RemoteException, InvalidMoneyException
+    public static synchronized NegozioSingleton getInstance()
     {
         if(NegozioSingleton.store == null)
         {
@@ -70,22 +65,6 @@ public class NegozioSingleton
      */
     public void addCassa(Cassa cassa) {
         this.casse.add(cassa);
-       
-    }
-
-    /**
-     * @return il catalogo dei prodotti
-     */
-    public CatalogoProdottiSingleton getCatalogo() {
-        return catalogo;
-    }
-
-    /**
-     * Imposta il catalogo ricevuto come catalogo del negozio.
-     * @param catalogo
-     */
-    public void setCatalogo(CatalogoProdottiSingleton catalogo) {
-        this.catalogo = catalogo;
     }
 
     /**
@@ -95,6 +74,8 @@ public class NegozioSingleton
     public void aggiungiVendita(Vendita v)
     {
         try {
+            v.setIdVendita(DbVenditaSingleton.getInstance().count());
+            System.err.println("Vendita n."+v.getIdVendita());
             DbVenditaSingleton.getInstance().create(v);
         } catch (ObjectAlreadyExistsDbException ex) {
             Logger.getLogger(NegozioSingleton.class.getName()).log(Level.SEVERE, null, ex);

@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.model.vendita;
+package gameshop.advance.interfaces;
 
+import gameshop.advance.model.vendita.CartaCliente;
 import java.util.List;
 
 /**

@@ -1,12 +1,8 @@
 package gameshop.advance.model;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
 import gameshop.advance.utility.IDProdotto;
-import java.util.HashMap;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Il CatalogoProdotti rappresenta il vero catalogo di un negozio, e consente di
@@ -19,31 +15,13 @@ public class CatalogoProdottiSingleton
 {
 
     private static CatalogoProdottiSingleton catalog;
-    private  HashMap<IDProdotto,DescrizioneProdotto> descrizioni = new HashMap<>();
     
     /**
      * Il Costruttore di CatalogoProdotti attualmente crea un insieme di 
      * DescrizioneProdotto e lo salva nella variabile descrizioni.Successivamente
      * andrà a recuperare le descrizioni dei prodotti nel database.
      */
-    private CatalogoProdottiSingleton () throws InvalidMoneyException {
-       //  Dobbiamo recuperare i prodotti dalla cache o dal db
-        /**
-       for(int i=1; i<6;i++)
-       {
-           IDProdotto id = new IDProdotto("AB"+i);
-           Money money = new Money(new Double(i*5));
-           Prezzo p = new Prezzo(money, new IntervalloDiTempo(new DateTime(), new DateTime().plusDays(5)));
-           DescrizioneProdotto desc = new DescrizioneProdotto(id, p, "Prodotto "+i);
-           this.descrizioni.put(id, desc);
-           try {
-               DbDescrizioneProdottoSingleton.getInstance().create(desc);
-           } catch (ObjectAlreadyExistsDbException ex) {
-               Logger.getLogger(CatalogoProdottiSingleton.class.getName()).log(Level.SEVERE, null, ex);
-           }
-       }
-       */
-    }
+    private CatalogoProdottiSingleton (){}
 
     /**
      * Impedisce la creazione di più cataloghi dato che il CatalogoProdotto è Singleton.
@@ -67,12 +45,6 @@ public class CatalogoProdottiSingleton
      */
     public DescrizioneProdotto getDescrizioneProdotto(IDProdotto codiceProdotto)
     {
-        DescrizioneProdotto desc = null;
-        try {
-            desc = DbDescrizioneProdottoSingleton.getInstance().read(codiceProdotto);
-        } catch (ObjectAlreadyExistsDbException ex) {
-            Logger.getLogger(CatalogoProdottiSingleton.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        return desc;
+        return DbDescrizioneProdottoSingleton.getInstance().read(codiceProdotto);
     }
 }

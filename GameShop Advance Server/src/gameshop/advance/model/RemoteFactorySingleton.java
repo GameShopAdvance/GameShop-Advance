@@ -2,8 +2,8 @@ package gameshop.advance.model;
 
 
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.remote.interfaces.IRemoteFactory;
-import gameshop.advance.remote.interfaces.ICassaRemote;
+import gameshop.advance.interfaces.remote.IRemoteFactory;
+import gameshop.advance.interfaces.remote.ICassaRemote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;
