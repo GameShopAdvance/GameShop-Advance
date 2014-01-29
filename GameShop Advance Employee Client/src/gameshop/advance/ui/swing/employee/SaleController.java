@@ -70,12 +70,8 @@ public class SaleController extends UnicastRemoteObject implements IRemoteClient
     {
         this.cassa.avviaNuovaVendita();
         this.cassa.aggiungiListener(this.saleTotalObserver);
+        this.cassa.inserisciTesseraCliente(1);
         aggiornaWindow(new InsertItemPanel());
-    }
-    
-    public void inserisciTesseraCliente(int codiceTessera) throws RemoteException
-    {
-        this.cassa.inserisciTesseraCliente(codiceTessera);
     }
     
     public void inserisciProdotto(String productID, int quantity) throws RemoteException, ProdottoNotFoundException, QuantityException
