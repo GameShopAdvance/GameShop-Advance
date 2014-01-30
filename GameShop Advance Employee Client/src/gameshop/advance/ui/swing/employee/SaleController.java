@@ -99,6 +99,11 @@ public class SaleController extends UnicastRemoteObject implements IRemoteClient
         aggiornaWindow(new EndSalePanel());
     }
     
+    public void inserisciCartaCliente(int code) throws RemoteException
+    {
+        cassa.inserisciTesseraCliente(code);
+    }
+    
     /**
      *
      * @param m
@@ -128,6 +133,10 @@ public class SaleController extends UnicastRemoteObject implements IRemoteClient
     public Money getResto()
     {
         return this.resto;
+    }
+
+    void clearSale() {
+        //da implementare
     }
     
 }
