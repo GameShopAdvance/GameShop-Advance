@@ -20,12 +20,13 @@ new FormModel {
 						name: "label1"
 						"text": "Indirizzo server"
 						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+						"labelFor": new FormReference( "serverAddress" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 3
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "textField1"
+						name: "serverAddress"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 5
 						"gridWidth": 3
@@ -35,12 +36,13 @@ new FormModel {
 						name: "label2"
 						"text": "Porta"
 						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+						"labelFor": new FormReference( "serverPort" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 5
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "textField2"
+						name: "serverPort"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 5
 						"gridY": 5
@@ -57,12 +59,13 @@ new FormModel {
 						name: "label3"
 						"text": "Numero di cassa attuale"
 						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+						"labelFor": new FormReference( "idCassa" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridY": 3
 						"gridX": 3
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "textField3"
+						name: "idCassa"
 						"editable": false
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 7
@@ -72,12 +75,13 @@ new FormModel {
 						name: "label4"
 						"text": "Nuovo numero di cassa"
 						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+						"labelFor": new FormReference( "newIdCassa" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 5
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "textField4"
+						name: "newIdCassa"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 7
 						"gridY": 5

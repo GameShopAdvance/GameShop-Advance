@@ -1,5 +1,6 @@
 package gameshop.advance.employee;
 
+import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
@@ -21,15 +22,21 @@ public class GameShopAdvanceEmployee {
             {
                 if(args.length > 0)
                 {
-                    ConfigurationSingleton.getInstance().setConfigurationFile(args[0]);
-                    ConfigurationSingleton.getInstance().readConfiguration();
+                    //Configuration.getInstance().setConfigurationFile(args[0]);
+                    //Configuration.getInstance().readConfiguration();
+            
+                    //controllerConfig.getConfiguration();
                 }
             }
+            
+            ConfigurationControllerSingleton controllerConfig = ConfigurationControllerSingleton.getInstance();
+            controllerConfig.setConfiguration("127.0.0.1", 1099, 17);
 
             UIWindowSingleton window = UIWindowSingleton.getInstance();
             window.setPanel(new EmployeeMenuPanel());
             window.setVisible(true);
             window.refreshContent();
     }
+    
     
 }

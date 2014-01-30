@@ -44,15 +44,15 @@ public class EmployeeMenuPanel extends JPanel{
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(175, 175, 175)
-                .addComponent(startSale)
-                .addContainerGap(207, Short.MAX_VALUE))
+                .addComponent(startSale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(207, 207, 207))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
                 .addGap(140, 140, 140)
-                .addComponent(startSale)
-                .addContainerGap(168, Short.MAX_VALUE))
+                .addComponent(startSale, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE)
+                .addGap(168, 168, 168))
         );
     }// </editor-fold>//GEN-END:initComponents
 
