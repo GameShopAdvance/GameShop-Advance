@@ -47,7 +47,7 @@ public class ConfigurationDialog extends JDialog {
     }
 
     private void saveConfiguration(ActionEvent e) {
-                
+        ConfigurationControllerSingleton().getInstance().
     }
 
     private void cancelModify(ActionEvent e) {
