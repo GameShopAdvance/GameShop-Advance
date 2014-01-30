@@ -8,6 +8,8 @@ package gameshop.advance.config;
 
 import gameshop.advance.employee.Configuration;
 import gameshop.advance.exceptions.ConfigurationException;
+import java.net.UnknownHostException;
+import sun.net.util.IPAddressUtil;
 
 /**
  *
@@ -47,8 +49,11 @@ public class ConfigurationControllerSingleton {
         return this.config;
     }
     
-    public void setServerAddress(String address){
+    public void setServerAddress(String address) throws UnknownHostException{
         
+        boolean goodAddress = IPAddressUtil.isIPv4LiteralAddress(address);
+        if(!goodAddress)
+            throw new UnknownHostException();
         this.config.setServerAddress(address);
     }
     

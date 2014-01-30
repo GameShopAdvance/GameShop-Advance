@@ -16,6 +16,7 @@ import java.awt.Dialog;
 import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.net.UnknownHostException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -65,9 +66,38 @@ public class ConfigurationDialog extends JDialog {
 
     private void saveConfiguration(ActionEvent e) {
         try {
-            ConfigurationControllerSingleton.getInstance().setIdCassa(Integer.getInteger(this.newIdCassa.getText()));
-            ConfigurationControllerSingleton.getInstance().setServerAddress(this.serverAddress.getText());
-            ConfigurationControllerSingleton.getInstance().setServerAddress(this.serverPort.getText());
+            System.err.println("Config: "+ConfigurationControllerSingleton.getInstance());
+            String cassa = this.newIdCassa.getText();
+            System.out.println("Cassa: " + cassa);
+            boolean error = false;
+            if(!cassa.isEmpty())
+            {
+                int nCassa = Integer.decode(cassa);
+                ConfigurationControllerSingleton.getInstance().setIdCassa(nCassa);
+            }
+            try{
+                ConfigurationControllerSingleton.getInstance().setServerAddress(this.serverAddress.getText());
+                
+            } catch (UnknownHostException ex) {
+                UIWindowSingleton.getInstance().displayError("Indirizzo non valido.");
+                this.serverAddress.setBackground(UIStyleSingleton.getInstance().getErrorColor());
+                error = true;
+            }
+            
+            String port = this.serverPort.getText();
+            System.out.println("Porta: " + port);
+            if(!port.isEmpty())
+            {
+                int nPort = Integer.decode(port);
+                ConfigurationControllerSingleton.getInstance().setServerPort(nPort);
+            }
+            else
+            {
+                error = true;
+                this.serverPort.setBackground(UIStyleSingleton.getInstance().getErrorColor());
+            }
+            if(!error)
+                this.dispose();
         } catch (ConfigurationException ex) {
             Logger.getLogger(ConfigurationDialog.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -75,6 +105,10 @@ public class ConfigurationDialog extends JDialog {
 
     private void cancelModify(ActionEvent e) {
         this.dispose();
+    }
+
+    private void createUIComponents() {
+        // TODO: add custom component creation code here
     }
     
     private void initComponents() {
@@ -194,7 +228,7 @@ public class ConfigurationDialog extends JDialog {
         });
 
         PanelBuilder contentPaneBuilder = new PanelBuilder(new FormLayout(
-            "15dlu, $lcgap, [70dlu,default], $lcgap, [98dlu,default]:grow, $lcgap, 70dlu, $lcgap, 15dlu",
+            "[15dlu,default], $lcgap, [70dlu,default], $lcgap, [98dlu,default]:grow, $lcgap, 70dlu, $lcgap, [15dlu,default]",
             "[20dlu,default], $lgap, fill:[125dlu,default]:grow, $rgap, 25dlu, $lgap, 20dlu"));
         contentPane.setLayout(new BorderLayout());
         contentPane.add(contentPaneBuilder.getPanel(), BorderLayout.CENTER);
@@ -202,7 +236,7 @@ public class ConfigurationDialog extends JDialog {
         contentPaneBuilder.add(tabbedPane1, CC.xywh(3, 3, 5, 1, CC.FILL, CC.FILL));
         contentPaneBuilder.add(button1,     CC.xy  (3, 5));
         contentPaneBuilder.add(button2,     CC.xy  (7, 5));
-        setSize(500, 330);
+        pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }

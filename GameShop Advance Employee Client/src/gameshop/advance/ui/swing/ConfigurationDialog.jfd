@@ -4,11 +4,11 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "15dlu, labelcompgap, max(default;70dlu), labelcompgap, max(default;98dlu):grow, labelcompgap, 70dlu, labelcompgap, 15dlu"
+			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;70dlu), labelcompgap, max(default;98dlu):grow, labelcompgap, 70dlu, labelcompgap, max(default;15dlu)"
 			"$rowSpecs": "max(default;20dlu), linegap, fill:max(default;125dlu):grow, relgap, 25dlu, linegap, 20dlu"
 		} ) {
 			name: "this"
-			"$sizePolicy": 1
+			"$sizePolicy": 0
 			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
 				name: "tabbedPane1"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
