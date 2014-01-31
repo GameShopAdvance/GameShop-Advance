@@ -1,0 +1,63 @@
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_25" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+			"$columnSpecs": "labelcompgap, 73dlu, labelcompgap, 113dlu, 70dlu, labelcompgap, 1dlu"
+			"$rowSpecs": "39dlu, linegap, 30dlu, linegap, 15dlu, relgap, 31dlu, pargap, 25dlu, 29dlu, pargap"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Totale"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 10, false )
+				"alignmentX": 0.5f
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 3
+				"gridX": 2
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "displayTotal"
+				"editable": false
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 4
+				"gridY": 2
+				"gridWidth": 2
+				"gridHeight": 2
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "payment"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 4
+				"gridY": 6
+				"gridWidth": 2
+				"gridHeight": 2
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Pagamento"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 10, false )
+				"alignmentX": 0.5f
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 7
+				"gridX": 2
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "payButton"
+				"text": "Paga"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 15, false )
+				"alignmentX": 0.5f
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payButtonActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 4
+				"gridY": 9
+				"gridWidth": 2
+				"gridHeight": 2
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 245, 190 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+	}
+}
