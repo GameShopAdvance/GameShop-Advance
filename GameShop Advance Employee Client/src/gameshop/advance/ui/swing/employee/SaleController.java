@@ -89,7 +89,7 @@ public class SaleController extends UnicastRemoteObject implements IRemoteClient
      */
     public void concludiVendita() throws RemoteException
     {
-        this.aggiornaWindow(new PaymentPanel());
+        this.aggiornaWindow(new PaymentPanelOld());
         this.cassa.concludiVendita();
     }
     
