@@ -2,42 +2,28 @@
 package gameshop.advance.employee;
 
 import gameshop.advance.exceptions.ConfigurationException;
-import java.io.IOException;
-import javax.xml.parsers.ParserConfigurationException;
-import org.xml.sax.SAXException;
 
 /**
  *
  * @author Lorenzo Di Giuseppe
  * Classe che mantiene la configurazione del client.
  */
-public class ConfigurationSingleton {
+public class Configuration {
     
-    private String configurationFile = "./src/gameshop/advance/employee/config/clientConfiguration.xml";
-    private static ConfigurationSingleton instance;
+    //private String configurationFile = "./src/gameshop/advance/employee/config/clientConfiguration.xml";
+
     private String serverAddress;
     private int serverPort;
     private int idCassa;
     
-    private ConfigurationSingleton() throws ConfigurationException
+    public Configuration() throws ConfigurationException
     {
-        this.readConfiguration();
+        
     }
-
-    public int getIdCassa() {
-        return idCassa;
-    }
+   
     
-    public static ConfigurationSingleton getInstance() throws ConfigurationException
-    {
-        if(instance == null)
-        {
-            instance = new ConfigurationSingleton();
-        }
-        return instance;
-    }
     
-    public void setConfigurationFile(String path)
+    /*public void setConfigurationFile(String path)
     {
         this.configurationFile = path;
     }
@@ -60,6 +46,18 @@ public class ConfigurationSingleton {
         } catch (ParserConfigurationException | SAXException | IOException ex) {
             throw new ConfigurationException(configurationFile, "Impossibile leggere il file di configurazione.");
         }
+    }*/
+
+    
+    public String printConfiguration() throws ConfigurationException {
+        
+        String configuration;
+        configuration = "Configurazione del terminale - " +
+                "Server Address: "+ this.getServerAddress() +
+                "Server Port: " + this.getServerPort() +
+                "Numero Cassa: " + this.getIdCassa();
+        
+        return configuration;
     }
     
     public String getServerAddress() {
@@ -76,6 +74,14 @@ public class ConfigurationSingleton {
 
     public void setServerPort(int serverPort) {
         this.serverPort = serverPort;
+    }
+    
+    public int getIdCassa() {
+        return idCassa;
+    }
+    
+    public void setIdCassa(int idCassa){
+        this.idCassa = idCassa;
     }
     
 }

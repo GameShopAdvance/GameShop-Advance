@@ -1,0 +1,124 @@
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;70dlu), labelcompgap, max(default;98dlu):grow, labelcompgap, 70dlu, labelcompgap, max(default;15dlu)"
+			"$rowSpecs": "max(default;20dlu), linegap, fill:max(default;125dlu):grow, relgap, 25dlu, linegap, 20dlu"
+		} ) {
+			name: "this"
+			"$sizePolicy": 0
+			add( new FormContainer( "javax.swing.JTabbedPane", new FormLayoutManager( class javax.swing.JTabbedPane ) ) {
+				name: "tabbedPane1"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+					"$columnSpecs": "10dlu, labelcompgap, 70dlu, labelcompgap, 75dlu, labelcompgap, max(default;53dlu):grow, labelcompgap, max(default;10dlu)"
+					"$rowSpecs": "15dlu, linegap, max(default;30dlu), unrelgap, max(default;30dlu)"
+				} ) {
+					name: "panel1"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label1"
+						"text": "Indirizzo server"
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+						"labelFor": new FormReference( "serverAddress" )
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridX": 3
+						"gridY": 3
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "serverAddress"
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridX": 5
+						"gridWidth": 3
+						"gridY": 3
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label2"
+						"text": "Porta"
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+						"labelFor": new FormReference( "serverPort" )
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridX": 3
+						"gridY": 5
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "serverPort"
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridX": 5
+						"gridY": 5
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "Connessione"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+					"$columnSpecs": "max(default;10dlu), labelcompgap, max(default;100dlu), labelcompgap, max(default;10dlu), labelcompgap, max(default;35dlu), labelcompgap, default, labelcompgap, default"
+					"$rowSpecs": "15dlu, linegap, 30dlu, relgap, max(default;30dlu)"
+				} ) {
+					name: "panel2"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label3"
+						"text": "Numero di cassa attuale"
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+						"labelFor": new FormReference( "idCassa" )
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridY": 3
+						"gridX": 3
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "idCassa"
+						"editable": false
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridX": 7
+						"gridY": 3
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label4"
+						"text": "Nuovo numero di cassa"
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
+						"labelFor": new FormReference( "newIdCassa" )
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridX": 3
+						"gridY": 5
+					} )
+					add( new FormComponent( "javax.swing.JTextField" ) {
+						name: "newIdCassa"
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridX": 7
+						"gridY": 5
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"title": "Cassa"
+				} )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 3
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridWidth": 5
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "Annulla"
+				"toolTipText": "Annulla i cambiamenti"
+				"background": new java.awt.Color( 153, 255, 51, 255 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cancelModify", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 5
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "Salva"
+				"background": new java.awt.Color( 255, 204, 51, 255 )
+				"toolTipText": "Salva le modifiche apportate"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "saveConfiguration", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 5
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 500, 330 )
+		} )
+	}
+}

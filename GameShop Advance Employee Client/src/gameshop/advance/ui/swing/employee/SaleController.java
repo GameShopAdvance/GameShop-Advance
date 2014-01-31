@@ -1,7 +1,7 @@
 
 package gameshop.advance.ui.swing.employee;
 
-import gameshop.advance.employee.ConfigurationSingleton;
+import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
@@ -40,11 +40,12 @@ public class SaleController extends UnicastRemoteObject implements IRemoteClient
 
     private void configure() throws ConfigurationException, RemoteException, NotBoundException {
           
-        ConfigurationSingleton config = ConfigurationSingleton.getInstance();
-        Registry reg = LocateRegistry.getRegistry(config.getServerAddress(), config.getServerPort());
+        ConfigurationControllerSingleton controllerConfig = ConfigurationControllerSingleton.getInstance();
+
+        Registry reg = LocateRegistry.getRegistry(controllerConfig.getServerAddress(), controllerConfig.getServerPort());
         
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
-        this.cassa = factory.creaCassa(config.getIdCassa());
+        this.cassa = factory.creaCassa(controllerConfig.getIdCassa());
         this.saleTotalObserver = new SaleObserver(instance);
         this.saleRestObserver = new SaleRestObserver(instance);
     }
@@ -70,12 +71,8 @@ public class SaleController extends UnicastRemoteObject implements IRemoteClient
     {
         this.cassa.avviaNuovaVendita();
         this.cassa.aggiungiListener(this.saleTotalObserver);
+        this.cassa.inserisciTesseraCliente(1);
         aggiornaWindow(new InsertItemPanel());
-    }
-    
-    public void inserisciTesseraCliente(int codiceTessera) throws RemoteException
-    {
-        this.cassa.inserisciTesseraCliente(codiceTessera);
     }
     
     public void inserisciProdotto(String productID, int quantity) throws RemoteException, ProdottoNotFoundException, QuantityException
@@ -101,6 +98,11 @@ public class SaleController extends UnicastRemoteObject implements IRemoteClient
         cassa.aggiungiListener(this.saleRestObserver);
         cassa.gestisciPagamento(new Money(payment));
         aggiornaWindow(new EndSalePanel());
+    }
+    
+    public void inserisciCartaCliente(int code) throws RemoteException
+    {
+        cassa.inserisciTesseraCliente(code);
     }
     
     /**
@@ -132,6 +134,10 @@ public class SaleController extends UnicastRemoteObject implements IRemoteClient
     public Money getResto()
     {
         return this.resto;
+    }
+
+    void clearSale() {
+        //da implementare
     }
     
 }
