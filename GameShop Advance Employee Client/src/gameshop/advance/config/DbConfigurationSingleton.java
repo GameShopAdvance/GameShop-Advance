@@ -36,7 +36,7 @@ public class DbConfigurationSingleton {
     
    
     public void create (Configuration config) {
-   
+        
         ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), this.DbName);
         System.err.println("Salvataggio in corso!");
         db.store(config);

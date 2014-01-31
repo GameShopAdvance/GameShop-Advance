@@ -24,12 +24,9 @@ new FormModel {
 					name: "menu1"
 					"text": "Configurazione"
 					add( new FormComponent( "javax.swing.JMenuItem" ) {
-						name: "menuItem1"
-						"text": "Nuova"
-					} )
-					add( new FormComponent( "javax.swing.JMenuItem" ) {
 						name: "menuItem2"
 						"text": "Modifica"
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "modificaConfigurazione", true ) )
 					} )
 				} )
 			}

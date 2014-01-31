@@ -15,7 +15,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
- * 
+ * @author Matteo Gentile
  */
 public class EmployeeMenuPanel extends JPanel {
     

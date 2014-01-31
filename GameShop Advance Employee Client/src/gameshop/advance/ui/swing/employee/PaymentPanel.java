@@ -18,7 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
- * @author Franco
+ * @author Andrea
  */
 public class PaymentPanel extends JPanel {
     
@@ -40,7 +40,6 @@ public class PaymentPanel extends JPanel {
 
     private void payButtonActionPerformed(ActionEvent e) {
         try{
-            UIWindowSingleton.getInstance().clearError();
             SaleController.getInstance().effettuaPagamento(Double.parseDouble(this.payment.getText()));
         } catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"

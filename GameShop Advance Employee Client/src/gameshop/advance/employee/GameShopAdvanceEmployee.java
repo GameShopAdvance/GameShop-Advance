@@ -2,10 +2,8 @@ package gameshop.advance.employee;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
-import gameshop.advance.ui.swing.ConfigurationDialog;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
-import javax.swing.JDialog;
 
 /**
  *
@@ -39,8 +37,6 @@ public class GameShopAdvanceEmployee {
             window.setVisible(true);
             window.refreshContent();
             
-            JDialog d = new ConfigurationDialog(UIWindowSingleton.getInstance());
-            d.setVisible(true);
     }
     
     

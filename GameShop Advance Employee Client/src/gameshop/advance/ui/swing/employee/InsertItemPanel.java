@@ -28,7 +28,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 
 /**
- * @author Pippo
+ * @author Matteo Gentile
  */
 public class InsertItemPanel extends JPanel {
     public InsertItemPanel() {
@@ -58,7 +58,6 @@ public class InsertItemPanel extends JPanel {
     
     private void addProductButtonActionPerformed(ActionEvent e) {
         try {
-            UIWindowSingleton.getInstance().clearError();
             Integer quantity = Integer.parseInt(this.quantityTextField.getText());
             SaleController.getInstance().inserisciProdotto(this.productIdTextField.getText(), quantity);
             this.clearFields();
@@ -83,7 +82,6 @@ public class InsertItemPanel extends JPanel {
 
     private void insertClientCodeActionPerformed(ActionEvent e) {
         try{
-            UIWindowSingleton.getInstance().clearError();
             Integer code = Integer.parseInt(this.clientCode.getText());
             SaleController.getInstance().inserisciCartaCliente(code);
         } catch (NullPointerException ex) {
@@ -97,7 +95,6 @@ public class InsertItemPanel extends JPanel {
 
     private void clearSaleActionPerformed(ActionEvent e) {
         try{
-            UIWindowSingleton.getInstance().clearError();
             SaleController.getInstance().clearSale();
         } catch (NullPointerException ex) {
             Logger.getLogger(InsertItemPanel.class.getName()).log(Level.SEVERE, null, ex);

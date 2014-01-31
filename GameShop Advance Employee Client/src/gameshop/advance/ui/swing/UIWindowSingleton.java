@@ -7,6 +7,9 @@ package gameshop.advance.ui.swing;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import java.awt.Container;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import javax.swing.JDialog;
 import javax.swing.JFrame;
 import javax.swing.JMenu;
 import javax.swing.JMenuBar;
@@ -15,7 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JPanel;
 
 /**
- * @author matteog
+ * @author Matteo Gentile
  */
 public class UIWindowSingleton extends JFrame {
     
@@ -31,11 +34,15 @@ public class UIWindowSingleton extends JFrame {
         //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    private void modificaConfigurazione(ActionEvent e) {
+          JDialog d = new ConfigurationDialog(UIWindowSingleton.getInstance());
+          d.setVisible(true);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         menuBar1 = new JMenuBar();
         menu1 = new JMenu();
-        menuItem1 = new JMenuItem();
         menuItem2 = new JMenuItem();
         mainPanel = new JPanel();
 
@@ -53,12 +60,14 @@ public class UIWindowSingleton extends JFrame {
             {
                 menu1.setText("Configurazione");
 
-                //---- menuItem1 ----
-                menuItem1.setText("Nuova");
-                menu1.add(menuItem1);
-
                 //---- menuItem2 ----
                 menuItem2.setText("Modifica");
+                menuItem2.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        modificaConfigurazione(e);
+                    }
+                });
                 menu1.add(menuItem2);
             }
             menuBar1.add(menu1);
@@ -128,15 +137,10 @@ public class UIWindowSingleton extends JFrame {
         JOptionPane.showMessageDialog(this, message,"Errore",JOptionPane.WARNING_MESSAGE);
     }
     
-    public void clearError()
-    {
-       //ErrorDialog.getInstance().setText(this,"");
-    }
     
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JMenuBar menuBar1;
     private JMenu menu1;
-    private JMenuItem menuItem1;
     private JMenuItem menuItem2;
     private JPanel mainPanel;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
