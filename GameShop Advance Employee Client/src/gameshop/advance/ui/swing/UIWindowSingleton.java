@@ -4,8 +4,10 @@
 
 package gameshop.advance.ui.swing;
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -30,8 +32,8 @@ public class UIWindowSingleton extends JFrame {
     public UIWindowSingleton() {
         this.panel = null;
         this.initComponents();
-        //this.setExtendedState(this.getExtendedState() | JFrame.MAXIMIZED_BOTH);
-        //this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        
     }
 
     private void modificaConfigurazione(ActionEvent e) {
@@ -48,20 +50,21 @@ public class UIWindowSingleton extends JFrame {
 
         //======== this ========
         setTitle("GameShopAdvance Cassa");
+        setName("this");
         Container contentPane = getContentPane();
-        contentPane.setLayout(new FormLayout(
-            "235dlu",
-            "[153dlu,default]"));
 
         //======== menuBar1 ========
         {
+            menuBar1.setName("menuBar1");
 
             //======== menu1 ========
             {
                 menu1.setText("Configurazione");
+                menu1.setName("menu1");
 
                 //---- menuItem2 ----
                 menuItem2.setText("Modifica");
+                menuItem2.setName("menuItem2");
                 menuItem2.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -76,11 +79,21 @@ public class UIWindowSingleton extends JFrame {
 
         //======== mainPanel ========
         {
-            mainPanel.setLayout(new FormLayout(
-                "234dlu",
-                "[139dlu,default]"));
+            mainPanel.setName("mainPanel");
+
+            PanelBuilder mainPanelBuilder = new PanelBuilder(new FormLayout(
+                "[269dlu,default]:grow",
+                "[181dlu,default]:grow"), mainPanel);
+
         }
-        contentPane.add(mainPanel, CC.xy(1, 1));
+
+        PanelBuilder contentPaneBuilder = new PanelBuilder(new FormLayout(
+            "268dlu",
+            "[153dlu,default]"));
+        contentPane.setLayout(new BorderLayout());
+        contentPane.add(contentPaneBuilder.getPanel(), BorderLayout.CENTER);
+
+        contentPaneBuilder.add(mainPanel, CC.xy(1, 1, CC.FILL, CC.FILL));
         setSize(480, 320);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -107,7 +120,7 @@ public class UIWindowSingleton extends JFrame {
     public void setPanel(JPanel panel)
     {
         if(this.panel != null)
-            this.mainPanel.remove(this.panel);
+            this.getContentPane().remove(this.panel);
         this.panel = panel;
     }
     
@@ -125,6 +138,7 @@ public class UIWindowSingleton extends JFrame {
      */
     public void refreshContent()
     {   
+        this.getContentPane().setSize(this.panel.getSize());
         this.setContentPane(this.panel);
         this.revalidate();
     }

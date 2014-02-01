@@ -4,6 +4,7 @@
 
 package gameshop.advance.ui.swing.employee;
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.exceptions.ConfigurationException;
@@ -84,39 +85,50 @@ public class EndSalePanel extends JPanel {
         goToMenu = new JButton();
 
         //======== this ========
-        setLayout(new FormLayout(
-            "45dlu:grow, $lcgap, [150px,min]:grow, $lcgap, [45dlu,default]:grow",
-            "25dlu:grow, $lgap, 20dlu:grow, $lgap, default:grow, $lgap, 25dlu:grow, $lgap, default:grow, 2*($lgap, 25dlu:grow)"));
+        setName("this");
 
         //---- label1 ----
         label1.setText("Resto:");
-        add(label1, CC.xy(1, 1, CC.CENTER, CC.DEFAULT));
-        add(displayRest, CC.xy(3, 1));
+        label1.setLabelFor(displayRest);
+        label1.setName("label1");
+
+        //---- displayRest ----
+        displayRest.setName("displayRest");
 
         //---- label2 ----
         label2.setText("Grazie per aver effettuato acquisti da noi!");
-        add(label2, CC.xy(3, 3));
+        label2.setName("label2");
 
         //---- startNewSale ----
         startNewSale.setText("Avvia una nuova Vendita");
         startNewSale.setBackground(new Color(102, 255, 102));
+        startNewSale.setName("startNewSale");
         startNewSale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startNewSaleActionPerformed(e);
             }
         });
-        add(startNewSale, CC.xy(3, 7, CC.DEFAULT, CC.FILL));
 
         //---- goToMenu ----
         goToMenu.setText("Torna al Men\u00f9");
+        goToMenu.setName("goToMenu");
         goToMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 goToMenuActionPerformed(e);
             }
         });
-        add(goToMenu, CC.xy(3, 11, CC.DEFAULT, CC.FILL));
+
+        PanelBuilder builder = new PanelBuilder(new FormLayout(
+            "default:grow, 45dlu, $lcgap, [150px,min], default:grow",
+            "default:grow, 25dlu, $lgap, 20dlu, $lgap, 25dlu, $rgap, 25dlu, fill:25dlu:grow"), this);
+
+        builder.add(label1,       CC.xy(2, 2,    CC.FILL,    CC.FILL));
+        builder.add(displayRest,  CC.xy(4, 2,    CC.FILL, CC.DEFAULT));
+        builder.add(label2,       CC.xy(4, 4,    CC.FILL,    CC.FILL));
+        builder.add(startNewSale, CC.xy(4, 6, CC.DEFAULT,    CC.FILL));
+        builder.add(goToMenu,     CC.xy(4, 8, CC.DEFAULT,    CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

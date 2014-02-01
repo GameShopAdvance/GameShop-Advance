@@ -1,6 +1,7 @@
 package gameshop.advance.model;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
 import gameshop.advance.utility.IDProdotto;
 
@@ -43,8 +44,11 @@ public class CatalogoProdottiSingleton
      * @param codiceProdotto
      * @return  la descrizione del prodotto
      */
-    public DescrizioneProdotto getDescrizioneProdotto(IDProdotto codiceProdotto)
+    public DescrizioneProdotto getDescrizioneProdotto(IDProdotto codiceProdotto) throws ProdottoNotFoundException
     {
-        return DbDescrizioneProdottoSingleton.getInstance().read(codiceProdotto);
+        DescrizioneProdotto desc = DbDescrizioneProdottoSingleton.getInstance().read(codiceProdotto);
+        if(desc == null)
+            throw new ProdottoNotFoundException(codiceProdotto);
+        return desc;
     }
 }

@@ -4,25 +4,27 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(default;20dlu), labelcompgap, 65dlu, labelcompgap, 61dlu, labelcompgap, 56dlu, labelcompgap, 20dlu"
-			"$rowSpecs": "max(default;15dlu), linegap, 17dlu, relgap, max(default;9dlu), relgap, max(default;20dlu), relgap, 60dlu, relgap, max(default;25dlu), linegap, default"
+			"$columnSpecs": "max(default;20dlu):grow, 65dlu, labelcompgap, 61dlu, labelcompgap, 56dlu, 20dlu:grow"
+			"$rowSpecs": "fill:max(default;15dlu):grow, fill:max(default;20dlu), relgap, max(default;9dlu):grow, relgap, max(default;20dlu), fill:default:grow, 60dlu, fill:13dlu:grow, fill:20dlu, fill:default:grow"
 		} ) {
 			name: "this"
+			"componentPopupMenu": sfield com.jformdesigner.model.FormObject NULL_VALUE
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "Totale"
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 1, false )
 				"labelFor": new FormReference( "total" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
-				"gridY": 3
+				"gridX": 2
+				"gridY": 2
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "total"
+				"editable": false
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 5
+				"gridX": 4
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-				"gridY": 3
+				"gridY": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"
@@ -31,15 +33,15 @@ new FormModel {
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToPaymentButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 7
-				"gridY": 3
+				"gridX": 6
+				"gridY": 2
 			} )
 			add( new FormComponent( "javax.swing.JSeparator" ) {
 				name: "separator1"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 2
-				"gridY": 5
-				"gridWidth": 6
+				"gridY": 4
+				"gridWidth": 5
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 				"$columnSpecs": "65dlu, labelcompgap, 53dlu:grow, labelcompgap, 49dlu:grow"
@@ -87,8 +89,8 @@ new FormModel {
 					"gridY": 3
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
-				"gridY": 7
+				"gridX": 2
+				"gridY": 6
 				"gridWidth": 5
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
@@ -124,8 +126,8 @@ new FormModel {
 					"gridY": 3
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
-				"gridY": 9
+				"gridX": 2
+				"gridY": 8
 				"gridWidth": 5
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -136,12 +138,12 @@ new FormModel {
 				"foreground": new java.awt.Color( 255, 255, 255, 255 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "clearSaleActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
-				"gridY": 11
+				"gridX": 2
+				"gridY": 10
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 5, 20 )
-			"size": new java.awt.Dimension( 410, 335 )
+			"size": new java.awt.Dimension( 410, 350 )
 		} )
 	}
 }

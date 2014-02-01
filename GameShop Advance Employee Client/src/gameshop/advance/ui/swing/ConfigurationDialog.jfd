@@ -20,17 +20,17 @@ new FormModel {
 						name: "label1"
 						"text": "Indirizzo server"
 						"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 2, false )
-						"labelFor": new FormReference( "serverAddress" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 3
 					} )
-					add( new FormComponent( "javax.swing.JTextField" ) {
+					add( new FormComponent( "javax.swing.JFormattedTextField" ) {
 						name: "serverAddress"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 5
-						"gridWidth": 3
 						"gridY": 3
+						"gridWidth": 3
+						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label2"

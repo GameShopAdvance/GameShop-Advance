@@ -69,6 +69,8 @@ public class DbDescrizioneProdottoSingleton {
         query.descend("codiceProdotto").constrain(code);
         ObjectSet results = query.execute();
         System.err.println("Descrizioni trovate: "+results.size());
+        if(results.isEmpty())
+            return null;
         return (DescrizioneProdotto) results.get(0);
     }
 }

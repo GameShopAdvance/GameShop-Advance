@@ -125,6 +125,7 @@ public class InsertItemPanel extends JPanel {
         clearSale = new JButton();
 
         //======== this ========
+        setComponentPopupMenu(null);
         setName("this");
 
         //---- label1 ----
@@ -134,6 +135,7 @@ public class InsertItemPanel extends JPanel {
         label1.setName("label1");
 
         //---- total ----
+        total.setEditable(false);
         total.setName("total");
 
         //---- button2 ----
@@ -252,16 +254,16 @@ public class InsertItemPanel extends JPanel {
         });
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[20dlu,default], $lcgap, 65dlu, $lcgap, 61dlu, $lcgap, 56dlu, $lcgap, 20dlu",
-            "[15dlu,default], $lgap, 17dlu, $rgap, [9dlu,default], $rgap, [20dlu,default], $rgap, 60dlu, $rgap, [25dlu,default], $lgap, default"), this);
+            "[20dlu,default]:grow, 65dlu, $lcgap, 61dlu, $lcgap, 56dlu, 20dlu:grow",
+            "fill:[15dlu,default]:grow, fill:[20dlu,default], $rgap, [9dlu,default]:grow, $rgap, [20dlu,default], fill:default:grow, 60dlu, fill:13dlu:grow, fill:20dlu, fill:default:grow"), this);
 
-        builder.add(label1,     CC.xy  (3,  3));
-        builder.add(total,      CC.xy  (5,  3, CC.DEFAULT, CC.FILL));
-        builder.add(button2,    CC.xy  (7,  3));
-        builder.add(separator1, CC.xywh(2,  5,          6,       1));
-        builder.add(panel2,     CC.xywh(3,  7,          5,       1));
-        builder.add(panel1,     CC.xywh(3,  9,          5,       1));
-        builder.add(clearSale,  CC.xy  (3, 11));
+        builder.add(label1,     CC.xy  (2,  2));
+        builder.add(total,      CC.xy  (4,  2, CC.DEFAULT, CC.FILL));
+        builder.add(button2,    CC.xy  (6,  2));
+        builder.add(separator1, CC.xywh(2,  4,          5,       1));
+        builder.add(panel2,     CC.xywh(2,  6,          5,       1));
+        builder.add(panel1,     CC.xywh(2,  8,          5,       1));
+        builder.add(clearSale,  CC.xy  (2, 10));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

@@ -4,19 +4,21 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "235dlu"
+			"$columnSpecs": "268dlu"
 			"$rowSpecs": "max(default;153dlu)"
 		} ) {
 			name: "this"
 			"$sizePolicy": 1
 			"title": "GameShopAdvance Cassa"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "234dlu"
-				"$rowSpecs": "max(default;139dlu)"
+				"$columnSpecs": "max(default;269dlu):grow"
+				"$rowSpecs": "max(default;181dlu):grow"
 			} ) {
 				name: "mainPanel"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 1
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 			menuBar: new FormContainer( "javax.swing.JMenuBar", new FormLayoutManager( class javax.swing.JMenuBar ) ) {
 				name: "menuBar1"

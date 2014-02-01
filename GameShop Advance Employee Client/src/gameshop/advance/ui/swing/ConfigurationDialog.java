@@ -21,6 +21,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JDialog;
+import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -116,7 +117,7 @@ public class ConfigurationDialog extends JDialog {
         tabbedPane1 = new JTabbedPane();
         panel1 = new JPanel();
         label1 = new JLabel();
-        serverAddress = new JTextField();
+        serverAddress = new JFormattedTextField();
         label2 = new JLabel();
         serverPort = new JTextField();
         panel2 = new JPanel();
@@ -142,7 +143,6 @@ public class ConfigurationDialog extends JDialog {
                 //---- label1 ----
                 label1.setText("Indirizzo server");
                 label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 2f));
-                label1.setLabelFor(serverAddress);
                 label1.setName("label1");
 
                 //---- serverAddress ----
@@ -162,7 +162,7 @@ public class ConfigurationDialog extends JDialog {
                     "15dlu, $lgap, [30dlu,default], $ugap, [30dlu,default]"), panel1);
 
                 panel1Builder.add(label1,        CC.xy  (3, 3));
-                panel1Builder.add(serverAddress, CC.xywh(5, 3, 3, 1));
+                panel1Builder.add(serverAddress, CC.xywh(5, 3, 3, 1, CC.FILL, CC.DEFAULT));
                 panel1Builder.add(label2,        CC.xy  (3, 5));
                 panel1Builder.add(serverPort,    CC.xy  (5, 5));
             }
@@ -245,7 +245,7 @@ public class ConfigurationDialog extends JDialog {
     private JTabbedPane tabbedPane1;
     private JPanel panel1;
     private JLabel label1;
-    private JTextField serverAddress;
+    private JFormattedTextField serverAddress;
     private JLabel label2;
     private JTextField serverPort;
     private JPanel panel2;
