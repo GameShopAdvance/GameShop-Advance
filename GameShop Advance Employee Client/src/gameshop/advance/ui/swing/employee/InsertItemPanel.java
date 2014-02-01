@@ -22,6 +22,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.border.CompoundBorder;
@@ -30,7 +31,8 @@ import javax.swing.border.TitledBorder;
 /**
  * @author Matteo Gentile
  */
-public class InsertItemPanel extends JPanel {
+public class InsertItemPanel extends JScrollPane {
+
     public InsertItemPanel() {
         initComponents();
     }
@@ -84,6 +86,7 @@ public class InsertItemPanel extends JPanel {
         try{
             Integer code = Integer.parseInt(this.clientCode.getText());
             SaleController.getInstance().inserisciCartaCliente(code);
+            this.clientCode.setEditable(false);
         } catch (NullPointerException ex) {
             Logger.getLogger(InsertItemPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ConfigurationException ex) {
@@ -108,6 +111,8 @@ public class InsertItemPanel extends JPanel {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        panel3 = new JPanel();
+        clearSale = new JButton();
         label1 = new JLabel();
         total = new JTextField();
         button2 = new JButton();
@@ -122,152 +127,160 @@ public class InsertItemPanel extends JPanel {
         label4 = new JLabel();
         clientCode = new JTextField();
         insertClientCode = new JButton();
-        clearSale = new JButton();
 
         //======== this ========
         setComponentPopupMenu(null);
         setName("this");
 
-        //---- label1 ----
-        label1.setText("Totale");
-        label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 1f));
-        label1.setLabelFor(total);
-        label1.setName("label1");
-
-        //---- total ----
-        total.setEditable(false);
-        total.setName("total");
-
-        //---- button2 ----
-        button2.setText("Paga");
-        button2.setBackground(new Color(102, 255, 102));
-        button2.setFont(button2.getFont().deriveFont(button2.getFont().getStyle() | Font.BOLD));
-        button2.setName("button2");
-        button2.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                goToPaymentButtonActionPerformed(e);
-            }
-        });
-
-        //---- separator1 ----
-        separator1.setName("separator1");
-
-        //======== panel2 ========
+        //======== panel3 ========
         {
-            panel2.setBorder(new CompoundBorder(
-                new TitledBorder("Prodotto"),
-                Borders.DLU2_BORDER));
-            panel2.setName("panel2");
+            panel3.setName("panel3");
 
-            //---- label2 ----
-            label2.setText("Codice Prodotto");
-            label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 1f));
-            label2.setLabelFor(productIdTextField);
-            label2.setName("label2");
-
-            //---- productIdTextField ----
-            productIdTextField.setName("productIdTextField");
-
-            //---- label3 ----
-            label3.setText("Quantit\u00e0");
-            label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 1f));
-            label3.setLabelFor(quantityTextField);
-            label3.setName("label3");
-
-            //---- quantityTextField ----
-            quantityTextField.setName("quantityTextField");
-
-            //---- addProductButton ----
-            addProductButton.setText("Aggiungi");
-            addProductButton.setBackground(new Color(153, 153, 255));
-            addProductButton.setForeground(Color.white);
-            addProductButton.setFont(addProductButton.getFont().deriveFont(addProductButton.getFont().getStyle() | Font.BOLD));
-            addProductButton.setName("addProductButton");
-            addProductButton.addActionListener(new ActionListener() {
+            //---- clearSale ----
+            clearSale.setText("Annulla");
+            clearSale.setBackground(new Color(255, 51, 0));
+            clearSale.setFont(clearSale.getFont().deriveFont(clearSale.getFont().getStyle() | Font.BOLD));
+            clearSale.setForeground(Color.white);
+            clearSale.setName("clearSale");
+            clearSale.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    addProductButtonActionPerformed(e);
+                    clearSaleActionPerformed(e);
+                    clearSaleActionPerformed(e);
                 }
             });
 
-            PanelBuilder panel2Builder = new PanelBuilder(new FormLayout(
-                "65dlu, $lcgap, 53dlu:grow, $lcgap, 49dlu:grow",
-                "[20dlu,default], $rgap, [20dlu,default]"), panel2);
+            //---- label1 ----
+            label1.setText("Totale");
+            label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 1f));
+            label1.setLabelFor(total);
+            label1.setName("label1");
 
-            panel2Builder.add(label2,             CC.xy  (1, 1));
-            panel2Builder.add(productIdTextField, CC.xywh(3, 1,          3,       1, CC.DEFAULT, CC.FILL));
-            panel2Builder.add(label3,             CC.xy  (1, 3));
-            panel2Builder.add(quantityTextField,  CC.xy  (3, 3, CC.DEFAULT, CC.FILL));
-            panel2Builder.add(addProductButton,   CC.xy  (5, 3));
-        }
+            //---- total ----
+            total.setEditable(false);
+            total.setName("total");
 
-        //======== panel1 ========
-        {
-            panel1.setBorder(new CompoundBorder(
-                new TitledBorder("Carta Cliente"),
-                Borders.DLU2_BORDER));
-            panel1.setName("panel1");
-
-            //---- label4 ----
-            label4.setText("Codice");
-            label4.setFont(label4.getFont().deriveFont(label4.getFont().getSize() + 1f));
-            label4.setLabelFor(clientCode);
-            label4.setName("label4");
-
-            //---- clientCode ----
-            clientCode.setName("clientCode");
-
-            //---- insertClientCode ----
-            insertClientCode.setText("Inserisci");
-            insertClientCode.setForeground(Color.white);
-            insertClientCode.setBackground(new Color(153, 153, 255));
-            insertClientCode.setFont(insertClientCode.getFont().deriveFont(insertClientCode.getFont().getStyle() | Font.BOLD));
-            insertClientCode.setName("insertClientCode");
-            insertClientCode.addActionListener(new ActionListener() {
+            //---- button2 ----
+            button2.setText("Avanti");
+            button2.setBackground(new Color(102, 255, 102));
+            button2.setFont(button2.getFont().deriveFont(button2.getFont().getStyle() | Font.BOLD));
+            button2.setName("button2");
+            button2.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
-                    insertClientCodeActionPerformed(e);
+                    goToPaymentButtonActionPerformed(e);
                 }
             });
 
-            PanelBuilder panel1Builder = new PanelBuilder(new FormLayout(
-                "[67dlu,default], $lcgap, 110dlu",
-                "24dlu, $lgap, default"), panel1);
+            //---- separator1 ----
+            separator1.setName("separator1");
 
-            panel1Builder.add(label4,           CC.xy(1, 1));
-            panel1Builder.add(clientCode,       CC.xy(3, 1, CC.FILL, CC.FILL));
-            panel1Builder.add(insertClientCode, CC.xy(3, 3));
-        }
+            //======== panel2 ========
+            {
+                panel2.setBorder(new CompoundBorder(
+                    new TitledBorder("Prodotto"),
+                    Borders.DLU2_BORDER));
+                panel2.setName("panel2");
 
-        //---- clearSale ----
-        clearSale.setText("Annulla");
-        clearSale.setBackground(new Color(255, 51, 0));
-        clearSale.setFont(clearSale.getFont().deriveFont(clearSale.getFont().getStyle() | Font.BOLD));
-        clearSale.setForeground(Color.white);
-        clearSale.setName("clearSale");
-        clearSale.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                clearSaleActionPerformed(e);
+                //---- label2 ----
+                label2.setText("Codice Prodotto");
+                label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 1f));
+                label2.setLabelFor(productIdTextField);
+                label2.setName("label2");
+
+                //---- productIdTextField ----
+                productIdTextField.setName("productIdTextField");
+
+                //---- label3 ----
+                label3.setText("Quantit\u00e0");
+                label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 1f));
+                label3.setLabelFor(quantityTextField);
+                label3.setName("label3");
+
+                //---- quantityTextField ----
+                quantityTextField.setName("quantityTextField");
+
+                //---- addProductButton ----
+                addProductButton.setText("Aggiungi");
+                addProductButton.setBackground(new Color(153, 153, 255));
+                addProductButton.setForeground(Color.white);
+                addProductButton.setFont(addProductButton.getFont().deriveFont(addProductButton.getFont().getStyle() | Font.BOLD));
+                addProductButton.setName("addProductButton");
+                addProductButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        addProductButtonActionPerformed(e);
+                    }
+                });
+
+                PanelBuilder panel2Builder = new PanelBuilder(new FormLayout(
+                    "65dlu, $lcgap, 53dlu:grow, $lcgap, 49dlu:grow",
+                    "[20dlu,default], $rgap, [20dlu,default]"), panel2);
+
+                panel2Builder.add(label2,             CC.xy  (1, 1));
+                panel2Builder.add(productIdTextField, CC.xywh(3, 1,          3,       1, CC.DEFAULT, CC.FILL));
+                panel2Builder.add(label3,             CC.xy  (1, 3));
+                panel2Builder.add(quantityTextField,  CC.xy  (3, 3, CC.DEFAULT, CC.FILL));
+                panel2Builder.add(addProductButton,   CC.xy  (5, 3));
             }
-        });
 
-        PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[20dlu,default]:grow, 65dlu, $lcgap, 61dlu, $lcgap, 56dlu, 20dlu:grow",
-            "fill:[15dlu,default]:grow, fill:[20dlu,default], $rgap, [9dlu,default]:grow, $rgap, [20dlu,default], fill:default:grow, 60dlu, fill:13dlu:grow, fill:20dlu, fill:default:grow"), this);
+            //======== panel1 ========
+            {
+                panel1.setBorder(new CompoundBorder(
+                    new TitledBorder("Carta Cliente"),
+                    Borders.DLU2_BORDER));
+                panel1.setName("panel1");
 
-        builder.add(label1,     CC.xy  (2,  2));
-        builder.add(total,      CC.xy  (4,  2, CC.DEFAULT, CC.FILL));
-        builder.add(button2,    CC.xy  (6,  2));
-        builder.add(separator1, CC.xywh(2,  4,          5,       1));
-        builder.add(panel2,     CC.xywh(2,  6,          5,       1));
-        builder.add(panel1,     CC.xywh(2,  8,          5,       1));
-        builder.add(clearSale,  CC.xy  (2, 10));
+                //---- label4 ----
+                label4.setText("Codice");
+                label4.setFont(label4.getFont().deriveFont(label4.getFont().getSize() + 1f));
+                label4.setLabelFor(clientCode);
+                label4.setName("label4");
+
+                //---- clientCode ----
+                clientCode.setName("clientCode");
+
+                //---- insertClientCode ----
+                insertClientCode.setText("Inserisci");
+                insertClientCode.setForeground(Color.white);
+                insertClientCode.setBackground(new Color(153, 153, 255));
+                insertClientCode.setFont(insertClientCode.getFont().deriveFont(insertClientCode.getFont().getStyle() | Font.BOLD));
+                insertClientCode.setName("insertClientCode");
+                insertClientCode.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        insertClientCodeActionPerformed(e);
+                    }
+                });
+
+                PanelBuilder panel1Builder = new PanelBuilder(new FormLayout(
+                    "[67dlu,default], $lcgap, 110dlu",
+                    "24dlu, $lgap, default"), panel1);
+
+                panel1Builder.add(label4,           CC.xy(1, 1));
+                panel1Builder.add(clientCode,       CC.xy(3, 1, CC.FILL, CC.FILL));
+                panel1Builder.add(insertClientCode, CC.xy(3, 3));
+            }
+
+            PanelBuilder panel3Builder = new PanelBuilder(new FormLayout(
+                "5dlu, 65dlu, [20dlu,default]:grow, 65dlu, $lcgap, 61dlu, $lcgap, 56dlu, [20dlu,default]:grow, 65dlu, 5dlu",
+                "5dlu, fill:[20dlu,default], $lgap, [20dlu,default,40dlu], [20dlu,default], fill:[15dlu,default,40dlu], 60dlu, fill:default:grow"), panel3);
+
+            panel3Builder.add(clearSale,  CC.xy  ( 2, 2));
+            panel3Builder.add(label1,     CC.xy  ( 4, 2));
+            panel3Builder.add(total,      CC.xy  ( 6, 2, CC.DEFAULT, CC.FILL));
+            panel3Builder.add(button2,    CC.xy  (10, 2));
+            panel3Builder.add(separator1, CC.xywh( 4, 4,          5,       1));
+            panel3Builder.add(panel2,     CC.xywh( 4, 5,          5,       1));
+            panel3Builder.add(panel1,     CC.xywh( 4, 7,          5,       1));
+        }
+        setViewportView(panel3);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JPanel panel3;
+    private JButton clearSale;
     private JLabel label1;
     private JTextField total;
     private JButton button2;
@@ -282,6 +295,5 @@ public class InsertItemPanel extends JPanel {
     private JLabel label4;
     private JTextField clientCode;
     private JButton insertClientCode;
-    private JButton clearSale;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

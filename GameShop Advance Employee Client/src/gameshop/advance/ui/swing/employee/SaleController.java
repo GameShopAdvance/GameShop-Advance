@@ -20,7 +20,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import javax.swing.JPanel;
+import javax.swing.JComponent;
 
 /**
  *
@@ -121,7 +121,7 @@ public class SaleController extends UnicastRemoteObject implements IRemoteClient
         this.resto = m;
     }
     
-    private void aggiornaWindow(JPanel panel) {
+    private void aggiornaWindow(JComponent panel) {
         UIWindowSingleton.getInstance().setPanel(panel);
         UIWindowSingleton.getInstance().refreshContent();
     }
@@ -137,7 +137,8 @@ public class SaleController extends UnicastRemoteObject implements IRemoteClient
     }
 
     void clearSale() {
-        //da implementare
+        UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
+        UIWindowSingleton.getInstance().refreshContent();
     }
     
 }
