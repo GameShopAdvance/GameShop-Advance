@@ -4,6 +4,7 @@
 
 package gameshop.advance.ui.swing.employee;
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.exceptions.ConfigurationException;
@@ -48,19 +49,23 @@ public class EmployeeMenuPanel extends JPanel {
         startSale = new JButton();
 
         //======== this ========
-        setLayout(new FormLayout(
-            "[150px,min]:grow, $lcgap, [150px,default], $lcgap, 150px:grow",
-            "[70px,min]:grow, $lgap, 45px, $lgap, [160px,min]:grow"));
+        setName("this");
 
         //---- startSale ----
         startSale.setText("Avvia Vendita");
+        startSale.setName("startSale");
         startSale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startSaleActionPerformed(e);
             }
         });
-        add(startSale, CC.xy(3, 3, CC.DEFAULT, CC.FILL));
+
+        PanelBuilder builder = new PanelBuilder(new FormLayout(
+            "[150px,min]:grow, $lcgap, [150px,default], $lcgap, 150px:grow",
+            "[70px,min]:grow, $lgap, 45px, $lgap, [160px,min]:grow"), this);
+
+        builder.add(startSale, CC.xy(3, 3, CC.DEFAULT, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

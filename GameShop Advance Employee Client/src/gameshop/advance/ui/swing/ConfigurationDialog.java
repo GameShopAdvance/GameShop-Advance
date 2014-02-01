@@ -36,6 +36,10 @@ public class ConfigurationDialog extends JDialog {
         super(owner);
         initComponents();
         this.setConfigurationValues();
+        this.button1.setBackground(UIStyleSingleton.getInstance().getSuccessColor());
+        this.button1.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
+        this.button2.setBackground(UIStyleSingleton.getInstance().getAlertColor());
+        this.button2.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
     }
 
     public ConfigurationDialog(Dialog owner) {

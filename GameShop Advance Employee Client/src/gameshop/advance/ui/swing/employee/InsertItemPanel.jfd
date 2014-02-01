@@ -17,11 +17,15 @@ new FormModel {
 					"background": new java.awt.Color( 255, 51, 0, 255 )
 					"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
 					"foreground": new java.awt.Color( 255, 255, 255, 255 )
+					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"nextFocusableComponent": new FormReference( "button2" )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "clearSaleActionPerformed", true ) )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "clearSaleActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridY": 2
 					"gridX": 2
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
@@ -43,8 +47,10 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "button2"
 					"text": "Avanti"
-					"background": new java.awt.Color( 102, 255, 102, 255 )
+					"background": new java.awt.Color( 102, 204, 0, 255 )
 					"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+					"name": "nextButton"
+					"nextFocusableComponent": new FormReference( "productIdTextField" )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToPaymentButtonActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 10
@@ -71,6 +77,7 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "productIdTextField"
+						"nextFocusableComponent": new FormReference( "quantityTextField" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridWidth": 3
@@ -86,6 +93,7 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "quantityTextField"
+						"nextFocusableComponent": new FormReference( "addProductButton" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 3
@@ -94,9 +102,9 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "addProductButton"
 						"text": "Aggiungi"
-						"background": new java.awt.Color( 153, 153, 255, 255 )
-						"foreground": new java.awt.Color( 255, 255, 255, 255 )
-						"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+						"foreground": sfield java.awt.Color black
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 65536, 0, false )
+						"nextFocusableComponent": new FormReference( "clientCode" )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addProductButtonActionPerformed", true ) )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 5
@@ -109,7 +117,7 @@ new FormModel {
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 					"$columnSpecs": "max(default;67dlu), labelcompgap, 110dlu"
-					"$rowSpecs": "24dlu, linegap, default"
+					"$rowSpecs": "max(default;20dlu), linegap, default"
 				} ) {
 					name: "panel1"
 					"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( "Carta Cliente" ), sfield com.jgoodies.forms.factories.Borders DLU2_BORDER )
@@ -123,6 +131,7 @@ new FormModel {
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "clientCode"
+						"nextFocusableComponent": new FormReference( "insertClientCode" )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
@@ -131,9 +140,9 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "insertClientCode"
 						"text": "Inserisci"
-						"foreground": new java.awt.Color( 255, 255, 255, 255 )
-						"background": new java.awt.Color( 153, 153, 255, 255 )
-						"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+						"foreground": sfield java.awt.Color black
+						"font": new com.jformdesigner.model.SwingDerivedFont( null, 65536, 0, false )
+						"nextFocusableComponent": new FormReference( "button2" )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "insertClientCodeActionPerformed", true ) )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3

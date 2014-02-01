@@ -14,9 +14,11 @@ import java.awt.Color;
  */
 public class UIStyleSingleton {
 
-    private Color successColor = new Color(153, 255, 51);
-    private Color alertColor = new Color(255, 204, 51);
+    private Color successColor = new Color(102, 204, 0);
+    private Color alertColor = new Color(255, 51, 0);
     private Color errorColor = new Color(255, 51, 51);
+    
+    private Color buttonTextColor = new Color(255, 255, 255);
     
     private static UIStyleSingleton instance;
     
@@ -55,6 +57,10 @@ public class UIStyleSingleton {
 
     public void setErrorColor(Color errorColor) {
         this.errorColor = errorColor;
+    }
+
+    public Color getButtonTextColor() {
+        return this.buttonTextColor;
     }
 
     

@@ -11,6 +11,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.ui.swing.UIStyleSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.Color;
 import java.awt.Font;
@@ -35,6 +36,11 @@ public class InsertItemPanel extends JScrollPane {
 
     public InsertItemPanel() {
         initComponents();
+        this.clearSale.setBackground(UIStyleSingleton.getInstance().getAlertColor());
+        this.clearSale.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
+        this.button2.setBackground(UIStyleSingleton.getInstance().getSuccessColor());
+        this.button2.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
+               
     }
 
     private void goToPaymentButtonActionPerformed(ActionEvent e) {
@@ -109,6 +115,10 @@ public class InsertItemPanel extends JScrollPane {
         
     }
 
+    private void createUIComponents() {
+        // TODO: add custom component creation code here
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel3 = new JPanel();
@@ -141,6 +151,8 @@ public class InsertItemPanel extends JScrollPane {
             clearSale.setBackground(new Color(255, 51, 0));
             clearSale.setFont(clearSale.getFont().deriveFont(clearSale.getFont().getStyle() | Font.BOLD));
             clearSale.setForeground(Color.white);
+            clearSale.setIcon(null);
+            clearSale.setNextFocusableComponent(button2);
             clearSale.setName("clearSale");
             clearSale.addActionListener(new ActionListener() {
                 @Override
@@ -162,9 +174,10 @@ public class InsertItemPanel extends JScrollPane {
 
             //---- button2 ----
             button2.setText("Avanti");
-            button2.setBackground(new Color(102, 255, 102));
+            button2.setBackground(new Color(102, 204, 0));
             button2.setFont(button2.getFont().deriveFont(button2.getFont().getStyle() | Font.BOLD));
-            button2.setName("button2");
+            button2.setName("nextButton");
+            button2.setNextFocusableComponent(productIdTextField);
             button2.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -189,6 +202,7 @@ public class InsertItemPanel extends JScrollPane {
                 label2.setName("label2");
 
                 //---- productIdTextField ----
+                productIdTextField.setNextFocusableComponent(quantityTextField);
                 productIdTextField.setName("productIdTextField");
 
                 //---- label3 ----
@@ -198,13 +212,14 @@ public class InsertItemPanel extends JScrollPane {
                 label3.setName("label3");
 
                 //---- quantityTextField ----
+                quantityTextField.setNextFocusableComponent(addProductButton);
                 quantityTextField.setName("quantityTextField");
 
                 //---- addProductButton ----
                 addProductButton.setText("Aggiungi");
-                addProductButton.setBackground(new Color(153, 153, 255));
-                addProductButton.setForeground(Color.white);
-                addProductButton.setFont(addProductButton.getFont().deriveFont(addProductButton.getFont().getStyle() | Font.BOLD));
+                addProductButton.setForeground(Color.black);
+                addProductButton.setFont(addProductButton.getFont().deriveFont(addProductButton.getFont().getStyle() & ~Font.BOLD));
+                addProductButton.setNextFocusableComponent(clientCode);
                 addProductButton.setName("addProductButton");
                 addProductButton.addActionListener(new ActionListener() {
                     @Override
@@ -238,13 +253,14 @@ public class InsertItemPanel extends JScrollPane {
                 label4.setName("label4");
 
                 //---- clientCode ----
+                clientCode.setNextFocusableComponent(insertClientCode);
                 clientCode.setName("clientCode");
 
                 //---- insertClientCode ----
                 insertClientCode.setText("Inserisci");
-                insertClientCode.setForeground(Color.white);
-                insertClientCode.setBackground(new Color(153, 153, 255));
-                insertClientCode.setFont(insertClientCode.getFont().deriveFont(insertClientCode.getFont().getStyle() | Font.BOLD));
+                insertClientCode.setForeground(Color.black);
+                insertClientCode.setFont(insertClientCode.getFont().deriveFont(insertClientCode.getFont().getStyle() & ~Font.BOLD));
+                insertClientCode.setNextFocusableComponent(button2);
                 insertClientCode.setName("insertClientCode");
                 insertClientCode.addActionListener(new ActionListener() {
                     @Override
@@ -255,7 +271,7 @@ public class InsertItemPanel extends JScrollPane {
 
                 PanelBuilder panel1Builder = new PanelBuilder(new FormLayout(
                     "[67dlu,default], $lcgap, 110dlu",
-                    "24dlu, $lgap, default"), panel1);
+                    "[20dlu,default], $lgap, default"), panel1);
 
                 panel1Builder.add(label4,           CC.xy(1, 1));
                 panel1Builder.add(clientCode,       CC.xy(3, 1, CC.FILL, CC.FILL));
@@ -266,7 +282,7 @@ public class InsertItemPanel extends JScrollPane {
                 "5dlu, 65dlu, [20dlu,default]:grow, 65dlu, $lcgap, 61dlu, $lcgap, 56dlu, [20dlu,default]:grow, 65dlu, 5dlu",
                 "5dlu, fill:[20dlu,default], $lgap, [20dlu,default,40dlu], [20dlu,default], fill:[15dlu,default,40dlu], 60dlu, fill:default:grow"), panel3);
 
-            panel3Builder.add(clearSale,  CC.xy  ( 2, 2));
+            panel3Builder.add(clearSale,  CC.xy  ( 2, 2,    CC.FILL, CC.FILL));
             panel3Builder.add(label1,     CC.xy  ( 4, 2));
             panel3Builder.add(total,      CC.xy  ( 6, 2, CC.DEFAULT, CC.FILL));
             panel3Builder.add(button2,    CC.xy  (10, 2));

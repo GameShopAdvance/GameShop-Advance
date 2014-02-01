@@ -11,7 +11,6 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "startSale"
 				"text": "Avvia Vendita"
-				"background": new java.awt.Color( 102, 255, 102, 255 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startSaleActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3

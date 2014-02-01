@@ -11,7 +11,7 @@ import java.util.List;
  * prodotto: id, prezzo e descrizione testuale.
  * @author Salx
  */
-public class DescrizioneProdotto
+public class DescrizioneProdotto implements Cloneable
 {
 
     private IDProdotto codiceProdotto;
