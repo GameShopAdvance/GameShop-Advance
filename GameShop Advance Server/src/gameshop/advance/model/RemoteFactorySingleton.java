@@ -2,12 +2,10 @@ package gameshop.advance.model;
 
 
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.interfaces.remote.ICassaRemote;
+import gameshop.advance.interfaces.remote.IRemoteFactory;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * La Factory è utilizzata per la creazione delle casse:impedisce che una stessa cassa venga
@@ -54,13 +52,13 @@ public class RemoteFactorySingleton extends UnicastRemoteObject implements IRemo
     @Override
     public ICassaRemote creaCassa(int numeroCassa) throws RemoteException {
         try {
-            NegozioSingleton negozio;
-            negozio = NegozioSingleton.getInstance();
+            RemoteTerminalSingleton terminals;
+            terminals = RemoteTerminalSingleton.getInstance();
 
-            Cassa cassa = negozio.getCassa(numeroCassa);
+            Cassa cassa = terminals.getCassa(numeroCassa);
             if (cassa == null){
                 cassa = new Cassa(numeroCassa);
-                negozio.addCassa(cassa);
+                terminals.addCassa(cassa);
             }
             System.err.println("Cassa: "+cassa);
             return cassa;

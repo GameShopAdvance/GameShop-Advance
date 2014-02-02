@@ -1,13 +1,10 @@
 package gameshop.advance.model;
 
-import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.model.vendita.CartaCliente;
 import gameshop.advance.model.vendita.Vendita;
 import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
 import gameshop.advance.technicalservices.db.DbVenditaSingleton;
-import java.rmi.RemoteException;
-import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -20,21 +17,18 @@ import java.util.logging.Logger;
 public class NegozioSingleton
 {
     private static NegozioSingleton store = null;
-    private LinkedList<Cassa> casse;
 
     /**
      * Il Costruttore imposta tutte le variabili di Negozio.
      */
     private NegozioSingleton()
     {
-        this.casse = new LinkedList<>();
+        
     }
 
     /**
      * Impedisce la creazione di più oggetti Negozio dato che Negozio è Singleton-
      * @return Negozio
-     * @throws RemoteException
-     * @throws InvalidMoneyException
      */
     public static synchronized NegozioSingleton getInstance()
     {
@@ -43,28 +37,6 @@ public class NegozioSingleton
             NegozioSingleton.store = new NegozioSingleton();
         }
         return NegozioSingleton.store;
-    }
-
-    /**
-     * Utilizza il parametro in ingresso idCassa per recuperare la Cassa che possiede
-     * tale id,all'interno dell'elenco di casse che fanno parte del negozio.
-     * @param idCassa
-     * @return l'oggetto Cassa richiesto
-     */
-    public Cassa getCassa(int idCassa) {
-        for (Cassa cassa : this.casse) {
-            if ( cassa.getIdCassa() == idCassa )
-                return cassa;
-        }   
-        return null;
-    }
-
-    /**
-     * Aggiunge la cassa ricevuta all'elenco delle casse presenti e attive in negozio.
-     * @param cassa
-     */
-    public void addCassa(Cassa cassa) {
-        this.casse.add(cassa);
     }
 
     /**
