@@ -28,9 +28,10 @@ public class GameShopAdvanceEmployee {
                     //controllerConfig.getConfiguration();
                 }
             }
-            
+                        
+           
             ConfigurationControllerSingleton controllerConfig = ConfigurationControllerSingleton.getInstance();
-            controllerConfig.setConfiguration("127.0.0.1", 1099, 17);
+            controllerConfig.loadConfiguration();
             
             UIWindowSingleton window = UIWindowSingleton.getInstance();
             window.setPanel(new EmployeeMenuPanel());

@@ -99,6 +99,8 @@ public class InsertItemPanel extends JScrollPane {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di configurazione. Se il problema persiste contattare l'amministratore di sistema.");
         } catch (RemoteException ex) {
             UIWindowSingleton.getInstance().displayError("Non è stato possibile convalidare il codice cliente.");
+        } catch (NumberFormatException ex){
+            UIWindowSingleton.getInstance().displayError("Il codice cliente inserito non è valido o il suo formato non è corretto");
         }
     }
 

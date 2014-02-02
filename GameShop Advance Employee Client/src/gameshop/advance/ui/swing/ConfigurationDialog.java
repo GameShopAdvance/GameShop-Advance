@@ -70,6 +70,7 @@ public class ConfigurationDialog extends JDialog {
     }
 
     private void saveConfiguration(ActionEvent e) {
+        int nCassa = 0;
         try {
             System.err.println("Config: "+ConfigurationControllerSingleton.getInstance());
             String cassa = this.newIdCassa.getText();
@@ -77,8 +78,12 @@ public class ConfigurationDialog extends JDialog {
             boolean error = false;
             if(!cassa.isEmpty())
             {
-                int nCassa = Integer.decode(cassa);
-                ConfigurationControllerSingleton.getInstance().setIdCassa(nCassa);
+                try{
+                    nCassa = Integer.decode(cassa);
+                    ConfigurationControllerSingleton.getInstance().setIdCassa(nCassa);
+                } catch(NumberFormatException ex) {
+                    UIWindowSingleton.getInstance().displayError("Il numero di cassa inserito: " + cassa + "non è valido.");
+                }
             }
             try{
                 ConfigurationControllerSingleton.getInstance().setServerAddress(this.serverAddress.getText());

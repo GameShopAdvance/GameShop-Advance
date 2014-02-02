@@ -94,10 +94,8 @@ public class ConfigurationControllerSingleton {
         DbConfigurationSingleton.getInstance().create(this.config);
     }
     
-    public Configuration loadConfiguration(){
-        
+    public void loadConfiguration(){
         this.config = DbConfigurationSingleton.getInstance().read();
-        return this.config;
     }
     
     public void updateConfiguration(){
