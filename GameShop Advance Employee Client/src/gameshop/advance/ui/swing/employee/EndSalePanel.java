@@ -23,14 +23,7 @@ import javax.swing.JTextField;
 
 
 /**
- * @aJButtonswiimport javax.swing.JPanel;
-import javax.swing.JTextField;
-ng.JLabel
-import javaxPiForimport javax.swing.JLabel;
-import javax.swing.JPanel;
-import javax.swing.JTextField;
-mLayout;
-import javax.swing.JButtonpo
+ * 
  */
 public class EndSalePanel extends JPanel {
     public EndSalePanel() {
