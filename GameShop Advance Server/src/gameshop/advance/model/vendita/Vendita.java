@@ -1,14 +1,13 @@
 package gameshop.advance.model.vendita;
 
-import gameshop.advance.interfaces.IVendita;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.interfaces.IVendita;
+import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.interfaces.remote.IVenditaRemote;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.Pagamento;
 import gameshop.advance.model.vendita.sconto.ScontoFactorySingleton;
-import gameshop.advance.model.vendita.sconto.vendita.ScontoTotaleVenditaStrategy;
 import gameshop.advance.model.vendita.sconto.vendita.ScontoVenditaStrategyComposite;
-import gameshop.advance.interfaces.remote.IRemoteObserver;
-import gameshop.advance.interfaces.remote.IVenditaRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.util.Date;
@@ -45,7 +44,7 @@ public class Vendita implements IVenditaRemote, IVendita
         this.date = new Date();
         this.completata = false;
         this.strategiaDiSconto = (ScontoVenditaStrategyComposite) ScontoFactorySingleton.getInstance().getStrategiaScontoVendita();
-        this.strategiaDiSconto.add(new ScontoTotaleVenditaStrategy(new Money(10.0)));
+        //this.strategiaDiSconto.add(new ScontoTotaleVenditaStrategy(new Money(10.0), ));
     }
 
     public Integer getIdVendita() {

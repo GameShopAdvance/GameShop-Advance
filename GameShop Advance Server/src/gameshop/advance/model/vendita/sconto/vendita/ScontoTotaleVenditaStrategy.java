@@ -6,9 +6,10 @@
 
 package gameshop.advance.model.vendita.sconto.vendita;
 
-import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.IVendita;
+import gameshop.advance.model.IntervalloDiTempo;
 import gameshop.advance.model.vendita.RigaDiVendita;
 import gameshop.advance.utility.Money;
 import java.util.List;
@@ -22,10 +23,12 @@ import java.util.logging.Logger;
 public class ScontoTotaleVenditaStrategy implements IScontoVenditaStrategy {
     
     private Money ammontare;
+    private IntervalloDiTempo periodo;
     
-    public ScontoTotaleVenditaStrategy(Money m){
+    public ScontoTotaleVenditaStrategy(Money m, IntervalloDiTempo time){
         
         this.ammontare = m;
+        this.periodo = time;
     }
     
     public void setScontoTotale(Money m){
@@ -53,4 +56,7 @@ public class ScontoTotaleVenditaStrategy implements IScontoVenditaStrategy {
         return totale.subtract(this.ammontare);
     }
     
+    public boolean isActual() {
+        return this.periodo.isActual();
+    }
 }

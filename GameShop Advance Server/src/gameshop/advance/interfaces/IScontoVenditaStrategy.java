@@ -6,7 +6,6 @@
 
 package gameshop.advance.interfaces;
 
-import gameshop.advance.interfaces.IVendita;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 
@@ -17,5 +16,7 @@ import java.rmi.RemoteException;
 public interface IScontoVenditaStrategy {
     
     Money getTotal(IVendita vendita) throws RemoteException;
+
+    public boolean isActual();
 
 }

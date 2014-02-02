@@ -1,10 +1,13 @@
 package gameshop.advance.model;
 
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.model.vendita.CartaCliente;
 import gameshop.advance.model.vendita.Vendita;
 import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
+import gameshop.advance.technicalservices.db.DbScontoVenditaSingleton;
 import gameshop.advance.technicalservices.db.DbVenditaSingleton;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -58,5 +61,30 @@ public class NegozioSingleton
         System.err.println("Negozio ---- looking for client");
             return DbCartaClienteSingleton.getInstance().read(codiceTessera);
     }
+    
+    
+    public LinkedList<IScontoVenditaStrategy> getScontiAttuali(){
+      
+        LinkedList<IScontoVenditaStrategy> scontiAttuali = null;
+        
+        DbScontoVenditaSingleton dbSconto = DbScontoVenditaSingleton.getInstance();
+        LinkedList<IScontoVenditaStrategy> sconti = dbSconto.getSconti();
+        
+        for (IScontoVenditaStrategy s : sconti){
+           if(s.isActual()){
+               scontiAttuali.add(s);
+           }
+       }
+        
+       return scontiAttuali;
+        
+    }
+    
+    public void salvaScontoVendita(IScontoVenditaStrategy sconto) throws ObjectAlreadyExistsDbException{
+        
+        DbScontoVenditaSingleton dbSconto = DbScontoVenditaSingleton.getInstance();
+        dbSconto.create(sconto);
+    }
+
 
 }
