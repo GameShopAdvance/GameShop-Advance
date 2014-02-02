@@ -1,5 +1,6 @@
 package gameshop.advance.employee;
 
+import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
@@ -27,6 +28,10 @@ public class GameShopAdvanceEmployee {
                     //controllerConfig.getConfiguration();
                 }
             }
+                        
+           
+            ConfigurationControllerSingleton controllerConfig = ConfigurationControllerSingleton.getInstance();
+            controllerConfig.loadConfiguration();
             
             UIWindowSingleton window = UIWindowSingleton.getInstance();
             window.setPanel(new EmployeeMenuPanel());
