@@ -11,6 +11,7 @@ import com.db4o.query.Query;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.IVendita;
+import java.util.Iterator;
 
 /**
  *
@@ -54,4 +55,11 @@ public class DbScontoVenditaSingleton {
         return (IVendita) query.execute().get(0);
     }
     
+    public Iterator<Object> read()
+    {
+        ObjectContainer client = DbManagerSingleton.getInstance().getClient();
+        Query query=client.query();
+        query.constrain(IVendita.class);
+        return query.execute().iterator();
+    }
 }

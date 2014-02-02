@@ -1,6 +1,7 @@
 package gameshop.advance.model.vendita;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.IVendita;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.interfaces.remote.IVenditaRemote;
@@ -181,5 +182,10 @@ public class Vendita implements IVenditaRemote, IVendita
     {
         System.err.println("Vendita --- setting client: "+c);
         this.cliente = c;
+    }
+
+    public void setSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali) {
+        for(IScontoVenditaStrategy sconto:scontiAttuali)
+            this.strategiaDiSconto.add(sconto);
     }
 }

@@ -7,6 +7,7 @@ import gameshop.advance.model.vendita.Vendita;
 import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
 import gameshop.advance.technicalservices.db.DbScontoVenditaSingleton;
 import gameshop.advance.technicalservices.db.DbVenditaSingleton;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -65,18 +66,20 @@ public class NegozioSingleton
     
     public LinkedList<IScontoVenditaStrategy> getScontiAttuali(){
       
-        LinkedList<IScontoVenditaStrategy> scontiAttuali = null;
+        LinkedList<IScontoVenditaStrategy> scontiAttuali = new LinkedList<>();
         
         DbScontoVenditaSingleton dbSconto = DbScontoVenditaSingleton.getInstance();
-        LinkedList<IScontoVenditaStrategy> sconti = dbSconto.getSconti();
+        Iterator<Object> sconti = dbSconto.read();
         
-        for (IScontoVenditaStrategy s : sconti){
-           if(s.isActual()){
-               scontiAttuali.add(s);
-           }
-       }
+        while(sconti.hasNext())
+        {
+            IScontoVenditaStrategy sconto = (IScontoVenditaStrategy) sconti.next();
+            if(sconto.isActual()){
+                scontiAttuali.add(sconto);
+            }
+        }
         
-       return scontiAttuali;
+        return scontiAttuali;
         
     }
     

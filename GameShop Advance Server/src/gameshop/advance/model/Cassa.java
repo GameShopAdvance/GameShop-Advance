@@ -50,6 +50,7 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
     @Override
     public void avviaNuovaVendita() throws RemoteException {
         this.venditaCorrente = new Vendita();
+        this.venditaCorrente.setSconti(NegozioSingleton.getInstance().getScontiAttuali());
     }
 
     /**
