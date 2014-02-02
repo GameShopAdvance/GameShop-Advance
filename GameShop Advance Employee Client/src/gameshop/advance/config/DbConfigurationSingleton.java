@@ -9,6 +9,7 @@ package gameshop.advance.config;
 
 import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
 import com.db4o.query.Query;
 import gameshop.advance.employee.Configuration;
 
@@ -46,23 +47,28 @@ public class DbConfigurationSingleton {
     
     public Configuration read(){
         
-        Configuration config;
+        
         ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), this.DbName);
         Query query = db.query();
         query.constrain(Configuration.class);
-        config = (Configuration) query.execute().get(0);
-        return config;
+        ObjectSet<Object> config = query.execute();
+        Configuration result;
+        if(config.isEmpty())
+            result = null;
+        else
+            result = (Configuration) config.get(0);
+        db.close();
+        return result;
     }
     
     public void delete() {
-    
-        Configuration config;
         ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), this.DbName);
         Query query = db.query();
-        config = (Configuration) query.execute().get(0);
-        db.delete(config);
+        query.constrain(Configuration.class);
+        ObjectSet<Object> config = query.execute();
+        if(!config.isEmpty())
+            db.delete((Configuration) config.get(0));
         db.close();
-        
     }
     
     

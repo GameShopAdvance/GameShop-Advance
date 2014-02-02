@@ -18,17 +18,22 @@ import sun.net.util.IPAddressUtil;
 public class ConfigurationControllerSingleton {
     
     private static ConfigurationControllerSingleton instance;
+    
     private Configuration config;
     
     private ConfigurationControllerSingleton() throws ConfigurationException{
         
-        config = new Configuration();
+        Configuration c = DbConfigurationSingleton.getInstance().read();
+        if(c == null)
+            this.config = new Configuration();
+        else
+            config = c;
     }
     
     public static ConfigurationControllerSingleton getInstance() throws ConfigurationException {
         
-        if (instance == null){
-       
+        if (instance == null)
+        {
             instance = new ConfigurationControllerSingleton();
         }
         
@@ -39,9 +44,7 @@ public class ConfigurationControllerSingleton {
         
         this.config.setServerAddress(address);
         this.config.setServerPort(port);
-        this.config.setIdCassa(idCassa);
-        this.storeConfiguration();
-        
+        this.config.setIdCassa(idCassa);     
     }
     
     public Configuration getConfiguration(){
@@ -82,7 +85,6 @@ public class ConfigurationControllerSingleton {
     }
     
     public int getIdCassa(){
-        
         int idCassa;
         idCassa = this.config.getIdCassa();
         return idCassa;
@@ -90,16 +92,6 @@ public class ConfigurationControllerSingleton {
     
 
     public void storeConfiguration(){
-        
-        DbConfigurationSingleton.getInstance().create(this.config);
-    }
-    
-    public void loadConfiguration(){
-        this.config = DbConfigurationSingleton.getInstance().read();
-    }
-    
-    public void updateConfiguration(){
-        
         DbConfigurationSingleton.getInstance().delete();
         DbConfigurationSingleton.getInstance().create(this.config);
     }

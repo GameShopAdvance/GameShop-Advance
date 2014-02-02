@@ -23,6 +23,7 @@ public class InitializeConfiguration {
         try {
             ConfigurationControllerSingleton controllerConfig = ConfigurationControllerSingleton.getInstance();
             controllerConfig.setConfiguration("127.0.0.1", 1099, 17);
+            controllerConfig.storeConfiguration();
         } catch (ConfigurationException ex) {
             Logger.getLogger(InitializeConfiguration.class.getName()).log(Level.SEVERE, null, ex);
         }

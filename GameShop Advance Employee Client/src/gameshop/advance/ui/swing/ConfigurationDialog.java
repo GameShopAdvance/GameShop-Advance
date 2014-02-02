@@ -51,6 +51,7 @@ public class ConfigurationDialog extends JDialog {
     private void setConfigurationValues()
     {
         try{
+            System.err.println("Config ip: "+ConfigurationControllerSingleton.getInstance().getServerAddress());
             this.serverAddress.setText(ConfigurationControllerSingleton.getInstance().getServerAddress());
             this.serverPort.setText(""+ConfigurationControllerSingleton.getInstance().getServerPort());
             this.idCassa.setText(""+ConfigurationControllerSingleton.getInstance().getIdCassa());
@@ -106,8 +107,12 @@ public class ConfigurationDialog extends JDialog {
                 error = true;
                 this.serverPort.setBackground(UIStyleSingleton.getInstance().getErrorColor());
             }
+            
             if(!error)
+            {
+                ConfigurationControllerSingleton.getInstance().storeConfiguration();
                 this.dispose();
+            }
         } catch (ConfigurationException ex) {
             Logger.getLogger(ConfigurationDialog.class.getName()).log(Level.SEVERE, null, ex);
         }

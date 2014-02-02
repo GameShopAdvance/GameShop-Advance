@@ -36,7 +36,9 @@ public class SaleController extends UnicastRemoteObject implements IRemoteClient
     private Money resto;
     
     private SaleController() throws RemoteException
-    {}
+    {
+        
+    }
 
     private void configure() throws ConfigurationException, RemoteException, NotBoundException {
           
@@ -71,7 +73,6 @@ public class SaleController extends UnicastRemoteObject implements IRemoteClient
     {
         this.cassa.avviaNuovaVendita();
         this.cassa.aggiungiListener(this.saleTotalObserver);
-        this.cassa.inserisciTesseraCliente(1);
         aggiornaWindow(new InsertItemPanel());
     }
     

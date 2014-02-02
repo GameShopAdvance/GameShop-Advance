@@ -34,7 +34,6 @@ public class UIWindowSingleton extends JFrame {
         this.panel = null;
         this.initComponents();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        
     }
 
     private void modificaConfigurazione(ActionEvent e) {

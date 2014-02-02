@@ -31,7 +31,6 @@ public class GameShopAdvanceEmployee {
                         
            
             ConfigurationControllerSingleton controllerConfig = ConfigurationControllerSingleton.getInstance();
-            controllerConfig.loadConfiguration();
             
             UIWindowSingleton window = UIWindowSingleton.getInstance();
             window.setPanel(new EmployeeMenuPanel());
