@@ -30,7 +30,7 @@ public class EmployeeMenuPanel extends JPanel {
      */
     private void startSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startSaleActionPerformed
         try{
-            SaleController.getInstance().avviaNuovaVendita();
+            SaleControllerSingleton.getInstance().avviaNuovaVendita();
         } catch(NullPointerException e){
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
                     + " si prega di controllare la configurazione del sistema.");

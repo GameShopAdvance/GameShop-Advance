@@ -4,7 +4,6 @@ import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.IVendita;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
-import gameshop.advance.interfaces.remote.IVenditaRemote;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.Pagamento;
 import gameshop.advance.model.vendita.sconto.ScontoFactorySingleton;
@@ -18,13 +17,13 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- * La classe Vendita implementa l'interfaccia remota IVenditaRemote.Gestisce tutte le
- * azioni di una vendita inerenti i pagamenti;crea e aggiunge nuove righe di vendita alla
- * vendita corrente;aggangia alla vendita corrente e informa gli osservatori che hanno 
- * bisogno dei cambi di stato della vendita.
+ * La classe Vendita implementa l'interfaccia remota IVenditaRemoteDecorator.Gestisce tutte le
+ azioni di una vendita inerenti i pagamenti;crea e aggiunge nuove righe di vendita alla
+ vendita corrente;aggangia alla vendita corrente e informa gli osservatori che hanno 
+ bisogno dei cambi di stato della vendita.
  * @author Salx
  */
-public class Vendita implements IVenditaRemote, IVendita
+public class Vendita implements IVendita
 {
 
     private Integer idVendita;
@@ -102,10 +101,8 @@ public class Vendita implements IVenditaRemote, IVendita
      * della transazione.
      * @return il totale della transazione
      * @throws RemoteException
-     * @throws InvalidMoneyException
      */
-    @Override
-    public Money getTotal() throws RemoteException, InvalidMoneyException
+        public Money getTotal()
     {
         return this.strategiaDiSconto.getTotal(this);
     }
@@ -117,8 +114,7 @@ public class Vendita implements IVenditaRemote, IVendita
      * @throws InvalidMoneyException
      * @throws RemoteException
      */
-    @Override
-    public Money getResto() throws InvalidMoneyException, RemoteException
+        public Money getResto() throws InvalidMoneyException
     {
         Money m = this.getTotal();
         if(this.pagamento == null)
@@ -131,10 +127,10 @@ public class Vendita implements IVenditaRemote, IVendita
      * Crea un nuovo oggetto pagamento utilizzando l'ammontare della vendita corrente.Aggiunge 
      * tale pagamento alla vendita e invia una notifica gli osservatori in ascolto.
      * @param ammontare
-     * @throws java.rmi.RemoteException
      * @throws gameshop.advance.exceptions.InvalidMoneyException
+     * @throws java.rmi.RemoteException
      */
-     public void gestisciPagamento(Money ammontare) throws RemoteException, InvalidMoneyException
+     public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException
     {
             if( !ammontare.equals(this.getTotal()) && !ammontare.greater(this.getTotal()))
                 throw new InvalidMoneyException(ammontare);
@@ -160,9 +156,9 @@ public class Vendita implements IVenditaRemote, IVendita
      * @throws RemoteException
      */
     private void notificaListeners() throws RemoteException {
+        
         for(IRemoteObserver o : this.observers){
-            System.out.println("Observer: "+o);
-            o.notifica(this);
+            o.notifica(new VenditaRemoteDecorator(this));
         }
     }
     

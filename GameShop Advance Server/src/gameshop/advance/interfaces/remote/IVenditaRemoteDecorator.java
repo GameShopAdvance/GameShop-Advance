@@ -15,7 +15,7 @@ import java.rmi.RemoteException;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public interface IVenditaRemote extends Remote {
+public interface IVenditaRemoteDecorator extends Remote {
 
     Money getTotal() throws RemoteException, InvalidMoneyException;
     

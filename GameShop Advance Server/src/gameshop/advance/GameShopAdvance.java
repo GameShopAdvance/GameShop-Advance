@@ -6,8 +6,8 @@
 
 package gameshop.advance;
 
-import gameshop.advance.model.RemoteFactorySingleton;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
+import gameshop.advance.model.RemoteFactorySingleton;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
 import java.rmi.RemoteException;
@@ -32,11 +32,6 @@ public class GameShopAdvance {
      */
     public static void main(String[] args) {
         try {
-            //bind to a specific ip
-            // System.setProperty("java.rmi.server.hostname", "10.154.42.76");
-            
-            
-            
             if(System.getSecurityManager() == null)
                 System.setSecurityManager(new SecurityManager());
             

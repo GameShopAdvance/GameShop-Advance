@@ -29,7 +29,7 @@ public class EndSalePanel extends JPanel {
     public EndSalePanel() {
         initComponents();
         try {
-            this.displayRest.setText(SaleController.getInstance().getResto().toString());
+            this.displayRest.setText(SaleControllerSingleton.getInstance().getResto().toString());
         } catch (NullPointerException ex) {
             Logger.getLogger(EndSalePanel.class.getName()).log(Level.SEVERE, null, ex);
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
@@ -46,7 +46,7 @@ public class EndSalePanel extends JPanel {
     
      private void startNewSaleActionPerformed(java.awt.event.ActionEvent evt) {                                             
         try{
-            SaleController.getInstance().avviaNuovaVendita();
+            SaleControllerSingleton.getInstance().avviaNuovaVendita();
         } catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
                     + " si prega di controllare la configurazione del sistema.");

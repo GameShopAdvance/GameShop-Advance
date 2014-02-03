@@ -26,16 +26,16 @@ import javax.swing.JComponent;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class SaleController extends UnicastRemoteObject implements IRemoteClient {
+public class SaleControllerSingleton extends UnicastRemoteObject implements IRemoteClient {
     
-    private static SaleController instance;
+    private static SaleControllerSingleton instance;
     private ICassaRemote cassa;
     private IRemoteObserver saleTotalObserver;
     private IRemoteObserver saleRestObserver;
     private Money totale;
     private Money resto;
     
-    private SaleController() throws RemoteException
+    private SaleControllerSingleton() throws RemoteException
     {
         
     }
@@ -52,12 +52,12 @@ public class SaleController extends UnicastRemoteObject implements IRemoteClient
         this.saleRestObserver = new SaleRestObserver(instance);
     }
     
-    public static SaleController getInstance() throws NullPointerException, RemoteException, ConfigurationException
+    public static SaleControllerSingleton getInstance() throws NullPointerException, RemoteException, ConfigurationException
     {
         if(instance==null)
         {
             try {
-                instance = new SaleController();
+                instance = new SaleControllerSingleton();
                 instance.configure();
             } catch (RemoteException | NotBoundException ex) {
                 instance = null;

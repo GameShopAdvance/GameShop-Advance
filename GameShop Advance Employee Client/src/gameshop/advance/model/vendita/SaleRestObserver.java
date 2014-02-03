@@ -9,14 +9,14 @@ package gameshop.advance.model.vendita;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.IRemoteClient;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
-import gameshop.advance.interfaces.remote.IVenditaRemote;
-import java.io.Serializable;
+import gameshop.advance.interfaces.remote.IVenditaRemoteDecorator;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
 
-public class SaleRestObserver implements IRemoteObserver, Serializable {
+public class SaleRestObserver extends UnicastRemoteObject implements IRemoteObserver {
     private IRemoteClient client;
 
     public SaleRestObserver(IRemoteClient client) throws RemoteException {
@@ -24,8 +24,8 @@ public class SaleRestObserver implements IRemoteObserver, Serializable {
     }
     
     @Override
-    public void notifica(Object o) throws RemoteException {
-        IVenditaRemote sale = (IVenditaRemote) o;
+    public void notifica(IVenditaRemoteDecorator o) throws RemoteException {
+        IVenditaRemoteDecorator sale = (IVenditaRemoteDecorator) o;
         try {        
             this.client.aggiornaResto(sale.getResto());
         } catch (InvalidMoneyException ex) {

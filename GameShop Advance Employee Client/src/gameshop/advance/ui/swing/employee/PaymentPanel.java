@@ -27,7 +27,7 @@ public class PaymentPanel extends JPanel {
     public PaymentPanel() {
         initComponents();
         try {
-            this.displayTotal.setText(SaleController.getInstance().getTotal().toString());
+            this.displayTotal.setText(SaleControllerSingleton.getInstance().getTotal().toString());
         } catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
                     + " si prega di controllare la configurazione del sistema.");
@@ -42,7 +42,7 @@ public class PaymentPanel extends JPanel {
 
     private void payButtonActionPerformed(ActionEvent e) {
         try{
-            SaleController.getInstance().effettuaPagamento(Double.parseDouble(this.payment.getText()));
+            SaleControllerSingleton.getInstance().effettuaPagamento(Double.parseDouble(this.payment.getText()));
         } catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
                     + " si prega di controllare la configurazione del sistema.");

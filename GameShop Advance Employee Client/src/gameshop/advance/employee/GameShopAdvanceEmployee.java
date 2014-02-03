@@ -20,6 +20,7 @@ public class GameShopAdvanceEmployee {
             window.setPanel(new EmployeeMenuPanel());
             window.setVisible(true);
             window.refreshContent();
+
             
     }
     

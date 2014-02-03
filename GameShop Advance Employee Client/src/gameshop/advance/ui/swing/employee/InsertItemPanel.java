@@ -45,7 +45,7 @@ public class InsertItemPanel extends JScrollPane {
 
     private void goToPaymentButtonActionPerformed(ActionEvent e) {
         try {
-            SaleController.getInstance().concludiVendita();
+            SaleControllerSingleton.getInstance().concludiVendita();
         } catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
                     + " si prega di controllare la configurazione del sistema.");
@@ -67,9 +67,9 @@ public class InsertItemPanel extends JScrollPane {
     private void addProductButtonActionPerformed(ActionEvent e) {
         try {
             Integer quantity = Integer.parseInt(this.quantityTextField.getText());
-            SaleController.getInstance().inserisciProdotto(this.productIdTextField.getText(), quantity);
+            SaleControllerSingleton.getInstance().inserisciProdotto(this.productIdTextField.getText(), quantity);
             this.clearFields();
-            this.total.setText(SaleController.getInstance().getTotal().toString());
+            this.total.setText(SaleControllerSingleton.getInstance().getTotal().toString());
         } catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
                     + " si prega di controllare la configurazione del sistema.");
@@ -91,9 +91,9 @@ public class InsertItemPanel extends JScrollPane {
     private void insertClientCodeActionPerformed(ActionEvent e) {
         try{
             Integer code = Integer.parseInt(this.clientCode.getText());
-            SaleController.getInstance().inserisciCartaCliente(code);
+            SaleControllerSingleton.getInstance().inserisciCartaCliente(code);
             this.clientCode.setEditable(false);
-            this.total.setText(SaleController.getInstance().getTotal().toString());
+            this.total.setText(SaleControllerSingleton.getInstance().getTotal().toString());
         } catch (NullPointerException ex) {
             Logger.getLogger(InsertItemPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ConfigurationException ex) {
@@ -107,7 +107,7 @@ public class InsertItemPanel extends JScrollPane {
 
     private void clearSaleActionPerformed(ActionEvent e) {
         try{
-            SaleController.getInstance().clearSale();
+            SaleControllerSingleton.getInstance().clearSale();
         } catch (NullPointerException ex) {
             Logger.getLogger(InsertItemPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (RemoteException ex) {
