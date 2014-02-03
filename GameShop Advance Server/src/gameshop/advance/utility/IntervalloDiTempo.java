@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.model;
+package gameshop.advance.utility;
 import org.joda.time.DateTime;
 
 /**
@@ -22,10 +22,7 @@ public class IntervalloDiTempo {
     }
   
     public boolean isActual(){
-         if(this.startDate.isBeforeNow() && this.endDate.isAfterNow())
-             return true;
-         else
-             return false;
+        return this.startDate.isBeforeNow() && this.endDate.isAfterNow();
      }
     
 

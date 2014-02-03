@@ -70,7 +70,7 @@ public class Vendita implements IVenditaRemote, IVendita
     {
         try {
             RigaDiVendita rdv = new RigaDiVendita(desc, quantity);
-            this.righeDiVendita.add(rdv); 
+            this.righeDiVendita.add(rdv);
             this.notificaListeners();
         } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
             Logger.getLogger(Vendita.class.getName()).log(Level.SEVERE, null, ex);

@@ -10,9 +10,16 @@ import com.db4o.ObjectContainer;
 import com.db4o.ObjectServer;
 import com.db4o.ObjectSet;
 import com.db4o.cs.Db4oClientServer;
+import com.db4o.cs.config.ServerConfiguration;
 import com.db4o.query.Query;
+import gameshop.advance.interfaces.IScontoProdottoStrategy;
+import gameshop.advance.model.DescrizioneProdotto;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.List;
+import java.util.Map;
+import java.util.Map.Entry;
+import java.util.Set;
 
 /**
  *
@@ -31,13 +38,12 @@ public class DbManagerSingleton {
     
     private DbManagerSingleton()
     {
+        ServerConfiguration configuration = Db4oClientServer.newServerConfiguration();
+        configuration.common().objectClass(DescrizioneProdotto.class).cascadeOnUpdate(true);
         System.err.println("SERVER DB OPENING");
-        this.server = Db4oClientServer.openServer(Db4oClientServer.newServerConfiguration(), this.dbName, 0);
+        this.server = Db4oClientServer.openServer(configuration, this.dbName, 0);
         System.err.println("SERVER DB: "+this.server);
         this.clients = new HashMap<>();
-        Thread t = Thread.currentThread();
-        
-        System.out.println("Thread id: "+t.getId());
     }
     
     public synchronized static DbManagerSingleton getInstance()
@@ -61,17 +67,38 @@ public class DbManagerSingleton {
         return client;
     }
     
+    public void close()
+    {
+        
+        Set<Map.Entry<Long, ObjectContainer>> values = this.clients.entrySet();
+        Iterator iter = values.iterator();
+        while(iter.hasNext()){
+            Entry next = (Entry<Long, ObjectContainer>) iter.next();
+            
+            this.clients.remove((Long) next.getKey());
+            ((ObjectContainer) next.getValue()).close();
+        }
+    }
+    
     public void printObjects(Class c)
     {
         ObjectContainer client = this.server.openClient();
         Query query = client.query();
-        query.constrain(c);
+        query.constrain(DescrizioneProdotto.class);
         ObjectSet list = query.execute();
         Iterator iter = list.iterator();
         System.out.println("PRINTING OBJECTS IN DB");
+        int i = 1;
         while(iter.hasNext())
         {
-            System.err.println(c.getName()+": "+iter.next());
+            DescrizioneProdotto desc = (DescrizioneProdotto) iter.next();
+            System.err.println("Descrizione Prodotto:"+i+" - "+desc);
+            List<IScontoProdottoStrategy> sconti = desc.getTuttiSconti();
+            for(IScontoProdottoStrategy sconto:sconti)
+            {
+                System.out.println("Sconto: "+sconto.getClass()+" valid: "+sconto.isValid());
+            }
+            i++;
         }
         client.close();
     }

@@ -7,17 +7,18 @@
 package gameshop.advance;
 
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.model.CatalogoProdottiSingleton;
 import gameshop.advance.model.DescrizioneProdotto;
-import gameshop.advance.model.IntervalloDiTempo;
 import gameshop.advance.model.Prezzo;
 import gameshop.advance.model.vendita.CartaCliente;
 import gameshop.advance.model.vendita.TipologiaCliente;
-import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.model.vendita.sconto.prodotti.ScontoPrendiPaghiClienteProdottoStrategy;
 import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
 import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
+import gameshop.advance.technicalservices.db.DbManagerSingleton;
 import gameshop.advance.utility.IDProdotto;
+import gameshop.advance.utility.IntervalloDiTempo;
 import gameshop.advance.utility.Money;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -50,11 +51,16 @@ public class InitializeDb {
             CartaCliente cliente = new CartaCliente("Pippo", "Disney", 1, tipo);
             DbCartaClienteSingleton.getInstance().create(cliente);
             IntervalloDiTempo periodo = new IntervalloDiTempo(DateTime.now(), DateTime.now().plusDays(10));
+            DbManagerSingleton.getInstance().close();
             DescrizioneProdotto desc;
             desc = DbDescrizioneProdottoSingleton.getInstance().read(new IDProdotto("AB1"));
+            System.out.println("Descrizione prodotto dal DB: "+desc);
             IScontoProdottoStrategy scontoAB1 = new ScontoPrendiPaghiClienteProdottoStrategy(3,2, periodo, tipo);
             desc.addSconto(scontoAB1);
+            System.err.println("Sconti desc: "+desc.getTuttiSconti().size());
             DbDescrizioneProdottoSingleton.getInstance().update(desc);
+            
+            
         } catch (ObjectAlreadyExistsDbException ex) {
             Logger.getLogger(InitializeDb.class.getName()).log(Level.SEVERE, null, ex);
         }

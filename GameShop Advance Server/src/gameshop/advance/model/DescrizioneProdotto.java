@@ -17,7 +17,7 @@ public class DescrizioneProdotto implements Cloneable
     private IDProdotto codiceProdotto;
     private LinkedList<Prezzo> prezzi = new LinkedList<>();
     private String descrizione;
-    private LinkedList<IScontoProdottoStrategy> sconti = new LinkedList<>();
+    private LinkedList<IScontoProdottoStrategy> sconti;
 
     /**
      * Il Costruttore imposta tutte le variabili di DescrizioneProdotto utilizzando
@@ -30,6 +30,7 @@ public class DescrizioneProdotto implements Cloneable
         this.descrizione = descrizione;
         this.prezzi.add(prezzo);
         this.codiceProdotto = codiceProdotto;
+        this.sconti = new LinkedList<>();
     }
 
     /**
@@ -75,7 +76,6 @@ public class DescrizioneProdotto implements Cloneable
      public List<IScontoProdottoStrategy> getSconti()
      {
          LinkedList<IScontoProdottoStrategy> scontiValidi = new LinkedList<>();
-         System.err.println("getSconti()");
          for(IScontoProdottoStrategy sconto: this.sconti)
          {
              System.out.println("Sconto: "+sconto.getClass().toString());

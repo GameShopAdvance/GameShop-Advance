@@ -6,6 +6,7 @@
 
 package gameshop.advance.model;
 
+import gameshop.advance.utility.IntervalloDiTempo;
 import gameshop.advance.utility.Money;
 
 /**
