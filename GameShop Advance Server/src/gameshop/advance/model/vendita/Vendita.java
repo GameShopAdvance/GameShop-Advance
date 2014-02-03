@@ -178,10 +178,11 @@ public class Vendita implements IVenditaRemote, IVendita
         return this.cliente;
     }
 
-    public void setCliente(CartaCliente c)
+    public void setCliente(CartaCliente c) throws RemoteException
     {
         System.err.println("Vendita --- setting client: "+c);
         this.cliente = c;
+        this.notificaListeners();
     }
 
     public void setSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali) {

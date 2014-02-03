@@ -93,6 +93,7 @@ public class InsertItemPanel extends JScrollPane {
             Integer code = Integer.parseInt(this.clientCode.getText());
             SaleController.getInstance().inserisciCartaCliente(code);
             this.clientCode.setEditable(false);
+            this.total.setText(SaleController.getInstance().getTotal().toString());
         } catch (NullPointerException ex) {
             Logger.getLogger(InsertItemPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ConfigurationException ex) {

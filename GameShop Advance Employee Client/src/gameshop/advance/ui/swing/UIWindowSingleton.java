@@ -43,6 +43,7 @@ public class UIWindowSingleton extends JFrame {
 
     private void exit(ActionEvent e) {
         this.dispose();
+        System.exit(0);
     }
 
     private void initComponents() {
