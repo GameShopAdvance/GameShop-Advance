@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 
 /**
- * La classe Vendita implementa l'interfaccia remota IVenditaRemoteDecorator.Gestisce tutte le
+ * La classe Vendita implementa l'interfaccia remota IVenditaRemoteProxy.Gestisce tutte le
  azioni di una vendita inerenti i pagamenti;crea e aggiunge nuove righe di vendita alla
  vendita corrente;aggangia alla vendita corrente e informa gli osservatori che hanno 
  bisogno dei cambi di stato della vendita.
@@ -154,7 +154,7 @@ public class Vendita implements IVendita
     private void notificaListeners() throws RemoteException {
         
         for(IRemoteObserver o : this.observers){
-            o.notifica(new VenditaRemoteDecorator(this));
+            o.notifica(new VenditaRemoteProxy(this));
         }
     }
     

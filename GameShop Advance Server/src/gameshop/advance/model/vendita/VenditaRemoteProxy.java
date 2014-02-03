@@ -11,11 +11,11 @@ import java.rmi.server.UnicastRemoteObject;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-class VenditaRemoteDecorator extends UnicastRemoteObject implements IVenditaRemoteDecorator {
+class VenditaRemoteProxy extends UnicastRemoteObject implements IVenditaRemoteDecorator {
 
     private final IVendita sale;
     
-    public VenditaRemoteDecorator(IVendita sale) throws RemoteException {
+    public VenditaRemoteProxy(IVendita sale) throws RemoteException {
         this.sale = sale;
     }
     
