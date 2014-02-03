@@ -1,10 +1,9 @@
 package gameshop.advance.model.vendita;
 
+import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.IVendita;
-import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.vendita.sconto.ScontoFactorySingleton;
-import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.utility.Money;
 import java.util.List;
 
@@ -24,11 +23,8 @@ public class RigaDiVendita
      * quantità) per creare una nuova riga di vendita.
      * @param desc
      * @param quantity
-     * @throws java.lang.ClassNotFoundException
-     * @throws java.lang.InstantiationException
-     * @throws java.lang.IllegalAccessException
      */
-    public RigaDiVendita(DescrizioneProdotto desc, int quantity) throws ClassNotFoundException, InstantiationException, IllegalAccessException
+    public RigaDiVendita(DescrizioneProdotto desc, int quantity)
     {
         this.descrizione = desc;
         this.quantity = quantity;
@@ -56,7 +52,7 @@ public class RigaDiVendita
         this.quantity = quantity;
     }
 
-    public Money getSubTotal(IVendita v) throws InvalidMoneyException
+    public Money getSubTotal(IVendita v)
     {
         return this.strategiaDiSconto.getSubtotal(v, this);
     }

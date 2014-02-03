@@ -18,20 +18,23 @@ import java.util.List;
  */
 public class ScontoProdottoMigliorePerClienteStrategyComposite extends ScontoProdottoStrategyComposite {
 
-    
+    /**
+     *
+     * @param v
+     * @param rdv
+     * @return
+     */
     @Override
-    public Money getSubtotal(IVendita v, RigaDiVendita rdv) 
+    public Money getSubtotal(IVendita v, RigaDiVendita rdv)
     {
         List<IScontoProdottoStrategy> components = super.getComponents();
         Money minimaSpesa = super.getRealSubtotal(rdv);
         for(IScontoProdottoStrategy sconto: components)
         {
-            System.err.println("Ciclo calcolo totale");
             Money subtotal = sconto.getSubtotal(v, rdv);
             if(minimaSpesa.greater(subtotal))
                 minimaSpesa = subtotal;
         }
-        System.err.println("Minima spesa: "+minimaSpesa);
         return minimaSpesa;
     }
 

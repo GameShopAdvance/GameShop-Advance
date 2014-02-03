@@ -13,7 +13,7 @@ import java.rmi.server.UnicastRemoteObject;
  */
 class VenditaRemoteDecorator extends UnicastRemoteObject implements IVenditaRemoteDecorator {
 
-    private IVendita sale;
+    private final IVendita sale;
     
     public VenditaRemoteDecorator(IVendita sale) throws RemoteException {
         this.sale = sale;

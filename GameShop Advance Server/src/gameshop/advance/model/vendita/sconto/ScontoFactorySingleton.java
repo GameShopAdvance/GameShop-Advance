@@ -33,7 +33,7 @@ public class ScontoFactorySingleton {
         return new ScontoVenditaMigliorePerClienteStrategyComposite();
     }
     
-    public IScontoProdottoStrategy getStrategiaScontoProdotto() throws ClassNotFoundException, InstantiationException, IllegalAccessException
+    public IScontoProdottoStrategy getStrategiaScontoProdotto()
     {
         //String className = System.getProperty( "strategiadiscontoprodotti.class.name" );
         //IScontoProdottoStrategy strategy = (IScontoProdottoStrategy) Class.forName( className ).newInstance();

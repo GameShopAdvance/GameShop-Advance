@@ -4,8 +4,9 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.model;
+package gameshop.advance.remote;
 
+import gameshop.advance.model.Cassa;
 import java.util.LinkedList;
 
 /**

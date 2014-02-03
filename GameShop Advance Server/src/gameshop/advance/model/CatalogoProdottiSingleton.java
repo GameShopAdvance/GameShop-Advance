@@ -43,6 +43,7 @@ public class CatalogoProdottiSingleton
      * l'id del prodotto ricevuto in input.
      * @param codiceProdotto
      * @return  la descrizione del prodotto
+     * @throws gameshop.advance.exceptions.ProdottoNotFoundException
      */
     public DescrizioneProdotto getDescrizioneProdotto(IDProdotto codiceProdotto) throws ProdottoNotFoundException
     {

@@ -10,7 +10,6 @@ import com.db4o.ObjectContainer;
 import com.db4o.query.Query;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IVendita;
-import gameshop.advance.model.vendita.Vendita;
 
 /**
  *
@@ -35,13 +34,10 @@ public class DbVenditaSingleton {
     public void create(IVendita sale) throws ObjectAlreadyExistsDbException
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-        System.err.println("PreQuery");
         int exist = client.queryByExample(sale).size();
-        System.err.println("Salvataggio in corso!");
         if(exist > 0)
             throw new ObjectAlreadyExistsDbException();
         client.store(sale);
-        DbManagerSingleton.getInstance().printObjects(Vendita.class);
         client.commit();
     }
     

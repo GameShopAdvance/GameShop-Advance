@@ -1,5 +1,6 @@
 package gameshop.advance.model;
 
+import gameshop.advance.utility.Prezzo;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
@@ -11,7 +12,7 @@ import java.util.List;
  * prodotto: id, prezzo e descrizione testuale.
  * @author Salx
  */
-public class DescrizioneProdotto implements Cloneable
+public class DescrizioneProdotto
 {
 
     private IDProdotto codiceProdotto;
@@ -106,13 +107,5 @@ public class DescrizioneProdotto implements Cloneable
     public List<IScontoProdottoStrategy> getTuttiSconti()
     {
         return this.sconti;
-    }
-    
-    public void clone(DescrizioneProdotto d)
-    {
-        this.codiceProdotto = d.getCodiceProdotto();
-        this.descrizione = d.getDescrizione();
-        this.prezzi = (LinkedList <Prezzo>) d.getTuttiPrezzi();
-        this.sconti = (LinkedList<IScontoProdottoStrategy>) d.getTuttiSconti();
     }
 }

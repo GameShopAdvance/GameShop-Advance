@@ -38,7 +38,6 @@ public class DbDescrizioneProdottoSingleton {
                 throw new ObjectAlreadyExistsDbException();
             client.store(desc);
             client.commit();
-            DbManagerSingleton.getInstance().printObjects(DescrizioneProdotto.class);
     }
     
     //metodo provvisorio
@@ -46,7 +45,6 @@ public class DbDescrizioneProdottoSingleton {
             ObjectContainer client = DbManagerSingleton.getInstance().getClient();
             client.store(desc);
             client.commit();
-            DbManagerSingleton.getInstance().printObjects(DescrizioneProdotto.class);
     }
     
     public DescrizioneProdotto read(IDProdotto code) {
@@ -55,7 +53,6 @@ public class DbDescrizioneProdottoSingleton {
         query.constrain(DescrizioneProdotto.class);
         query.descend("codiceProdotto").constrain(code);
         ObjectSet results = query.execute();
-        System.err.println("Query su descrizioni vuota: "+results.isEmpty());
         if(results.isEmpty())
             return null;
         return (DescrizioneProdotto) results.get(0);

@@ -7,14 +7,11 @@
 package gameshop.advance.model.vendita.sconto.vendita;
 
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
-import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.IVendita;
 import gameshop.advance.model.vendita.RigaDiVendita;
 import gameshop.advance.utility.Money;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -42,11 +39,7 @@ public abstract class ScontoVenditaStrategyComposite implements IScontoVenditaSt
         Money totale = new Money();
         for(RigaDiVendita riga:righe)
         {
-            try {
-                totale = totale.add(riga.getSubTotal(vendita));
-            } catch (InvalidMoneyException ex) {
-                Logger.getLogger(ScontoVenditaStrategyComposite.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            totale = totale.add(riga.getSubTotal(vendita));
 
         }
         return totale;

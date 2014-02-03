@@ -48,7 +48,6 @@ public abstract class ScontoProdottoStrategyComposite implements IScontoProdotto
     public Money getRealSubtotal(RigaDiVendita rdv)
     {
         Money subtotal =  rdv.getDescrizione().getPrezzo().multiply(rdv.getQuantity());
-        System.err.println("Sottototale non scontato: "+subtotal);
         return subtotal;
     }
 }

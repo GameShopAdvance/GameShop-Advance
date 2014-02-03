@@ -94,6 +94,7 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
         if(desc == null)
             throw new ProdottoNotFoundException(codiceProdotto);
         this.venditaCorrente.creaRigaDiVendita(desc, quantity);
+
     }
 
     /**

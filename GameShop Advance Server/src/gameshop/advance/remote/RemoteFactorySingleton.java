@@ -1,9 +1,10 @@
-package gameshop.advance.model;
+package gameshop.advance.remote;
 
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.ICassaRemote;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
+import gameshop.advance.model.Cassa;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 

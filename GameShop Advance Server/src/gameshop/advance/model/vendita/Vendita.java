@@ -13,8 +13,6 @@ import java.rmi.RemoteException;
 import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * La classe Vendita implementa l'interfaccia remota IVenditaRemoteDecorator.Gestisce tutte le
@@ -44,7 +42,6 @@ public class Vendita implements IVendita
         this.date = new Date();
         this.completata = false;
         this.strategiaDiSconto = (ScontoVenditaStrategyComposite) ScontoFactorySingleton.getInstance().getStrategiaScontoVendita();
-        //this.strategiaDiSconto.add(new ScontoTotaleVenditaStrategy(new Money(10.0), ));
     }
 
     public Integer getIdVendita() {
@@ -64,16 +61,15 @@ public class Vendita implements IVendita
      * @param desc
      * @param quantity
      * @throws java.rmi.RemoteException
+     * @throws java.lang.ClassNotFoundException
+     * @throws java.lang.InstantiationException
+     * @throws java.lang.IllegalAccessException
      */
-    public void creaRigaDiVendita(DescrizioneProdotto desc, int quantity) throws RemoteException 
+    public void creaRigaDiVendita(DescrizioneProdotto desc, int quantity) throws RemoteException
     {
-        try {
-            RigaDiVendita rdv = new RigaDiVendita(desc, quantity);
-            this.righeDiVendita.add(rdv);
-            this.notificaListeners();
-        } catch (ClassNotFoundException | InstantiationException | IllegalAccessException ex) {
-            Logger.getLogger(Vendita.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        RigaDiVendita rdv = new RigaDiVendita(desc, quantity);
+        this.righeDiVendita.add(rdv);
+        this.notificaListeners();
     }
 
     /**
@@ -100,8 +96,8 @@ public class Vendita implements IVendita
      * della transazione sommando i valori sub-totali di tutte le righe di vendita
      * della transazione.
      * @return il totale della transazione
-     * @throws RemoteException
      */
+    @Override
         public Money getTotal()
     {
         return this.strategiaDiSconto.getTotal(this);
@@ -112,8 +108,8 @@ public class Vendita implements IVendita
      * il resto.
      * @return il resto da restituire 
      * @throws InvalidMoneyException
-     * @throws RemoteException
      */
+    @Override
         public Money getResto() throws InvalidMoneyException
     {
         Money m = this.getTotal();
@@ -176,7 +172,6 @@ public class Vendita implements IVendita
 
     public void setCliente(CartaCliente c) throws RemoteException
     {
-        System.err.println("Vendita --- setting client: "+c);
         this.cliente = c;
         this.notificaListeners();
     }

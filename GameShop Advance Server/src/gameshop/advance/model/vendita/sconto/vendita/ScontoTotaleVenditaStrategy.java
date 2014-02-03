@@ -6,15 +6,12 @@
 
 package gameshop.advance.model.vendita.sconto.vendita;
 
-import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.IVendita;
-import gameshop.advance.utility.IntervalloDiTempo;
 import gameshop.advance.model.vendita.RigaDiVendita;
+import gameshop.advance.utility.IntervalloDiTempo;
 import gameshop.advance.utility.Money;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -47,15 +44,12 @@ public class ScontoTotaleVenditaStrategy implements IScontoVenditaStrategy {
         Money totale = new Money();
         for(RigaDiVendita riga:righe)
         {
-            try {
-                totale = totale.add(riga.getSubTotal(vendita));
-            } catch (InvalidMoneyException ex) {
-                Logger.getLogger(ScontoTotaleVenditaStrategy.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            totale = totale.add(riga.getSubTotal(vendita));
         }
         return totale.subtract(this.ammontare);
     }
     
+    @Override
     public boolean isActual() {
         return this.periodo.isActual();
     }

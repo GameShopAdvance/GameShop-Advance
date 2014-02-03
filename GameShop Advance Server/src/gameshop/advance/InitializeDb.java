@@ -10,7 +10,7 @@ import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.model.CatalogoProdottiSingleton;
 import gameshop.advance.model.DescrizioneProdotto;
-import gameshop.advance.model.Prezzo;
+import gameshop.advance.utility.Prezzo;
 import gameshop.advance.model.vendita.CartaCliente;
 import gameshop.advance.model.vendita.TipologiaCliente;
 import gameshop.advance.model.vendita.sconto.prodotti.ScontoPrendiPaghiClienteProdottoStrategy;

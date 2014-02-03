@@ -36,13 +36,10 @@ public class DbScontoVenditaSingleton {
     public void create(IScontoVenditaStrategy sconto) throws ObjectAlreadyExistsDbException
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-        System.err.println("PreQuery");
         int exist = client.queryByExample(sconto).size();
-        System.err.println("Salvataggio in corso!");
         if(exist > 0)
             throw new ObjectAlreadyExistsDbException();
         client.store(sconto);
-        DbManagerSingleton.getInstance().printObjects(IScontoVenditaStrategy.class);
         client.commit();
     }
     

@@ -9,10 +9,7 @@ package gameshop.advance.model.vendita.sconto.vendita;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.IVendita;
 import gameshop.advance.utility.Money;
-import java.rmi.RemoteException;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -20,19 +17,21 @@ import java.util.logging.Logger;
  */
 public class ScontoVenditaMigliorePerClienteStrategyComposite extends ScontoVenditaStrategyComposite{
 
+    /**
+     *
+     * @param vendita
+     * @return
+     */
     @Override
     public Money getTotal(IVendita vendita) {
         List<IScontoVenditaStrategy> components = super.getComponents();
         Money minimoTotale = super.getRealTotal(vendita);
         for(IScontoVenditaStrategy strategy: components)
         {
-            try {
-                Money total = strategy.getTotal(vendita);
-                if(minimoTotale.greater(total))
-                    minimoTotale = total;
-            } catch (RemoteException ex) {
-                Logger.getLogger(ScontoVenditaMigliorePerClienteStrategyComposite.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            Money total = strategy.getTotal(vendita);
+            if(minimoTotale.greater(total))
+                minimoTotale = total;
+         
         }
         return minimoTotale;
     }
