@@ -1,9 +1,10 @@
 package gameshop.advance.model;
 
-import gameshop.advance.utility.Prezzo;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
+import gameshop.advance.utility.Prezzo;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -90,9 +91,12 @@ public class DescrizioneProdotto
      }
 
     private Prezzo getPrezzoAttuale() {
-        Prezzo p;
-        for(Prezzo prezzo: this.prezzi)
+        
+        Iterator iter = this.prezzi.iterator();
+        Prezzo prezzo;
+        while(iter.hasNext())
         {
+            prezzo = (Prezzo) iter.next();
             if(prezzo.isActual())
                 return prezzo;
         }

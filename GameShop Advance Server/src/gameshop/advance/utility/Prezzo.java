@@ -6,9 +6,6 @@
 
 package gameshop.advance.utility;
 
-import gameshop.advance.utility.IntervalloDiTempo;
-import gameshop.advance.utility.Money;
-
 /**
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
