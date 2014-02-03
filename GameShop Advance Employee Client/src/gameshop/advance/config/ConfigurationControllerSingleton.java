@@ -92,8 +92,7 @@ public class ConfigurationControllerSingleton {
     
 
     public void storeConfiguration(){
-        DbConfigurationSingleton.getInstance().delete();
-        DbConfigurationSingleton.getInstance().create(this.config);
+        DbConfigurationSingleton.getInstance().store(this.config);
     }
         
 }

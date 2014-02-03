@@ -20,9 +20,13 @@ import gameshop.advance.employee.Configuration;
 public class DbConfigurationSingleton {
     
     private static DbConfigurationSingleton instance;
+    
+    private ObjectContainer db;
+    
     private final String DbName = "src/gameshop/advance/config/configuration.db";
     
     private DbConfigurationSingleton(){
+        this.db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), this.DbName);
     } 
     
     public synchronized static DbConfigurationSingleton getInstance(){
@@ -36,20 +40,15 @@ public class DbConfigurationSingleton {
     }
     
    
-    public void create (Configuration config) {
-        
-        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), this.DbName);
+    public void store (Configuration config) {
         System.err.println("Salvataggio in corso!");
         db.store(config);
         System.out.print("Object Stored: "+ config);
-        db.close();
+        db.commit();
     }
     
     public Configuration read(){
-        
-        
-        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), this.DbName);
-        Query query = db.query();
+        Query query = this.db.query();
         query.constrain(Configuration.class);
         ObjectSet<Object> config = query.execute();
         Configuration result;
@@ -57,19 +56,7 @@ public class DbConfigurationSingleton {
             result = null;
         else
             result = (Configuration) config.get(0);
-        db.close();
         return result;
     }
-    
-    public void delete() {
-        ObjectContainer db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), this.DbName);
-        Query query = db.query();
-        query.constrain(Configuration.class);
-        ObjectSet<Object> config = query.execute();
-        if(!config.isEmpty())
-            db.delete((Configuration) config.get(0));
-        db.close();
-    }
-    
-    
+
 }
