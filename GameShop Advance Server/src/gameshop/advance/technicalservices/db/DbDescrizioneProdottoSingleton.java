@@ -38,7 +38,6 @@ public class DbDescrizioneProdottoSingleton {
                 throw new ObjectAlreadyExistsDbException();
             client.store(desc);
             client.commit();
-            client.close();
             DbManagerSingleton.getInstance().printObjects(DescrizioneProdotto.class);
     }
     
@@ -58,7 +57,6 @@ public class DbDescrizioneProdottoSingleton {
                 this.create(desc);
             }
             client.commit();
-            client.close();
             DbManagerSingleton.getInstance().printObjects(DescrizioneProdotto.class);
     }
     

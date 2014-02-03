@@ -42,7 +42,7 @@ public class DbVenditaSingleton {
             throw new ObjectAlreadyExistsDbException();
         client.store(sale);
         DbManagerSingleton.getInstance().printObjects(Vendita.class);
-        client.close();
+        client.commit();
     }
     
     public IVendita read(Integer id)

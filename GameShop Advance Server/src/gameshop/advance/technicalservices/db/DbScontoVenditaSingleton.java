@@ -43,7 +43,7 @@ public class DbScontoVenditaSingleton {
             throw new ObjectAlreadyExistsDbException();
         client.store(sconto);
         DbManagerSingleton.getInstance().printObjects(IScontoVenditaStrategy.class);
-        client.close();
+        client.commit();
     }
     
     public IVendita read(Integer id)
@@ -59,7 +59,7 @@ public class DbScontoVenditaSingleton {
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         Query query=client.query();
-        query.constrain(IVendita.class);
+        query.constrain(IScontoVenditaStrategy.class);
         return query.execute().iterator();
     }
 }

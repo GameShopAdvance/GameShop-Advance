@@ -42,7 +42,7 @@ public class DbCartaClienteSingleton {
         System.err.println("Salvataggio in corso!");
         client.store(carta);
         DbManagerSingleton.getInstance().printObjects(CartaCliente.class);
-        client.close();
+        client.commit();
     }
     
     public CartaCliente read(int id)

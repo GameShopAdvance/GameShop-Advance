@@ -11,6 +11,7 @@ import com.db4o.ObjectServer;
 import com.db4o.ObjectSet;
 import com.db4o.cs.Db4oClientServer;
 import com.db4o.query.Query;
+import java.util.HashMap;
 import java.util.Iterator;
 
 /**
@@ -25,6 +26,7 @@ public class DbManagerSingleton {
     
     private final ObjectServer server;
     
+    private HashMap<Long, ObjectContainer>  clients;
     
     
     private DbManagerSingleton()
@@ -32,6 +34,10 @@ public class DbManagerSingleton {
         System.err.println("SERVER DB OPENING");
         this.server = Db4oClientServer.openServer(Db4oClientServer.newServerConfiguration(), this.dbName, 0);
         System.err.println("SERVER DB: "+this.server);
+        this.clients = new HashMap<>();
+        Thread t = Thread.currentThread();
+        
+        System.out.println("Thread id: "+t.getId());
     }
     
     public synchronized static DbManagerSingleton getInstance()
@@ -44,7 +50,15 @@ public class DbManagerSingleton {
     
     public ObjectContainer getClient()
     {
-        return this.server.openClient();
+        Thread t = Thread.currentThread();
+        ObjectContainer client = this.clients.get(t.getId());
+        if(client == null)
+        {
+            client = this.server.openClient();
+            this.clients.put(t.getId(), client);
+        }
+        System.err.println("Thread di esecuzione client: "+t.getId());
+        return client;
     }
     
     public void printObjects(Class c)
