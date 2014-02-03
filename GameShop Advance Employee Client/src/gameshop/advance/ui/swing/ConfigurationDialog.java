@@ -17,8 +17,6 @@ import java.awt.Frame;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.net.UnknownHostException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JDialog;
 import javax.swing.JFormattedTextField;
@@ -114,7 +112,8 @@ public class ConfigurationDialog extends JDialog {
                 this.dispose();
             }
         } catch (ConfigurationException ex) {
-            Logger.getLogger(ConfigurationDialog.class.getName()).log(Level.SEVERE, null, ex);
+               UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
+                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
         }
     }
 
