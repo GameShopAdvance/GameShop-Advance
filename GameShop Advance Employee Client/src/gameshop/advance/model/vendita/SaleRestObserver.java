@@ -12,8 +12,6 @@ import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.interfaces.remote.IVenditaRemoteDecorator;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 
 public class SaleRestObserver extends UnicastRemoteObject implements IRemoteObserver {
@@ -29,7 +27,7 @@ public class SaleRestObserver extends UnicastRemoteObject implements IRemoteObse
         try {        
             this.client.aggiornaResto(sale.getResto());
         } catch (InvalidMoneyException ex) {
-            Logger.getLogger(SaleRestObserver.class.getName()).log(Level.SEVERE, null, ex);
+             throw new RemoteException(ex.getMessage());
         }
     }
 

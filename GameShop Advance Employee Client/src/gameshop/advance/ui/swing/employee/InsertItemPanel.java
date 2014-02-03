@@ -18,8 +18,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -95,7 +93,7 @@ public class InsertItemPanel extends JScrollPane {
             this.clientCode.setEditable(false);
             this.total.setText(SaleControllerSingleton.getInstance().getTotal().toString());
         } catch (NullPointerException ex) {
-            Logger.getLogger(InsertItemPanel.class.getName()).log(Level.SEVERE, null, ex);
+             UIWindowSingleton.getInstance().displayError("Non è stato possibile convalidare il codice cliente.");
         } catch (ConfigurationException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di configurazione. Se il problema persiste contattare l'amministratore di sistema.");
         } catch (RemoteException ex) {
@@ -109,11 +107,12 @@ public class InsertItemPanel extends JScrollPane {
         try{
             SaleControllerSingleton.getInstance().clearSale();
         } catch (NullPointerException ex) {
-            Logger.getLogger(InsertItemPanel.class.getName()).log(Level.SEVERE, null, ex);
+             UIWindowSingleton.getInstance().displayError("Non è stato possibile convalidare il codice cliente.");       
         } catch (RemoteException ex) {
-            Logger.getLogger(InsertItemPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
+                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
         } catch (ConfigurationException ex) {
-            Logger.getLogger(InsertItemPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi di configurazione. Se il problema persiste contattare l'amministratore di sistema.");
         }
         
     }

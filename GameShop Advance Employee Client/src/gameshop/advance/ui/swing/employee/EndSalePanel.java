@@ -14,8 +14,6 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -31,13 +29,12 @@ public class EndSalePanel extends JPanel {
         try {
             this.displayRest.setText(SaleControllerSingleton.getInstance().getResto().toString());
         } catch (NullPointerException ex) {
-            Logger.getLogger(EndSalePanel.class.getName()).log(Level.SEVERE, null, ex);
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
                     + " si prega di controllare la configurazione del sistema.");
         } catch (RemoteException ex) {
-            Logger.getLogger(EndSalePanel.class.getName()).log(Level.SEVERE, null, ex);
+           UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
+                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
         } catch (ConfigurationException ex) {
-            Logger.getLogger(EndSalePanel.class.getName()).log(Level.SEVERE, null, ex);
             UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
                     + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
         }
