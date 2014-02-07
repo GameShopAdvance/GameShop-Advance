@@ -24,7 +24,7 @@ public class DbManagerSingleton {
     
     private static DbManagerSingleton instance;
     
-    private final String dbName = "src/gameshop/advance/technicalservices/db/GSA.db";
+    private final String dbName = "./GSA.db";
     
     private final ObjectServer server;
     

@@ -11,7 +11,6 @@ import com.db4o.Db4oEmbedded;
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.query.Query;
-import gameshop.advance.employee.Configuration;
 
 /**
  *
@@ -23,7 +22,7 @@ public class DbConfigurationSingleton {
     
     private ObjectContainer db;
     
-    private final String DbName = "src/gameshop/advance/config/configuration.db";
+    private final String DbName = "./configuration.db";
     
     private DbConfigurationSingleton(){
         this.db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), this.DbName);

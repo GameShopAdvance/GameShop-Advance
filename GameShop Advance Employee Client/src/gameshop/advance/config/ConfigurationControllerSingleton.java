@@ -6,7 +6,6 @@
 
 package gameshop.advance.config;
 
-import gameshop.advance.employee.Configuration;
 import gameshop.advance.exceptions.ConfigurationException;
 import java.net.UnknownHostException;
 import sun.net.util.IPAddressUtil;

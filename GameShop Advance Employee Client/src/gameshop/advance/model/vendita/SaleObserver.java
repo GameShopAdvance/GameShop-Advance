@@ -3,7 +3,7 @@ package gameshop.advance.model.vendita;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.IRemoteClient;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
-import gameshop.advance.interfaces.remote.IVenditaRemoteDecorator;
+import gameshop.advance.interfaces.remote.IVenditaRemote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -21,8 +21,8 @@ public class SaleObserver extends UnicastRemoteObject implements IRemoteObserver
     }
     
     @Override
-    public void notifica(IVenditaRemoteDecorator o)throws RemoteException{
-        IVenditaRemoteDecorator vendita = (IVenditaRemoteDecorator) o;
+    public void notifica(IVenditaRemote o)throws RemoteException{
+        IVenditaRemote vendita = (IVenditaRemote) o;
         System.err.println("Observer del totale, client: "+this.client);
         try{
             this.client.aggiornaTotale(vendita.getTotal());

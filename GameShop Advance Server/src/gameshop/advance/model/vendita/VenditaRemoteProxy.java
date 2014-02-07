@@ -2,7 +2,7 @@ package gameshop.advance.model.vendita;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.IVendita;
-import gameshop.advance.interfaces.remote.IVenditaRemoteDecorator;
+import gameshop.advance.interfaces.remote.IVenditaRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -11,7 +11,7 @@ import java.rmi.server.UnicastRemoteObject;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-class VenditaRemoteProxy extends UnicastRemoteObject implements IVenditaRemoteDecorator {
+class VenditaRemoteProxy extends UnicastRemoteObject implements IVenditaRemote {
 
     private final IVendita sale;
     

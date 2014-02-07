@@ -1,5 +1,5 @@
 
-package gameshop.advance.employee;
+package gameshop.advance.config;
 
 import gameshop.advance.exceptions.ConfigurationException;
 

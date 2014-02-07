@@ -61,9 +61,6 @@ public class Vendita implements IVendita
      * @param desc
      * @param quantity
      * @throws java.rmi.RemoteException
-     * @throws java.lang.ClassNotFoundException
-     * @throws java.lang.InstantiationException
-     * @throws java.lang.IllegalAccessException
      */
     public void creaRigaDiVendita(DescrizioneProdotto desc, int quantity) throws RemoteException
     {

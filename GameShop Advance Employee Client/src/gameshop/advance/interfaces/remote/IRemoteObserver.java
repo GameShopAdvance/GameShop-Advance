@@ -21,6 +21,6 @@ public interface IRemoteObserver extends Remote {
      * @param o
      * @throws RemoteException
      */
-    void notifica(IVenditaRemoteDecorator o) throws RemoteException;
+    void notifica(IVenditaRemote o) throws RemoteException;
 
 }
