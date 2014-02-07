@@ -1,0 +1,26 @@
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+			"$columnSpecs": "max(min;150px):grow, labelcompgap, max(default;150px), labelcompgap, max(min;150px):grow"
+			"$rowSpecs": "max(min;70px):grow, linegap, 45px, linegap, max(min;160px):grow"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button1"
+				"text": "Avvia Ricerca"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "avviaRicerca", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 3
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 460, 300 )
+		} )
+	}
+}
