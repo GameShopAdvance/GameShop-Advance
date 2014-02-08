@@ -19,6 +19,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "endInventoryButton"
 				"text": "Fine"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "endInventoryButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 5
 				"gridY": 1

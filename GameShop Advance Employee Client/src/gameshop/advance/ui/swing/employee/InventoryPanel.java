@@ -48,9 +48,9 @@ public class InventoryPanel extends JPanel {
                 if(!this.quantitaProdotto.getText().equals(""))
                     UIWindowSingleton.getInstance().displayError("Il formato di dato inserito per la quantità non è valido");
             }
-            this.clearFields();
-            InventoryControllerSingleton.getInstance().inserisciProdotto(this.codiceProdotto.getText(), quantity);
             
+            InventoryControllerSingleton.getInstance().inserisciProdotto(this.codiceProdotto.getText(), quantity);
+            this.clearFields();
         } catch (RemoteException ex) {
              UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
                     + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
@@ -79,6 +79,16 @@ public class InventoryPanel extends JPanel {
             UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
                     + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
         } catch (ConfigurationException | NotBoundException ex) {
+            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void endInventoryButtonActionPerformed(ActionEvent e) {
+        try {
+            InventoryControllerSingleton.getInstance().terminaInventario();
+        } catch (ConfigurationException | NotBoundException ex) {
+            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
             Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -112,6 +122,12 @@ public class InventoryPanel extends JPanel {
         //---- endInventoryButton ----
         endInventoryButton.setText("Fine");
         endInventoryButton.setName("endInventoryButton");
+        endInventoryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                endInventoryButtonActionPerformed(e);
+            }
+        });
 
         //======== panel1 ========
         {

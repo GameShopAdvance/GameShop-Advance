@@ -77,6 +77,7 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
     public void terminaInventario() throws RemoteException
     {
         this.controller.terminaInventario();
+        this.aggiornaWindow(new EmployeeMenuPanel());
     }
 
     @Override
@@ -97,14 +98,9 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
 
     public void cancel() throws RemoteException {
         this.controller.cancel();
-        UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
+        this.aggiornaWindow(new EmployeeMenuPanel());
     }
-    
-    public void endInventory() throws RemoteException {
-        this.controller.terminaInventario();
-        UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
-    }
-    
+     
     private void aggiornaWindow(JComponent panel) {
         UIWindowSingleton.getInstance().setPanel(panel);
         UIWindowSingleton.getInstance().refreshContent();

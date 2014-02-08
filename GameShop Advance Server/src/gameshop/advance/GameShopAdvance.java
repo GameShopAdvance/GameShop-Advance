@@ -70,7 +70,7 @@ public class GameShopAdvance {
                 IDProdotto id = new IDProdotto("AB"+i);
                 Money money = new Money(new Double(i*5));
                 Prezzo p = new Prezzo(money, new IntervalloDiTempo(new DateTime(), new DateTime().plusDays(5)));
-                DescrizioneProdotto desc = new DescrizioneProdotto(id, p, "Prodotto "+i);
+                DescrizioneProdotto desc = new DescrizioneProdotto(id, p, "Prodotto "+i, i*5);
                 try {
                     DbDescrizioneProdottoSingleton.getInstance().create(desc);
                 } catch (ObjectAlreadyExistsDbException ex) {

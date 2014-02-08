@@ -22,7 +22,7 @@ public class DescrizioneProdotto implements IDescrizioneProdottoRemote
     private LinkedList<Prezzo> prezzi = new LinkedList<>();
     private String descrizione;
     private LinkedList<IScontoProdottoStrategy> sconti;
-    private int quantitaDisponibile;
+    private int quantitaDisponibile = 0;
 
     /**
      * Il Costruttore imposta tutte le variabili di DescrizioneProdotto utilizzando
@@ -31,11 +31,12 @@ public class DescrizioneProdotto implements IDescrizioneProdottoRemote
      * @param prezzo
      * @param descrizione
      */
-    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione ) throws RemoteException{
+    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione, int quantity ) throws RemoteException{
         this.descrizione = descrizione;
         this.prezzi.add(prezzo);
         this.codiceProdotto = codiceProdotto;
         this.sconti = new LinkedList<>();
+        this.quantitaDisponibile = quantity;
     }
 
     /**
@@ -93,11 +94,11 @@ public class DescrizioneProdotto implements IDescrizioneProdottoRemote
          return scontiValidi;
      }
      
-    public void setQuantitaDisponibile(int quantity){
+    public synchronized void setQuantitaDisponibile(int quantity){
         this.quantitaDisponibile = quantity;
     }
     
-    public int getQuantitaDisponibile(){
+    public synchronized int getQuantitaDisponibile(){
         return this.quantitaDisponibile;
     }
     

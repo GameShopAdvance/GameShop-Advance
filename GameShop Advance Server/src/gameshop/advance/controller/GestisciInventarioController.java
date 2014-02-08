@@ -33,7 +33,12 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
     
     
     public GestisciInventarioController () throws RemoteException {
+        this.descrizioni = new LinkedList<>();
         System.err.println("Gest. Inv. Contr.");
+    }
+    
+    @Override
+    public void avviaInventario()  throws RemoteException{
         
     }
   
@@ -45,10 +50,9 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
         }
        
         DescrizioneProdotto desc = CatalogoProdottiSingleton.getInstance().getDescrizioneProdotto(codiceProdotto);
-//        if(desc == null){
-//            throw new ProdottoNotFoundException(codiceProdotto);
-//        }
-        desc.addQuantitaDisponibile (quantity);
+        System.err.println("Desc: "+desc);
+        desc.addQuantitaDisponibile(quantity);
+        System.err.println("Desc after update: "+desc);
         descrizioni.add(desc);
         this.notificaListeners();
 
@@ -88,16 +92,15 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
         for (DescrizioneProdotto desc : this.descrizioni) {
             try {
                 DbDescrizioneProdottoSingleton.getInstance().create(desc);
+                System.out.println("Descrizioni aggiornate");
             } catch (ObjectAlreadyExistsDbException ex) {
                 Logger.getLogger(GestisciInventarioController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        this.descrizioni = null;
     }
 
-    @Override
-    public void avviaInventario()  throws RemoteException{
-        this.descrizioni = new LinkedList();
-    }
+    
     
     
 }
