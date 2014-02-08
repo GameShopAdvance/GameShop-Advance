@@ -1,8 +1,10 @@
 package gameshop.advance.remote;
 
 
+import gameshop.advance.controller.GestisciInventarioController;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.ICassaRemote;
+import gameshop.advance.interfaces.remote.IInventarioControllerRemote;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.model.Cassa;
 import java.rmi.RemoteException;
@@ -66,5 +68,11 @@ public class RemoteFactorySingleton extends UnicastRemoteObject implements IRemo
         } catch (InvalidMoneyException ex) {
             throw new RemoteException(ex.getMessage());
         }
+    }
+    
+    public IInventarioControllerRemote getGestisciInventarioController() throws RemoteException, InvalidMoneyException{
+        
+        GestisciInventarioController inventario = new GestisciInventarioController();
+        return inventario;
     }
 }

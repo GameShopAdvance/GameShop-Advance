@@ -63,7 +63,7 @@ public class GameShopAdvance {
         }
     }
     
-    public static void initializeDb() {
+    public static void initializeDb() throws RemoteException {
         try {
             for(int i=1; i<6;i++)
             {
