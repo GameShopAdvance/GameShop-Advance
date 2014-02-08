@@ -16,7 +16,7 @@ import java.rmi.RemoteException;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public interface IInventarioControllerRemote extends Remote {
+public interface IInventarioControllerRemote extends Remote{
     
     public void inserisciProdotto(IDProdotto code, int quantity) throws RemoteException, QuantityException, ProdottoNotFoundException;
     
@@ -24,5 +24,7 @@ public interface IInventarioControllerRemote extends Remote {
     
     public IDescrizioneProdottoRemote getLastDescription() throws RemoteException;
 
-    public void cancel();
+    public void cancel() throws RemoteException;
+
+    public void avviaInventario() throws RemoteException;
 }

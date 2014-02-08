@@ -35,20 +35,26 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
         this.addedItems = new HashMap<>();
     }
     
-    public static InventoryControllerSingleton getInstance() throws RemoteException
+    public static InventoryControllerSingleton getInstance() throws RemoteException, ConfigurationException, NotBoundException
     {
         if(instance == null)
             instance = new InventoryControllerSingleton();
+        instance.configure();
         return instance;
     }
     
-    public void avviaInventario() throws ConfigurationException, RemoteException, NotBoundException
+    private void configure() throws ConfigurationException, RemoteException, NotBoundException
     {
         ConfigurationControllerSingleton controllerConfig = ConfigurationControllerSingleton.getInstance();
         Registry reg = LocateRegistry.getRegistry(controllerConfig.getServerAddress(), controllerConfig.getServerPort());
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
         this.controller = factory.getGestisciInventarioController();
         System.err.println("Controller: " +this.controller);
+    }
+    
+    public void avviaInventario() throws ConfigurationException, RemoteException, NotBoundException
+    {
+        this.controller.avviaInventario();
         UIWindowSingleton.getInstance().setPanel(new InventoryPanel());
     }
     

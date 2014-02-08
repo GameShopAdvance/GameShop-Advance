@@ -9,6 +9,8 @@ import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.model.Cassa;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  * La Factory è utilizzata per la creazione delle casse:impedisce che una stessa cassa venga
@@ -73,7 +75,12 @@ public class RemoteFactorySingleton extends UnicastRemoteObject implements IRemo
     @Override
     public IInventarioControllerRemote getGestisciInventarioController() throws RemoteException{
         System.err.println("Factory's creating controller of inventory");
-        IInventarioControllerRemote inventario = new GestisciInventarioController();
-        return inventario;
+        try{
+            IInventarioControllerRemote inventario = new GestisciInventarioController();
+            return inventario;
+        } catch (RemoteException ex) {
+            Logger.getLogger(RemoteFactorySingleton.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        return null;
     }
 }

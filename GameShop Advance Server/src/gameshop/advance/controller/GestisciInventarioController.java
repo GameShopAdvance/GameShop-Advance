@@ -32,8 +32,9 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
     private LinkedList<IRemoteObserver> observers = new LinkedList<>();
     
     
-    public GestisciInventarioController () throws RemoteException{
-        this.descrizioni = new LinkedList();
+    public GestisciInventarioController () throws RemoteException {
+        System.err.println("Gest. Inv. Contr.");
+        
     }
   
     @Override
@@ -60,11 +61,11 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
         }
     }
     
-    public void aggiungiListener(IRemoteObserver obs){
+    public void aggiungiListener(IRemoteObserver obs)  throws RemoteException{
         this.observers.add(obs);
     }
     
-    public void rimuoviListener(IRemoteObserver obs){
+    public void rimuoviListener(IRemoteObserver obs)  throws RemoteException{
          if(obs == null)
              this.observers = null;
          else
@@ -72,18 +73,18 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
      }
     
     @Override
-    public DescrizioneProdotto getLastDescription(){
+    public DescrizioneProdotto getLastDescription() throws RemoteException{
         
         return this.descrizioni.getLast();
     }
     
     @Override
-    public void cancel(){
+    public void cancel() throws RemoteException{
         
     }
     
     @Override
-    public void terminaInventario(){
+    public void terminaInventario() throws RemoteException{
         for (DescrizioneProdotto desc : this.descrizioni) {
             try {
                 DbDescrizioneProdottoSingleton.getInstance().create(desc);
@@ -91,6 +92,11 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
                 Logger.getLogger(GestisciInventarioController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+
+    @Override
+    public void avviaInventario()  throws RemoteException{
+        this.descrizioni = new LinkedList();
     }
     
     
