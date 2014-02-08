@@ -83,8 +83,9 @@ public class InventoryControllerSingleton implements IRemoteDescriptionClient {
         UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
     }
     
-    public void endInventory() {
-        
+    public void endInventory() throws RemoteException {
+        this.controller.terminaInventario();
+        UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
     }
 }
 
