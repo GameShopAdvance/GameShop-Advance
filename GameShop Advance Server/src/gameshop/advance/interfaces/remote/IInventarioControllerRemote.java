@@ -6,6 +6,8 @@
 
 package gameshop.advance.interfaces.remote;
 
+import gameshop.advance.exceptions.ProdottoNotFoundException;
+import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.utility.IDProdotto;
 import java.rmi.RemoteException;
 
@@ -15,7 +17,7 @@ import java.rmi.RemoteException;
  */
 public interface IInventarioControllerRemote {
     
-    public void inserisciProdotto(IDProdotto code, int quantity) throws RemoteException;
+    public void inserisciProdotto(IDProdotto code, int quantity) throws RemoteException, QuantityException, ProdottoNotFoundException;
     
     public void terminaInventario() throws RemoteException;
     

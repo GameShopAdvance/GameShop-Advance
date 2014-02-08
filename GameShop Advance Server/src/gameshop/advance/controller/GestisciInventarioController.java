@@ -7,16 +7,20 @@
 package gameshop.advance.controller;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.remote.IInventarioControllerRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.CatalogoProdottiSingleton;
 import gameshop.advance.model.DescrizioneProdotto;
+import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
 import gameshop.advance.utility.IDProdotto;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 
 /**
@@ -36,6 +40,7 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
     }
     
     
+  
     @Override
     public void inserisciProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException, QuantityException, ProdottoNotFoundException{
        
@@ -71,11 +76,27 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
             this.observers.remove(obs);
      }
     
+    @Override
     public DescrizioneProdotto getLastDescription(){
         
         return this.descrizioni.getLast();
     }
     
+    @Override
+    public void cancel(){
+        
+    }
+    
+    @Override
+    public void terminaInventario(){
+        for (DescrizioneProdotto desc : this.descrizioni) {
+            try {
+                DbDescrizioneProdottoSingleton.getInstance().create(desc);
+            } catch (ObjectAlreadyExistsDbException ex) {
+                Logger.getLogger(GestisciInventarioController.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
+    }
     
     
 }
