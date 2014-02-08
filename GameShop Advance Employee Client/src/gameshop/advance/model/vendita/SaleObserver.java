@@ -21,7 +21,7 @@ public class SaleObserver extends UnicastRemoteObject implements IRemoteObserver
     }
     
     @Override
-    public void notifica(IVenditaRemote o)throws RemoteException{
+    public void notifica(Object o)throws RemoteException{
         IVenditaRemote vendita = (IVenditaRemote) o;
         System.err.println("Observer del totale, client: "+this.client);
         try{
