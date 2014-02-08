@@ -29,7 +29,7 @@ public class CatalogoProdottiSingleton
      * @return il catalogo dei prodotti
      * @throws InvalidMoneyException
      */
-    public static synchronized CatalogoProdottiSingleton getInstance() throws InvalidMoneyException
+    public static synchronized CatalogoProdottiSingleton getInstance()
         {
             if(CatalogoProdottiSingleton.catalog == null)
             {

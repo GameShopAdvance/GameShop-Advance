@@ -6,7 +6,6 @@
 
 package gameshop.advance.controller;
 
-import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
@@ -29,17 +28,13 @@ import java.util.logging.Logger;
  */
 public class GestisciInventarioController extends UnicastRemoteObject implements IInventarioControllerRemote {
     
-    CatalogoProdottiSingleton catalogo;
     private LinkedList<DescrizioneProdotto> descrizioni;
     private LinkedList<IRemoteObserver> observers = new LinkedList<>();
     
     
-    public GestisciInventarioController () throws RemoteException, InvalidMoneyException{
-        this.catalogo = CatalogoProdottiSingleton.getInstance();
+    public GestisciInventarioController () throws RemoteException{
         this.descrizioni = new LinkedList();
     }
-    
-    
   
     @Override
     public void inserisciProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException, QuantityException, ProdottoNotFoundException{
@@ -48,7 +43,7 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
             throw new QuantityException(quantity);
         }
        
-        DescrizioneProdotto desc = this.catalogo.getDescrizioneProdotto(codiceProdotto);
+        DescrizioneProdotto desc = CatalogoProdottiSingleton.getInstance().getDescrizioneProdotto(codiceProdotto);
         if(desc == null){
             throw new ProdottoNotFoundException(codiceProdotto);
         }

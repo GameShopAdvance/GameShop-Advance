@@ -6,7 +6,6 @@ import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import gameshop.advance.utility.Prezzo;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -16,7 +15,7 @@ import java.util.List;
  * prodotto: id, prezzo e descrizione testuale.
  * @author Salx
  */
-public class DescrizioneProdotto extends UnicastRemoteObject implements IDescrizioneProdottoRemote
+public class DescrizioneProdotto implements IDescrizioneProdottoRemote
 {
 
     private IDProdotto codiceProdotto;

@@ -16,6 +16,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.LinkedList;
 
@@ -23,18 +24,18 @@ import java.util.LinkedList;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class InventoryControllerSingleton implements IRemoteDescriptionClient {
+public class InventoryControllerSingleton extends UnicastRemoteObject implements IRemoteDescriptionClient {
     
     private static InventoryControllerSingleton instance;
     private IInventarioControllerRemote controller;
     private HashMap<String, AggiuntaProdotti> addedItems;
     
-    private InventoryControllerSingleton()
+    private InventoryControllerSingleton() throws RemoteException
     {
         this.addedItems = new HashMap<>();
     }
     
-    public static InventoryControllerSingleton getInstance()
+    public static InventoryControllerSingleton getInstance() throws RemoteException
     {
         if(instance == null)
             instance = new InventoryControllerSingleton();
@@ -47,6 +48,7 @@ public class InventoryControllerSingleton implements IRemoteDescriptionClient {
         Registry reg = LocateRegistry.getRegistry(controllerConfig.getServerAddress(), controllerConfig.getServerPort());
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
         this.controller = factory.getGestisciInventarioController();
+        System.err.println("Controller: " +this.controller);
         UIWindowSingleton.getInstance().setPanel(new InventoryPanel());
     }
     

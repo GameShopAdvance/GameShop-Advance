@@ -70,9 +70,10 @@ public class RemoteFactorySingleton extends UnicastRemoteObject implements IRemo
         }
     }
     
-    public IInventarioControllerRemote getGestisciInventarioController() throws RemoteException, InvalidMoneyException{
-        
-        GestisciInventarioController inventario = new GestisciInventarioController();
+    @Override
+    public IInventarioControllerRemote getGestisciInventarioController() throws RemoteException{
+        System.err.println("Factory's creating controller of inventory");
+        IInventarioControllerRemote inventario = new GestisciInventarioController();
         return inventario;
     }
 }

@@ -67,7 +67,12 @@ public class InventoryPanel extends JPanel {
     }
 
     private void cancelButtonActionPerformed(ActionEvent e) {
-        InventoryControllerSingleton.getInstance().cancel();
+        try {
+            InventoryControllerSingleton.getInstance().cancel();
+        } catch (RemoteException ex) {
+            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
+                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+        }
     }
     
     private void initComponents() {
