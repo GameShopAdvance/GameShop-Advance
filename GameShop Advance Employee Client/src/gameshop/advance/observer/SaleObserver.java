@@ -1,4 +1,4 @@
-package gameshop.advance.model.vendita;
+package gameshop.advance.observer;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.IRemoteClient;
@@ -21,7 +21,7 @@ public class SaleObserver extends UnicastRemoteObject implements IRemoteObserver
     }
     
     @Override
-    public void notifica(Object o)throws RemoteException{
+    public void notifica(Object o) throws RemoteException{
         IVenditaRemote vendita = (IVenditaRemote) o;
         System.err.println("Observer del totale, client: "+this.client);
         try{

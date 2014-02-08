@@ -18,5 +18,6 @@ public interface IRemoteFactory extends Remote{
      */
     ICassaRemote creaCassa(int numeroCassa) throws RemoteException;
     
+    IInventarioControllerRemote getGestisciInventarioController() throws RemoteException;
     
 }

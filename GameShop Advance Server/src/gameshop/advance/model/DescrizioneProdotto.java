@@ -1,7 +1,7 @@
 package gameshop.advance.model;
 
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
-import gameshop.advance.interfaces.remote.IRemoteDescrizione;
+import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import gameshop.advance.utility.Prezzo;
@@ -16,7 +16,7 @@ import java.util.List;
  * prodotto: id, prezzo e descrizione testuale.
  * @author Salx
  */
-public class DescrizioneProdotto extends UnicastRemoteObject implements IRemoteDescrizione
+public class DescrizioneProdotto extends UnicastRemoteObject implements IDescrizioneProdottoRemote
 {
 
     private IDProdotto codiceProdotto;

@@ -1,5 +1,5 @@
 
-package gameshop.advance.ui.swing.employee;
+package gameshop.advance.controller;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
@@ -10,9 +10,13 @@ import gameshop.advance.interfaces.remote.ICassaRemote;
 import gameshop.advance.interfaces.remote.IRemoteClient;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
-import gameshop.advance.model.vendita.SaleObserver;
-import gameshop.advance.model.vendita.SaleRestObserver;
+import gameshop.advance.observer.SaleObserver;
+import gameshop.advance.observer.SaleRestObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
+import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
+import gameshop.advance.ui.swing.employee.EndSalePanel;
+import gameshop.advance.ui.swing.employee.InsertItemPanel;
+import gameshop.advance.ui.swing.employee.PaymentPanel;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.NotBoundException;
@@ -137,7 +141,7 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         return this.resto;
     }
 
-    void clearSale() {
+    public void clearSale() {
         UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
         UIWindowSingleton.getInstance().refreshContent();
     }

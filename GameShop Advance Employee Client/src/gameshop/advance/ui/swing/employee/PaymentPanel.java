@@ -4,6 +4,7 @@
 
 package gameshop.advance.ui.swing.employee;
 
+import gameshop.advance.controller.SaleControllerSingleton;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
