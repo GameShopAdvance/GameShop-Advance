@@ -45,9 +45,9 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
         }
        
         DescrizioneProdotto desc = CatalogoProdottiSingleton.getInstance().getDescrizioneProdotto(codiceProdotto);
-        if(desc == null){
-            throw new ProdottoNotFoundException(codiceProdotto);
-        }
+//        if(desc == null){
+//            throw new ProdottoNotFoundException(codiceProdotto);
+//        }
         desc.addQuantitaDisponibile (quantity);
         descrizioni.add(desc);
         this.notificaListeners();

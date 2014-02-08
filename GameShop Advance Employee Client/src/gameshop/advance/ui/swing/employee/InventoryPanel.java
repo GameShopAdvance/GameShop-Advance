@@ -9,13 +9,16 @@ import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.InventoryControllerSingleton;
-import gameshop.advance.ui.swing.DescriptionListCellRenderer;
-import gameshop.advance.ui.swing.DescriptionListModel;
+import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.ProdottoNotFoundException;
+import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -27,16 +30,11 @@ import javax.swing.JTextField;
  * @author Pippo
  */
 public class InventoryPanel extends JPanel {
-    
-    private DescriptionListModel descList;
-    
+        
     public InventoryPanel() {
-        try {
-            initComponents();
-            this.descriptions.setCellRenderer(new DescriptionListCellRenderer(this.descriptions.getWidth(), 40));
-        } catch (IOException ex) {
-            UIWindowSingleton.getInstance().displayError("Non è stato possibile inizializzare alcuni elementi grafici.");
-        }
+        initComponents();
+        //System.err.println("Creazione Renderer");
+        //this.descriptions.setCellRenderer(new DescriptionListCellRenderer(30, 30));
     }
 
     private void aggiungiProdotto(ActionEvent e) {
@@ -52,10 +50,18 @@ public class InventoryPanel extends JPanel {
             }
             this.clearFields();
             InventoryControllerSingleton.getInstance().inserisciProdotto(this.codiceProdotto.getText(), quantity);
-            this.descList = new DescriptionListModel(InventoryControllerSingleton.getInstance().getDescriptions());
+            
         } catch (RemoteException ex) {
              UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
                     + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+        } catch (ConfigurationException ex) {
+            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (NotBoundException ex) {
+            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (QuantityException ex) {
+            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ProdottoNotFoundException ex) {
+            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
@@ -72,6 +78,8 @@ public class InventoryPanel extends JPanel {
         } catch (RemoteException ex) {
             UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
                     + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+        } catch (ConfigurationException | NotBoundException ex) {
+            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

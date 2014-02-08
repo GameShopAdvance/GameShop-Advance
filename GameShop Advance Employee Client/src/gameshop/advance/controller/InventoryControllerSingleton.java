@@ -4,6 +4,8 @@ package gameshop.advance.controller;
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.controller.valueData.AggiuntaProdotti;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.ProdottoNotFoundException;
+import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IInventarioControllerRemote;
 import gameshop.advance.interfaces.remote.IRemoteDescriptionClient;
@@ -19,6 +21,7 @@ import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.HashMap;
 import java.util.LinkedList;
+import javax.swing.JComponent;
 
 /**
  *
@@ -37,9 +40,15 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
     
     public static InventoryControllerSingleton getInstance() throws RemoteException, ConfigurationException, NotBoundException
     {
-        if(instance == null)
-            instance = new InventoryControllerSingleton();
-        instance.configure();
+        try {
+                instance = new InventoryControllerSingleton();
+                instance.configure();
+            } catch (RemoteException | NotBoundException ex) {
+                instance = null;
+                throw new RemoteException("Ci sono problemi di comunicazione con il server.");
+                //Instanziare un logger per tener traccia delle eccezioni e consentire la loro analisi
+            }
+        
         return instance;
     }
     
@@ -55,10 +64,10 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
     public void avviaInventario() throws ConfigurationException, RemoteException, NotBoundException
     {
         this.controller.avviaInventario();
-        UIWindowSingleton.getInstance().setPanel(new InventoryPanel());
+        aggiornaWindow(new InventoryPanel());
     }
     
-    public void inserisciProdotto(String codiceProdotto, int quantity) throws RemoteException
+    public void inserisciProdotto(String codiceProdotto, int quantity) throws RemoteException, QuantityException, ProdottoNotFoundException
     {
         IDProdotto id = new IDProdotto(codiceProdotto);
         this.controller.inserisciProdotto(id, quantity);
@@ -86,7 +95,7 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
         return (LinkedList<AggiuntaProdotti>) this.addedItems.values();
     }
 
-    public void cancel() {
+    public void cancel() throws RemoteException {
         this.controller.cancel();
         UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
     }
@@ -94,6 +103,11 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
     public void endInventory() throws RemoteException {
         this.controller.terminaInventario();
         UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
+    }
+    
+    private void aggiornaWindow(JComponent panel) {
+        UIWindowSingleton.getInstance().setPanel(panel);
+        UIWindowSingleton.getInstance().refreshContent();
     }
 }
 
