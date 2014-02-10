@@ -9,6 +9,7 @@ import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.InventoryControllerSingleton;
+import gameshop.advance.controller.valueData.AggiuntaProdotti;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
@@ -17,7 +18,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.LinkedList;
+import java.util.Collection;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
@@ -26,14 +27,18 @@ import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
 import javax.swing.JTextField;
+import javax.swing.table.AbstractTableModel;
 
 /**
  * @author Pippo
  */
 public class InventoryPanel extends JPanel {
         
+    private final String[] columnNames = {"id", "descrizione", "quantità aggiunta"};
+    
     public InventoryPanel() {
         initComponents();
+        this.refreshTable();
         //System.err.println("Creazione Renderer");
         //this.descriptions.setCellRenderer(new DescriptionListCellRenderer(30, 30));
     }
@@ -94,6 +99,10 @@ public class InventoryPanel extends JPanel {
             Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private void createUIComponents() {
+        // TODO: add custom component creation code here
+    }
     
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -105,8 +114,8 @@ public class InventoryPanel extends JPanel {
         label2 = new JLabel();
         quantitaProdotto = new JTextField();
         button1 = new JButton();
-        table = new JScrollPane();
-        table1 = new JTable();
+        panel = new JScrollPane();
+        table = new JTable();
 
         //======== this ========
         setName("this");
@@ -170,13 +179,13 @@ public class InventoryPanel extends JPanel {
             panel1Builder.add(button1,          CC.xy  (3, 5));
         }
 
-        //======== table ========
+        //======== panel ========
         {
-            table.setName("table");
+            panel.setName("panel");
 
-            //---- table1 ----
-            table1.setName("table1");
-            table.setViewportView(table1);
+            //---- table ----
+            table.setName("table");
+            panel.setViewportView(table);
         }
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
@@ -186,7 +195,7 @@ public class InventoryPanel extends JPanel {
         builder.add(cancelButton,       CC.xy(1, 1));
         builder.add(endInventoryButton, CC.xy(5, 1));
         builder.add(panel1,             CC.xy(3, 3));
-        builder.add(table,              CC.xy(3, 5, CC.FILL, CC.FILL));
+        builder.add(panel,              CC.xy(3, 5, CC.FILL, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -199,14 +208,50 @@ public class InventoryPanel extends JPanel {
     private JLabel label2;
     private JTextField quantitaProdotto;
     private JButton button1;
-    private JScrollPane table;
-    private JTable table1;
+    private JScrollPane panel;
+    private JTable table;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private void refreshTable() {
         try {
-            LinkedList descriptions = InventoryControllerSingleton.getInstance().getDescriptions();
-            this.table.
+            Collection<AggiuntaProdotti> descriptions = InventoryControllerSingleton.getInstance().getDescriptionList();
+            final Object[] aggiunte = descriptions.toArray();
+            for(Object o: aggiunte)
+                System.err.println("Aggiunte "+o.toString());
+            final String[] names = this.columnNames;
+            this.table.setModel(new AbstractTableModel() {
+
+                @Override
+                public String getColumnName(int column){
+                    return names[column];
+                }
+                
+                @Override
+                public int getRowCount() {
+                    return aggiunte.length;
+                }
+
+                @Override
+                public int getColumnCount() {
+                    return names.length;
+                }
+
+                @Override
+                public Object getValueAt(int rowIndex, int columnIndex) {
+                    try {
+                        AggiuntaProdotti ap = (AggiuntaProdotti) aggiunte[rowIndex];
+                        switch(columnIndex)
+                        {
+                            case 0: return ap.getId();
+                            case 1: return ap.getDescrizione();
+                            case 2: return ap.getAddedQuantity();
+                        }
+                    } catch (RemoteException ex) {
+                        Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+                    }
+                    return null;
+                }
+            });
         } catch (RemoteException ex) {
             Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ConfigurationException ex) {

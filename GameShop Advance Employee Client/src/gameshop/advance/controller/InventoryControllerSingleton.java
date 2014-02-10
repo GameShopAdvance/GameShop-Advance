@@ -21,8 +21,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Collection;
 import java.util.HashMap;
-import java.util.LinkedList;
 import javax.swing.JComponent;
 
 /**
@@ -40,11 +40,14 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
     {
         this.addedItems = new HashMap<>();
         this.observer = new DescriptionsObserver(this);
+        System.err.println("observer: "+this.observer);
     }
     
     public static InventoryControllerSingleton getInstance() throws RemoteException, ConfigurationException, NotBoundException
     {
-        try {
+        if(instance == null)
+        {
+            try {
                 instance = new InventoryControllerSingleton();
                 instance.configure();
             } catch (RemoteException | NotBoundException ex) {
@@ -52,6 +55,7 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
                 throw new RemoteException("Ci sono problemi di comunicazione con il server.");
                 //Instanziare un logger per tener traccia delle eccezioni e consentire la loro analisi
             }
+        }
         
         return instance;
     }
@@ -75,8 +79,18 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
     public void inserisciProdotto(String codiceProdotto, int quantity) throws RemoteException, QuantityException, ProdottoNotFoundException
     {
         IDProdotto id = new IDProdotto(codiceProdotto);
-        this.controller.inserisciProdotto(id, quantity);
-        this.addedItems.put(id.getCodice(), new AggiuntaProdotti(null, quantity));
+        try{
+            System.err.println("Pre aggiunta hash :"+this.addedItems.size());
+            this.addedItems.put(id.getCodice(), new AggiuntaProdotti(null, quantity));
+            System.err.println("Post aggiunta hash :"+this.addedItems.size());
+            this.controller.inserisciProdotto(id, quantity);
+        }catch(ProdottoNotFoundException | QuantityException e)
+        {
+            System.err.println("Err aggiunta hash");
+            this.addedItems.remove(id.getCodice());
+            throw e;
+        }
+        
     }
     
     public void terminaInventario() throws RemoteException
@@ -88,6 +102,7 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
 
     @Override
     public void addDescription(IDescrizioneProdottoRemote desc) throws RemoteException{
+        System.err.println("OBSERVER CALL");
         AggiuntaProdotti aggiunta = this.addedItems.get(desc.getCodiceProdotto().getCodice());
         if(aggiunta != null)
         {
@@ -98,8 +113,8 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
             this.addedItems.put(desc.getCodiceProdotto().getCodice(), new AggiuntaProdotti(desc, 0));
     }
 
-    public LinkedList<AggiuntaProdotti> getDescriptions() throws RemoteException {
-        return (LinkedList<AggiuntaProdotti>) this.addedItems.values();
+    public Collection<AggiuntaProdotti> getDescriptionList() throws RemoteException {
+        return this.addedItems.values();
     }
 
     public void cancel() throws RemoteException {

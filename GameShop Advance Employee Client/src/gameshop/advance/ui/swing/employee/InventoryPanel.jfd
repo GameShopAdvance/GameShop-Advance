@@ -70,9 +70,9 @@ new FormModel {
 				"gridY": 3
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-				name: "table"
+				name: "panel"
 				add( new FormComponent( "javax.swing.JTable" ) {
-					name: "table1"
+					name: "table"
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
