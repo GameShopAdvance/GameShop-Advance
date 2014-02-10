@@ -76,6 +76,11 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
             this.observers.remove(obs);
      }
     
+    /**
+     *
+     * @return
+     * @throws RemoteException
+     */
     @Override
     public DescrizioneProdotto getLastDescription() throws RemoteException{
         

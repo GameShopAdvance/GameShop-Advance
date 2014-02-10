@@ -27,4 +27,10 @@ public interface IInventarioControllerRemote extends Remote{
     public void cancel() throws RemoteException;
 
     public void avviaInventario() throws RemoteException;
+    
+    void aggiungiListener(IRemoteObserver obs)  throws RemoteException;
+    
+    void rimuoviListener(IRemoteObserver obs)  throws RemoteException;
+    
+    
 }

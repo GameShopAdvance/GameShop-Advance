@@ -10,6 +10,8 @@ import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IInventarioControllerRemote;
 import gameshop.advance.interfaces.remote.IRemoteDescriptionClient;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
+import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.observer.DescriptionsObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.employee.InventoryPanel;
@@ -32,10 +34,12 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
     private static InventoryControllerSingleton instance;
     private IInventarioControllerRemote controller;
     private HashMap<String, AggiuntaProdotti> addedItems;
+    private IRemoteObserver observer;
     
     private InventoryControllerSingleton() throws RemoteException
     {
         this.addedItems = new HashMap<>();
+        this.observer = new DescriptionsObserver(this);
     }
     
     public static InventoryControllerSingleton getInstance() throws RemoteException, ConfigurationException, NotBoundException
@@ -64,6 +68,7 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
     public void avviaInventario() throws ConfigurationException, RemoteException, NotBoundException
     {
         this.controller.avviaInventario();
+        this.controller.aggiungiListener(this.observer);
         aggiornaWindow(new InventoryPanel());
     }
     
@@ -76,6 +81,7 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
     
     public void terminaInventario() throws RemoteException
     {
+        this.controller.rimuoviListener(this.observer);
         this.controller.terminaInventario();
         this.aggiornaWindow(new EmployeeMenuPanel());
     }
