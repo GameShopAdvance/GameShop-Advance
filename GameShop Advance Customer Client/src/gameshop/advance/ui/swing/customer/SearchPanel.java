@@ -18,6 +18,7 @@ import javax.swing.JScrollPane;
 public class SearchPanel extends JPanel {
     public SearchPanel() {
         initComponents();
+        
     }
 
     private void initComponents() {
