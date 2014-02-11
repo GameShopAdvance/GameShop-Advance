@@ -39,8 +39,6 @@ public class InventoryPanel extends JPanel {
     public InventoryPanel() {
         initComponents();
         this.refreshTable();
-        //System.err.println("Creazione Renderer");
-        //this.descriptions.setCellRenderer(new DescriptionListCellRenderer(30, 30));
     }
 
     private void aggiungiProdotto(ActionEvent e) {
@@ -58,17 +56,16 @@ public class InventoryPanel extends JPanel {
             InventoryControllerSingleton.getInstance().inserisciProdotto(this.codiceProdotto.getText(), quantity);
             this.clearFields();
             this.refreshTable();
-        } catch (RemoteException ex) {
+        } catch (RemoteException | NotBoundException ex) {
              UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
                     + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
         } catch (ConfigurationException ex) {
-            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NotBoundException ex) {
-            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (QuantityException ex) {
-            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
+                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+        }catch (QuantityException ex) {
+            UIWindowSingleton.getInstance().displayError("La quantità inserita "+ this.quantitaProdotto.getText() +" non è valida.");
         } catch (ProdottoNotFoundException ex) {
-            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError("Il codice prodotto inserito "+this.codiceProdotto.getText()+" non è valido.");
         }
     }
 
@@ -82,21 +79,24 @@ public class InventoryPanel extends JPanel {
     private void cancelButtonActionPerformed(ActionEvent e) {
         try {
             InventoryControllerSingleton.getInstance().cancel();
-        } catch (RemoteException ex) {
+        } catch (RemoteException | NotBoundException ex) {
             UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
                     + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
-        } catch (ConfigurationException | NotBoundException ex) {
-            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ConfigurationException ex) {
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
+                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
         }
     }
 
     private void endInventoryButtonActionPerformed(ActionEvent e) {
         try {
             InventoryControllerSingleton.getInstance().terminaInventario();
-        } catch (ConfigurationException | NotBoundException ex) {
-            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (RemoteException ex) {
-            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ConfigurationException ex) {
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
+                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+        } catch (RemoteException | NotBoundException ex) {
+            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
+                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
         }
     }
 
@@ -252,12 +252,12 @@ public class InventoryPanel extends JPanel {
                     return null;
                 }
             });
-        } catch (RemoteException ex) {
-            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException | NotBoundException ex) {
+            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
+                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
         } catch (ConfigurationException ex) {
-            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (NotBoundException ex) {
-            Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
+                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
         }
     }
 }
