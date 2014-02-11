@@ -11,6 +11,7 @@ import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.transazione.RigaDiVendita;
 import gameshop.advance.utility.IntervalloDiTempo;
 import gameshop.advance.utility.Money;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -39,7 +40,7 @@ public class ScontoTotaleVenditaStrategy implements IScontoVenditaStrategy {
     }
     
     @Override
-    public Money getTotal(ITransazione vendita){
+    public Money getTotal(ITransazione vendita) throws RemoteException{
         List<RigaDiVendita> righe = vendita.getRigheDiVendita();
         Money totale = new Money();
         for(RigaDiVendita riga:righe)

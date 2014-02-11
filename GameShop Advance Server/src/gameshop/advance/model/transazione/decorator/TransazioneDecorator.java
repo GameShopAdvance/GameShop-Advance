@@ -12,6 +12,7 @@ import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.CartaCliente;
+import gameshop.advance.model.transazione.TransazioneRemoteProxy;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
@@ -37,11 +38,6 @@ public class TransazioneDecorator implements ITransazione {
         this.listeners = new LinkedList<>();
     }
     
-    public void addListener(IRemoteObserver obs)
-    {
-        this.listeners.add(obs);
-    }
-    
     public void rimuoviListener(IRemoteObserver obs)
     {
         if(obs==null)
@@ -57,25 +53,26 @@ public class TransazioneDecorator implements ITransazione {
     
     protected void notificaListeners() throws RemoteException
     {
+        System.err.println("Calling listener");
         for(IRemoteObserver o:this.listeners)
         {
-            o.notifica(new TransazioneDecoratorRemoteProxy(this));
+            o.notifica(new TransazioneRemoteProxy(this));
         }
     }
     
     @Override
-    public void completaVendita() throws RemoteException {
+    public void completaVendita() {
         this.wrapped.completaVendita();
     }
 
     @Override
-    public void inserisciProdotto(DescrizioneProdotto desc, int quantity) throws RemoteException {
+    public void inserisciProdotto(DescrizioneProdotto desc, int quantity) throws RemoteException{
         this.wrapped.inserisciProdotto(desc, quantity);
     }
 
     @Override
     public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException {
-        this.wrapped.gestisciPagamento(ammontare);;
+        this.wrapped.gestisciPagamento(ammontare);
     }
 
     @Override
@@ -89,22 +86,22 @@ public class TransazioneDecorator implements ITransazione {
     }
 
     @Override
-    public Money getResto() throws InvalidMoneyException {
+    public Money getResto() throws InvalidMoneyException, RemoteException {
         return this.wrapped.getResto();
     }
 
     @Override
-    public List getRigheDiVendita() {
+    public List getRigheDiVendita() throws RemoteException {
         return this.wrapped.getRigheDiVendita();
     }
 
     @Override
-    public Money getTotal() {
+    public Money getTotal() throws RemoteException {
         return this.wrapped.getTotal();
     }
 
     @Override
-    public void setCliente(CartaCliente c) throws RemoteException {
+    public void setCliente(CartaCliente c) {
         this.wrapped.setCliente(c);
     }
 
@@ -113,6 +110,7 @@ public class TransazioneDecorator implements ITransazione {
         this.wrapped.setIdVendita(idVendita);
     }
 
+    @Override
     public void setSconto(ScontoVenditaStrategyComposite sconto)
     {
         this.wrapped.setSconto(sconto);

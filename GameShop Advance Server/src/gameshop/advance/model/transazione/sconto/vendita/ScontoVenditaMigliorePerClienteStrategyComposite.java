@@ -3,6 +3,7 @@ package gameshop.advance.model.transazione.sconto.vendita;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.utility.Money;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -15,9 +16,10 @@ public class ScontoVenditaMigliorePerClienteStrategyComposite extends ScontoVend
      *
      * @param vendita
      * @return
+     * @throws java.rmi.RemoteException
      */
     @Override
-    public Money getTotal(ITransazione vendita) {
+    public Money getTotal(ITransazione vendita) throws RemoteException {
         List<IScontoVenditaStrategy> components = super.getComponents();
         Money minimoTotale = super.getRealTotal(vendita);
         for(IScontoVenditaStrategy strategy: components)

@@ -4,6 +4,7 @@ import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.transazione.RigaDiVendita;
 import gameshop.advance.utility.Money;
+import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -16,7 +17,7 @@ public abstract class ScontoVenditaStrategyComposite implements IScontoVenditaSt
     private LinkedList<IScontoVenditaStrategy> components = new LinkedList<>();
     
     @Override
-    public abstract Money getTotal(ITransazione vendita);
+    public abstract Money getTotal(ITransazione vendita) throws RemoteException;
     
     public void add(IScontoVenditaStrategy sconto){
         this.components.add(sconto);
@@ -27,7 +28,7 @@ public abstract class ScontoVenditaStrategyComposite implements IScontoVenditaSt
         return this.components;
     }
     
-    protected Money getRealTotal(ITransazione vendita)
+    protected Money getRealTotal(ITransazione vendita) throws RemoteException
     {
         List<RigaDiVendita> righe = vendita.getRigheDiVendita();
         Money totale = new Money();

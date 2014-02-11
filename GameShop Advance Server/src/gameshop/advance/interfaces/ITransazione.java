@@ -11,23 +11,21 @@ import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
-import java.util.List;
 
 /**
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public interface ITransazione extends Remote {
+public interface ITransazione extends ITransazioneRemote {
 
     /**
      * Imposta lo stato della vendita come completata e invia una notifica agli
      * osservatori in ascolto.
      * @throws RemoteException
      */
-    void completaVendita() throws RemoteException;
+    void completaVendita();
 
     /**
      * Utilizza i parametri ricevuti in ingresso (descrizione prodotto e quantità) per
@@ -53,25 +51,7 @@ public interface ITransazione extends Remote {
 
     Integer getIdVendita();
 
-    /**
-     * Utilizza il totale della transazione e il pagamento ricevuto per calcolare
-     * il resto.
-     * @return il resto da restituire
-     * @throws InvalidMoneyException
-     */
-    Money getResto() throws InvalidMoneyException;
-
-    List getRigheDiVendita();
-
-    /**
-     * Implementazione del metodo dell'interfaccia di vendita.Calcola il totale
-     * della transazione sommando i valori sub-totali di tutte le righe di vendita
-     * della transazione.
-     * @return il totale della transazione
-     */
-    Money getTotal();
-
-    void setCliente(CartaCliente c) throws RemoteException;
+    void setCliente(CartaCliente c);
 
     void setIdVendita(Integer idVendita);
 

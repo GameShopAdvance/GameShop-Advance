@@ -55,7 +55,7 @@ public class Transazione implements ITransazione {
      * @throws java.rmi.RemoteException
      */
     @Override
-    public void inserisciProdotto(DescrizioneProdotto desc, int quantity) throws RemoteException {
+    public void inserisciProdotto(DescrizioneProdotto desc, int quantity) {
         RigaDiVendita rdv = new RigaDiVendita(desc, quantity);
         this.righeDiVendita.add(rdv);
 //        this.notificaListeners();
@@ -90,7 +90,7 @@ public class Transazione implements ITransazione {
      * @return il totale della transazione
      */
     @Override
-    public Money getTotal() {
+    public Money getTotal() throws RemoteException {
         return this.strategiaDiSconto.getTotal(this);
     }
 
@@ -101,7 +101,7 @@ public class Transazione implements ITransazione {
      * @throws InvalidMoneyException
      */
     @Override
-    public Money getResto() throws InvalidMoneyException {
+    public Money getResto() throws InvalidMoneyException, RemoteException {
         Money m = this.getTotal();
         if (this.pagamento == null) {
             return null;
@@ -118,10 +118,7 @@ public class Transazione implements ITransazione {
      * @throws java.rmi.RemoteException
      */
     @Override
-    public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException {
-        if (!ammontare.equals(this.getTotal()) && !ammontare.greater(this.getTotal())) {
-            throw new InvalidMoneyException(ammontare);
-        }
+    public void gestisciPagamento(Money ammontare) throws InvalidMoneyException,RemoteException {
         this.pagamento = new Pagamento(ammontare);
 //        this.notificaListeners();
     }
@@ -132,7 +129,7 @@ public class Transazione implements ITransazione {
      * @throws RemoteException
      */
     @Override
-    public void completaVendita() throws RemoteException {
+    public void completaVendita() {
         this.completata = true;
 //        this.notificaListeners();
     }
@@ -159,7 +156,7 @@ public class Transazione implements ITransazione {
     }
 
     @Override
-    public void setCliente(CartaCliente c) throws RemoteException {
+    public void setCliente(CartaCliente c) {
         this.cliente = c;
 //        this.notificaListeners();
     }
