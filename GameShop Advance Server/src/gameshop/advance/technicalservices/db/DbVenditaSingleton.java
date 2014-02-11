@@ -10,6 +10,7 @@ import com.db4o.ObjectContainer;
 import com.db4o.query.Query;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.ITransazione;
+import gameshop.advance.model.transazione.decorator.VenditaTransazioneDecorator;
 
 /**
  *
@@ -31,7 +32,7 @@ public class DbVenditaSingleton {
         return DbVenditaSingleton.instance;
     }
     
-    public void create(ITransazione sale) throws ObjectAlreadyExistsDbException
+    public void create(VenditaTransazioneDecorator sale) throws ObjectAlreadyExistsDbException
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         int exist = client.queryByExample(sale).size();
@@ -45,14 +46,14 @@ public class DbVenditaSingleton {
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         Query query=client.query();
-        query.constrain(ITransazione.class);
+        query.constrain(VenditaTransazioneDecorator.class);
         query.descend("id").constrain(id);
-        return (ITransazione) query.execute().get(0);
+        return (VenditaTransazioneDecorator) query.execute().get(0);
     }
     
     public Integer count()
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-        return client.queryByExample(ITransazione.class).size();
+        return client.queryByExample(VenditaTransazioneDecorator.class).size();
     }
 }

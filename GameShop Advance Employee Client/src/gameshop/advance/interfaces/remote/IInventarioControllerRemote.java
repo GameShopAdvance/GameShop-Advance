@@ -32,5 +32,4 @@ public interface IInventarioControllerRemote extends Remote{
     
     void rimuoviListener(IRemoteObserver obs)  throws RemoteException;
     
-    
 }

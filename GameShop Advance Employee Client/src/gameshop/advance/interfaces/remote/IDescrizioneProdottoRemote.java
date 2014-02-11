@@ -35,5 +35,5 @@ public interface IDescrizioneProdottoRemote extends Remote {
      * @throws java.rmi.RemoteException
      */
     Money getPrezzo() throws RemoteException;
-    
+
 }

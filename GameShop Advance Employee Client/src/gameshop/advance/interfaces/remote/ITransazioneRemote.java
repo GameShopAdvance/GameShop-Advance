@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.interfaces;
+package gameshop.advance.interfaces.remote;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.utility.Money;

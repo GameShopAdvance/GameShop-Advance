@@ -3,7 +3,6 @@ package gameshop.advance.controller;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
-import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.remote.ICassaRemote;
@@ -24,6 +23,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 
 /**
@@ -98,11 +99,16 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         this.cassa.concludiVendita();
     }
     
-    public void effettuaPagamento(Double payment) throws RemoteException, InvalidMoneyException
+    public void effettuaPagamento(Double payment) throws RemoteException
     {
-        cassa.aggiungiListener(this.saleRestObserver);
-        cassa.gestisciPagamento(new Money(payment));
-        aggiornaWindow(new EndSalePanel());
+        try{
+            cassa.aggiungiListener(this.saleRestObserver);
+            cassa.gestisciPagamento(new Money(payment));
+            aggiornaWindow(new EndSalePanel());
+        }
+        catch (Exception ex) {
+            Logger.getLogger(SaleControllerSingleton.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public void inserisciCartaCliente(int code) throws RemoteException
@@ -123,6 +129,7 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
     @Override
     public void aggiornaResto(Money m)
     {
+        System.err.println("Resto "+m);
         this.resto = m;
     }
     
@@ -138,6 +145,7 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
     
     public Money getResto()
     {
+        System.err.println("Resto "+this.resto.toString());
         return this.resto;
     }
 

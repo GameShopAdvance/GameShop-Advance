@@ -9,7 +9,7 @@ package gameshop.advance.observer;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.IRemoteClient;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
-import gameshop.advance.interfaces.remote.IVenditaRemote;
+import gameshop.advance.interfaces.remote.ITransazioneRemote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -23,7 +23,7 @@ public class SaleRestObserver extends UnicastRemoteObject implements IRemoteObse
     
     @Override
     public void notifica(Object o) throws RemoteException {
-        IVenditaRemote sale = (IVenditaRemote) o;
+        ITransazioneRemote sale = (ITransazioneRemote) o;
         try {        
             this.client.aggiornaResto(sale.getResto());
         } catch (InvalidMoneyException ex) {

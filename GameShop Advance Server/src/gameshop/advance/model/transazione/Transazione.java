@@ -58,30 +58,7 @@ public class Transazione implements ITransazione {
     public void inserisciProdotto(DescrizioneProdotto desc, int quantity) {
         RigaDiVendita rdv = new RigaDiVendita(desc, quantity);
         this.righeDiVendita.add(rdv);
-//        this.notificaListeners();
     }
-//
-//    /**
-//     * Aggiunge l'osservatore ricevuto in input alla vendita corrente.
-//     * @param obs
-//     */
-//    @Override
-//    public void aggiungiListener(IRemoteObserver obs) {
-//        this.observers.add(obs);
-//    }
-//
-//    /**
-//     * Rimuove l'osservatore ricevuto in input dalla vendita corrente.
-//     * @param obs
-//     */
-//    @Override
-//    public void rimuoviListener(IRemoteObserver obs) {
-//        if (obs == null) {
-//            this.observers = null;
-//        } else {
-//            this.observers.remove(obs);
-//        }
-//    }
 
     /**
      * Implementazione del metodo dell'interfaccia di vendita.Calcola il totale
@@ -120,7 +97,6 @@ public class Transazione implements ITransazione {
     @Override
     public void gestisciPagamento(Money ammontare) throws InvalidMoneyException,RemoteException {
         this.pagamento = new Pagamento(ammontare);
-//        this.notificaListeners();
     }
 
     /**
@@ -131,19 +107,7 @@ public class Transazione implements ITransazione {
     @Override
     public void completaVendita() {
         this.completata = true;
-//        this.notificaListeners();
     }
-
-//    /**
-//     * Invia la vendita corrente a tutti gli osservatori in ascolto, i quali
-//     * recupereranno poi da tale vendita le informazioni di cui hanno bisogno.
-//     * @throws RemoteException
-//     */
-//    protected void notificaListeners() throws RemoteException {
-//        for (IRemoteObserver o : this.observers) {
-//            o.notifica();
-//        }
-//    }
 
     @Override
     public List getRigheDiVendita() {
@@ -158,7 +122,6 @@ public class Transazione implements ITransazione {
     @Override
     public void setCliente(CartaCliente c) {
         this.cliente = c;
-//        this.notificaListeners();
     }
     
     public void setStrategiaSconto(ScontoVenditaStrategyComposite sconto)

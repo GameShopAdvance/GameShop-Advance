@@ -4,10 +4,10 @@
 
 package gameshop.advance.ui.swing.employee;
 
-import gameshop.advance.controller.SaleControllerSingleton;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
+import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.utility.Money;
@@ -15,6 +15,8 @@ import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -30,6 +32,7 @@ public class EndSalePanel extends JPanel {
         try {
             this.displayRest.setText(SaleControllerSingleton.getInstance().getResto().toString());
         } catch (NullPointerException ex) {
+            Logger.getLogger(EndSalePanel.class.getName()).log(Level.SEVERE, null, ex);
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
                     + " si prega di controllare la configurazione del sistema.");
         } catch (RemoteException ex) {

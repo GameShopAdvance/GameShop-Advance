@@ -8,7 +8,7 @@ package gameshop.advance.model.transazione;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.ITransazione;
-import gameshop.advance.interfaces.ITransazioneRemote;
+import gameshop.advance.interfaces.remote.ITransazioneRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

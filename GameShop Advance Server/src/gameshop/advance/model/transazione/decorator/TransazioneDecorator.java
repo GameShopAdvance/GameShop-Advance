@@ -12,7 +12,6 @@ import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.CartaCliente;
-import gameshop.advance.model.transazione.TransazioneRemoteProxy;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
@@ -23,14 +22,14 @@ import java.util.List;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class TransazioneDecorator implements ITransazione {
+public abstract class TransazioneDecorator implements ITransazione {
     
     /**
      *
      */
     protected ITransazione wrapped;
     
-    private LinkedList<IRemoteObserver> listeners;
+    protected LinkedList<IRemoteObserver> listeners;
     
     public TransazioneDecorator(ITransazione trans)
     {
@@ -41,7 +40,10 @@ public class TransazioneDecorator implements ITransazione {
     public void rimuoviListener(IRemoteObserver obs)
     {
         if(obs==null)
+        {
+            System.err.println("Rimuovi tutti i listener!!!");
             this.listeners=null;
+        }
         else
             this.listeners.remove(obs);
     }
@@ -51,14 +53,7 @@ public class TransazioneDecorator implements ITransazione {
     }
     
     
-    protected void notificaListeners() throws RemoteException
-    {
-        System.err.println("Calling listener");
-        for(IRemoteObserver o:this.listeners)
-        {
-            o.notifica(new TransazioneRemoteProxy(this));
-        }
-    }
+    abstract void notificaListener() throws RemoteException;
     
     @Override
     public void completaVendita() {
@@ -84,12 +79,10 @@ public class TransazioneDecorator implements ITransazione {
     public Integer getIdVendita() {
         return this.wrapped.getIdVendita();
     }
-
+    
     @Override
-    public Money getResto() throws InvalidMoneyException, RemoteException {
-        return this.wrapped.getResto();
-    }
-
+    public abstract Money getResto() throws InvalidMoneyException, RemoteException;
+    
     @Override
     public List getRigheDiVendita() throws RemoteException {
         return this.wrapped.getRigheDiVendita();

@@ -6,6 +6,7 @@
 
 package gameshop.advance.interfaces;
 
+import gameshop.advance.interfaces.remote.ITransazioneRemote;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.CartaCliente;

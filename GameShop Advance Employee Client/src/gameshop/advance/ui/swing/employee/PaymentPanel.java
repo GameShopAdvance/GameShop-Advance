@@ -9,7 +9,6 @@ import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.exceptions.ConfigurationException;
-import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -53,8 +52,6 @@ public class PaymentPanel extends JPanel {
         } catch (ConfigurationException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
                     + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
-        } catch (InvalidMoneyException ex) {
-            UIWindowSingleton.getInstance().displayError("La quantità di denaro: "+ ex.getAmount().toString() +" non è sufficiente.");
         }
     }
 

@@ -8,7 +8,9 @@ package gameshop.advance.model.transazione.decorator;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.ITransazione;
+import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.DescrizioneProdotto;
+import gameshop.advance.model.transazione.TransazioneRemoteProxy;
 import gameshop.advance.model.transazione.sconto.ScontoFactorySingleton;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
@@ -30,7 +32,7 @@ public class VenditaTransazioneDecorator extends TransazioneDecorator{
     @Override
     public void inserisciProdotto(DescrizioneProdotto desc, int quantity) throws RemoteException {
         super.inserisciProdotto(desc, quantity);
-        super.notificaListeners();
+        this.notificaListener();
     }    
     
     @Override 
@@ -38,5 +40,26 @@ public class VenditaTransazioneDecorator extends TransazioneDecorator{
         if(!ammontare.equals(this.getTotal()) && !ammontare.greater(this.getTotal()))
             throw new InvalidMoneyException(ammontare);
         super.gestisciPagamento(ammontare);
+        this.notificaListener();
     }
+    
+    @Override
+    public Money getResto() throws InvalidMoneyException, RemoteException {
+        return this.wrapped.getResto();
+    }
+    
+    /**
+     *
+     * @throws RemoteException
+     */
+    @Override
+    protected void notificaListener() throws RemoteException
+    {
+        System.err.println("Calling listener");
+        for(IRemoteObserver o:this.listeners)
+        {
+            o.notifica(new TransazioneRemoteProxy(this));
+        }
+    }
+
 }
