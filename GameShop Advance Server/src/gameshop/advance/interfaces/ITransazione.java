@@ -7,10 +7,10 @@
 package gameshop.advance.interfaces;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.DescrizioneProdotto;
-import gameshop.advance.model.vendita.CartaCliente;
+import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.utility.Money;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
@@ -19,13 +19,7 @@ import java.util.List;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public interface ITransazione {
-
-    /**
-     * Aggiunge l'osservatore ricevuto in input alla vendita corrente.
-     * @param obs
-     */
-    void aggiungiListener(IRemoteObserver obs);
+public interface ITransazione extends Remote {
 
     /**
      * Imposta lo stato della vendita come completata e invia una notifica agli
@@ -75,12 +69,6 @@ public interface ITransazione {
      * @return il totale della transazione
      */
     Money getTotal();
-
-    /**
-     * Rimuove l'osservatore ricevuto in input dalla vendita corrente.
-     * @param obs
-     */
-    void rimuoviListener(IRemoteObserver obs);
 
     void setCliente(CartaCliente c) throws RemoteException;
 

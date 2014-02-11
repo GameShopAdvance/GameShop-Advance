@@ -6,7 +6,7 @@
 
 package gameshop.advance.interfaces;
 
-import gameshop.advance.model.vendita.RigaDiVendita;
+import gameshop.advance.model.transazione.RigaDiVendita;
 import gameshop.advance.utility.Money;
 
 /**
