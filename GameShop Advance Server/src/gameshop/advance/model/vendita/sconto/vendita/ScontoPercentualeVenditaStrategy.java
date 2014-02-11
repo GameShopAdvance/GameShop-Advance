@@ -7,7 +7,7 @@
 package gameshop.advance.model.vendita.sconto.vendita;
 
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
-import gameshop.advance.interfaces.IVendita;
+import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.vendita.RigaDiVendita;
 import gameshop.advance.utility.IntervalloDiTempo;
 import gameshop.advance.utility.Money;
@@ -39,7 +39,7 @@ public class ScontoPercentualeVenditaStrategy implements IScontoVenditaStrategy 
     }
     
     @Override
-    public Money getTotal(IVendita vendita) {
+    public Money getTotal(ITransazione vendita) {
         List<RigaDiVendita> righe = vendita.getRigheDiVendita();
         Money totale = new Money();
         for(RigaDiVendita riga:righe)

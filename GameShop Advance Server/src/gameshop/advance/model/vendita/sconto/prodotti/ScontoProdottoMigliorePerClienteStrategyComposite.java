@@ -7,7 +7,7 @@
 package gameshop.advance.model.vendita.sconto.prodotti;
 
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
-import gameshop.advance.interfaces.IVendita;
+import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.vendita.RigaDiVendita;
 import gameshop.advance.utility.Money;
 import java.util.List;
@@ -25,7 +25,7 @@ public class ScontoProdottoMigliorePerClienteStrategyComposite extends ScontoPro
      * @return
      */
     @Override
-    public Money getSubtotal(IVendita v, RigaDiVendita rdv)
+    public Money getSubtotal(ITransazione v, RigaDiVendita rdv)
     {
         List<IScontoProdottoStrategy> components = super.getComponents();
         Money minimaSpesa = super.getRealSubtotal(rdv);

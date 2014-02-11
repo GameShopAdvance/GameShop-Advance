@@ -7,7 +7,7 @@
 package gameshop.advance.model.vendita.sconto.prodotti;
 
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
-import gameshop.advance.interfaces.IVendita;
+import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.vendita.CartaCliente;
 import gameshop.advance.model.vendita.RigaDiVendita;
 import gameshop.advance.model.vendita.TipologiaCliente;
@@ -45,7 +45,7 @@ public class ScontoPrendiPaghiClienteProdottoStrategy implements IScontoProdotto
     }
     
     @Override
-    public Money getSubtotal(IVendita v, RigaDiVendita rdv) {
+    public Money getSubtotal(ITransazione v, RigaDiVendita rdv) {
         CartaCliente c = v.getCliente();
         int quantity = rdv.getQuantity();
         if(c!=null && this.checkApplicable(c.getTipo()))

@@ -15,7 +15,7 @@ import gameshop.advance.utility.Money;
  */
 public interface IScontoProdottoStrategy {
     
-    public Money getSubtotal(IVendita v, RigaDiVendita rdv );
+    public Money getSubtotal(ITransazione v, RigaDiVendita rdv );
     
     public boolean isValid();
     

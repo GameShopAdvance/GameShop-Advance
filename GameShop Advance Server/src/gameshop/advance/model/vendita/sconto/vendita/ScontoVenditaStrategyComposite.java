@@ -7,7 +7,7 @@
 package gameshop.advance.model.vendita.sconto.vendita;
 
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
-import gameshop.advance.interfaces.IVendita;
+import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.vendita.RigaDiVendita;
 import gameshop.advance.utility.Money;
 import java.util.LinkedList;
@@ -22,7 +22,7 @@ public abstract class ScontoVenditaStrategyComposite implements IScontoVenditaSt
     private LinkedList<IScontoVenditaStrategy> components = new LinkedList<>();
     
     @Override
-    public abstract Money getTotal(IVendita vendita);
+    public abstract Money getTotal(ITransazione vendita);
     
     public void add(IScontoVenditaStrategy sconto){
         this.components.add(sconto);
@@ -33,7 +33,7 @@ public abstract class ScontoVenditaStrategyComposite implements IScontoVenditaSt
         return this.components;
     }
     
-    protected Money getRealTotal(IVendita vendita)
+    protected Money getRealTotal(ITransazione vendita)
     {
         List<RigaDiVendita> righe = vendita.getRigheDiVendita();
         Money totale = new Money();

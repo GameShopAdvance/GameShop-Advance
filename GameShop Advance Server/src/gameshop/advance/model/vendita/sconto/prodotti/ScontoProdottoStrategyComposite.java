@@ -7,7 +7,7 @@
 package gameshop.advance.model.vendita.sconto.prodotti;
 
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
-import gameshop.advance.interfaces.IVendita;
+import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.vendita.RigaDiVendita;
 import gameshop.advance.utility.Money;
 import java.util.LinkedList;
@@ -43,7 +43,7 @@ public abstract class ScontoProdottoStrategyComposite implements IScontoProdotto
     }
     
     @Override
-    public abstract Money getSubtotal(IVendita v, RigaDiVendita rdv);
+    public abstract Money getSubtotal(ITransazione v, RigaDiVendita rdv);
     
     public Money getRealSubtotal(RigaDiVendita rdv)
     {
