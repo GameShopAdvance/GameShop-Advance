@@ -6,10 +6,32 @@
 
 package gameshop.advance.model.transazione.decorator;
 
+import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.model.Pagamento;
+import gameshop.advance.model.transazione.sconto.ScontoFactorySingleton;
+import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
+import gameshop.advance.utility.Money;
+import java.rmi.RemoteException;
+
 /**
  *
- * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
+ * @author matteog
  */
-public class PrenotazioneTransazioneDecorator {
+public class PrenotazioneTransazioneDecorator extends TransazioneDecorator {
     
+    private Pagamento acconto;
+
+    
+     public PrenotazioneTransazioneDecorator(TransazioneDecorator t) {
+        super(t);
+        ScontoVenditaStrategyComposite sconto = ScontoFactorySingleton.getInstance().getStrategiaScontoVendita();
+        super.setSconto(sconto);
+    }
+    
+    public void gestisciAcconto(Money ammontare) throws InvalidMoneyException, RemoteException {
+       if(ammontare.greater(this.getTotal())) {
+            throw new InvalidMoneyException(ammontare);
+        }
+        this.acconto = new Pagamento(ammontare);
+    }
 }
