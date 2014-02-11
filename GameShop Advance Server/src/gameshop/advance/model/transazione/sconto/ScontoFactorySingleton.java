@@ -1,9 +1,9 @@
 package gameshop.advance.model.transazione.sconto;
 
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
-import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.model.transazione.sconto.prodotti.ScontoProdottoMigliorePerClienteStrategyComposite;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaMigliorePerClienteStrategyComposite;
+import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 
 /**
  *
@@ -22,7 +22,7 @@ public class ScontoFactorySingleton {
         return instance;
     }
     
-    public IScontoVenditaStrategy getStrategiaScontoVendita()
+    public ScontoVenditaStrategyComposite getStrategiaScontoVendita()
     {
         return new ScontoVenditaMigliorePerClienteStrategyComposite();
     }
