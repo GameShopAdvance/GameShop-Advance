@@ -2,7 +2,7 @@ package gameshop.advance.model.vendita.sconto.vendita;
 
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
-import gameshop.advance.model.vendita.RigaDiVendita;
+import gameshop.advance.model.transazione.RigaDiVendita;
 import gameshop.advance.utility.Money;
 import java.util.LinkedList;
 import java.util.List;

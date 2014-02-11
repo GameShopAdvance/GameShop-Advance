@@ -1,4 +1,4 @@
-package gameshop.advance.model.vendita;
+package gameshop.advance.model.transazione;
 
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.ITransazione;

@@ -8,7 +8,7 @@ package gameshop.advance.model.vendita.sconto.prodotti;
 
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.ITransazione;
-import gameshop.advance.model.vendita.RigaDiVendita;
+import gameshop.advance.model.transazione.RigaDiVendita;
 import gameshop.advance.utility.Money;
 import java.util.List;
 

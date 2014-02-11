@@ -5,8 +5,9 @@ import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.remote.ICassaRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
-import gameshop.advance.model.vendita.CartaCliente;
-import gameshop.advance.model.vendita.Vendita;
+import gameshop.advance.model.transazione.CartaCliente;
+import gameshop.advance.model.transazione.Vendita;
+import gameshop.advance.model.transazione.decorator.TransazioneDecorator;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
@@ -23,7 +24,7 @@ import java.rmi.server.UnicastRemoteObject;
 public class Cassa extends UnicastRemoteObject implements ICassaRemote {
 
     int numeroCassa;
-    Vendita venditaCorrente;
+    TransazioneDecorator venditaCorrente;
 
     /**
      * Il Costruttore della Cassa recupera il catalogo dei prodotti,
