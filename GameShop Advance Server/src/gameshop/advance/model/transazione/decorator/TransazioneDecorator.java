@@ -23,7 +23,10 @@ import java.util.List;
  */
 public class TransazioneDecorator implements ITransazione {
     
-    private ITransazione wrapped;
+    /**
+     *
+     */
+    protected ITransazione wrapped;
     
     private LinkedList<IRemoteObserver> listeners;
     
@@ -43,63 +46,71 @@ public class TransazioneDecorator implements ITransazione {
         if(obs==null)
             this.listeners=null;
         else
-            this.listeners.remove()
+            this.listeners.remove(obs);
     }
     
     
+    protected void notificaListeners() throws RemoteException
+    {
+        for(IRemoteObserver o:this.listeners)
+        {
+            o.notifica(new TransazioneDecoratorRemoteProxy(this));
+        }
+    }
+    
     @Override
     public void completaVendita() throws RemoteException {
-        this.wrapped
+        this.wrapped.completaVendita();
     }
 
     @Override
     public void inserisciProdotto(DescrizioneProdotto desc, int quantity) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.wrapped.inserisciProdotto(desc, quantity);
     }
 
     @Override
     public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.wrapped.gestisciPagamento(ammontare);;
     }
 
     @Override
     public CartaCliente getCliente() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.wrapped.getCliente();
     }
 
     @Override
     public Integer getIdVendita() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.wrapped.getIdVendita();
     }
 
     @Override
     public Money getResto() throws InvalidMoneyException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.wrapped.getResto();
     }
 
     @Override
     public List getRigheDiVendita() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.wrapped.getRigheDiVendita();
     }
 
     @Override
     public Money getTotal() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.wrapped.getTotal();
     }
 
     @Override
     public void setCliente(CartaCliente c) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.wrapped.setCliente(c);
     }
 
     @Override
     public void setIdVendita(Integer idVendita) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.wrapped.setIdVendita(idVendita);
     }
 
     @Override
     public void setSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.wrapped.setSconti(scontiAttuali);
     }
     
 }
