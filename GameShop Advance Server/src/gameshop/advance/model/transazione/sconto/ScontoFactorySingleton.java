@@ -1,9 +1,9 @@
-package gameshop.advance.model.vendita.sconto;
+package gameshop.advance.model.transazione.sconto;
 
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
-import gameshop.advance.model.vendita.sconto.prodotti.ScontoProdottoMigliorePerClienteStrategyComposite;
-import gameshop.advance.model.vendita.sconto.vendita.ScontoVenditaMigliorePerClienteStrategyComposite;
+import gameshop.advance.model.transazione.sconto.prodotti.ScontoProdottoMigliorePerClienteStrategyComposite;
+import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaMigliorePerClienteStrategyComposite;
 
 /**
  *

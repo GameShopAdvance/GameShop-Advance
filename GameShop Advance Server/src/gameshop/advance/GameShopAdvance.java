@@ -13,7 +13,7 @@ import gameshop.advance.model.CatalogoProdottiSingleton;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.model.transazione.TipologiaCliente;
-import gameshop.advance.model.vendita.sconto.prodotti.ScontoPrendiPaghiClienteProdottoStrategy;
+import gameshop.advance.model.transazione.sconto.prodotti.ScontoPrendiPaghiClienteProdottoStrategy;
 import gameshop.advance.remote.RemoteFactorySingleton;
 import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
 import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;

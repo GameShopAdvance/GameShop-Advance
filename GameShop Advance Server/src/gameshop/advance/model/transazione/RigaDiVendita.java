@@ -3,7 +3,7 @@ package gameshop.advance.model.transazione;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.DescrizioneProdotto;
-import gameshop.advance.model.vendita.sconto.ScontoFactorySingleton;
+import gameshop.advance.model.transazione.sconto.ScontoFactorySingleton;
 import gameshop.advance.utility.Money;
 import java.util.List;
 

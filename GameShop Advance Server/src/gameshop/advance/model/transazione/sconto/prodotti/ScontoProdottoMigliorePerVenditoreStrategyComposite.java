@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.model.vendita.sconto.prodotti;
+package gameshop.advance.model.transazione.sconto.prodotti;
 
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.ITransazione;
@@ -16,27 +16,21 @@ import java.util.List;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class ScontoProdottoMigliorePerClienteStrategyComposite extends ScontoProdottoStrategyComposite {
-
-    /**
-     *
-     * @param v
-     * @param rdv
-     * @return
-     */
+public class ScontoProdottoMigliorePerVenditoreStrategyComposite extends ScontoProdottoStrategyComposite {
+    
+    
     @Override
-    public Money getSubtotal(ITransazione v, RigaDiVendita rdv)
+    public Money getSubtotal(ITransazione v, RigaDiVendita rdv) 
     {
         List<IScontoProdottoStrategy> components = super.getComponents();
-        Money minimaSpesa = super.getRealSubtotal(rdv);
+        Money massimaSpesa = super.getRealSubtotal(rdv);
         for(IScontoProdottoStrategy sconto: components)
         {
             Money subtotal = sconto.getSubtotal(v, rdv);
-            if(minimaSpesa.greater(subtotal))
-                minimaSpesa = subtotal;
+            if(subtotal.greater(massimaSpesa))
+                massimaSpesa = subtotal;
         }
-        return minimaSpesa;
+        return massimaSpesa;
     }
 
-    
 }

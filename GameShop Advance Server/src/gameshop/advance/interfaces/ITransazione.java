@@ -9,7 +9,7 @@ package gameshop.advance.interfaces;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.CartaCliente;
-import gameshop.advance.model.vendita.sconto.vendita.ScontoVenditaStrategyComposite;
+import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
