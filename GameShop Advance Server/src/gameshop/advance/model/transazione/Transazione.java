@@ -22,7 +22,7 @@ import java.util.List;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public abstract class Transazione implements ITransazione {
+public class Transazione implements ITransazione {
     protected Integer idVendita;
     protected LinkedList<RigaDiVendita> righeDiVendita = new LinkedList<>();
 //    protected LinkedList<IRemoteObserver> observers = new LinkedList<>();
@@ -170,10 +170,15 @@ public abstract class Transazione implements ITransazione {
     }
 
     @Override
-    public void setSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali) {
+    public void addSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali) {
         for (IScontoVenditaStrategy sconto : scontiAttuali) {
             this.strategiaDiSconto.add(sconto);
         }
+    }
+
+    @Override
+    public void setSconto(ScontoVenditaStrategyComposite sconto) {
+        this.strategiaDiSconto = sconto;
     }
     
 }

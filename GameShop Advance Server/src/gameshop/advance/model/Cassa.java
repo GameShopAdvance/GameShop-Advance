@@ -6,8 +6,9 @@ import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.remote.ICassaRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.transazione.CartaCliente;
-import gameshop.advance.model.transazione.Vendita;
+import gameshop.advance.model.transazione.Transazione;
 import gameshop.advance.model.transazione.decorator.TransazioneDecorator;
+import gameshop.advance.model.transazione.decorator.VenditaTransazioneDecorator;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
@@ -48,8 +49,8 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
      */
     @Override
     public void avviaNuovaVendita() throws RemoteException {
-        this.venditaCorrente = new Vendita();
-        this.venditaCorrente.setSconti(NegozioSingleton.getInstance().getScontiAttuali());
+        this.venditaCorrente = new VenditaTransazioneDecorator(new Transazione());
+        this.venditaCorrente.addSconti(NegozioSingleton.getInstance().getScontiAttuali());
     }
 
     /**

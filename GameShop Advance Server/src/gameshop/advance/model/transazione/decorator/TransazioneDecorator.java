@@ -12,6 +12,7 @@ import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.CartaCliente;
+import gameshop.advance.model.vendita.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
@@ -41,12 +42,16 @@ public class TransazioneDecorator implements ITransazione {
         this.listeners.add(obs);
     }
     
-    public void removeListener(IRemoteObserver obs)
+    public void rimuoviListener(IRemoteObserver obs)
     {
         if(obs==null)
             this.listeners=null;
         else
             this.listeners.remove(obs);
+    }
+    
+    public void aggiungiListener(IRemoteObserver obs) {
+        this.listeners.add(obs);
     }
     
     
@@ -108,9 +113,15 @@ public class TransazioneDecorator implements ITransazione {
         this.wrapped.setIdVendita(idVendita);
     }
 
-    @Override
-    public void setSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali) {
-        this.wrapped.setSconti(scontiAttuali);
+    public void setSconto(ScontoVenditaStrategyComposite sconto)
+    {
+        this.wrapped.setSconto(sconto);
     }
+    
+    @Override
+    public void addSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali) {
+        this.wrapped.addSconti(scontiAttuali);
+    }
+    
     
 }
