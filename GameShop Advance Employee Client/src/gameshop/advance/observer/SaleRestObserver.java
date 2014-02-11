@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.model.vendita;
+package gameshop.advance.observer;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.IRemoteClient;
@@ -22,7 +22,7 @@ public class SaleRestObserver extends UnicastRemoteObject implements IRemoteObse
     }
     
     @Override
-    public void notifica(IVenditaRemote o) throws RemoteException {
+    public void notifica(Object o) throws RemoteException {
         IVenditaRemote sale = (IVenditaRemote) o;
         try {        
             this.client.aggiornaResto(sale.getResto());

@@ -24,7 +24,6 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
 
     int numeroCassa;
     Vendita venditaCorrente;
-    CatalogoProdottiSingleton catalogo;
 
     /**
      * Il Costruttore della Cassa recupera il catalogo dei prodotti,
@@ -37,7 +36,6 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
      * @throws gameshop.advance.exceptions.InvalidMoneyException
      */
     public Cassa(int idCassa) throws RemoteException, InvalidMoneyException {
-        this.catalogo = CatalogoProdottiSingleton.getInstance();
         this.venditaCorrente = null;
         this.numeroCassa = idCassa;
         System.err.println("Nuova cassa: n°" + this.numeroCassa);
@@ -90,7 +88,7 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
     {
         if ( quantity < 1 )
             throw new QuantityException(quantity);
-        DescrizioneProdotto desc = this.catalogo.getDescrizioneProdotto(codiceProdotto);
+        DescrizioneProdotto desc = CatalogoProdottiSingleton.getInstance().getDescrizioneProdotto(codiceProdotto);
         if(desc == null)
             throw new ProdottoNotFoundException(codiceProdotto);
         this.venditaCorrente.creaRigaDiVendita(desc, quantity);

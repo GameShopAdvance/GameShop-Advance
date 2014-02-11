@@ -1,7 +1,7 @@
 package gameshop.advance.model.vendita;
 
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
-import gameshop.advance.interfaces.IVendita;
+import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.vendita.sconto.ScontoFactorySingleton;
 import gameshop.advance.utility.Money;
@@ -52,7 +52,7 @@ public class RigaDiVendita
         this.quantity = quantity;
     }
 
-    public Money getSubTotal(IVendita v)
+    public Money getSubTotal(ITransazione v)
     {
         return this.strategiaDiSconto.getSubtotal(v, this);
     }

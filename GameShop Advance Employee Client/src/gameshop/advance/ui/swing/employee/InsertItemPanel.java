@@ -8,6 +8,7 @@ import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
+import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
@@ -64,7 +65,15 @@ public class InsertItemPanel extends JScrollPane {
     
     private void addProductButtonActionPerformed(ActionEvent e) {
         try {
-            Integer quantity = Integer.parseInt(this.quantityTextField.getText());
+            Integer quantity = 1;
+            try{
+                 quantity = Integer.parseInt(this.quantityTextField.getText());
+            }
+            catch(NumberFormatException ex)
+            {
+                if(!this.quantityTextField.getText().equals(""))
+                    UIWindowSingleton.getInstance().displayError("Il formato di dato inserito per la quantità non è valido");
+            }
             SaleControllerSingleton.getInstance().inserisciProdotto(this.productIdTextField.getText(), quantity);
             this.clearFields();
             this.total.setText(SaleControllerSingleton.getInstance().getTotal().toString());
@@ -79,9 +88,7 @@ public class InsertItemPanel extends JScrollPane {
                     + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
         } catch (ProdottoNotFoundException ex) {
             UIWindowSingleton.getInstance().displayError("Il codice prodotto: " +ex.getCodice()+" inserito non è valido.");
-        } catch (NumberFormatException ex) {
-            UIWindowSingleton.getInstance().displayError("Il formato di dato inserito per la quantità non è valido");
-        } catch (QuantityException ex){
+        }  catch (QuantityException ex){
             UIWindowSingleton.getInstance().displayError("La quantità inserita: " +ex.getQuantity()+ "non è valida.");
         }
     }

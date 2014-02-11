@@ -1,9 +1,11 @@
 package gameshop.advance.model;
 
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
+import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import gameshop.advance.utility.Prezzo;
+import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
@@ -13,13 +15,14 @@ import java.util.List;
  * prodotto: id, prezzo e descrizione testuale.
  * @author Salx
  */
-public class DescrizioneProdotto
+public class DescrizioneProdotto implements IDescrizioneProdottoRemote
 {
 
     private IDProdotto codiceProdotto;
     private LinkedList<Prezzo> prezzi = new LinkedList<>();
     private String descrizione;
     private LinkedList<IScontoProdottoStrategy> sconti;
+    private int quantitaDisponibile = 0;
 
     /**
      * Il Costruttore imposta tutte le variabili di DescrizioneProdotto utilizzando
@@ -28,11 +31,12 @@ public class DescrizioneProdotto
      * @param prezzo
      * @param descrizione
      */
-    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione ){
+    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione, int quantity ) throws RemoteException{
         this.descrizione = descrizione;
         this.prezzi.add(prezzo);
         this.codiceProdotto = codiceProdotto;
         this.sconti = new LinkedList<>();
+        this.quantitaDisponibile = quantity;
     }
 
     /**
@@ -89,6 +93,18 @@ public class DescrizioneProdotto
          }
          return scontiValidi;
      }
+     
+    public synchronized void setQuantitaDisponibile(int quantity){
+        this.quantitaDisponibile = quantity;
+    }
+    
+    public synchronized int getQuantitaDisponibile(){
+        return this.quantitaDisponibile;
+    }
+    
+    public synchronized void addQuantitaDisponibile(int quantity){
+        this.quantitaDisponibile = this.quantitaDisponibile + quantity;
+    }
 
     private Prezzo getPrezzoAttuale() {
         

@@ -7,10 +7,13 @@ package gameshop.advance.ui.swing.employee;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
+import gameshop.advance.controller.InventoryControllerSingleton;
+import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import javax.swing.JButton;
 import javax.swing.JPanel;
@@ -44,9 +47,22 @@ public class EmployeeMenuPanel extends JPanel {
         
     }//GEN-LAST:event_startSaleActionPerformed
 
+    private void faiInventario(ActionEvent e) {
+        try {
+            InventoryControllerSingleton.getInstance().avviaInventario();
+        } catch (ConfigurationException ex) {
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
+                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+        } catch (RemoteException | NotBoundException ex) {
+            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
+                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+        }
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         startSale = new JButton();
+        button1 = new JButton();
 
         //======== this ========
         setName("this");
@@ -61,15 +77,27 @@ public class EmployeeMenuPanel extends JPanel {
             }
         });
 
+        //---- button1 ----
+        button1.setText("Fai Inventario");
+        button1.setName("button1");
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                faiInventario(e);
+            }
+        });
+
         PanelBuilder builder = new PanelBuilder(new FormLayout(
             "[150px,min]:grow, $lcgap, [150px,default], $lcgap, 150px:grow",
-            "[70px,min]:grow, $lgap, 45px, $lgap, [160px,min]:grow"), this);
+            "50px:grow, 2*($lgap, 45px), $lgap, 50px:grow"), this);
 
-        builder.add(startSale, CC.xy(3, 3, CC.DEFAULT, CC.FILL));
+        builder.add(startSale, CC.xy(3, 3, CC.FILL, CC.FILL));
+        builder.add(button1,   CC.xy(3, 5, CC.FILL, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JButton startSale;
+    private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

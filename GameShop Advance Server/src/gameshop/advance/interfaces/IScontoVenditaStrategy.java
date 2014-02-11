@@ -14,7 +14,7 @@ import gameshop.advance.utility.Money;
  */
 public interface IScontoVenditaStrategy {
     
-    Money getTotal(IVendita vendita);
+    Money getTotal(ITransazione vendita);
 
     public boolean isActual();
 
