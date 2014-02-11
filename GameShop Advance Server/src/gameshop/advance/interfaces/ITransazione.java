@@ -37,7 +37,7 @@ public interface ITransazione extends Remote {
      * @param quantity
      * @throws java.rmi.RemoteException
      */
-    void creaRigaDiVendita(DescrizioneProdotto desc, int quantity) throws RemoteException;
+    void inserisciProdotto(DescrizioneProdotto desc, int quantity) throws RemoteException;
 
     /**
      * Crea un nuovo oggetto pagamento utilizzando l'ammontare della vendita corrente.Aggiunge

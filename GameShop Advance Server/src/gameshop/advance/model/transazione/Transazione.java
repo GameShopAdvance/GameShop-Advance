@@ -55,7 +55,7 @@ public abstract class Transazione implements ITransazione {
      * @throws java.rmi.RemoteException
      */
     @Override
-    public void creaRigaDiVendita(DescrizioneProdotto desc, int quantity) throws RemoteException {
+    public void inserisciProdotto(DescrizioneProdotto desc, int quantity) throws RemoteException {
         RigaDiVendita rdv = new RigaDiVendita(desc, quantity);
         this.righeDiVendita.add(rdv);
 //        this.notificaListeners();
@@ -162,6 +162,11 @@ public abstract class Transazione implements ITransazione {
     public void setCliente(CartaCliente c) throws RemoteException {
         this.cliente = c;
 //        this.notificaListeners();
+    }
+    
+    public void setStrategiaSconto(ScontoVenditaStrategyComposite sconto)
+    {
+        this.strategiaDiSconto = sconto;
     }
 
     @Override

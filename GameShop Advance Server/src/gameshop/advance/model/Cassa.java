@@ -92,7 +92,7 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
         DescrizioneProdotto desc = CatalogoProdottiSingleton.getInstance().getDescrizioneProdotto(codiceProdotto);
         if(desc == null)
             throw new ProdottoNotFoundException(codiceProdotto);
-        this.venditaCorrente.creaRigaDiVendita(desc, quantity);
+        this.venditaCorrente.inserisciProdotto(desc, quantity);
 
     }
 
