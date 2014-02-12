@@ -9,6 +9,7 @@ package gameshop.advance.interfaces.remote;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
+import java.util.Iterator;
 
 /**
  *
@@ -17,6 +18,8 @@ import java.rmi.RemoteException;
 public interface IPrenotaProdottoRemote {
 
     //OPERAZIONI DI SISTEMA LATO CLIENTE
+    
+    Iterator<IDescrizioneProdottoRemote> getDescriptions() throws RemoteException;
     
     void avviaPrenotazione() throws RemoteException;
 

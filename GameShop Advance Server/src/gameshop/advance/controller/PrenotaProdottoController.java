@@ -6,11 +6,13 @@
 
 package gameshop.advance.controller;
 
+import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Iterator;
 
 /**
  *
@@ -21,6 +23,11 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     //OPERAZIONI DI SISTEMA LATO CLIENTE
     
     public PrenotaProdottoController() throws RemoteException
+    {
+        
+    }
+    
+    public Iterator<IDescrizioneProdottoRemote> getDescriptions() throws RemoteException
     {
         
     }

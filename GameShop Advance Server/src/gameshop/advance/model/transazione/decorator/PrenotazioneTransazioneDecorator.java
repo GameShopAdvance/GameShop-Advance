@@ -47,6 +47,7 @@ public class PrenotazioneTransazioneDecorator extends TransazioneDecorator {
         }
     }
     
+    @Override
     public Money getResto() throws InvalidMoneyException, RemoteException {
         return this.wrapped.getResto();
     }
