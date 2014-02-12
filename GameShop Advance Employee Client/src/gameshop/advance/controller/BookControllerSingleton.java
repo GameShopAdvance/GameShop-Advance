@@ -10,10 +10,15 @@ import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.interfaces.remote.ICassaRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
+import gameshop.advance.interfaces.remote.IRemoteClient;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
+import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.observer.SaleObserver;
+import gameshop.advance.observer.SaleRestObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.BookPanel;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
+import gameshop.advance.utility.Money;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -25,11 +30,13 @@ import javax.swing.JComponent;
  *
  * @author Salx
  */
-public class BookControllerSingleton  extends UnicastRemoteObject {
+public class BookControllerSingleton  extends UnicastRemoteObject implements IRemoteClient{
     
     private static BookControllerSingleton instance;
     private IPrenotaProdottoRemote controller;
     private ICassaRemote cassa;
+    private IRemoteObserver saleTotalObserver;
+    private IRemoteObserver saleRestObserver;
     
     private BookControllerSingleton() throws RemoteException{
         
@@ -42,6 +49,8 @@ public class BookControllerSingleton  extends UnicastRemoteObject {
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
         this.controller = factory.getPrenotaProdottoController();
         this.cassa = factory.creaCassa(controllerConfig.getIdCassa());
+        this.saleTotalObserver = new SaleObserver(instance);
+        this.saleRestObserver = new SaleRestObserver(instance);
         
     }
     
@@ -68,11 +77,6 @@ public class BookControllerSingleton  extends UnicastRemoteObject {
         this.controller.recuperaPrenotazione(codicePrenotazione);
     }
     
-//    public void ricercaPrenotazione() throws RemoteException {
-//        
-//        this.controller.ricercaPrenotazione();
-//    }
-    
     public void terminaPrenotazione() throws RemoteException {
         
         this.controller.terminaPrenotazione();
@@ -86,5 +90,15 @@ public class BookControllerSingleton  extends UnicastRemoteObject {
     public void clearPrenotazione() {
         UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
         UIWindowSingleton.getInstance().refreshContent();
+    }
+
+    @Override
+    public void aggiornaTotale(Money m) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void aggiornaResto(Money m) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
