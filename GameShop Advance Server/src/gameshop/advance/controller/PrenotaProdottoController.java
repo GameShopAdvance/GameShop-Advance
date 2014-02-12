@@ -6,45 +6,59 @@
 
 package gameshop.advance.controller;
 
+import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class PrenotaProdottoController {
+public class PrenotaProdottoController extends UnicastRemoteObject implements IPrenotaProdottoRemote {
     
     //OPERAZIONI DI SISTEMA LATO CLIENTE
     
-    public void avviaPrenotazione()
+    public PrenotaProdottoController() throws RemoteException
     {
         
     }
     
-    public void prenotaProdotto(IDProdotto codiceProdotto, int quantity)
+    @Override
+    public void avviaPrenotazione() throws RemoteException
     {
         
     }
     
-    public void terminaPrenotazione()
+    @Override
+    public void prenotaProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException
+    {
+        
+    }
+    
+    @Override
+    public void terminaPrenotazione() throws RemoteException
     {
         
     }
     
     //OPERAZIONI DI SISTEMA LATO COMMESSO
     
-    public void ricercaPrenotazione()
+    @Override
+    public void ricercaPrenotazione() throws RemoteException
     {
         
     }
     
-    public void recuperaPrenotazione(Integer id)
+    @Override
+    public void recuperaPrenotazione(Integer id) throws RemoteException
     {
         
     }
     
-    public void gestisciPagamento(Money amount)
+    @Override
+    public void gestisciPagamento(Money amount) throws RemoteException
     {
         
     }
