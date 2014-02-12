@@ -6,31 +6,33 @@
 
 package gameshop.advance.interfaces.remote;
 
+import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.utility.IDProdotto;
+import gameshop.advance.utility.IteratorWrapper;
 import gameshop.advance.utility.Money;
+import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
  *
- * @author Salx
+ * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public interface IPrenotaProdottoRemote {
+public interface IPrenotaProdottoRemote extends Remote{
 
     //OPERAZIONI DI SISTEMA LATO CLIENTE
     
+    IteratorWrapper<IDescrizioneProdottoRemote> getDescriptions() throws RemoteException;
+    
     void avviaPrenotazione() throws RemoteException;
 
-    void gestisciPagamento(Money amount) throws RemoteException;
+    void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException;
 
-    void prenotaProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException;
+    void prenotaProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException, ProdottoNotFoundException;
     
     //OPERAZIONI DI SISTEMA LATO COMMESSO
     
-    void gestisciPrenotazione() throws RemoteException;
-    
     void recuperaPrenotazione(Integer id) throws RemoteException;
-    
-    void ricercaPrenotazione() throws RemoteException;
 
     void terminaPrenotazione() throws RemoteException;
     

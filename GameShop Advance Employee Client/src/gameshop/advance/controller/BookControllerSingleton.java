@@ -18,19 +18,20 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import javax.swing.JComponent;
 
 /**
  *
  * @author Salx
  */
-public class BookControllerSingleton {
+public class BookControllerSingleton  extends UnicastRemoteObject {
     
     private static BookControllerSingleton instance;
     private IPrenotaProdottoRemote controller;
     private ICassaRemote cassa;
     
-    private BookControllerSingleton(){
+    private BookControllerSingleton() throws RemoteException{
         
     }
     
@@ -59,7 +60,6 @@ public class BookControllerSingleton {
     }
     
     public void gestisciPrenotazione() throws RemoteException{
-        controller.gestisciPrenotazione();
         aggiornaWindow(new BookPanel());
     }
     
@@ -68,10 +68,10 @@ public class BookControllerSingleton {
         this.controller.recuperaPrenotazione(codicePrenotazione);
     }
     
-    public void ricercaPrenotazione() throws RemoteException {
-        
-        this.controller.ricercaPrenotazione();
-    }
+//    public void ricercaPrenotazione() throws RemoteException {
+//        
+//        this.controller.ricercaPrenotazione();
+//    }
     
     public void terminaPrenotazione() throws RemoteException {
         
