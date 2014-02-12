@@ -52,7 +52,7 @@ public class SearchControllerSingleton extends UnicastRemoteObject {
     public void nuovaRicerca() throws RemoteException
     {   
        // this.pippo.avviaNuovaRicerca();
-        aggiornaWindow(new SearchPanel());
+        aggiornaWindow(new ReservationPanel());
     }
     
   
