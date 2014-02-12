@@ -8,17 +8,24 @@ package gameshop.advance.controller;
 
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
+import gameshop.advance.model.DescrizioneProdotto;
+import gameshop.advance.model.transazione.decorator.TransazioneDecorator;
+import gameshop.advance.remote.DescrizioneRemoteProxy;
+import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class PrenotaProdottoController extends UnicastRemoteObject implements IPrenotaProdottoRemote {
+    
+    private TransazioneDecorator prenotazione;
     
     //OPERAZIONI DI SISTEMA LATO CLIENTE
     
@@ -29,7 +36,13 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     
     public Iterator<IDescrizioneProdottoRemote> getDescriptions() throws RemoteException
     {
-        
+        Iterator<Object> iter = DbDescrizioneProdottoSingleton.getInstance().read();
+        LinkedList<IDescrizioneProdottoRemote> list = new LinkedList<>();
+        while(iter.hasNext())
+        {
+            list.add(new DescrizioneRemoteProxy((DescrizioneProdotto) iter.next()));
+        }
+        return list.iterator();
     }
     
     @Override

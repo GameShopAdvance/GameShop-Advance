@@ -24,8 +24,8 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class Cassa extends UnicastRemoteObject implements ICassaRemote {
 
-    int numeroCassa;
-    TransazioneDecorator venditaCorrente;
+    private int numeroCassa;
+    private TransazioneDecorator venditaCorrente;
 
     /**
      * Il Costruttore della Cassa recupera il catalogo dei prodotti,

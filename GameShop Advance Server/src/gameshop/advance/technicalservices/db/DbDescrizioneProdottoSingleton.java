@@ -12,6 +12,7 @@ import com.db4o.query.Query;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.utility.IDProdotto;
+import java.util.Iterator;
 
 /**
  *
@@ -45,6 +46,12 @@ public class DbDescrizioneProdottoSingleton {
             ObjectContainer client = DbManagerSingleton.getInstance().getClient();
             client.store(desc);
             client.commit();
+    }
+    
+    public Iterator<Object> read()
+    {
+        ObjectContainer client = DbManagerSingleton.getInstance().getClient();
+        return client.queryByExample(DescrizioneProdotto.class).iterator();
     }
     
     public DescrizioneProdotto read(IDProdotto code) {
