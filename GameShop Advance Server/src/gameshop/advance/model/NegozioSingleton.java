@@ -58,6 +58,11 @@ public class NegozioSingleton
         }
     }
     
+    public TransazioneDecorator riprendiTransazione(Integer id)
+    {
+        return DbTransazioneSingleton.getInstance().read(id);
+    }
+    
     public CartaCliente getCliente(int codiceTessera) {
         System.err.println("Negozio ---- looking for client");
             return DbCartaClienteSingleton.getInstance().read(codiceTessera);

@@ -6,6 +6,7 @@
 
 package gameshop.advance.interfaces.remote;
 
+import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
@@ -25,15 +26,13 @@ public interface IPrenotaProdottoRemote extends Remote{
     
     void avviaPrenotazione() throws RemoteException;
 
-    void gestisciPagamento(Money amount) throws RemoteException;
+    void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException;
 
     void prenotaProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException, ProdottoNotFoundException;
     
     //OPERAZIONI DI SISTEMA LATO COMMESSO
     
     void recuperaPrenotazione(Integer id) throws RemoteException;
-    
-    void ricercaPrenotazione() throws RemoteException;
 
     void terminaPrenotazione() throws RemoteException;
     
