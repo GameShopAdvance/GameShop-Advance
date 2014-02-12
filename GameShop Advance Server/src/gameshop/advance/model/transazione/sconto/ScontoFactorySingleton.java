@@ -34,4 +34,8 @@ public class ScontoFactorySingleton {
         //return strategy;
         return new ScontoProdottoMigliorePerClienteStrategyComposite();
     }
+
+    public ScontoVenditaStrategyComposite getStrategiaScontoPrenotazione() {
+        return new ScontoVenditaMigliorePerClienteStrategyComposite();
+    }
 }

@@ -54,6 +54,8 @@ public interface ITransazione extends ITransazioneRemote {
     void setCliente(CartaCliente c);
 
     void setId(Integer idVendita);
+    
+    Money getPagamento();
 
     void addSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali);
     

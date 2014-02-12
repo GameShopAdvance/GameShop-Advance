@@ -23,15 +23,14 @@ public class PrenotazioneTransazioneDecorator extends TransazioneDecorator {
     
      public PrenotazioneTransazioneDecorator(ITransazione t) {
         super(t);
-        ScontoVenditaStrategyComposite sconto = ScontoFactorySingleton.getInstance().getStrategiaScontoVendita();
+        ScontoVenditaStrategyComposite sconto = ScontoFactorySingleton.getInstance().getStrategiaScontoPrenotazione();
         super.setSconto(sconto);
     }
      
      @Override
     public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException
     {
-        if(ammontare.greater(new Money()))
-            this.wrapped.gestisciPagamento(ammontare);
+        
         
     }
     
@@ -49,4 +48,11 @@ public class PrenotazioneTransazioneDecorator extends TransazioneDecorator {
     public Money getResto() throws InvalidMoneyException, RemoteException {
         return this.wrapped.getResto();
     }
+
+     @Override
+    public Money getTotal()
+    {
+        return this.getTotal().subtract(this.getPagamento());
+    }
+    
 }

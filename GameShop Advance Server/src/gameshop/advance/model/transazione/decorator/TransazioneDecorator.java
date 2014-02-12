@@ -114,5 +114,10 @@ public abstract class TransazioneDecorator implements ITransazione {
         this.wrapped.addSconti(scontiAttuali);
     }
     
+    @Override
+    public Money getPagamento()
+    {
+        return this.wrapped.getPagamento();
+    }
     
 }

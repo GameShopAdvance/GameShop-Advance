@@ -25,7 +25,6 @@ import java.util.List;
 public class Transazione implements ITransazione {
     protected Integer idVendita;
     protected LinkedList<RigaDiVendita> righeDiVendita = new LinkedList<>();
-//    protected LinkedList<IRemoteObserver> observers = new LinkedList<>();
     protected CartaCliente cliente;
     protected Pagamento pagamento;
     protected Date date;
@@ -99,10 +98,14 @@ public class Transazione implements ITransazione {
         this.pagamento = new Pagamento(ammontare);
     }
 
+    @Override
+    public Money getPagamento()
+    {
+        return this.pagamento.getAmmontare();
+    }
     /**
      * Imposta lo stato della vendita come completata e invia una notifica agli
      * osservatori in ascolto.
-     * @throws RemoteException
      */
     @Override
     public void completaTransazione() {
