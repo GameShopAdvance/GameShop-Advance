@@ -4,45 +4,124 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "labelcompgap, 13dlu, 69dlu, 177dlu, labelcompgap"
-			"$rowSpecs": "75dlu, linegap, 24dlu, linegap, 14dlu, 71dlu, linegap"
+			"$columnSpecs": "5dlu, 65dlu, max(default;20dlu):grow, 65dlu, labelcompgap, 61dlu, labelcompgap, 56dlu, max(default;20dlu):grow, 65dlu, 5dlu"
+			"$rowSpecs": "5dlu, fill:max(default;20dlu), linegap, (20dlu<default<40dlu), max(default;20dlu), fill:(15dlu<default<40dlu), 60dlu, fill:default:grow"
 		} ) {
-			name: "this"
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "bookCodeField"
+			name: "panel3"
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "clearBook"
+				"text": "Annulla"
+				"background": new java.awt.Color( 255, 51, 0, 255 )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				"foreground": new java.awt.Color( 255, 255, 255, 255 )
+				"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"nextFocusableComponent": new FormReference( "button2" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
 				"gridY": 2
-				"gridHeight": 2
+				"gridX": 2
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
-				"text": "Codice"
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 5, false )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
-				"gridY": 2
-				"gridHeight": 2
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "retrieveBook"
-				"text": "Recupera Prenotazione"
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "retrieveBookActionPerformed", true ) )
+				"text": "Totale"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 1, false )
+				"labelFor": new FormReference( "total" )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 4
-				"gridY": 6
-				"gridHeight": 2
+				"gridY": 2
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "total"
+				"editable": false
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 6
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridY": 2
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "Avanti"
+				"background": new java.awt.Color( 102, 204, 0, 255 )
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				"name": "nextButton"
+				"nextFocusableComponent": new FormReference( "bookCodeField" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 10
+				"gridY": 2
+			} )
+			add( new FormComponent( "javax.swing.JSeparator" ) {
+				name: "separator1"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 4
+				"gridY": 4
+				"gridWidth": 5
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+				"$columnSpecs": "65dlu, labelcompgap, 53dlu:grow, labelcompgap, 49dlu:grow"
+				"$rowSpecs": "max(default;20dlu), relgap, max(default;20dlu)"
+			} ) {
+				name: "panel2"
+				"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( "Prenotazione" ), sfield com.jgoodies.forms.factories.Borders DLU2_BORDER )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "Codice "
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 1, false )
+					"labelFor": new FormReference( "bookCodeField" )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "bookCodeField"
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 3
+					"gridWidth": 3
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				} )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 4
+				"gridY": 5
+				"gridWidth": 5
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+				"$columnSpecs": "max(default;67dlu), labelcompgap, 110dlu"
+				"$rowSpecs": "max(default;20dlu), linegap, default"
+			} ) {
+				name: "panel1"
+				"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( "Carta Cliente" ), sfield com.jgoodies.forms.factories.Borders DLU2_BORDER )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label4"
+					"text": "Codice"
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 1, false )
+					"labelFor": new FormReference( "clientCode" )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 1
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "clientCode"
+					"nextFocusableComponent": new FormReference( "insertClientCode" )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 3
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "insertClientCode"
+					"text": "Inserisci"
+					"foreground": sfield java.awt.Color black
+					"font": new com.jformdesigner.model.SwingDerivedFont( null, 65536, 0, false )
+					"nextFocusableComponent": new FormReference( "button2" )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "insertClientCodeActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 3
+					"gridY": 3
+				} )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 4
+				"gridY": 7
+				"gridWidth": 5
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 300 )
-		} )
-		add( new FormComponent( "javax.swing.JButton" ) {
-			name: "button1"
-			"text": "text"
-		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 200, 0 )
+			"size": new java.awt.Dimension( 663, 348 )
 		} )
 	}
 }
