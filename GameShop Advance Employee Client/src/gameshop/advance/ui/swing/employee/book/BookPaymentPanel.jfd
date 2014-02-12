@@ -34,6 +34,8 @@ new FormModel {
 					name: "payPartialButton"
 					"text": "Paga Acconto"
 					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 5, false )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payPartialButtonActionPerformed", true ) )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payPartialButtonActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 9
 					"gridHeight": 4
@@ -93,6 +95,7 @@ new FormModel {
 					name: "payTotalButton"
 					"text": "Paga Totale"
 					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 5, false )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payTotalButtonActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 9
 					"gridY": 4

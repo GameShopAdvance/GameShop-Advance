@@ -2,7 +2,7 @@
  * Created by JFormDesigner on Thu Jan 30 12:02:33 CET 2014
  */
 
-package gameshop.advance.ui.swing.employee;
+package gameshop.advance.ui.swing.employee.sale;
 
 import gameshop.advance.controller.SaleControllerSingleton;
 import com.jgoodies.forms.builder.PanelBuilder;
