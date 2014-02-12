@@ -6,6 +6,7 @@ package gameshop.advance.ui.swing.customer;
 
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
+import gameshop.advance.controller.PrenotaProdottoController;
 import gameshop.advance.exceptions.ConfigurationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -23,16 +24,16 @@ public class CustomerPanel extends JPanel {
         initComponents();
     }
 
-    private void avviaRicerca(ActionEvent e) {
-        try {
-            SearchControllerSingleton.getInstance().nuovaRicerca();
-        } catch (NullPointerException ex) {
-            Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (RemoteException ex) {
-            Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ConfigurationException ex) {
-            Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+    private void avviaPrenotazione(ActionEvent e) {    
+            try {
+                PrenotaProdottoController.getInstance().avviaPrenotazione();
+            } catch (NullPointerException ex) {
+                Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (RemoteException ex) {
+                Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (ConfigurationException ex) {
+                Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
+            }
     }
 
     private void initComponents() {
@@ -45,11 +46,11 @@ public class CustomerPanel extends JPanel {
             "[70px,min]:grow, $lgap, 45px, $lgap, [160px,min]:grow"));
 
         //---- button1 ----
-        button1.setText("Avvia Ricerca");
+        button1.setText("Avvia Prenotazione");
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                avviaRicerca(e);
+                avviaPrenotazione(e);
             }
         });
         add(button1, CC.xy(3, 3, CC.FILL, CC.FILL));
