@@ -4,9 +4,9 @@
 
 package gameshop.advance.ui.swing.employee;
 
-import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
+import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.controller.InventoryControllerSingleton;
 import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
@@ -32,6 +32,7 @@ public class EmployeeMenuPanel extends JPanel {
      * stabilire una connessione con il server visualizzerà gli errori.
      */
     private void startSaleActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_startSaleActionPerformed
+       
         try{
             SaleControllerSingleton.getInstance().avviaNuovaVendita();
         } catch(NullPointerException e){
@@ -59,45 +60,68 @@ public class EmployeeMenuPanel extends JPanel {
         }
     }
 
+
+    private void manageBookActionPerformed(ActionEvent e) {
+        try {
+            BookControllerSingleton.getInstance().gestisciPrenotazione();
+        } catch (ConfigurationException ex) {
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
+                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+        } catch (RemoteException ex) {
+            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
+                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+        } catch(NullPointerException ex){
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
+                    + " si prega di controllare la configurazione del sistema.");
+        } 
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         startSale = new JButton();
+        manageBook = new JButton();
         button1 = new JButton();
 
         //======== this ========
-        setName("this");
+        setLayout(new FormLayout(
+            "[150px,min]:grow, $lcgap, [150px,default], $lcgap, 150px:grow",
+            "50px:grow, 2*($lgap, 45px), $lgap, 50px:grow"));
 
         //---- startSale ----
         startSale.setText("Avvia Vendita");
-        startSale.setName("startSale");
         startSale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startSaleActionPerformed(e);
             }
         });
+        add(startSale, CC.xywh(1, 3, 1, 3, CC.FILL, CC.FILL));
+
+        //---- manageBook ----
+        manageBook.setText("Gestisci Prenotazioni");
+        manageBook.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                manageBookActionPerformed(e);
+            }
+        });
+        add(manageBook, CC.xywh(3, 3, 1, 3));
 
         //---- button1 ----
         button1.setText("Fai Inventario");
-        button1.setName("button1");
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 faiInventario(e);
             }
         });
-
-        PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[150px,min]:grow, $lcgap, [150px,default], $lcgap, 150px:grow",
-            "50px:grow, 2*($lgap, 45px), $lgap, 50px:grow"), this);
-
-        builder.add(startSale, CC.xy(3, 3, CC.FILL, CC.FILL));
-        builder.add(button1,   CC.xy(3, 5, CC.FILL, CC.FILL));
+        add(button1, CC.xywh(5, 3, 1, 3, CC.FILL, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JButton startSale;
+    private JButton manageBook;
     private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

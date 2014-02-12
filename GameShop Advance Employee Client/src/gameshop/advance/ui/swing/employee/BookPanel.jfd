@@ -1,0 +1,48 @@
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_25" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+			"$columnSpecs": "labelcompgap, 13dlu, 69dlu, 177dlu, labelcompgap"
+			"$rowSpecs": "75dlu, linegap, 24dlu, linegap, 14dlu, 71dlu, linegap"
+		} ) {
+			name: "this"
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "bookCodeField"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 4
+				"gridY": 2
+				"gridHeight": 2
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Codice"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 5, false )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 2
+				"gridHeight": 2
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "retrieveBook"
+				"text": "Recupera Prenotazione"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 6, false )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "retrieveBookActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 4
+				"gridY": 6
+				"gridHeight": 2
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 400, 300 )
+		} )
+		add( new FormComponent( "javax.swing.JButton" ) {
+			name: "button1"
+			"text": "text"
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 200, 0 )
+		} )
+	}
+}
