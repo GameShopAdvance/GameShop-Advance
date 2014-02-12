@@ -6,6 +6,7 @@
 
 package gameshop.advance.controller;
 
+import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
@@ -79,21 +80,22 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     //OPERAZIONI DI SISTEMA LATO COMMESSO
     
     @Override
-    public void ricercaPrenotazione() throws RemoteException
-    {
-        
-    }
-    
-    @Override
     public void recuperaPrenotazione(Integer id) throws RemoteException
     {
-        
+        this.prenotazione = NegozioSingleton.getInstance().riprendiTransazione(id);
     }
     
+    /**
+     *
+     * @param amount
+     * @throws RemoteException
+     * @throws InvalidMoneyException
+     */
     @Override
-    public void gestisciPagamento(Money amount) throws RemoteException
+    public void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException
     {
-        
+        this.prenotazione.gestisciPagamento(amount);
+        //this.n
     }
     
 }
