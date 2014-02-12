@@ -6,71 +6,122 @@ package gameshop.advance.ui.swing.customer;
 
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
+import gameshop.advance.controller.PrenotaProdottoController;
+import gameshop.advance.controller.valueData.MostraProdotti;
+import gameshop.advance.exceptions.ConfigurationException;
+import java.rmi.RemoteException;
+import java.util.Collection;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTable;
-import javax.swing.JTextField;
+import javax.swing.table.AbstractTableModel;
 
 /**
  * @author Matteog
  */
 public class ReservationPanel extends JPanel {
+    
+    private final String[] columnNames = {"Id", "Descrizione", "Prenota"};
+    private Object[] prodotti;
+     
     public ReservationPanel() {
         initComponents();
+        this.refreshTable();
     }
-
+    
+    
+    
+     private void refreshTable()  {
+        try {
+            final String[] names = this.columnNames;
+            Collection<MostraProdotti> descriptionList = PrenotaProdottoController.getInstance().getDescriptionList();
+            prodotti = descriptionList.toArray();
+                    this.table1.setModel(new AbstractTableModel() {
+                            
+             
+                        
+                        @Override
+                        public String getColumnName(int column){
+                            return names[column];
+                        }
+                        
+                        @Override
+                        public int getRowCount() {
+                            return prodotti.length;
+                        }
+                        
+                        @Override
+                        public int getColumnCount() {
+                            return prodotti.length;
+                        }
+                        
+                        @Override
+                        public Object getValueAt(int rowIndex, int columnIndex) {
+                            try {
+                               MostraProdotti mp = (MostraProdotti) prodotti[rowIndex];
+                                switch(columnIndex)
+                                {
+                                    case 0: return mp.getId();
+                                    case 1: return mp.getDescrizione();
+                                    case 2: return mp.getAddedQuantity();
+                                }
+                                return null;
+                            } catch (RemoteException ex) {
+                                Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                            }
+                            return null;
+                        }
+                    });
+        } catch (NullPointerException ex) {
+            Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ConfigurationException ex) {
+            Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex) {
+            Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         button1 = new JButton();
-        button2 = new JButton();
-        panel1 = new JPanel();
         label1 = new JLabel();
-        textField1 = new JTextField();
+        button2 = new JButton();
         scrollPane1 = new JScrollPane();
         table1 = new JTable();
 
         //======== this ========
         setLayout(new FormLayout(
-            "45dlu, $lcgap, [120dlu,min], $lcgap, 45dlu",
-            "[20dlu,min], $lgap, 50dlu, $lgap, 80dlu, $lgap, [20dlu,default]:grow"));
+            "[45dlu,min], $lcgap, [120dlu,min]:grow, $lcgap, [45dlu,min]",
+            "[30dlu,min], $lgap, 80dlu:grow, $lgap, [20dlu,default]:grow"));
 
         //---- button1 ----
         button1.setText("Indietro");
         add(button1, CC.xy(1, 1));
 
+        //---- label1 ----
+        label1.setText("Prodotti");
+        add(label1, CC.xy(3, 1, CC.CENTER, CC.DEFAULT));
+
         //---- button2 ----
         button2.setText("Avanti");
         add(button2, CC.xy(5, 1));
-
-        //======== panel1 ========
-        {
-            panel1.setLayout(new FormLayout(
-                "50dlu, $lcgap, 80dlu",
-                "default"));
-
-            //---- label1 ----
-            label1.setText("Cerca:");
-            panel1.add(label1, CC.xy(1, 1));
-            panel1.add(textField1, CC.xy(3, 1));
-        }
-        add(panel1, CC.xy(3, 3));
 
         //======== scrollPane1 ========
         {
             scrollPane1.setViewportView(table1);
         }
-        add(scrollPane1, CC.xy(3, 5));
+        add(scrollPane1, CC.xy(3, 3));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JButton button1;
-    private JButton button2;
-    private JPanel panel1;
     private JLabel label1;
-    private JTextField textField1;
+    private JButton button2;
     private JScrollPane scrollPane1;
     private JTable table1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

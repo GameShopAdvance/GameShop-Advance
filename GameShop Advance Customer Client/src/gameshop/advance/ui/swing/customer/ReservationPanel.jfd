@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "45dlu, labelcompgap, max(min;120dlu), labelcompgap, 45dlu"
-			"$rowSpecs": "max(min;20dlu), linegap, 50dlu, linegap, 80dlu, linegap, max(default;20dlu):grow"
+			"$columnSpecs": "max(min;45dlu), labelcompgap, max(min;120dlu):grow, labelcompgap, max(min;45dlu)"
+			"$rowSpecs": "max(min;30dlu), linegap, 80dlu:grow, linegap, max(default;20dlu):grow"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -15,34 +15,20 @@ new FormModel {
 				"gridX": 1
 				"gridY": 1
 			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Prodotti"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 1
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
+			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"
 				"text": "Avanti"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 5
 				"gridY": 1
-			} )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "50dlu, labelcompgap, 80dlu"
-				"$rowSpecs": "default"
-			} ) {
-				name: "panel1"
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label1"
-					"text": "Cerca:"
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridX": 1
-					"gridY": 1
-				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textField1"
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridX": 3
-					"gridY": 1
-				} )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
-				"gridY": 3
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
@@ -51,7 +37,7 @@ new FormModel {
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
-				"gridY": 5
+				"gridY": 3
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
