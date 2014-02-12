@@ -25,7 +25,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ReservationPanel extends JPanel {
     
-    private final String[] columnNames = {"Id", "Descrizione", "Prezzo"};
+    private final String[] columnNames = {"Id", "Descrizione", "Prezzo", "Prenota"};
     private Object[] prodotti;
      
     public ReservationPanel() {
@@ -56,6 +56,16 @@ public class ReservationPanel extends JPanel {
                         public int getColumnCount() {
                             return names.length;
                         }
+                   
+                        @Override
+                        public boolean isCellEditable(int row, int col) {
+                            return (col == 3); 
+                        }
+                        
+                        @Override
+                        public Class getColumnClass(int column) {
+                                return (getValueAt(0, column).getClass());
+                        }
                         
                         @Override
                         public Object getValueAt(int rowIndex, int columnIndex) {
@@ -66,6 +76,7 @@ public class ReservationPanel extends JPanel {
                                     case 0: return mp.getCodiceProdotto();
                                     case 1: return mp.getDescrizione();
                                     case 2: return mp.getPrezzo();
+                                    case 3: return Boolean.false;
                                 }
                                 return null;
                             } catch (RemoteException ex) {
@@ -73,6 +84,8 @@ public class ReservationPanel extends JPanel {
                             }
                             return null;
                         }
+                        
+                        
                     });
         } catch (NullPointerException ex) {
             Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);

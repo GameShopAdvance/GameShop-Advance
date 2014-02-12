@@ -85,23 +85,6 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements Se
             result.add((IDescrizioneProdottoRemote) iter.next());
         }
         return result;
-    }
-    
-    
-    
-    
-//      public Set<IDescrizioneProdottoRemote> getObjSet(IteratorWrapper<IDescrizioneProdottoRemote> desc){
-//                Set<IDescrizioneProdottoRemote> result = new HashSet<IDescrizioneProdottoRemote>();
-//                    while (desc.hasNext()) {
-//                        IDescrizioneProdottoRemote dp = desc.next();
-//                    if (dp instanceof IDescrizioneProdottoRemote) {
-//                        result.add((IDescrizioneProdottoRemote) desc.next());
-//                    }
-//                }
-//                return result;
-//            }
-
-   
-    
+    }   
     
 }
