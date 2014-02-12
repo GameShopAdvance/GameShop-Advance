@@ -7,8 +7,8 @@ package gameshop.advance.ui.swing.customer;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.PrenotaProdottoController;
-import gameshop.advance.controller.valueData.MostraProdotti;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import java.rmi.RemoteException;
 import java.util.Collection;
 import java.util.logging.Level;
@@ -25,7 +25,7 @@ import javax.swing.table.AbstractTableModel;
  */
 public class ReservationPanel extends JPanel {
     
-    private final String[] columnNames = {"Id", "Descrizione", "Prenota"};
+    private final String[] columnNames = {"Id", "Descrizione", "Prezzo", "Prenota"};
     private Object[] prodotti;
      
     public ReservationPanel() {
@@ -38,12 +38,10 @@ public class ReservationPanel extends JPanel {
      private void refreshTable()  {
         try {
             final String[] names = this.columnNames;
-            Collection<MostraProdotti> descriptionList = PrenotaProdottoController.getInstance().getDescriptionList();
+            Collection<IDescrizioneProdottoRemote> descriptionList = PrenotaProdottoController.getInstance().getDescriptionList();
             prodotti = descriptionList.toArray();
                     this.table1.setModel(new AbstractTableModel() {
-                            
-             
-                        
+           
                         @Override
                         public String getColumnName(int column){
                             return names[column];
@@ -56,18 +54,29 @@ public class ReservationPanel extends JPanel {
                         
                         @Override
                         public int getColumnCount() {
-                            return prodotti.length;
+                            return names.length;
+                        }
+                   
+                        @Override
+                        public boolean isCellEditable(int row, int col) {
+                            return (col == 3); 
+                        }
+                        
+                        @Override
+                        public Class getColumnClass(int column) {
+                                return (getValueAt(0, column).getClass());
                         }
                         
                         @Override
                         public Object getValueAt(int rowIndex, int columnIndex) {
                             try {
-                               MostraProdotti mp = (MostraProdotti) prodotti[rowIndex];
+                               IDescrizioneProdottoRemote mp = (IDescrizioneProdottoRemote) prodotti[rowIndex];
                                 switch(columnIndex)
                                 {
-                                    case 0: return mp.getId();
+                                    case 0: return mp.getCodiceProdotto();
                                     case 1: return mp.getDescrizione();
-                                    case 2: return mp.getAddedQuantity();
+                                    case 2: return mp.getPrezzo();
+                                    case 3: return Boolean.false;
                                 }
                                 return null;
                             } catch (RemoteException ex) {
@@ -75,6 +84,8 @@ public class ReservationPanel extends JPanel {
                             }
                             return null;
                         }
+                        
+                        
                     });
         } catch (NullPointerException ex) {
             Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);

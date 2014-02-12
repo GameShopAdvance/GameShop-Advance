@@ -7,14 +7,13 @@
 package gameshop.advance.controller;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
-import gameshop.advance.controller.valueData.MostraProdotti;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
+import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.customer.ReservationPanel;
-import gameshop.advance.utility.IteratorWrapper;
 import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -33,7 +32,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements Se
 
     private static PrenotaProdottoController instance;
     private IPrenotaProdottoRemote controller;
-    private IteratorWrapper<IDescrizioneProdottoRemote> iter;
+    private IIteratorWrapperRemote<IDescrizioneProdottoRemote> iter;
    
 
     public PrenotaProdottoController() throws RemoteException {
@@ -79,30 +78,13 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements Se
        aggiornaWindow(new ReservationPanel());
     }
     
-    public Collection<MostraProdotti> getDescriptionList() throws RemoteException {
+    public Collection<IDescrizioneProdottoRemote> getDescriptionList() throws RemoteException {
          iter = this.controller.getDescriptions();
-         Collection<MostraProdotti> result = new HashSet<MostraProdotti>();
+         Collection<IDescrizioneProdottoRemote> result = new HashSet<IDescrizioneProdottoRemote>();
         while(iter.hasNext()){
-            result.add((MostraProdotti) iter.next());
+            result.add((IDescrizioneProdottoRemote) iter.next());
         }
         return result;
-    }
-    
-    
-    
-    
-//      public Set<IDescrizioneProdottoRemote> getObjSet(IteratorWrapper<IDescrizioneProdottoRemote> desc){
-//                Set<IDescrizioneProdottoRemote> result = new HashSet<IDescrizioneProdottoRemote>();
-//                    while (desc.hasNext()) {
-//                        IDescrizioneProdottoRemote dp = desc.next();
-//                    if (dp instanceof IDescrizioneProdottoRemote) {
-//                        result.add((IDescrizioneProdottoRemote) desc.next());
-//                    }
-//                }
-//                return result;
-//            }
-
-   
-    
+    }   
     
 }
