@@ -1,6 +1,5 @@
 package gameshop.advance.interfaces.remote;
 
-import gameshop.advance.controller.PrenotaProdottoController;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -21,5 +20,5 @@ public interface IRemoteFactory extends Remote{
     
     IInventarioControllerRemote getGestisciInventarioController()  throws RemoteException;
     
-    PrenotaProdottoController getPrenotaProdottoController() throws RemoteException;
+    IPrenotaProdottoRemote getPrenotaProdottoController() throws RemoteException;
 }
