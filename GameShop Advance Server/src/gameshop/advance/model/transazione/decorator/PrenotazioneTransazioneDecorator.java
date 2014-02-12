@@ -7,6 +7,7 @@
 package gameshop.advance.model.transazione.decorator;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.Pagamento;
 import gameshop.advance.model.transazione.TransazioneRemoteProxy;
@@ -24,7 +25,7 @@ public class PrenotazioneTransazioneDecorator extends TransazioneDecorator {
     private Pagamento acconto;
 
     
-     public PrenotazioneTransazioneDecorator(TransazioneDecorator t) {
+     public PrenotazioneTransazioneDecorator(ITransazione t) {
         super(t);
         ScontoVenditaStrategyComposite sconto = ScontoFactorySingleton.getInstance().getStrategiaScontoVendita();
         super.setSconto(sconto);

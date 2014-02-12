@@ -9,30 +9,29 @@ package gameshop.advance.technicalservices.db;
 import com.db4o.ObjectContainer;
 import com.db4o.query.Query;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
-import gameshop.advance.interfaces.ITransazione;
-import gameshop.advance.model.transazione.decorator.VenditaTransazioneDecorator;
+import gameshop.advance.model.transazione.decorator.TransazioneDecorator;
 
 /**
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class DbVenditaSingleton {
+public class DbTransazioneSingleton {
     
-    private static DbVenditaSingleton instance;
+    private static DbTransazioneSingleton instance;
     
-    private DbVenditaSingleton()
+    private DbTransazioneSingleton()
     {
         
     }
     
-    public static DbVenditaSingleton getInstance()
+    public static DbTransazioneSingleton getInstance()
     {
-        if(DbVenditaSingleton.instance == null)
-            DbVenditaSingleton.instance = new DbVenditaSingleton();
-        return DbVenditaSingleton.instance;
+        if(DbTransazioneSingleton.instance == null)
+            DbTransazioneSingleton.instance = new DbTransazioneSingleton();
+        return DbTransazioneSingleton.instance;
     }
     
-    public void create(VenditaTransazioneDecorator sale) throws ObjectAlreadyExistsDbException
+    public void create(TransazioneDecorator sale) throws ObjectAlreadyExistsDbException
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         int exist = client.queryByExample(sale).size();
@@ -42,18 +41,18 @@ public class DbVenditaSingleton {
         client.commit();
     }
     
-    public ITransazione read(Integer id)
+    public TransazioneDecorator read(Integer id)
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         Query query=client.query();
-        query.constrain(VenditaTransazioneDecorator.class);
+        query.constrain(TransazioneDecorator.class);
         query.descend("id").constrain(id);
-        return (VenditaTransazioneDecorator) query.execute().get(0);
+        return (TransazioneDecorator) query.execute().get(0);
     }
     
     public Integer count()
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-        return client.queryByExample(VenditaTransazioneDecorator.class).size();
+        return client.queryByExample(TransazioneDecorator.class).size();
     }
 }

@@ -99,12 +99,12 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
     }
 
     /**
-     * Conlude la vendita richiamando la funzione completaVendita della venditaCorrente.
+     * Conlude la vendita richiamando la funzione completaTransazione della venditaCorrente.
      * @throws java.rmi.RemoteException
      */
     @Override
     public void concludiVendita() throws RemoteException {
-        this.venditaCorrente.completaVendita();
+        this.venditaCorrente.completaTransazione();
     }
 
     /**
@@ -121,7 +121,7 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
     public void gestisciPagamento(Money ammontare) throws RemoteException, InvalidMoneyException {
         this.venditaCorrente.gestisciPagamento(ammontare);
         this.venditaCorrente.rimuoviListener(null);
-        NegozioSingleton.getInstance().aggiungiVendita((VenditaTransazioneDecorator) this.venditaCorrente);
+        NegozioSingleton.getInstance().registraTransazione(this.venditaCorrente);
     }
 
     public void setIdCassa(int idCassa) {

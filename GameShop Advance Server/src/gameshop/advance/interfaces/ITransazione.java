@@ -6,8 +6,8 @@
 
 package gameshop.advance.interfaces;
 
-import gameshop.advance.interfaces.remote.ITransazioneRemote;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.interfaces.remote.ITransazioneRemote;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
@@ -24,9 +24,8 @@ public interface ITransazione extends ITransazioneRemote {
     /**
      * Imposta lo stato della vendita come completata e invia una notifica agli
      * osservatori in ascolto.
-     * @throws RemoteException
      */
-    void completaVendita();
+    void completaTransazione();
 
     /**
      * Utilizza i parametri ricevuti in ingresso (descrizione prodotto e quantità) per
@@ -50,11 +49,11 @@ public interface ITransazione extends ITransazioneRemote {
 
     CartaCliente getCliente();
 
-    Integer getIdVendita();
+    Integer getId();
 
     void setCliente(CartaCliente c);
 
-    void setIdVendita(Integer idVendita);
+    void setId(Integer idVendita);
 
     void addSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali);
     

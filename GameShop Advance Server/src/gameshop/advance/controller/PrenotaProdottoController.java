@@ -6,9 +6,14 @@
 
 package gameshop.advance.controller;
 
+import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
+import gameshop.advance.model.CatalogoProdottiSingleton;
 import gameshop.advance.model.DescrizioneProdotto;
+import gameshop.advance.model.NegozioSingleton;
+import gameshop.advance.model.transazione.Transazione;
+import gameshop.advance.model.transazione.decorator.PrenotazioneTransazioneDecorator;
 import gameshop.advance.model.transazione.decorator.TransazioneDecorator;
 import gameshop.advance.remote.DescrizioneRemoteProxy;
 import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
@@ -34,6 +39,12 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
         
     }
     
+    /**
+     *
+     * @return
+     * @throws RemoteException
+     */
+    @Override
     public Iterator<IDescrizioneProdottoRemote> getDescriptions() throws RemoteException
     {
         Iterator<Object> iter = DbDescrizioneProdottoSingleton.getInstance().read();
@@ -48,19 +59,21 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     @Override
     public void avviaPrenotazione() throws RemoteException
     {
-        
+        this.prenotazione = new PrenotazioneTransazioneDecorator(new Transazione());
     }
     
     @Override
-    public void prenotaProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException
+    public void prenotaProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException, ProdottoNotFoundException
     {
-        
+        DescrizioneProdotto desc;
+        desc = CatalogoProdottiSingleton.getInstance().getDescrizioneProdotto(codiceProdotto);
+        this.prenotazione.inserisciProdotto(desc, quantity);
     }
     
     @Override
     public void terminaPrenotazione() throws RemoteException
     {
-        
+        NegozioSingleton.getInstance().registraTransazione(this.prenotazione);
     }
     
     //OPERAZIONI DI SISTEMA LATO COMMESSO

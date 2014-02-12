@@ -6,6 +6,7 @@
 
 package gameshop.advance.interfaces.remote;
 
+import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
@@ -25,7 +26,7 @@ public interface IPrenotaProdottoRemote {
 
     void gestisciPagamento(Money amount) throws RemoteException;
 
-    void prenotaProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException;
+    void prenotaProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException, ProdottoNotFoundException;
     
     //OPERAZIONI DI SISTEMA LATO COMMESSO
     

@@ -3,10 +3,10 @@ package gameshop.advance.model;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.model.transazione.CartaCliente;
-import gameshop.advance.model.transazione.decorator.VenditaTransazioneDecorator;
+import gameshop.advance.model.transazione.decorator.TransazioneDecorator;
 import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
 import gameshop.advance.technicalservices.db.DbScontoVenditaSingleton;
-import gameshop.advance.technicalservices.db.DbVenditaSingleton;
+import gameshop.advance.technicalservices.db.DbTransazioneSingleton;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -47,12 +47,12 @@ public class NegozioSingleton
      * Aggiunge la vendita ricevuta all'elenco delle vendite completate nel negozio.
      * @param v
      */
-    public void aggiungiVendita(VenditaTransazioneDecorator v)
+    public void registraTransazione(TransazioneDecorator v)
     {
         try {
-            v.setIdVendita(DbVenditaSingleton.getInstance().count());
-            System.err.println("Vendita n."+v.getIdVendita());
-            DbVenditaSingleton.getInstance().create(v);
+            v.setId(DbTransazioneSingleton.getInstance().count());
+            System.err.println("Transazione n."+v.getId());
+            DbTransazioneSingleton.getInstance().create(v);
         } catch (ObjectAlreadyExistsDbException ex) {
             Logger.getLogger(NegozioSingleton.class.getName()).log(Level.SEVERE, null, ex);
         }

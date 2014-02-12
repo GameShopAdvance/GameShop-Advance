@@ -56,8 +56,8 @@ public abstract class TransazioneDecorator implements ITransazione {
     abstract void notificaListener() throws RemoteException;
     
     @Override
-    public void completaVendita() {
-        this.wrapped.completaVendita();
+    public void completaTransazione() {
+        this.wrapped.completaTransazione();
     }
 
     @Override
@@ -76,8 +76,8 @@ public abstract class TransazioneDecorator implements ITransazione {
     }
 
     @Override
-    public Integer getIdVendita() {
-        return this.wrapped.getIdVendita();
+    public Integer getId() {
+        return this.wrapped.getId();
     }
     
     @Override
@@ -99,8 +99,8 @@ public abstract class TransazioneDecorator implements ITransazione {
     }
 
     @Override
-    public void setIdVendita(Integer idVendita) {
-        this.wrapped.setIdVendita(idVendita);
+    public void setId(Integer idVendita) {
+        this.wrapped.setId(idVendita);
     }
 
     @Override

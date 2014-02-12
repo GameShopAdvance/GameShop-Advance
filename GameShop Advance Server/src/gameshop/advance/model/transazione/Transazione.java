@@ -36,12 +36,12 @@ public class Transazione implements ITransazione {
     }
 
     @Override
-    public Integer getIdVendita() {
+    public Integer getId() {
         return idVendita;
     }
 
     @Override
-    public void setIdVendita(Integer idVendita) {
+    public void setId(Integer idVendita) {
         this.idVendita = idVendita;
     }
 
@@ -105,7 +105,7 @@ public class Transazione implements ITransazione {
      * @throws RemoteException
      */
     @Override
-    public void completaVendita() {
+    public void completaTransazione() {
         this.completata = true;
     }
 
