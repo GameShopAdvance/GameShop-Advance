@@ -3,6 +3,7 @@ package gameshop.advance.model;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.remote.ICassaRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.transazione.CartaCliente;
@@ -85,13 +86,22 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
      * @throws java.rmi.RemoteException
      * @throws gameshop.advance.exceptions.QuantityException
      * @throws gameshop.advance.exceptions.ProdottoNotFoundException
+     * @throws gameshop.advance.exceptions.QuantityNotInStockException
      */
     @Override
-    public void inserisciProdotto(IDProdotto codiceProdotto, Integer quantity) throws RemoteException, QuantityException, ProdottoNotFoundException
+    public void inserisciProdotto(IDProdotto codiceProdotto, Integer quantity) throws RemoteException, QuantityException, ProdottoNotFoundException, QuantityNotInStockException
     {
         if ( quantity < 1 )
             throw new QuantityException(quantity);
+        
         DescrizioneProdotto desc = CatalogoProdottiSingleton.getInstance().getDescrizioneProdotto(codiceProdotto);
+        if(desc.getQuantitaDisponibile() < quantity)
+        {
+            throw new QuantityNotInStockException();
+        }
+        else
+            desc.setQuantitaDisponibile(desc.getQuantitaDisponibile() - quantity);
+        
         if(desc == null)
             throw new ProdottoNotFoundException(codiceProdotto);
         this.venditaCorrente.inserisciProdotto(desc, quantity);
