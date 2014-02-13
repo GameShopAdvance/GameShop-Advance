@@ -76,7 +76,7 @@ public class ReservationPanel extends JPanel {
                                     case 0: return mp.getCodiceProdotto();
                                     case 1: return mp.getDescrizione();
                                     case 2: return mp.getPrezzo();
-                                    case 3: return Boolean.false;
+                                    case 3: return false;
                                 }
                                 return null;
                             } catch (RemoteException ex) {

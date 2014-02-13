@@ -55,7 +55,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
         {
             list.add(new DescrizioneRemoteProxy((DescrizioneProdotto) iter.next()));
         }
-        return new IteratorWrapper<IDescrizioneProdottoRemote> (list.iterator());
+        return new IteratorWrapper<> (list.iterator());
     }
     
     @Override
@@ -97,6 +97,11 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     {
         this.prenotazione.gestisciPagamento(amount);
         //this.n
+    }
+    
+    public void pagaInAcconto(Money amount) throws RemoteException
+    {
+        
     }
     
 }
