@@ -30,7 +30,17 @@ public class PrenotazioneTransazioneDecorator extends TransazioneDecorator {
      @Override
     public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException
     {
-        
+        Money acconto = super.getPagamento();
+        Money zero = new Money();
+        if(acconto.greater(zero))
+        {
+            if(ammontare.greater(zero))
+                super.gestisciPagamento(acconto.add(ammontare));
+            else
+                throw new InvalidMoneyException("La quantità di denaro non è sufficiente a pagare la prenotazione");
+        }
+        else
+            super.gestisciPagamento(ammontare);
         
     }
     
@@ -46,13 +56,25 @@ public class PrenotazioneTransazioneDecorator extends TransazioneDecorator {
     
     @Override
     public Money getResto() throws InvalidMoneyException, RemoteException {
-        return this.wrapped.getResto();
+        Money resto = this.wrapped.getResto();
+        Money zero = new Money();
+        if(zero.greater(resto))
+            //resto per pagamento in acconto
+            return zero;
+        else
+            //resto per pagamento totale
+            return resto;
     }
 
      @Override
-    public Money getTotal()
+    public Money getTotal() throws RemoteException
     {
-        return this.getTotal().subtract(this.getPagamento());
+        Money totale = super.getTotal();
+        Money acconto = super.getPagamento();
+        if(acconto.greater(totale))
+            return new Money();
+        else
+            return totale.subtract(acconto);
     }
     
 }
