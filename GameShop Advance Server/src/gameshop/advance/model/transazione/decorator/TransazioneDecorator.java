@@ -120,4 +120,15 @@ public abstract class TransazioneDecorator implements ITransazione {
         return this.wrapped.getPagamento();
     }
     
+    @Override
+    public boolean isCompleted()
+    {
+        return this.wrapped.isCompleted();
+    }
+    
+    public ITransazione unwrap()
+    {
+        return this.wrapped;
+    }
+    
 }

@@ -61,4 +61,5 @@ public interface ITransazione extends ITransazioneRemote {
     
     void setSconto(ScontoVenditaStrategyComposite sconto);
     
+    boolean isCompleted();
 }

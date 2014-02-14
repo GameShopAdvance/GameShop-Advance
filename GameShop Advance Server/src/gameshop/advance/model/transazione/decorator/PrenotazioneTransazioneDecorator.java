@@ -10,71 +10,59 @@ import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.transazione.TransazioneRemoteProxy;
-import gameshop.advance.model.transazione.sconto.ScontoFactorySingleton;
-import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 
 /**
  *
- * @author matteog
+ * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class PrenotazioneTransazioneDecorator extends TransazioneDecorator {
+
     
-     public PrenotazioneTransazioneDecorator(ITransazione t) {
-        super(t);
-        ScontoVenditaStrategyComposite sconto = ScontoFactorySingleton.getInstance().getStrategiaScontoPrenotazione();
-        super.setSconto(sconto);
-    }
-     
-     @Override
-    public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException
+    public PrenotazioneTransazioneDecorator(ITransazione trans)
     {
-        Money acconto = super.getPagamento();
-        Money zero = new Money();
-        if(acconto.greater(zero))
-        {
-            if(ammontare.greater(zero))
-                super.gestisciPagamento(acconto.add(ammontare));
-            else
-                throw new InvalidMoneyException("La quantità di denaro non è sufficiente a pagare la prenotazione");
-        }
-        else
-            super.gestisciPagamento(ammontare);
-        
+        super(trans);
     }
     
     @Override
-    protected void notificaListener() throws RemoteException
+    public void gestisciPagamento(Money ammontare) throws RemoteException, InvalidMoneyException
     {
+        if(ammontare.greater(this.getTotal()))
+        {
+            super.gestisciPagamento(ammontare.add(super.getPagamento()));
+            
+        }
+        else
+            throw new InvalidMoneyException(ammontare);
+            
+    }
+    
+    
+    @Override
+    public Money getTotal() throws RemoteException
+    {
+        Money payed = super.getPagamento();
+        Money total = super.getTotal();
+        Money remainingTotal = total.subtract(payed);
+        if(remainingTotal.greater(new Money()))
+            return remainingTotal;
+        else
+            return new Money();
+    }
+    
+    @Override
+    void notificaListener() throws RemoteException {
         System.err.println("Calling listener");
         for(IRemoteObserver o:super.listeners)
         {
             o.notifica(new TransazioneRemoteProxy(this));
         }
     }
-    
+
     @Override
     public Money getResto() throws InvalidMoneyException, RemoteException {
-        Money resto = this.wrapped.getResto();
-        Money zero = new Money();
-        if(zero.greater(resto))
-            //resto per pagamento in acconto
-            return zero;
-        else
-            //resto per pagamento totale
-            return resto;
-    }
-
-     @Override
-    public Money getTotal() throws RemoteException
-    {
-        Money totale = super.getTotal();
-        Money acconto = super.getPagamento();
-        if(acconto.greater(totale))
-            return new Money();
-        else
-            return totale.subtract(acconto);
+        return super.getPagamento().subtract(this.getTotal());
     }
     
 }

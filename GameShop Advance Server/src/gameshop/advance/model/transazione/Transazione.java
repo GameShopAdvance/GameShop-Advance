@@ -143,5 +143,10 @@ public class Transazione implements ITransazione {
     public void setSconto(ScontoVenditaStrategyComposite sconto) {
         this.strategiaDiSconto = sconto;
     }
+
+    @Override
+    public boolean isCompleted() {
+        return this.completata;
+    }
     
 }
