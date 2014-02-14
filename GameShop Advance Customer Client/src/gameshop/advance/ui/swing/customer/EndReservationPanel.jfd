@@ -4,56 +4,35 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(default;20dlu), labelcompgap, max(min;45dlu), labelcompgap, max(min;120dlu):grow, labelcompgap, max(min;45dlu), labelcompgap, max(default;20dlu)"
-			"$rowSpecs": "max(default;20dlu), linegap, max(min;30dlu), linegap, 80dlu:grow, linegap, max(default;25dlu), linegap, max(default;25dlu), linegap, max(default;25dlu):grow"
+			"$columnSpecs": "max(default;20dlu):grow, labelcompgap, max(default;30dlu), labelcompgap, 130dlu, labelcompgap, max(default;30dlu), labelcompgap, max(default;20dlu):grow"
+			"$rowSpecs": "max(default;20dlu):grow, linegap, default, linegap, max(default;75dlu), linegap, max(default;54dlu):grow"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
-				"text": "Indietro"
+				"text": "Annulla"
 				"background": new java.awt.Color( 255, 51, 0, 255 )
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "clearReservationActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 3
-				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label1"
-				"text": "Prodotti"
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 5
-				"gridY": 3
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"
-				"text": "Avanti"
+				"text": "Completa"
 				"background": new java.awt.Color( 102, 204, 0, 255 )
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToReviewActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
 				"gridY": 3
-				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-			} )
-			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-				name: "scrollPane1"
-				add( new FormComponent( "javax.swing.JTable" ) {
-					name: "table1"
-				} )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 5
-				"gridY": 5
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "50dlu, labelcompgap, max(default;70dlu)"
-				"$rowSpecs": "default"
+				"$columnSpecs": "61dlu, labelcompgap, 63dlu"
+				"$rowSpecs": "default, linegap, default"
 			} ) {
 				name: "panel1"
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label2"
+					name: "label1"
 					"text": "Totale:"
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 1
@@ -65,13 +44,26 @@ new FormModel {
 					"gridX": 3
 					"gridY": 1
 				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "N.Prenotazione:"
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 1
+					"gridY": 3
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "textField2"
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 3
+					"gridY": 3
+				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 5
-				"gridY": 9
+				"gridY": 5
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 530, 385 )
+			"size": new java.awt.Dimension( 510, 305 )
 		} )
 	}
 }
