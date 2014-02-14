@@ -12,7 +12,7 @@ import java.util.List;
  * la descrizione del prodotto e la quantità di prodotti acquistata.
  * @author Salx
  */
-public class RigaDiVendita
+public class RigaDiTransazione
 {
     private IScontoProdottoStrategy strategiaDiSconto;
     private DescrizioneProdotto descrizione;
@@ -24,12 +24,11 @@ public class RigaDiVendita
      * @param desc
      * @param quantity
      */
-    public RigaDiVendita(DescrizioneProdotto desc, int quantity)
+    public RigaDiTransazione(DescrizioneProdotto desc, int quantity, List<IScontoProdottoStrategy> sconti)
     {
         this.descrizione = desc;
         this.quantity = quantity;
         this.strategiaDiSconto = ScontoFactorySingleton.getInstance().getStrategiaScontoProdotto();
-        List<IScontoProdottoStrategy> sconti = desc.getSconti();
         for(IScontoProdottoStrategy sconto:sconti)
         {
             this.strategiaDiSconto.add(sconto);

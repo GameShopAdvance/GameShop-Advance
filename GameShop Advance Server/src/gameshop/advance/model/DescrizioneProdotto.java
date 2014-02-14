@@ -9,6 +9,7 @@ import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import org.joda.time.DateTime;
 
 /**
  * La DescrizioneProdotto contiene tutte le informazioni relative ad un tipo di
@@ -30,6 +31,8 @@ public class DescrizioneProdotto implements IDescrizioneProdottoRemote
      * @param codiceProdotto
      * @param prezzo
      * @param descrizione
+     * @param quantity
+     * @throws java.rmi.RemoteException
      */
     public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione, int quantity ) throws RemoteException{
         this.descrizione = descrizione;
@@ -40,9 +43,11 @@ public class DescrizioneProdotto implements IDescrizioneProdottoRemote
     }
 
     /**
+     * @param period
      * @return il prezzo di un prodotto.
      */
-    public Money getPrezzo()
+    @Override
+    public Money getPrezzo(DateTime period)
     {
         Prezzo p = this.getPrezzoAttuale();
         if(p!=null)
@@ -79,13 +84,13 @@ public class DescrizioneProdotto implements IDescrizioneProdottoRemote
         this.descrizione = descrizione;
     }
          
-     public List<IScontoProdottoStrategy> getSconti()
+     public List<IScontoProdottoStrategy> getSconti(DateTime period)
      {
          LinkedList<IScontoProdottoStrategy> scontiValidi = new LinkedList<>();
          for(IScontoProdottoStrategy sconto: this.sconti)
          {
              System.out.println("Sconto: "+sconto.getClass().toString());
-             if(sconto.isValid())
+             if(sconto.isValid(period))
              {
                  scontiValidi.add(sconto);
                  System.err.println("Sconto Valido");

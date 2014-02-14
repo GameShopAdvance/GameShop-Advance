@@ -11,6 +11,7 @@ import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -36,7 +37,7 @@ public class DescrizioneRemoteProxy extends UnicastRemoteObject implements IDesc
     }
 
     @Override
-    public Money getPrezzo() throws RemoteException {
-        return this.desc.getPrezzo();
+    public Money getPrezzo(DateTime period) throws RemoteException {
+        return this.desc.getPrezzo(period);
     }
 }

@@ -8,10 +8,11 @@ package gameshop.advance.model.transazione.sconto.prodotti;
 
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.ITransazione;
-import gameshop.advance.model.transazione.RigaDiVendita;
+import gameshop.advance.model.transazione.RigaDiTransazione;
 import gameshop.advance.utility.Money;
 import java.util.LinkedList;
 import java.util.List;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -37,17 +38,17 @@ public abstract class ScontoProdottoStrategyComposite implements IScontoProdotto
     }
     
     @Override
-    public boolean isValid()
+    public boolean isValid(DateTime period)
     {
         return true;
     }
     
     @Override
-    public abstract Money getSubtotal(ITransazione v, RigaDiVendita rdv);
+    public abstract Money getSubtotal(ITransazione v, RigaDiTransazione rdv);
     
-    public Money getRealSubtotal(RigaDiVendita rdv)
+    public Money getRealSubtotal(RigaDiTransazione rdv, DateTime period)
     {
-        Money subtotal =  rdv.getDescrizione().getPrezzo().multiply(rdv.getQuantity());
+        Money subtotal =  rdv.getDescrizione().getPrezzo(period).multiply(rdv.getQuantity());
         return subtotal;
     }
 }

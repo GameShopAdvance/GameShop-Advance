@@ -6,8 +6,9 @@
 
 package gameshop.advance.interfaces;
 
-import gameshop.advance.model.transazione.RigaDiVendita;
+import gameshop.advance.model.transazione.RigaDiTransazione;
 import gameshop.advance.utility.Money;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -15,9 +16,14 @@ import gameshop.advance.utility.Money;
  */
 public interface IScontoProdottoStrategy {
     
-    public Money getSubtotal(ITransazione v, RigaDiVendita rdv );
+    public Money getSubtotal(ITransazione v, RigaDiTransazione rdv );
     
-    public boolean isValid();
+    /**
+     *
+     * @param period
+     * @return
+     */
+    public boolean isValid(DateTime period);
     
     public void add(IScontoProdottoStrategy sp);
 }

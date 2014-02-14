@@ -15,6 +15,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.Map.Entry;
 import java.util.Set;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -91,7 +92,7 @@ public class DbManagerSingleton {
             List<IScontoProdottoStrategy> sconti = desc.getTuttiSconti();
             for(IScontoProdottoStrategy sconto:sconti)
             {
-                System.out.println("Sconto: "+sconto.getClass()+" valid: "+sconto.isValid());
+                System.out.println("Sconto: "+sconto.getClass()+" valid: "+sconto.isValid(DateTime.now()));
             }
             i++;
         }
