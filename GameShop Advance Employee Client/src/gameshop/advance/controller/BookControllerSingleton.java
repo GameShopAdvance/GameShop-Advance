@@ -77,6 +77,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     }
     
     public void gestisciPrenotazione() throws RemoteException{
+        this.controller.addListener(this.saleTotalObserver);
         aggiornaWindow(new BookPanel());
     }
     
@@ -105,9 +106,8 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     public void effettuaPagamentoAcconto(Double acconto){
         
         try{
-            //controller.aggiungiListener(this.saleRestObserver);
-            //Gestione pagamento acconto da implementare
-            controller.pagaAcconto(new Money(acconto));
+            this.controller.addListener(this.saleRestObserver);
+            this.controller.pagaAcconto(new Money(acconto));
             aggiornaWindow(new EndBookPanel());
         }
         catch (InvalidMoneyException | RemoteException ex) {
@@ -117,9 +117,8 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     
     public void effettuaPagamentoTotale(Double totale){
         try{
-            //controller.aggiungiListener(this.saleRestObserver);
-            //Gestione pagamento totale da implementare
-            controller.pagaTotale(new Money(totale));
+            this.controller.addListener(this.saleRestObserver);
+            this.controller.pagaTotale(new Money(totale));
             aggiornaWindow(new EndBookPanel());
         }
         catch (InvalidMoneyException | RemoteException ex) {

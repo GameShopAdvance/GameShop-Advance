@@ -20,6 +20,8 @@ import java.rmi.RemoteException;
  */
 public interface IPrenotaProdottoRemote extends Remote{
 
+    void addListener(IRemoteObserver obs) throws RemoteException;
+    
     //OPERAZIONI DI SISTEMA LATO CLIENTE
     
     IteratorWrapper<IDescrizioneProdottoRemote> getDescriptions() throws RemoteException;
