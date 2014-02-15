@@ -8,6 +8,7 @@ package gameshop.advance.controller;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.ICassaRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.IRemoteClient;
@@ -16,14 +17,18 @@ import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.observer.SaleObserver;
 import gameshop.advance.observer.SaleRestObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
-import gameshop.advance.ui.swing.employee.BookPanel;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
+import gameshop.advance.ui.swing.employee.book.BookPanel;
+import gameshop.advance.ui.swing.employee.book.BookPaymentPanel;
+import gameshop.advance.ui.swing.employee.book.EndBookPanel;
 import gameshop.advance.utility.Money;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JComponent;
 
 /**
@@ -37,6 +42,9 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     private ICassaRemote cassa;
     private IRemoteObserver saleTotalObserver;
     private IRemoteObserver saleRestObserver;
+    private Money totale;
+    private Money acconto;
+    private Money resto;
     
     private BookControllerSingleton() throws RemoteException{
         
@@ -69,6 +77,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     }
     
     public void gestisciPrenotazione() throws RemoteException{
+        this.controller.addListener(this.saleTotalObserver);
         aggiornaWindow(new BookPanel());
     }
     
@@ -78,8 +87,43 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     }
     
     public void terminaPrenotazione() throws RemoteException {
-        
+        this.aggiornaWindow(new BookPaymentPanel());
         this.controller.terminaPrenotazione();
+    }
+    
+    public Money getTotal(){
+        return this.totale;
+    }
+    
+    public Money getPartial(){
+        return this.acconto;
+    }
+    
+    public Money getResto(){
+        return this.resto;
+    }
+    
+    public void effettuaPagamentoAcconto(Double acconto){
+        
+        try{
+            this.controller.addListener(this.saleRestObserver);
+            this.controller.pagaAcconto(new Money(acconto));
+            aggiornaWindow(new EndBookPanel());
+        }
+        catch (InvalidMoneyException | RemoteException ex) {
+            Logger.getLogger(SaleControllerSingleton.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public void effettuaPagamentoTotale(Double totale){
+        try{
+            this.controller.addListener(this.saleRestObserver);
+            this.controller.pagaTotale(new Money(totale));
+            aggiornaWindow(new EndBookPanel());
+        }
+        catch (InvalidMoneyException | RemoteException ex) {
+            Logger.getLogger(SaleControllerSingleton.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private void aggiornaWindow(JComponent panel) {
@@ -87,7 +131,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         UIWindowSingleton.getInstance().refreshContent();
     }
     
-    public void clearPrenotazione() {
+    public void clearBook() {
         UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
         UIWindowSingleton.getInstance().refreshContent();
     }

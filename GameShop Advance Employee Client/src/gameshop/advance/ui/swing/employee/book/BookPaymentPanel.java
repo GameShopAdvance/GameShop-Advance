@@ -2,10 +2,16 @@
  * Created by JFormDesigner on Wed Feb 12 15:48:38 CET 2014
  */
 
-package gameshop.advance.ui.swing.employee;
+package gameshop.advance.ui.swing.employee.book;
 
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
+import gameshop.advance.controller.BookControllerSingleton;
+import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.ui.swing.UIWindowSingleton;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -17,8 +23,52 @@ import javax.swing.border.TitledBorder;
  * @author Franco
  */
 public class BookPaymentPanel extends JPanel {
+    
     public BookPaymentPanel() {
         initComponents();
+        try {
+            this.displayPartial.setText(BookControllerSingleton.getInstance().getPartial().toString());
+            this.displayTotal.setText(BookControllerSingleton.getInstance().getTotal().toString());
+        } catch (NullPointerException ex) {
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
+                    + " si prega di controllare la configurazione del sistema.");
+        } catch (RemoteException ex) {
+            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
+                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+        } catch (ConfigurationException ex) {
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
+                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+        }
+    }
+
+    private void payPartialButtonActionPerformed(ActionEvent e) {
+        try{
+            BookControllerSingleton.getInstance().effettuaPagamentoAcconto(Double.parseDouble(this.partialPayment.getText()));
+        } catch (NullPointerException ex) {
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
+                    + " si prega di controllare la configurazione del sistema.");
+        } catch (RemoteException ex) {
+            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
+                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+        } catch (ConfigurationException ex) {
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
+                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+        }
+    }
+
+    private void payTotalButtonActionPerformed(ActionEvent e) {
+        try{
+            BookControllerSingleton.getInstance().effettuaPagamentoTotale(Double.parseDouble(this.totalPayment.getText()));
+        } catch (NullPointerException ex) {
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
+                    + " si prega di controllare la configurazione del sistema.");
+        } catch (RemoteException ex) {
+            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
+                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+        } catch (ConfigurationException ex) {
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
+                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+        }
     }
 
     private void initComponents() {
@@ -60,6 +110,13 @@ public class BookPaymentPanel extends JPanel {
             //---- payPartialButton ----
             payPartialButton.setText("Paga Acconto");
             payPartialButton.setFont(payPartialButton.getFont().deriveFont(payPartialButton.getFont().getSize() + 5f));
+            payPartialButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    payPartialButtonActionPerformed(e);
+                    payPartialButtonActionPerformed(e);
+                }
+            });
             panel1.add(payPartialButton, CC.xywh(9, 4, 1, 4));
 
             //---- label2 ----
@@ -90,6 +147,12 @@ public class BookPaymentPanel extends JPanel {
             //---- payTotalButton ----
             payTotalButton.setText("Paga Totale");
             payTotalButton.setFont(payTotalButton.getFont().deriveFont(payTotalButton.getFont().getSize() + 5f));
+            payTotalButton.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    payTotalButtonActionPerformed(e);
+                }
+            });
             panel2.add(payTotalButton, CC.xywh(9, 4, 1, 4));
 
             //---- label4 ----

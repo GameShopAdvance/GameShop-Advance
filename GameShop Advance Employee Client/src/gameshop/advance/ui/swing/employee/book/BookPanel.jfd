@@ -15,7 +15,8 @@ new FormModel {
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
 				"foreground": new java.awt.Color( 255, 255, 255, 255 )
 				"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
-				"nextFocusableComponent": new FormReference( "button2" )
+				"nextFocusableComponent": new FormReference( "goToPaymentBookButton" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "clearBookActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 2
 				"gridX": 2
@@ -40,12 +41,13 @@ new FormModel {
 				"gridY": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button2"
+				name: "goToPaymentBookButton"
 				"text": "Avanti"
 				"background": new java.awt.Color( 102, 204, 0, 255 )
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
 				"name": "nextButton"
 				"nextFocusableComponent": new FormReference( "bookCodeField" )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToPaymentBookButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 10
 				"gridY": 2
@@ -71,10 +73,20 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
 				add( new FormComponent( "javax.swing.JTextField" ) {
 					name: "bookCodeField"
+					"cursor": new java.awt.Cursor( 2 )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 3
 					"gridWidth": 3
 					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "retrieveBookButton"
+					"text": "Cerca Prenotazione"
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "retrieveBookButtonActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 3
+					"gridY": 3
+					"gridWidth": 3
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 4
@@ -108,7 +120,7 @@ new FormModel {
 					"text": "Inserisci"
 					"foreground": sfield java.awt.Color black
 					"font": new com.jformdesigner.model.SwingDerivedFont( null, 65536, 0, false )
-					"nextFocusableComponent": new FormReference( "button2" )
+					"nextFocusableComponent": new FormReference( "goToPaymentBookButton" )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "insertClientCodeActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 3

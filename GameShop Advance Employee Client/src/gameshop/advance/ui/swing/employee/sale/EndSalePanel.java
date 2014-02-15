@@ -2,7 +2,7 @@
  * Created by JFormDesigner on Fri Jan 31 21:43:02 CET 2014
  */
 
-package gameshop.advance.ui.swing.employee;
+package gameshop.advance.ui.swing.employee.sale;
 
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
@@ -10,6 +10,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.ui.swing.UIWindowSingleton;
+import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.utility.Money;
 import java.awt.Color;
 import java.awt.event.ActionEvent;
