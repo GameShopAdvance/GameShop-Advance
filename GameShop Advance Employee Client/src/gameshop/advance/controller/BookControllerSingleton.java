@@ -8,6 +8,7 @@ package gameshop.advance.controller;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.ICassaRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.IRemoteClient;
@@ -16,9 +17,9 @@ import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.observer.SaleObserver;
 import gameshop.advance.observer.SaleRestObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
+import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.employee.book.BookPanel;
 import gameshop.advance.ui.swing.employee.book.BookPaymentPanel;
-import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.employee.book.EndBookPanel;
 import gameshop.advance.utility.Money;
 import java.rmi.NotBoundException;
@@ -106,10 +107,10 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         try{
             //controller.aggiungiListener(this.saleRestObserver);
             //Gestione pagamento acconto da implementare
-            controller.gestisciPagamento(new Money(acconto));
+            controller.pagaAcconto(new Money(acconto));
             aggiornaWindow(new EndBookPanel());
         }
-        catch (Exception ex) {
+        catch (InvalidMoneyException | RemoteException ex) {
             Logger.getLogger(SaleControllerSingleton.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
@@ -118,10 +119,10 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         try{
             //controller.aggiungiListener(this.saleRestObserver);
             //Gestione pagamento totale da implementare
-            controller.gestisciPagamento(new Money(totale));
+            controller.pagaTotale(new Money(totale));
             aggiornaWindow(new EndBookPanel());
         }
-        catch (Exception ex) {
+        catch (InvalidMoneyException | RemoteException ex) {
             Logger.getLogger(SaleControllerSingleton.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
