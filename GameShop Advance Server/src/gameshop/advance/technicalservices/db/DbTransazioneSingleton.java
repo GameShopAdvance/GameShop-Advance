@@ -7,9 +7,11 @@
 package gameshop.advance.technicalservices.db;
 
 import com.db4o.ObjectContainer;
-import com.db4o.query.Query;
+import com.db4o.query.Predicate;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.transazione.decorator.TransazioneDecorator;
+import java.util.List;
 
 /**
  *
@@ -41,13 +43,23 @@ public class DbTransazioneSingleton {
         client.commit();
     }
     
-    public TransazioneDecorator read(Integer id)
+    public TransazioneDecorator read(final Integer id)
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-        Query query=client.query();
-        query.constrain(TransazioneDecorator.class);
-        query.descend("id").constrain(id);
-        return (TransazioneDecorator) query.execute().get(0);
+        List<TransazioneDecorator> result = client.query(new Predicate<TransazioneDecorator>() {
+
+            @Override
+            public boolean match(TransazioneDecorator candidate) {
+                ITransazione trans = candidate.unwrap();
+                if(trans.getId().intValue() == id.intValue())
+                    return true;
+                else
+                    return false;
+            }
+        });
+        if(result.isEmpty())
+            return null;
+        return result.get(0);
     }
     
     public Integer count()

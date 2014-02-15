@@ -15,7 +15,8 @@ import gameshop.advance.model.CatalogoProdottiSingleton;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.NegozioSingleton;
 import gameshop.advance.model.transazione.Transazione;
-import gameshop.advance.model.transazione.decorator.PrenotazioneInAccontoTransazioneDecorator;
+import gameshop.advance.model.transazione.decorator.PagataInAccontoTransazioneDecorator;
+import gameshop.advance.model.transazione.decorator.PagataInTotaleTransazioneDecorator;
 import gameshop.advance.model.transazione.decorator.PrenotazioneTransazioneDecorator;
 import gameshop.advance.model.transazione.decorator.TransazioneDecorator;
 import gameshop.advance.remote.DescrizioneRemoteProxy;
@@ -78,6 +79,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     public void terminaPrenotazione() throws RemoteException
     {
         NegozioSingleton.getInstance().registraTransazione(this.prenotazione);
+           
     }
     
     //OPERAZIONI DI SISTEMA LATO COMMESSO
@@ -91,10 +93,17 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     @Override
     public void pagaAcconto(Money amount) throws RemoteException, InvalidMoneyException
     {
-        this.prenotazione = new PrenotazioneInAccontoTransazioneDecorator(this.prenotazione.unwrap());
+        this.prenotazione = new PagataInAccontoTransazioneDecorator(this.prenotazione);
         this.prenotazione.gestisciPagamento(amount);
+        this.prenotazione = (TransazioneDecorator) this.prenotazione.unwrap();
     }
     
+    /**
+     *
+     * @param obs
+     * @throws RemoteException
+     */
+    @Override
     public void addListener(IRemoteObserver obs) throws RemoteException
     {
         this.prenotazione.aggiungiListener(obs);
@@ -109,8 +118,9 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     @Override
     public void pagaTotale(Money amount) throws RemoteException, InvalidMoneyException
     {
-        this.prenotazione = new PrenotazioneTransazioneDecorator(this.prenotazione.unwrap());
+        this.prenotazione = new PagataInTotaleTransazioneDecorator(this.prenotazione.unwrap());
         this.prenotazione.gestisciPagamento(amount);
+        this.prenotazione = (TransazioneDecorator) this.prenotazione.unwrap();
     }
     
 }

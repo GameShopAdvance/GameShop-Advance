@@ -17,29 +17,25 @@ import java.rmi.RemoteException;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class PrenotazioneTransazioneDecorator extends TransazioneDecorator {
+public class PagataInTotaleTransazioneDecorator extends TransazioneDecorator {
 
-    
-    public PrenotazioneTransazioneDecorator(ITransazione trans)
-    {
+    public PagataInTotaleTransazioneDecorator(ITransazione trans) {
         super(trans);
     }
     
-    
-    
-    
     @Override
-    public Money getTotal() throws RemoteException
+    public void gestisciPagamento(Money ammontare) throws RemoteException, InvalidMoneyException
     {
-        Money payed = super.getPagamento();
-        Money total = super.getTotal();
-        Money remainingTotal = total.subtract(payed);
-        if(remainingTotal.greater(new Money()))
-            return remainingTotal;
+        if(ammontare.greater(this.getTotal()))
+        {
+            super.gestisciPagamento(ammontare.add(super.getPagamento()));
+            
+        }
         else
-            return new Money();
+            throw new InvalidMoneyException(ammontare);
+            
     }
-    
+
     @Override
     void notificaListener() throws RemoteException {
         System.err.println("Calling listener");
@@ -51,7 +47,12 @@ public class PrenotazioneTransazioneDecorator extends TransazioneDecorator {
 
     @Override
     public Money getResto() throws InvalidMoneyException, RemoteException {
-        return super.getPagamento().subtract(this.getTotal());
+        return this.wrapped.getResto();
     }
     
+    @Override
+    public ITransazione unwrap()
+    {
+        return this.wrapped;
+    }
 }

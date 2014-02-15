@@ -14,12 +14,12 @@ import java.rmi.RemoteException;
  *
  * @author matteog
  */
-public class PrenotazioneInAccontoTransazioneDecorator extends TransazioneDecorator {
+public class PagataInAccontoTransazioneDecorator extends TransazioneDecorator {
     
      private static final int percentualeAcconto = 20;
      private Pagamento acconto;
     
-     public PrenotazioneInAccontoTransazioneDecorator(ITransazione t) {
+     public PagataInAccontoTransazioneDecorator(ITransazione t) {
         super(t);
         ScontoVenditaStrategyComposite sconto = ScontoFactorySingleton.getInstance().getStrategiaScontoPrenotazione();
         super.setSconto(sconto);
@@ -65,5 +65,12 @@ public class PrenotazioneInAccontoTransazioneDecorator extends TransazioneDecora
     public void completaTransazione()
     {
         //La transazione non può essere completata fino a che non verrà completamente pagata
+    }
+    
+     @Override
+    public ITransazione unwrap()
+    {
+         return this.wrapped;
+        
     }
 }
