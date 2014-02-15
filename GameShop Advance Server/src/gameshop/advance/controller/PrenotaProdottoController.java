@@ -10,10 +10,12 @@ import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
+import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.CatalogoProdottiSingleton;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.NegozioSingleton;
 import gameshop.advance.model.transazione.Transazione;
+import gameshop.advance.model.transazione.decorator.PrenotazioneInAccontoTransazioneDecorator;
 import gameshop.advance.model.transazione.decorator.PrenotazioneTransazioneDecorator;
 import gameshop.advance.model.transazione.decorator.TransazioneDecorator;
 import gameshop.advance.remote.DescrizioneRemoteProxy;
@@ -86,6 +88,18 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
         this.prenotazione = NegozioSingleton.getInstance().riprendiTransazione(id);
     }
     
+    @Override
+    public void pagaAcconto(Money amount) throws RemoteException, InvalidMoneyException
+    {
+        this.prenotazione = new PrenotazioneInAccontoTransazioneDecorator(this.prenotazione.unwrap());
+        this.prenotazione.gestisciPagamento(amount);
+    }
+    
+    public void addListener(IRemoteObserver obs) throws RemoteException
+    {
+        this.prenotazione.aggiungiListener(obs);
+    }
+    
     /**
      *
      * @param amount
@@ -93,15 +107,10 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
      * @throws InvalidMoneyException
      */
     @Override
-    public void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException
+    public void pagaTotale(Money amount) throws RemoteException, InvalidMoneyException
     {
+        this.prenotazione = new PrenotazioneTransazioneDecorator(this.prenotazione.unwrap());
         this.prenotazione.gestisciPagamento(amount);
-        //this.n
-    }
-    
-    public void pagaInAcconto(Money amount) throws RemoteException
-    {
-        
     }
     
 }

@@ -9,11 +9,12 @@ package gameshop.advance.model.transazione.sconto.prodotti;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.transazione.CartaCliente;
-import gameshop.advance.model.transazione.RigaDiVendita;
+import gameshop.advance.model.transazione.RigaDiTransazione;
 import gameshop.advance.model.transazione.TipologiaCliente;
 import gameshop.advance.utility.IntervalloDiTempo;
 import gameshop.advance.utility.Money;
 import java.util.List;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -32,9 +33,9 @@ public class ScontoPercentualeClienteProdottoStrategy implements IScontoProdotto
     }
 
     @Override
-    public Money getSubtotal(ITransazione v, RigaDiVendita rdv) {
+    public Money getSubtotal(ITransazione v, RigaDiTransazione rdv) {
         CartaCliente c = v.getCliente();
-        Money subtotal = rdv.getDescrizione().getPrezzo().multiply(rdv.getQuantity());
+        Money subtotal = rdv.getDescrizione().getPrezzo(v.getDate()).multiply(rdv.getQuantity());
         if(c!=null && this.checkApplicable(c.getTipo()))
             return subtotal.subtract(subtotal.multiply(percentuale).divide(100));
         else
@@ -55,7 +56,10 @@ public class ScontoPercentualeClienteProdottoStrategy implements IScontoProdotto
     }
 
     @Override
-    public boolean isValid() {
-        return periodo.isActual();
+    public boolean isValid(DateTime period) {
+        if(period == null)
+            return periodo.isActual();
+        else
+            return periodo.isInPeriod(period);
     }
 }

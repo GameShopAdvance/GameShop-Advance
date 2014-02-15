@@ -13,6 +13,7 @@ import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.ui.swing.UIWindowSingleton;
+import gameshop.advance.ui.swing.customer.EndReservationPanel;
 import gameshop.advance.ui.swing.customer.ReservationPanel;
 import java.io.Serializable;
 import java.rmi.NotBoundException;
@@ -20,13 +21,11 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Collection;
-import java.util.HashSet;
 import javax.swing.JComponent;
 
 /**
  *
- * @author matteog
+ * @author Matteo Gentile
  */
 public class PrenotaProdottoController extends UnicastRemoteObject implements Serializable{
 
@@ -74,17 +73,26 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements Se
     
     public void avviaPrenotazione() throws RemoteException {
        this.controller.avviaPrenotazione();
-       System.err.println("Avvia Prenotazione");
        aggiornaWindow(new ReservationPanel());
     }
     
-    public Collection<IDescrizioneProdottoRemote> getDescriptionList() throws RemoteException {
-         iter = this.controller.getDescriptions();
-         Collection<IDescrizioneProdottoRemote> result = new HashSet<IDescrizioneProdottoRemote>();
-        while(iter.hasNext()){
-            result.add((IDescrizioneProdottoRemote) iter.next());
-        }
-        return result;
-    }   
-    
+    public IIteratorWrapperRemote<IDescrizioneProdottoRemote> getDescriptionList() throws RemoteException {
+         return this.controller.getDescriptions();
+//         Collection<IDescrizioneProdottoRemote> result = new HashSet<>();
+//        while(iter.hasNext()){
+//            result.add((IDescrizioneProdottoRemote) iter.next());
+//        }
+//        return result;
+//    }   
+    }
+
+    public void clearReservation() {      
+        UIWindowSingleton.getInstance().setPanel(new ReservationPanel());
+        UIWindowSingleton.getInstance().refreshContent();
+    }
+
+    public void riepilogoPrenotazione() {
+       aggiornaWindow(new EndReservationPanel());
+    }
+
 }

@@ -5,6 +5,7 @@ import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.util.List;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -33,7 +34,7 @@ public class ScontoVenditaMigliorePerClienteStrategyComposite extends ScontoVend
     }
 
     @Override
-    public boolean isActual() {
+    public boolean isValid(DateTime period) {
         return false;
     }
     

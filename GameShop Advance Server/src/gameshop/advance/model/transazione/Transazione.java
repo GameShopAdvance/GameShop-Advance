@@ -14,9 +14,9 @@ import gameshop.advance.model.Pagamento;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
-import java.util.Date;
 import java.util.LinkedList;
 import java.util.List;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -24,14 +24,15 @@ import java.util.List;
  */
 public class Transazione implements ITransazione {
     protected Integer idVendita;
-    protected LinkedList<RigaDiVendita> righeDiVendita = new LinkedList<>();
+    protected LinkedList<RigaDiTransazione> righeDiVendita = new LinkedList<>();
     protected CartaCliente cliente;
     protected Pagamento pagamento;
-    protected Date date;
+    protected DateTime date;
     protected ScontoVenditaStrategyComposite strategiaDiSconto;
     protected boolean completata;
 
     public Transazione() {
+        this.date = new DateTime();
     }
 
     @Override
@@ -39,6 +40,16 @@ public class Transazione implements ITransazione {
         return idVendita;
     }
 
+    /**
+     *
+     * @return
+     */
+    @Override
+    public DateTime getDate()
+    {
+        return this.date;
+    }
+    
     @Override
     public void setId(Integer idVendita) {
         this.idVendita = idVendita;
@@ -51,11 +62,10 @@ public class Transazione implements ITransazione {
      * aggiornare l'output.
      * @param desc
      * @param quantity
-     * @throws java.rmi.RemoteException
      */
     @Override
     public void inserisciProdotto(DescrizioneProdotto desc, int quantity) {
-        RigaDiVendita rdv = new RigaDiVendita(desc, quantity);
+        RigaDiTransazione rdv = new RigaDiTransazione(desc, quantity, desc.getSconti(date));
         this.righeDiVendita.add(rdv);
     }
 
@@ -64,6 +74,7 @@ public class Transazione implements ITransazione {
      * della transazione sommando i valori sub-totali di tutte le righe di vendita
      * della transazione.
      * @return il totale della transazione
+     * @throws java.rmi.RemoteException
      */
     @Override
     public Money getTotal() throws RemoteException {
@@ -75,6 +86,7 @@ public class Transazione implements ITransazione {
      * il resto.
      * @return il resto da restituire
      * @throws InvalidMoneyException
+     * @throws java.rmi.RemoteException
      */
     @Override
     public Money getResto() throws InvalidMoneyException, RemoteException {
@@ -142,6 +154,11 @@ public class Transazione implements ITransazione {
     @Override
     public void setSconto(ScontoVenditaStrategyComposite sconto) {
         this.strategiaDiSconto = sconto;
+    }
+
+    @Override
+    public boolean isCompleted() {
+        return this.completata;
     }
     
 }

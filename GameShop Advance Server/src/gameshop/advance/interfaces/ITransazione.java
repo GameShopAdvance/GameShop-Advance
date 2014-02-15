@@ -14,6 +14,7 @@ import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyCo
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -61,4 +62,8 @@ public interface ITransazione extends ITransazioneRemote {
     
     void setSconto(ScontoVenditaStrategyComposite sconto);
     
+    boolean isCompleted();
+    
+        
+    DateTime getDate();
 }

@@ -8,6 +8,7 @@ package gameshop.advance.interfaces;
 
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -17,6 +18,6 @@ public interface IScontoVenditaStrategy {
     
     Money getTotal(ITransazione vendita) throws RemoteException;
 
-    public boolean isActual();
+    public boolean isValid(DateTime period);
 
 }

@@ -17,6 +17,7 @@ import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -120,4 +121,24 @@ public abstract class TransazioneDecorator implements ITransazione {
         return this.wrapped.getPagamento();
     }
     
+    @Override
+    public boolean isCompleted()
+    {
+        return this.wrapped.isCompleted();
+    }
+    
+    public ITransazione unwrap()
+    {
+        return this.wrapped;
+    }
+    
+    /**
+     *
+     * @return
+     */
+    @Override
+    public DateTime getDate()
+    {
+        return this.wrapped.getDate();
+    }
 }

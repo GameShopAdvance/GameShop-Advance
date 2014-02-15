@@ -9,12 +9,13 @@ package gameshop.advance.model.transazione.sconto.prodotti;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.transazione.CartaCliente;
-import gameshop.advance.model.transazione.RigaDiVendita;
+import gameshop.advance.model.transazione.RigaDiTransazione;
 import gameshop.advance.model.transazione.TipologiaCliente;
 import gameshop.advance.utility.IntervalloDiTempo;
 import gameshop.advance.utility.Money;
 import java.util.LinkedList;
 import java.util.List;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -45,7 +46,7 @@ public class ScontoPrendiPaghiClienteProdottoStrategy implements IScontoProdotto
     }
     
     @Override
-    public Money getSubtotal(ITransazione v, RigaDiVendita rdv) {
+    public Money getSubtotal(ITransazione v, RigaDiTransazione rdv) {
         CartaCliente c = v.getCliente();
         int quantity = rdv.getQuantity();
         if(c!=null && this.checkApplicable(c.getTipo()))
@@ -55,7 +56,7 @@ public class ScontoPrendiPaghiClienteProdottoStrategy implements IScontoProdotto
             quantity = rdv.getQuantity()-notPayedQuantity;
         }
 
-        return rdv.getDescrizione().getPrezzo().multiply(quantity);
+        return rdv.getDescrizione().getPrezzo(v.getDate()).multiply(quantity);
     }
 
     private boolean checkApplicable(TipologiaCliente tc)
@@ -69,8 +70,8 @@ public class ScontoPrendiPaghiClienteProdottoStrategy implements IScontoProdotto
     }
     
     @Override
-    public boolean isValid() {
-        return this.periodo.isActual();
+    public boolean isValid(DateTime period) {
+        return this.periodo.isInPeriod(period);
     }
 
     @Override

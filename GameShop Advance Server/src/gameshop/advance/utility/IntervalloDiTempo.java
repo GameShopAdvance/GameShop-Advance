@@ -24,6 +24,10 @@ public class IntervalloDiTempo {
     public boolean isActual(){
         return this.startDate.isBeforeNow() && this.endDate.isAfterNow();
      }
+
+    public boolean isInPeriod(DateTime period) {
+        return this.startDate.isBefore(period) && this.endDate.isAfter(period);
+    }
     
 
     

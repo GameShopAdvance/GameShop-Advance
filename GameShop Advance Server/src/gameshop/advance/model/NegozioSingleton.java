@@ -11,6 +11,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import org.joda.time.DateTime;
 
 /**
  * Il Negozio rappresenta il vero Negozio fisico.Dato che il negozio è uno e uno solo,
@@ -79,7 +80,7 @@ public class NegozioSingleton
         while(sconti.hasNext())
         {
             IScontoVenditaStrategy sconto = (IScontoVenditaStrategy) sconti.next();
-            if(sconto.isActual()){
+            if(sconto.isValid(DateTime.now())){
                 scontiAttuali.add(sconto);
             }
         }
