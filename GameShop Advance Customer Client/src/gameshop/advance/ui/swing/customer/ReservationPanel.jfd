@@ -29,10 +29,10 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"
-				"text": "Avanti"
+				"text": "Completa"
 				"background": new java.awt.Color( 102, 204, 0, 255 )
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToReviewActionPerformed", true ) )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "completeReservationActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
 				"gridY": 3

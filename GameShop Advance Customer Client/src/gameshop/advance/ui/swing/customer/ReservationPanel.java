@@ -10,6 +10,7 @@ import gameshop.advance.controller.PrenotaProdottoController;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
+import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.utility.Money;
 import java.awt.Color;
 import java.awt.Font;
@@ -39,14 +40,16 @@ import org.joda.time.DateTime;
  */
 public class ReservationPanel extends JPanel {
     
-    private final String[] columnNames = {"Id", "Descrizione", "Prezzo", "Prenota"};
+    private final String[] columnNames = {"Id", "Descrizione", "Prezzo", "Prenota","Subtotale"};
+    private final int MAX_QUANTITY  = 10;
     
      
     public ReservationPanel() {
         try {
             initComponents();
             this.DisplayData(PrenotaProdottoController.getInstance().getDescriptionList());
-            this.setUpReservationColumn(this.table1, this.table1.getColumnModel().getColumn(3));
+            this.setUpReservationColumn( this.table1.getColumnModel().getColumn(3));
+            this.setUpSubtotalColumn( this.table1.getColumnModel().getColumn(4));
         } catch (RemoteException ex) {
             Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (NullPointerException ex) {
@@ -56,20 +59,17 @@ public class ReservationPanel extends JPanel {
         }
     }
 
- public void setUpReservationColumn(JTable table, TableColumn rColumn) {
-        //Set up the editor for the sport cells.
+ public void setUpReservationColumn(TableColumn rColumn) {
         JComboBox comboBox = new JComboBox();
-        comboBox.addItem(1);
-        comboBox.addItem(2);
-        comboBox.addItem(3);
-        comboBox.addItem(4);
-        comboBox.addItem(5);
-        comboBox.addItem(6);
+        
+        for (int i=0; i<=MAX_QUANTITY; i++){
+            comboBox.addItem(i);
+        }
+        
         rColumn.setCellEditor(new DefaultCellEditor(comboBox));
-
-        //Set up cells
+        comboBox.setSelectedItem(0);
         DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
-        renderer.setToolTipText("Click per sceglere le copie");
+        renderer.setToolTipText("Clicca per sceglere le copie da prenotare");
         rColumn.setCellRenderer(renderer);
     }
      
@@ -78,15 +78,11 @@ public class ReservationPanel extends JPanel {
             DefaultTableModel aModel = new DefaultTableModel() {
                 @Override
                 public boolean isCellEditable(int row, int column) {
-                    if( column > 2 )
-                            return true;
-                    else
-                        return false;
+                    return column > 2;
                 }
             };
-            //setting the column name
+           
             final Object[] names = this.columnNames;
-            
             
             aModel.setColumnIdentifiers(names);
             if (ProductsList == null) {
@@ -96,7 +92,7 @@ public class ReservationPanel extends JPanel {
             
             Object[] objects = new Object[3];
             IIteratorWrapperRemote<IDescrizioneProdottoRemote> products = ProductsList;
-            //populating the tablemodel
+            // Populazione della TableModel
             while (products.hasNext()) {
                 try {
                     IDescrizioneProdottoRemote p = products.next();
@@ -109,50 +105,80 @@ public class ReservationPanel extends JPanel {
                     Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
                 }
             }
-            
-             aModel.addTableModelListener( new TableModelListener() {
-               private Money total = new Money();
-
-                @Override
-                public void tableChanged(TableModelEvent e) {
-                   if (e.getType() == TableModelEvent.UPDATE)
-                    {
-                        int row = e.getFirstRow();
-                        int column = e.getColumn();
-                        
-                        int quantity = 0;
-                        
-                        if (column == 2 ||column == 3)
-                        {
-                            TableModel aModel = (TableModel)e.getSource();
-                            quantity = ((Integer) aModel.getValueAt(row, 3)).intValue();
-                            System.err.println("Row:"+quantity );
-                            Money price = ((Money) aModel.getValueAt(row, 2));
-                            total = total.add(price.multiply(quantity));
-                           
-                         }
-                                
-                               
-                            
-                            
-                            //aModel.setValueAt(quantity, row, 3);
-                        }
-                         textField1.setText(total.toString());
-                        
-                    }
-                
-            });
-           
             this.table1.setModel(aModel);
+            setTableModelListener();
+            
         } catch (RemoteException ex) {
             Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
      
 };
+     
+     private void setTableModelListener(){
+        TableModelListener tableModelListener;
+        tableModelListener = new TableModelListener() {
+            private Money total = new Money();
+            private Money subtotal = new Money();
+           
+            @Override
+            public void tableChanged(TableModelEvent e) {
+                if (e.getType() == TableModelEvent.UPDATE)
+                {
+                    int row = e.getFirstRow();
+                    int column = e.getColumn();
+                    int quantity = 0;
+                    
+                    if (column == 0 || column == 2 ||column == 3)
+                    {   
+                       
+                        TableModel myModel = (TableModel)e.getSource();
+                        try {
+                            quantity = ((Integer) myModel.getValueAt(row, 3)).intValue();
+                        }
+                        catch(NullPointerException ex){  
+                            UIWindowSingleton.getInstance().displayError("Attenzione seleziona una quantità valida");
+                        }
+                        Money price = (Money) myModel.getValueAt(row, 2);
+                        Money old_subtotal = (Money) myModel.getValueAt(row, 4);
+                        
+                        if (old_subtotal == null)
+                                old_subtotal = new Money();
+                        
+                         subtotal = price.multiply(quantity);
+                         myModel.setValueAt(subtotal, row, 4);
+                         
+                            if (subtotal.equals(old_subtotal))
+                                total = subtotal;
+                            else
+                                total = total.add(subtotal.subtract(old_subtotal));
+                        
+                            try {
+                            PrenotaProdottoController.getInstance().inserisciProdotti(myModel.getValueAt(row, 0), quantity);
+                        } catch ( NullPointerException | RemoteException | ConfigurationException ex) {
+                            Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+                        }
+                    }
+                }
+                 
+                textField1.setText(total.toString());
+            }         
+        };
+            table1.getModel().addTableModelListener(tableModelListener);
+     }
+     
+      private void setUpSubtotalColumn( TableColumn column) {
+        JTextField jtextField3;
+        jtextField3 = new JTextField();
+        column.setCellEditor(new DefaultCellEditor(jtextField3));
+
+        //Set up cells
+        DefaultTableCellRenderer renderer = new DefaultTableCellRenderer();
+        column.setCellRenderer(renderer);
+    }
 
 private void clearReservationActionPerformed(ActionEvent e) {
         try {
-            PrenotaProdottoController.getInstance().clearReservation();// TODO add your code here
+            PrenotaProdottoController.getInstance().clearReservation();
         } catch (NullPointerException ex) {
             Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (RemoteException ex) {
@@ -162,9 +188,9 @@ private void clearReservationActionPerformed(ActionEvent e) {
         }
 }
 
-private void goToReviewActionPerformed(ActionEvent e) {
+private void completeReservationActionPerformed(ActionEvent e) {
         try {
-            PrenotaProdottoController.getInstance().riepilogoPrenotazione();
+            PrenotaProdottoController.getInstance().completaPrenotazione();
         } catch (NullPointerException ex) {
             Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (RemoteException ex) {
@@ -208,13 +234,13 @@ private void goToReviewActionPerformed(ActionEvent e) {
         add(label1, CC.xy(5, 3, CC.CENTER, CC.DEFAULT));
 
         //---- button2 ----
-        button2.setText("Avanti");
+        button2.setText("Completa");
         button2.setBackground(new Color(102, 204, 0));
         button2.setFont(button2.getFont().deriveFont(button2.getFont().getStyle() | Font.BOLD));
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                goToReviewActionPerformed(e);
+                completeReservationActionPerformed(e);
             }
         });
         add(button2, CC.xy(7, 3, CC.DEFAULT, CC.FILL));
@@ -250,4 +276,6 @@ private void goToReviewActionPerformed(ActionEvent e) {
     private JLabel label2;
     private JTextField textField1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+   
 }
