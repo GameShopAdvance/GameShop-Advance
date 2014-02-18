@@ -44,7 +44,8 @@ public class BookPanel extends JPanel {
                     UIWindowSingleton.getInstance().displayError("Il formato di dato inserito per la quantità non è valido");
             }
             BookControllerSingleton.getInstance().recuperaPrenotazione(Integer.parseInt(this.bookCodeField.getText()));
-         
+            this.clearFields();
+            this.total.setText(BookControllerSingleton.getInstance().getTotal().toString());
         } catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
                     + " si prega di controllare la configurazione del sistema.");
@@ -115,6 +116,11 @@ public class BookPanel extends JPanel {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
                     + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
         }
+    }
+    
+    public void clearFields()
+    {
+        this.bookCodeField.setText("");
     }
 
     
