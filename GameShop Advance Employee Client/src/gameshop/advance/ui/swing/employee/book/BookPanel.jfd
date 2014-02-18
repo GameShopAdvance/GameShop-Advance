@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "5dlu, 65dlu, max(default;20dlu):grow, 65dlu, labelcompgap, 61dlu, labelcompgap, 56dlu, max(default;20dlu):grow, 65dlu, 5dlu"
-			"$rowSpecs": "5dlu, fill:max(default;20dlu), linegap, (20dlu<default<40dlu), max(default;20dlu), fill:(15dlu<default<40dlu), 60dlu, fill:default:grow"
+			"$columnSpecs": "5dlu, 65dlu, max(default;7dlu):grow, 59dlu, labelcompgap, 61dlu, labelcompgap, 69dlu, max(default;47dlu):grow, 23dlu, 5dlu"
+			"$rowSpecs": "5dlu, 23dlu, linegap, fill:max(default;43dlu), linegap, max(default;20dlu), fill:(36dlu<default<40dlu), 2dlu, 17dlu, 29dlu, linegap, fill:19dlu:grow, linegap, 1dlu"
 		} ) {
 			name: "panel3"
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -15,49 +15,12 @@ new FormModel {
 				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
 				"foreground": new java.awt.Color( 255, 255, 255, 255 )
 				"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
-				"nextFocusableComponent": new FormReference( "goToPaymentBookButton" )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "clearBookActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 2
 				"gridX": 2
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label1"
-				"text": "Totale"
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 1, false )
-				"labelFor": new FormReference( "total" )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
-				"gridY": 2
-			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "total"
-				"editable": false
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 6
-				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-				"gridY": 2
-			} )
-			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "goToPaymentBookButton"
-				"text": "Avanti"
-				"background": new java.awt.Color( 102, 204, 0, 255 )
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
-				"name": "nextButton"
-				"nextFocusableComponent": new FormReference( "bookCodeField" )
-				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToPaymentBookButtonActionPerformed", true ) )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 10
-				"gridY": 2
-			} )
-			add( new FormComponent( "javax.swing.JSeparator" ) {
-				name: "separator1"
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
-				"gridY": 4
-				"gridWidth": 5
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 				"$columnSpecs": "65dlu, labelcompgap, 53dlu:grow, labelcompgap, 49dlu:grow"
@@ -90,12 +53,12 @@ new FormModel {
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 4
-				"gridY": 5
+				"gridY": 4
 				"gridWidth": 5
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "max(default;67dlu), labelcompgap, 110dlu"
-				"$rowSpecs": "max(default;20dlu), linegap, default"
+				"$columnSpecs": "max(default;67dlu), labelcompgap, 103dlu"
+				"$rowSpecs": "max(default;20dlu), linegap, 13dlu"
 			} ) {
 				name: "panel1"
 				"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( "Carta Cliente" ), sfield com.jgoodies.forms.factories.Borders DLU2_BORDER )
@@ -120,7 +83,6 @@ new FormModel {
 					"text": "Inserisci"
 					"foreground": sfield java.awt.Color black
 					"font": new com.jformdesigner.model.SwingDerivedFont( null, 65536, 0, false )
-					"nextFocusableComponent": new FormReference( "goToPaymentBookButton" )
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "insertClientCodeActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 3
@@ -128,8 +90,70 @@ new FormModel {
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 4
-				"gridY": 7
+				"gridY": 6
 				"gridWidth": 5
+				"gridHeight": 2
+			} )
+			add( new FormComponent( "javax.swing.JSeparator" ) {
+				name: "separator2"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 9
+				"gridX": 2
+				"gridWidth": 9
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Totale"
+				"font": &SwingDerivedFont0 new com.jformdesigner.model.SwingDerivedFont( null, 0, 1, false )
+				"labelFor": &FormReference0 new FormReference( "total" )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 2
+				"gridY": 10
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "total"
+				"editable": false
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridY": 10
+				"gridWidth": 2
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "Acconto"
+				"font": #SwingDerivedFont0
+				"labelFor": #FormReference0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 10
+				"gridX": 8
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "partial"
+				"editable": false
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 9
+				"gridY": 10
+				"gridWidth": 2
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "payTotal"
+				"text": "Paga Totale"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payTotalActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 12
+				"gridWidth": 2
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "payPartial"
+				"text": "Paga Acconto"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payPartialActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 9
+				"gridY": 12
+				"gridWidth": 2
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

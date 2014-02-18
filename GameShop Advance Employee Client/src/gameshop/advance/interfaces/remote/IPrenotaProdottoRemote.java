@@ -36,8 +36,15 @@ public interface IPrenotaProdottoRemote extends Remote{
     
     void recuperaPrenotazione(Integer id) throws RemoteException;
     
-    void pagaTotale(Money amount) throws RemoteException, InvalidMoneyException;
+     void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException;
     
-    void pagaAcconto(Money amount) throws RemoteException, InvalidMoneyException;
+    //metodo per la richiesta di pagamento in acconto
+
+    /**
+     *
+     * @throws RemoteException
+     * @throws InvalidMoneyException
+     */
+     void pagaAcconto() throws RemoteException, InvalidMoneyException;
     
 }

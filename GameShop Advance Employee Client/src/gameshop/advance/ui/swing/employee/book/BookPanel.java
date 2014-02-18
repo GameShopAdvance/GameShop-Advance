@@ -10,6 +10,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.Color;
 import java.awt.Cursor;
@@ -17,6 +18,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -74,21 +77,6 @@ public class BookPanel extends JPanel {
         }
     }
 
-    private void goToPaymentBookButtonActionPerformed(ActionEvent e) {
-        try {
-            BookControllerSingleton.getInstance().terminaPrenotazione();
-        } catch (NullPointerException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
-                    + " si prega di controllare la configurazione del sistema.");
-        } catch (RemoteException ex) {
-            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
-        } catch (ConfigurationException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
-                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
-        }
-    }
-
     private void clearBookActionPerformed(ActionEvent e) {
         try{
             BookControllerSingleton.getInstance().clearBook();
@@ -102,15 +90,43 @@ public class BookPanel extends JPanel {
         }
     }
 
+    private void payPartialActionPerformed(ActionEvent e) {
+        try{
+            BookControllerSingleton.getInstance().pagaAcconto();
+        } catch (NullPointerException ex) {
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
+                    + " si prega di controllare la configurazione del sistema.");
+        } catch (RemoteException ex) {
+            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
+                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+        } catch (ConfigurationException ex) {
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
+                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+        } catch (InvalidMoneyException ex) {
+            Logger.getLogger(BookPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }// TODO add your code here
+    }
+
+    private void payTotalActionPerformed(ActionEvent e) {
+        try {
+            BookControllerSingleton.getInstance().pagaTotale();
+        } catch (NullPointerException ex) {
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
+                    + " si prega di controllare la configurazione del sistema.");
+        } catch (RemoteException ex) {
+            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
+                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+        } catch (ConfigurationException ex) {
+            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
+                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+        }
+    }
+
     
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel3 = new JPanel();
         clearBook = new JButton();
-        label1 = new JLabel();
-        total = new JTextField();
-        goToPaymentBookButton = new JButton();
-        separator1 = new JSeparator();
         panel2 = new JPanel();
         label2 = new JLabel();
         bookCodeField = new JTextField();
@@ -119,12 +135,19 @@ public class BookPanel extends JPanel {
         label4 = new JLabel();
         clientCode = new JTextField();
         insertClientCode = new JButton();
+        separator2 = new JSeparator();
+        label1 = new JLabel();
+        total = new JTextField();
+        label3 = new JLabel();
+        partial = new JTextField();
+        payTotal = new JButton();
+        payPartial = new JButton();
 
         //======== panel3 ========
         {
             panel3.setLayout(new FormLayout(
-                "5dlu, 65dlu, [20dlu,default]:grow, 65dlu, $lcgap, 61dlu, $lcgap, 56dlu, [20dlu,default]:grow, 65dlu, 5dlu",
-                "5dlu, fill:[20dlu,default], $lgap, [20dlu,default,40dlu], [20dlu,default], fill:[15dlu,default,40dlu], 60dlu, fill:default:grow"));
+                "5dlu, 65dlu, [7dlu,default]:grow, 59dlu, $lcgap, 61dlu, $lcgap, 69dlu, [47dlu,default]:grow, 23dlu, 5dlu",
+                "5dlu, 23dlu, $lgap, fill:[43dlu,default], $lgap, [20dlu,default], fill:[36dlu,default,40dlu], 2dlu, 17dlu, 29dlu, $lgap, fill:19dlu:grow, $lgap, 1dlu"));
 
             //---- clearBook ----
             clearBook.setText("Annulla");
@@ -132,7 +155,6 @@ public class BookPanel extends JPanel {
             clearBook.setFont(clearBook.getFont().deriveFont(clearBook.getFont().getStyle() | Font.BOLD));
             clearBook.setForeground(Color.white);
             clearBook.setIcon(null);
-            clearBook.setNextFocusableComponent(goToPaymentBookButton);
             clearBook.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -140,31 +162,6 @@ public class BookPanel extends JPanel {
                 }
             });
             panel3.add(clearBook, CC.xy(2, 2, CC.FILL, CC.FILL));
-
-            //---- label1 ----
-            label1.setText("Totale");
-            label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 1f));
-            label1.setLabelFor(total);
-            panel3.add(label1, CC.xy(4, 2));
-
-            //---- total ----
-            total.setEditable(false);
-            panel3.add(total, CC.xy(6, 2, CC.DEFAULT, CC.FILL));
-
-            //---- goToPaymentBookButton ----
-            goToPaymentBookButton.setText("Avanti");
-            goToPaymentBookButton.setBackground(new Color(102, 204, 0));
-            goToPaymentBookButton.setFont(goToPaymentBookButton.getFont().deriveFont(goToPaymentBookButton.getFont().getStyle() | Font.BOLD));
-            goToPaymentBookButton.setName("nextButton");
-            goToPaymentBookButton.setNextFocusableComponent(bookCodeField);
-            goToPaymentBookButton.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    goToPaymentBookButtonActionPerformed(e);
-                }
-            });
-            panel3.add(goToPaymentBookButton, CC.xy(10, 2));
-            panel3.add(separator1, CC.xywh(4, 4, 5, 1));
 
             //======== panel2 ========
             {
@@ -195,7 +192,7 @@ public class BookPanel extends JPanel {
                 });
                 panel2.add(retrieveBookButton, CC.xywh(3, 3, 3, 1));
             }
-            panel3.add(panel2, CC.xywh(4, 5, 5, 1));
+            panel3.add(panel2, CC.xywh(4, 4, 5, 1));
 
             //======== panel1 ========
             {
@@ -203,8 +200,8 @@ public class BookPanel extends JPanel {
                     new TitledBorder("Carta Cliente"),
                     Borders.DLU2_BORDER));
                 panel1.setLayout(new FormLayout(
-                    "[67dlu,default], $lcgap, 110dlu",
-                    "[20dlu,default], $lgap, default"));
+                    "[67dlu,default], $lcgap, 103dlu",
+                    "[20dlu,default], $lgap, 13dlu"));
 
                 //---- label4 ----
                 label4.setText("Codice");
@@ -220,7 +217,6 @@ public class BookPanel extends JPanel {
                 insertClientCode.setText("Inserisci");
                 insertClientCode.setForeground(Color.black);
                 insertClientCode.setFont(insertClientCode.getFont().deriveFont(insertClientCode.getFont().getStyle() & ~Font.BOLD));
-                insertClientCode.setNextFocusableComponent(goToPaymentBookButton);
                 insertClientCode.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -229,7 +225,48 @@ public class BookPanel extends JPanel {
                 });
                 panel1.add(insertClientCode, CC.xy(3, 3));
             }
-            panel3.add(panel1, CC.xywh(4, 7, 5, 1));
+            panel3.add(panel1, CC.xywh(4, 6, 5, 2));
+            panel3.add(separator2, CC.xywh(2, 9, 9, 1));
+
+            //---- label1 ----
+            label1.setText("Totale");
+            label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 1f));
+            label1.setLabelFor(total);
+            panel3.add(label1, CC.xy(2, 10));
+
+            //---- total ----
+            total.setEditable(false);
+            panel3.add(total, CC.xywh(3, 10, 2, 1, CC.DEFAULT, CC.FILL));
+
+            //---- label3 ----
+            label3.setText("Acconto");
+            label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 1f));
+            label3.setLabelFor(total);
+            panel3.add(label3, CC.xy(8, 10));
+
+            //---- partial ----
+            partial.setEditable(false);
+            panel3.add(partial, CC.xywh(9, 10, 2, 1, CC.DEFAULT, CC.FILL));
+
+            //---- payTotal ----
+            payTotal.setText("Paga Totale");
+            payTotal.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    payTotalActionPerformed(e);
+                }
+            });
+            panel3.add(payTotal, CC.xywh(3, 12, 2, 1));
+
+            //---- payPartial ----
+            payPartial.setText("Paga Acconto");
+            payPartial.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    payPartialActionPerformed(e);
+                }
+            });
+            panel3.add(payPartial, CC.xywh(9, 12, 2, 1));
         }
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
@@ -237,10 +274,6 @@ public class BookPanel extends JPanel {
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel3;
     private JButton clearBook;
-    private JLabel label1;
-    private JTextField total;
-    private JButton goToPaymentBookButton;
-    private JSeparator separator1;
     private JPanel panel2;
     private JLabel label2;
     private JTextField bookCodeField;
@@ -249,5 +282,12 @@ public class BookPanel extends JPanel {
     private JLabel label4;
     private JTextField clientCode;
     private JButton insertClientCode;
+    private JSeparator separator2;
+    private JLabel label1;
+    private JTextField total;
+    private JLabel label3;
+    private JTextField partial;
+    private JButton payTotal;
+    private JButton payPartial;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
