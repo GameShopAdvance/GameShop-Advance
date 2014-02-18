@@ -14,8 +14,7 @@ import gameshop.advance.interfaces.remote.IRemoteClient;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.observer.BookPartialObserver;
-import gameshop.advance.observer.SaleObserver;
-import gameshop.advance.observer.SaleRestObserver;
+import gameshop.advance.observer.BookRestObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.employee.book.BookPanel;
@@ -39,8 +38,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     
     private static BookControllerSingleton instance;
     private IPrenotaProdottoRemote controller;
-    private IRemoteObserver saleTotalObserver;
-    private IRemoteObserver saleRestObserver;
+    private IRemoteObserver bookRestObserver;
     private IRemoteObserver bookPartialObserver;
     private Money totale;
     private Money acconto;
@@ -56,8 +54,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         Registry reg = LocateRegistry.getRegistry(controllerConfig.getServerAddress(), controllerConfig.getServerPort()); 
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
         this.controller = factory.getPrenotaProdottoController();
-        this.saleTotalObserver = new SaleObserver(instance);
-        this.saleRestObserver = new SaleRestObserver(instance);
+        this.bookRestObserver = new BookRestObserver(instance);
         this.bookPartialObserver = new BookPartialObserver(instance);
         
     }
@@ -78,12 +75,11 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     
     public void gestisciPrenotazione() throws RemoteException{
         this.controller.avviaPrenotazione();
-        this.controller.addListener(this.saleTotalObserver);
-        aggiornaWindow(new BookPanel());
+        this.controller.addListener(this.bookPartialObserver);
+        this.aggiornaWindow(new BookPanel());
     }
     
     public void recuperaPrenotazione(int codicePrenotazione) throws RemoteException {
-        
         this.controller.recuperaPrenotazione(codicePrenotazione);
     }
     
@@ -106,7 +102,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     
     public void pagaAcconto(double acconto) throws RemoteException, InvalidMoneyException{
         try{
-            this.controller.addListener(this.bookPartialObserver);
+            this.controller.addListener(this.bookRestObserver);
             this.controller.pagaAcconto(new Money(acconto));
             aggiornaWindow(new EndBookPanel());
         }
@@ -126,7 +122,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     public void gestisciPagamento(Double ammontare){
         
         try{
-            this.controller.addListener(this.saleRestObserver);
+            this.controller.addListener(this.bookRestObserver);
             this.controller.gestisciPagamento(new Money(ammontare));
             aggiornaWindow(new EndBookPanel());
         }
@@ -159,5 +155,9 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     @Override
     public void aggiornaResto(Money m) throws RemoteException {
         this.resto = m;
+    }
+
+    public void inserisciCartaCliente(Integer code) {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
