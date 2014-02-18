@@ -80,13 +80,9 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
     {
         IDProdotto id = new IDProdotto(codiceProdotto);
         try{
-            if(!this.addedItems.containsKey(id.getCodice()))
-                this.addedItems.put(id.getCodice(), new AggiuntaProdotti(null, quantity));
-            else
-            {
-                AggiuntaProdotti ap = this.addedItems.get(id.getCodice());
-                ap.setAddedQuantity(ap.getAddedQuantity()+quantity);
-            }
+            System.err.println("Pre aggiunta hash :"+this.addedItems.size());
+            this.addedItems.put(id.getCodice(), new AggiuntaProdotti(null, quantity));
+            System.err.println("Post aggiunta hash :"+this.addedItems.size());
             this.controller.inserisciProdotto(id, quantity);
         }catch(ProdottoNotFoundException | QuantityException e)
         {
