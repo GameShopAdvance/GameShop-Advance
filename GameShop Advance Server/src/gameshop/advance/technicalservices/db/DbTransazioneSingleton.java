@@ -10,6 +10,7 @@ import com.db4o.ObjectContainer;
 import com.db4o.query.Predicate;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.ITransazione;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -49,7 +50,14 @@ public class DbTransazioneSingleton {
 
             @Override
             public boolean match(ITransazione candidate) {
-                if(candidate.getId().intValue() == id.intValue())
+                Integer idTrans;
+                try {
+                    idTrans = candidate.getId();
+                }
+                catch (RemoteException ex) {
+                    return false;
+                }
+                if(idTrans.intValue() == id.intValue())
                     return true;
                 else
                     return false;

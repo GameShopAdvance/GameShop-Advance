@@ -41,8 +41,9 @@ public interface IPrenotaProdottoRemote extends Remote{
 
     /**
      *
+     * @param ammontare
      * @throws RemoteException
      * @throws InvalidMoneyException
      */
-        void pagaAcconto() throws RemoteException, InvalidMoneyException;
+        void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException;
 }

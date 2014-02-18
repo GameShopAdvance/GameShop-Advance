@@ -7,6 +7,7 @@ import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
 import gameshop.advance.technicalservices.db.DbScontoVenditaSingleton;
 import gameshop.advance.technicalservices.db.DbTransazioneSingleton;
+import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.logging.Level;
@@ -47,12 +48,12 @@ public class NegozioSingleton
     /**
      * Aggiunge la vendita ricevuta all'elenco delle vendite completate nel negozio.
      * @param v
+     * @throws java.rmi.RemoteException
      */
-    public void registraTransazione(ITransazione v)
+    public void registraTransazione(ITransazione v) throws RemoteException
     {
         try {
             v.setId(DbTransazioneSingleton.getInstance().count());
-            System.err.println("Transazione n."+v.getId());
             DbTransazioneSingleton.getInstance().create(v);
         } catch (ObjectAlreadyExistsDbException ex) {
             Logger.getLogger(NegozioSingleton.class.getName()).log(Level.SEVERE, null, ex);

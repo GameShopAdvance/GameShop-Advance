@@ -35,5 +35,7 @@ public interface ITransazioneRemote extends Remote {
      * @return il totale della transazione
      */
     Money getTotal() throws RemoteException;
+    
+    Integer getId() throws RemoteException;
 
 }
