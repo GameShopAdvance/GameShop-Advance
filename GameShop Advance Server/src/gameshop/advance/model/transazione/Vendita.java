@@ -12,6 +12,7 @@ import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.Pagamento;
+import gameshop.advance.model.transazione.sconto.ScontoFactorySingleton;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
@@ -34,8 +35,8 @@ public class Vendita implements ITransazione {
     private LinkedList<IRemoteObserver> listeners;
 
     public Vendita() {
-        this.listeners = new LinkedList<>();
         this.date = new DateTime();
+        this.strategiaDiSconto = ScontoFactorySingleton.getInstance().getStrategiaScontoVendita();
     }
 
     @Override
@@ -168,6 +169,8 @@ public class Vendita implements ITransazione {
 
     @Override
     public void aggiungiListener(IRemoteObserver obs) {
+        if(this.listeners == null)
+            this.listeners = new LinkedList<>();
         this.listeners.add(obs);
     }
 
@@ -181,9 +184,10 @@ public class Vendita implements ITransazione {
     
     protected void notificaListener() throws RemoteException
     {
-        for(IRemoteObserver obs: this.listeners)
+        if(this.listeners != null)
         {
-            obs.notifica(new TransazioneRemoteProxy(this));
+            for(IRemoteObserver obs:this.listeners)
+                obs.notifica(new TransazioneRemoteProxy(this));
         }
     }
 }

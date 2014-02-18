@@ -23,6 +23,7 @@ public interface ITransazioneRemote extends Remote {
      * il resto.
      * @return il resto da restituire
      * @throws InvalidMoneyException
+     * @throws java.rmi.RemoteException
      */
     Money getResto() throws InvalidMoneyException, RemoteException;
 
@@ -33,7 +34,10 @@ public interface ITransazioneRemote extends Remote {
      * della transazione sommando i valori sub-totali di tutte le righe di vendita
      * della transazione.
      * @return il totale della transazione
+     * @throws java.rmi.RemoteException
      */
     Money getTotal() throws RemoteException;
+    
+    Integer getId() throws RemoteException;
     
 }

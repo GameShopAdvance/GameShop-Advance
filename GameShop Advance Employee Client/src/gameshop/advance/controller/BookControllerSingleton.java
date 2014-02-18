@@ -9,17 +9,16 @@ package gameshop.advance.controller;
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.interfaces.remote.ICassaRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.IRemoteClient;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.observer.BookPartialObserver;
 import gameshop.advance.observer.SaleObserver;
 import gameshop.advance.observer.SaleRestObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.employee.book.BookPanel;
-import gameshop.advance.ui.swing.employee.book.BookPartialPaymentPanel;
 import gameshop.advance.ui.swing.employee.book.BookTotalPaymentPanel;
 import gameshop.advance.ui.swing.employee.book.EndBookPanel;
 import gameshop.advance.utility.Money;
@@ -40,9 +39,9 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     
     private static BookControllerSingleton instance;
     private IPrenotaProdottoRemote controller;
-    private ICassaRemote cassa;
     private IRemoteObserver saleTotalObserver;
     private IRemoteObserver saleRestObserver;
+    private IRemoteObserver bookPartialObserver;
     private Money totale;
     private Money acconto;
     private Money resto;
@@ -57,9 +56,9 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         Registry reg = LocateRegistry.getRegistry(controllerConfig.getServerAddress(), controllerConfig.getServerPort()); 
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
         this.controller = factory.getPrenotaProdottoController();
-        this.cassa = factory.creaCassa(controllerConfig.getIdCassa());
         this.saleTotalObserver = new SaleObserver(instance);
         this.saleRestObserver = new SaleRestObserver(instance);
+        this.bookPartialObserver = new BookPartialObserver(instance);
         
     }
     
@@ -78,6 +77,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     }
     
     public void gestisciPrenotazione() throws RemoteException{
+        this.controller.avviaPrenotazione();
         this.controller.addListener(this.saleTotalObserver);
         aggiornaWindow(new BookPanel());
     }
@@ -104,12 +104,22 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         return this.resto;
     }
     
-    public void pagaAcconto() throws RemoteException, InvalidMoneyException{
-        this.controller.pagaAcconto();
-        aggiornaWindow(new BookPartialPaymentPanel());
+    public void pagaAcconto(double acconto) throws RemoteException, InvalidMoneyException{
+        try{
+            this.controller.addListener(this.bookPartialObserver);
+            this.controller.pagaAcconto(new Money(acconto));
+            aggiornaWindow(new EndBookPanel());
+        }
+        catch (InvalidMoneyException | RemoteException ex) {
+            Logger.getLogger(SaleControllerSingleton.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void pagaTotale(){
+    public void mostraPagaTotale(){
+        aggiornaWindow(new BookTotalPaymentPanel());
+    }
+    
+    public void mostraPagaAcconto(){
         aggiornaWindow(new BookTotalPaymentPanel());
     }
     
@@ -137,12 +147,17 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     }
 
     @Override
+    public void aggiornaAcconto(Money m){
+        this.acconto = m;
+    }
+    
+    @Override
     public void aggiornaTotale(Money m) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.totale = m;
     }
 
     @Override
     public void aggiornaResto(Money m) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.resto = m;
     }
 }
