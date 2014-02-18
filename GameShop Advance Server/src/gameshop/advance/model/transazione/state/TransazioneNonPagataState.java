@@ -6,9 +6,11 @@
 
 package gameshop.advance.model.transazione.state;
 
+import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.ITransazioneState;
 import gameshop.advance.utility.Money;
+import java.rmi.RemoteException;
 
 /**
  *
@@ -16,19 +18,26 @@ import gameshop.advance.utility.Money;
  */
 public class TransazioneNonPagataState implements ITransazioneState {
 
+    public TransazioneNonPagataState() {
+    }
+    
     @Override
-    public void pagaAcconto(ITransazione trans) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void pagaAcconto(ITransazione trans) throws RemoteException {
+        trans.setState(new TransazionePagataInAccontoState());
     }
 
     @Override
-    public void gestisciPagamento(ITransazione trans, Money ammontare) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void gestisciPagamento(ITransazione trans, Money ammontare) throws RemoteException, InvalidMoneyException{
+        Money total = trans.getTotal();
+        if(total.greater(ammontare))
+            throw new InvalidMoneyException(ammontare);
+        else
+            trans.setPagamento(ammontare);
     }
 
     @Override
-    public Money getTotal(ITransazione trans) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public Money getTotal(ITransazione trans) throws RemoteException {
+        return trans.getScontoVendita().getTotal(trans);
     }
 
     @Override

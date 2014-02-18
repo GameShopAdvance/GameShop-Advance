@@ -6,7 +6,9 @@
 
 package gameshop.advance.interfaces;
 
+import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.utility.Money;
+import java.rmi.RemoteException;
 
 /**
  *
@@ -14,11 +16,11 @@ import gameshop.advance.utility.Money;
  */
 public interface ITransazioneState {
     
-    void pagaAcconto(ITransazione trans);
+    void pagaAcconto(ITransazione trans) throws RemoteException;
     
-    void gestisciPagamento(ITransazione trans, Money ammontare);
+    void gestisciPagamento(ITransazione trans, Money ammontare)  throws RemoteException, InvalidMoneyException;
     
-    Money getTotal(ITransazione trans);
+    Money getTotal(ITransazione trans) throws RemoteException;
     
-    Money getResto(ITransazione trans);
+    Money getResto(ITransazione trans) throws RemoteException;
 }
