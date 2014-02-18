@@ -81,9 +81,9 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     }
     
     @Override
-    public void pagaAcconto() throws RemoteException, InvalidMoneyException
+    public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException
     {
-        this.prenotazione.pagaAcconto();
+        this.prenotazione.pagaAcconto(ammontare);
     }
     
     /**

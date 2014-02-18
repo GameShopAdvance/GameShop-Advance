@@ -69,10 +69,4 @@ public interface ITransazione extends ITransazioneRemote {
         
     DateTime getDate();
 
-    void setState(ITransazioneState state) throws RemoteException;
-    
-    IScontoVenditaStrategy getScontoVendita();
-
-    public void setPagamento(Money ammontare);
-    
 }

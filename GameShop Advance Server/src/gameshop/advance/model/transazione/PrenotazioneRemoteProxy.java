@@ -7,45 +7,47 @@
 package gameshop.advance.model.transazione;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.interfaces.ITransazione;
-import gameshop.advance.interfaces.remote.ITransazioneRemote;
+import gameshop.advance.interfaces.remote.IPrenotazioneRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
-import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 /**
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class TransazioneRemoteProxy extends UnicastRemoteObject implements ITransazioneRemote {
+public class PrenotazioneRemoteProxy implements IPrenotazioneRemote {
+
+    private final IPrenotazioneRemote protectedRemoteObject;
     
-    private final ITransazione protectedRemoteTransaction;
-    
-    public TransazioneRemoteProxy(ITransazione trans) throws RemoteException
+    public PrenotazioneRemoteProxy(IPrenotazioneRemote pren)
     {
-        System.err.println("Creazione Proxy");
-        this.protectedRemoteTransaction = trans;
+        this.protectedRemoteObject = pren;
+    }
+    
+    @Override
+    public Money getAcconto() throws RemoteException {
+        return this.protectedRemoteObject.getAcconto();
     }
 
     @Override
     public Money getResto() throws InvalidMoneyException, RemoteException {
-        return this.protectedRemoteTransaction.getResto();
+        return this.protectedRemoteObject.getResto();
     }
 
     @Override
     public List getRigheDiVendita() throws RemoteException {
-        return this.protectedRemoteTransaction.getRigheDiVendita();
+        return this.protectedRemoteObject.getRigheDiVendita();
     }
 
     @Override
     public Money getTotal() throws RemoteException {
-        return this.protectedRemoteTransaction.getTotal();
+        return this.protectedRemoteObject.getTotal();
     }
 
     @Override
     public Integer getId() throws RemoteException {
-        return this.protectedRemoteTransaction.getId();
+        return this.protectedRemoteObject.getId();
     }
     
 }
