@@ -2,8 +2,8 @@ package gameshop.advance.model;
 
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
+import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.transazione.CartaCliente;
-import gameshop.advance.model.transazione.decorator.TransazioneDecorator;
 import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
 import gameshop.advance.technicalservices.db.DbScontoVenditaSingleton;
 import gameshop.advance.technicalservices.db.DbTransazioneSingleton;
@@ -48,7 +48,7 @@ public class NegozioSingleton
      * Aggiunge la vendita ricevuta all'elenco delle vendite completate nel negozio.
      * @param v
      */
-    public void registraTransazione(TransazioneDecorator v)
+    public void registraTransazione(ITransazione v)
     {
         try {
             v.setId(DbTransazioneSingleton.getInstance().count());
@@ -59,7 +59,7 @@ public class NegozioSingleton
         }
     }
     
-    public TransazioneDecorator riprendiTransazione(Integer id)
+    public ITransazione riprendiTransazione(Integer id)
     {
         return DbTransazioneSingleton.getInstance().read(id);
     }

@@ -9,6 +9,7 @@ package gameshop.advance.model.transazione;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
+import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.Pagamento;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
@@ -22,7 +23,7 @@ import org.joda.time.DateTime;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class Transazione implements ITransazione {
+public class Vendita implements ITransazione {
     protected Integer idVendita;
     protected LinkedList<RigaDiTransazione> righeDiVendita = new LinkedList<>();
     protected CartaCliente cliente;
@@ -30,8 +31,10 @@ public class Transazione implements ITransazione {
     protected DateTime date;
     protected ScontoVenditaStrategyComposite strategiaDiSconto;
     protected boolean completata;
+    private LinkedList<IRemoteObserver> listeners;
 
-    public Transazione() {
+    public Vendita() {
+        this.listeners = new LinkedList<>();
         this.date = new DateTime();
     }
 
@@ -64,9 +67,10 @@ public class Transazione implements ITransazione {
      * @param quantity
      */
     @Override
-    public void inserisciProdotto(DescrizioneProdotto desc, int quantity) {
+    public void inserisciProdotto(DescrizioneProdotto desc, int quantity) throws RemoteException {
         RigaDiTransazione rdv = new RigaDiTransazione(desc, quantity, desc.getSconti(date));
         this.righeDiVendita.add(rdv);
+        this.notificaListener();
     }
 
     /**
@@ -108,6 +112,7 @@ public class Transazione implements ITransazione {
     @Override
     public void gestisciPagamento(Money ammontare) throws InvalidMoneyException,RemoteException {
         this.pagamento = new Pagamento(ammontare);
+        this.notificaListener();
     }
 
     @Override
@@ -145,20 +150,37 @@ public class Transazione implements ITransazione {
     }
 
     @Override
-    public void addSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali) {
+    public void addSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali) throws RemoteException {
         for (IScontoVenditaStrategy sconto : scontiAttuali) {
             this.strategiaDiSconto.add(sconto);
         }
-    }
-
-    @Override
-    public void setSconto(ScontoVenditaStrategyComposite sconto) {
-        this.strategiaDiSconto = sconto;
+        this.notificaListener();
     }
 
     @Override
     public boolean isCompleted() {
         return this.completata;
+    }
+
+    @Override
+    public void aggiungiListener(IRemoteObserver obs) {
+        this.listeners.add(obs);
+    }
+
+    @Override
+    public void rimuoviListener(IRemoteObserver obs) {
+        if(obs == null)
+            this.listeners = null;
+        else
+            this.listeners.remove(obs);
+    }
+    
+    protected void notificaListener() throws RemoteException
+    {
+        for(IRemoteObserver obs: this.listeners)
+        {
+            obs.notifica(new TransazioneRemoteProxy(this));
+        }
     }
     
 }

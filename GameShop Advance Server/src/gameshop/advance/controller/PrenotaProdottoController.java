@@ -8,17 +8,14 @@ package gameshop.advance.controller;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
+import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.CatalogoProdottiSingleton;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.NegozioSingleton;
-import gameshop.advance.model.transazione.Transazione;
-import gameshop.advance.model.transazione.decorator.PagataInAccontoTransazioneDecorator;
-import gameshop.advance.model.transazione.decorator.PagataInTotaleTransazioneDecorator;
-import gameshop.advance.model.transazione.decorator.PrenotazioneTransazioneDecorator;
-import gameshop.advance.model.transazione.decorator.TransazioneDecorator;
+import gameshop.advance.model.transazione.Prenotazione;
 import gameshop.advance.remote.DescrizioneRemoteProxy;
 import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
 import gameshop.advance.utility.IDProdotto;
@@ -35,7 +32,7 @@ import java.util.LinkedList;
  */
 public class PrenotaProdottoController extends UnicastRemoteObject implements IPrenotaProdottoRemote {
     
-    private TransazioneDecorator prenotazione;
+    private ITransazione prenotazione;
     
     //OPERAZIONI DI SISTEMA LATO CLIENTE
     
@@ -64,7 +61,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     @Override
     public void avviaPrenotazione() throws RemoteException
     {
-        this.prenotazione = new PrenotazioneTransazioneDecorator(new Transazione());
+        this.prenotazione = new Prenotazione();
     }
     
     @Override
@@ -93,9 +90,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     @Override
     public void pagaAcconto(Money amount) throws RemoteException, InvalidMoneyException
     {
-        this.prenotazione = new PagataInAccontoTransazioneDecorator(this.prenotazione);
         this.prenotazione.gestisciPagamento(amount);
-        this.prenotazione = (TransazioneDecorator) this.prenotazione.unwrap();
     }
     
     /**
@@ -118,9 +113,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     @Override
     public void pagaTotale(Money amount) throws RemoteException, InvalidMoneyException
     {
-        this.prenotazione = new PagataInTotaleTransazioneDecorator(this.prenotazione.unwrap());
         this.prenotazione.gestisciPagamento(amount);
-        this.prenotazione = (TransazioneDecorator) this.prenotazione.unwrap();
     }
     
 }

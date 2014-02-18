@@ -7,6 +7,7 @@
 package gameshop.advance.interfaces;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.interfaces.remote.ITransazioneRemote;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.CartaCliente;
@@ -58,12 +59,16 @@ public interface ITransazione extends ITransazioneRemote {
     
     Money getPagamento();
 
-    void addSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali);
+    void addSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali) throws RemoteException;
     
-    void setSconto(ScontoVenditaStrategyComposite sconto);
+    void setStrategiaSconto(ScontoVenditaStrategyComposite sconto);
     
     boolean isCompleted();
     
+    void aggiungiListener(IRemoteObserver obs);
+    
+    void rimuoviListener(IRemoteObserver obs);
         
     DateTime getDate();
+
 }

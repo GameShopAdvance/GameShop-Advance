@@ -10,7 +10,6 @@ import com.db4o.ObjectContainer;
 import com.db4o.query.Predicate;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.ITransazione;
-import gameshop.advance.model.transazione.decorator.TransazioneDecorator;
 import java.util.List;
 
 /**
@@ -33,7 +32,7 @@ public class DbTransazioneSingleton {
         return DbTransazioneSingleton.instance;
     }
     
-    public void create(TransazioneDecorator sale) throws ObjectAlreadyExistsDbException
+    public void create(ITransazione sale) throws ObjectAlreadyExistsDbException
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         int exist = client.queryByExample(sale).size();
@@ -43,15 +42,14 @@ public class DbTransazioneSingleton {
         client.commit();
     }
     
-    public TransazioneDecorator read(final Integer id)
+    public ITransazione read(final Integer id)
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-        List<TransazioneDecorator> result = client.query(new Predicate<TransazioneDecorator>() {
+        List<ITransazione> result = client.query(new Predicate<ITransazione>() {
 
             @Override
-            public boolean match(TransazioneDecorator candidate) {
-                ITransazione trans = candidate.unwrap();
-                if(trans.getId().intValue() == id.intValue())
+            public boolean match(ITransazione candidate) {
+                if(candidate.getId().intValue() == id.intValue())
                     return true;
                 else
                     return false;
@@ -65,6 +63,6 @@ public class DbTransazioneSingleton {
     public Integer count()
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-        return client.queryByExample(TransazioneDecorator.class).size();
+        return client.queryByExample(ITransazione.class).size();
     }
 }

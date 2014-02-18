@@ -7,9 +7,7 @@ import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.remote.ICassaRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.transazione.CartaCliente;
-import gameshop.advance.model.transazione.Transazione;
-import gameshop.advance.model.transazione.decorator.TransazioneDecorator;
-import gameshop.advance.model.transazione.decorator.VenditaTransazioneDecorator;
+import gameshop.advance.model.transazione.Vendita;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
@@ -26,7 +24,7 @@ import java.rmi.server.UnicastRemoteObject;
 public class Cassa extends UnicastRemoteObject implements ICassaRemote {
 
     private int numeroCassa;
-    private TransazioneDecorator venditaCorrente;
+    private Vendita venditaCorrente;
 
     /**
      * Il Costruttore della Cassa recupera il catalogo dei prodotti,
@@ -50,7 +48,6 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
      */
     @Override
     public void avviaNuovaVendita() throws RemoteException {
-        this.venditaCorrente = new VenditaTransazioneDecorator(new Transazione());
         System.err.println("Wrapped decorator");
         this.venditaCorrente.addSconti(NegozioSingleton.getInstance().getScontiAttuali());
     }
@@ -109,7 +106,7 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
     }
 
     /**
-     * Conlude la vendita richiamando la funzione completaTransazione della venditaCorrente.
+     * Conlude la vendita richiamando la funzione completaVendita della venditaCorrente.
      * @throws java.rmi.RemoteException
      */
     @Override
