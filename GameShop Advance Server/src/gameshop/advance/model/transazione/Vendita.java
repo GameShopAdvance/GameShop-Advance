@@ -9,10 +9,12 @@ package gameshop.advance.model.transazione;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
+import gameshop.advance.interfaces.ITransazioneState;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.Pagamento;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
+import gameshop.advance.model.transazione.state.TransazioneNonPagataState;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
@@ -32,8 +34,10 @@ public class Vendita implements ITransazione {
     protected ScontoVenditaStrategyComposite strategiaDiSconto;
     protected boolean completata;
     private LinkedList<IRemoteObserver> listeners;
+    private ITransazioneState state;
 
     public Vendita() {
+        this.state = new TransazioneNonPagataState();
         this.listeners = new LinkedList<>();
         this.date = new DateTime();
     }
@@ -111,7 +115,8 @@ public class Vendita implements ITransazione {
      */
     @Override
     public void gestisciPagamento(Money ammontare) throws InvalidMoneyException,RemoteException {
-        this.pagamento = new Pagamento(ammontare);
+        this.state.gestisciPagamento(this, ammontare);
+//        this.pagamento = new Pagamento(ammontare);
         this.notificaListener();
     }
 
@@ -144,6 +149,7 @@ public class Vendita implements ITransazione {
         this.cliente = c;
     }
     
+    @Override
     public void setStrategiaSconto(ScontoVenditaStrategyComposite sconto)
     {
         this.strategiaDiSconto = sconto;
@@ -182,5 +188,22 @@ public class Vendita implements ITransazione {
             obs.notifica(new TransazioneRemoteProxy(this));
         }
     }
+
+    @Override
+    public void setState(ITransazioneState state) throws RemoteException {
+        this.state = state;
+        this.notificaListener();
+    }
     
+    
+    @Override
+    public IScontoVenditaStrategy getScontoVendita()
+    {
+        return this.strategiaDiSconto;
+    }
+
+    @Override
+    public void setPagamento(Money ammontare) {
+        this.pagamento = new Pagamento(ammontare);
+    }
 }
