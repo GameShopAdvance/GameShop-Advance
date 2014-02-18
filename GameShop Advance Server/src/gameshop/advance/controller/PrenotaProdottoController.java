@@ -1,14 +1,7 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gameshop.advance.controller;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
-import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
@@ -32,7 +25,7 @@ import java.util.LinkedList;
  */
 public class PrenotaProdottoController extends UnicastRemoteObject implements IPrenotaProdottoRemote {
     
-    private ITransazione prenotazione;
+    private Prenotazione prenotazione;
     
     //OPERAZIONI DI SISTEMA LATO CLIENTE
     
@@ -84,13 +77,13 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     @Override
     public void recuperaPrenotazione(Integer id) throws RemoteException
     {
-        this.prenotazione = NegozioSingleton.getInstance().riprendiTransazione(id);
+        this.prenotazione = (Prenotazione) NegozioSingleton.getInstance().riprendiTransazione(id);
     }
     
     @Override
-    public void pagaAcconto(Money amount) throws RemoteException, InvalidMoneyException
+    public void pagaAcconto() throws RemoteException, InvalidMoneyException
     {
-        this.prenotazione.gestisciPagamento(amount);
+        this.prenotazione.pagaAcconto();
     }
     
     /**
@@ -104,6 +97,11 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
         this.prenotazione.aggiungiListener(obs);
     }
     
+    public void rimuoviListener(IRemoteObserver obs) throws RemoteException
+    {
+        this.prenotazione.rimuoviListener(obs);
+    }
+    
     /**
      *
      * @param amount
@@ -111,7 +109,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
      * @throws InvalidMoneyException
      */
     @Override
-    public void pagaTotale(Money amount) throws RemoteException, InvalidMoneyException
+    public void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException
     {
         this.prenotazione.gestisciPagamento(amount);
     }
