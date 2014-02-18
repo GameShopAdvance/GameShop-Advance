@@ -13,11 +13,14 @@ import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
+import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.interfaces.remote.IRemoteReservationClient;
+import gameshop.advance.observer.ReservationObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
+import gameshop.advance.ui.swing.customer.CompletedReservationPanel;
 import gameshop.advance.ui.swing.customer.CustomerPanel;
 import gameshop.advance.ui.swing.customer.ReservationPanel;
 import gameshop.advance.utility.IDProdotto;
-import java.io.Serializable;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -34,11 +37,14 @@ import javax.swing.JComponent;
  *
  * @author Matteo Gentile
  */
-public class PrenotaProdottoController extends UnicastRemoteObject implements Serializable{
+public class PrenotaProdottoController extends UnicastRemoteObject implements IRemoteReservationClient{
 
     private static PrenotaProdottoController instance;
     private IPrenotaProdottoRemote controller;
     private HashMap<String, Integer> reserved_items;
+    private Integer idPrenotazione = -1;
+    private IRemoteObserver reservationObserver;
+
    
 
     public PrenotaProdottoController() throws RemoteException {
@@ -51,6 +57,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements Se
         Registry reg = LocateRegistry.getRegistry(controllerConfig.getServerAddress(), controllerConfig.getServerPort());
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
         this.controller = factory.getPrenotaProdottoController();
+        this.reservationObserver = new ReservationObserver(instance);
         System.err.println("Controller: " +this.controller);
         
     }
@@ -97,6 +104,8 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements Se
     }
 
     public void completaPrenotazione() throws RemoteException {
+        
+        System.err.println("ID Prenotazione:"+this.idPrenotazione);
         Iterator it = this.reserved_items.entrySet().iterator();
         while (it.hasNext()) {
             try {
@@ -107,7 +116,16 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements Se
                 Logger.getLogger(PrenotaProdottoController.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+        this.controller.addListener(this.reservationObserver);
         this.controller.terminaPrenotazione();
+        aggiornaWindow(new CompletedReservationPanel(this.idPrenotazione));
+        //System.err.println("ID Prenotazione:"+this.idPrenotazione);
+    }
+    
+
+    @Override
+    public void aggiornaIdPrenotazione(int id) throws RemoteException {
+        this.idPrenotazione = id;
     }
  
 }

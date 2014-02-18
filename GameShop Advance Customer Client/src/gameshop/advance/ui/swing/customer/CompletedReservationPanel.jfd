@@ -4,20 +4,21 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "25dlu, labelcompgap, max(default;163dlu), labelcompgap, max(default;25dlu)"
-			"$rowSpecs": "max(default;25dlu), linegap, 120dlu, linegap, max(default;20dlu)"
+			"$columnSpecs": "25dlu:grow, labelcompgap, max(default;163dlu), labelcompgap, max(default;25dlu):grow"
+			"$rowSpecs": "max(default;25dlu):grow, linegap, 120dlu, linegap, max(default;20dlu):grow"
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "163dlu"
-				"$rowSpecs": "default, linegap, max(default;19dlu), linegap, 35dlu"
+				"$columnSpecs": "205dlu"
+				"$rowSpecs": "21dlu, linegap, max(default;19dlu), linegap, 35dlu"
 			} ) {
 				name: "panel1"
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "textField1"
-					"text": "Prego Completa la tua prenotazione in cassa."
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "text"
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "button1"
@@ -34,7 +35,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 440, 305 )
+			"size": new java.awt.Dimension( 520, 315 )
 		} )
 	}
 }
