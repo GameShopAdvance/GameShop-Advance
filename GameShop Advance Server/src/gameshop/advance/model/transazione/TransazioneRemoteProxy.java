@@ -42,5 +42,10 @@ public class TransazioneRemoteProxy extends UnicastRemoteObject implements ITran
     public Money getTotal() throws RemoteException {
         return this.protectedRemoteTransaction.getTotal();
     }
+
+    @Override
+    public Integer getId() throws RemoteException {
+        return this.protectedRemoteTransaction.getId();
+    }
     
 }

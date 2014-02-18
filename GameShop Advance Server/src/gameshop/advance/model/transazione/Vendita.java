@@ -58,8 +58,9 @@ public class Vendita implements ITransazione {
     }
     
     @Override
-    public void setId(Integer idVendita) {
+    public void setId(Integer idVendita) throws RemoteException {
         this.idVendita = idVendita;
+        this.notificaListener();
     }
 
     /**
