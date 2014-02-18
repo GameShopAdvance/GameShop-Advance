@@ -50,4 +50,8 @@ public class PrenotazioneRemoteProxy implements IPrenotazioneRemote {
         return this.protectedRemoteObject.getId();
     }
     
+    public Money getRestoAcconto() throws RemoteException{
+        return this.protectedRemoteObject.getRestoAcconto();
+    }
+    
 }

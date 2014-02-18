@@ -15,4 +15,5 @@ import java.rmi.RemoteException;
  */
 public interface IPrenotazioneRemote extends ITransazioneRemote {
     Money getAcconto() throws RemoteException;
+    Money getRestoAcconto() throws RemoteException;
 }
