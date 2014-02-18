@@ -6,7 +6,9 @@
 
 package gameshop.advance.model.transazione;
 
+import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.IPrenotazioneRemote;
+import gameshop.advance.model.Pagamento;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 
@@ -15,18 +17,27 @@ import java.rmi.RemoteException;
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class Prenotazione extends Vendita implements IPrenotazioneRemote {
+    private Pagamento acconto;
+    private int percentualeAcconto;
 
-    private Money Acconto;
+    public Prenotazione(int percentualeAcconto) {
+        this.percentualeAcconto = percentualeAcconto;
+    }
     
-    public void pagaAcconto(Money ammontare) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException {
+        if(this.getAcconto().greater(ammontare))
+            throw new InvalidMoneyException(ammontare);
+        this.acconto = new Pagamento(ammontare);
     }
 
     @Override
     public Money getAcconto() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return this.getTotal().multiply(percentualeAcconto).divide(100);
     }
     
-
+    @Override
+    public Money getRestoAcconto() throws RemoteException{
+        return this.acconto.getAmmontare().subtract(this.getAcconto());
+    }
     
 }

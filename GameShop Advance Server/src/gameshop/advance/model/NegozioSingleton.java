@@ -24,6 +24,7 @@ public class NegozioSingleton
 {
     private static NegozioSingleton store = null;
 
+    private static int percentualeAcconto = 20;
     /**
      * Il Costruttore imposta tutte le variabili di Negozio.
      */
@@ -45,6 +46,11 @@ public class NegozioSingleton
         return NegozioSingleton.store;
     }
 
+    public int getPercentualeAcconto()
+    {
+        return this.percentualeAcconto;
+    }
+    
     /**
      * Aggiunge la vendita ricevuta all'elenco delle vendite completate nel negozio.
      * @param v
