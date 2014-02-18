@@ -14,12 +14,12 @@ import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.IRemoteClient;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.observer.BookPartialObserver;
 import gameshop.advance.observer.SaleObserver;
 import gameshop.advance.observer.SaleRestObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.employee.book.BookPanel;
-import gameshop.advance.ui.swing.employee.book.BookPartialPaymentPanel;
 import gameshop.advance.ui.swing.employee.book.BookTotalPaymentPanel;
 import gameshop.advance.ui.swing.employee.book.EndBookPanel;
 import gameshop.advance.utility.Money;
@@ -43,6 +43,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     private ICassaRemote cassa;
     private IRemoteObserver saleTotalObserver;
     private IRemoteObserver saleRestObserver;
+    private IRemoteObserver bookPartialObserver;
     private Money totale;
     private Money acconto;
     private Money resto;
@@ -60,6 +61,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         this.cassa = factory.creaCassa(controllerConfig.getIdCassa());
         this.saleTotalObserver = new SaleObserver(instance);
         this.saleRestObserver = new SaleRestObserver(instance);
+        this.bookPartialObserver = new BookPartialObserver(instance);
         
     }
     
@@ -104,12 +106,22 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         return this.resto;
     }
     
-    public void pagaAcconto() throws RemoteException, InvalidMoneyException{
-        this.controller.pagaAcconto();
-        aggiornaWindow(new BookPartialPaymentPanel());
+    public void pagaAcconto(double acconto) throws RemoteException, InvalidMoneyException{
+        try{
+            this.controller.addListener(this.bookPartialObserver);
+            this.controller.pagaAcconto(new Money(acconto));
+            aggiornaWindow(new EndBookPanel());
+        }
+        catch (InvalidMoneyException | RemoteException ex) {
+            Logger.getLogger(SaleControllerSingleton.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
-    public void pagaTotale(){
+    public void mostraPagaTotale(){
+        aggiornaWindow(new BookTotalPaymentPanel());
+    }
+    
+    public void mostraPagaAcconto(){
         aggiornaWindow(new BookTotalPaymentPanel());
     }
     

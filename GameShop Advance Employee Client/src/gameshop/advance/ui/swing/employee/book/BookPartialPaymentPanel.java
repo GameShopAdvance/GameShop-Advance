@@ -8,10 +8,13 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -40,7 +43,7 @@ public class BookPartialPaymentPanel extends JPanel {
 
     private void payPartialButtonActionPerformed(ActionEvent e) {
         try{
-            BookControllerSingleton.getInstance().gestisciPagamento(Double.parseDouble(this.partialPayment.getText()));
+            BookControllerSingleton.getInstance().pagaAcconto(Double.parseDouble(this.partialPayment.getText()));
         } catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
                     + " si prega di controllare la configurazione del sistema.");
@@ -50,6 +53,8 @@ public class BookPartialPaymentPanel extends JPanel {
         } catch (ConfigurationException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
                     + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+        } catch (InvalidMoneyException ex) {
+            Logger.getLogger(BookPartialPaymentPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
 
