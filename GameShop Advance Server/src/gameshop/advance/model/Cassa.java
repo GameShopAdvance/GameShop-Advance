@@ -48,6 +48,7 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
      */
     @Override
     public void avviaNuovaVendita() throws RemoteException {
+        this.venditaCorrente = new Vendita();
         System.err.println("Wrapped decorator");
         this.venditaCorrente.addSconti(NegozioSingleton.getInstance().getScontiAttuali());
     }
