@@ -131,7 +131,7 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
         this.venditaCorrente.gestisciPagamento(ammontare);
         this.venditaCorrente.setId(NegozioSingleton.getInstance().getNextId());
         this.venditaCorrente.rimuoviListener(null);
-        NegozioSingleton.getInstance().registraTransazione(this.venditaCorrente);
+        NegozioSingleton.getInstance().registraVendita(this.venditaCorrente);
     }
 
     public void setIdCassa(int idCassa) {

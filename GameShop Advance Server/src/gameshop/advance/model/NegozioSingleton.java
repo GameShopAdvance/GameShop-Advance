@@ -1,10 +1,12 @@
 package gameshop.advance.model;
 
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
+import gameshop.advance.technicalservices.db.DbPrenotazioneSingleton;
 import gameshop.advance.technicalservices.db.DbScontoVenditaSingleton;
 import gameshop.advance.technicalservices.db.DbVenditaSingleton;
 import java.rmi.RemoteException;
@@ -61,7 +63,7 @@ public class NegozioSingleton
      * @param v
      * @throws java.rmi.RemoteException
      */
-    public void registraTransazione(ITransazione v) throws RemoteException
+    public void registraVendita(ITransazione v) throws RemoteException
     {
         try {
             DbVenditaSingleton.getInstance().create(v);
@@ -70,9 +72,18 @@ public class NegozioSingleton
         }
     }
     
-    public ITransazione riprendiTransazione(Integer id)
+     public void registraPrenotazione(IPrenotazione p) throws RemoteException
     {
-        return DbVenditaSingleton.getInstance().read(id);
+        try {
+            DbPrenotazioneSingleton.getInstance().create(p);
+        } catch (ObjectAlreadyExistsDbException ex) {
+            Logger.getLogger(NegozioSingleton.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+    
+    public ITransazione riprendiPrenotazione(Integer id)
+    {
+        return DbPrenotazioneSingleton.getInstance().read(id);
     }
     
     public CartaCliente getCliente(int codiceTessera) {
