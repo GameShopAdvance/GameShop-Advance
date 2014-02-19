@@ -1,5 +1,6 @@
 package gameshop.advance.model;
 
+import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.utility.IDProdotto;
@@ -16,7 +17,7 @@ import org.joda.time.DateTime;
  * prodotto: id, prezzo e descrizione testuale.
  * @author Salx
  */
-public class DescrizioneProdotto implements IDescrizioneProdottoRemote
+public class DescrizioneProdotto implements IDescrizioneProdotto
 {
 
     private IDProdotto codiceProdotto;
@@ -56,6 +57,7 @@ public class DescrizioneProdotto implements IDescrizioneProdottoRemote
             return null;
     }
     
+    @Override
     public IDProdotto getCodiceProdotto()
     {
         return this.codiceProdotto;
@@ -64,26 +66,31 @@ public class DescrizioneProdotto implements IDescrizioneProdottoRemote
     /**
      * @return la descizione di un prodotto.
      */
+    @Override
     public String getDescrizione()
     {
         return this.descrizione;
     }
 
+    @Override
     public void addSconto(IScontoProdottoStrategy sconto)
     {
         this.sconti.add(sconto);
     }
     
+    @Override
     public void addSconti(List<IScontoProdottoStrategy> sconti)
     {
         this.sconti.addAll(sconti);
     }
 
+    @Override
      public void setDescrizione(String descrizione)
     {
         this.descrizione = descrizione;
     }
          
+    @Override
      public List<IScontoProdottoStrategy> getSconti(DateTime period)
      {
          LinkedList<IScontoProdottoStrategy> scontiValidi = new LinkedList<>();
@@ -99,14 +106,17 @@ public class DescrizioneProdotto implements IDescrizioneProdottoRemote
          return scontiValidi;
      }
      
+    @Override
     public synchronized void setQuantitaDisponibile(int quantity){
         this.quantitaDisponibile = quantity;
     }
     
+    @Override
     public synchronized int getQuantitaDisponibile(){
         return this.quantitaDisponibile;
     }
     
+    @Override
     public synchronized void addQuantitaDisponibile(int quantity){
         this.quantitaDisponibile = this.quantitaDisponibile + quantity;
     }
@@ -124,11 +134,13 @@ public class DescrizioneProdotto implements IDescrizioneProdottoRemote
         return null;
     }
     
+    @Override
     public List<Prezzo> getTuttiPrezzi()
     {
         return this.prezzi;
     }
     
+    @Override
     public List<IScontoProdottoStrategy> getTuttiSconti()
     {
         return this.sconti;

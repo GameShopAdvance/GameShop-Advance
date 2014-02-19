@@ -11,6 +11,7 @@ import com.db4o.ObjectSet;
 import com.db4o.query.Query;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.model.DescrizioneProdotto;
+import gameshop.advance.model.DescrizioneProdottoSmartProxy;
 import gameshop.advance.utility.IDProdotto;
 import java.util.Iterator;
 
@@ -37,7 +38,7 @@ public class DbDescrizioneProdottoSingleton {
             int result = client.queryByExample(desc).size();
             if(result > 0)
                 throw new ObjectAlreadyExistsDbException();
-            client.store(desc);
+            client.store(new DescrizioneProdottoSmartProxy(desc));
             client.commit();
     }
     
