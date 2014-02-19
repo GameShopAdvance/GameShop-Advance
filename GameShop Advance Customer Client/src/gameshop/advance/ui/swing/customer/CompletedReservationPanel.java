@@ -6,7 +6,7 @@ package gameshop.advance.ui.swing.customer;
 
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
-import gameshop.advance.controller.PrenotaProdottoController;
+import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -31,7 +31,7 @@ public class CompletedReservationPanel extends JPanel {
 
     private void startNewReservationActionPerformed(ActionEvent e) {
         try {
-            PrenotaProdottoController.getInstance().avviaPrenotazione();
+            ReservationControllerSingleton.getInstance().avviaPrenotazione();
         } catch (NullPointerException ex) {
             Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (ConfigurationException ex) {

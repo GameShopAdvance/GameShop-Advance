@@ -37,9 +37,9 @@ import javax.swing.JComponent;
  *
  * @author Matteo Gentile
  */
-public class PrenotaProdottoController extends UnicastRemoteObject implements IRemoteReservationClient{
+public class ReservationControllerSingleton extends UnicastRemoteObject implements IRemoteReservationClient{
 
-    private static PrenotaProdottoController instance;
+    private static ReservationControllerSingleton instance;
     private IPrenotaProdottoRemote controller;
     private HashMap<String, Integer> reserved_items;
     private Integer idPrenotazione = -1;
@@ -47,7 +47,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IR
 
    
 
-    public PrenotaProdottoController() throws RemoteException {
+    public ReservationControllerSingleton() throws RemoteException {
         this.reserved_items = new HashMap<>();
     }
     
@@ -62,12 +62,12 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IR
         
     }
     
-    public static PrenotaProdottoController getInstance() throws NullPointerException, RemoteException, ConfigurationException
+    public static ReservationControllerSingleton getInstance() throws NullPointerException, RemoteException, ConfigurationException
     {
         if(instance==null)
         {
             try {
-                instance = new PrenotaProdottoController();
+                instance = new ReservationControllerSingleton();
                 System.err.println("Instance:"+instance);
                 instance.configure();
             } catch (RemoteException | NotBoundException ex) {
@@ -113,7 +113,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IR
                 this.controller.prenotaProdotto(new IDProdotto((String) pairs.getKey()),(int) pairs.getValue());
                 System.out.println("Prodotto: "+ pairs.getKey() + " Quantità = " + pairs.getValue());
             } catch (ProdottoNotFoundException ex) {
-                Logger.getLogger(PrenotaProdottoController.class.getName()).log(Level.SEVERE, null, ex);
+                Logger.getLogger(ReservationControllerSingleton.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
         this.controller.addListener(this.reservationObserver);

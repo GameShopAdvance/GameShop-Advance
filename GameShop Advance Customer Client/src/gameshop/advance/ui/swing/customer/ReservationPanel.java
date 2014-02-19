@@ -6,7 +6,7 @@ package gameshop.advance.ui.swing.customer;
 
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
-import gameshop.advance.controller.PrenotaProdottoController;
+import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
@@ -47,7 +47,7 @@ public class ReservationPanel extends JPanel {
     public ReservationPanel() {
         try {
             initComponents();
-            this.DisplayData(PrenotaProdottoController.getInstance().getDescriptionList());
+            this.DisplayData(ReservationControllerSingleton.getInstance().getDescriptionList());
             this.setUpReservationColumn( this.table1.getColumnModel().getColumn(3));
             this.setUpSubtotalColumn( this.table1.getColumnModel().getColumn(4));
         } catch (RemoteException ex) {
@@ -153,7 +153,7 @@ public class ReservationPanel extends JPanel {
                                 total = total.add(subtotal.subtract(old_subtotal));
                         
                             try {
-                            PrenotaProdottoController.getInstance().inserisciProdotti(myModel.getValueAt(row, 0), quantity);
+                            ReservationControllerSingleton.getInstance().inserisciProdotti(myModel.getValueAt(row, 0), quantity);
                         } catch ( NullPointerException | RemoteException | ConfigurationException ex) {
                             Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
                         }
@@ -178,7 +178,7 @@ public class ReservationPanel extends JPanel {
 
 private void clearReservationActionPerformed(ActionEvent e) {
         try {
-            PrenotaProdottoController.getInstance().clearReservation();
+            ReservationControllerSingleton.getInstance().clearReservation();
         } catch (NullPointerException ex) {
             Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (RemoteException ex) {
@@ -190,7 +190,7 @@ private void clearReservationActionPerformed(ActionEvent e) {
 
 private void completeReservationActionPerformed(ActionEvent e) {
         try {
-            PrenotaProdottoController.getInstance().completaPrenotazione();
+            ReservationControllerSingleton.getInstance().completaPrenotazione();
         } catch (NullPointerException ex) {
             Logger.getLogger(ReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
         } catch (RemoteException ex) {
