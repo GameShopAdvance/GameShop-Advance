@@ -24,7 +24,7 @@ public class NegozioSingleton
 {
     private static NegozioSingleton store = null;
 
-    private static int percentualeAcconto = 20;
+    private static final int percentualeAcconto = 20;
     /**
      * Il Costruttore imposta tutte le variabili di Negozio.
      */
@@ -48,10 +48,10 @@ public class NegozioSingleton
 
     public int getPercentualeAcconto()
     {
-        return this.percentualeAcconto;
+        return NegozioSingleton.percentualeAcconto;
     }
     
-    public Integer getNextId()
+    public synchronized Integer getNextId()
     {
         return DbTransazioneSingleton.getInstance().count();
     }
