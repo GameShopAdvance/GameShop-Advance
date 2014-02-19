@@ -47,7 +47,6 @@ public class DbTransazioneSingleton {
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         List<ITransazione> result = client.query(new Predicate<ITransazione>() {
-
             @Override
             public boolean match(ITransazione candidate) {
                 Integer idTrans;

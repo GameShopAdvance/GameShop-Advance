@@ -10,7 +10,7 @@ import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
-import gameshop.advance.interfaces.remote.IRemoteClient;
+import gameshop.advance.interfaces.remote.IRemoteBookClient;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.observer.BookPartialObserver;
@@ -34,7 +34,7 @@ import javax.swing.JComponent;
  *
  * @author Salx
  */
-public class BookControllerSingleton  extends UnicastRemoteObject implements IRemoteClient{
+public class BookControllerSingleton  extends UnicastRemoteObject implements IRemoteBookClient{
     
     private static BookControllerSingleton instance;
     private IPrenotaProdottoRemote controller;

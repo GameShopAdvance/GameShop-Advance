@@ -51,6 +51,11 @@ public class NegozioSingleton
         return this.percentualeAcconto;
     }
     
+    public Integer getNextId()
+    {
+        return DbTransazioneSingleton.getInstance().count();
+    }
+    
     /**
      * Aggiunge la vendita ricevuta all'elenco delle vendite completate nel negozio.
      * @param v
@@ -59,7 +64,6 @@ public class NegozioSingleton
     public void registraTransazione(ITransazione v) throws RemoteException
     {
         try {
-            v.setId(DbTransazioneSingleton.getInstance().count());
             DbTransazioneSingleton.getInstance().create(v);
         } catch (ObjectAlreadyExistsDbException ex) {
             Logger.getLogger(NegozioSingleton.class.getName()).log(Level.SEVERE, null, ex);

@@ -7,7 +7,7 @@
 package gameshop.advance.observer;
 
 import gameshop.advance.interfaces.remote.IPrenotazioneRemote;
-import gameshop.advance.interfaces.remote.IRemoteClient;
+import gameshop.advance.interfaces.remote.IRemoteBookClient;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -18,9 +18,9 @@ import java.rmi.server.UnicastRemoteObject;
  */
 public class BookPartialObserver extends UnicastRemoteObject implements IRemoteObserver {
     
-    private IRemoteClient client;
+    private IRemoteBookClient client;
     
-    public BookPartialObserver(IRemoteClient client) throws RemoteException {
+    public BookPartialObserver(IRemoteBookClient client) throws RemoteException {
         this.client = client;
     }
     

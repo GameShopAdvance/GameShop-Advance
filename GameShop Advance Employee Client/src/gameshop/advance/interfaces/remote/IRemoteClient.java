@@ -31,11 +31,4 @@ public interface IRemoteClient extends Remote {
      * @throws RemoteException
      */
     void aggiornaResto(Money m) throws RemoteException;
-    
-     /**
-     *
-     * @param m
-     * @throws RemoteException
-     */
-    void aggiornaAcconto(Money m) throws RemoteException;
 }

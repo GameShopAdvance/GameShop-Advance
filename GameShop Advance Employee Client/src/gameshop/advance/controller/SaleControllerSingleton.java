@@ -155,9 +155,4 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         UIWindowSingleton.getInstance().refreshContent();
     }
 
-    @Override
-    public void aggiornaAcconto(Money m) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
-    
 }

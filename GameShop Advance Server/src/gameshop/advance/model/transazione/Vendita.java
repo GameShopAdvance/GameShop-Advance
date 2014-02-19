@@ -135,6 +135,10 @@ public class Vendita implements ITransazione {
         this.notificaListener();
     }
 
+    /**
+     *
+     * @return
+     */
     @Override
     public List getRigheDiVendita() {
         return this.righeDiVendita;
