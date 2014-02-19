@@ -127,10 +127,12 @@ public class Vendita implements ITransazione {
     /**
      * Imposta lo stato della vendita come completata e invia una notifica agli
      * osservatori in ascolto.
+     * @throws java.rmi.RemoteException
      */
     @Override
-    public void completaTransazione() {
+    public void completaTransazione() throws RemoteException{
         this.completata = true;
+        this.notificaListener();
     }
 
     @Override

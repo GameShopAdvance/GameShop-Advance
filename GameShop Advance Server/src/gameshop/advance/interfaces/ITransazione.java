@@ -27,7 +27,7 @@ public interface ITransazione extends ITransazioneRemote {
      * Imposta lo stato della vendita come completata e invia una notifica agli
      * osservatori in ascolto.
      */
-    void completaTransazione();
+    void completaTransazione() throws RemoteException;
 
     /**
      * Utilizza i parametri ricevuti in ingresso (descrizione prodotto e quantità) per
