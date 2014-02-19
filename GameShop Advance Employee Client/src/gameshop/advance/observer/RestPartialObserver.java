@@ -16,18 +16,18 @@ import java.rmi.server.UnicastRemoteObject;
  *
  * @author Salx
  */
-public class BookRestObserver extends UnicastRemoteObject implements IRemoteObserver {
+public class RestPartialObserver extends UnicastRemoteObject implements IRemoteObserver {
     
     private IRemoteBookClient client;
     
-    public BookRestObserver(IRemoteBookClient client) throws RemoteException {
+    public RestPartialObserver(IRemoteBookClient client) throws RemoteException {
         this.client = client;
     }
     
     @Override
     public void notifica(Object o) throws RemoteException{
         IPrenotazioneRemote prenotazione = (IPrenotazioneRemote) o;
-        System.err.println("Observer del totale, client: "+this.client);
+        System.err.println("Observer del resto del pagamento in acconto, client: "+this.client);
         this.client.aggiornaResto(prenotazione.getRestoAcconto());
     }
     

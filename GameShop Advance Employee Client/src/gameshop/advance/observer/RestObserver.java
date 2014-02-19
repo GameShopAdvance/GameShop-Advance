@@ -14,10 +14,10 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 
-public class SaleRestObserver extends UnicastRemoteObject implements IRemoteObserver {
+public class RestObserver extends UnicastRemoteObject implements IRemoteObserver {
     private IRemoteClient client;
 
-    public SaleRestObserver(IRemoteClient client) throws RemoteException {
+    public RestObserver(IRemoteClient client) throws RemoteException {
         this.client = client;
     }
     

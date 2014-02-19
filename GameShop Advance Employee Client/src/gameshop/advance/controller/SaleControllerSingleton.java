@@ -10,8 +10,8 @@ import gameshop.advance.interfaces.remote.ICassaRemote;
 import gameshop.advance.interfaces.remote.IRemoteClient;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
-import gameshop.advance.observer.SaleObserver;
-import gameshop.advance.observer.SaleRestObserver;
+import gameshop.advance.observer.TotalObserver;
+import gameshop.advance.observer.RestObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.employee.sale.EndSalePanel;
@@ -54,8 +54,8 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
         this.cassa = factory.creaCassa(controllerConfig.getIdCassa());
-        this.saleTotalObserver = new SaleObserver(instance);
-        this.saleRestObserver = new SaleRestObserver(instance);
+        this.saleTotalObserver = new TotalObserver(instance);
+        this.saleRestObserver = new RestObserver(instance);
     }
     
     public static SaleControllerSingleton getInstance() throws NullPointerException, RemoteException, ConfigurationException

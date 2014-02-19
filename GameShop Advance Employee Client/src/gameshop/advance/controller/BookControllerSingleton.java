@@ -1,9 +1,3 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gameshop.advance.controller;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
@@ -13,8 +7,10 @@ import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.IRemoteBookClient;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
-import gameshop.advance.observer.BookPartialObserver;
-import gameshop.advance.observer.BookRestObserver;
+import gameshop.advance.observer.PartialObserver;
+import gameshop.advance.observer.RestObserver;
+import gameshop.advance.observer.RestPartialObserver;
+import gameshop.advance.observer.TotalObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.employee.book.BookPanel;
@@ -40,9 +36,10 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     private IPrenotaProdottoRemote controller;
     private IRemoteObserver bookRestObserver;
     private IRemoteObserver bookPartialObserver;
-    private Money totale;
-    private Money acconto;
-    private Money resto;
+    private IRemoteObserver bookTotalObserver;
+    private Money totale = new Money();
+    private Money acconto = new Money();
+    private Money resto = new Money();
     
     private BookControllerSingleton() throws RemoteException{
         
@@ -54,9 +51,8 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         Registry reg = LocateRegistry.getRegistry(controllerConfig.getServerAddress(), controllerConfig.getServerPort()); 
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
         this.controller = factory.getPrenotaProdottoController();
-        this.bookRestObserver = new BookRestObserver(instance);
-        this.bookPartialObserver = new BookPartialObserver(instance);
-        
+        this.bookPartialObserver = new PartialObserver(instance);
+        this.bookTotalObserver = new TotalObserver(instance);
     }
     
     
@@ -80,6 +76,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     public void recuperaPrenotazione(int codicePrenotazione) throws RemoteException {
         this.controller.recuperaPrenotazione(codicePrenotazione);
         this.controller.addListener(this.bookPartialObserver);
+        this.controller.addListener(bookTotalObserver);
         this.controller.completaPrenotazione();
     }
     
@@ -102,6 +99,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     
     public void pagaAcconto(double acconto) throws RemoteException, InvalidMoneyException{
         try{
+            this.bookRestObserver = new RestPartialObserver(instance);
             this.controller.addListener(this.bookRestObserver);
             this.controller.pagaAcconto(new Money(acconto));
             aggiornaWindow(new EndBookPanel());
@@ -122,6 +120,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     public void gestisciPagamento(Double ammontare){
         
         try{
+            this.bookRestObserver = new RestObserver(instance);
             this.controller.addListener(this.bookRestObserver);
             this.controller.gestisciPagamento(new Money(ammontare));
             aggiornaWindow(new EndBookPanel());
@@ -143,17 +142,20 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     }
 
     @Override
-    public void aggiornaAcconto(Money m){
+    public void aggiornaAcconto(Money m) throws RemoteException {
+        System.out.println("Acconto: "+m);
         this.acconto = m;
     }
     
     @Override
     public void aggiornaTotale(Money m) throws RemoteException {
+        System.out.println("Totale: "+m);
         this.totale = m;
     }
 
     @Override
     public void aggiornaResto(Money m) throws RemoteException {
+        System.out.println("Resto: "+m);
         this.resto = m;
     }
 

@@ -10,12 +10,12 @@ import java.rmi.server.UnicastRemoteObject;
  *
  * @author Salx
  */
-public class SaleObserver extends UnicastRemoteObject implements IRemoteObserver {
+public class TotalObserver extends UnicastRemoteObject implements IRemoteObserver {
     
 
     private IRemoteClient client;
     
-    public SaleObserver(IRemoteClient client) throws RemoteException {
+    public TotalObserver(IRemoteClient client) throws RemoteException {
         this.client = client;
     }
     

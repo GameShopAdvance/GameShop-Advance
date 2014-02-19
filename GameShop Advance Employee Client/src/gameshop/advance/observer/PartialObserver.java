@@ -16,11 +16,11 @@ import java.rmi.server.UnicastRemoteObject;
  *
  * @author Salx
  */
-public class BookPartialObserver extends UnicastRemoteObject implements IRemoteObserver {
+public class PartialObserver extends UnicastRemoteObject implements IRemoteObserver {
     
     private IRemoteBookClient client;
     
-    public BookPartialObserver(IRemoteBookClient client) throws RemoteException {
+    public PartialObserver(IRemoteBookClient client) throws RemoteException {
         this.client = client;
     }
     
