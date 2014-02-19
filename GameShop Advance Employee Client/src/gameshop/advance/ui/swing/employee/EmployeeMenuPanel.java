@@ -15,6 +15,8 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -64,16 +66,23 @@ public class EmployeeMenuPanel extends JPanel {
     private void manageBookActionPerformed(ActionEvent e) {
         try {
             BookControllerSingleton.getInstance().gestisciPrenotazione();
-        } catch (ConfigurationException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
-                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
-        } catch (RemoteException ex) {
-            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
-        } catch(NullPointerException ex){
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
-                    + " si prega di controllare la configurazione del sistema.");
-        } 
+        } catch (Exception ex) {
+            Logger.getLogger(EmployeeMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+//        } catch (ConfigurationException ex) {
+//            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
+//                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+//         catch (RemoteException ex) {
+//            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
+//                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+//        } catch(NullPointerException ex){
+//            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
+//                    + " si prega di controllare la configurazione del sistema.");
+//        }
+//        
+//        catch (ConfigurationException ex) {
+//            Logger.getLogger(EmployeeMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
+//        } 
     }
 
     private void initComponents() {

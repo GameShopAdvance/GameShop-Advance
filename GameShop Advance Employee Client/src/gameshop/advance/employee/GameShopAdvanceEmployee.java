@@ -15,6 +15,7 @@ public class GameShopAdvanceEmployee {
      * @throws gameshop.advance.exceptions.ConfigurationException
      */
     public static void main(String[] args) throws ConfigurationException {
+
         if(System.getSecurityManager() == null)
             System.setSecurityManager(new SecurityManager());          
         UIWindowSingleton window = UIWindowSingleton.getInstance();

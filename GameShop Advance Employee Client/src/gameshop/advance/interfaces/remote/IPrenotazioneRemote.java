@@ -7,16 +7,13 @@
 package gameshop.advance.interfaces.remote;
 
 import gameshop.advance.utility.Money;
-import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
  *
- * @author Salx
+ * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public interface IPrenotazioneRemote extends Remote {
-    
+public interface IPrenotazioneRemote extends ITransazioneRemote {
     Money getAcconto() throws RemoteException;
     Money getRestoAcconto() throws RemoteException;
-    
 }

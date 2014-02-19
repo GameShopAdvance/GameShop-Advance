@@ -12,6 +12,8 @@ import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.exceptions.QuantityNotInStockException;
+import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIStyleSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.Color;
@@ -77,19 +79,29 @@ public class InsertItemPanel extends JScrollPane {
             SaleControllerSingleton.getInstance().inserisciProdotto(this.productIdTextField.getText(), quantity);
             this.clearFields();
             this.total.setText(SaleControllerSingleton.getInstance().getTotal().toString());
-        } catch (NullPointerException ex) {
+        }
+        catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
                     + " si prega di controllare la configurazione del sistema.");
+            LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
             UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
                     + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+            LoggerSingleton.getInstance().log(ex);
         } catch (ConfigurationException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
                     + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+            LoggerSingleton.getInstance().log(ex);
         } catch (ProdottoNotFoundException ex) {
             UIWindowSingleton.getInstance().displayError("Il codice prodotto: " +ex.getCodice()+" inserito non è valido.");
+            LoggerSingleton.getInstance().log(ex);
         }  catch (QuantityException ex){
             UIWindowSingleton.getInstance().displayError("La quantità inserita: " +ex.getQuantity()+ "non è valida.");
+            LoggerSingleton.getInstance().log(ex);
+        }
+        catch (QuantityNotInStockException ex) {
+            UIWindowSingleton.getInstance().displayError("La quantità non è presente in magazzino, si consiglia di prenotarla.");
+            LoggerSingleton.getInstance().log(ex);
         }
     }
 

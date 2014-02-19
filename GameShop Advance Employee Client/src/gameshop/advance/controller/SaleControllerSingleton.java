@@ -5,6 +5,7 @@ import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.remote.ICassaRemote;
 import gameshop.advance.interfaces.remote.IRemoteClient;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
@@ -81,7 +82,7 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         aggiornaWindow(new InsertItemPanel());
     }
     
-    public void inserisciProdotto(String productID, int quantity) throws RemoteException, ProdottoNotFoundException, QuantityException
+    public void inserisciProdotto(String productID, int quantity) throws RemoteException, ProdottoNotFoundException, QuantityException, QuantityNotInStockException
     {
         if(quantity < 1)
             throw new QuantityException("La quantità selezionata non è valida.");

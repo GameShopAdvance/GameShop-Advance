@@ -10,6 +10,7 @@ import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
+import org.joda.time.DateTime;
 
 /**
  *
@@ -34,6 +35,6 @@ public interface IDescrizioneProdottoRemote extends Remote {
      * @return il prezzo di un prodotto.
      * @throws java.rmi.RemoteException
      */
-    Money getPrezzo() throws RemoteException;
+    Money getPrezzo(DateTime period) throws RemoteException;
 
 }

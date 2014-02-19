@@ -9,6 +9,7 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.Color;
 import java.awt.Font;
@@ -47,12 +48,15 @@ public class BookPanel extends JPanel {
         } catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
                     + " si prega di controllare la configurazione del sistema.");
+            LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
             UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
                     + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+            LoggerSingleton.getInstance().log(ex);
         } catch (ConfigurationException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
                     + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+            LoggerSingleton.getInstance().log(ex);
         }  
     }
     private void insertClientCodeActionPerformed(ActionEvent e) {
