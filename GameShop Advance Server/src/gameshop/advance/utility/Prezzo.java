@@ -6,6 +6,8 @@
 
 package gameshop.advance.utility;
 
+import org.joda.time.DateTime;
+
 /**
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
@@ -27,6 +29,11 @@ public class Prezzo {
     public boolean isActual() 
     {
         return this.periodo.isActual();
+    }
+    
+    public boolean isValidInDate(DateTime period)
+    {
+        return this.periodo.isInPeriod(period);
     }
     
 }

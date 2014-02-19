@@ -12,6 +12,7 @@ import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.Pagamento;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
+import java.util.List;
 
 /**
  *
@@ -22,6 +23,7 @@ public class Prenotazione extends Vendita implements IPrenotazioneRemote {
     private int percentualeAcconto;
 
     public Prenotazione(int percentualeAcconto) {
+        super();
         this.percentualeAcconto = percentualeAcconto;
     }
     
@@ -33,7 +35,7 @@ public class Prenotazione extends Vendita implements IPrenotazioneRemote {
 
     @Override
     public Money getAcconto() throws RemoteException {
-        return this.getTotal().multiply(percentualeAcconto).divide(100);
+        return super.getTotal().multiply(percentualeAcconto).divide(100);
     }
     
     @Override
@@ -43,9 +45,12 @@ public class Prenotazione extends Vendita implements IPrenotazioneRemote {
     
     @Override
     protected void notificaListener() throws RemoteException {
-        for(IRemoteObserver obs:this.getListeners())
+        
+        List<IRemoteObserver> listeners = this.getListeners();
+        if(listeners != null)
         {
-            obs.notifica(new PrenotazioneRemoteProxy(this));
+            for(IRemoteObserver obs:listeners)
+                obs.notifica(new PrenotazioneRemoteProxy(this));
         }
     }
 }

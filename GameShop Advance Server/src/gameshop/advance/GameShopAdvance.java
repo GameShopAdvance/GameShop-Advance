@@ -65,12 +65,12 @@ public class GameShopAdvance {
     
     public static void initializeDb() throws RemoteException {
         try {
-            for(int i=1; i<6;i++)
+            for(int i=1; i<16;i++)
             {
                 IDProdotto id = new IDProdotto("AB"+i);
                 Money money = new Money(new Double(i*5));
-                Prezzo p = new Prezzo(money, new IntervalloDiTempo(new DateTime(), new DateTime().plusDays(5)));
-                DescrizioneProdotto desc = new DescrizioneProdotto(id, p, "Prodotto "+i, i*5);
+                Prezzo p = new Prezzo(money, new IntervalloDiTempo(new DateTime(), new DateTime().plusDays(15)));
+                DescrizioneProdotto desc = new DescrizioneProdotto(id, p, "Prodotto "+i, (int) (Math.random()*i*5));
                 try {
                     DbDescrizioneProdottoSingleton.getInstance().create(desc);
                 } catch (ObjectAlreadyExistsDbException ex) {
