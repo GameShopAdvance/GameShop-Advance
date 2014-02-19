@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.interfaces;
+package gameshop.advance.model;
 
 import com.db4o.activation.ActivationPurpose;
 import com.db4o.activation.Activator;
