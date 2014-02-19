@@ -14,5 +14,7 @@ import java.rmi.RemoteException;
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IRemoteBookClient extends IRemoteClient {
+    
     void aggiornaAcconto(Money ammontare) throws RemoteException;
+
 }

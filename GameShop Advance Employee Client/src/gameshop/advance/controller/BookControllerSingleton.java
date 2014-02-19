@@ -57,8 +57,9 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     
     
     public static BookControllerSingleton getInstance() throws NullPointerException, RemoteException, ConfigurationException{
-        
-        try {
+        if(instance == null)
+        {
+            try {
                instance = new BookControllerSingleton();
                instance.configure();
             } catch (RemoteException | NotBoundException ex) {
@@ -66,6 +67,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
                throw new RemoteException("Ci sono problemi di comunicazione con il server.");
                //Instanziare un logger per tener traccia delle eccezioni e consentire la loro analisi
             }
+        }
         return instance;
     }
     
@@ -76,7 +78,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     public void recuperaPrenotazione(int codicePrenotazione) throws RemoteException {
         this.controller.recuperaPrenotazione(codicePrenotazione);
         this.controller.addListener(this.bookPartialObserver);
-        this.controller.addListener(bookTotalObserver);
+        this.controller.addListener(this.bookTotalObserver);
         this.controller.completaPrenotazione();
     }
     
@@ -145,12 +147,14 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     public void aggiornaAcconto(Money m) throws RemoteException {
         System.out.println("Acconto: "+m);
         this.acconto = m;
+        System.err.println("Acconto da controller: "+this.acconto);
     }
     
     @Override
     public void aggiornaTotale(Money m) throws RemoteException {
         System.out.println("Totale: "+m);
         this.totale = m;
+        System.err.println("Totale da controller: "+this.totale);
     }
 
     @Override

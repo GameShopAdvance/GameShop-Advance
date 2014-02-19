@@ -11,6 +11,7 @@ import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
+import gameshop.advance.utility.Money;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -36,7 +37,9 @@ public class BookPanel extends JPanel {
         try {
             BookControllerSingleton.getInstance().recuperaPrenotazione(Integer.parseInt(this.bookCode.getText()));
             this.clearFields();
-            this.partial.setText(BookControllerSingleton.getInstance().getPartial().toString());
+            Money partial = BookControllerSingleton.getInstance().getPartial();
+            System.err.println("Partial in panel: "+partial);
+            this.partial.setText(partial.toString());
             this.total.setText(BookControllerSingleton.getInstance().getTotal().toString());
         } catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"

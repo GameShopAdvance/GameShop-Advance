@@ -11,7 +11,7 @@ import java.util.Currency;
 import java.util.Locale;
 
 /**
- *
+ * Gestisce tutte le operazioni riguardanti il denaro.
  * @author loki
  */
 public class Money implements Serializable{
