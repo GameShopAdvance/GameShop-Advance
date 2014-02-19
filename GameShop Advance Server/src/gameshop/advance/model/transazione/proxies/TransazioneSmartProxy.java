@@ -4,12 +4,14 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.interfaces;
+package gameshop.advance.model.transazione.proxies;
 
 import com.db4o.activation.ActivationPurpose;
 import com.db4o.activation.Activator;
 import com.db4o.ta.Activatable;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.interfaces.IScontoVenditaStrategy;
+import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.CartaCliente;
