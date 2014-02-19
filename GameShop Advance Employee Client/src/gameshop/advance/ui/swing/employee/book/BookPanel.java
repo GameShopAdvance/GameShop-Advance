@@ -34,17 +34,10 @@ public class BookPanel extends JPanel {
 
     private void retrieveBookActionPerformed(ActionEvent e) {
         try {
-            Integer code = 1;
-            try{
-                 code = Integer.parseInt(this.bookCode.getText());
-            } catch(NumberFormatException ex){
-                if(!this.bookCode.getText().equals(""))
-                    UIWindowSingleton.getInstance().displayError("Il formato di dato inserito per la quantità non è valido");
-            }
             BookControllerSingleton.getInstance().recuperaPrenotazione(Integer.parseInt(this.bookCode.getText()));
             this.clearFields();
             this.partial.setText(BookControllerSingleton.getInstance().getPartial().toString());
-            //this.total.setText(BookControllerSingleton.getInstance().getTotal().toString());
+            this.total.setText(BookControllerSingleton.getInstance().getTotal().toString());
         } catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
                     + " si prega di controllare la configurazione del sistema.");
