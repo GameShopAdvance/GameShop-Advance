@@ -10,17 +10,18 @@ import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.IPrenotazioneRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.List;
 
 /**
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class PrenotazioneRemoteProxy implements IPrenotazioneRemote {
+public class PrenotazioneRemoteProxy extends UnicastRemoteObject implements IPrenotazioneRemote {
 
     private final IPrenotazioneRemote protectedRemoteObject;
     
-    public PrenotazioneRemoteProxy(IPrenotazioneRemote pren)
+    public PrenotazioneRemoteProxy(IPrenotazioneRemote pren) throws RemoteException
     {
         this.protectedRemoteObject = pren;
     }

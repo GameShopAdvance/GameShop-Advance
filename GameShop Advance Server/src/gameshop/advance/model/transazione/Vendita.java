@@ -196,4 +196,9 @@ public class Vendita implements ITransazione {
                 obs.notifica(new TransazioneRemoteProxy(this));
         }
     }
+    
+    protected List<IRemoteObserver> getListeners()
+    {
+        return this.listeners;
+    }
 }

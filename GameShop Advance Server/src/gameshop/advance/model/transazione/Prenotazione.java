@@ -8,6 +8,7 @@ package gameshop.advance.model.transazione;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.IPrenotazioneRemote;
+import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.Pagamento;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
@@ -40,4 +41,11 @@ public class Prenotazione extends Vendita implements IPrenotazioneRemote {
         return this.acconto.getAmmontare().subtract(this.getAcconto());
     }
     
+    @Override
+    protected void notificaListener() throws RemoteException {
+        for(IRemoteObserver obs:this.getListeners())
+        {
+            obs.notifica(new PrenotazioneRemoteProxy(this));
+        }
+    }
 }
