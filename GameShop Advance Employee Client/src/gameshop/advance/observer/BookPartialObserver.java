@@ -28,7 +28,7 @@ public class BookPartialObserver extends UnicastRemoteObject implements IRemoteO
     public void notifica(Object o) throws RemoteException{
         IPrenotazioneRemote prenotazione = (IPrenotazioneRemote) o;
         System.err.println("Observer del totale, client: "+this.client);
-        this.client.aggiornaTotale(prenotazione.getAcconto());
+        this.client.aggiornaAcconto(prenotazione.getAcconto());
     }
     
 }

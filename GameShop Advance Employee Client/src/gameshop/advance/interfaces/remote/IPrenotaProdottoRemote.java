@@ -32,6 +32,7 @@ public interface IPrenotaProdottoRemote extends Remote{
     void terminaPrenotazione() throws RemoteException;
     
     //OPERAZIONI DI SISTEMA LATO COMMESSO
+    void completaPrenotazione() throws RemoteException;
     
     void recuperaPrenotazione(Integer id) throws RemoteException;
     

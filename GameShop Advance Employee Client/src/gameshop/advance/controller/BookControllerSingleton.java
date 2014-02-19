@@ -74,13 +74,13 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     }
     
     public void gestisciPrenotazione() throws RemoteException{
-        this.controller.avviaPrenotazione();
-        this.controller.addListener(this.bookPartialObserver);
         this.aggiornaWindow(new BookPanel());
     }
     
     public void recuperaPrenotazione(int codicePrenotazione) throws RemoteException {
         this.controller.recuperaPrenotazione(codicePrenotazione);
+        this.controller.addListener(this.bookPartialObserver);
+        this.controller.completaPrenotazione();
     }
     
     public void terminaPrenotazione() throws RemoteException {
