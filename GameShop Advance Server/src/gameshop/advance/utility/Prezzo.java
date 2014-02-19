@@ -28,6 +28,7 @@ public class Prezzo {
 
     public boolean isActual() 
     {
+        System.out.println("Periodo prezzo: "+this.periodo);
         return this.periodo.isActual();
     }
     

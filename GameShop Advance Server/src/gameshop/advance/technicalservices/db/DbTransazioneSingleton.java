@@ -64,7 +64,9 @@ public class DbTransazioneSingleton {
         });
         if(result.isEmpty())
             return null;
-        return result.get(0);
+        ITransazione trans = result.get(0);
+        client.activate(trans, 11);
+        return trans;
     }
     
     public Integer count()
