@@ -6,6 +6,7 @@
 
 package gameshop.advance.model.transazione;
 
+import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.IPrenotazioneRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
@@ -18,7 +19,7 @@ import java.util.List;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class Prenotazione extends Vendita implements IPrenotazioneRemote {
+public class Prenotazione extends Vendita implements IPrenotazione {
     private Pagamento acconto;
     private int percentualeAcconto;
 
@@ -27,6 +28,7 @@ public class Prenotazione extends Vendita implements IPrenotazioneRemote {
         this.percentualeAcconto = percentualeAcconto;
     }
     
+    @Override
     public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException {
         if(this.getAcconto().greater(ammontare))
             throw new InvalidMoneyException(ammontare);
