@@ -37,7 +37,7 @@ public class DbPrenotazioneSingleton {
         int exist = client.queryByExample(book).size();
         if(exist > 0)
             throw new ObjectAlreadyExistsDbException();
-        client.store(book);
+        client.store(SmartProxyFactorySingleton.getIstance().creaProxyPrenotazione(book));
         client.commit();
     }
     
@@ -54,6 +54,7 @@ public class DbPrenotazioneSingleton {
      
      public Integer count(){
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-        return client.queryByExample(IPrenotazione.class).size();
+        IPrenotazione pren = SmartProxyFactorySingleton.getIstance().creaProxyPrenotazione(null);
+        return client.queryByExample(pren.getClass()).size();
     }
 }

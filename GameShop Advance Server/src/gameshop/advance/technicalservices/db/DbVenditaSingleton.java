@@ -17,20 +17,20 @@ import java.util.List;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class DbTransazioneSingleton {
+public class DbVenditaSingleton {
     
-    private static DbTransazioneSingleton instance;
+    private static DbVenditaSingleton instance;
     
-    private DbTransazioneSingleton()
+    private DbVenditaSingleton()
     {
         
     }
     
-    public static DbTransazioneSingleton getInstance()
+    public static DbVenditaSingleton getInstance()
     {
-        if(DbTransazioneSingleton.instance == null)
-            DbTransazioneSingleton.instance = new DbTransazioneSingleton();
-        return DbTransazioneSingleton.instance;
+        if(DbVenditaSingleton.instance == null)
+            DbVenditaSingleton.instance = new DbVenditaSingleton();
+        return DbVenditaSingleton.instance;
     }
     
     public void create(ITransazione sale) throws ObjectAlreadyExistsDbException
@@ -39,7 +39,7 @@ public class DbTransazioneSingleton {
         int exist = client.queryByExample(sale).size();
         if(exist > 0)
             throw new ObjectAlreadyExistsDbException();
-        client.store(sale);
+        client.store(SmartProxyFactorySingleton.getIstance().creaProxyVendita(sale));
         client.commit();
     }
     
@@ -72,6 +72,7 @@ public class DbTransazioneSingleton {
     public Integer count()
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-        return client.queryByExample(ITransazione.class).size();
+        ITransazione trans = SmartProxyFactorySingleton.getIstance().creaProxyVendita(null);
+        return client.queryByExample(trans.getClass()).size();
     }
 }

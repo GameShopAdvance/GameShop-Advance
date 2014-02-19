@@ -10,6 +10,7 @@ import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.transazione.RigaDiTransazione;
 import gameshop.advance.utility.Money;
+import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 import org.joda.time.DateTime;
@@ -46,7 +47,7 @@ public abstract class ScontoProdottoStrategyComposite implements IScontoProdotto
     @Override
     public abstract Money getSubtotal(ITransazione v, RigaDiTransazione rdv);
     
-    public Money getRealSubtotal(RigaDiTransazione rdv, DateTime period)
+    public Money getRealSubtotal(RigaDiTransazione rdv, DateTime period) throws RemoteException
     {
         Money subtotal =  rdv.getDescrizione().getPrezzo(period).multiply(rdv.getQuantity());
         return subtotal;

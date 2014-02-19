@@ -9,11 +9,11 @@ package gameshop.advance.controller;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IInventarioControllerRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.CatalogoProdottiSingleton;
-import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.remote.DescrizioneRemoteProxy;
 import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
 import gameshop.advance.utility.IDProdotto;
@@ -30,7 +30,7 @@ import java.util.logging.Logger;
  */
 public class GestisciInventarioController extends UnicastRemoteObject implements IInventarioControllerRemote {
     
-    private LinkedList<DescrizioneProdotto> descrizioni;
+    private LinkedList<IDescrizioneProdotto> descrizioni;
     private LinkedList<IRemoteObserver> observers;
     
     
@@ -52,7 +52,7 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
             throw new QuantityException(quantity);
         }
        
-        DescrizioneProdotto desc = CatalogoProdottiSingleton.getInstance().getDescrizioneProdotto(codiceProdotto);
+        IDescrizioneProdotto desc = CatalogoProdottiSingleton.getInstance().getDescrizioneProdotto(codiceProdotto);
         System.err.println("Desc: "+desc);
         desc.addQuantitaDisponibile(quantity);
         System.err.println("Desc after update: "+desc);
@@ -92,7 +92,7 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
      */
     @Override
     public IDescrizioneProdottoRemote getLastDescription() throws RemoteException{
-        DescrizioneProdotto desc = this.descrizioni.getLast();
+        IDescrizioneProdotto desc = this.descrizioni.getLast();
         System.err.println("last desc: "+desc.toString());
         return new DescrizioneRemoteProxy(desc);
     }
@@ -104,7 +104,7 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
     
     @Override
     public void terminaInventario() throws RemoteException{
-        for (DescrizioneProdotto desc : this.descrizioni) {
+        for (IDescrizioneProdotto desc : this.descrizioni) {
             try {
                 DbDescrizioneProdottoSingleton.getInstance().create(desc);
                 System.out.println("Descrizioni aggiornate");

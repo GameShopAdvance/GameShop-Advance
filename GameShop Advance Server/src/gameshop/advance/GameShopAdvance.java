@@ -7,6 +7,7 @@
 package gameshop.advance;
 
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.model.CatalogoProdottiSingleton;
@@ -82,7 +83,7 @@ public class GameShopAdvance {
             DbCartaClienteSingleton.getInstance().create(cliente);
             IntervalloDiTempo periodo = new IntervalloDiTempo(DateTime.now(), DateTime.now().plusDays(10));
             DbManagerSingleton.getInstance().close();
-            DescrizioneProdotto desc;
+            IDescrizioneProdotto desc;
             desc = DbDescrizioneProdottoSingleton.getInstance().read(new IDProdotto("AB1"));
             System.out.println("Descrizione prodotto dal DB: "+desc);
             IScontoProdottoStrategy scontoAB1 = new ScontoPrendiPaghiClienteProdottoStrategy(3,2, periodo, tipo);

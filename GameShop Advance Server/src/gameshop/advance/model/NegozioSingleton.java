@@ -6,7 +6,7 @@ import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
 import gameshop.advance.technicalservices.db.DbScontoVenditaSingleton;
-import gameshop.advance.technicalservices.db.DbTransazioneSingleton;
+import gameshop.advance.technicalservices.db.DbVenditaSingleton;
 import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.LinkedList;
@@ -53,7 +53,7 @@ public class NegozioSingleton
     
     public synchronized Integer getNextId()
     {
-        return DbTransazioneSingleton.getInstance().count();
+        return DbVenditaSingleton.getInstance().count();
     }
     
     /**
@@ -64,7 +64,7 @@ public class NegozioSingleton
     public void registraTransazione(ITransazione v) throws RemoteException
     {
         try {
-            DbTransazioneSingleton.getInstance().create(v);
+            DbVenditaSingleton.getInstance().create(v);
         } catch (ObjectAlreadyExistsDbException ex) {
             Logger.getLogger(NegozioSingleton.class.getName()).log(Level.SEVERE, null, ex);
         }
@@ -72,7 +72,7 @@ public class NegozioSingleton
     
     public ITransazione riprendiTransazione(Integer id)
     {
-        return DbTransazioneSingleton.getInstance().read(id);
+        return DbVenditaSingleton.getInstance().read(id);
     }
     
     public CartaCliente getCliente(int codiceTessera) {

@@ -13,6 +13,7 @@ import gameshop.advance.model.transazione.RigaDiTransazione;
 import gameshop.advance.model.transazione.TipologiaCliente;
 import gameshop.advance.utility.IntervalloDiTempo;
 import gameshop.advance.utility.Money;
+import java.rmi.RemoteException;
 import java.util.List;
 import org.joda.time.DateTime;
 
@@ -33,7 +34,7 @@ public class ScontoPercentualeClienteProdottoStrategy implements IScontoProdotto
     }
 
     @Override
-    public Money getSubtotal(ITransazione v, RigaDiTransazione rdv) {
+    public Money getSubtotal(ITransazione v, RigaDiTransazione rdv) throws RemoteException {
         CartaCliente c = v.getCliente();
         Money subtotal = rdv.getDescrizione().getPrezzo(v.getDate()).multiply(rdv.getQuantity());
         if(c!=null && this.checkApplicable(c.getTipo()))

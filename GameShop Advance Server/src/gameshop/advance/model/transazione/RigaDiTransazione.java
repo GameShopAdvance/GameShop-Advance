@@ -1,5 +1,6 @@
 package gameshop.advance.model.transazione;
 
+import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.DescrizioneProdotto;
@@ -15,7 +16,7 @@ import java.util.List;
 public class RigaDiTransazione
 {
     private IScontoProdottoStrategy strategiaDiSconto;
-    private DescrizioneProdotto descrizione;
+    private IDescrizioneProdotto descrizione;
     private int quantity;
 
     /**
@@ -24,7 +25,7 @@ public class RigaDiTransazione
      * @param desc
      * @param quantity
      */
-    public RigaDiTransazione(DescrizioneProdotto desc, int quantity, List<IScontoProdottoStrategy> sconti)
+    public RigaDiTransazione(IDescrizioneProdotto desc, int quantity, List<IScontoProdottoStrategy> sconti)
     {
         this.descrizione = desc;
         this.quantity = quantity;
@@ -35,7 +36,7 @@ public class RigaDiTransazione
         }
     }
 
-    public DescrizioneProdotto getDescrizione() {
+    public IDescrizioneProdotto getDescrizione() {
         return descrizione;
     }
 

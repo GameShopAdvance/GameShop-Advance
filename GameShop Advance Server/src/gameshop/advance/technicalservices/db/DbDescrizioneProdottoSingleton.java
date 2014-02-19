@@ -10,8 +10,8 @@ import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.query.Query;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.model.DescrizioneProdotto;
-import gameshop.advance.model.DescrizioneProdottoSmartProxy;
 import gameshop.advance.utility.IDProdotto;
 import java.util.Iterator;
 
@@ -33,17 +33,17 @@ public class DbDescrizioneProdottoSingleton {
              return instance;
     }
         
-    public void create(DescrizioneProdotto desc) throws ObjectAlreadyExistsDbException{
+    public void create(IDescrizioneProdotto desc) throws ObjectAlreadyExistsDbException{
             ObjectContainer client = DbManagerSingleton.getInstance().getClient();
             int result = client.queryByExample(desc).size();
             if(result > 0)
                 throw new ObjectAlreadyExistsDbException();
-            client.store(new DescrizioneProdottoSmartProxy(desc));
+            client.store(SmartProxyFactorySingleton.getIstance().creaProxyDescrizioneProdotto(desc));
             client.commit();
     }
     
     //metodo provvisorio
-    public void update(DescrizioneProdotto desc) throws ObjectAlreadyExistsDbException{
+    public void update(IDescrizioneProdotto desc) throws ObjectAlreadyExistsDbException{
             ObjectContainer client = DbManagerSingleton.getInstance().getClient();
             client.store(desc);
             client.commit();
@@ -52,13 +52,15 @@ public class DbDescrizioneProdottoSingleton {
     public Iterator<Object> read()
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-        return client.queryByExample(DescrizioneProdotto.class).iterator();
+        IDescrizioneProdotto desc = SmartProxyFactorySingleton.getIstance().creaProxyDescrizioneProdotto(null);
+        return client.queryByExample(desc.getClass()).iterator();
     }
     
-    public DescrizioneProdotto read(IDProdotto code) {
+    public IDescrizioneProdotto read(IDProdotto code) {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         Query query=client.query();
-        query.constrain(DescrizioneProdotto.class);
+        IDescrizioneProdotto desc = SmartProxyFactorySingleton.getIstance().creaProxyDescrizioneProdotto(null);
+        query.constrain(desc.getClass());
         query.descend("codiceProdotto").constrain(code);
         ObjectSet results = query.execute();
         if(results.isEmpty())

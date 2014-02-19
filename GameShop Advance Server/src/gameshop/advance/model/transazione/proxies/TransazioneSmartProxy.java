@@ -10,10 +10,10 @@ import com.db4o.activation.ActivationPurpose;
 import com.db4o.activation.Activator;
 import com.db4o.ta.Activatable;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
-import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
@@ -31,13 +31,18 @@ public class TransazioneSmartProxy implements ITransazione, Activatable{
     private ITransazione trans;
     private transient Activator _activator;
 
+    public TransazioneSmartProxy(ITransazione trans)
+    {
+        this.trans = trans;
+    }
+    
     @Override
     public void completaTransazione() throws RemoteException {
         this.trans.completaTransazione();
     }
 
     @Override
-    public void inserisciProdotto(DescrizioneProdotto desc, int quantity) throws RemoteException {
+    public void inserisciProdotto(IDescrizioneProdotto desc, int quantity) throws RemoteException {
         this.trans.inserisciProdotto(desc, quantity);
     }
 

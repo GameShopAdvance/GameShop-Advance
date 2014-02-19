@@ -9,7 +9,6 @@ package gameshop.advance.interfaces;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.interfaces.remote.ITransazioneRemote;
-import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
@@ -38,7 +37,7 @@ public interface ITransazione extends ITransazioneRemote {
      * @param quantity
      * @throws java.rmi.RemoteException
      */
-    void inserisciProdotto(DescrizioneProdotto desc, int quantity) throws RemoteException;
+    void inserisciProdotto(IDescrizioneProdotto desc, int quantity) throws RemoteException;
 
     /**
      * Crea un nuovo oggetto pagamento utilizzando l'ammontare della vendita corrente.Aggiunge

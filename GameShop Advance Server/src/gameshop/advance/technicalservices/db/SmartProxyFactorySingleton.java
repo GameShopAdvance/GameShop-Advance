@@ -6,7 +6,9 @@
 
 package gameshop.advance.technicalservices.db;
 
+import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
+import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.DescrizioneProdottoSmartProxy;
 import gameshop.advance.model.transazione.proxies.PrenotazioneSmartProxy;
 import gameshop.advance.model.transazione.proxies.TransazioneSmartProxy;
@@ -34,18 +36,18 @@ public class SmartProxyFactorySingleton {
     }
 
     
-    public PrenotazioneSmartProxy creaProxyPrenotazione(IPrenotazione res) {
+    public IPrenotazione creaProxyPrenotazione(IPrenotazione res) {
    
             return new PrenotazioneSmartProxy(res);
       
     }
 
-    public DescrizioneProdottoSmartProxy creaProxyDescrizioneProdotto(IDescrizione desc){
+    public IDescrizioneProdotto creaProxyDescrizioneProdotto(IDescrizioneProdotto desc){
          return new DescrizioneProdottoSmartProxy(desc);
     }
         
-    public TransazioneSmartProxy creaProxyVendita(IVendita v){
-        return new TransazioneProdottoSmartProxy(v);
+    public ITransazione creaProxyVendita(ITransazione v){
+        return new TransazioneSmartProxy(v);
     }
     
   

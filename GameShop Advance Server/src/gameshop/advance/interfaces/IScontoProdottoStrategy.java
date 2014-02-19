@@ -8,6 +8,7 @@ package gameshop.advance.interfaces;
 
 import gameshop.advance.model.transazione.RigaDiTransazione;
 import gameshop.advance.utility.Money;
+import java.rmi.RemoteException;
 import org.joda.time.DateTime;
 
 /**
@@ -16,7 +17,7 @@ import org.joda.time.DateTime;
  */
 public interface IScontoProdottoStrategy {
     
-    public Money getSubtotal(ITransazione v, RigaDiTransazione rdv );
+    public Money getSubtotal(ITransazione v, RigaDiTransazione rdv ) throws RemoteException;
     
     /**
      *
