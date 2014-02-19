@@ -3,11 +3,11 @@ package gameshop.advance.controller;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
+import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.CatalogoProdottiSingleton;
-import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.NegozioSingleton;
 import gameshop.advance.model.transazione.Prenotazione;
 import gameshop.advance.remote.DescrizioneRemoteProxy;
@@ -26,7 +26,7 @@ import java.util.LinkedList;
  */
 public class PrenotaProdottoController extends UnicastRemoteObject implements IPrenotaProdottoRemote {
     
-    private Prenotazione prenotazione;
+    private IPrenotazione prenotazione;
     
     //OPERAZIONI DI SISTEMA LATO CLIENTE
     
@@ -47,7 +47,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
         LinkedList<IDescrizioneProdottoRemote> list = new LinkedList<>();
         while(iter.hasNext())
         {
-            list.add(new DescrizioneRemoteProxy((DescrizioneProdotto) iter.next()));
+            list.add(new DescrizioneRemoteProxy((IDescrizioneProdottoRemote) iter.next()));
         }
         return new IteratorWrapper<> (list.iterator());
     }

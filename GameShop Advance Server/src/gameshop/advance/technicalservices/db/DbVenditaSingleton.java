@@ -10,6 +10,7 @@ import com.db4o.ObjectContainer;
 import com.db4o.query.Predicate;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.ITransazione;
+import gameshop.advance.model.transazione.proxies.TransazioneSmartProxy;
 import java.rmi.RemoteException;
 import java.util.List;
 
@@ -39,16 +40,16 @@ public class DbVenditaSingleton {
         int exist = client.queryByExample(sale).size();
         if(exist > 0)
             throw new ObjectAlreadyExistsDbException();
-        client.store(SmartProxyFactorySingleton.getIstance().creaProxyVendita(sale));
+        client.store(new TransazioneSmartProxy(sale));
         client.commit();
     }
     
     public ITransazione read(final Integer id)
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-        List<ITransazione> result = client.query(new Predicate<ITransazione>() {
+        List<TransazioneSmartProxy> result = client.query(new Predicate<TransazioneSmartProxy>() {
             @Override
-            public boolean match(ITransazione candidate) {
+            public boolean match(TransazioneSmartProxy candidate) {
                 Integer idTrans;
                 try {
                     idTrans = candidate.getId();
@@ -65,14 +66,12 @@ public class DbVenditaSingleton {
         if(result.isEmpty())
             return null;
         ITransazione trans = result.get(0);
-        client.activate(trans, 11);
         return trans;
     }
     
     public Integer count()
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-        ITransazione trans = SmartProxyFactorySingleton.getIstance().creaProxyVendita(null);
-        return client.queryByExample(trans.getClass()).size();
+        return client.queryByExample(TransazioneSmartProxy.class).size();
     }
 }

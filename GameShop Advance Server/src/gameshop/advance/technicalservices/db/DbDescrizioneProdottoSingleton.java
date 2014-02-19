@@ -7,13 +7,14 @@
 package gameshop.advance.technicalservices.db;
 
 import com.db4o.ObjectContainer;
-import com.db4o.ObjectSet;
-import com.db4o.query.Query;
+import com.db4o.query.Predicate;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
-import gameshop.advance.model.DescrizioneProdotto;
+import gameshop.advance.model.DescrizioneProdottoSmartProxy;
 import gameshop.advance.utility.IDProdotto;
+import java.rmi.RemoteException;
 import java.util.Iterator;
+import java.util.List;
 
 /**
  *
@@ -38,7 +39,7 @@ public class DbDescrizioneProdottoSingleton {
             int result = client.queryByExample(desc).size();
             if(result > 0)
                 throw new ObjectAlreadyExistsDbException();
-            client.store(SmartProxyFactorySingleton.getIstance().creaProxyDescrizioneProdotto(desc));
+            client.store(new DescrizioneProdottoSmartProxy(desc));
             client.commit();
     }
     
@@ -52,20 +53,34 @@ public class DbDescrizioneProdottoSingleton {
     public Iterator<Object> read()
     {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-        IDescrizioneProdotto desc = SmartProxyFactorySingleton.getIstance().creaProxyDescrizioneProdotto(null);
-        return client.queryByExample(desc.getClass()).iterator();
+        return client.queryByExample(DescrizioneProdottoSmartProxy.class).iterator();
     }
     
-    public IDescrizioneProdotto read(IDProdotto code) {
+    public IDescrizioneProdotto read(final IDProdotto code) {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-        Query query=client.query();
-        IDescrizioneProdotto desc = SmartProxyFactorySingleton.getIstance().creaProxyDescrizioneProdotto(null);
-        query.constrain(desc.getClass());
-        query.descend("codiceProdotto").constrain(code);
-        ObjectSet results = query.execute();
-        if(results.isEmpty())
-            return null;
-        return (DescrizioneProdotto) results.get(0);
-    }
+        List<DescrizioneProdottoSmartProxy> result = client.query(new Predicate<DescrizioneProdottoSmartProxy>() {
+            @Override
+            public boolean match(DescrizioneProdottoSmartProxy candidate) {
+               IDProdotto codice;
+               try {
+                   codice = candidate.getCodiceProdotto();
+               }
+               catch (RemoteException ex) {
+                   return false;
+               }
+               if(codice.getCodice().equals(code.getCodice()))
+                   return true;
+               else
+                   return false;
+           }
+       });
+       if(result.isEmpty())
+           return null;
+       DescrizioneProdottoSmartProxy desc = result.get(0);
+       client.activate(desc, 11);
+       return desc;
+       
+   }
 }
 
+       
