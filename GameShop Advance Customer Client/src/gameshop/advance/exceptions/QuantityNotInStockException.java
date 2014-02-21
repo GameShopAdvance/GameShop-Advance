@@ -4,17 +4,12 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.interfaces.remote;
-
-import java.rmi.Remote;
-import java.rmi.RemoteException;
+package gameshop.advance.exceptions;
 
 /**
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public interface IRemoteDescriptionClient extends Remote {
+public class QuantityNotInStockException extends Exception{
     
-    void addDescription(IDescrizioneProdottoRemote add) throws RemoteException;
-
 }

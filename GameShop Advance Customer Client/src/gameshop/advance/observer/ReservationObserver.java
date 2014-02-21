@@ -14,7 +14,7 @@ import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
+/** Observer della prenotazione
  *
  * @author Matteo Gentile
  */
@@ -22,6 +22,11 @@ public class ReservationObserver extends UnicastRemoteObject implements IRemoteO
     
     private IRemoteReservationClient client;
     
+    /** 
+     *
+     * @param client
+     * @throws RemoteException
+     */
     public ReservationObserver(IRemoteReservationClient client) throws RemoteException {
         this.client = client;
     }

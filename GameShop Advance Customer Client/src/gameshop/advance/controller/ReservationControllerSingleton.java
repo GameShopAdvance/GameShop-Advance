@@ -45,8 +45,10 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     private Integer idPrenotazione = -1;
     private IRemoteObserver reservationObserver;
 
-   
-
+    /**
+     *
+     * @throws RemoteException
+     */
     public ReservationControllerSingleton() throws RemoteException {
         this.reserved_items = new HashMap<>();
     }
@@ -62,6 +64,13 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         
     }
     
+    /**
+     *
+     * @return
+     * @throws NullPointerException
+     * @throws RemoteException
+     * @throws ConfigurationException
+     */
     public static ReservationControllerSingleton getInstance() throws NullPointerException, RemoteException, ConfigurationException
     {
         if(instance==null)
@@ -103,6 +112,11 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
             this.reserved_items.put(codiceP.toString(), quantity);
     }
 
+    /** Metodo che si occupa di prendere dalla tabella dei prodotti disponibili per la prenotazione
+     *  quelli selezionati e le rispettive quantità e richiede al controller di aggiungerli alla prenotazione.
+     *
+     * @throws RemoteException
+     */
     public void completaPrenotazione() throws RemoteException {
         
         System.err.println("ID Prenotazione:"+this.idPrenotazione);
@@ -119,10 +133,13 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         this.controller.addListener(this.reservationObserver);
         this.controller.terminaPrenotazione();
         aggiornaWindow(new CompletedReservationPanel(this.idPrenotazione));
-        //System.err.println("ID Prenotazione:"+this.idPrenotazione);
     }
-    
 
+    /** Aggiorna l'id della prenotazione una volta che questa è terminata
+     *
+     * @param id
+     * @throws RemoteException
+     */
     @Override
     public void aggiornaIdPrenotazione(int id) throws RemoteException {
         this.idPrenotazione = id;

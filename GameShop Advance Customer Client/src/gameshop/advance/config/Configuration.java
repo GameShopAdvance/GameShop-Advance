@@ -10,7 +10,6 @@ import gameshop.advance.exceptions.ConfigurationException;
  */
 public class Configuration {
     
-    //private String configurationFile = "./src/gameshop/advance/employee/config/clientConfiguration.xml";
 
     private String serverAddress;
     private int serverPort;
@@ -29,10 +28,10 @@ public class Configuration {
     public String toString() {
         
         String configuration;
-        configuration = "Configurazione del terminale - " +
-                "Server Address: "+ this.getServerAddress() +
-                "Server Port: " + this.getServerPort() +
-                "Numero Cassa: " + this.getIdCassa();
+        configuration = " Configurazione del terminale - " +
+                " Server Address: "+ this.getServerAddress() +
+                " Server Port: " + this.getServerPort() +
+                " Numero Cassa: " + this.getIdCassa();
         
         return configuration;
     }

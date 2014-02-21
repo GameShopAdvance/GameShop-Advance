@@ -17,7 +17,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 
-/**
+/** Pannello Prenotazione cliente completata
  *
  * @author Matteo Gentile
  */

@@ -10,7 +10,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- * Interfaccia remota per l'esportazione delle classiobserver che la implementano tramite
+ * Interfaccia remota per l'esportazione delle classi observer che la implementano tramite
  * Java RMI.
  * @author Salx
  */

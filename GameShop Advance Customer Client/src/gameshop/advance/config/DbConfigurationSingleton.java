@@ -26,8 +26,12 @@ public class DbConfigurationSingleton {
     
     private DbConfigurationSingleton(){
         this.db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), this.DbName);
-    } 
-    
+    }
+
+    /**
+     *
+     * @return instance
+     */
     public synchronized static DbConfigurationSingleton getInstance(){
         
         if (instance == null){
@@ -37,8 +41,11 @@ public class DbConfigurationSingleton {
         
         return instance;
     }
-    
-   
+
+    /**
+     *
+     * @param config la configurazione da salvare
+     */
     public void store (Configuration config) {
         System.err.println("Salvataggio in corso!");
         db.store(config);
@@ -46,6 +53,10 @@ public class DbConfigurationSingleton {
         db.commit();
     }
     
+    /**
+     *
+     * @return la configurazione salvata 
+     */
     public Configuration read(){
         Query query = this.db.query();
         query.constrain(Configuration.class);

@@ -18,7 +18,17 @@ public interface IRemoteFactory extends Remote{
      */
     ICassaRemote creaCassa(int numeroCassa) throws RemoteException;
     
+    /** Ritorna il controller necessario all'inventario
+     *
+     * @return IInventarioControllerRemote
+     * @throws RemoteException
+     */
     IInventarioControllerRemote getGestisciInventarioController()  throws RemoteException;
     
+    /** Ritorna il controller necessario alla prenotazione
+     *
+     * @return IPrenotaProdottoRemote
+     * @throws RemoteException
+     */
     IPrenotaProdottoRemote getPrenotaProdottoController() throws RemoteException;
 }

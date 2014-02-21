@@ -59,7 +59,12 @@ public class ReservationPanel extends JPanel {
         }
     }
 
- public void setUpReservationColumn(TableColumn rColumn) {
+    /** 
+     *
+     * @param rColumn Colonna della tabella dei prodotti che sarà destinata alla selezione della quantità
+     * da prenotare.
+     */
+    public void setUpReservationColumn(TableColumn rColumn) {
         JComboBox comboBox = new JComboBox();
         
         for (int i=0; i<=MAX_QUANTITY; i++){
@@ -166,7 +171,7 @@ public class ReservationPanel extends JPanel {
             table1.getModel().addTableModelListener(tableModelListener);
      }
      
-      private void setUpSubtotalColumn( TableColumn column) {
+private void setUpSubtotalColumn( TableColumn column) {
         JTextField jtextField3;
         jtextField3 = new JTextField();
         column.setCellEditor(new DefaultCellEditor(jtextField3));

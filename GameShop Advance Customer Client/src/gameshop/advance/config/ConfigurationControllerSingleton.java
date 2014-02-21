@@ -10,7 +10,8 @@ import gameshop.advance.exceptions.ConfigurationException;
 import java.net.UnknownHostException;
 import sun.net.util.IPAddressUtil;
 
-/**
+/** Controller che si occupa di gestire la configurazione del client necessaria per consentire il funzionamento
+ * di Java RMI
  *
  * @author Salx
  */
