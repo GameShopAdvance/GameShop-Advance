@@ -45,7 +45,7 @@ public abstract class ScontoProdottoStrategyComposite implements IScontoProdotto
     }
     
     @Override
-    public abstract Money getSubtotal(ITransazione v, RigaDiTransazione rdv);
+    public abstract Money getSubtotal(ITransazione v, RigaDiTransazione rdv) throws RemoteException;
     
     public Money getRealSubtotal(RigaDiTransazione rdv, DateTime period) throws RemoteException
     {

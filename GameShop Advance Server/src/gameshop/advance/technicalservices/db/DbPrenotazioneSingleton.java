@@ -39,7 +39,10 @@ public class DbPrenotazioneSingleton {
         int exist = client.queryByExample(book).size();
         if(exist > 0)
             throw new ObjectAlreadyExistsDbException();
-        client.store(new PrenotazioneSmartProxy(book));
+        if(book.getClass() != PrenotazioneSmartProxy.class)
+            client.store(new PrenotazioneSmartProxy(book));
+        else
+            client.store(book);
         client.commit();
     }
     

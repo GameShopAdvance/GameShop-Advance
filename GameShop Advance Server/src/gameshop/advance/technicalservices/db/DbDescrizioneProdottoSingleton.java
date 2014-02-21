@@ -39,7 +39,10 @@ public class DbDescrizioneProdottoSingleton {
             int result = client.queryByExample(desc).size();
             if(result > 0)
                 throw new ObjectAlreadyExistsDbException();
-            client.store(new DescrizioneProdottoSmartProxy(desc));
+            if(desc.getClass() != DescrizioneProdottoSmartProxy.class)
+                client.store(new DescrizioneProdottoSmartProxy(desc));
+            else
+                client.store(desc);
             client.commit();
     }
     

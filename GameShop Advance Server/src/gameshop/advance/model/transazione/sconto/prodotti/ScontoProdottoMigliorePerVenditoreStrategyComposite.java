@@ -10,6 +10,7 @@ import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.transazione.RigaDiTransazione;
 import gameshop.advance.utility.Money;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -20,7 +21,7 @@ public class ScontoProdottoMigliorePerVenditoreStrategyComposite extends ScontoP
     
     
     @Override
-    public Money getSubtotal(ITransazione v, RigaDiTransazione rdv) 
+    public Money getSubtotal(ITransazione v, RigaDiTransazione rdv) throws RemoteException 
     {
         List<IScontoProdottoStrategy> components = super.getComponents();
         Money massimaSpesa = new Money();

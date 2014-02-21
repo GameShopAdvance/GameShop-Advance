@@ -40,7 +40,10 @@ public class DbVenditaSingleton {
         int exist = client.queryByExample(sale).size();
         if(exist > 0)
             throw new ObjectAlreadyExistsDbException();
-        client.store(new TransazioneSmartProxy(sale));
+        if(sale.getClass() != TransazioneSmartProxy.class)
+            client.store(new TransazioneSmartProxy(sale));
+        else
+            client.store(sale);
         client.commit();
     }
     

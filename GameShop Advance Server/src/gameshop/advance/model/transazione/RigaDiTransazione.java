@@ -6,6 +6,7 @@ import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.sconto.ScontoFactorySingleton;
 import gameshop.advance.utility.Money;
+import java.rmi.RemoteException;
 import java.util.List;
 
 /**
@@ -52,7 +53,7 @@ public class RigaDiTransazione
         this.quantity = quantity;
     }
 
-    public Money getSubTotal(ITransazione v)
+    public Money getSubTotal(ITransazione v) throws RemoteException
     {
         return this.strategiaDiSconto.getSubtotal(v, this);
     }
