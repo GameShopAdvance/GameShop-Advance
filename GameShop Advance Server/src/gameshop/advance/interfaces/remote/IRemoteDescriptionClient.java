@@ -15,6 +15,11 @@ import java.rmi.RemoteException;
  */
 public interface IRemoteDescriptionClient extends Remote {
     
+    /** Aggiunge descrizioni prodotto tramite inventario
+     *
+     * @param add 
+     * @throws RemoteException
+     */
     void addDescription(IDescrizioneProdottoRemote add) throws RemoteException;
 
 }

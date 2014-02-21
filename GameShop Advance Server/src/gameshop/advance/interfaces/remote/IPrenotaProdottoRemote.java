@@ -19,23 +19,73 @@ import java.rmi.RemoteException;
  */
 public interface IPrenotaProdottoRemote extends Remote{
 
+    /**
+     *
+     * @param obs
+     * @throws RemoteException
+     */
     void addListener(IRemoteObserver obs) throws RemoteException;
     
-    //OPERAZIONI DI SISTEMA LATO CLIENTE
+    /**********************************
+
+    OPERAZIONI DI SISTEMA LATO CLIENTE
+
+    **********************************/
     
+    /**
+     *
+     * @return
+     * @throws RemoteException
+     */
+        
     IIteratorWrapperRemote<IDescrizioneProdottoRemote> getDescriptions() throws RemoteException;
     
+    /**
+     *
+     * @throws RemoteException
+     */
     void avviaPrenotazione() throws RemoteException;
 
+    /**
+     *
+     * @param codiceProdotto
+     * @param quantity
+     * @throws RemoteException
+     * @throws ProdottoNotFoundException
+     */
     void prenotaProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException, ProdottoNotFoundException;
     
+    /**
+     *
+     * @throws RemoteException
+     */
     void terminaPrenotazione() throws RemoteException;
     
-    //OPERAZIONI DI SISTEMA LATO COMMESSO
+    /**********************************
+
+    OPERAZIONI DI SISTEMA LATO COMMESSO
+
+    **********************************/
+
+    /**
+     *
+     * @throws RemoteException
+     */
     void completaPrenotazione() throws RemoteException;
     
+    /**
+     *
+     * @param id
+     * @throws RemoteException
+     */
     void recuperaPrenotazione(Integer id) throws RemoteException;
     
+    /**
+     *
+     * @param amount
+     * @throws RemoteException
+     * @throws InvalidMoneyException
+     */
     void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException;
     
     //metodo per la richiesta di pagamento in acconto
@@ -46,5 +96,5 @@ public interface IPrenotaProdottoRemote extends Remote{
      * @throws RemoteException
      * @throws InvalidMoneyException
      */
-        void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException;
+     void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException;
 }
