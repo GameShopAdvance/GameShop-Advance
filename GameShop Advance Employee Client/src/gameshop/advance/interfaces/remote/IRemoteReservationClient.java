@@ -10,11 +10,15 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- *
+ * Interfaccia remota per esportare ReservationClient sui client tramite Java RMI.
  * @author Matteo Gentile
  */
 public interface IRemoteReservationClient extends Remote {
     
+    /**
+     * @param id
+     * @throws RemoteException
+     */
     void aggiornaIdPrenotazione(int id) throws RemoteException;
 
 }

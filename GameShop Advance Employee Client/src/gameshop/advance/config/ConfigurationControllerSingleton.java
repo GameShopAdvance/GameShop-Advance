@@ -11,7 +11,8 @@ import java.net.UnknownHostException;
 import sun.net.util.IPAddressUtil;
 
 /**
- *
+ * Classe che si occupa della gestione, recupero e salvataggio, dell'oggetto configuration,
+ * che contiene tutti i dati relativi alla configurazione del server.s
  * @author Salx
  */
 public class ConfigurationControllerSingleton {
@@ -20,6 +21,9 @@ public class ConfigurationControllerSingleton {
     
     private Configuration config;
     
+    /**
+     * Inizializza ConfigurationController.
+     */
     private ConfigurationControllerSingleton() throws ConfigurationException{
         
         Configuration c = DbConfigurationSingleton.getInstance().read();
@@ -29,6 +33,10 @@ public class ConfigurationControllerSingleton {
             config = c;
     }
     
+    /**
+     * @return istanza di ConfigurationController
+     * @throws ConfigurationException
+     */
     public static ConfigurationControllerSingleton getInstance() throws ConfigurationException {
         
         if (instance == null)
@@ -39,18 +47,27 @@ public class ConfigurationControllerSingleton {
         return instance;
     }
     
+    /**
+     * @param address
+     * @param port
+     * @param idCassa
+     */
     public void setConfiguration(String address, int port, int idCassa){
         
         this.config.setServerAddress(address);
         this.config.setServerPort(port);
         this.config.setIdCassa(idCassa);     
     }
-    
+
     public Configuration getConfiguration(){
         
         return this.config;
     }
     
+    /**
+     * @param address
+     * @throws UnknownHostException
+     */
     public void setServerAddress(String address) throws UnknownHostException{
         
         boolean goodAddress = IPAddressUtil.isIPv4LiteralAddress(address);
@@ -88,8 +105,10 @@ public class ConfigurationControllerSingleton {
         idCassa = this.config.getIdCassa();
         return idCassa;
     }
-    
 
+    /**
+     * Salva la configurazione nel db locale.
+     */
     public void storeConfiguration(){
         DbConfigurationSingleton.getInstance().store(this.config);
     }

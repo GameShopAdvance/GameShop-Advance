@@ -10,8 +10,8 @@ import gameshop.advance.interfaces.remote.ICassaRemote;
 import gameshop.advance.interfaces.remote.IRemoteClient;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
-import gameshop.advance.observer.TotalObserver;
 import gameshop.advance.observer.RestObserver;
+import gameshop.advance.observer.TotalObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.employee.sale.EndSalePanel;
@@ -29,7 +29,7 @@ import java.util.logging.Logger;
 import javax.swing.JComponent;
 
 /**
- *
+ * Controller lato client delle operazioni di gestione delle vendite.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class SaleControllerSingleton extends UnicastRemoteObject implements IRemoteClient {
@@ -46,6 +46,11 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         
     }
 
+    /**
+     * @throws ConfigurationException
+     * @throws RemoteException
+     * @throws NotBoundException
+     */
     private void configure() throws ConfigurationException, RemoteException, NotBoundException {
           
         ConfigurationControllerSingleton controllerConfig = ConfigurationControllerSingleton.getInstance();
@@ -58,6 +63,12 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         this.saleRestObserver = new RestObserver(instance);
     }
     
+    /**
+     * @return istanza di SaleControlelrSingleton
+     * @throws NullPointerException
+     * @throws RemoteException
+     * @throws ConfigurationException
+     */
     public static SaleControllerSingleton getInstance() throws NullPointerException, RemoteException, ConfigurationException
     {
         if(instance==null)
@@ -75,6 +86,9 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         return instance;
     }
     
+    /**
+     * @throws RemoteException
+     */
     public void avviaNuovaVendita() throws RemoteException
     {
         this.cassa.avviaNuovaVendita();
@@ -82,6 +96,14 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         aggiornaWindow(new InsertItemPanel());
     }
     
+    /**
+     * @param productID
+     * @param quantity
+     * @throws RemoteException
+     * @throws ProdottoNotFoundException
+     * @throws QuantityException
+     * @throws QuantityNotInStockException
+     */
     public void inserisciProdotto(String productID, int quantity) throws RemoteException, ProdottoNotFoundException, QuantityException, QuantityNotInStockException
     {
         if(quantity < 1)
@@ -91,8 +113,7 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
     }
     
     /**
-     *
-     * @throws java.rmi.RemoteException
+     * @throws RemoteException
      */
     public void concludiVendita() throws RemoteException
     {
@@ -100,6 +121,10 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         this.cassa.concludiVendita();
     }
     
+    /**
+     * @param payment
+     * @throws RemoteException
+     */
     public void effettuaPagamento(Double payment) throws RemoteException
     {
         try{
@@ -112,13 +137,16 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         }
     }
     
+    /**
+     * @param code
+     * @throws RemoteException
+     */
     public void inserisciCartaCliente(int code) throws RemoteException
     {
         cassa.inserisciTesseraCliente(code);
     }
     
     /**
-     *
      * @param m
      */
     @Override
@@ -127,6 +155,9 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         this.totale = m;
     }
     
+    /**
+     * @param m
+     */
     @Override
     public void aggiornaResto(Money m)
     {

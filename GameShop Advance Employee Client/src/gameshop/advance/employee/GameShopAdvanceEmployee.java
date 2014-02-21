@@ -5,14 +5,14 @@ import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 
 /**
- *
+ * Classe di avviamento del client.
  * @author loki
  */
 public class GameShopAdvanceEmployee {
 
     /**
      * @param args the command line arguments
-     * @throws gameshop.advance.exceptions.ConfigurationException
+     * @throws ConfigurationException
      */
     public static void main(String[] args) throws ConfigurationException {
 
@@ -21,10 +21,6 @@ public class GameShopAdvanceEmployee {
         UIWindowSingleton window = UIWindowSingleton.getInstance();
         window.setPanel(new EmployeeMenuPanel());
         window.setVisible(true);
-        window.refreshContent();
-
-            
-    }
-    
-    
+        window.refreshContent();      
+    } 
 }

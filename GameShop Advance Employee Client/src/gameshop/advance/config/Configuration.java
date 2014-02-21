@@ -4,9 +4,8 @@ package gameshop.advance.config;
 import gameshop.advance.exceptions.ConfigurationException;
 
 /**
- *
- * @author Lorenzo Di Giuseppe
  * Classe che mantiene la configurazione del client.
+ * @author Lorenzo Di Giuseppe
  */
 public class Configuration {
     
@@ -16,14 +15,13 @@ public class Configuration {
     private int serverPort;
     private int idCassa;
     
-    public Configuration() throws ConfigurationException
-    {
+    public Configuration() throws ConfigurationException{
         
     }
     
     /**
-     *
-     * @return
+     * Ritorna tutti i dati di configurazione come stringa.
+     * @return configuration
      */
     @Override
     public String toString() {
@@ -36,7 +34,7 @@ public class Configuration {
         
         return configuration;
     }
-    
+
     public String getServerAddress() {
         return serverAddress;
     }
@@ -52,11 +50,11 @@ public class Configuration {
     public void setServerPort(int serverPort) {
         this.serverPort = serverPort;
     }
-    
+
     public int getIdCassa() {
         return idCassa;
     }
-    
+ 
     public void setIdCassa(int idCassa){
         this.idCassa = idCassa;
     }

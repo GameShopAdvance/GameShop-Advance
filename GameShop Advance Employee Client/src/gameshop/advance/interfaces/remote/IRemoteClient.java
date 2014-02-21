@@ -19,14 +19,12 @@ import java.rmi.RemoteException;
 public interface IRemoteClient extends Remote {
 
     /**
-     *
      * @param m 
      * @throws RemoteException
      */
     void aggiornaTotale(Money m) throws RemoteException;
     
     /**
-     *
      * @param m
      * @throws RemoteException
      */

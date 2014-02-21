@@ -13,14 +13,25 @@ import gameshop.advance.interfaces.remote.ITransazioneRemote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-
+/**
+ * Osservatore del resto di una transazione.
+ * @author Salx
+ */
 public class RestObserver extends UnicastRemoteObject implements IRemoteObserver {
     private IRemoteClient client;
 
+    /**
+     * @param client
+     * @throws RemoteException
+     */
     public RestObserver(IRemoteClient client) throws RemoteException {
         this.client = client;
     }
     
+    /**
+     * @param o
+     * @throws RemoteException
+     */
     @Override
     public void notifica(Object o) throws RemoteException {
         ITransazioneRemote sale = (ITransazioneRemote) o;

@@ -13,17 +13,25 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
- *
+ * Osservatore dell'acconto di una prenotazione.
  * @author Salx
  */
 public class PartialObserver extends UnicastRemoteObject implements IRemoteObserver {
     
     private IRemoteBookClient client;
     
+    /**
+     * @param client
+     * @throws RemoteException
+     */
     public PartialObserver(IRemoteBookClient client) throws RemoteException {
         this.client = client;
     }
     
+    /**
+     * @param o
+     * @throws RemoteException
+     */
     @Override
     public void notifica(Object o) throws RemoteException{
         IPrenotazioneRemote prenotazione = (IPrenotazioneRemote) o;

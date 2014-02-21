@@ -10,11 +10,15 @@ import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 
 /**
- *
+ * Interfaccia remota per esportare RemoteBookClient sui client tramite Java RMI.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IRemoteBookClient extends IRemoteClient {
     
+    /**
+     * @param ammontare
+     * @throws RemoteException
+     */
     void aggiornaAcconto(Money ammontare) throws RemoteException;
 
 }

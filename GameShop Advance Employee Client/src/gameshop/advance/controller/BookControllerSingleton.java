@@ -27,7 +27,7 @@ import java.util.logging.Logger;
 import javax.swing.JComponent;
 
 /**
- *
+ * Controller lato client delle funzioni relative alle prenotazioni.
  * @author Salx
  */
 public class BookControllerSingleton  extends UnicastRemoteObject implements IRemoteBookClient{
@@ -54,8 +54,13 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         this.bookPartialObserver = new PartialObserver(instance);
         this.bookTotalObserver = new TotalObserver(instance);
     }
-    
-    
+
+    /**
+     * @return istanza di BookControllerSingleton
+     * @throws NullPointerException
+     * @throws RemoteException
+     * @throws ConfigurationException
+     */
     public static BookControllerSingleton getInstance() throws NullPointerException, RemoteException, ConfigurationException{
         if(instance == null)
         {
@@ -71,10 +76,19 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         return instance;
     }
     
+    /**
+     * Aggiorna i panel.
+     * @throws RemoteException
+     */
     public void gestisciPrenotazione() throws RemoteException{
         this.aggiornaWindow(new BookPanel());
     }
     
+    /**
+     * Avvia la funzione del recupero della prenotazione e aggiunge gli observer alla prenotazione.
+     * @param codicePrenotazione
+     * @throws RemoteException
+     */
     public void recuperaPrenotazione(int codicePrenotazione) throws RemoteException {
         this.controller.recuperaPrenotazione(codicePrenotazione);
         this.controller.addListener(this.bookPartialObserver);
@@ -82,6 +96,9 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         this.controller.completaPrenotazione();
     }
     
+    /**
+     * @throws RemoteException
+     */
     public void terminaPrenotazione() throws RemoteException {
         this.aggiornaWindow(new BookTotalPaymentPanel());
         this.controller.terminaPrenotazione();
@@ -99,6 +116,12 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         return this.resto;
     }
     
+    /**
+     * Funziona che avvia il pagamento dell'acconto di una prenotazione.
+     * @param acconto
+     * @throws RemoteException
+     * @throws InvalidMoneyException
+     */
     public void pagaAcconto(double acconto) throws RemoteException, InvalidMoneyException{
         try{
             this.bookRestObserver = new RestPartialObserver(instance);
@@ -119,6 +142,10 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         aggiornaWindow(new BookTotalPaymentPanel());
     }
     
+    /**
+     * Funziona che avvia il pagamento del totale di una prenotazione.
+     * @param ammontare
+     */
     public void gestisciPagamento(Double ammontare){
         
         try{
@@ -143,6 +170,10 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         UIWindowSingleton.getInstance().refreshContent();
     }
 
+    /**
+     * @param m
+     * @throws RemoteException
+     */
     @Override
     public void aggiornaAcconto(Money m) throws RemoteException {
         System.out.println("Acconto: "+m);
@@ -150,6 +181,10 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         System.err.println("Acconto da controller: "+this.acconto);
     }
     
+    /**
+     * @param m
+     * @throws RemoteException
+     */
     @Override
     public void aggiornaTotale(Money m) throws RemoteException {
         System.out.println("Totale: "+m);
@@ -157,12 +192,19 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         System.err.println("Totale da controller: "+this.totale);
     }
 
+    /**
+     * @param m
+     * @throws RemoteException
+     */
     @Override
     public void aggiornaResto(Money m) throws RemoteException {
         System.out.println("Resto: "+m);
         this.resto = m;
     }
 
+    /**
+     * @param code
+     */
     public void inserisciCartaCliente(Integer code) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

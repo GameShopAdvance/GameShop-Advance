@@ -26,7 +26,7 @@ import java.util.HashMap;
 import javax.swing.JComponent;
 
 /**
- *
+ * Controller lato client delle operazioni di gestione dell'inventario.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class InventoryControllerSingleton extends UnicastRemoteObject implements IRemoteDescriptionClient {
@@ -43,6 +43,12 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
         System.err.println("observer: "+this.observer);
     }
     
+    /**
+     * @return istanza di InventoryControllerSingleton
+     * @throws RemoteException
+     * @throws ConfigurationException
+     * @throws NotBoundException
+     */
     public static InventoryControllerSingleton getInstance() throws RemoteException, ConfigurationException, NotBoundException
     {
         if(instance == null)
@@ -60,6 +66,11 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
         return instance;
     }
     
+    /**
+     * @throws ConfigurationException
+     * @throws RemoteException
+     * @throws NotBoundException
+     */
     private void configure() throws ConfigurationException, RemoteException, NotBoundException
     {
         ConfigurationControllerSingleton controllerConfig = ConfigurationControllerSingleton.getInstance();
@@ -69,6 +80,11 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
         System.err.println("Controller: " +this.controller);
     }
     
+    /**
+     * @throws ConfigurationException
+     * @throws RemoteException
+     * @throws NotBoundException
+     */
     public void avviaInventario() throws ConfigurationException, RemoteException, NotBoundException
     {
         this.controller.avviaInventario();
@@ -76,6 +92,13 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
         aggiornaWindow(new InventoryPanel());
     }
     
+    /**
+     * @param codiceProdotto
+     * @param quantity
+     * @throws RemoteException
+     * @throws QuantityException
+     * @throws ProdottoNotFoundException
+     */
     public void inserisciProdotto(String codiceProdotto, int quantity) throws RemoteException, QuantityException, ProdottoNotFoundException
     {
         IDProdotto id = new IDProdotto(codiceProdotto);
@@ -93,6 +116,9 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
         
     }
     
+    /**
+     * @throws RemoteException
+     */
     public void terminaInventario() throws RemoteException
     {
         this.controller.rimuoviListener(this.observer);
@@ -100,6 +126,10 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
         this.aggiornaWindow(new EmployeeMenuPanel());
     }
 
+    /**
+     * @param desc
+     * @throws RemoteException
+     */
     @Override
     public void addDescription(IDescrizioneProdottoRemote desc) throws RemoteException{
         System.err.println("OBSERVER CALL");
@@ -113,10 +143,17 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
             this.addedItems.put(desc.getCodiceProdotto().getCodice(), new AggiuntaProdotti(desc, 0));
     }
 
+    /**
+     * @return valori degli oggetti appena inseriti
+     * @throws RemoteException
+     */
     public Collection<AggiuntaProdotti> getDescriptionList() throws RemoteException {
         return this.addedItems.values();
     }
 
+    /**
+     * @throws RemoteException
+     */
     public void cancel() throws RemoteException {
         this.controller.cancel();
         this.aggiornaWindow(new EmployeeMenuPanel());

@@ -13,7 +13,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 /**
- *
+ * Interfaccia remota per esportare Transazione sui client tramite Java RMI.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface ITransazioneRemote extends Remote {
@@ -26,6 +26,10 @@ public interface ITransazioneRemote extends Remote {
      */
     Money getResto() throws InvalidMoneyException, RemoteException;
 
+    /**
+     * @return
+     * @throws RemoteException
+     */
     List getRigheDiVendita() throws RemoteException;
 
     /**
@@ -36,6 +40,10 @@ public interface ITransazioneRemote extends Remote {
      */
     Money getTotal() throws RemoteException;
     
+    /**
+     * @return
+     * @throws RemoteException
+     */
     Integer getId() throws RemoteException;
 
 }

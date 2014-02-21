@@ -13,13 +13,12 @@ import java.rmi.RemoteException;
 import org.joda.time.DateTime;
 
 /**
- *
+ * Interfaccia remota per esportare DescrizioneProdotto sui client tramite Java RMI.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IDescrizioneProdottoRemote extends Remote {
 
     /**
-     *
      * @return
      * @throws RemoteException
      */

@@ -21,6 +21,9 @@ public class LoggerSingleton {
         
     }
     
+    /**
+     * @return istanza di LoggerSingleton
+     */
     public static LoggerSingleton getInstance()
     {
         if(instance == null)
@@ -28,6 +31,9 @@ public class LoggerSingleton {
         return instance;
     }
     
+    /**
+     * @param ex
+     */
     public void log(Exception ex)
     {
         Logger.getLogger(LoggerSingleton.class.getName()).log(Level.SEVERE, null, ex);

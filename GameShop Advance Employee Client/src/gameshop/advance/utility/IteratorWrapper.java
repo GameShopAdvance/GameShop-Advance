@@ -19,6 +19,10 @@ import java.util.Iterator;
 public class IteratorWrapper<T1> extends UnicastRemoteObject implements IIteratorWrapperRemote<T1> {
     private Iterator<T1> iter;
     
+    /**
+     * @param iter
+     * @throws RemoteException
+     */
     public IteratorWrapper(Iterator<T1> iter) throws RemoteException
     {
         this.iter = iter;

@@ -13,23 +13,34 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe che conserva le descrizioni dei prodotti aggiunti e la quantità inserita.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class AggiuntaProdotti {
     private IDescrizioneProdottoRemote descrizione;
     private Integer quantity;
 
-    public AggiuntaProdotti(IDescrizioneProdottoRemote desc, int quantity)
-    {
+    /**
+     * @param desc
+     * @param quantity
+     */
+    public AggiuntaProdotti(IDescrizioneProdottoRemote desc, int quantity){
         this.descrizione = desc;
         this.quantity = quantity;
     }
 
+    /**
+     * @return codice prodotto
+     * @throws RemoteException
+     */
     public IDProdotto getId() throws RemoteException {
         return this.descrizione.getCodiceProdotto();
     }
         
+    /**
+     * @return descrizione
+     * @throws RemoteException
+     */
     public String getDescrizione() throws RemoteException {
         return this.descrizione.getDescrizione();
     }

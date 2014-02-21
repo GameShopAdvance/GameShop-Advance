@@ -9,7 +9,7 @@ package gameshop.advance.exceptions;
 import gameshop.advance.utility.Money;
 
 /**
- *
+ * Classe che si occupa delle Exception riguardanti gli oggetti Money.
  * @author matteog
  */
 public class InvalidMoneyException extends Exception {

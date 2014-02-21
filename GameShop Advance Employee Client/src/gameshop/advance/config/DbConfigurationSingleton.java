@@ -7,7 +7,7 @@ import com.db4o.ObjectSet;
 import com.db4o.query.Query;
 
 /**
- *
+ * Classe che si occupa della persistenza degli oggetti configuration.
  * @author Salx
  */
 public class DbConfigurationSingleton {
@@ -18,10 +18,16 @@ public class DbConfigurationSingleton {
     
     private final String DbName = "./configuration.db";
     
+    /**
+     * Inizializza il db.
+     */
     private DbConfigurationSingleton(){
         this.db = Db4oEmbedded.openFile(Db4oEmbedded.newConfiguration(), this.DbName);
-    } 
-    
+    }
+
+    /**
+     * @return istanza di DbConfigurationSingleton
+     */
     public synchronized static DbConfigurationSingleton getInstance(){
         
         if (instance == null){
@@ -31,8 +37,11 @@ public class DbConfigurationSingleton {
         
         return instance;
     }
-    
-   
+
+    /**
+     * Salva configuration sul db.
+     * @param config
+     */
     public void store (Configuration config) {
         System.err.println("Salvataggio in corso!");
         db.store(config);
@@ -40,6 +49,9 @@ public class DbConfigurationSingleton {
         db.commit();
     }
     
+    /**
+     * @return configuration dal db
+     */
     public Configuration read(){
         Query query = this.db.query();
         query.constrain(Configuration.class);

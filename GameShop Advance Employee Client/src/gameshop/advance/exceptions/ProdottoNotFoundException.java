@@ -11,7 +11,7 @@ import gameshop.advance.utility.IDProdotto;
 
 
 /**
- *
+ * Classe che si occupa delle Exception riguardanti i prodotti non trovati nel db.
  * @author matteog
  */
 public class ProdottoNotFoundException extends Exception {

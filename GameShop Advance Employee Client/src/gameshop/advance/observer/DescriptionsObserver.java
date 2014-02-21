@@ -15,17 +15,25 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Osservatore delle descrizioni dei prodotti inseriti.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class DescriptionsObserver extends UnicastRemoteObject implements IRemoteObserver {
     
     private IRemoteDescriptionClient client;
     
+    /**
+     * @param client
+     * @throws RemoteException
+     */
     public DescriptionsObserver(IRemoteDescriptionClient client) throws RemoteException {
         this.client = client;
     }
     
+    /**
+     * @param o
+     * @throws RemoteException
+     */
     @Override
     public void notifica(Object o) throws RemoteException{
         System.err.println("Notifica Observer");
