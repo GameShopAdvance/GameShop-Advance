@@ -54,7 +54,7 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
 
     @Override
     public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException {
-        this.gestisciPagamento(ammontare);
+        this.prenotazione.gestisciPagamento(ammontare);
     }
 
     @Override

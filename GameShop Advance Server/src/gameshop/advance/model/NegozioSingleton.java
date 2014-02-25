@@ -53,9 +53,14 @@ public class NegozioSingleton
         return NegozioSingleton.percentualeAcconto;
     }
     
-    public synchronized Integer getNextId()
+    public synchronized Integer getNextSaleId()
     {
         return DbVenditaSingleton.getInstance().count();
+    }
+    
+    public synchronized Integer getNextBookId()
+    {
+        return DbPrenotazioneSingleton.getInstance().count();
     }
     
     /**

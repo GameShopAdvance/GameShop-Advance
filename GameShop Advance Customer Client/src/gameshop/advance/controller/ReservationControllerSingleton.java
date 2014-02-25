@@ -142,6 +142,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
      */
     @Override
     public void aggiornaIdPrenotazione(int id) throws RemoteException {
+        System.err.println("id "+id);
         this.idPrenotazione = id;
     }
  
