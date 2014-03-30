@@ -8,6 +8,7 @@ import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
+import gameshop.advance.utility.Money;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
@@ -29,6 +30,7 @@ public class ProductsPanel extends JPanel {
         this.productsModel = new DefaultListModel<>();
         this.productsList.setCellRenderer(new ProductCell());
         this.productsList.setModel(this.productsModel);
+        this.Totale.setText(new Money().toString());
     }
     
     public void addProduct(IDescrizioneProdottoRemote desc){

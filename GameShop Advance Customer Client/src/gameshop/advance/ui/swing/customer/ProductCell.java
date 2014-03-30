@@ -34,7 +34,7 @@ public class ProductCell extends JPanel implements ListCellRenderer<IDescrizione
         price = new JLabel();
         label2 = new JLabel();
         quantity = new JLabel();
-        separator1 = new JSeparator();
+        separator = new JSeparator();
 
         //======== this ========
         setName("this");
@@ -65,19 +65,19 @@ public class ProductCell extends JPanel implements ListCellRenderer<IDescrizione
         quantity.setText("text");
         quantity.setName("quantity");
 
-        //---- separator1 ----
-        separator1.setName("separator1");
+        //---- separator ----
+        separator.setName("separator");
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
             "[15dlu,default], $lcgap, [40dlu,default], $lcgap, 62dlu:grow, 2*($lcgap, 25dlu), $lcgap, [15dlu,default]",
-            "[10dlu,default], $lgap, [15dlu,default], $lgap, [22dlu,default], $lgap, 10dlu"), this);
+            "[10dlu,default], $lgap, [15dlu,default], $lgap, [22dlu,default], $lgap, min"), this);
 
-        builder.add(imageBox,   CC.xywh(3, 3,       1,          3));
-        builder.add(title,      CC.xy  (5, 3, CC.FILL,    CC.FILL));
-        builder.add(price,      CC.xywh(7, 3,       3,          1, CC.FILL, CC.FILL   ));
-        builder.add(label2,     CC.xy  (7, 5, CC.FILL, CC.DEFAULT));
-        builder.add(quantity,   CC.xy  (9, 5, CC.FILL, CC.DEFAULT));
-        builder.add(separator1, CC.xywh(1, 7,      11,          1, CC.FILL, CC.DEFAULT));
+        builder.add(imageBox,  CC.xywh(3, 3,       1,          3));
+        builder.add(title,     CC.xy  (5, 3, CC.FILL,    CC.FILL));
+        builder.add(price,     CC.xywh(7, 3,       3,          1, CC.FILL, CC.FILL   ));
+        builder.add(label2,    CC.xy  (7, 5, CC.FILL, CC.DEFAULT));
+        builder.add(quantity,  CC.xy  (9, 5, CC.FILL, CC.DEFAULT));
+        builder.add(separator, CC.xywh(1, 7,      11,          1, CC.FILL, CC.DEFAULT));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -87,7 +87,7 @@ public class ProductCell extends JPanel implements ListCellRenderer<IDescrizione
     private JLabel price;
     private JLabel label2;
     private JLabel quantity;
-    private JSeparator separator1;
+    private JSeparator separator;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     @Override

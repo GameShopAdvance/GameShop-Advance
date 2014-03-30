@@ -5,7 +5,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;40dlu), labelcompgap, 62dlu:grow, labelcompgap, 25dlu, labelcompgap, 25dlu, labelcompgap, max(default;15dlu)"
-			"$rowSpecs": "max(default;10dlu), linegap, max(default;15dlu), linegap, max(default;22dlu), linegap, 10dlu"
+			"$rowSpecs": "max(default;10dlu), linegap, max(default;15dlu), linegap, max(default;22dlu), linegap, min"
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
@@ -54,7 +54,7 @@ new FormModel {
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 			add( new FormComponent( "javax.swing.JSeparator" ) {
-				name: "separator1"
+				name: "separator"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 7
 				"gridWidth": 11
@@ -62,7 +62,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 100 )
+			"size": new java.awt.Dimension( 400, 90 )
 		} )
 	}
 }
