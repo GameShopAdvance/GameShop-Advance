@@ -40,4 +40,9 @@ public class DescrizioneRemoteProxy extends UnicastRemoteObject implements IDesc
     public Money getPrezzo(DateTime period) throws RemoteException {
         return this.desc.getPrezzo(period);
     }
+
+    @Override
+    public int getQuantitaDisponibile() throws RemoteException {
+        return this.desc.getQuantitaDisponibile();
+    }
 }

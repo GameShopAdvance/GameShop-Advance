@@ -36,5 +36,7 @@ public interface IDescrizioneProdottoRemote extends Remote {
      * @throws java.rmi.RemoteException
      */
     Money getPrezzo(DateTime period) throws RemoteException;
-
+    
+    int getQuantitaDisponibile() throws RemoteException;
+    
 }

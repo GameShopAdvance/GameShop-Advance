@@ -6,9 +6,8 @@
 
 package gameshop.advance.model.transazione;
 
-import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.interfaces.remote.IPrenotazioneRemote;
+import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.Pagamento;
 import gameshop.advance.utility.Money;

@@ -1,0 +1,79 @@
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
+
+new FormModel {
+	contentType: "form/swing"
+	root: new FormRoot {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+			"$columnSpecs": "15dlu:grow, labelcompgap, max(default;480px)"
+			"$rowSpecs": "max(default;15dlu):grow, linegap, max(default;15dlu):grow, linegap, max(default;180dlu):grow, linegap, fill:max(default;15dlu):grow"
+		} ) {
+			name: "this"
+			add( new FormContainer( "javax.swing.JLayeredPane", new FormLayoutManager( class javax.swing.JLayeredPane ) ) {
+				name: "layeredPane1"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+					"$columnSpecs": "max(default;15dlu), labelcompgap, 73dlu, labelcompgap, default:grow, labelcompgap, 73dlu, labelcompgap, max(default;15dlu)"
+					"$rowSpecs": "max(default;15dlu), linegap, max(default;15dlu), linegap, default:grow, linegap, 15dlu, linegap, max(default;15dlu)"
+				} ) {
+					name: "mainPanel"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label1"
+						"text": "Catalogo Prodotti"
+						"labelFor": new FormReference( "productsList" )
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"gridX": 3
+						"gridY": 3
+						"gridWidth": 3
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button1"
+						"text": "Riepilogo Prenotazione"
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridX": 7
+						"gridY": 3
+					} )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane1"
+						add( new FormComponent( "javax.swing.JList" ) {
+							name: "productsList"
+							addEvent( new FormEvent( "javax.swing.event.ListSelectionListener", "valueChanged", "productsListValueChanged", true ) )
+						} )
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridY": 5
+						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"gridX": 3
+						"gridWidth": 5
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "button2"
+						"text": "Cancella"
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridX": 3
+						"gridY": 7
+					} )
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "Totale"
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridX": 7
+						"gridY": 7
+					} )
+				}, new FormLayoutConstraints( null ) {
+					"x": 0
+					"y": 0
+					"width": 540
+					"height": 395
+				} )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridWidth": 3
+				"gridHeight": 7
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+			} )
+		}, new FormLayoutConstraints( null ) {
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 540, 395 )
+		} )
+	}
+}

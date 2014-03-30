@@ -2,7 +2,6 @@ package gameshop.advance.model;
 
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
-import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import gameshop.advance.utility.Prezzo;
