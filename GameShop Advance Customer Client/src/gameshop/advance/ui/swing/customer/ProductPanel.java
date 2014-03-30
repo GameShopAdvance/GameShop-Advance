@@ -22,11 +22,13 @@ import org.joda.time.DateTime;
 public class ProductPanel extends JPanel {
     private IDescrizioneProdottoRemote product;
     
-    public ProductPanel(IDescrizioneProdottoRemote desc) throws RemoteException {
+    public ProductPanel(){
         initComponents();
+    }
+    
+    public void setValues(IDescrizioneProdottoRemote desc) throws RemoteException{
         this.price.setText(desc.getPrezzo(DateTime.now()).toString());
-//        this.title.setText(desc.getName());
-        this.description.setText(desc.getDescrizione());
+        this.title.setText(desc.getDescrizione());
         this.product = desc;
         
 //        this.actionButton.setText(TOOL_TIP_TEXT_KEY);
