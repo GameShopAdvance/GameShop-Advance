@@ -24,9 +24,9 @@ import org.joda.time.DateTime;
 /**
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class ProductCell extends JPanel implements ListCellRenderer<IDescrizioneProdottoRemote>{
+public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDescrizioneProdottoRemote>{
     
-    public ProductCell(){
+    public ProductCellRenderer(){
         initComponents();
     }
 
@@ -108,21 +108,21 @@ public class ProductCell extends JPanel implements ListCellRenderer<IDescrizione
             this.title.setText(value.getDescrizione());
         }
         catch (Exception ex) {
-            Logger.getLogger(ProductCell.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
             this.title.setText("???");
         }
         try {
             this.price.setText(value.getPrezzo(DateTime.now()).toString());
         }
         catch (Exception ex) {
-            Logger.getLogger(ProductCell.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
             this.price.setText("???");
         }
         try{
             this.quantity.setText(""+value.getQuantitaDisponibile());
         }
         catch(Exception ex){
-            Logger.getLogger(ProductCell.class.getName()).log(Level.SEVERE, null, ex);
+            Logger.getLogger(ProductCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
             this.quantity.setText("???");
         }
         

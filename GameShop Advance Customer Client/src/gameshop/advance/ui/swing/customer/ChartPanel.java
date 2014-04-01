@@ -9,6 +9,7 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.ui.interfaces.PopActionListener;
 import gameshop.advance.utility.Money;
 import java.awt.CardLayout;
@@ -17,6 +18,7 @@ import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -30,14 +32,23 @@ public class ChartPanel extends JPanel implements ActionListener {
     private PopActionListener listener;
     private final String name = "Chart Panel";
     private CompletedReservationPanel completedPanel;
+    private DefaultListModel bookListModel;
     
     public ChartPanel() {
         initComponents();
+        this.bookListModel = new DefaultListModel();
+        this.bookList.setCellRenderer(new ProductCellRenderer());
+        this.bookList.setModel(this.bookListModel);
         this.completedPanel = new CompletedReservationPanel();
         this.completedPanel.addActionListener(this);
         this.add(this.completedPanel);
         CardLayout layout = (CardLayout) this.getLayout();
         layout.addLayoutComponent(this.completedPanel, this.completedPanel.getName());
+        
+    }
+    
+    public void addProduct(IDescrizioneProdottoRemote desc, Integer quantity)
+    {
         
     }
     
@@ -106,7 +117,7 @@ public class ChartPanel extends JPanel implements ActionListener {
         this.panel1 = new JPanel();
         this.label2 = new JLabel();
         this.scrollPane1 = new JScrollPane();
-        this.list1 = new JList();
+        this.bookList = new JList();
         this.label1 = new JLabel();
         this.totale = new JLabel();
         this.back = new JButton();
@@ -129,9 +140,9 @@ public class ChartPanel extends JPanel implements ActionListener {
             {
                 this.scrollPane1.setName("scrollPane1");
 
-                //---- list1 ----
-                this.list1.setName("list1");
-                this.scrollPane1.setViewportView(this.list1);
+                //---- bookList ----
+                this.bookList.setName("bookList");
+                this.scrollPane1.setViewportView(this.bookList);
             }
 
             //---- label1 ----
@@ -191,7 +202,7 @@ public class ChartPanel extends JPanel implements ActionListener {
     private JPanel panel1;
     private JLabel label2;
     private JScrollPane scrollPane1;
-    private JList list1;
+    private JList bookList;
     private JLabel label1;
     private JLabel totale;
     private JButton back;

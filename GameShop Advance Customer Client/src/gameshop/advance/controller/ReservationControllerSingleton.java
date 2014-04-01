@@ -118,7 +118,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         this.acconto = new Money();
     }
 
-    public void inserisciProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException, ProdottoNotFoundException 
+    public void inserisciProdotto(IDescrizioneProdottoRemote desc, int quantity) throws RemoteException, ProdottoNotFoundException 
     {
         if(!this.started)
         {
@@ -128,6 +128,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
             this.controller.addListener(this.partialObserver);
             this.started = true;
         }
+        IDProdotto codiceProdotto = desc.getCodiceProdotto();
         this.controller.prenotaProdotto(codiceProdotto, quantity);
     }
 

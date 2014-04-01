@@ -43,7 +43,7 @@ public class ProductsPanel extends JPanel implements PopActionListener {
         initComponents();
         this.panelStack = new LinkedList<>();
         this.productsModel = new DefaultListModel<>();
-        this.productsList.setCellRenderer(new ProductCell());
+        this.productsList.setCellRenderer(new ProductCellRenderer());
         this.productsList.setModel(this.productsModel);
         this.productDetail = new ProductPanel();
         this.productDetail.setListener(this);

@@ -14,7 +14,6 @@ import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.ui.interfaces.PopActionListener;
-import gameshop.advance.utility.IDProdotto;
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.Insets;
@@ -38,7 +37,7 @@ public class ProductPanel extends JPanel {
     private PopActionListener listener;
     private final String name = "Product Detail";
     
-    private IDProdotto product;
+    private IDescrizioneProdottoRemote product;
     
     public ProductPanel(){
         initComponents();
@@ -69,7 +68,7 @@ public class ProductPanel extends JPanel {
         {
             layout.show(this.panelSwitch, this.bookPanel.getName());
         }
-        this.product = desc.getCodiceProdotto();
+        this.product = desc;
     }
 
     private void backActionPerformed(ActionEvent e) {
@@ -79,7 +78,6 @@ public class ProductPanel extends JPanel {
     private void bookActionPerformed(ActionEvent e) {
         try {
             Integer qty = Integer.parseInt(this.requiredQuantity.getText());
-            System.err.println("Quantità: "+qty);
             ReservationControllerSingleton.getInstance().inserisciProdotto(this.product, qty);
             
             CardLayout layout = (CardLayout) this.panelSwitch.getLayout();
