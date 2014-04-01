@@ -10,7 +10,7 @@ import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.utility.Money;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.List;
+import java.util.Iterator;
 
 /**
  *
@@ -32,7 +32,7 @@ public interface ITransazioneRemote extends Remote {
      * @return
      * @throws RemoteException
      */
-    List getRigheDiVendita() throws RemoteException;
+    Iterator<IRigaDiVenditaRemote> getRigheDiVendita() throws RemoteException;
 
     /**
      * Implementazione del metodo dell'interfaccia di vendita.Calcola il totale

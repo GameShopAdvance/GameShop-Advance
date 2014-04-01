@@ -10,12 +10,13 @@ import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.interfaces.remote.IRemoteReservationClient;
 import gameshop.advance.interfaces.remote.ITransazioneRemote;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class TransactionObserver implements IRemoteObserver{
+public class TransactionObserver extends UnicastRemoteObject implements IRemoteObserver{
     
     private final IRemoteReservationClient client;
 

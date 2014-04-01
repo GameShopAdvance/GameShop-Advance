@@ -105,7 +105,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
        ProductsPanel panel = new ProductsPanel();
        this.aggiornaWindow(panel);
        IIteratorWrapperRemote<IDescrizioneProdottoRemote> iter = this.controller.getDescriptions();
-        System.err.println("Iteratore "+iter);
+
        while(iter.hasNext()) {
            panel.addProduct(iter.next());
        }
@@ -126,6 +126,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         if(!this.started)
         {
             this.controller.avviaPrenotazione();
+            System.err.println("Prenotazione avviata");
             this.controller.addListener(this.totalObserver);
             this.controller.addListener(this.partialObserver);
             this.started = true;
@@ -167,6 +168,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
 
     @Override
     public void aggiornaTotale(Money m) throws RemoteException {
+        System.err.println("Totale: "+m.toString());
         this.totale = m;
     }
 

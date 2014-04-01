@@ -9,14 +9,20 @@ import com.intellij.uiDesigner.core.GridLayoutManager;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
+import gameshop.advance.controller.ReservationControllerSingleton;
+import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.ui.interfaces.PopActionListener;
+import gameshop.advance.utility.IDProdotto;
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -32,10 +38,11 @@ public class ProductPanel extends JPanel {
     private PopActionListener listener;
     private final String name = "Product Detail";
     
-    private IDescrizioneProdottoRemote product;
+    private IDProdotto product;
     
     public ProductPanel(){
         initComponents();
+        CardLayout layout = (CardLayout) this.panelSwitch.getLayout();
     }
     
     @Override
@@ -56,17 +63,38 @@ public class ProductPanel extends JPanel {
         CardLayout layout = (CardLayout) this.panelSwitch.getLayout();
         if(quantity.intValue() != 0)
         {
-            layout.last(this.panelSwitch);
+            layout.show(this.panelSwitch, this.buyPanel.getName());
         }
         else
         {
-            layout.first(this.panelSwitch);
+            layout.show(this.panelSwitch, this.bookPanel.getName());
         }
-        this.product = desc;
+        this.product = desc.getCodiceProdotto();
     }
 
     private void backActionPerformed(ActionEvent e) {
         this.listener.popPanel();
+    }
+
+    private void bookActionPerformed(ActionEvent e) {
+        try {
+            ReservationControllerSingleton.getInstance().inserisciProdotto(this.product, 
+                                                    Integer.getInteger(this.requiredQuantity.getText()));
+            CardLayout layout = (CardLayout) this.panelSwitch.getLayout();
+            layout.show(this.panelSwitch, this.bookCompleted.getName());
+        }
+        catch (RemoteException ex) {
+            Logger.getLogger(ProductPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (ProdottoNotFoundException ex) {
+            Logger.getLogger(ProductPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (NullPointerException ex) {
+            Logger.getLogger(ProductPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (ConfigurationException ex) {
+            Logger.getLogger(ProductPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     private void initComponents() {
@@ -84,11 +112,15 @@ public class ProductPanel extends JPanel {
         label6 = new JLabel();
         label7 = new JLabel();
         requiredQuantity = new JTextField();
-        button2 = new JButton();
+        bookButton = new JButton();
         buyPanel = new JPanel();
         label3 = new JLabel();
         label4 = new JLabel();
         quantity = new JLabel();
+        bookCompleted = new JPanel();
+        label8 = new JLabel();
+        label9 = new JLabel();
+        label10 = new JLabel();
 
         //======== this ========
         setName("this");
@@ -170,9 +202,15 @@ public class ProductPanel extends JPanel {
                 requiredQuantity.setHorizontalAlignment(SwingConstants.LEFT);
                 requiredQuantity.setName("requiredQuantity");
 
-                //---- button2 ----
-                button2.setText("Prenota");
-                button2.setName("button2");
+                //---- bookButton ----
+                bookButton.setText("Prenota");
+                bookButton.setName("bookButton");
+                bookButton.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        bookActionPerformed(e);
+                    }
+                });
 
                 PanelBuilder bookPanelBuilder = new PanelBuilder(new FormLayout(
                     "54dlu:grow, $lcgap, [49dlu,default], $lcgap, [0dlu,default]:grow, $lcgap, 73dlu",
@@ -182,9 +220,9 @@ public class ProductPanel extends JPanel {
                 bookPanelBuilder.add(label6,           CC.xywh(1, 5,          7,       1, CC.CENTER, CC.FILL));
                 bookPanelBuilder.add(label7,           CC.xy  (1, 9,    CC.FILL, CC.FILL));
                 bookPanelBuilder.add(requiredQuantity, CC.xy  (3, 9, CC.DEFAULT, CC.FILL));
-                bookPanelBuilder.add(button2,          CC.xy  (7, 9));
+                bookPanelBuilder.add(bookButton,       CC.xy  (7, 9,    CC.FILL, CC.FILL));
             }
-            panelSwitch.add(bookPanel, "prenotaPanel");
+            panelSwitch.add(bookPanel, "bookPanel");
 
             //======== buyPanel ========
             {
@@ -221,6 +259,36 @@ public class ProductPanel extends JPanel {
                     null, null, null));
             }
             panelSwitch.add(buyPanel, "buyPanel");
+
+            //======== bookCompleted ========
+            {
+                bookCompleted.setName("bookCompleted");
+
+                //---- label8 ----
+                label8.setText("L'oggetto \u00e8 stato aggiunto alla tua prenotazione.");
+                label8.setHorizontalAlignment(SwingConstants.CENTER);
+                label8.setFont(new Font("Dialog", Font.BOLD, 11));
+                label8.setName("label8");
+
+                //---- label9 ----
+                label9.setText("Ricorda: puoi rivedere e modificare i dettagli della tua ");
+                label9.setHorizontalAlignment(SwingConstants.CENTER);
+                label9.setName("label9");
+
+                //---- label10 ----
+                label10.setText("prenotazione facendo click su carrello.");
+                label10.setHorizontalAlignment(SwingConstants.CENTER);
+                label10.setName("label10");
+
+                PanelBuilder bookCompletedBuilder = new PanelBuilder(new FormLayout(
+                    "[15dlu,default]:grow, $lcgap, default:grow, $lcgap, [15dlu,default]:grow",
+                    "[15dlu,default]:grow, $lgap, 17dlu, 5dlu, 2*(12dlu, $lgap), [15dlu,default]:grow"), bookCompleted);
+
+                bookCompletedBuilder.add(label8,  CC.xy(3, 3, CC.FILL, CC.FILL));
+                bookCompletedBuilder.add(label9,  CC.xy(3, 5, CC.FILL, CC.FILL));
+                bookCompletedBuilder.add(label10, CC.xy(3, 7, CC.FILL, CC.FILL));
+            }
+            panelSwitch.add(bookCompleted, "bookCompleted");
         }
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
@@ -250,10 +318,14 @@ public class ProductPanel extends JPanel {
     private JLabel label6;
     private JLabel label7;
     private JTextField requiredQuantity;
-    private JButton button2;
+    private JButton bookButton;
     private JPanel buyPanel;
     private JLabel label3;
     private JLabel label4;
     private JLabel quantity;
+    private JPanel bookCompleted;
+    private JLabel label8;
+    private JLabel label9;
+    private JLabel label10;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
