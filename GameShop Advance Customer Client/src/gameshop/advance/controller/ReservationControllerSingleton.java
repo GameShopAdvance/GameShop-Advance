@@ -20,7 +20,6 @@ import gameshop.advance.observer.PartialObserver;
 import gameshop.advance.observer.ReservationObserver;
 import gameshop.advance.observer.TotalObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
-import gameshop.advance.ui.swing.customer.CustomerPanel;
 import gameshop.advance.ui.swing.customer.ProductsPanel;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
@@ -117,8 +116,6 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         this.started = false;
         this.totale = new Money();
         this.acconto = new Money();
-        UIWindowSingleton.getInstance().setPanel(new CustomerPanel());
-        UIWindowSingleton.getInstance().refreshContent();
     }
 
     public void inserisciProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException, ProdottoNotFoundException 

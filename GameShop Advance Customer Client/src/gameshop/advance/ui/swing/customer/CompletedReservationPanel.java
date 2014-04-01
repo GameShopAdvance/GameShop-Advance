@@ -12,11 +12,16 @@ import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.utility.Money;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.awt.event.MouseEvent;
+import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /*
  *
@@ -24,8 +29,17 @@ import javax.swing.JPanel;
  */
  
 public class CompletedReservationPanel extends JPanel {
+    
+    private final String name = "Completed Panel";
+    
     public CompletedReservationPanel() {
         initComponents();
+    }
+    
+    @Override
+    public String getName()
+    {
+        return this.name;
     }
     
     public void setID(Integer id)
@@ -43,6 +57,11 @@ public class CompletedReservationPanel extends JPanel {
         this.acconto.setText(m.toString());
     }
     
+    public void addActionListener(ActionListener listener)
+    {
+        this.button1.addActionListener(listener);
+    }
+    
     private void startNewReservationActionPerformed(ActionEvent e) {
         try {
             ReservationControllerSingleton.getInstance().avviaPrenotazione();
@@ -52,6 +71,15 @@ public class CompletedReservationPanel extends JPanel {
             Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
         }   catch (RemoteException ex) {
             Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+    }
+
+    private void ReservationCompletedMouseClicked(MouseEvent e) {
+        MouseListener[] mouseListeners = this.getMouseListeners();
+        for(int i=0; i<mouseListeners.length; i++)
+        {
+            MouseListener ml = mouseListeners[i];
+            ml.mouseClicked(e);
         }
     }
     
@@ -67,6 +95,7 @@ public class CompletedReservationPanel extends JPanel {
         totale = new JLabel();
         acconto = new JLabel();
         label4 = new JLabel();
+        button1 = new JButton();
 
         //======== this ========
         setName("this");
@@ -103,14 +132,20 @@ public class CompletedReservationPanel extends JPanel {
         label6.setName("label6");
 
         //---- totale ----
+        totale.setHorizontalAlignment(SwingConstants.CENTER);
         totale.setName("totale");
 
         //---- acconto ----
+        acconto.setHorizontalAlignment(SwingConstants.CENTER);
         acconto.setName("acconto");
 
         //---- label4 ----
         label4.setText("Ti ringraziamo per aver scelto di utilizzare i nostri sistemi automatici.");
         label4.setName("label4");
+
+        //---- button1 ----
+        button1.setText("Chiudi");
+        button1.setName("button1");
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
             "[15dlu,default], $lcgap, 100dlu, $lcgap, default:grow, $lcgap, 100dlu, $lcgap, [15dlu,default]",
@@ -123,9 +158,10 @@ public class CompletedReservationPanel extends JPanel {
         builder.add(label7,             CC.xywh(3,  9,         5,          1, CC.CENTER, CC.FILL));
         builder.add(label5,             CC.xy  (3, 11, CC.CENTER,    CC.FILL));
         builder.add(label6,             CC.xy  (7, 11, CC.CENTER,    CC.FILL));
-        builder.add(totale,             CC.xy  (3, 13, CC.CENTER,    CC.FILL));
-        builder.add(acconto,            CC.xy  (7, 13));
-        builder.add(label4,             CC.xywh(3, 17,         5,          1, CC.CENTER, CC.FILL));
+        builder.add(totale,             CC.xy  (3, 13,   CC.FILL,    CC.FILL));
+        builder.add(acconto,            CC.xy  (7, 13,   CC.FILL,    CC.FILL));
+        builder.add(label4,             CC.xywh(3, 15,         5,          1, CC.CENTER, CC.FILL));
+        builder.add(button1,            CC.xy  (5, 17,   CC.FILL,    CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -140,5 +176,6 @@ public class CompletedReservationPanel extends JPanel {
     private JLabel totale;
     private JLabel acconto;
     private JLabel label4;
+    private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

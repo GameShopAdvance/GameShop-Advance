@@ -78,8 +78,10 @@ public class ProductPanel extends JPanel {
 
     private void bookActionPerformed(ActionEvent e) {
         try {
-            ReservationControllerSingleton.getInstance().inserisciProdotto(this.product, 
-                                                    Integer.getInteger(this.requiredQuantity.getText()));
+            Integer qty = Integer.parseInt(this.requiredQuantity.getText());
+            System.err.println("Quantità: "+qty);
+            ReservationControllerSingleton.getInstance().inserisciProdotto(this.product, qty);
+            
             CardLayout layout = (CardLayout) this.panelSwitch.getLayout();
             layout.show(this.panelSwitch, this.bookCompleted.getName());
         }
