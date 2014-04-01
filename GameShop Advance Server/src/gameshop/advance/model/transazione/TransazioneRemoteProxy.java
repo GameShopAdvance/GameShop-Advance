@@ -12,7 +12,6 @@ import gameshop.advance.interfaces.remote.ITransazioneRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
 
 /**
  *
@@ -24,18 +23,12 @@ public class TransazioneRemoteProxy extends UnicastRemoteObject implements ITran
     
     public TransazioneRemoteProxy(ITransazione trans) throws RemoteException
     {
-        System.err.println("Creazione Proxy");
         this.protectedRemoteTransaction = trans;
     }
 
     @Override
     public Money getResto() throws InvalidMoneyException, RemoteException {
         return this.protectedRemoteTransaction.getResto();
-    }
-
-    @Override
-    public List getRigheDiVendita() throws RemoteException {
-        return this.protectedRemoteTransaction.getRigheDiVendita();
     }
 
     @Override

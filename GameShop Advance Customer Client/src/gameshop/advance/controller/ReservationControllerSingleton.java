@@ -8,51 +8,66 @@ package gameshop.advance.controller;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
+import gameshop.advance.interfaces.remote.IRemoteBookClient;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.interfaces.remote.IRemoteReservationClient;
+import gameshop.advance.observer.PartialObserver;
 import gameshop.advance.observer.ReservationObserver;
+import gameshop.advance.observer.TotalObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.customer.CustomerPanel;
 import gameshop.advance.ui.swing.customer.ProductsPanel;
+import gameshop.advance.utility.IDProdotto;
+import gameshop.advance.utility.Money;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.HashMap;
 import javax.swing.JComponent;
 
 /**
  *
  * @author Matteo Gentile
  */
-public class ReservationControllerSingleton extends UnicastRemoteObject implements IRemoteReservationClient{
+public class ReservationControllerSingleton extends UnicastRemoteObject implements IRemoteReservationClient, IRemoteBookClient{
 
     private static ReservationControllerSingleton instance;
     private IPrenotaProdottoRemote controller;
-    private HashMap<String, Integer> reserved_items;
-    private Integer idPrenotazione = -1;
+    
     private IRemoteObserver reservationObserver;
-
+    private IRemoteObserver totalObserver;
+    private IRemoteObserver partialObserver;
+    
+    private Integer idPrenotazione;
+    private Money totale;
+    private Money acconto;
+    
+    private boolean started = false;
+    
     /**
      *
      * @throws RemoteException
      */
     public ReservationControllerSingleton() throws RemoteException {
-        this.reserved_items = new HashMap<>();
+        this.totale = new Money();
+        this.acconto = new Money();
     }
     
-     private void configure() throws ConfigurationException, RemoteException, NotBoundException {
-          
+     private void configure() throws ConfigurationException, RemoteException, NotBoundException 
+     {    
         ConfigurationControllerSingleton controllerConfig = ConfigurationControllerSingleton.getInstance();
         Registry reg = LocateRegistry.getRegistry(controllerConfig.getServerAddress(), controllerConfig.getServerPort());
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
         this.controller = factory.getPrenotaProdottoController();
         this.reservationObserver = new ReservationObserver(instance);
+        this.totalObserver = new TotalObserver(instance);
+        this.partialObserver = new PartialObserver(instance);
     }
     
     /**
@@ -78,29 +93,44 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     }
     
     
-    private void aggiornaWindow(JComponent panel) {
+    private void aggiornaWindow(JComponent panel) 
+    {
         UIWindowSingleton.getInstance().setPanel(panel);
         UIWindowSingleton.getInstance().refreshContent();
     }
 
     
-    public void avviaPrenotazione() throws RemoteException {
-       this.controller.avviaPrenotazione();
+    public void avviaPrenotazione() throws RemoteException 
+    {
        ProductsPanel panel = new ProductsPanel();
        this.aggiornaWindow(panel);
        IIteratorWrapperRemote<IDescrizioneProdottoRemote> iter = this.controller.getDescriptions();
+        System.err.println("Iteratore "+iter);
        while(iter.hasNext()) {
            panel.addProduct(iter.next());
        }
     }
 
-    public void clearReservation() {      
+    public void cancellaPrenotazione() throws RemoteException 
+    {      
+        this.controller.cancellaPrenotazione();
+        this.started = false;
+        this.totale = new Money();
+        this.acconto = new Money();
         UIWindowSingleton.getInstance().setPanel(new CustomerPanel());
         UIWindowSingleton.getInstance().refreshContent();
     }
 
-    public void inserisciProdotti(Object codiceP, int quantity) {
-        this.reserved_items.put(codiceP.toString(), quantity);
+    public void inserisciProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException, ProdottoNotFoundException 
+    {
+        if(!this.started)
+        {
+            this.controller.avviaPrenotazione();
+            this.controller.addListener(this.totalObserver);
+            this.controller.addListener(this.partialObserver);
+            this.started = true;
+        }
+        this.controller.prenotaProdotto(codiceProdotto, quantity);
     }
 
     /** Metodo che si occupa di prendere dalla tabella dei prodotti disponibili per la prenotazione
@@ -108,22 +138,11 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
      *
      * @throws RemoteException
      */
-    public void completaPrenotazione() throws RemoteException {
-        
-//        System.err.println("ID Prenotazione:"+this.idPrenotazione);
-//        Iterator it = this.reserved_items.entrySet().iterator();
-//        while (it.hasNext()) {
-//            try {
-//                Map.Entry pairs = (Map.Entry) it.next();
-//                this.controller.prenotaProdotto(new IDProdotto((String) pairs.getKey()),(int) pairs.getValue());
-//                System.out.println("Prodotto: "+ pairs.getKey() + " Quantità = " + pairs.getValue());
-//            } catch (ProdottoNotFoundException ex) {
-//                Logger.getLogger(ReservationControllerSingleton.class.getName()).log(Level.SEVERE, null, ex);
-//            }
-//        }
-//        this.controller.addListener(this.reservationObserver);
-//        this.controller.terminaPrenotazione();
-//        aggiornaWindow(new CompletedReservationPanel(this.idPrenotazione));
+    public void completaPrenotazione() throws RemoteException 
+    {
+        this.controller.addListener(this.reservationObserver);
+        this.controller.terminaPrenotazione();
+        this.started = false;
     }
 
     /** Aggiorna l'id della prenotazione una volta che questa è terminata
@@ -134,6 +153,41 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     @Override
     public void aggiornaIdPrenotazione(int id) throws RemoteException {
         this.idPrenotazione = id;
+    }
+
+    @Override
+    public void aggiornaListaProdotti(IIteratorWrapperRemote iter) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void aggiornaAcconto(Money ammontare) throws RemoteException {
+        this.acconto = ammontare;
+    }
+
+    @Override
+    public void aggiornaTotale(Money m) throws RemoteException {
+        this.totale = m;
+    }
+
+    @Override
+    public void aggiornaResto(Money m) throws RemoteException {
+        
+    }
+    
+    public Integer getID()
+    {
+        return this.idPrenotazione;
+    }
+    
+    public Money getTotal()
+    {
+        return this.totale;
+    }
+    
+    public Money getPartial()
+    {
+        return this.acconto;
     }
  
 }

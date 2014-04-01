@@ -4,34 +4,99 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "25dlu:grow, labelcompgap, max(default;163dlu), labelcompgap, max(default;25dlu):grow"
-			"$rowSpecs": "max(default;25dlu):grow, linegap, 120dlu, linegap, max(default;20dlu):grow"
+			"$columnSpecs": "max(default;15dlu), labelcompgap, 100dlu, labelcompgap, default:grow, labelcompgap, 100dlu, labelcompgap, max(default;15dlu)"
+			"$rowSpecs": "15dlu, linegap, max(default;20dlu), 5dlu, fill:15dlu, linegap, fill:20dlu, 5dlu, 15dlu, linegap, 15dlu, linegap, 15dlu, linegap, max(default;30dlu):grow, linegap, max(default;20dlu), linegap, 16dlu"
 		} ) {
 			name: "this"
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "205dlu"
-				"$rowSpecs": "21dlu, linegap, max(default;19dlu), linegap, 35dlu"
-			} ) {
-				name: "panel1"
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label1"
-					"text": "text"
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button1"
-					"text": "Avvia Nuova Prenotazione"
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startNewReservationActionPerformed", true ) )
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridX": 1
-					"gridY": 5
-					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-				} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Congratulazioni: la tua prenotazione è completata"
+				"font": new java.awt.Font( "Dialog", 1, 12 )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 3
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
+				"gridWidth": 5
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label2"
+				"text": "Puoi pagare i prodotti prenotati in cassa fornendo il numero di prenotazione"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 5
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
+				"gridWidth": 5
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label3"
+				"text": "Numero prenotazione"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 7
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "numeroPrenotazione"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 5
+				"gridY": 7
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label7"
+				"text": "Se desideri puoi lasciare un acconto e saldare il totale quando avrai i prodotti"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 9
+				"gridWidth": 5
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label5"
+				"text": "Totale"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 11
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label6"
+				"text": "Acconto"
+				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 11
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "totale"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 13
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "acconto"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 13
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label4"
+				"text": "Ti ringraziamo per aver scelto di utilizzare i nostri sistemi automatici."
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 17
+				"gridWidth": 5
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

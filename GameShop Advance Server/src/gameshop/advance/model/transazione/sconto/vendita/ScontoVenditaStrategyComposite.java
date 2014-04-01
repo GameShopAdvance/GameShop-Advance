@@ -5,6 +5,7 @@ import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.model.transazione.RigaDiTransazione;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -30,11 +31,11 @@ public abstract class ScontoVenditaStrategyComposite implements IScontoVenditaSt
     
     protected Money getRealTotal(ITransazione vendita) throws RemoteException
     {
-        List<RigaDiTransazione> righe = vendita.getRigheDiVendita();
+        Iterator<RigaDiTransazione> righe = vendita.getRigheDiVendita();
         Money totale = new Money();
-        for(RigaDiTransazione riga:righe)
+        while(righe.hasNext())
         {
-            totale = totale.add(riga.getSubTotal(vendita));
+            totale = totale.add(righe.next().getSubTotal(vendita));
 
         }
         return totale;

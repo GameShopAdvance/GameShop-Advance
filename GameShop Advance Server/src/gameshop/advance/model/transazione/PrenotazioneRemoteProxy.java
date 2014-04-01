@@ -11,7 +11,6 @@ import gameshop.advance.interfaces.remote.IPrenotazioneRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.List;
 
 /**
  *
@@ -37,11 +36,6 @@ public class PrenotazioneRemoteProxy extends UnicastRemoteObject implements IPre
     }
 
     @Override
-    public List getRigheDiVendita() throws RemoteException {
-        return this.protectedRemoteObject.getRigheDiVendita();
-    }
-
-    @Override
     public Money getTotal() throws RemoteException {
         return this.protectedRemoteObject.getTotal();
     }
@@ -51,6 +45,7 @@ public class PrenotazioneRemoteProxy extends UnicastRemoteObject implements IPre
         return this.protectedRemoteObject.getId();
     }
     
+    @Override
     public Money getRestoAcconto() throws RemoteException{
         return this.protectedRemoteObject.getRestoAcconto();
     }

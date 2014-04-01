@@ -12,7 +12,7 @@ import gameshop.advance.model.transazione.RigaDiTransazione;
 import gameshop.advance.utility.IntervalloDiTempo;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
-import java.util.List;
+import java.util.Iterator;
 import org.joda.time.DateTime;
 
 /**
@@ -42,11 +42,11 @@ public class ScontoPercentualeVenditaStrategy implements IScontoVenditaStrategy 
     
     @Override
     public Money getTotal(ITransazione vendita) throws RemoteException {
-        List<RigaDiTransazione> righe = vendita.getRigheDiVendita();
+        Iterator<RigaDiTransazione> righe = vendita.getRigheDiVendita();
         Money totale = new Money();
-        for(RigaDiTransazione riga:righe)
+        while(righe.hasNext())
         {
-            totale = totale.add(riga.getSubTotal(vendita));
+            totale = totale.add(righe.next().getSubTotal(vendita));
  
         }
         return totale.subtract(totale.multiply(percentuale).divide(100));

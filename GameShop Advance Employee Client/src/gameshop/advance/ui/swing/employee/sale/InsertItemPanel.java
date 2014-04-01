@@ -18,6 +18,9 @@ import gameshop.advance.ui.swing.UIStyleSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.Color;
 import java.awt.Font;
+import java.awt.GridBagConstraints;
+import java.awt.GridBagLayout;
+import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -166,6 +169,11 @@ public class InsertItemPanel extends JScrollPane {
         //======== panel3 ========
         {
             panel3.setName("panel3");
+            panel3.setLayout(new GridBagLayout());
+            ((GridBagLayout)panel3.getLayout()).columnWidths = new int[] {9, 114, 35, 114, 5, 107, 5, 98, 35, 114, 9, 0};
+            ((GridBagLayout)panel3.getLayout()).rowHeights = new int[] {8, 30, 5, 30, 30, 23, 90, 0, 0};
+            ((GridBagLayout)panel3.getLayout()).columnWeights = new double[] {1.0, 0.0, 1.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 0.0, 1.0, 1.0E-4};
+            ((GridBagLayout)panel3.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0, 1.0E-4};
 
             //---- clearSale ----
             clearSale.setText("Annulla");
@@ -182,16 +190,25 @@ public class InsertItemPanel extends JScrollPane {
                     clearSaleActionPerformed(e);
                 }
             });
+            panel3.add(clearSale, new GridBagConstraints(1, 1, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 0, 0), 0, 0));
 
             //---- label1 ----
             label1.setText("Totale");
             label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 1f));
             label1.setLabelFor(total);
             label1.setName("label1");
+            panel3.add(label1, new GridBagConstraints(3, 1, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 0, 0), 0, 0));
 
             //---- total ----
             total.setEditable(false);
             total.setName("total");
+            panel3.add(total, new GridBagConstraints(5, 1, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 0, 0), 0, 0));
 
             //---- button2 ----
             button2.setText("Avanti");
@@ -205,9 +222,15 @@ public class InsertItemPanel extends JScrollPane {
                     goToPaymentButtonActionPerformed(e);
                 }
             });
+            panel3.add(button2, new GridBagConstraints(9, 1, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
+                new Insets(0, 0, 0, 0), 0, 0));
 
             //---- separator1 ----
             separator1.setName("separator1");
+            panel3.add(separator1, new GridBagConstraints(3, 3, 5, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+                new Insets(0, 0, 0, 0), 0, 0));
 
             //======== panel2 ========
             {
@@ -259,6 +282,9 @@ public class InsertItemPanel extends JScrollPane {
                 panel2Builder.add(quantityTextField,  CC.xy  (3, 3, CC.DEFAULT, CC.FILL));
                 panel2Builder.add(addProductButton,   CC.xy  (5, 3));
             }
+            panel3.add(panel2, new GridBagConstraints(3, 4, 5, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+                new Insets(0, 0, 0, 0), 0, 0));
 
             //======== panel1 ========
             {
@@ -298,18 +324,9 @@ public class InsertItemPanel extends JScrollPane {
                 panel1Builder.add(clientCode,       CC.xy(3, 1, CC.FILL, CC.FILL));
                 panel1Builder.add(insertClientCode, CC.xy(3, 3));
             }
-
-            PanelBuilder panel3Builder = new PanelBuilder(new FormLayout(
-                "5dlu, 65dlu, [20dlu,default]:grow, 65dlu, $lcgap, 61dlu, $lcgap, 56dlu, [20dlu,default]:grow, 65dlu, 5dlu",
-                "5dlu, fill:[20dlu,default], $lgap, [20dlu,default,40dlu], [20dlu,default], fill:[15dlu,default,40dlu], 60dlu, fill:default:grow"), panel3);
-
-            panel3Builder.add(clearSale,  CC.xy  ( 2, 2,    CC.FILL, CC.FILL));
-            panel3Builder.add(label1,     CC.xy  ( 4, 2));
-            panel3Builder.add(total,      CC.xy  ( 6, 2, CC.DEFAULT, CC.FILL));
-            panel3Builder.add(button2,    CC.xy  (10, 2));
-            panel3Builder.add(separator1, CC.xywh( 4, 4,          5,       1));
-            panel3Builder.add(panel2,     CC.xywh( 4, 5,          5,       1));
-            panel3Builder.add(panel1,     CC.xywh( 4, 7,          5,       1));
+            panel3.add(panel1, new GridBagConstraints(3, 6, 5, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
+                new Insets(0, 0, 0, 0), 0, 0));
         }
         setViewportView(panel3);
         // JFormDesigner - End of component initialization  //GEN-END:initComponents

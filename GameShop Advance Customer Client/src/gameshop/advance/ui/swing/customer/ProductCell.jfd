@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;40dlu), labelcompgap, 62dlu:grow, labelcompgap, 25dlu, labelcompgap, 25dlu, labelcompgap, max(default;15dlu)"
-			"$rowSpecs": "max(default;10dlu), linegap, max(default;15dlu), linegap, max(default;22dlu), linegap, min"
+			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;40dlu), labelcompgap, 62dlu:grow, labelcompgap, 25dlu, labelcompgap, 25dlu, labelcompgap, max(default;15dlu), labelcompgap, default"
+			"$rowSpecs": "max(default;10dlu), linegap, 30dlu, linegap, 30dlu, linegap, max(default;10dlu), linegap, 1dlu"
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
@@ -13,6 +13,15 @@ new FormModel {
 				"$rowSpecs": "fill:41dlu"
 			} ) {
 				name: "imageBox"
+				"border": new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, false )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "Immagine"
+					"horizontalAlignment": 0
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 1
+					"gridY": 1
+				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 3
@@ -54,15 +63,14 @@ new FormModel {
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 			add( new FormComponent( "javax.swing.JSeparator" ) {
-				name: "separator"
+				name: "separator1"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 7
-				"gridWidth": 11
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridY": 9
+				"gridWidth": 13
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 90 )
+			"size": new java.awt.Dimension( 400, 140 )
 		} )
 	}
 }

@@ -81,7 +81,6 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     public void recuperaPrenotazione(Integer id) throws RemoteException
     {
         this.prenotazione = (IPrenotazione) NegozioSingleton.getInstance().riprendiPrenotazione(id);
-        System.err.println("Prenotazione: "+this.prenotazione.getTotal());
     }
     
     @Override
@@ -121,9 +120,13 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     @Override
     public void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException
     {
-        System.err.println("Ammontare: "+amount);
         this.prenotazione.gestisciPagamento(amount);
         NegozioSingleton.getInstance().registraPrenotazione(this.prenotazione);
+    }
+
+    @Override
+    public void cancellaPrenotazione() {
+        this.prenotazione = null;
     }
     
 }

@@ -3,6 +3,7 @@ package gameshop.advance.model.transazione;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.ITransazione;
+import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.sconto.ScontoFactorySingleton;
 import gameshop.advance.utility.Money;
@@ -14,7 +15,7 @@ import java.util.List;
  * la descrizione del prodotto e la quantità di prodotti acquistata.
  * @author Salx
  */
-public class RigaDiTransazione
+public class RigaDiTransazione implements IRigaDiTransazioneRemote
 {
     private IScontoProdottoStrategy strategiaDiSconto;
     private IDescrizioneProdotto descrizione;
@@ -37,7 +38,8 @@ public class RigaDiTransazione
         }
     }
 
-    public IDescrizioneProdotto getDescrizione() {
+    @Override
+    public IDescrizioneProdotto getDescrizione() throws RemoteException {
         return descrizione;
     }
 
@@ -45,7 +47,8 @@ public class RigaDiTransazione
         this.descrizione = descrizione;
     }
 
-    public int getQuantity() {
+    @Override
+    public int getQuantity() throws RemoteException {
         return quantity;
     }
 

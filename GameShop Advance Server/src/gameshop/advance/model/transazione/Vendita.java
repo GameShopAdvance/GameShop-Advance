@@ -16,6 +16,7 @@ import gameshop.advance.model.transazione.sconto.ScontoFactorySingleton;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import org.joda.time.DateTime;
@@ -140,8 +141,8 @@ public class Vendita implements ITransazione {
      * @return
      */
     @Override
-    public List getRigheDiVendita() {
-        return this.righeDiVendita;
+    public Iterator<RigaDiTransazione> getRigheDiVendita() {
+        return this.righeDiVendita.iterator();
     }
 
     @Override

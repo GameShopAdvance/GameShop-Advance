@@ -5,7 +5,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 			"$columnSpecs": "max(min;150px):grow, labelcompgap, max(default;150px), labelcompgap, max(min;150px):grow"
-			"$rowSpecs": "max(min;70px):grow, linegap, 45px, linegap, max(min;160px):grow"
+			"$rowSpecs": "max(min;100px):grow, linegap, 40px, linegap, fill:max(min;100px):grow"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -20,7 +20,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 460, 300 )
+			"size": new java.awt.Dimension( 460, 250 )
 		} )
 	}
 }

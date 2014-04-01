@@ -15,11 +15,12 @@ import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.transazione.CartaCliente;
+import gameshop.advance.model.transazione.RigaDiTransazione;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
+import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.List;
 import org.joda.time.DateTime;
 
 /**
@@ -116,7 +117,7 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
     }
 
     @Override
-    public List getRigheDiVendita() throws RemoteException {
+    public Iterator<RigaDiTransazione> getRigheDiVendita() {
         return this.prenotazione.getRigheDiVendita();
     }
 
