@@ -7,6 +7,13 @@ package gameshop.advance.ui.swing.manager;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
+import gameshop.advance.controller.FornitureControllerSingleton;
+import gameshop.advance.exceptions.ConfigurationException;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -17,6 +24,18 @@ import javax.swing.border.TitledBorder;
 public class ManagerMenu extends JPanel {
     public ManagerMenu() {
         initComponents();
+    }
+
+    private void fornitureActionPerformed(ActionEvent e) {
+        try {
+            FornitureControllerSingleton.getInstance().avviaGestioneForniture();
+        }
+        catch (ConfigurationException ex) {
+            Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (RemoteException ex) {
+            Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void initComponents() {
@@ -61,6 +80,12 @@ public class ManagerMenu extends JPanel {
         //---- button4 ----
         button4.setText("Gestisci Forniture");
         button4.setName("button4");
+        button4.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                fornitureActionPerformed(e);
+            }
+        });
 
         //---- button7 ----
         button7.setText("Controlla Magazzino");

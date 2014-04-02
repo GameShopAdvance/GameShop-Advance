@@ -30,6 +30,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button4"
 				"text": "Gestisci Forniture"
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "fornitureActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 5
 				"gridY": 3
