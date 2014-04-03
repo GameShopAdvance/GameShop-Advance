@@ -4,6 +4,7 @@
 
 package gameshop.advance.ui.swing.employee;
 
+import java.awt.*;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.BookControllerSingleton;
@@ -11,6 +12,7 @@ import gameshop.advance.controller.InventoryControllerSingleton;
 import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.ui.swing.UIWindowSingleton;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.NotBoundException;
@@ -90,41 +92,54 @@ public class EmployeeMenuPanel extends JPanel {
         startSale = new JButton();
         manageBook = new JButton();
         button1 = new JButton();
+        button2 = new JButton();
 
         //======== this ========
+        setMaximumSize(new Dimension(700, 600));
+        setMinimumSize(new Dimension(650, 450));
         setLayout(new FormLayout(
-            "[150px,min]:grow, $lcgap, [150px,default], $lcgap, 150px:grow",
-            "50px:grow, 2*($lgap, 45px), $lgap, 50px:grow"));
+            "$lcgap, [327px,min], center:11dlu, [322px,min]",
+            "$pgap, fill:190px, $pgap, fill:171px, $lgap"));
 
         //---- startSale ----
         startSale.setText("Avvia Vendita");
+        startSale.setFont(new Font("Tahoma", Font.PLAIN, 24));
         startSale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startSaleActionPerformed(e);
             }
         });
-        add(startSale, CC.xywh(1, 3, 1, 3, CC.FILL, CC.FILL));
+        add(startSale, CC.xy(2, 2));
 
         //---- manageBook ----
         manageBook.setText("Gestisci Prenotazioni");
+        manageBook.setFont(new Font("Tahoma", Font.PLAIN, 24));
+        manageBook.setMaximumSize(new Dimension(169, 37));
+        manageBook.setMinimumSize(new Dimension(169, 37));
+        manageBook.setPreferredSize(new Dimension(169, 37));
         manageBook.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 manageBookActionPerformed(e);
             }
         });
-        add(manageBook, CC.xywh(3, 3, 1, 3));
+        add(manageBook, CC.xy(4, 2));
 
         //---- button1 ----
         button1.setText("Fai Inventario");
+        button1.setFont(new Font("Tahoma", Font.PLAIN, 24));
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 faiInventario(e);
             }
         });
-        add(button1, CC.xywh(5, 3, 1, 3, CC.FILL, CC.FILL));
+        add(button1, CC.xy(2, 4));
+
+        //---- button2 ----
+        button2.setAction(null);
+        add(button2, CC.xy(4, 4));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -132,5 +147,6 @@ public class EmployeeMenuPanel extends JPanel {
     private JButton startSale;
     private JButton manageBook;
     private JButton button1;
+    private JButton button2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

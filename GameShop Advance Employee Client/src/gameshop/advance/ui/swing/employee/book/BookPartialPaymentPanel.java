@@ -10,6 +10,7 @@ import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.ui.swing.UIWindowSingleton;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -58,39 +59,57 @@ public class BookPartialPaymentPanel extends JPanel {
         }
     }
 
+    private void startSaleActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void manageBookActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void faiInventario(ActionEvent e) {
+        // TODO add your code here
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel1 = new JPanel();
-        displayPartial = new JTextField();
         label1 = new JLabel();
-        payPartialButton = new JButton();
+        displayPartial = new JTextField();
         label2 = new JLabel();
         partialPayment = new JTextField();
+        payPartialButton = new JButton();
 
         //======== this ========
         setLayout(new FormLayout(
-            "10dlu, $lcgap, 439dlu",
-            "27dlu, $lgap, 103dlu, 2*($lgap, default)"));
+            "[300px,min], $lcgap, [332px,min]",
+            "27dlu, $lgap, fill:197dlu"));
 
         //======== panel1 ========
         {
             panel1.setBorder(new TitledBorder("Paga Acconto"));
             panel1.setLayout(new FormLayout(
-                "default, $lcgap, 71dlu, $lcgap, 141dlu, $lcgap, 34dlu, $lcgap, 155dlu",
-                "6dlu, 2*($lgap, 25dlu), $lgap, 3dlu"));
-
-            //---- displayPartial ----
-            displayPartial.setEditable(false);
-            panel1.add(displayPartial, CC.xywh(5, 2, 1, 2));
+                "5dlu, $lcgap, [100px,min], $lcgap, [200px,min]",
+                "2*(fill:[50px,min], $lgap), fill:[50px,min], 10dlu"));
 
             //---- label1 ----
             label1.setText("Acconto");
-            label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 3f));
-            panel1.add(label1, CC.xy(3, 3));
+            label1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+            panel1.add(label1, CC.xy(3, 1));
+
+            //---- displayPartial ----
+            displayPartial.setEditable(false);
+            panel1.add(displayPartial, CC.xy(5, 1));
+
+            //---- label2 ----
+            label2.setText("Pagamento");
+            label2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+            panel1.add(label2, CC.xy(3, 3));
+            panel1.add(partialPayment, CC.xy(5, 3));
 
             //---- payPartialButton ----
             payPartialButton.setText("Paga Acconto");
-            payPartialButton.setFont(payPartialButton.getFont().deriveFont(payPartialButton.getFont().getSize() + 5f));
+            payPartialButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
             payPartialButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -99,13 +118,7 @@ public class BookPartialPaymentPanel extends JPanel {
                     payPartialButtonActionPerformed(e);
                 }
             });
-            panel1.add(payPartialButton, CC.xywh(9, 4, 1, 4));
-
-            //---- label2 ----
-            label2.setText("Pagamento");
-            label2.setFont(label2.getFont().deriveFont(label2.getFont().getSize() + 3f));
-            panel1.add(label2, CC.xy(3, 5));
-            panel1.add(partialPayment, CC.xywh(5, 5, 1, 2));
+            panel1.add(payPartialButton, CC.xy(5, 5));
         }
         add(panel1, CC.xy(3, 3));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -113,10 +126,10 @@ public class BookPartialPaymentPanel extends JPanel {
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel1;
-    private JTextField displayPartial;
     private JLabel label1;
-    private JButton payPartialButton;
+    private JTextField displayPartial;
     private JLabel label2;
     private JTextField partialPayment;
+    private JButton payPartialButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

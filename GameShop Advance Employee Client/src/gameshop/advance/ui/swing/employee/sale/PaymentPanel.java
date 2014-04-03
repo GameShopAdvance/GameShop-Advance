@@ -4,10 +4,10 @@
 
 package gameshop.advance.ui.swing.employee.sale;
 
-import gameshop.advance.controller.SaleControllerSingleton;
-import com.jgoodies.forms.builder.PanelBuilder;
+
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
+import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.Font;
@@ -55,6 +55,18 @@ public class PaymentPanel extends JPanel {
         }
     }
 
+    private void startSaleActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void manageBookActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void faiInventario(ActionEvent e) {
+        // TODO add your code here
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -71,48 +83,38 @@ public class PaymentPanel extends JPanel {
         payButton = new JButton();
 
         //======== this ========
-        setName("this");
+        setLayout(new FormLayout(
+            "[324px,min], $lcgap, [146px,min], $lcgap, [189px,min]",
+            "fill:44dlu, [32dlu,default], $rgap, 35dlu, $rgap, fill:36dlu, fill:default:grow"));
 
         //---- label1 ----
         label1.setText("Totale");
-        label1.setFont(new Font("Dialog", Font.PLAIN, 14));
+        label1.setFont(new Font("Tahoma", Font.PLAIN, 26));
         label1.setAlignmentX(0.5F);
-        label1.setName("label1");
+        add(label1, CC.xy(3, 2));
 
         //---- displayTotal ----
         displayTotal.setEditable(false);
-        displayTotal.setName("displayTotal");
-
-        //---- payment ----
-        payment.setName("payment");
+        add(displayTotal, CC.xy(5, 2, CC.FILL, CC.FILL));
+        add(payment, CC.xy(5, 4, CC.FILL, CC.FILL));
 
         //---- label2 ----
         label2.setText("Pagamento");
-        label2.setFont(new Font("Dialog", Font.PLAIN, 14));
+        label2.setFont(new Font("Tahoma", Font.PLAIN, 26));
         label2.setAlignmentX(0.5F);
-        label2.setName("label2");
+        add(label2, CC.xy(3, 4));
 
         //---- payButton ----
         payButton.setText("Paga");
-        payButton.setFont(new Font("Dialog", Font.PLAIN, 14));
+        payButton.setFont(new Font("Tahoma", Font.PLAIN, 24));
         payButton.setAlignmentX(0.5F);
-        payButton.setName("payButton");
         payButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 payButtonActionPerformed(e);
             }
         });
-
-        PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "default:grow, $lcgap, 73dlu, $lcgap, 113dlu, $lcgap, default:grow",
-            "fill:default:grow, [20dlu,default], $rgap, 20dlu, $rgap, 25dlu, fill:default:grow"), this);
-
-        builder.add(label1,       CC.xy(3, 2));
-        builder.add(displayTotal, CC.xy(5, 2, CC.FILL, CC.FILL));
-        builder.add(payment,      CC.xy(5, 4, CC.FILL, CC.FILL));
-        builder.add(label2,       CC.xy(3, 4));
-        builder.add(payButton,    CC.xy(5, 6));
+        add(payButton, CC.xy(5, 6));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

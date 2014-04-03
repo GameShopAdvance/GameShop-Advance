@@ -9,6 +9,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.ui.swing.UIWindowSingleton;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -56,63 +57,79 @@ public class BookTotalPaymentPanel extends JPanel {
         }
     }
 
+    private void payPartialButtonActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void startSaleActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void manageBookActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void faiInventario(ActionEvent e) {
+        // TODO add your code here
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         panel2 = new JPanel();
-        displayTotal = new JTextField();
         label3 = new JLabel();
+        displayTotal = new JTextField();
+        label4 = new JLabel();
         totalPayment = new JTextField();
         payTotalButton = new JButton();
-        label4 = new JLabel();
 
         //======== this ========
         setLayout(new FormLayout(
-            "default, $lcgap, 91dlu, $lcgap, 115dlu, $lcgap, 110dlu, $lcgap, 109dlu, $lcgap, 11dlu",
-            "default, $lgap, 32dlu, $lgap, 48dlu, $lgap, 13dlu, $lgap, 32dlu, $lgap, 49dlu, $lgap, default"));
+            "[300px,min], $lcgap, [332px,min]",
+            "27dlu, $lgap, fill:196dlu"));
 
         //======== panel2 ========
         {
             panel2.setBorder(new TitledBorder("Paga Totale"));
             panel2.setLayout(new FormLayout(
-                "default, $lcgap, 71dlu, $lcgap, 141dlu, $lcgap, 34dlu, $lcgap, 155dlu",
-                "7dlu, $lgap, 25dlu, $lgap, 24dlu, $lgap, 3dlu"));
-
-            //---- displayTotal ----
-            displayTotal.setEditable(false);
-            panel2.add(displayTotal, CC.xywh(5, 2, 1, 2));
+                "5dlu, $lcgap, [100px,min], $lcgap, [200px,min]",
+                "2*(fill:[50px,min], $lgap), fill:[50px,min]"));
 
             //---- label3 ----
             label3.setText("Totale");
-            label3.setFont(label3.getFont().deriveFont(label3.getFont().getSize() + 3f));
-            panel2.add(label3, CC.xy(3, 3));
-            panel2.add(totalPayment, CC.xywh(5, 5, 1, 2));
+            label3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+            panel2.add(label3, CC.xy(3, 1));
+
+            //---- displayTotal ----
+            displayTotal.setEditable(false);
+            panel2.add(displayTotal, CC.xy(5, 1));
+
+            //---- label4 ----
+            label4.setText("Pagamento");
+            label4.setFont(new Font("Tahoma", Font.PLAIN, 18));
+            panel2.add(label4, CC.xy(3, 3));
+            panel2.add(totalPayment, CC.xy(5, 3));
 
             //---- payTotalButton ----
             payTotalButton.setText("Paga Totale");
-            payTotalButton.setFont(payTotalButton.getFont().deriveFont(payTotalButton.getFont().getSize() + 5f));
+            payTotalButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
             payTotalButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     payTotalButtonActionPerformed(e);
                 }
             });
-            panel2.add(payTotalButton, CC.xywh(9, 4, 1, 4));
-
-            //---- label4 ----
-            label4.setText("Pagamento");
-            label4.setFont(label4.getFont().deriveFont(label4.getFont().getSize() + 3f));
-            panel2.add(label4, CC.xy(3, 5));
+            panel2.add(payTotalButton, CC.xy(5, 5));
         }
-        add(panel2, CC.xywh(3, 3, 7, 3));
+        add(panel2, CC.xy(3, 3));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel2;
-    private JTextField displayTotal;
     private JLabel label3;
+    private JTextField displayTotal;
+    private JLabel label4;
     private JTextField totalPayment;
     private JButton payTotalButton;
-    private JLabel label4;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

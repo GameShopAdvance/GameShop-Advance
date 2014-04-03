@@ -4,13 +4,14 @@
 
 package gameshop.advance.ui.swing.employee.book;
 
-import gameshop.advance.ui.swing.employee.sale.EndSalePanel;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
+import gameshop.advance.ui.swing.employee.sale.EndSalePanel;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -20,6 +21,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 /**
  * @author Franco
@@ -48,54 +50,71 @@ public class EndBookPanel extends JPanel {
         UIWindowSingleton.getInstance().refreshContent();
     }
 
+    private void startSaleActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void manageBookActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void faiInventario(ActionEvent e) {
+        // TODO add your code here
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        this2 = new JPanel();
         label1 = new JLabel();
         displayRest = new JTextField();
         label2 = new JLabel();
+        this2 = new JPanel();
         goToMenu = new JButton();
 
         //======== this ========
         setLayout(new FormLayout(
-            "default, $lcgap, default",
-            "2*(default, $lgap), default"));
+            "$lcgap, [150px,min], $lcgap, 56dlu, $lcgap, 155dlu, $lcgap, 80dlu, $lcgap, default",
+            "24dlu, $lgap, fill:37dlu, $lgap, 59dlu, $lgap, 69dlu, $lgap, 59dlu"));
+
+        //---- label1 ----
+        label1.setText("Resto");
+        label1.setLabelFor(displayRest);
+        label1.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        add(label1, CC.xy(4, 3, CC.FILL, CC.FILL));
+        add(displayRest, CC.xy(6, 3, CC.FILL, CC.DEFAULT));
+
+        //---- label2 ----
+        label2.setText("Prenotazione effettuata!");
+        label2.setHorizontalAlignment(SwingConstants.CENTER);
+        label2.setFont(new Font("Tahoma", Font.PLAIN, 30));
+        add(label2, CC.xywh(2, 5, 7, 1, CC.FILL, CC.FILL));
 
         //======== this2 ========
         {
             this2.setLayout(new FormLayout(
-                "default:grow, 45dlu, $lcgap, [150px,min], default:grow",
-                "default:grow, 25dlu, $lgap, 20dlu, $lgap, 25dlu, $rgap, 25dlu, fill:25dlu:grow"));
-
-            //---- label1 ----
-            label1.setText("Resto:");
-            label1.setLabelFor(displayRest);
-            this2.add(label1, CC.xy(2, 2, CC.FILL, CC.FILL));
-            this2.add(displayRest, CC.xy(4, 2, CC.FILL, CC.DEFAULT));
-
-            //---- label2 ----
-            label2.setText("Prenotazione effettuata!");
-            this2.add(label2, CC.xy(4, 4, CC.FILL, CC.FILL));
-
-            //---- goToMenu ----
-            goToMenu.setText("Torna al Men\u00f9");
-            goToMenu.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    goToMenuActionPerformed(e);
-                }
-            });
-            this2.add(goToMenu, CC.xywh(4, 6, 1, 3, CC.DEFAULT, CC.FILL));
+                "default:grow, 45dlu, $lcgap, [283px,min], default:grow",
+                "default:grow, 25dlu, $lgap, 20dlu, $lgap, 25dlu"));
         }
-        add(this2, CC.xy(3, 3));
+        add(this2, CC.xy(6, 7));
+
+        //---- goToMenu ----
+        goToMenu.setText("Torna al Men\u00f9");
+        goToMenu.setEnabled(false);
+        goToMenu.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        goToMenu.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                goToMenuActionPerformed(e);
+            }
+        });
+        add(goToMenu, CC.xy(2, 9, CC.DEFAULT, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JPanel this2;
     private JLabel label1;
     private JTextField displayRest;
     private JLabel label2;
+    private JPanel this2;
     private JButton goToMenu;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

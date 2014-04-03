@@ -5,7 +5,6 @@
 package gameshop.advance.ui.swing.employee;
 
 
-import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.InventoryControllerSingleton;
@@ -14,6 +13,7 @@ import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.ui.swing.UIWindowSingleton;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.NotBoundException;
@@ -103,11 +103,21 @@ public class InventoryPanel extends JPanel {
     private void createUIComponents() {
         // TODO: add custom component creation code here
     }
+
+    private void startSaleActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void manageBookActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void faiInventario(ActionEvent e) {
+        // TODO add your code here
+    }
     
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        cancelButton = new JButton();
-        endInventoryButton = new JButton();
         panel1 = new JPanel();
         label1 = new JLabel();
         codiceProdotto = new JTextField();
@@ -116,92 +126,76 @@ public class InventoryPanel extends JPanel {
         button1 = new JButton();
         panel = new JScrollPane();
         table = new JTable();
+        cancelButton = new JButton();
+        endInventoryButton = new JButton();
 
         //======== this ========
-        setName("this");
-
-        //---- cancelButton ----
-        cancelButton.setText("Annulla");
-        cancelButton.setName("cancelButton");
-        cancelButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                cancelButtonActionPerformed(e);
-            }
-        });
-
-        //---- endInventoryButton ----
-        endInventoryButton.setText("Fine");
-        endInventoryButton.setName("endInventoryButton");
-        endInventoryButton.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                endInventoryButtonActionPerformed(e);
-            }
-        });
+        setLayout(new FormLayout(
+            "$lcgap, 2*([75px,min]), $lcgap, [358px,min], $lcgap, 2*([75px,min]), $lcgap",
+            "68dlu, $lgap, [200px,min], $lgap, fill:[70px,min]"));
 
         //======== panel1 ========
         {
-            panel1.setName("panel1");
+            panel1.setLayout(new FormLayout(
+                "[100px,min], $lcgap, [80px,min], $lcgap, [100px,min]",
+                "fill:[40px,min], $rgap, fill:[40px,default]"));
 
             //---- label1 ----
             label1.setText("Codice Prodotto");
-            label1.setName("label1");
-
-            //---- codiceProdotto ----
-            codiceProdotto.setName("codiceProdotto");
+            label1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+            panel1.add(label1, CC.xy(1, 1));
+            panel1.add(codiceProdotto, CC.xywh(3, 1, 3, 1, CC.FILL, CC.DEFAULT));
 
             //---- label2 ----
             label2.setText("Quantit\u00e0");
-            label2.setName("label2");
-
-            //---- quantitaProdotto ----
-            quantitaProdotto.setName("quantitaProdotto");
+            label2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+            panel1.add(label2, CC.xy(1, 3));
+            panel1.add(quantitaProdotto, CC.xy(3, 3, CC.FILL, CC.DEFAULT));
 
             //---- button1 ----
             button1.setText("Inserisci");
-            button1.setName("button1");
+            button1.setFont(new Font("Tahoma", Font.PLAIN, 20));
             button1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     aggiungiProdotto(e);
                 }
             });
-
-            PanelBuilder panel1Builder = new PanelBuilder(new FormLayout(
-                "[60dlu,default], $lcgap, 50dlu, $lcgap, [60dlu,default]",
-                "default, $rgap, default, $ugap, default"), panel1);
-
-            panel1Builder.add(label1,           CC.xy  (1, 1));
-            panel1Builder.add(codiceProdotto,   CC.xywh(3, 1,       3,          1, CC.FILL, CC.DEFAULT));
-            panel1Builder.add(label2,           CC.xy  (1, 3));
-            panel1Builder.add(quantitaProdotto, CC.xy  (3, 3, CC.FILL, CC.DEFAULT));
-            panel1Builder.add(button1,          CC.xy  (3, 5));
+            panel1.add(button1, CC.xy(5, 3));
         }
+        add(panel1, CC.xy(5, 1));
 
         //======== panel ========
         {
-            panel.setName("panel");
-
-            //---- table ----
-            table.setName("table");
             panel.setViewportView(table);
         }
+        add(panel, CC.xywh(3, 3, 5, 1, CC.FILL, CC.FILL));
 
-        PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "45dlu, $lcgap, [120dlu,default], $lcgap, 45dlu",
-            "fill:[20dlu,default], $lgap, 51dlu, $lgap, 77dlu:grow, $lgap, [20dlu,default]:grow"), this);
+        //---- cancelButton ----
+        cancelButton.setText("Annulla");
+        cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        cancelButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cancelButtonActionPerformed(e);
+            }
+        });
+        add(cancelButton, CC.xywh(2, 5, 2, 1));
 
-        builder.add(cancelButton,       CC.xy(1, 1));
-        builder.add(endInventoryButton, CC.xy(5, 1));
-        builder.add(panel1,             CC.xy(3, 3));
-        builder.add(panel,              CC.xy(3, 5, CC.FILL, CC.FILL));
+        //---- endInventoryButton ----
+        endInventoryButton.setText("Fine");
+        endInventoryButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        endInventoryButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                endInventoryButtonActionPerformed(e);
+            }
+        });
+        add(endInventoryButton, CC.xywh(7, 5, 2, 1));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JButton cancelButton;
-    private JButton endInventoryButton;
     private JPanel panel1;
     private JLabel label1;
     private JTextField codiceProdotto;
@@ -210,6 +204,8 @@ public class InventoryPanel extends JPanel {
     private JButton button1;
     private JScrollPane panel;
     private JTable table;
+    private JButton cancelButton;
+    private JButton endInventoryButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     private void refreshTable() {

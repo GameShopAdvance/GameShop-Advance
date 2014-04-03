@@ -4,7 +4,6 @@
 
 package gameshop.advance.ui.swing.employee.sale;
 
-import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.SaleControllerSingleton;
@@ -13,6 +12,7 @@ import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.utility.Money;
 import java.awt.Color;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -22,6 +22,7 @@ import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
+import javax.swing.SwingConstants;
 
 
 /**
@@ -70,6 +71,18 @@ public class EndSalePanel extends JPanel {
     {
         this.displayRest.setText(rest.toString());
     }
+
+    private void startSaleActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void manageBookActionPerformed(ActionEvent e) {
+        // TODO add your code here
+    }
+
+    private void faiInventario(ActionEvent e) {
+        // TODO add your code here
+    }
     
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
@@ -80,50 +93,45 @@ public class EndSalePanel extends JPanel {
         goToMenu = new JButton();
 
         //======== this ========
-        setName("this");
+        setLayout(new FormLayout(
+            "$lcgap, center:[150px,min], [50px,min], $lcgap, center:[257px,min], [164px,min], $lcgap",
+            "21dlu, fill:25dlu, $lgap, 85dlu, $lgap, 44dlu, $rgap, 49dlu"));
 
         //---- label1 ----
-        label1.setText("Resto:");
+        label1.setText("Resto");
         label1.setLabelFor(displayRest);
-        label1.setName("label1");
-
-        //---- displayRest ----
-        displayRest.setName("displayRest");
+        label1.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        add(label1, CC.xy(3, 2, CC.FILL, CC.FILL));
+        add(displayRest, CC.xy(5, 2, CC.FILL, CC.DEFAULT));
 
         //---- label2 ----
         label2.setText("Grazie per aver effettuato acquisti da noi!");
-        label2.setName("label2");
+        label2.setFont(new Font("Tahoma", Font.PLAIN, 28));
+        label2.setHorizontalAlignment(SwingConstants.CENTER);
+        add(label2, CC.xywh(2, 4, 5, 1, CC.FILL, CC.FILL));
 
         //---- startNewSale ----
-        startNewSale.setText("Avvia una nuova Vendita");
+        startNewSale.setText("Nuova Vendita");
         startNewSale.setBackground(new Color(102, 255, 102));
-        startNewSale.setName("startNewSale");
+        startNewSale.setFont(new Font("Tahoma", Font.PLAIN, 22));
         startNewSale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startNewSaleActionPerformed(e);
             }
         });
+        add(startNewSale, CC.xy(2, 8, CC.DEFAULT, CC.FILL));
 
         //---- goToMenu ----
         goToMenu.setText("Torna al Men\u00f9");
-        goToMenu.setName("goToMenu");
+        goToMenu.setFont(new Font("Tahoma", Font.PLAIN, 22));
         goToMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 goToMenuActionPerformed(e);
             }
         });
-
-        PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "default:grow, 45dlu, $lcgap, [150px,min], default:grow",
-            "default:grow, 25dlu, $lgap, 20dlu, $lgap, 25dlu, $rgap, 25dlu, fill:25dlu:grow"), this);
-
-        builder.add(label1,       CC.xy(2, 2,    CC.FILL,    CC.FILL));
-        builder.add(displayRest,  CC.xy(4, 2,    CC.FILL, CC.DEFAULT));
-        builder.add(label2,       CC.xy(4, 4,    CC.FILL,    CC.FILL));
-        builder.add(startNewSale, CC.xy(4, 6, CC.DEFAULT,    CC.FILL));
-        builder.add(goToMenu,     CC.xy(4, 8, CC.DEFAULT,    CC.FILL));
+        add(goToMenu, CC.xy(6, 8, CC.DEFAULT, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
