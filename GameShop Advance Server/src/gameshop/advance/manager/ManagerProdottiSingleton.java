@@ -25,4 +25,6 @@ public class ManagerProdottiSingleton {
         }
         return ManagerProdottiSingleton.instance;
     }
+    
+    
 }

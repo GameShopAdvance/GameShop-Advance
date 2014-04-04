@@ -1,14 +1,10 @@
-/*
- * To change this license header, choose License Headers in Project Properties.
- * To change this template file, choose Tools | Templates
- * and open the template in the editor.
- */
-
 package gameshop.advance.manager;
 
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.interfaces.IObserver;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.technicalservices.db.DbPrenotazioneSingleton;
+import java.util.Iterator;
 import java.util.LinkedList;
 
 /**
@@ -23,6 +19,7 @@ public class ManagerPrenotazioniSingleton {
     
     public ManagerPrenotazioniSingleton(){
         this.listeners = new LinkedList<IObserver>();
+        
     }
     
     public static ManagerPrenotazioniSingleton getInstance(){
@@ -54,7 +51,12 @@ public class ManagerPrenotazioniSingleton {
         Iterator<IObserver> iter = this.listeners.iterator();
         while(iter.hasNext())
         {
-            iter.next().notifica();
+            iter.next().notifica(this);
         }
+    }
+    
+    public LinkedList<IPrenotazione> getNotProcessed()
+    {
+        return DbPrenotazioneSingleton.getInstance().readNotProcessed();
     }
 }

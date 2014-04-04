@@ -79,10 +79,7 @@ public class DbDescrizioneProdottoSingleton {
        });
        if(result.isEmpty())
            return null;
-       DescrizioneProdottoSmartProxy desc = result.get(0);
-       client.activate(desc, 11);
-       return desc;
-       
+       return result.get(0);   
    }
 }
 
