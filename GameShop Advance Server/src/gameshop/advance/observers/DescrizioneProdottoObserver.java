@@ -7,6 +7,8 @@
 package gameshop.advance.observers;
 
 import gameshop.advance.interfaces.IObserver;
+import gameshop.advance.manager.ManagerProdottiSingleton;
+import gameshop.advance.model.DescrizioneProdotto;
 
 /**
  *
@@ -20,8 +22,15 @@ public class DescrizioneProdottoObserver implements IObserver {
     
     @Override
     public void notifica(Object o) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        
+        DescrizioneProdotto desc = (DescrizioneProdotto) o;
+        ManagerProdottiSingleton manager = ManagerProdottiSingleton.getInstance();
+        
+        if (desc.sottoSoglia()){
+            manager.addDescrizione(desc);
+        }
+        else {
+            manager.deleteDescrizione(desc);
+        }
     }
-    
-    
 }

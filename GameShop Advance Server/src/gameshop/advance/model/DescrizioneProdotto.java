@@ -140,6 +140,10 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
         return this.quantitaDiSoglia;
     }
     
+    public boolean sottoSoglia(){
+        return this.quantitaDisponibile < this.quantitaDiSoglia;
+    }
+    
     @Override
     public synchronized void addQuantitaDisponibile(int quantity){
         this.quantitaDisponibile = this.quantitaDisponibile + quantity;
