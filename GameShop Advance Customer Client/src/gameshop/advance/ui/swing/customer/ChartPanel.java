@@ -28,23 +28,16 @@ import javax.swing.JScrollPane;
 /**
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class ChartPanel extends JPanel implements ActionListener {
+public class ChartPanel extends JPanel {
     private PopActionListener listener;
     private final String name = "Chart Panel";
-    private CompletedReservationPanel completedPanel;
     private DefaultListModel bookListModel;
     
     public ChartPanel() {
         initComponents();
         this.bookListModel = new DefaultListModel();
         this.bookList.setCellRenderer(new ProductCellRenderer());
-        this.bookList.setModel(this.bookListModel);
-        this.completedPanel = new CompletedReservationPanel();
-        this.completedPanel.addActionListener(this);
-        this.add(this.completedPanel);
-        CardLayout layout = (CardLayout) this.getLayout();
-        layout.addLayoutComponent(this.completedPanel, this.completedPanel.getName());
-        
+        this.bookList.setModel(this.bookListModel);      
     }
     
     public void addProduct(IDescrizioneProdottoRemote desc, Integer quantity)
@@ -61,11 +54,6 @@ public class ChartPanel extends JPanel implements ActionListener {
     private void reserveActionPerformed(ActionEvent e) {
         try {
             ReservationControllerSingleton.getInstance().completaPrenotazione();
-            this.completedPanel.setID(ReservationControllerSingleton.getInstance().getID());
-            this.completedPanel.setTotal(ReservationControllerSingleton.getInstance().getTotal());
-            this.completedPanel.setPartial(ReservationControllerSingleton.getInstance().getPartial());
-            CardLayout layout = (CardLayout) this.getLayout();
-            layout.show(this, this.completedPanel.getName());
         }
         catch (NullPointerException ex) {
             Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -106,10 +94,6 @@ public class ChartPanel extends JPanel implements ActionListener {
 
     private void backActionPerformed(ActionEvent e) {
         this.listener.popPanel();
-    }
-
-    private void button1ActionPerformed(ActionEvent e) {
-        // TODO add your code here
     }
 
     private void initComponents() {
@@ -209,14 +193,5 @@ public class ChartPanel extends JPanel implements ActionListener {
     private JButton button2;
     private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
-
-    @Override
-    public void actionPerformed(ActionEvent e) {
-        this.listener.popPanel();
-        CardLayout layout = (CardLayout) this.getLayout();
-        layout.first(this);
-    }
-
-
 
 }

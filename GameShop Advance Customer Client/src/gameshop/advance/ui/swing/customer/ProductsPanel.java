@@ -74,11 +74,8 @@ public class ProductsPanel extends JPanel implements PopActionListener {
     @Override
     public void pushPanel(JPanel panel){
         this.panelStack.push(panel);
-        System.err.println("Nome panel: "+panel.getName());
         CardLayout layout = (CardLayout) this.getLayout();
         layout.show(this, panel.getName());
-
-        System.err.println("Stack size: "+this.panelStack.size());
     }
     
     @Override
@@ -91,7 +88,6 @@ public class ProductsPanel extends JPanel implements PopActionListener {
             JPanel panel = this.panelStack.getFirst();
             layout.show(this, panel.getName());
         }
-        System.err.println("Stack size: "+this.panelStack.size());
         this.aggiornaTotale();
     }
 

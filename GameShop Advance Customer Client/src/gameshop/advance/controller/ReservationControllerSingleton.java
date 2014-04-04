@@ -20,6 +20,7 @@ import gameshop.advance.observer.PartialObserver;
 import gameshop.advance.observer.ReservationObserver;
 import gameshop.advance.observer.TotalObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
+import gameshop.advance.ui.swing.customer.CompletedReservationPanel;
 import gameshop.advance.ui.swing.customer.ProductsPanel;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
@@ -141,6 +142,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     {
         this.controller.addListener(this.reservationObserver);
         this.controller.terminaPrenotazione();
+        this.aggiornaWindow(new CompletedReservationPanel());
         this.started = false;
     }
 

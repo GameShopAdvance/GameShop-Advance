@@ -56,6 +56,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     public void avviaPrenotazione() throws RemoteException
     {
         this.prenotazione = new Prenotazione(NegozioSingleton.getInstance().getPercentualeAcconto());
+        System.err.println("Prenotazione creata");
     }
     
     @Override
@@ -63,6 +64,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     {
         IDescrizioneProdotto desc;
         desc = CatalogoProdottiSingleton.getInstance().getDescrizioneProdotto(codiceProdotto);
+        System.err.println("Descrizione: "+desc);
         this.prenotazione.inserisciProdotto(desc, quantity);
     }
     

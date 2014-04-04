@@ -13,8 +13,6 @@ import gameshop.advance.utility.Money;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
-import java.awt.event.MouseEvent;
-import java.awt.event.MouseListener;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -33,7 +31,21 @@ public class CompletedReservationPanel extends JPanel {
     private final String name = "Completed Panel";
     
     public CompletedReservationPanel() {
-        initComponents();
+        try {
+            initComponents();
+            this.setID(ReservationControllerSingleton.getInstance().getID());
+            this.setTotal(ReservationControllerSingleton.getInstance().getTotal());
+            this.setPartial(ReservationControllerSingleton.getInstance().getPartial());
+        }
+        catch (NullPointerException ex) {
+            Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (RemoteException ex) {
+            Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (ConfigurationException ex) {
+            Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @Override
@@ -56,31 +68,21 @@ public class CompletedReservationPanel extends JPanel {
     {
         this.acconto.setText(m.toString());
     }
-    
-    public void addActionListener(ActionListener listener)
-    {
-        this.button1.addActionListener(listener);
-    }
-    
-    private void startNewReservationActionPerformed(ActionEvent e) {
+
+    private void endActionPerformed(ActionEvent e) {
         try {
             ReservationControllerSingleton.getInstance().avviaPrenotazione();
-        } catch (NullPointerException ex) {
-            Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ConfigurationException ex) {
-            Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
-        }   catch (RemoteException ex) {
+        }
+        catch (NullPointerException ex) {
             Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-    }
-
-    private void ReservationCompletedMouseClicked(MouseEvent e) {
-        MouseListener[] mouseListeners = this.getMouseListeners();
-        for(int i=0; i<mouseListeners.length; i++)
-        {
-            MouseListener ml = mouseListeners[i];
-            ml.mouseClicked(e);
+        catch (ConfigurationException ex) {
+            Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        catch (RemoteException ex) {
+            Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
     }
     
     private void initComponents() {
@@ -146,6 +148,12 @@ public class CompletedReservationPanel extends JPanel {
         //---- button1 ----
         button1.setText("Chiudi");
         button1.setName("button1");
+        button1.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                endActionPerformed(e);
+            }
+        });
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
             "[15dlu,default], $lcgap, 100dlu, $lcgap, default:grow, $lcgap, 100dlu, $lcgap, [15dlu,default]",
