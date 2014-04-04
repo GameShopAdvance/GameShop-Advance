@@ -161,5 +161,16 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
             _activator.activate(purpose);
         }
     }
+
+    @Override
+    public void evadi() {
+        this.prenotazione.evadi();
+    }
+
+    @Override
+    public boolean getEvasa() {
+        this.activate(ActivationPurpose.READ);
+        return this.prenotazione.getEvasa();
+    }
     
 }

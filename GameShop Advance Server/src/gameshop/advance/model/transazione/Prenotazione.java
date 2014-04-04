@@ -21,6 +21,7 @@ import java.util.List;
 public class Prenotazione extends Vendita implements IPrenotazione {
     private Pagamento acconto;
     private int percentualeAcconto;
+    private boolean evasa = false;
 
     public Prenotazione(int percentualeAcconto) {
         super();
@@ -53,5 +54,15 @@ public class Prenotazione extends Vendita implements IPrenotazione {
             for(IRemoteObserver obs:listeners)
                 obs.notifica(new PrenotazioneRemoteProxy(this));
         }
+    }
+    
+    public void evadi()
+    {
+        this.evasa = true;
+    }
+    
+    public boolean getEvasa()
+    {
+        return this.evasa;
     }
 }

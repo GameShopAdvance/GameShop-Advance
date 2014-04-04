@@ -19,4 +19,8 @@ public interface IPrenotazione extends ITransazione, IPrenotazioneRemote {
 
     void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException;
     
+    public void evadi();
+    
+    public boolean getEvasa();
+    
 }

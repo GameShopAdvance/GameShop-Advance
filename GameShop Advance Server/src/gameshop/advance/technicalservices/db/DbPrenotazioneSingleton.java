@@ -8,11 +8,13 @@ package gameshop.advance.technicalservices.db;
 
 import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
+import com.db4o.collections.ActivatableLinkedList;
 import com.db4o.query.Predicate;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.model.transazione.proxies.PrenotazioneSmartProxy;
 import java.rmi.RemoteException;
+import java.util.LinkedList;
 
 /**
  *
@@ -74,4 +76,25 @@ public class DbPrenotazioneSingleton {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         return client.queryByExample(PrenotazioneSmartProxy.class).size();
     }
+     
+     public LinkedList<IPrenotazione> readNotProcessed()
+     {
+         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
+         ObjectSet<IPrenotazione> result = client.query(new Predicate<IPrenotazione>() {
+
+             @Override
+             public boolean match(IPrenotazione candidate) {
+                 if(candidate.getClass() != PrenotazioneSmartProxy.class)
+                     return false;
+                 else
+                    return !candidate.getEvasa();
+             }
+         });
+         if(result.isEmpty())
+            return null;
+         else{
+             LinkedList<IPrenotazione> list = new ActivatableLinkedList<>(result);
+             return list;
+         }
+     }
 }
