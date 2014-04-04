@@ -6,8 +6,9 @@
 
 package gameshop.advance.manager;
 
-import gameshop.advance.interfaces.IManager;
+import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.model.DescrizioneProdotto;
+import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -15,13 +16,14 @@ import java.util.List;
  *
  * @author Salx
  */
-public class ManagerProdottiSingleton implements IManager {
+public class ManagerProdottiSingleton {
     
     private static ManagerProdottiSingleton instance;
-    private LinkedList<DescrizioneProdotto> descrizioni;
+    private LinkedList<IDescrizioneProdotto> descrizioni;
     
     public ManagerProdottiSingleton(){
-        
+        DbDescrizioneProdottoSingleton db = DbDescrizioneProdottoSingleton.getInstance();
+        descrizioni = db.readBelowThreshold();
     }
     
     public static ManagerProdottiSingleton getInstance(){
@@ -33,14 +35,19 @@ public class ManagerProdottiSingleton implements IManager {
     }
     
     public void addDescrizione(DescrizioneProdotto desc){
-        
+        if(descrizioni.contains(desc)){
+        }
+        else {
+            descrizioni.add(desc);
+        }
     }
     
     public void deleteDescrizione(DescrizioneProdotto desc){
-        
+       if(descrizioni.contains(desc)){
+           descrizioni.remove(desc);
+       } 
     }
 
-    @Override
     public List getMonitored() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }

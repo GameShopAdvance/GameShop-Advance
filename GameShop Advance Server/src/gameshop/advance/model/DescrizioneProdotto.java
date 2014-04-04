@@ -132,14 +132,17 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
         return this.quantitaDisponibile;
     }
     
+    @Override
     public void setQuantitaDiSoglia(int soglia){
         this.quantitaDiSoglia = soglia;
     }
     
+    @Override
     public int getQuantitaDiSoglia(){
         return this.quantitaDiSoglia;
     }
     
+    @Override
     public boolean sottoSoglia(){
         return this.quantitaDisponibile < this.quantitaDiSoglia;
     }
