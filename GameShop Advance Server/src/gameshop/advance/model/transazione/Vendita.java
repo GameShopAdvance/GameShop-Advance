@@ -8,6 +8,7 @@ package gameshop.advance.model.transazione;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
+import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
@@ -71,7 +72,12 @@ public class Vendita implements ITransazione {
      */
     @Override
     public void inserisciProdotto(IDescrizioneProdotto desc, int quantity) throws RemoteException {
-        RigaDiTransazione rdv = new RigaDiTransazione(desc, quantity, desc.getSconti(date));
+        IScontoProdottoStrategy strategiaSconto = ScontoFactorySingleton.getInstance().getStrategiaScontoProdotto(this);
+        for(IScontoProdottoStrategy sconto:desc.getSconti(this.date))
+        {
+            strategiaSconto.add(sconto);
+        }
+        RigaDiTransazione rdv = new RigaDiTransazione(desc, quantity, strategiaSconto);
         this.righeDiVendita.add(rdv);
         this.notificaListener();
     }

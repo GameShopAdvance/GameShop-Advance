@@ -2,13 +2,10 @@ package gameshop.advance.model.transazione;
 
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
-import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.model.DescrizioneProdotto;
-import gameshop.advance.model.transazione.sconto.ScontoFactorySingleton;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
-import java.util.List;
 
 /**
  * Rappresenta la riga di vendita che verrà stampata sullo scontrino.Contiene
@@ -27,15 +24,11 @@ public class RigaDiTransazione implements IRigaDiTransazioneRemote
      * @param desc
      * @param quantity
      */
-    public RigaDiTransazione(IDescrizioneProdotto desc, int quantity, List<IScontoProdottoStrategy> sconti)
+    public RigaDiTransazione(IDescrizioneProdotto desc, int quantity, IScontoProdottoStrategy sconto)
     {
         this.descrizione = desc;
         this.quantity = quantity;
-        this.strategiaDiSconto = ScontoFactorySingleton.getInstance().getStrategiaScontoProdotto();
-        for(IScontoProdottoStrategy sconto:sconti)
-        {
-            this.strategiaDiSconto.add(sconto);
-        }
+        this.strategiaDiSconto = sconto;
     }
 
     @Override
@@ -56,9 +49,9 @@ public class RigaDiTransazione implements IRigaDiTransazioneRemote
         this.quantity = quantity;
     }
 
-    public Money getSubTotal(ITransazione v) throws RemoteException
+    public Money getSubTotal() throws RemoteException
     {
-        return this.strategiaDiSconto.getSubtotal(v, this);
+        return this.strategiaDiSconto.getSubtotal(this, null);
     }
 
 }

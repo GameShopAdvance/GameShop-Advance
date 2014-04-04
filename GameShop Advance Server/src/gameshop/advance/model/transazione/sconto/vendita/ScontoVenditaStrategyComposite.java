@@ -35,7 +35,7 @@ public abstract class ScontoVenditaStrategyComposite implements IScontoVenditaSt
         Money totale = new Money();
         while(righe.hasNext())
         {
-            totale = totale.add(righe.next().getSubTotal(vendita));
+            totale = totale.add(righe.next().getSubTotal());
 
         }
         return totale;

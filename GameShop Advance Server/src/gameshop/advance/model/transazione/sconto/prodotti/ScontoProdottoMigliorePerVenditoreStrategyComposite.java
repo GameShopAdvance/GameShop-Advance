@@ -18,16 +18,20 @@ import java.util.List;
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class ScontoProdottoMigliorePerVenditoreStrategyComposite extends ScontoProdottoStrategyComposite {
+
+    public ScontoProdottoMigliorePerVenditoreStrategyComposite(ITransazione trans) {
+        super(trans);
+    }
     
     
     @Override
-    public Money getSubtotal(ITransazione v, RigaDiTransazione rdv) throws RemoteException 
+    public Money getSubtotal(RigaDiTransazione rdv, ITransazione trans) throws RemoteException 
     {
         List<IScontoProdottoStrategy> components = super.getComponents();
         Money massimaSpesa = new Money();
         for(IScontoProdottoStrategy sconto: components)
         {
-            Money subtotal = sconto.getSubtotal(v, rdv);
+            Money subtotal = sconto.getSubtotal(rdv, this.getTransazione());
             if(subtotal.greater(massimaSpesa))
                 massimaSpesa = subtotal;
         }

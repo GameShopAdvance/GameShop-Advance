@@ -47,8 +47,8 @@ public class ScontoPrendiPaghiClienteProdottoStrategy implements IScontoProdotto
     }
     
     @Override
-    public Money getSubtotal(ITransazione v, RigaDiTransazione rdv) throws RemoteException {
-        CartaCliente c = v.getCliente();
+    public Money getSubtotal(RigaDiTransazione rdv, ITransazione trans) throws RemoteException {
+        CartaCliente c = trans.getCliente();
         int quantity = rdv.getQuantity();
         if(c!=null && this.checkApplicable(c.getTipo()))
         {
@@ -57,7 +57,7 @@ public class ScontoPrendiPaghiClienteProdottoStrategy implements IScontoProdotto
             quantity = rdv.getQuantity()-notPayedQuantity;
         }
 
-        return rdv.getDescrizione().getPrezzo(v.getDate()).multiply(quantity);
+        return rdv.getDescrizione().getPrezzo(trans.getDate()).multiply(quantity);
     }
 
     private boolean checkApplicable(TipologiaCliente tc)

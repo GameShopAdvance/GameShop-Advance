@@ -34,9 +34,9 @@ public class ScontoPercentualeClienteProdottoStrategy implements IScontoProdotto
     }
 
     @Override
-    public Money getSubtotal(ITransazione v, RigaDiTransazione rdv) throws RemoteException {
-        CartaCliente c = v.getCliente();
-        Money subtotal = rdv.getDescrizione().getPrezzo(v.getDate()).multiply(rdv.getQuantity());
+    public Money getSubtotal(RigaDiTransazione rdv, ITransazione trans) throws RemoteException {
+        CartaCliente c = trans.getCliente();
+        Money subtotal = rdv.getDescrizione().getPrezzo(trans.getDate()).multiply(rdv.getQuantity());
         if(c!=null && this.checkApplicable(c.getTipo()))
             return subtotal.subtract(subtotal.multiply(percentuale).divide(100));
         else

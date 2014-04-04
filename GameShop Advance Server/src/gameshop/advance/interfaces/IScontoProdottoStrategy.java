@@ -17,7 +17,13 @@ import org.joda.time.DateTime;
  */
 public interface IScontoProdottoStrategy {
     
-    public Money getSubtotal(ITransazione v, RigaDiTransazione rdv ) throws RemoteException;
+    /**
+     *
+     * @param rdv
+     * @return
+     * @throws RemoteException
+     */
+    public Money getSubtotal(RigaDiTransazione rdv, ITransazione trans) throws RemoteException;
     
     /**
      *

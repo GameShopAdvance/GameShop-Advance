@@ -20,14 +20,24 @@ import org.joda.time.DateTime;
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public abstract class ScontoProdottoStrategyComposite implements IScontoProdottoStrategy{
-    
+    private ITransazione transazione;
     private LinkedList<IScontoProdottoStrategy> components = new LinkedList<>();
+    
+    public ScontoProdottoStrategyComposite(ITransazione trans){
+        this.transazione = trans;
+    }
+    
+    protected ITransazione getTransazione()
+    {
+        return this.transazione;
+    }
     
     protected List<IScontoProdottoStrategy> getComponents()
     {
         return this.components;
     }
     
+    @Override
     public void add(IScontoProdottoStrategy sconto)
     {
         this.components.add(sconto);
@@ -45,7 +55,7 @@ public abstract class ScontoProdottoStrategyComposite implements IScontoProdotto
     }
     
     @Override
-    public abstract Money getSubtotal(ITransazione v, RigaDiTransazione rdv) throws RemoteException;
+    public abstract Money getSubtotal(RigaDiTransazione rdv, ITransazione trans) throws RemoteException;
     
     public Money getRealSubtotal(RigaDiTransazione rdv, DateTime period) throws RemoteException
     {

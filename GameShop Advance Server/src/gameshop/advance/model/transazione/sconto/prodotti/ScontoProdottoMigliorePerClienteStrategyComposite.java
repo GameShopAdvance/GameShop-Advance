@@ -19,6 +19,10 @@ import java.util.List;
  */
 public class ScontoProdottoMigliorePerClienteStrategyComposite extends ScontoProdottoStrategyComposite {
 
+    public ScontoProdottoMigliorePerClienteStrategyComposite(ITransazione trans) {
+        super(trans);
+    }
+
     /**
      *
      * @param v
@@ -26,13 +30,13 @@ public class ScontoProdottoMigliorePerClienteStrategyComposite extends ScontoPro
      * @return
      */
     @Override
-    public Money getSubtotal(ITransazione v, RigaDiTransazione rdv) throws RemoteException
+    public Money getSubtotal(RigaDiTransazione rdv, ITransazione trans) throws RemoteException
     {
         List<IScontoProdottoStrategy> components = super.getComponents();
-        Money minimaSpesa = super.getRealSubtotal(rdv, v.getDate());
+        Money minimaSpesa = super.getRealSubtotal(rdv, this.getTransazione().getDate());
         for(IScontoProdottoStrategy sconto: components)
         {
-            Money subtotal = sconto.getSubtotal(v, rdv);
+            Money subtotal = sconto.getSubtotal(rdv, this.getTransazione());
             if(minimaSpesa.greater(subtotal))
                 minimaSpesa = subtotal;
         }
