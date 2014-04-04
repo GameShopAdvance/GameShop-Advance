@@ -6,14 +6,16 @@
 
 package gameshop.advance.manager;
 
+import gameshop.advance.interfaces.IManager;
 import gameshop.advance.model.DescrizioneProdotto;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
  * @author Salx
  */
-public class ManagerProdottiSingleton {
+public class ManagerProdottiSingleton implements IManager {
     
     private static ManagerProdottiSingleton instance;
     private LinkedList<DescrizioneProdotto> descrizioni;
@@ -37,4 +39,11 @@ public class ManagerProdottiSingleton {
     public void deleteDescrizione(DescrizioneProdotto desc){
         
     }
+
+    @Override
+    public List getMonitored() {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+    
+   
 }

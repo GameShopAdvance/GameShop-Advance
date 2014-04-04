@@ -7,6 +7,8 @@
 package gameshop.advance.technicalservices.db;
 
 import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
+import com.db4o.collections.ActivatableLinkedList;
 import com.db4o.query.Predicate;
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
@@ -14,6 +16,7 @@ import gameshop.advance.model.DescrizioneProdottoSmartProxy;
 import gameshop.advance.utility.IDProdotto;
 import java.rmi.RemoteException;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 
 /**
@@ -81,6 +84,26 @@ public class DbDescrizioneProdottoSingleton {
            return null;
        return result.get(0);   
    }
+    
+    public LinkedList<IDescrizioneProdotto> readBelowThreshold(){
+        ObjectContainer client = DbManagerSingleton.getInstance().getClient();
+        ObjectSet<IDescrizioneProdotto> result = client.query(new Predicate<IDescrizioneProdotto>() {
+
+            @Override
+            public boolean match(IDescrizioneProdotto candidate) {
+                if(candidate.getClass() != DescrizioneProdottoSmartProxy.class)
+                    return false;
+                else
+                   return !candidate.sottoSoglia();
+            }
+        });
+        if(result.isEmpty())
+           return null;
+        else{
+            LinkedList<IDescrizioneProdotto> list = new ActivatableLinkedList<>(result);
+            return list;
+        }
+    }
 }
 
        
