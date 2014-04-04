@@ -23,30 +23,30 @@ import org.joda.time.DateTime;
  */
 public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto {
 
-    private final IDescrizioneProdotto decrizione;
+    private final IDescrizioneProdotto descrizione;
     private transient Activator activator;
     
     public DescrizioneProdottoSmartProxy(IDescrizioneProdotto desc)
     {
-        this.decrizione = desc;
+        this.descrizione = desc;
     }
     
     @Override
     public IDProdotto getCodiceProdotto() throws RemoteException {
         this.activate(ActivationPurpose.READ);
-        return this.decrizione.getCodiceProdotto();
+        return this.descrizione.getCodiceProdotto();
     }
 
     @Override
     public String getDescrizione() throws RemoteException {
         this.activate(ActivationPurpose.READ);
-        return this.decrizione.getDescrizione();
+        return this.descrizione.getDescrizione();
     }
 
     @Override
     public Money getPrezzo(DateTime period) throws RemoteException {
         this.activate(ActivationPurpose.READ);
-        return this.decrizione.getPrezzo(period);
+        return this.descrizione.getPrezzo(period);
     }
     
     public void activate(ActivationPurpose purpose) {
@@ -67,49 +67,64 @@ public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto {
 
     @Override
     public void addQuantitaDisponibile(int quantity) {
-        this.decrizione.addQuantitaDisponibile(quantity);
+        this.descrizione.addQuantitaDisponibile(quantity);
     }
 
     @Override
     public void addSconti(List<IScontoProdottoStrategy> sconti) {
-        this.decrizione.addSconti(sconti);
+        this.descrizione.addSconti(sconti);
     }
 
     @Override
     public void addSconto(IScontoProdottoStrategy sconto) {
-        this.decrizione.addSconto(sconto);
+        this.descrizione.addSconto(sconto);
     }
 
     @Override
     public int getQuantitaDisponibile() {
-        return this.decrizione.getQuantitaDisponibile();
+        return this.descrizione.getQuantitaDisponibile();
+    }
+    
+    @Override
+    public void setQuantitaDiSoglia(int soglia){
+        this.descrizione.setQuantitaDiSoglia(soglia);
+    }
+    
+    @Override
+    public int getQuantitaDiSoglia(){
+        return this.descrizione.getQuantitaDiSoglia();
+    }
+    
+    @Override
+    public boolean sottoSoglia(){
+        return this.descrizione.sottoSoglia();
     }
 
     @Override
     public List<IScontoProdottoStrategy> getSconti(DateTime period) {
         this.activate(ActivationPurpose.READ);
-        return this.decrizione.getSconti(period);
+        return this.descrizione.getSconti(period);
     }
 
     @Override
     public List<Prezzo> getTuttiPrezzi() {
         this.activate(ActivationPurpose.READ);
-        return this.decrizione.getTuttiPrezzi();
+        return this.descrizione.getTuttiPrezzi();
     }
 
     @Override
     public List<IScontoProdottoStrategy> getTuttiSconti() {
         this.activate(ActivationPurpose.READ);
-        return this.decrizione.getTuttiSconti();
+        return this.descrizione.getTuttiSconti();
     }
 
     @Override
     public void setDescrizione(String descrizione) {
-        this.decrizione.setDescrizione(descrizione);
+        this.descrizione.setDescrizione(descrizione);
     }
 
     @Override
     public void setQuantitaDisponibile(int quantity) {
-        this.decrizione.setQuantitaDisponibile(quantity);
+        this.descrizione.setQuantitaDisponibile(quantity);
     }
 }

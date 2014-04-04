@@ -6,7 +6,6 @@
 
 package gameshop.advance.interfaces;
 
-import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.utility.Prezzo;
 import java.util.List;
@@ -25,6 +24,12 @@ public interface IDescrizioneProdotto extends IDescrizioneProdottoRemote {
     void addSconto(IScontoProdottoStrategy sconto);
 
     int getQuantitaDisponibile();
+    
+    void setQuantitaDiSoglia(int soglia);
+    
+    int getQuantitaDiSoglia();
+    
+    boolean sottoSoglia();
 
     List<IScontoProdottoStrategy> getSconti(DateTime period);
 
