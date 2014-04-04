@@ -9,6 +9,9 @@ package gameshop.advance.manager;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IObserver;
 import gameshop.advance.interfaces.IPrenotazione;
+import java.util.Iterator;
+import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -17,6 +20,10 @@ import gameshop.advance.interfaces.IPrenotazione;
 public class ManagerFornitureSingleton implements IObserver {
     
     private static ManagerFornitureSingleton instance;
+    
+    private LinkedList<IPrenotazione> prenotazioni;
+    
+    private LinkedList<IDescrizioneProdotto> descrizioni;
     
     public ManagerFornitureSingleton(){
         
@@ -31,20 +38,31 @@ public class ManagerFornitureSingleton implements IObserver {
     }
 
     @Override
-    public void notifica(Object o) {
+    public synchronized void notifica(Object o) {
+        this.aggiornaPrenotazioni(ManagerPrenotazioniSingleton.getInstance().getNotProcessed());
+        //this.aggiornaDescrizioni(ManagerProdottiSingleton.getInstance());
+    }
+    
+    /**
+     *
+     * @param descrizioni
+     */
+    public void aggiornaDescrizioni(List<IDescrizioneProdotto> descrizioni){
         
     }
     
     /**
      *
-     * @param descrizione
+     * @param prenotazioni
      */
-    public void aggiorna(IDescrizioneProdotto descrizione){
+    public void aggiornaPrenotazioni(List<IPrenotazione> prenotazioni){
+        this.prenotazioni = (LinkedList<IPrenotazione>) prenotazioni;
         
-    }
-    
-    public void aggiorna(IPrenotazione prenotazione){
-        
+        Iterator<IPrenotazione> iter = this.prenotazioni.iterator();
+        while(iter.hasNext())
+        {
+            System.err.println("Prenotazione: "+iter.next());
+        }
     }
     
 }

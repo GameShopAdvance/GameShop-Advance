@@ -1,7 +1,6 @@
 package gameshop.advance.manager;
 
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
-import gameshop.advance.interfaces.IManager;
 import gameshop.advance.interfaces.IObserver;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.technicalservices.db.DbPrenotazioneSingleton;
@@ -12,7 +11,7 @@ import java.util.LinkedList;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class ManagerPrenotazioniSingleton implements IManager{
+public class ManagerPrenotazioniSingleton {
     
     private static ManagerPrenotazioniSingleton instance;
     
@@ -56,8 +55,7 @@ public class ManagerPrenotazioniSingleton implements IManager{
         }
     }
     
-    @Override
-    public LinkedList<IPrenotazione> getMonitored()
+    public LinkedList<IPrenotazione> getNotProcessed()
     {
         return DbPrenotazioneSingleton.getInstance().readNotProcessed();
     }
