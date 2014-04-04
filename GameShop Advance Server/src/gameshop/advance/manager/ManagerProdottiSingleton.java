@@ -6,6 +6,9 @@
 
 package gameshop.advance.manager;
 
+import gameshop.advance.model.DescrizioneProdotto;
+import java.util.LinkedList;
+
 /**
  *
  * @author Salx
@@ -13,6 +16,7 @@ package gameshop.advance.manager;
 public class ManagerProdottiSingleton {
     
     private static ManagerProdottiSingleton instance;
+    private LinkedList<DescrizioneProdotto> descrizioni;
     
     public ManagerProdottiSingleton(){
         
@@ -24,5 +28,13 @@ public class ManagerProdottiSingleton {
             ManagerProdottiSingleton.instance = new ManagerProdottiSingleton();
         }
         return ManagerProdottiSingleton.instance;
+    }
+    
+    public void addDescrizione(DescrizioneProdotto desc){
+        
+    }
+    
+    public void deleteDescrizione(DescrizioneProdotto desc){
+        
     }
 }
