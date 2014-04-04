@@ -1,7 +1,9 @@
 package gameshop.advance.model;
 
 import gameshop.advance.interfaces.IDescrizioneProdotto;
+import gameshop.advance.interfaces.IObserver;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
+import gameshop.advance.observers.DescrizioneProdottoObserver;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import gameshop.advance.utility.Prezzo;
@@ -24,6 +26,8 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
     private String descrizione;
     private LinkedList<IScontoProdottoStrategy> sconti;
     private int quantitaDisponibile = 0;
+    private int quantitaDiSoglia = 1;
+    private IObserver listener;
 
     /**
      * Il Costruttore imposta tutte le variabili di DescrizioneProdotto utilizzando
@@ -31,15 +35,27 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
      * @param codiceProdotto
      * @param prezzo
      * @param descrizione
-     * @param quantity
+     * @param disponibile
+     * @param soglia
      * @throws java.rmi.RemoteException
      */
-    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione, int quantity ) throws RemoteException{
+    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione, int disponibile, int soglia ) throws RemoteException{
         this.descrizione = descrizione;
         this.prezzi.add(prezzo);
         this.codiceProdotto = codiceProdotto;
         this.sconti = new LinkedList<>();
-        this.quantitaDisponibile = quantity;
+        this.quantitaDisponibile = disponibile;
+        this.quantitaDiSoglia = soglia;
+        this.listener = new DescrizioneProdottoObserver();
+    }
+    
+    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione, int disponibile){
+        this.descrizione = descrizione;
+        this.prezzi.add(prezzo);
+        this.codiceProdotto = codiceProdotto;
+        this.sconti = new LinkedList<>();
+        this.quantitaDisponibile = disponibile;
+        this.listener = new DescrizioneProdottoObserver(); 
     }
 
     /**
@@ -108,11 +124,20 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
     @Override
     public synchronized void setQuantitaDisponibile(int quantity){
         this.quantitaDisponibile = quantity;
+        this.listener.notifica(this);
     }
     
     @Override
     public synchronized int getQuantitaDisponibile(){
         return this.quantitaDisponibile;
+    }
+    
+    public void setQuantitaDiSoglia(int soglia){
+        this.quantitaDiSoglia = soglia;
+    }
+    
+    public int getQuantitaDiSoglia(){
+        return this.quantitaDiSoglia;
     }
     
     @Override
