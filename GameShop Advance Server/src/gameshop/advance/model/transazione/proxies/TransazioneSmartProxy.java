@@ -10,6 +10,7 @@ import com.db4o.activation.ActivationPurpose;
 import com.db4o.activation.Activator;
 import com.db4o.ta.Activatable;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
@@ -43,7 +44,7 @@ public class TransazioneSmartProxy implements ITransazione, Activatable{
     }
 
     @Override
-    public void inserisciProdotto(IDescrizioneProdotto desc, int quantity) throws RemoteException {
+    public void inserisciProdotto(IDescrizioneProdotto desc, int quantity) throws RemoteException, QuantityNotInStockException {
         this.trans.inserisciProdotto(desc, quantity);
     }
 

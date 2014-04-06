@@ -7,7 +7,7 @@ package gameshop.advance.ui.swing.customer;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
-import gameshop.advance.interfaces.remote.IRigaDiVenditaRemote;
+import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.utility.Money;
 import java.awt.Color;
 import java.awt.Component;
@@ -22,7 +22,7 @@ import javax.swing.border.LineBorder;
 /**
  * @author Pippo
  */
-public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDiVenditaRemote>{
+public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDiTransazioneRemote>{
     public BookCellRenderer() {
         initComponents();
     }
@@ -72,7 +72,7 @@ public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDi
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends IRigaDiVenditaRemote> list, IRigaDiVenditaRemote value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList<? extends IRigaDiTransazioneRemote> list, IRigaDiTransazioneRemote value, int index, boolean isSelected, boolean cellHasFocus) {
         this.name.setText("Prodotto...manca observer delle righe di vendita");
         this.quantity.setText("???");
         this.subTotal.setText(new Money().toString());

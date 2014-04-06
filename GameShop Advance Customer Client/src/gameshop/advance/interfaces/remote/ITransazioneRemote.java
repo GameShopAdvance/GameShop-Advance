@@ -32,7 +32,7 @@ public interface ITransazioneRemote extends Remote {
      * @return
      * @throws RemoteException
      */
-    Iterator<IRigaDiVenditaRemote> getRigheDiVendita() throws RemoteException;
+    Iterator<IRigaDiTransazioneRemote> getRigheDiVendita() throws RemoteException;
 
     /**
      * Implementazione del metodo dell'interfaccia di vendita.Calcola il totale

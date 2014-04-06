@@ -2,6 +2,7 @@ package gameshop.advance.controller;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
+import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
@@ -65,7 +66,11 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
         IDescrizioneProdotto desc;
         desc = CatalogoProdottiSingleton.getInstance().getDescrizioneProdotto(codiceProdotto);
         System.err.println("Descrizione: "+desc);
-        this.prenotazione.inserisciProdotto(desc, quantity);
+        try {
+            this.prenotazione.inserisciProdotto(desc, quantity);
+        } catch (QuantityNotInStockException ex) {
+            throw new RemoteException(ex.getMessage());
+        }
     }
     
     @Override

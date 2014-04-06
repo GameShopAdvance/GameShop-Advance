@@ -7,6 +7,7 @@
 package gameshop.advance.model.transazione;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
@@ -69,9 +70,19 @@ public class Vendita implements ITransazione {
      * aggiornare l'output.
      * @param desc
      * @param quantity
+     * @throws gameshop.advance.exceptions.QuantityNotInStockException
      */
     @Override
-    public void inserisciProdotto(IDescrizioneProdotto desc, int quantity) throws RemoteException {
+    public void inserisciProdotto(IDescrizioneProdotto desc, int quantity) throws RemoteException, QuantityNotInStockException {
+        if(desc.getQuantitaDisponibile() < quantity)
+        {
+            throw new QuantityNotInStockException();
+        }
+        else
+        {
+            desc.setQuantitaDisponibile(desc.getQuantitaDisponibile() - quantity);
+            System.err.println("Quantità "+desc.getDescrizione()+" : "+desc.getQuantitaDisponibile()+"/"+desc.getQuantitaDiSoglia());
+        }
         IScontoProdottoStrategy strategiaSconto = ScontoFactorySingleton.getInstance().getStrategiaScontoProdotto(this);
         for(IScontoProdottoStrategy sconto:desc.getSconti(this.date))
         {

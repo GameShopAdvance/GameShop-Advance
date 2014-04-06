@@ -7,6 +7,7 @@
 package gameshop.advance.interfaces;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.interfaces.remote.ITransazioneRemote;
 import gameshop.advance.model.transazione.CartaCliente;
@@ -39,7 +40,7 @@ public interface ITransazione extends ITransazioneRemote {
      * @param quantity
      * @throws java.rmi.RemoteException
      */
-    void inserisciProdotto(IDescrizioneProdotto desc, int quantity) throws RemoteException;
+    void inserisciProdotto(IDescrizioneProdotto desc, int quantity) throws RemoteException, QuantityNotInStockException;
 
     /**
      * Crea un nuovo oggetto pagamento utilizzando l'ammontare della vendita corrente.Aggiunge

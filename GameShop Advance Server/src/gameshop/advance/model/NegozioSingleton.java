@@ -73,6 +73,12 @@ public class NegozioSingleton
     {
         try {
             DbVenditaSingleton.getInstance().create(v);
+            CatalogoProdottiSingleton.getInstance().aggiornaDescrizioni();
+//            Iterator<RigaDiTransazione> righeDiVendita = v.getRigheDiVendita();
+//            while(righeDiVendita.hasNext())
+//            {
+//                DbDescrizioneProdottoSingleton.getInstance().update(righeDiVendita.next().getDescrizione());
+//            }
         } catch (ObjectAlreadyExistsDbException ex) {
             Logger.getLogger(NegozioSingleton.class.getName()).log(Level.SEVERE, null, ex);
         }

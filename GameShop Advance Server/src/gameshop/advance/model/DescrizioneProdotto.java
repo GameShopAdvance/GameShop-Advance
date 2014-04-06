@@ -25,8 +25,8 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
     private LinkedList<Prezzo> prezzi = new LinkedList<>();
     private String descrizione;
     private LinkedList<IScontoProdottoStrategy> sconti;
-    private int quantitaDisponibile = 0;
-    private int quantitaDiSoglia = 1;
+    private Integer quantitaDisponibile;
+    private Integer quantitaDiSoglia;
     private IObserver listener;
 
     /**
@@ -44,18 +44,17 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
         this.prezzi.add(prezzo);
         this.codiceProdotto = codiceProdotto;
         this.sconti = new LinkedList<>();
-        this.quantitaDisponibile = disponibile;
-        this.quantitaDiSoglia = soglia;
+        this.quantitaDisponibile = new Integer(disponibile);
+        this.quantitaDiSoglia = new Integer(soglia);
         this.listener = new DescrizioneProdottoObserver();
     }
     
-    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione, int disponibile){
-        this.descrizione = descrizione;
-        this.prezzi.add(prezzo);
-        this.codiceProdotto = codiceProdotto;
-        this.sconti = new LinkedList<>();
-        this.quantitaDisponibile = disponibile;
-        this.listener = new DescrizioneProdottoObserver(); 
+    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione, int disponibile) throws RemoteException{
+        this(codiceProdotto, prezzo, descrizione, disponibile, 0);
+    }
+    
+    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione) throws RemoteException{
+        this(codiceProdotto, prezzo, descrizione, 1, 0);
     }
 
     /**
@@ -123,33 +122,33 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
      
     @Override
     public synchronized void setQuantitaDisponibile(int quantity){
-        this.quantitaDisponibile = quantity;
+        this.quantitaDisponibile = new Integer(quantity);
         this.listener.notifica(this);
     }
     
     @Override
     public synchronized int getQuantitaDisponibile(){
-        return this.quantitaDisponibile;
+        return this.quantitaDisponibile.intValue();
     }
     
     @Override
     public void setQuantitaDiSoglia(int soglia){
-        this.quantitaDiSoglia = soglia;
+        this.quantitaDiSoglia = new Integer(soglia);
     }
     
     @Override
     public int getQuantitaDiSoglia(){
-        return this.quantitaDiSoglia;
+        return this.quantitaDiSoglia.intValue();
     }
     
     @Override
     public boolean sottoSoglia(){
-        return this.quantitaDisponibile < this.quantitaDiSoglia;
+        return this.quantitaDisponibile.intValue() < this.quantitaDiSoglia.intValue();
     }
     
     @Override
     public synchronized void addQuantitaDisponibile(int quantity){
-        this.quantitaDisponibile = this.quantitaDisponibile + quantity;
+        this.quantitaDisponibile = new Integer(this.quantitaDisponibile.intValue() + quantity);
     }
 
     private Prezzo getPrezzoAttuale() {

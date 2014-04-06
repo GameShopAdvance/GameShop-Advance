@@ -95,17 +95,11 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
             throw new QuantityException(quantity);
         
         IDescrizioneProdotto desc = CatalogoProdottiSingleton.getInstance().getDescrizioneProdotto(codiceProdotto);
-        if(desc.getQuantitaDisponibile() < quantity)
-        {
-            throw new QuantityNotInStockException();
-        }
-        else
-            desc.setQuantitaDisponibile(desc.getQuantitaDisponibile() - quantity);
         
         if(desc == null)
             throw new ProdottoNotFoundException(codiceProdotto);
+        
         this.venditaCorrente.inserisciProdotto(desc, quantity);
-
     }
 
     /**

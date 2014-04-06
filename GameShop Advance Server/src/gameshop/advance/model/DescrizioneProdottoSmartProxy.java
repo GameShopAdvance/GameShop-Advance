@@ -125,6 +125,7 @@ public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto {
 
     @Override
     public void setQuantitaDisponibile(int quantity) {
+        this.activate(ActivationPurpose.WRITE);
         this.descrizione.setQuantitaDisponibile(quantity);
     }
 }

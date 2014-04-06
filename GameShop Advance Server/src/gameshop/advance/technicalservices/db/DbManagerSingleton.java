@@ -10,6 +10,8 @@ import com.db4o.query.Query;
 import com.db4o.ta.TransparentActivationSupport;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.model.DescrizioneProdotto;
+import gameshop.advance.model.DescrizioneProdottoSmartProxy;
+import gameshop.advance.model.transazione.proxies.TransazioneSmartProxy;
 import java.util.HashMap;
 import java.util.Iterator;
 import java.util.List;
@@ -39,6 +41,8 @@ public class DbManagerSingleton {
 //        configuration.common().objectClass(ITransazione.class).cascadeOnUpdate(true);
 //        configuration.common().objectClass(DescrizioneProdotto.class).cascadeOnUpdate(true);
         configuration.common().add(new TransparentActivationSupport());
+        configuration.common().objectClass(DescrizioneProdottoSmartProxy.class).cascadeOnUpdate(true);
+        configuration.common().objectClass(TransazioneSmartProxy.class).cascadeOnUpdate(true);
         System.err.println("SERVER DB OPENING");
         this.server = Db4oClientServer.openServer(configuration, this.dbName, 0);
         System.err.println("SERVER DB: "+this.server);

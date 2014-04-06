@@ -38,22 +38,22 @@ public class DbDescrizioneProdottoSingleton {
     }
         
     public void create(IDescrizioneProdotto desc) throws ObjectAlreadyExistsDbException{
-            ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-            int result = client.queryByExample(desc).size();
-            if(result > 0)
-                throw new ObjectAlreadyExistsDbException();
-            if(desc.getClass() != DescrizioneProdottoSmartProxy.class)
-                client.store(new DescrizioneProdottoSmartProxy(desc));
-            else
-                client.store(desc);
-            client.commit();
+        ObjectContainer client = DbManagerSingleton.getInstance().getClient();
+        int result = client.queryByExample(desc).size();
+        if(result > 0)
+            throw new ObjectAlreadyExistsDbException();
+        if(desc.getClass() != DescrizioneProdottoSmartProxy.class)
+            client.store(new DescrizioneProdottoSmartProxy(desc));
+        else
+            client.store(desc);
+        client.commit();
     }
     
     //metodo provvisorio
     public void update(IDescrizioneProdotto desc) throws ObjectAlreadyExistsDbException{
-            ObjectContainer client = DbManagerSingleton.getInstance().getClient();
-            client.store(desc);
-            client.commit();
+        ObjectContainer client = DbManagerSingleton.getInstance().getClient();
+        client.store(desc);
+        client.commit();
     }
     
     public Iterator<Object> read()
@@ -82,7 +82,9 @@ public class DbDescrizioneProdottoSingleton {
        });
        if(result.isEmpty())
            return null;
-       return result.get(0);   
+       IDescrizioneProdotto desc = result.get(0);
+       client.ext().refresh(desc, 10);
+       return desc;  
    }
     
     public LinkedList<IDescrizioneProdotto> readBelowThreshold(){
@@ -101,6 +103,7 @@ public class DbDescrizioneProdottoSingleton {
            return null;
         else{
             LinkedList<IDescrizioneProdotto> list = new ActivatableLinkedList<>(result);
+            client.ext().refresh(list, 15);
             return list;
         }
     }
