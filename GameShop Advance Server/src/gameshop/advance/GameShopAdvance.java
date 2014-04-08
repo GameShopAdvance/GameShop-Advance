@@ -10,6 +10,8 @@ import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
+import gameshop.advance.manager.ManagerFornitureSingleton;
+import gameshop.advance.manager.ManagerPrenotazioniSingleton;
 import gameshop.advance.model.CatalogoProdottiSingleton;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.CartaCliente;
@@ -54,6 +56,7 @@ public class GameShopAdvance {
             File f = new File("./GSA.db");
             if(!f.exists() && !f.isDirectory())
                 initializeDb();
+            startManagers();
             LocateRegistry.createRegistry(1099);
             Registry reg = LocateRegistry.getRegistry();
             System.err.println("Server registry: "+LocateRegistry.getRegistry());
@@ -95,6 +98,12 @@ public class GameShopAdvance {
         } catch (ObjectAlreadyExistsDbException ex) {
             Logger.getLogger(GameShopAdvance.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    private static void startManagers() {
+        ManagerFornitureSingleton mf = ManagerFornitureSingleton.getInstance();
+        ManagerPrenotazioniSingleton.getInstance().addListener(mf);
+        //ManagerProdottiSingleton.getInstance().addListener(mf);
     }
     
     

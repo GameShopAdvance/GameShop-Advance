@@ -8,6 +8,7 @@ import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
 import gameshop.advance.utility.IDProdotto;
 import java.util.Collection;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -79,5 +80,9 @@ public class CatalogoProdottiSingleton
                 Logger.getLogger(CatalogoProdottiSingleton.class.getName()).log(Level.SEVERE, null, ex);
             }
         }
+    }
+    
+    public Iterator<Object> getDescrizioni(){
+        return DbDescrizioneProdottoSingleton.getInstance().read();
     }
 }

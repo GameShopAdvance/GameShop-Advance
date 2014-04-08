@@ -21,6 +21,7 @@ public class ManagerProdottiSingleton {
     private static ManagerProdottiSingleton instance;
     private LinkedList<IDescrizioneProdotto> descrizioni;
     
+    
     public ManagerProdottiSingleton(){
         DbDescrizioneProdottoSingleton db = DbDescrizioneProdottoSingleton.getInstance();
         descrizioni = db.readBelowThreshold();
