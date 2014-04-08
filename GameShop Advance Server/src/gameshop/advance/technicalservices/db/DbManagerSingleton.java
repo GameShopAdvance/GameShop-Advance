@@ -67,6 +67,11 @@ public class DbManagerSingleton {
             this.clients.put(t.getId(), client);
         }
         System.err.println("Thread di esecuzione client: "+t.getId());
+        
+        for(ObjectContainer obj:this.clients.values())
+        {
+            System.err.println("Client: "+obj.hashCode());
+        }
         return client;
     }
     
