@@ -31,10 +31,10 @@ public class DbDescrizioneProdottoSingleton {
         
     public static DbDescrizioneProdottoSingleton getInstance()
     {
-            if( instance == null)
-                instance = new DbDescrizioneProdottoSingleton();
-        
-             return instance;
+        if( instance == null)
+            instance = new DbDescrizioneProdottoSingleton();
+
+         return instance;
     }
         
     public void create(IDescrizioneProdotto desc) throws ObjectAlreadyExistsDbException{

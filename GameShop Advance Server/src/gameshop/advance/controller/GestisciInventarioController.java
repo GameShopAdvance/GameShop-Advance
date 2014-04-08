@@ -107,7 +107,6 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
         for (IDescrizioneProdotto desc : this.descrizioni) {
             try {
                 DbDescrizioneProdottoSingleton.getInstance().create(desc);
-                System.out.println("Descrizioni aggiornate");
             } catch (ObjectAlreadyExistsDbException ex) {
                 Logger.getLogger(GestisciInventarioController.class.getName()).log(Level.SEVERE, null, ex);
             }

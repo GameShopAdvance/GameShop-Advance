@@ -100,7 +100,6 @@ public class DbManagerSingleton {
         query.constrain(DescrizioneProdotto.class);
         ObjectSet list = query.execute();
         Iterator iter = list.iterator();
-        System.out.println("PRINTING OBJECTS IN DB");
         int i = 1;
         while(iter.hasNext())
         {
