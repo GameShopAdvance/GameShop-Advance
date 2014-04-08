@@ -72,6 +72,9 @@ public class DbManagerSingleton {
 //            System.err.println("Client: "+obj.hashCode());
 //        }
 //        return client;
+        
+        if(this.client == null)
+            this.client = this.server.openClient();
         return this.client;
     }
     
@@ -87,6 +90,7 @@ public class DbManagerSingleton {
 //            ((ObjectContainer) next.getValue()).close();
 //        }
         this.client.close();
+        this.client = null;
     }
     
     public void printObjects(Class c)

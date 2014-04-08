@@ -63,6 +63,18 @@ public class Vendita implements ITransazione {
         this.notificaListener();
     }
 
+    protected void quantityCheck(IDescrizioneProdotto desc, int quantity) throws QuantityNotInStockException, RemoteException{
+        if(desc.getQuantitaDisponibile() < quantity)
+        {
+            throw new QuantityNotInStockException();
+        }
+        else
+        {
+            desc.setQuantitaDisponibile(desc.getQuantitaDisponibile() - quantity);
+            System.err.println("Quantità "+desc.getDescrizione()+" : "+desc.getQuantitaDisponibile()+"/"+desc.getQuantitaDiSoglia());
+        }
+    }
+    
     /**
      * Utilizza i parametri ricevuti in ingresso (descrizione prodotto e quantità) per
      * creare una riga di vendita.Aggiunge poi questa riga di vendita all'elenco di righe della
@@ -74,15 +86,7 @@ public class Vendita implements ITransazione {
      */
     @Override
     public void inserisciProdotto(IDescrizioneProdotto desc, int quantity) throws RemoteException, QuantityNotInStockException {
-        if(desc.getQuantitaDisponibile() < quantity)
-        {
-            throw new QuantityNotInStockException();
-        }
-        else
-        {
-            desc.setQuantitaDisponibile(desc.getQuantitaDisponibile() - quantity);
-            System.err.println("Quantità "+desc.getDescrizione()+" : "+desc.getQuantitaDisponibile()+"/"+desc.getQuantitaDiSoglia());
-        }
+        this.quantityCheck(desc, quantity);
         IScontoProdottoStrategy strategiaSconto = ScontoFactorySingleton.getInstance().getStrategiaScontoProdotto(this);
         for(IScontoProdottoStrategy sconto:desc.getSconti(this.date))
         {

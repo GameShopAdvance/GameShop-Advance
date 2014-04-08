@@ -7,6 +7,8 @@
 package gameshop.advance.model.transazione;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.QuantityNotInStockException;
+import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.Pagamento;
@@ -54,6 +56,11 @@ public class Prenotazione extends Vendita implements IPrenotazione {
             for(IRemoteObserver obs:listeners)
                 obs.notifica(new PrenotazioneRemoteProxy(this));
         }
+    }
+    
+    @Override
+    protected void quantityCheck(IDescrizioneProdotto desc, int quantity) throws QuantityNotInStockException, RemoteException{
+        
     }
     
     public void evadi()

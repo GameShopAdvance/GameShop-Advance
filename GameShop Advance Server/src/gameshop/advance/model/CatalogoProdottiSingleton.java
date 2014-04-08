@@ -57,17 +57,23 @@ public class CatalogoProdottiSingleton
      */
     public IDescrizioneProdotto getDescrizioneProdotto(IDProdotto codiceProdotto) throws ProdottoNotFoundException
     {
-        if(this.descriptions.containsKey(codiceProdotto.getCodice()))
-            return this.descriptions.get(codiceProdotto.getCodice());
-        else{
-            IDescrizioneProdotto desc = DbDescrizioneProdottoSingleton.getInstance().read(codiceProdotto);
-            
-            if(desc == null)
-                throw new ProdottoNotFoundException(codiceProdotto);
-            
-            this.descriptions.put(codiceProdotto.getCodice(), desc);
-            return desc;
-        }
+//        if(this.descriptions.containsKey(codiceProdotto.getCodice()))
+//            return this.descriptions.get(codiceProdotto.getCodice());
+//        else{
+//            IDescrizioneProdotto desc = DbDescrizioneProdottoSingleton.getInstance().read(codiceProdotto);
+//            
+//            if(desc == null)
+//                throw new ProdottoNotFoundException(codiceProdotto);
+//            
+//            this.descriptions.put(codiceProdotto.getCodice(), desc);
+//            return desc;
+//        }
+        IDescrizioneProdotto desc = DbDescrizioneProdottoSingleton.getInstance().read(codiceProdotto);
+  
+        if(desc == null)
+            throw new ProdottoNotFoundException(codiceProdotto);
+        
+        return desc;
     }
 
     public void aggiornaDescrizioni() {
