@@ -110,11 +110,9 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
          LinkedList<IScontoProdottoStrategy> scontiValidi = new LinkedList<>();
          for(IScontoProdottoStrategy sconto: this.sconti)
          {
-             System.out.println("Sconto: "+sconto.getClass().toString());
              if(sconto.isValid(period))
              {
                  scontiValidi.add(sconto);
-                 System.err.println("Sconto Valido");
              }
          }
          return scontiValidi;

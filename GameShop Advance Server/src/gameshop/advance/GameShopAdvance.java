@@ -10,13 +10,15 @@ import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
-import gameshop.advance.manager.ManagerFornitureSingleton;
 import gameshop.advance.manager.ManagerPrenotazioniSingleton;
+import gameshop.advance.manager.ManagerProdottiSingleton;
 import gameshop.advance.model.CatalogoProdottiSingleton;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.model.transazione.TipologiaCliente;
 import gameshop.advance.model.transazione.sconto.prodotti.ScontoPrendiPaghiClienteProdottoStrategy;
+import gameshop.advance.observers.ManagerPrenotazioniObserver;
+import gameshop.advance.observers.ManagerProdottiObserver;
 import gameshop.advance.remote.RemoteFactorySingleton;
 import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
 import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
@@ -88,10 +90,8 @@ public class GameShopAdvance {
             DbManagerSingleton.getInstance().close();
             IDescrizioneProdotto desc;
             desc = DbDescrizioneProdottoSingleton.getInstance().read(new IDProdotto("AB1"));
-            System.out.println("Descrizione prodotto dal DB: "+desc);
             IScontoProdottoStrategy scontoAB1 = new ScontoPrendiPaghiClienteProdottoStrategy(3,2, periodo, tipo);
             desc.addSconto(scontoAB1);
-            System.err.println("Sconti desc: "+desc.getTuttiSconti().size());
             DbDescrizioneProdottoSingleton.getInstance().update(desc);
             
             
@@ -101,9 +101,8 @@ public class GameShopAdvance {
     }
 
     private static void startManagers() {
-        ManagerFornitureSingleton mf = ManagerFornitureSingleton.getInstance();
-        ManagerPrenotazioniSingleton.getInstance().addListener(mf);
-        //ManagerProdottiSingleton.getInstance().addListener(mf);
+        ManagerPrenotazioniSingleton.getInstance().addListener(new ManagerPrenotazioniObserver());
+        ManagerProdottiSingleton.getInstance().addListener(new ManagerProdottiObserver());
     }
     
     

@@ -69,7 +69,7 @@ public class CatalogoProdottiSingleton
 //            return desc;
 //        }
         IDescrizioneProdotto desc = DbDescrizioneProdottoSingleton.getInstance().read(codiceProdotto);
-  
+        
         if(desc == null)
             throw new ProdottoNotFoundException(codiceProdotto);
         

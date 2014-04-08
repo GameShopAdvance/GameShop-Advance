@@ -63,11 +63,13 @@ public class Prenotazione extends Vendita implements IPrenotazione {
         
     }
     
+    @Override
     public void evadi()
     {
         this.evasa = true;
     }
     
+    @Override
     public boolean getEvasa()
     {
         return this.evasa;
