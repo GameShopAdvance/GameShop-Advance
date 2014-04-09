@@ -8,8 +8,13 @@ package gameshop.advance.manager;
 
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
-import java.util.LinkedList;
+import gameshop.advance.model.transazione.RigaDiTransazione;
+import java.rmi.RemoteException;
+import java.util.HashMap;
+import java.util.Iterator;
 import java.util.List;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -19,12 +24,16 @@ public class ManagerFornitureSingleton {
     
     private static ManagerFornitureSingleton instance;
     
-    private LinkedList<IPrenotazione> prenotazioni;
-    
-    private LinkedList<IDescrizioneProdotto> descrizioni;
+    private HashMap<String, InformazioniProdotto> informazioni;
     
     public ManagerFornitureSingleton(){
-        
+        try {
+            this.informazioni = new HashMap<>();
+            this.aggiornaDescrizioni(ManagerProdottiSingleton.getInstance().getMonitored());
+            this.aggiornaPrenotazioni(ManagerPrenotazioniSingleton.getInstance().getNotProcessed());
+        } catch (RemoteException ex) {
+            Logger.getLogger(ManagerFornitureSingleton.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     public static ManagerFornitureSingleton getInstance(){
@@ -40,24 +49,44 @@ public class ManagerFornitureSingleton {
      * @param descrizioni
      */
     public void aggiornaDescrizioni(List<IDescrizioneProdotto> descrizioni){
-        this.descrizioni = (LinkedList<IDescrizioneProdotto>) descrizioni;
+        
     }
     
     /**
      *
      * @param prenotazioni
      */
-    public void aggiornaPrenotazioni(List<IPrenotazione> prenotazioni){
-        this.prenotazioni = (LinkedList<IPrenotazione>) prenotazioni;
+    public void aggiornaPrenotazioni(List<IPrenotazione> prenotazioni) throws RemoteException{
+        for(IPrenotazione pren: prenotazioni)
+        {
+            Iterator<RigaDiTransazione> iter = pren.getRigheDiVendita();
+            while(iter.hasNext())
+            {
+                RigaDiTransazione rdt = iter.next();
+                IDescrizioneProdotto desc = rdt.getDescrizione();
+                if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
+                {
+                    this.informazioni.get(desc.getCodiceProdotto().getCodice()).addPrenotazione(pren);
+                }
+                else{
+                    InformazioniProdotto ip = new InformazioniProdotto(desc);
+                    ip.addPrenotazione(pren);
+                    this.informazioni.put(desc.getCodiceProdotto().getCodice(), ip);
+                }
+            }
+        }
     }
-
-    public List<IPrenotazione> getPrenotazioni() {
-        return prenotazioni;
-    }
-
-    public List<IDescrizioneProdotto> getDescrizioni() {
-        return descrizioni;
+    
+    public void addPrenotazione(IPrenotazione pren){
+        
     }
     
     
+    public void removePrenotazione(IPrenotazione pren){
+        
+    }
+
+    public Iterator<InformazioniProdotto> getInformazioni() {
+        return this.informazioni.values().iterator();
+    }    
 }

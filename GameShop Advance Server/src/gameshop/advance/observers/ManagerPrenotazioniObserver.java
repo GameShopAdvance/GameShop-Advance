@@ -7,8 +7,6 @@
 package gameshop.advance.observers;
 
 import gameshop.advance.interfaces.IObserver;
-import gameshop.advance.manager.ManagerFornitureSingleton;
-import gameshop.advance.manager.ManagerPrenotazioniSingleton;
 
 /**
  *
@@ -16,9 +14,11 @@ import gameshop.advance.manager.ManagerPrenotazioniSingleton;
  */
 public class ManagerPrenotazioniObserver implements IObserver {
 
+    private int size;
+    
     @Override
     public void notifica(Object o) {
-        ManagerFornitureSingleton.getInstance().aggiornaPrenotazioni(ManagerPrenotazioniSingleton.getInstance().getNotProcessed());
+        
     }
     
 }

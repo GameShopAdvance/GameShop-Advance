@@ -7,6 +7,7 @@
 package gameshop.advance.manager;
 
 import gameshop.advance.interfaces.IDescrizioneProdotto;
+import gameshop.advance.interfaces.IObserver;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
 import java.util.LinkedList;
@@ -20,6 +21,7 @@ public class ManagerProdottiSingleton {
     
     private static ManagerProdottiSingleton instance;
     private LinkedList<IDescrizioneProdotto> descrizioni;
+    private LinkedList<IObserver> listeners;
     
     
     public ManagerProdottiSingleton(){
@@ -52,4 +54,8 @@ public class ManagerProdottiSingleton {
     public List getMonitored() {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }   
+
+    public void addListener(IObserver obs) {
+        this.listeners.add(obs);
+    }
 }

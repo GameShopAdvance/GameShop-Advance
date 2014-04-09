@@ -14,12 +14,12 @@ import java.util.LinkedList;
 public class ManagerPrenotazioniSingleton {
     
     private static ManagerPrenotazioniSingleton instance;
-    
+    private LinkedList<IPrenotazione> prenotazioniDaEvadere;
     private LinkedList<IObserver> listeners;
     
     public ManagerPrenotazioniSingleton(){
         this.listeners = new LinkedList<IObserver>();
-        
+        this.prenotazioniDaEvadere = DbPrenotazioneSingleton.getInstance().readNotProcessed();
     }
     
     public static ManagerPrenotazioniSingleton getInstance(){
@@ -55,8 +55,17 @@ public class ManagerPrenotazioniSingleton {
         }
     }
     
+    public void addPrenotazione(IPrenotazione pren){
+        if(this.prenotazioniDaEvadere.indexOf(pren) < 0)
+            this.prenotazioniDaEvadere.push(pren);
+    }
+    
+    public IPrenotazione getLastNotProcessed(){
+        return this.prenotazioniDaEvadere.getLast();        
+    }
+    
     public LinkedList<IPrenotazione> getNotProcessed()
     {
-        return DbPrenotazioneSingleton.getInstance().readNotProcessed();
+        return this.prenotazioniDaEvadere;
     }
 }
