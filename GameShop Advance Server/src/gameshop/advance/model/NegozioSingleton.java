@@ -1,6 +1,7 @@
 package gameshop.advance.model;
 
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
@@ -76,10 +77,10 @@ public class NegozioSingleton
         try {
             DbVenditaSingleton.getInstance().create(v);
 //            CatalogoProdottiSingleton.getInstance().aggiornaDescrizioni();
-            Iterator<IRigaDiTransazioneRemote> righeDiVendita = v.getRigheDiVendita();
+            Iterator<IRigaDiTransazioneRemote> righeDiVendita = (Iterator<IRigaDiTransazioneRemote>) v.getRigheDiVendita();
             while(righeDiVendita.hasNext())
             {
-                DbDescrizioneProdottoSingleton.getInstance().update(righeDiVendita.next().getDescrizione());
+                DbDescrizioneProdottoSingleton.getInstance().update((IDescrizioneProdotto) righeDiVendita.next().getDescrizione());
             }
         } catch (ObjectAlreadyExistsDbException ex) {
             Logger.getLogger(NegozioSingleton.class.getName()).log(Level.SEVERE, null, ex);

@@ -10,6 +10,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
+import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.ui.interfaces.PopActionListener;
 import gameshop.advance.utility.Money;
 import java.awt.CardLayout;
@@ -19,6 +20,7 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -94,7 +96,13 @@ public class ProductsPanel extends JPanel implements PopActionListener {
     private void chartActionPerformed(ActionEvent e) {
         try {
             this.chart.setTotal(ReservationControllerSingleton.getInstance().getTotal());
+            this.chart.clearList();
             this.pushPanel(this.chart);
+            Iterator<IRigaDiTransazioneRemote> iter = ReservationControllerSingleton.getInstance().getListaProdotti();
+            while(iter.hasNext())
+            {
+                this.chart.addProduct(iter.next());
+            }
         }
         catch (NullPointerException ex) {
             Logger.getLogger(ProductsPanel.class.getName()).log(Level.SEVERE, null, ex);

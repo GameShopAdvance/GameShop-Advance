@@ -30,7 +30,7 @@ public class TransactionObserver extends UnicastRemoteObject implements IRemoteO
     public void notifica(Object o) throws RemoteException {
         ITransazioneRemote trans = (ITransazioneRemote) o;
         Iterator<IRigaDiTransazioneRemote> righeDiVendita = trans.getRigheDiVendita();
-        this.client.aggiornaListaProdotti(null);
+        this.client.aggiornaListaProdotti(righeDiVendita);
     }
 
 }

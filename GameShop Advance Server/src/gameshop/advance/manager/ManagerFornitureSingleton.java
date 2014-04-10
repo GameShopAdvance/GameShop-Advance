@@ -59,11 +59,11 @@ public class ManagerFornitureSingleton {
     public void aggiornaPrenotazioni(List<IPrenotazione> prenotazioni) throws RemoteException{
         for(IPrenotazione pren: prenotazioni)
         {
-            Iterator<IRigaDiTransazioneRemote> iter = pren.getRigheDiVendita();
+            Iterator<IRigaDiTransazioneRemote> iter = (Iterator<IRigaDiTransazioneRemote>) pren.getRigheDiVendita();
             while(iter.hasNext())
             {
                 IRigaDiTransazioneRemote rdt = iter.next();
-                IDescrizioneProdotto desc = rdt.getDescrizione();
+                IDescrizioneProdotto desc = (IDescrizioneProdotto) rdt.getDescrizione();
                 if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
                 {
                     this.informazioni.get(desc.getCodiceProdotto().getCodice()).addPrenotazione(pren);

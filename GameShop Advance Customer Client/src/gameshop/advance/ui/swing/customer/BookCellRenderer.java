@@ -8,9 +8,11 @@ import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
-import gameshop.advance.utility.Money;
 import java.awt.Color;
 import java.awt.Component;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -73,9 +75,24 @@ public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDi
 
     @Override
     public Component getListCellRendererComponent(JList<? extends IRigaDiTransazioneRemote> list, IRigaDiTransazioneRemote value, int index, boolean isSelected, boolean cellHasFocus) {
-        this.name.setText("Prodotto...manca observer delle righe di vendita");
-        this.quantity.setText("???");
-        this.subTotal.setText(new Money().toString());
+        try {
+            this.name.setText(value.getDescrizione().getDescrizione());
+        } catch (RemoteException ex) {
+            Logger.getLogger(BookCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+            this.name.setText("Prodotto... (!!!)");
+        }
+        try {
+            this.quantity.setText(""+value.getQuantity());
+        } catch (RemoteException ex) {
+            Logger.getLogger(BookCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+            this.quantity.setText("...");
+        }
+        try {
+            this.subTotal.setText(value.getSubTotal().toString());
+        } catch (RemoteException ex) {
+            Logger.getLogger(BookCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+            this.subTotal.setText("!!!");
+        }
         
         return this;
     }

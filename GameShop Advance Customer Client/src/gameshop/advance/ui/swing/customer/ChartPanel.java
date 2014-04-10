@@ -9,7 +9,7 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
-import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
+import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.ui.interfaces.PopActionListener;
 import gameshop.advance.utility.Money;
 import java.awt.CardLayout;
@@ -36,13 +36,18 @@ public class ChartPanel extends JPanel {
     public ChartPanel() {
         initComponents();
         this.bookListModel = new DefaultListModel();
-        this.bookList.setCellRenderer(new ProductCellRenderer());
+        this.bookList.setCellRenderer(new BookCellRenderer());
         this.bookList.setModel(this.bookListModel);      
     }
     
-    public void addProduct(IDescrizioneProdottoRemote desc, Integer quantity)
+    public void addProduct(IRigaDiTransazioneRemote rdt)
     {
-        
+        this.bookListModel.addElement(rdt);
+    }
+    
+    public void clearList()
+    {
+        this.bookListModel.clear();
     }
     
     @Override

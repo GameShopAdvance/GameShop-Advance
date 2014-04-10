@@ -28,13 +28,6 @@ public interface ITransazioneRemote extends Remote {
     Money getResto() throws InvalidMoneyException, RemoteException;
 
     /**
-     *
-     * @return
-     * @throws RemoteException
-     */
-    Iterator<IRigaDiTransazioneRemote> getRigheDiVendita() throws RemoteException;
-
-    /**
      * Implementazione del metodo dell'interfaccia di vendita.Calcola il totale
      * della transazione sommando i valori sub-totali di tutte le righe di vendita
      * della transazione.
@@ -50,4 +43,11 @@ public interface ITransazioneRemote extends Remote {
      */
     Integer getId() throws RemoteException;
 
+    /**
+     *
+     * @return
+     * @throws RemoteException
+     */
+    Iterator<IRigaDiTransazioneRemote> getRigheDiVendita();
+    
 }

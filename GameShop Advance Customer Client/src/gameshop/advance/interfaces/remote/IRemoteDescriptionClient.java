@@ -6,7 +6,6 @@
 
 package gameshop.advance.interfaces.remote;
 
-import gameshop.advance.utility.Money;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -14,11 +13,13 @@ import java.rmi.RemoteException;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public interface IRigaDiTransazioneRemote extends Remote{
-
-    IDescrizioneProdottoRemote getDescrizione() throws RemoteException;
-
-    int getQuantity() throws RemoteException;
+public interface IRemoteDescriptionClient extends Remote {
     
-    Money getSubTotal() throws RemoteException;
+    /** Aggiunge descrizioni prodotto tramite inventario
+     *
+     * @param add 
+     * @throws RemoteException
+     */
+    void addDescription(IDescrizioneProdottoRemote add) throws RemoteException;
+
 }

@@ -25,7 +25,7 @@ class RigaDiTransazioneRemoteProxy implements IRigaDiTransazioneRemote {
 
     @Override
     public IDescrizioneProdotto getDescrizione() throws RemoteException {
-        return this.protectedRDT.getDescrizione();
+        return (IDescrizioneProdotto) this.protectedRDT.getDescrizione();
     }
 
     @Override

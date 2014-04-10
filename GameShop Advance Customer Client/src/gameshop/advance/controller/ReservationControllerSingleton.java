@@ -16,9 +16,11 @@ import gameshop.advance.interfaces.remote.IRemoteBookClient;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.interfaces.remote.IRemoteReservationClient;
+import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.observer.PartialObserver;
 import gameshop.advance.observer.ReservationObserver;
 import gameshop.advance.observer.TotalObserver;
+import gameshop.advance.observer.TransactionObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.customer.CompletedReservationPanel;
 import gameshop.advance.ui.swing.customer.ProductsPanel;
@@ -29,6 +31,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Iterator;
 import javax.swing.JComponent;
 
 /**
@@ -43,10 +46,12 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     private IRemoteObserver reservationObserver;
     private IRemoteObserver totalObserver;
     private IRemoteObserver partialObserver;
+    private IRemoteObserver productsObserver;
     
     private Integer idPrenotazione;
     private Money totale;
     private Money acconto;
+    private Iterator<IRigaDiTransazioneRemote> prenotati;
     
     private boolean started = false;
     
@@ -68,6 +73,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         this.reservationObserver = new ReservationObserver(instance);
         this.totalObserver = new TotalObserver(instance);
         this.partialObserver = new PartialObserver(instance);
+        this.productsObserver = new TransactionObserver(instance);
     }
     
     /**
@@ -127,6 +133,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
             System.err.println("Prenotazione avviata");
             this.controller.addListener(this.totalObserver);
             this.controller.addListener(this.partialObserver);
+            this.controller.addListener(this.productsObserver);
             this.started = true;
         }
         IDProdotto codiceProdotto = desc.getCodiceProdotto();
@@ -157,8 +164,8 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     }
 
     @Override
-    public void aggiornaListaProdotti(IIteratorWrapperRemote iter) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void aggiornaListaProdotti(Iterator<IRigaDiTransazioneRemote> iter) throws RemoteException {
+        this.prenotati = iter;
     }
 
     @Override
@@ -190,6 +197,11 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     public Money getPartial()
     {
         return this.acconto;
+    }
+    
+    public Iterator<IRigaDiTransazioneRemote> getListaProdotti()
+    {
+        return this.prenotati;
     }
  
 }
