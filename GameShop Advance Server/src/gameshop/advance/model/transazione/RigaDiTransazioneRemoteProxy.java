@@ -10,16 +10,17 @@ import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  *
  * @author Lorenzo Di Giuseppe
  */
-class RigaDiTransazioneRemoteProxy implements IRigaDiTransazioneRemote {
+class RigaDiTransazioneRemoteProxy extends UnicastRemoteObject implements IRigaDiTransazioneRemote {
 
     private IRigaDiTransazioneRemote protectedRDT;
     
-    public RigaDiTransazioneRemoteProxy(IRigaDiTransazioneRemote rdt) {
+    public RigaDiTransazioneRemoteProxy(IRigaDiTransazioneRemote rdt) throws RemoteException {
         this.protectedRDT = rdt;
     }
 
