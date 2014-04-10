@@ -118,7 +118,7 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
     }
 
     @Override
-    public Iterator<IRigaDiTransazioneRemote> getRigheDiVendita() {
+    public Iterator<IRigaDiTransazioneRemote> getRigheDiVendita() throws RemoteException {
         return this.prenotazione.getRigheDiVendita();
     }
 

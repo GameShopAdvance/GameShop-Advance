@@ -48,6 +48,6 @@ public interface ITransazioneRemote extends Remote {
      * @return
      * @throws RemoteException
      */
-    Iterator<IRigaDiTransazioneRemote> getRigheDiVendita();
+    Iterator<IRigaDiTransazioneRemote> getRigheDiVendita() throws RemoteException;
     
 }

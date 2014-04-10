@@ -49,12 +49,12 @@ public class Prenotazione extends Vendita implements IPrenotazione {
     
     @Override
     protected void notificaListener() throws RemoteException {
-        
         List<IRemoteObserver> listeners = this.getListeners();
         if(listeners != null)
         {
-            for(IRemoteObserver obs:listeners)
+            for(IRemoteObserver obs:listeners) {
                 obs.notifica(new PrenotazioneRemoteProxy(this));
+            }
         }
     }
     

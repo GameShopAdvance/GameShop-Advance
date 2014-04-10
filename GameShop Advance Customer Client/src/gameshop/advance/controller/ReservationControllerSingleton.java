@@ -164,8 +164,8 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     }
 
     @Override
-    public void aggiornaListaProdotti(Iterator<IRigaDiTransazioneRemote> iter) throws RemoteException {
-        this.prenotati = iter;
+    public void aggiornaListaProdotti(IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter) throws RemoteException {
+        this.prenotati = (Iterator<IRigaDiTransazioneRemote>) iter;
     }
 
     @Override

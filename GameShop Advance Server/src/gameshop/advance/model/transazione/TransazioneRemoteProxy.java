@@ -16,8 +16,6 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  *
@@ -48,19 +46,14 @@ public class TransazioneRemoteProxy extends UnicastRemoteObject implements ITran
     }
 
     @Override
-    public Iterator<IRigaDiTransazioneRemote> getRigheDiVendita() {
+    public Iterator<IRigaDiTransazioneRemote> getRigheDiVendita() throws RemoteException {
         Iterator<IRigaDiTransazioneRemote> righeDiVendita = this.protectedRemoteTransaction.getRigheDiVendita();
         LinkedList<IRigaDiTransazioneRemote> righeProtette = new LinkedList<>();
         while(righeDiVendita.hasNext())
         {
             righeProtette.add(new RigaDiTransazioneRemoteProxy(righeDiVendita.next()));
         }
-        try {
-            return new IteratorWrapper<>(righeProtette.iterator());
-        } catch (RemoteException ex) {
-            Logger.getLogger(TransazioneRemoteProxy.class.getName()).log(Level.SEVERE, null, ex);
-            return null;
-        }
+        return new IteratorWrapper<>(righeProtette.iterator());
     }
     
 }

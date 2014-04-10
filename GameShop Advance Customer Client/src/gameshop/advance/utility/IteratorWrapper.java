@@ -16,7 +16,7 @@ import java.util.Iterator;
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  * @param <T1>
  */
-public class IteratorWrapper<T1> extends UnicastRemoteObject implements IIteratorWrapperRemote<T1> {
+public class IteratorWrapper<T1> extends UnicastRemoteObject implements IIteratorWrapperRemote<T1>, Iterator<T1> {
     private Iterator<T1> iter;
     
     public IteratorWrapper(Iterator<T1> iter) throws RemoteException

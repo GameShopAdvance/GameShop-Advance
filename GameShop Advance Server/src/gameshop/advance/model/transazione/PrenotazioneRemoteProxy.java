@@ -9,6 +9,7 @@ package gameshop.advance.model.transazione;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.IPrenotazioneRemote;
 import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
+import gameshop.advance.utility.IteratorWrapper;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -54,14 +55,14 @@ public class PrenotazioneRemoteProxy extends UnicastRemoteObject implements IPre
     }
 
     @Override
-    public Iterator<IRigaDiTransazioneRemote> getRigheDiVendita() {
+    public Iterator<IRigaDiTransazioneRemote> getRigheDiVendita() throws RemoteException {
         Iterator<IRigaDiTransazioneRemote> righeDiVendita = this.protectedRemoteObject.getRigheDiVendita();
         LinkedList<IRigaDiTransazioneRemote> righeProtette = new LinkedList<>();
         while(righeDiVendita.hasNext())
         {
             righeProtette.add(new RigaDiTransazioneRemoteProxy(righeDiVendita.next()));
         }
-        return righeProtette.iterator();
+        return new IteratorWrapper<>(righeProtette.iterator());
     }
     
 }

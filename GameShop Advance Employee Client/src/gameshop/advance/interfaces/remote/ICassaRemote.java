@@ -15,17 +15,12 @@ import java.rmi.RemoteException;
  */
 public interface ICassaRemote extends Remote {
 
-    /**
-     * @throws RemoteException
-     */
     void avviaNuovaVendita() throws RemoteException;
 
-    /**
-     * @throws RemoteException
-     */
     void concludiVendita() throws RemoteException;
 
     /**
+     *
      * @param ammontare
      * @throws RemoteException
      * @throws InvalidMoneyException
@@ -33,18 +28,21 @@ public interface ICassaRemote extends Remote {
     void gestisciPagamento(Money ammontare) throws RemoteException, InvalidMoneyException;
 
     /**
+     *
      * @param obs
      * @throws RemoteException
      */
     void aggiungiListener(IRemoteObserver obs) throws RemoteException;
     
     /**
+     *
      * @param obs
      * @throws RemoteException
      */
     void rimuoviListener(IRemoteObserver obs) throws RemoteException;
     
     /**
+     *
      * @param codiceProdotto
      * @param quantity
      * @throws java.rmi.RemoteException
@@ -53,10 +51,6 @@ public interface ICassaRemote extends Remote {
      */
     void inserisciProdotto(IDProdotto codiceProdotto, Integer quantity) throws RemoteException, ProdottoNotFoundException, QuantityException, QuantityNotInStockException;
     
-    /**
-     * @param codiceTessera
-     * @throws RemoteException
-     */
     void inserisciTesseraCliente(int codiceTessera) throws RemoteException;
     
 }

@@ -112,7 +112,7 @@ public class TransazioneSmartProxy implements ITransazione, Activatable{
     }
 
     @Override
-    public Iterator<IRigaDiTransazioneRemote> getRigheDiVendita() {
+    public Iterator<IRigaDiTransazioneRemote> getRigheDiVendita() throws RemoteException {
          activate(ActivationPurpose.READ);
         return this.trans.getRigheDiVendita();
     }

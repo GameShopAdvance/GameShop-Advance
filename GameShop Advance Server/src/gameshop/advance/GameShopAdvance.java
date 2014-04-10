@@ -58,7 +58,7 @@ public class GameShopAdvance {
             File f = new File("./GSA.db");
             if(!f.exists() && !f.isDirectory())
                 initializeDb();
-            startManagers();
+//            startManagers();
             LocateRegistry.createRegistry(1099);
             Registry reg = LocateRegistry.getRegistry();
             System.err.println("Server registry: "+LocateRegistry.getRegistry());
