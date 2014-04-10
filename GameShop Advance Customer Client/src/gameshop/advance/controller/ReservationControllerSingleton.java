@@ -31,7 +31,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Iterator;
 import javax.swing.JComponent;
 
 /**
@@ -51,7 +50,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     private Integer idPrenotazione;
     private Money totale;
     private Money acconto;
-    private Iterator<IRigaDiTransazioneRemote> prenotati;
+    private IIteratorWrapperRemote<IRigaDiTransazioneRemote> prenotati;
     
     private boolean started = false;
     
@@ -165,7 +164,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
 
     @Override
     public void aggiornaListaProdotti(IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter) throws RemoteException {
-        this.prenotati = (Iterator<IRigaDiTransazioneRemote>) iter;
+        this.prenotati = iter;
     }
 
     @Override
@@ -199,7 +198,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         return this.acconto;
     }
     
-    public Iterator<IRigaDiTransazioneRemote> getListaProdotti()
+    public IIteratorWrapperRemote<IRigaDiTransazioneRemote> getListaProdotti()
     {
         return this.prenotati;
     }

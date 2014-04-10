@@ -6,10 +6,8 @@
 
 package gameshop.advance.observer;
 
-import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.interfaces.remote.IRemoteReservationClient;
-import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.interfaces.remote.ITransazioneRemote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -29,8 +27,8 @@ public class TransactionObserver extends UnicastRemoteObject implements IRemoteO
     @Override
     public void notifica(Object o) throws RemoteException {
         ITransazioneRemote trans = (ITransazioneRemote) o;
-        IIteratorWrapperRemote<IRigaDiTransazioneRemote> righeDiVendita = (IIteratorWrapperRemote<IRigaDiTransazioneRemote>) trans.getRigheDiVendita();
-        this.client.aggiornaListaProdotti(righeDiVendita);
+        System.err.println("Transazione "+trans);
+        this.client.aggiornaListaProdotti(trans.getRigheDiVendita());
     }
 
 }

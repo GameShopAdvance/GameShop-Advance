@@ -12,14 +12,15 @@ import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
+import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.model.Pagamento;
 import gameshop.advance.model.transazione.sconto.ScontoFactorySingleton;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
+import gameshop.advance.utility.IteratorWrapper;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import org.joda.time.DateTime;
@@ -161,10 +162,11 @@ public class Vendita implements ITransazione {
     /**
      *
      * @return
+     * @throws java.rmi.RemoteException
      */
     @Override
-    public Iterator<IRigaDiTransazioneRemote> getRigheDiVendita() {
-        return this.righeDiVendita.iterator();
+    public IIteratorWrapperRemote<IRigaDiTransazioneRemote> getRigheDiVendita() throws RemoteException {
+        return new IteratorWrapper<>(this.righeDiVendita.iterator());
     }
 
     @Override
