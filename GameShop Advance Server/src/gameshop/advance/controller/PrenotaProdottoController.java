@@ -2,6 +2,7 @@ package gameshop.advance.controller;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
+import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
@@ -19,6 +20,8 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -77,7 +80,11 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     {
         this.prenotazione.setId(NegozioSingleton.getInstance().getNextBookId());
         this.prenotazione.rimuoviListener(null);
-        NegozioSingleton.getInstance().registraPrenotazione(this.prenotazione);
+        try {
+            NegozioSingleton.getInstance().registraPrenotazione(this.prenotazione);
+        } catch (QuantityException ex) {
+            Logger.getLogger(PrenotaProdottoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
            
     }
     
@@ -127,7 +134,11 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     public void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException
     {
         this.prenotazione.gestisciPagamento(amount);
-        NegozioSingleton.getInstance().registraPrenotazione(this.prenotazione);
+        try {
+            NegozioSingleton.getInstance().registraPrenotazione(this.prenotazione);
+        } catch (QuantityException ex) {
+            Logger.getLogger(PrenotaProdottoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     @Override

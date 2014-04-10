@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
+import java.util.Objects;
 import org.joda.time.DateTime;
 
 /**
@@ -172,5 +173,24 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
     public List<IScontoProdottoStrategy> getTuttiSconti()
     {
         return this.sconti;
+    }
+
+    @Override
+    public int hashCode() {
+        int hash = 7;
+        hash = 59 * hash + Objects.hashCode(this.codiceProdotto);
+        return hash;
+    }
+
+    @Override
+    public boolean equals(Object obj) {
+        if (obj == null) {
+            return false;
+        }
+        if (getClass() != obj.getClass()) {
+            return false;
+        }
+        final DescrizioneProdotto other = (DescrizioneProdotto) obj;
+        return Objects.equals(this.codiceProdotto, other.codiceProdotto);
     }
 }

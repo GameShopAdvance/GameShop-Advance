@@ -21,6 +21,7 @@ import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyCo
 import gameshop.advance.utility.IteratorWrapper;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
+import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
 import org.joda.time.DateTime;
@@ -31,7 +32,7 @@ import org.joda.time.DateTime;
  */
 public class Vendita implements ITransazione {
     protected Integer idVendita;
-    protected LinkedList<IRigaDiTransazioneRemote> righeDiVendita = new LinkedList<>();
+    protected HashMap<IDescrizioneProdotto, IRigaDiTransazioneRemote> righeDiVendita = new HashMap<>();
     protected CartaCliente cliente;
     protected Pagamento pagamento;
     protected DateTime date;
@@ -89,13 +90,19 @@ public class Vendita implements ITransazione {
     @Override
     public void inserisciProdotto(IDescrizioneProdotto desc, int quantity) throws RemoteException, QuantityNotInStockException {
         this.quantityCheck(desc, quantity);
-        IScontoProdottoStrategy strategiaSconto = ScontoFactorySingleton.getInstance().getStrategiaScontoProdotto(this);
-        for(IScontoProdottoStrategy sconto:desc.getSconti(this.date))
-        {
-            strategiaSconto.add(sconto);
+        if(this.righeDiVendita.containsKey(desc)) {
+            RigaDiTransazione rdt = (RigaDiTransazione) this.righeDiVendita.get(desc);
+            rdt.setQuantity(rdt.getQuantity()+quantity);
         }
-        RigaDiTransazione rdv = new RigaDiTransazione(desc, quantity, strategiaSconto);
-        this.righeDiVendita.add(rdv);
+        else {
+            IScontoProdottoStrategy strategiaSconto = ScontoFactorySingleton.getInstance().getStrategiaScontoProdotto(this);
+            for(IScontoProdottoStrategy sconto:desc.getSconti(this.date))
+            {
+                strategiaSconto.add(sconto);
+            }
+            RigaDiTransazione rdv = new RigaDiTransazione(desc, quantity, strategiaSconto);
+            this.righeDiVendita.put(desc, rdv);
+        }
         this.notificaListener();
     }
 
@@ -137,8 +144,9 @@ public class Vendita implements ITransazione {
      */
     @Override
     public void gestisciPagamento(Money ammontare) throws InvalidMoneyException,RemoteException {
-        if(this.getTotal().greater(ammontare))
+        if(this.getTotal().greater(ammontare)) {
             throw new InvalidMoneyException(ammontare);
+        }
         this.pagamento = new Pagamento(ammontare);
         this.notificaListener();
     }
@@ -166,7 +174,7 @@ public class Vendita implements ITransazione {
      */
     @Override
     public IIteratorWrapperRemote<IRigaDiTransazioneRemote> getRigheDiVendita() throws RemoteException {
-        return new IteratorWrapper<>(this.righeDiVendita.iterator());
+        return new IteratorWrapper<>(this.righeDiVendita.values().iterator());
     }
 
     @Override
