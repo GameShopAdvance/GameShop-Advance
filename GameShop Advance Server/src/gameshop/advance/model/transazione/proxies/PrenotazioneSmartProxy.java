@@ -15,8 +15,8 @@ import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.model.transazione.CartaCliente;
-import gameshop.advance.model.transazione.RigaDiTransazione;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
@@ -118,7 +118,7 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
     }
 
     @Override
-    public Iterator<RigaDiTransazione> getRigheDiVendita() {
+    public Iterator<IRigaDiTransazioneRemote> getRigheDiVendita() {
         return this.prenotazione.getRigheDiVendita();
     }
 

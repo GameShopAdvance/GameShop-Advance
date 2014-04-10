@@ -8,7 +8,7 @@ package gameshop.advance.manager;
 
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
-import gameshop.advance.model.transazione.RigaDiTransazione;
+import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Iterator;
@@ -59,10 +59,10 @@ public class ManagerFornitureSingleton {
     public void aggiornaPrenotazioni(List<IPrenotazione> prenotazioni) throws RemoteException{
         for(IPrenotazione pren: prenotazioni)
         {
-            Iterator<RigaDiTransazione> iter = pren.getRigheDiVendita();
+            Iterator<IRigaDiTransazioneRemote> iter = pren.getRigheDiVendita();
             while(iter.hasNext())
             {
-                RigaDiTransazione rdt = iter.next();
+                IRigaDiTransazioneRemote rdt = iter.next();
                 IDescrizioneProdotto desc = rdt.getDescrizione();
                 if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
                 {

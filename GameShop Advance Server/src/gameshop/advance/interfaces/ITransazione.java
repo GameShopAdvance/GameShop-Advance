@@ -11,11 +11,9 @@ import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.interfaces.remote.ITransazioneRemote;
 import gameshop.advance.model.transazione.CartaCliente;
-import gameshop.advance.model.transazione.RigaDiTransazione;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
-import java.util.Iterator;
 import java.util.LinkedList;
 import org.joda.time.DateTime;
 
@@ -71,11 +69,4 @@ public interface ITransazione extends ITransazioneRemote {
         
     DateTime getDate();
     
-    /**
-     *
-     * @return
-     * @throws RemoteException
-     */
-    Iterator<RigaDiTransazione> getRigheDiVendita();
-
 }

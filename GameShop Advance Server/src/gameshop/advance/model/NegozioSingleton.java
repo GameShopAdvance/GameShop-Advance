@@ -4,9 +4,9 @@ import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
+import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.manager.ManagerPrenotazioniSingleton;
 import gameshop.advance.model.transazione.CartaCliente;
-import gameshop.advance.model.transazione.RigaDiTransazione;
 import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
 import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
 import gameshop.advance.technicalservices.db.DbPrenotazioneSingleton;
@@ -76,7 +76,7 @@ public class NegozioSingleton
         try {
             DbVenditaSingleton.getInstance().create(v);
 //            CatalogoProdottiSingleton.getInstance().aggiornaDescrizioni();
-            Iterator<RigaDiTransazione> righeDiVendita = v.getRigheDiVendita();
+            Iterator<IRigaDiTransazioneRemote> righeDiVendita = v.getRigheDiVendita();
             while(righeDiVendita.hasNext())
             {
                 DbDescrizioneProdottoSingleton.getInstance().update(righeDiVendita.next().getDescrizione());

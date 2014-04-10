@@ -8,10 +8,13 @@ package gameshop.advance.model.transazione;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.ITransazione;
+import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.interfaces.remote.ITransazioneRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.Iterator;
+import java.util.LinkedList;
 
 /**
  *
@@ -39,6 +42,17 @@ public class TransazioneRemoteProxy extends UnicastRemoteObject implements ITran
     @Override
     public Integer getId() throws RemoteException {
         return this.protectedRemoteTransaction.getId();
+    }
+
+    @Override
+    public Iterator<IRigaDiTransazioneRemote> getRigheDiVendita() {
+        Iterator<IRigaDiTransazioneRemote> righeDiVendita = this.protectedRemoteTransaction.getRigheDiVendita();
+        LinkedList<IRigaDiTransazioneRemote> righeProtette = new LinkedList<>();
+        while(righeDiVendita.hasNext())
+        {
+            righeProtette.add(new RigaDiTransazioneRemoteProxy(righeDiVendita.next()));
+        }
+        return righeProtette.iterator();
     }
     
 }

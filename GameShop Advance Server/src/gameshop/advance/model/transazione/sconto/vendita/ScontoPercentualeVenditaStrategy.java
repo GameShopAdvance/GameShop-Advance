@@ -8,7 +8,7 @@ package gameshop.advance.model.transazione.sconto.vendita;
 
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
-import gameshop.advance.model.transazione.RigaDiTransazione;
+import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.utility.IntervalloDiTempo;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
@@ -42,7 +42,7 @@ public class ScontoPercentualeVenditaStrategy implements IScontoVenditaStrategy 
     
     @Override
     public Money getTotal(ITransazione vendita) throws RemoteException {
-        Iterator<RigaDiTransazione> righe = vendita.getRigheDiVendita();
+        Iterator<IRigaDiTransazioneRemote> righe = vendita.getRigheDiVendita();
         Money totale = new Money();
         while(righe.hasNext())
         {

@@ -13,6 +13,7 @@ import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.model.Pagamento;
 import gameshop.advance.model.transazione.sconto.ScontoFactorySingleton;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
@@ -29,7 +30,7 @@ import org.joda.time.DateTime;
  */
 public class Vendita implements ITransazione {
     protected Integer idVendita;
-    protected LinkedList<RigaDiTransazione> righeDiVendita = new LinkedList<>();
+    protected LinkedList<IRigaDiTransazioneRemote> righeDiVendita = new LinkedList<>();
     protected CartaCliente cliente;
     protected Pagamento pagamento;
     protected DateTime date;
@@ -162,7 +163,7 @@ public class Vendita implements ITransazione {
      * @return
      */
     @Override
-    public Iterator<RigaDiTransazione> getRigheDiVendita() {
+    public Iterator<IRigaDiTransazioneRemote> getRigheDiVendita() {
         return this.righeDiVendita.iterator();
     }
 
