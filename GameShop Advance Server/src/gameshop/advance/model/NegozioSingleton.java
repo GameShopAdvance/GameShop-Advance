@@ -1,6 +1,7 @@
 package gameshop.advance.model;
 
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
@@ -87,7 +88,7 @@ public class NegozioSingleton
         }
     }
     
-     public void registraPrenotazione(IPrenotazione p) throws RemoteException
+     public void registraPrenotazione(IPrenotazione p) throws RemoteException, QuantityException
     {
         try {
             ManagerPrenotazioniSingleton.getInstance().store(p);

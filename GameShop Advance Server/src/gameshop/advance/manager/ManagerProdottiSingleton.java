@@ -6,10 +6,11 @@
 
 package gameshop.advance.manager;
 
+import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IObserver;
-import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
+import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 
@@ -37,22 +38,31 @@ public class ManagerProdottiSingleton {
         return ManagerProdottiSingleton.instance;
     }
     
-    public void addDescrizione(DescrizioneProdotto desc){
-        if(descrizioni.contains(desc)){
+    public void addDescrizione(IDescrizioneProdotto desc) throws QuantityException, RemoteException{
+        
+        ManagerFornitureSingleton forniture = ManagerFornitureSingleton.getInstance();
+        forniture.addDescrizione(desc);
+        /*if(descrizioni.contains(desc)){
         }
         else {
             descrizioni.add(desc);
-        }
+        }*/
     }
     
-    public void deleteDescrizione(DescrizioneProdotto desc){
+    public void deleteDescrizione(IDescrizioneProdotto desc) throws QuantityException, RemoteException{
+        
+        ManagerFornitureSingleton forniture = ManagerFornitureSingleton.getInstance();
+        forniture.removeDescrizione(desc);
+    }
+    
+    /*public void deleteDescrizione(DescrizioneProdotto desc){
        if(descrizioni.contains(desc)){
            descrizioni.remove(desc);
        } 
-    }
+    }*/
 
     public List getMonitored() {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return descrizioni;
     }   
 
     public void addListener(IObserver obs) {

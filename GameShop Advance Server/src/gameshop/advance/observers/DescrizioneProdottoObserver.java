@@ -6,9 +6,13 @@
 
 package gameshop.advance.observers;
 
+import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.IObserver;
 import gameshop.advance.manager.ManagerProdottiSingleton;
 import gameshop.advance.model.DescrizioneProdotto;
+import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -27,10 +31,22 @@ public class DescrizioneProdottoObserver implements IObserver {
         ManagerProdottiSingleton manager = ManagerProdottiSingleton.getInstance();
         
         if (desc.sottoSoglia()){
-            manager.addDescrizione(desc);
+            try {
+                manager.addDescrizione(desc);
+            } catch (QuantityException ex) {
+                Logger.getLogger(DescrizioneProdottoObserver.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (RemoteException ex) {
+                Logger.getLogger(DescrizioneProdottoObserver.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
         else {
-            manager.deleteDescrizione(desc);
+            try {
+                manager.deleteDescrizione(desc);
+            } catch (QuantityException ex) {
+                Logger.getLogger(DescrizioneProdottoObserver.class.getName()).log(Level.SEVERE, null, ex);
+            } catch (RemoteException ex) {
+                Logger.getLogger(DescrizioneProdottoObserver.class.getName()).log(Level.SEVERE, null, ex);
+            }
         }
     }
 }
