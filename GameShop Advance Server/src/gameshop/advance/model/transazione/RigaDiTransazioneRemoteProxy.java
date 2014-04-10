@@ -6,8 +6,9 @@
 
 package gameshop.advance.model.transazione;
 
-import gameshop.advance.interfaces.IDescrizioneProdotto;
+import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
+import gameshop.advance.remote.DescrizioneRemoteProxy;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -25,8 +26,8 @@ class RigaDiTransazioneRemoteProxy extends UnicastRemoteObject implements IRigaD
     }
 
     @Override
-    public IDescrizioneProdotto getDescrizione() throws RemoteException {
-        return (IDescrizioneProdotto) this.protectedRDT.getDescrizione();
+    public IDescrizioneProdottoRemote getDescrizione() throws RemoteException {
+        return (IDescrizioneProdottoRemote) new DescrizioneRemoteProxy(this.protectedRDT.getDescrizione());
     }
 
     @Override

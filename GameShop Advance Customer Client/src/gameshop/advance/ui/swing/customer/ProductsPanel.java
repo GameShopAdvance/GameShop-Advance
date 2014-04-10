@@ -96,7 +96,7 @@ public class ProductsPanel extends JPanel implements PopActionListener {
     private void chartActionPerformed(ActionEvent e) {
         try {
             this.chart.setTotal(ReservationControllerSingleton.getInstance().getTotal());
-            this.chart.clearList();
+//            this.chart.clearList();
             this.pushPanel(this.chart);
             IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter = ReservationControllerSingleton.getInstance().getListaProdotti();
             while(iter.hasNext())
