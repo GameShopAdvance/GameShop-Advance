@@ -14,7 +14,6 @@ import gameshop.advance.observer.TotalObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.employee.book.BookPanel;
-import gameshop.advance.ui.swing.employee.book.BookTotalPaymentPanel;
 import gameshop.advance.ui.swing.employee.book.EndBookPanel;
 import gameshop.advance.utility.Money;
 import java.rmi.NotBoundException;
@@ -100,7 +99,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      * @throws RemoteException
      */
     public void terminaPrenotazione() throws RemoteException {
-        this.aggiornaWindow(new BookTotalPaymentPanel());
+        this.aggiornaWindow(new EndBookPanel());
         this.controller.terminaPrenotazione();
     }
     
@@ -133,15 +132,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
             Logger.getLogger(SaleControllerSingleton.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
-    public void mostraPagaTotale(){
-        aggiornaWindow(new BookTotalPaymentPanel());
-    }
-    
-    public void mostraPagaAcconto(){
-        aggiornaWindow(new BookTotalPaymentPanel());
-    }
-    
+        
     /**
      * Funziona che avvia il pagamento del totale di una prenotazione.
      * @param ammontare

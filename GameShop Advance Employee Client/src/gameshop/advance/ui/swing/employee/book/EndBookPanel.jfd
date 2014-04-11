@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_25" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -38,29 +38,19 @@ new FormModel {
 				"gridWidth": 7
 				"gridX": 2
 			} )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "default:grow, 45dlu, labelcompgap, max(min;283px), default:grow"
-				"$rowSpecs": "default:grow, 25dlu, linegap, 20dlu, linegap, 25dlu"
-			} ) {
-				name: "this2"
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 6
-				"gridY": 7
-			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "goToMenu"
 				"text": "Torna al Menù"
-				"enabled": false
 				"font": new java.awt.Font( "Tahoma", 0, 22 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToMenuActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 9
-				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"gridX": 2
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 685, 400 )
+			"size": new java.awt.Dimension( 745, 400 )
 		} )
 	}
 }

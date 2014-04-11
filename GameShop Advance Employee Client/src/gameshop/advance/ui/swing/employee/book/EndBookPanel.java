@@ -67,7 +67,6 @@ public class EndBookPanel extends JPanel {
         label1 = new JLabel();
         displayRest = new JTextField();
         label2 = new JLabel();
-        this2 = new JPanel();
         goToMenu = new JButton();
 
         //======== this ========
@@ -88,17 +87,8 @@ public class EndBookPanel extends JPanel {
         label2.setFont(new Font("Tahoma", Font.PLAIN, 30));
         add(label2, CC.xywh(2, 5, 7, 1, CC.FILL, CC.FILL));
 
-        //======== this2 ========
-        {
-            this2.setLayout(new FormLayout(
-                "default:grow, 45dlu, $lcgap, [283px,min], default:grow",
-                "default:grow, 25dlu, $lgap, 20dlu, $lgap, 25dlu"));
-        }
-        add(this2, CC.xy(6, 7));
-
         //---- goToMenu ----
         goToMenu.setText("Torna al Men\u00f9");
-        goToMenu.setEnabled(false);
         goToMenu.setFont(new Font("Tahoma", Font.PLAIN, 22));
         goToMenu.addActionListener(new ActionListener() {
             @Override
@@ -114,7 +104,6 @@ public class EndBookPanel extends JPanel {
     private JLabel label1;
     private JTextField displayRest;
     private JLabel label2;
-    private JPanel this2;
     private JButton goToMenu;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
