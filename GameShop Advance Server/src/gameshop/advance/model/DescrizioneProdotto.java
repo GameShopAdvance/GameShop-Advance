@@ -121,6 +121,10 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
     @Override
     public synchronized void setQuantitaDisponibile(int quantity){
         this.quantitaDisponibile = new Integer(quantity);
+        this.notifica();
+    }
+    
+    protected void notifica(){
         this.listener.notifica(this);
     }
     
@@ -132,6 +136,7 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
     @Override
     public void setQuantitaDiSoglia(int soglia){
         this.quantitaDiSoglia = new Integer(soglia);
+        this.notifica();
     }
     
     @Override
@@ -141,7 +146,7 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
     
     @Override
     public boolean sottoSoglia(){
-        return this.quantitaDisponibile.intValue() < this.quantitaDiSoglia.intValue();
+        return !(this.quantitaDisponibile.intValue() > this.quantitaDiSoglia.intValue());
     }
     
     @Override

@@ -28,11 +28,9 @@ public class DescrizioneProdottoObserver implements IObserver {
     public void notifica(Object o) {
         
         DescrizioneProdotto desc = (DescrizioneProdotto) o;
-        ManagerProdottiSingleton manager = ManagerProdottiSingleton.getInstance();
-        
         if (desc.sottoSoglia()){
             try {
-                manager.addDescrizione(desc);
+                ManagerProdottiSingleton.getInstance().addDescrizione(desc);
             } catch (QuantityException ex) {
                 Logger.getLogger(DescrizioneProdottoObserver.class.getName()).log(Level.SEVERE, null, ex);
             } catch (RemoteException ex) {
@@ -41,7 +39,7 @@ public class DescrizioneProdottoObserver implements IObserver {
         }
         else {
             try {
-                manager.deleteDescrizione(desc);
+                ManagerProdottiSingleton.getInstance().deleteDescrizione(desc);
             } catch (QuantityException ex) {
                 Logger.getLogger(DescrizioneProdottoObserver.class.getName()).log(Level.SEVERE, null, ex);
             } catch (RemoteException ex) {

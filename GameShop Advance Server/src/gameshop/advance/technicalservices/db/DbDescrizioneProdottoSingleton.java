@@ -96,7 +96,7 @@ public class DbDescrizioneProdottoSingleton {
                 if(candidate.getClass() != DescrizioneProdottoSmartProxy.class)
                     return false;
                 else
-                   return !candidate.sottoSoglia();
+                   return candidate.sottoSoglia();
             }
         });
         if(result.isEmpty())
