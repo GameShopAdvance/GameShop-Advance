@@ -23,8 +23,10 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JSeparator;
@@ -38,6 +40,7 @@ import javax.swing.border.TitledBorder;
  */
 
 public class InsertItemPanel extends JScrollPane {
+    private DefaultListModel<Object> rdvListModel;
 
     public InsertItemPanel() {
         initComponents();
@@ -45,6 +48,9 @@ public class InsertItemPanel extends JScrollPane {
         this.clearSale.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
         this.button2.setBackground(UIStyleSingleton.getInstance().getSuccessColor());
         this.button2.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
+        this.rdvListModel = new DefaultListModel<>();
+        this.rdvList.setCellRenderer(new rdvCellRender());
+        this.rdvList.setModel(this.rdvListModel);
                
     }
 
@@ -167,6 +173,9 @@ public class InsertItemPanel extends JScrollPane {
         quantityTextField = new JTextField();
         addProductButton = new JButton();
         separator2 = new JSeparator();
+        panel4 = new JPanel();
+        scrollPane1 = new JScrollPane();
+        rdvList = new JList();
         panel1 = new JPanel();
         label4 = new JLabel();
         clientCode = new JTextField();
@@ -237,6 +246,22 @@ public class InsertItemPanel extends JScrollPane {
             separator2.setOrientation(SwingConstants.VERTICAL);
             panel3.add(separator2, new GridBagConstraints(4, 1, 1, 3, 0.0, 0.0,
                 GridBagConstraints.CENTER, GridBagConstraints.VERTICAL,
+                new Insets(0, 0, 0, 0), 0, 0));
+
+            //======== panel4 ========
+            {
+                panel4.setLayout(new FormLayout(
+                    "95dlu",
+                    "default"));
+
+                //======== scrollPane1 ========
+                {
+                    scrollPane1.setViewportView(rdvList);
+                }
+                panel4.add(scrollPane1, CC.xy(1, 1));
+            }
+            panel3.add(panel4, new GridBagConstraints(5, 1, 1, 1, 0.0, 0.0,
+                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
                 new Insets(0, 0, 0, 0), 0, 0));
 
             //======== panel1 ========
@@ -336,6 +361,9 @@ public class InsertItemPanel extends JScrollPane {
     private JTextField quantityTextField;
     private JButton addProductButton;
     private JSeparator separator2;
+    private JPanel panel4;
+    private JScrollPane scrollPane1;
+    private JList rdvList;
     private JPanel panel1;
     private JLabel label4;
     private JTextField clientCode;
