@@ -45,4 +45,9 @@ public class DescrizioneRemoteProxy extends UnicastRemoteObject implements IDesc
     public int getQuantitaDisponibile() throws RemoteException {
         return this.desc.getQuantitaDisponibile();
     }
+
+    @Override
+    public int getQuantitaDiSoglia() throws RemoteException {
+        return this.desc.getQuantitaDiSoglia();
+    }
 }

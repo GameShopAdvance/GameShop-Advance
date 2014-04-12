@@ -67,7 +67,7 @@ public class ManagerPrenotazioniSingleton {
         }
     }
     
-    public void removePrenotazione(IPrenotazione pren) throws QuantityException{
+    public void removePrenotazione(IPrenotazione pren) throws QuantityException, RemoteException{
         if(pren != null && pren.isCompleted() && !pren.getEvasa())
         {
             if(this.prenotazioniDaEvadere.indexOf(pren) >= 0)

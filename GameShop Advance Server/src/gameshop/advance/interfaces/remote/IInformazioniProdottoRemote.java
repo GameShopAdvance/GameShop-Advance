@@ -4,9 +4,8 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.manager;
+package gameshop.advance.interfaces.remote;
 
-import gameshop.advance.interfaces.IDescrizioneProdotto;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -16,7 +15,7 @@ import java.rmi.RemoteException;
  */
 public interface IInformazioniProdottoRemote extends Remote {
 
-    IDescrizioneProdotto getDescrizione() throws RemoteException;
+    IDescrizioneProdottoRemote getDescrizione() throws RemoteException;
 
     int getOrdinati() throws RemoteException;
 

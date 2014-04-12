@@ -9,7 +9,9 @@ package gameshop.advance.manager;
 import gameshop.advance.GameShopAdvance;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
+import gameshop.advance.interfaces.IInformazioniProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
+import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
@@ -32,7 +34,7 @@ public class ManagerFornitureSingleton {
     
     private LinkedList<IRemoteObserver> listeners = new LinkedList<>();
     
-    private HashMap<String, InformazioniProdotto> informazioni;
+    private HashMap<String, IInformazioniProdotto> informazioni;
     
     public ManagerFornitureSingleton() throws QuantityException{
         try {
@@ -70,7 +72,7 @@ public class ManagerFornitureSingleton {
     public void aggiornaDescrizioni(List<IDescrizioneProdotto> descrizioni) throws RemoteException{
         
         for(IDescrizioneProdotto desc: descrizioni){
-            InformazioniProdotto ip = new InformazioniProdotto(desc);
+            IInformazioniProdotto ip = new InformazioniProdotto(desc);
             this.informazioni.put(desc.getCodiceProdotto().getCodice(), ip);
         }
     }
@@ -114,7 +116,7 @@ public class ManagerFornitureSingleton {
             IDescrizioneProdotto desc = rdt.getDescrizione();
             if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
             {
-                InformazioniProdotto ip = this.informazioni.get(desc.getCodiceProdotto().getCodice());
+                IInformazioniProdotto ip = this.informazioni.get(desc.getCodiceProdotto().getCodice());
                 ip.setPrenotati(ip.getPrenotati()+rdt.getQuantity());
             }
             else{
@@ -126,21 +128,36 @@ public class ManagerFornitureSingleton {
     }
     
     
-    public void removePrenotazione(IPrenotazione pren){
-        
+    public void removePrenotazione(IPrenotazione pren) throws RemoteException, QuantityException{
+        IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter = pren.getRigheDiVendita();
+        while(iter.hasNext())
+        {
+            RigaDiTransazione rdt = (RigaDiTransazione) iter.next();
+            IDescrizioneProdotto desc = rdt.getDescrizione();
+            if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
+            {
+                IInformazioniProdotto ip = this.informazioni.get(desc.getCodiceProdotto().getCodice());
+                int prenQty = ip.getPrenotati()-rdt.getQuantity();
+                if(prenQty > 0)
+                    ip.setPrenotati(prenQty);
+                else
+                    ip.setPrenotati(0);
+            }
+        }
+        this.print();
     }
 
-    public Iterator<InformazioniProdotto> getInformazioni() {
+    public Iterator<IInformazioniProdotto> getInformazioni() {
         return this.informazioni.values().iterator();
     }
     
     private void print(){
         try {
-            Iterator<InformazioniProdotto> iter = this.getInformazioni();
+            Iterator<IInformazioniProdotto> iter = this.getInformazioni();
             System.err.println("------FORNITURE------");
             while(iter.hasNext())
             {
-                InformazioniProdotto next = iter.next();
+                IInformazioniProdottoRemote next = iter.next();
                 System.err.println(next.getDescrizione().getDescrizione());
                 System.err.println("In stock: "+next.getDescrizione().getQuantitaDisponibile() +"/"
                                    +next.getDescrizione().getQuantitaDiSoglia());
