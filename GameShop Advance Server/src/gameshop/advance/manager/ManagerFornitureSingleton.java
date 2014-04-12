@@ -34,7 +34,7 @@ public class ManagerFornitureSingleton {
     
     private final LinkedList<IRemoteObserver> listeners = new LinkedList<>();
     
-    private HashMap<String, IInformazioniProdotto> informazioni;
+    private HashMap<String, IInformazioniProdottoRemote> informazioni;
     
     public ManagerFornitureSingleton() throws QuantityException{
         try {
@@ -86,7 +86,7 @@ public class ManagerFornitureSingleton {
     {    
         if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
         {
-            IInformazioniProdotto ip = this.informazioni.get(desc.getCodiceProdotto().getCodice());
+            IInformazioniProdotto ip = (IInformazioniProdotto) this.informazioni.get(desc.getCodiceProdotto().getCodice());
             ip.setDescrizione(desc);
         }
         else{
@@ -99,7 +99,7 @@ public class ManagerFornitureSingleton {
     {
         if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
         {
-            IInformazioniProdotto ip = this.informazioni.get(desc.getCodiceProdotto().getCodice());
+            IInformazioniProdotto ip = (IInformazioniProdotto) this.informazioni.get(desc.getCodiceProdotto().getCodice());
             if(ip.getDescrizione().getQuantitaDisponibile() - ip.getPrenotati() > ip.getDescrizione().getQuantitaDiSoglia()) {
                 this.informazioni.remove(desc.getCodiceProdotto().getCodice());
             }
@@ -133,7 +133,7 @@ public class ManagerFornitureSingleton {
             IDescrizioneProdotto desc = rdt.getDescrizione();
             if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
             {
-                IInformazioniProdotto ip = this.informazioni.get(desc.getCodiceProdotto().getCodice());
+                IInformazioniProdotto ip = (IInformazioniProdotto) this.informazioni.get(desc.getCodiceProdotto().getCodice());
                 ip.setPrenotati(ip.getPrenotati()+rdt.getQuantity());
             }
             else{
@@ -153,7 +153,7 @@ public class ManagerFornitureSingleton {
             IDescrizioneProdotto desc = rdt.getDescrizione();
             if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
             {
-                IInformazioniProdotto ip = this.informazioni.get(desc.getCodiceProdotto().getCodice());
+                IInformazioniProdotto ip = (IInformazioniProdotto) this.informazioni.get(desc.getCodiceProdotto().getCodice());
                 int prenQty = ip.getPrenotati()-rdt.getQuantity();
                 if(prenQty > 0)
                     ip.setPrenotati(prenQty);
@@ -164,13 +164,13 @@ public class ManagerFornitureSingleton {
         this.print();
     }
 
-    public Iterator<IInformazioniProdotto> getInformazioni() {
+    public Iterator<IInformazioniProdottoRemote> getInformazioni() {
         return this.informazioni.values().iterator();
     }
     
     private void print(){
         try {
-            Iterator<IInformazioniProdotto> iter = this.getInformazioni();
+            Iterator<IInformazioniProdottoRemote> iter = this.getInformazioni();
             System.err.println("------FORNITURE------");
             while(iter.hasNext())
             {

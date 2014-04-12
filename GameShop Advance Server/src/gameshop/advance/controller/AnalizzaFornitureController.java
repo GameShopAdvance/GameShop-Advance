@@ -6,9 +6,12 @@
 
 package gameshop.advance.controller;
 
+import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.remote.IFornitureControllerRemote;
 import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
+import gameshop.advance.manager.ManagerFornitureSingleton;
+import gameshop.advance.utility.IteratorWrapper;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
@@ -21,10 +24,16 @@ public class AnalizzaFornitureController extends UnicastRemoteObject implements 
     {
         
     }
-    @Override
-    public IIteratorWrapperRemote<IInformazioniProdottoRemote> getDatiForniture() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
-    }
 
+    /**
+     *
+     * @return
+     * @throws RemoteException
+     * @throws QuantityException
+     */
+    @Override
+    public IIteratorWrapperRemote<IInformazioniProdottoRemote> getDatiForniture() throws RemoteException, QuantityException {
+        return new IteratorWrapper<>(ManagerFornitureSingleton.getInstance().getInformazioni());
+    }
     
 }

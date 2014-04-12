@@ -39,4 +39,6 @@ public interface IDescrizioneProdottoRemote extends Remote {
     
     int getQuantitaDisponibile() throws RemoteException;
     
+    
+    int getQuantitaDiSoglia() throws RemoteException;
 }

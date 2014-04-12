@@ -6,16 +6,19 @@
 
 package gameshop.advance.interfaces.remote;
 
-import gameshop.advance.exceptions.QuantityException;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
  *
- * @author matteog
+ * @author Lorenzo Di Giuseppe
  */
-public interface IFornitureControllerRemote extends Remote{
-    
-    public IIteratorWrapperRemote<IInformazioniProdottoRemote> getDatiForniture() throws RemoteException, QuantityException;
+public interface IInformazioniProdottoRemote extends Remote {
+
+    IDescrizioneProdottoRemote getDescrizione() throws RemoteException;
+
+    int getOrdinati() throws RemoteException;
+
+    int getPrenotati() throws RemoteException;
     
 }
