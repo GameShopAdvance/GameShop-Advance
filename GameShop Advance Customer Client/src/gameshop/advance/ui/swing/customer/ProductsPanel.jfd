@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_17" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -7,8 +7,8 @@ new FormModel {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "max(default;15dlu), labelcompgap, 73dlu, labelcompgap, default:grow, labelcompgap, max(default;73dlu), labelcompgap, 73dlu, labelcompgap, max(default;15dlu)"
-				"$rowSpecs": "max(default;15dlu), linegap, max(default;15dlu), linegap, default:grow, linegap, 15dlu, linegap, max(default;15dlu)"
+				"$columnSpecs": "max(default;15dlu), labelcompgap, 73dlu, labelcompgap, default:grow, labelcompgap, max(default;73dlu), labelcompgap, max(default;75dlu), labelcompgap, max(default;15dlu)"
+				"$rowSpecs": "max(default;15dlu), linegap, max(default;35dlu), linegap, default:grow, linegap, 15dlu, linegap, max(default;15dlu)"
 			} ) {
 				name: "mainPanel"
 				"opaque": false
@@ -16,6 +16,7 @@ new FormModel {
 					name: "label1"
 					"text": "Prenotazione Prodotti"
 					"labelFor": new FormReference( "productsList" )
+					"font": new java.awt.Font( "Tahoma", 0, 16 )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
@@ -30,6 +31,8 @@ new FormModel {
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 9
 					"gridY": 3
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				} )
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 					name: "scrollPane1"
@@ -49,6 +52,8 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
 					"text": "Totale"
+					"font": new java.awt.Font( "Tahoma", 0, 14 )
+					"horizontalAlignment": 4
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 7
 					"gridY": 7
@@ -57,6 +62,7 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "totale"
+					"font": new java.awt.Font( "Tahoma", 1, 14 )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 9
 					"gridY": 7

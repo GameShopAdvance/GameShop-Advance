@@ -4,7 +4,6 @@
 
 package gameshop.advance.ui.swing.customer;
 
-import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
@@ -100,76 +99,60 @@ public class CompletedReservationPanel extends JPanel {
         button1 = new JButton();
 
         //======== this ========
-        setName("this");
+        setLayout(new FormLayout(
+            "[15dlu,default], $lcgap, 100dlu, $lcgap, default:grow, $lcgap, [75dlu,default], $lcgap, default:grow, $lcgap, 100dlu, $lcgap, [15dlu,default]",
+            "15dlu, $lgap, [20dlu,default], 5dlu, fill:15dlu, $lgap, fill:20dlu, 5dlu, 3*(15dlu, $lgap), [30dlu,default]:grow, $lgap, [35dlu,default], $lgap, 16dlu"));
 
         //---- label1 ----
         label1.setText("Congratulazioni: la tua prenotazione \u00e8 completata");
         label1.setFont(new Font("Dialog", Font.BOLD, 12));
-        label1.setName("label1");
+        add(label1, CC.xywh(3, 3, 9, 1, CC.CENTER, CC.FILL));
 
         //---- label2 ----
         label2.setText("Puoi pagare i prodotti prenotati in cassa fornendo il numero di prenotazione");
-        label2.setName("label2");
+        add(label2, CC.xywh(3, 5, 9, 1, CC.CENTER, CC.FILL));
 
         //---- label3 ----
         label3.setText("Numero prenotazione");
         label3.setFont(label3.getFont().deriveFont(label3.getFont().getStyle() | Font.BOLD));
-        label3.setName("label3");
-
-        //---- numeroPrenotazione ----
-        numeroPrenotazione.setName("numeroPrenotazione");
+        add(label3, CC.xy(3, 7, CC.CENTER, CC.DEFAULT));
+        add(numeroPrenotazione, CC.xy(7, 7));
 
         //---- label7 ----
         label7.setText("Se desideri puoi lasciare un acconto e saldare il totale quando avrai i prodotti");
-        label7.setName("label7");
+        add(label7, CC.xywh(3, 9, 9, 1, CC.CENTER, CC.FILL));
 
         //---- label5 ----
         label5.setText("Totale");
         label5.setFont(label5.getFont().deriveFont(label5.getFont().getStyle() | Font.BOLD));
-        label5.setName("label5");
+        add(label5, CC.xy(3, 11, CC.CENTER, CC.FILL));
 
         //---- label6 ----
         label6.setText("Acconto");
         label6.setFont(label6.getFont().deriveFont(label6.getFont().getStyle() | Font.BOLD));
-        label6.setName("label6");
+        add(label6, CC.xy(11, 11, CC.CENTER, CC.FILL));
 
         //---- totale ----
         totale.setHorizontalAlignment(SwingConstants.CENTER);
-        totale.setName("totale");
+        add(totale, CC.xy(3, 13, CC.FILL, CC.FILL));
 
         //---- acconto ----
         acconto.setHorizontalAlignment(SwingConstants.CENTER);
-        acconto.setName("acconto");
+        add(acconto, CC.xy(11, 13, CC.FILL, CC.FILL));
 
         //---- label4 ----
         label4.setText("Ti ringraziamo per aver scelto di utilizzare i nostri sistemi automatici.");
-        label4.setName("label4");
+        add(label4, CC.xywh(3, 15, 9, 1, CC.CENTER, CC.FILL));
 
         //---- button1 ----
         button1.setText("Chiudi");
-        button1.setName("button1");
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 endActionPerformed(e);
             }
         });
-
-        PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[15dlu,default], $lcgap, 100dlu, $lcgap, default:grow, $lcgap, 100dlu, $lcgap, [15dlu,default]",
-            "15dlu, $lgap, [20dlu,default], 5dlu, fill:15dlu, $lgap, fill:20dlu, 5dlu, 3*(15dlu, $lgap), [30dlu,default]:grow, $lgap, [20dlu,default], $lgap, 16dlu"), this);
-
-        builder.add(label1,             CC.xywh(3,  3,         5,          1, CC.CENTER, CC.FILL));
-        builder.add(label2,             CC.xywh(3,  5,         5,          1, CC.CENTER, CC.FILL));
-        builder.add(label3,             CC.xy  (3,  7, CC.CENTER, CC.DEFAULT));
-        builder.add(numeroPrenotazione, CC.xy  (5,  7));
-        builder.add(label7,             CC.xywh(3,  9,         5,          1, CC.CENTER, CC.FILL));
-        builder.add(label5,             CC.xy  (3, 11, CC.CENTER,    CC.FILL));
-        builder.add(label6,             CC.xy  (7, 11, CC.CENTER,    CC.FILL));
-        builder.add(totale,             CC.xy  (3, 13,   CC.FILL,    CC.FILL));
-        builder.add(acconto,            CC.xy  (7, 13,   CC.FILL,    CC.FILL));
-        builder.add(label4,             CC.xywh(3, 15,         5,          1, CC.CENTER, CC.FILL));
-        builder.add(button1,            CC.xy  (5, 17,   CC.FILL,    CC.FILL));
+        add(button1, CC.xy(7, 17, CC.FILL, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

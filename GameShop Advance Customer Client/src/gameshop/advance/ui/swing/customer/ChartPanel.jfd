@@ -1,49 +1,52 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_17" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
-		auxiliary() {
-			"JavaCodeGenerator.memberVariableThis": true
-		}
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(default;15dlu), labelcompgap, 73dlu, labelcompgap, 5dlu:grow, labelcompgap, 73dlu, labelcompgap, 73dlu, labelcompgap, max(default;15dlu)"
-			"$rowSpecs": "max(default;15dlu), linegap, max(default;20dlu), linegap, default:grow, linegap, max(default;20dlu), linegap, max(default;20dlu), linegap, 15dlu"
+			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;75dlu), labelcompgap, default:grow, labelcompgap, max(default;75dlu), labelcompgap, max(default;75dlu), labelcompgap, max(default;15dlu)"
+			"$rowSpecs": "max(default;15dlu), linegap, max(default;20dlu), linegap, max(default;50dlu):grow, linegap, max(default;20dlu), linegap, max(default;35dlu), linegap, max(default;15dlu)"
 		} ) {
-			name: "panel1"
+			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
 				"text": "Riepilogo prenotazione"
+				"horizontalAlignment": 0
+				"font": new java.awt.Font( "Tahoma", 0, 16 )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
+				"gridX": 5
 				"gridY": 3
-				"gridWidth": 7
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridWidth": 3
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "totalLabel"
+				"text": "Totale"
+				"font": new java.awt.Font( "Tahoma", 0, 14 )
+				"horizontalAlignment": 4
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 7
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridX": 7
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JList" ) {
 					name: "bookList"
+					"font": new java.awt.Font( "Tahoma", 0, 14 )
+					"background": sfield java.awt.SystemColor controlHighlight
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
 				"gridY": 5
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"gridWidth": 7
-			} )
-			add( new FormComponent( "javax.swing.JLabel" ) {
-				name: "label1"
-				"text": "Totale"
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
-				"gridY": 7
-				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-				"gridWidth": 5
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "totale"
+				"font": new java.awt.Font( "Tahoma", 1, 14 )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 9
 				"gridY": 7
@@ -53,16 +56,18 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "back"
 				"text": "Indietro"
+				"font": new java.awt.Font( "Tahoma", 0, 14 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "backActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
 				"gridY": 9
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridX": 3
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"
 				"text": "Cancella"
+				"font": new java.awt.Font( "Tahoma", 0, 14 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cancelActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
@@ -73,6 +78,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": "Conferma"
+				"font": new java.awt.Font( "Tahoma", 0, 14 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "reserveActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 9
@@ -81,8 +87,8 @@ new FormModel {
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 310 )
-			"size": new java.awt.Dimension( 475, 300 )
+			"location": new java.awt.Point( 0, 0 )
+			"size": new java.awt.Dimension( 555, 300 )
 		} )
 	}
 }
