@@ -21,7 +21,6 @@ import org.joda.time.DateTime;
  */
 public class DescrizioneProdotto implements IDescrizioneProdotto
 {
-
     private IDProdotto codiceProdotto;
     private LinkedList<Prezzo> prezzi = new LinkedList<>();
     private String descrizione;
