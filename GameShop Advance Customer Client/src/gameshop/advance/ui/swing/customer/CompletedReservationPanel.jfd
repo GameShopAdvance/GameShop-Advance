@@ -11,7 +11,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "Congratulazioni: la tua prenotazione è completata"
-				"font": new java.awt.Font( "Dialog", 1, 12 )
+				"font": new java.awt.Font( "Tahoma", 1, 16 )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 3
@@ -22,6 +22,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
 				"text": "Puoi pagare i prodotti prenotati in cassa fornendo il numero di prenotazione"
+				"font": &Font0 new java.awt.Font( "Tahoma", 0, 14 )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 5
@@ -32,14 +33,17 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label3"
 				"text": "Numero prenotazione"
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				"font": new java.awt.Font( "Tahoma", 1, 14 )
+				"horizontalAlignment": 4
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 7
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridWidth": 3
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "numeroPrenotazione"
+				"font": new java.awt.Font( "Tahoma", 0, 14 )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
 				"gridY": 7
@@ -47,6 +51,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label7"
 				"text": "Se desideri puoi lasciare un acconto e saldare il totale quando avrai i prodotti"
+				"font": #Font0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 9
@@ -57,7 +62,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label5"
 				"text": "Totale"
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				"font": new java.awt.Font( "Tahoma", 1, 14 )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 11
@@ -67,7 +72,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label6"
 				"text": "Acconto"
-				"font": new com.jformdesigner.model.SwingDerivedFont( null, 1, 0, false )
+				"font": new java.awt.Font( "Tahoma", 1, 14 )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 11
 				"gridY": 11
@@ -77,6 +82,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "totale"
 				"horizontalAlignment": 0
+				"font": new java.awt.Font( "Tahoma", 0, 14 )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 13
@@ -86,6 +92,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "acconto"
 				"horizontalAlignment": 0
+				"font": new java.awt.Font( "Tahoma", 0, 14 )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 11
 				"gridY": 13
@@ -95,6 +102,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label4"
 				"text": "Ti ringraziamo per aver scelto di utilizzare i nostri sistemi automatici."
+				"font": #Font0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 15
@@ -105,6 +113,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": "Chiudi"
+				"font": new java.awt.Font( "Tahoma", 0, 14 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "endActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
