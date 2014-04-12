@@ -4,11 +4,9 @@
 
 package gameshop.advance.ui.swing.customer;
 
-import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
-import java.awt.Color;
 import java.awt.Component;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
@@ -37,32 +35,23 @@ public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDi
         subTotal = new JLabel();
 
         //======== this ========
-        setBorder(new LineBorder(Color.black));
-        setName("this");
-
-        //---- name ----
-        name.setName("name");
+        setBorder(LineBorder.createBlackLineBorder());
+        setLayout(new FormLayout(
+            "[100dlu,default]:grow, $lcgap, 50dlu, $lcgap, 10dlu, $lcgap, 50dlu",
+            "fill:default:grow"));
+        add(name, CC.xy(1, 1));
 
         //---- quantity ----
         quantity.setHorizontalAlignment(SwingConstants.CENTER);
-        quantity.setName("quantity");
+        add(quantity, CC.xy(3, 1));
 
         //---- separator1 ----
         separator1.setOrientation(SwingConstants.VERTICAL);
-        separator1.setName("separator1");
+        add(separator1, CC.xy(5, 1, CC.CENTER, CC.DEFAULT));
 
         //---- subTotal ----
         subTotal.setHorizontalAlignment(SwingConstants.CENTER);
-        subTotal.setName("subTotal");
-
-        PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[100dlu,default]:grow, $lcgap, 50dlu, $lcgap, 10dlu, $lcgap, 50dlu",
-            "fill:default:grow"), this);
-
-        builder.add(name,       CC.xy(1, 1));
-        builder.add(quantity,   CC.xy(3, 1));
-        builder.add(separator1, CC.xy(5, 1, CC.CENTER, CC.DEFAULT));
-        builder.add(subTotal,   CC.xy(7, 1));
+        add(subTotal, CC.xy(7, 1));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

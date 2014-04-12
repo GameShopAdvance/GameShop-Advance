@@ -4,7 +4,6 @@
 
 package gameshop.advance.ui.swing.customer;
 
-import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
@@ -12,7 +11,6 @@ import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.ui.interfaces.PopActionListener;
 import gameshop.advance.utility.Money;
-import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -47,7 +45,7 @@ public class ChartPanel extends JPanel {
     
     public void clearList()
     {
-        this.bookListModel.clear();
+        this.bookListModel.removeAllElements();
     }
     
     @Override
@@ -82,9 +80,11 @@ public class ChartPanel extends JPanel {
 
     private void cancelActionPerformed(ActionEvent e)
     {
-        try {
+       try {
+            this.clearList();
             ReservationControllerSingleton.getInstance().cancellaPrenotazione();
-            this.listener.popPanel();
+            
+////            this.listener.popPanel();
         }
         catch (RemoteException ex) {
             Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -113,77 +113,57 @@ public class ChartPanel extends JPanel {
         this.button2 = new JButton();
         this.button1 = new JButton();
 
-        //======== this ========
-        setName("this");
-        setLayout(new CardLayout());
-
         //======== panel1 ========
         {
-            this.panel1.setName("panel1");
+            this.panel1.setLayout(new FormLayout(
+                "[15dlu,default], $lcgap, 73dlu, $lcgap, 5dlu:grow, 2*($lcgap, 73dlu), $lcgap, [15dlu,default]",
+                "[15dlu,default], $lgap, [20dlu,default], $lgap, default:grow, 2*($lgap, [20dlu,default]), $lgap, 15dlu"));
 
             //---- label2 ----
             this.label2.setText("Riepilogo prenotazione");
-            this.label2.setName("label2");
+            this.panel1.add(this.label2, CC.xywh(3, 3, 7, 1, CC.CENTER, CC.FILL));
 
             //======== scrollPane1 ========
             {
-                this.scrollPane1.setName("scrollPane1");
-
-                //---- bookList ----
-                this.bookList.setName("bookList");
                 this.scrollPane1.setViewportView(this.bookList);
             }
+            this.panel1.add(this.scrollPane1, CC.xywh(3, 5, 7, 1, CC.FILL, CC.FILL));
 
             //---- label1 ----
             this.label1.setText("Totale");
-            this.label1.setName("label1");
-
-            //---- totale ----
-            this.totale.setName("totale");
+            this.panel1.add(this.label1, CC.xywh(3, 7, 5, 1, CC.DEFAULT, CC.FILL));
+            this.panel1.add(this.totale, CC.xy(9, 7, CC.FILL, CC.FILL));
 
             //---- back ----
             this.back.setText("Indietro");
-            this.back.setName("back");
             this.back.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     backActionPerformed(e);
                 }
             });
+            this.panel1.add(this.back, CC.xy(3, 9, CC.FILL, CC.FILL));
 
             //---- button2 ----
             this.button2.setText("Cancella");
-            this.button2.setName("button2");
             this.button2.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     cancelActionPerformed(e);
                 }
             });
+            this.panel1.add(this.button2, CC.xy(7, 9, CC.FILL, CC.FILL));
 
             //---- button1 ----
             this.button1.setText("Conferma");
-            this.button1.setName("button1");
             this.button1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     reserveActionPerformed(e);
                 }
             });
-
-            PanelBuilder panel1Builder = new PanelBuilder(new FormLayout(
-                "[15dlu,default], $lcgap, 73dlu, $lcgap, 5dlu:grow, 2*($lcgap, 73dlu), $lcgap, [15dlu,default]",
-                "[15dlu,default], $lgap, [20dlu,default], $lgap, default:grow, 2*($lgap, [20dlu,default]), $lgap, 15dlu"), this.panel1);
-
-            panel1Builder.add(this.label2,      CC.xywh(3, 3,       7,       1, CC.CENTER , CC.FILL));
-            panel1Builder.add(this.scrollPane1, CC.xywh(3, 5,       7,       1, CC.FILL   , CC.FILL));
-            panel1Builder.add(this.label1,      CC.xywh(3, 7,       5,       1, CC.DEFAULT, CC.FILL));
-            panel1Builder.add(this.totale,      CC.xy  (9, 7, CC.FILL, CC.FILL));
-            panel1Builder.add(this.back,        CC.xy  (3, 9, CC.FILL, CC.FILL));
-            panel1Builder.add(this.button2,     CC.xy  (7, 9, CC.FILL, CC.FILL));
-            panel1Builder.add(this.button1,     CC.xy  (9, 9, CC.FILL, CC.FILL));
+            this.panel1.add(this.button1, CC.xy(9, 9, CC.FILL, CC.FILL));
         }
-        add(this.panel1, "card1");
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
