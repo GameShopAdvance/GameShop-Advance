@@ -1,10 +1,12 @@
 package gameshop.advance.remote;
 
 
+import gameshop.advance.controller.AnalizzaFornitureController;
 import gameshop.advance.controller.GestisciInventarioController;
 import gameshop.advance.controller.PrenotaProdottoController;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.ICassaRemote;
+import gameshop.advance.interfaces.remote.IFornitureControllerRemote;
 import gameshop.advance.interfaces.remote.IInventarioControllerRemote;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.model.Cassa;
@@ -94,5 +96,10 @@ public class RemoteFactorySingleton extends UnicastRemoteObject implements IRemo
             Logger.getLogger(RemoteFactorySingleton.class.getName()).log(Level.SEVERE, null, ex);
         }
         return null;
+    }
+
+    @Override
+    public IFornitureControllerRemote getAnalizzaFornitureController() throws RemoteException {
+        return new AnalizzaFornitureController();
     }
 }

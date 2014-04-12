@@ -25,23 +25,22 @@ public class ManagerProdottiSingleton {
     private LinkedList<IObserver> listeners;
     
     
-    public ManagerProdottiSingleton(){
-        DbDescrizioneProdottoSingleton db = DbDescrizioneProdottoSingleton.getInstance();
-        descrizioni = db.readBelowThreshold();
+    public ManagerProdottiSingleton()
+    {
+        descrizioni = DbDescrizioneProdottoSingleton.getInstance().readBelowThreshold();
     }
     
-    public static ManagerProdottiSingleton getInstance(){
-        
+    public static ManagerProdottiSingleton getInstance()
+    {
         if (ManagerProdottiSingleton.instance == null){
             ManagerProdottiSingleton.instance = new ManagerProdottiSingleton();
         }
         return ManagerProdottiSingleton.instance;
     }
     
-    public void addDescrizione(IDescrizioneProdotto desc) throws QuantityException, RemoteException{
-        
-        ManagerFornitureSingleton forniture = ManagerFornitureSingleton.getInstance();
-        forniture.addDescrizione(desc);
+    public void addDescrizione(IDescrizioneProdotto desc) throws QuantityException, RemoteException
+    {    
+        ManagerFornitureSingleton.getInstance().addDescrizione(desc);
         /*if(descrizioni.contains(desc)){
         }
         else {
@@ -49,23 +48,18 @@ public class ManagerProdottiSingleton {
         }*/
     }
     
-    public void deleteDescrizione(IDescrizioneProdotto desc) throws QuantityException, RemoteException{
-        
-        ManagerFornitureSingleton forniture = ManagerFornitureSingleton.getInstance();
-        forniture.removeDescrizione(desc);
+    public void deleteDescrizione(IDescrizioneProdotto desc) throws QuantityException, RemoteException
+    {
+        ManagerFornitureSingleton.getInstance().removeDescrizione(desc);
     }
-    
-    /*public void deleteDescrizione(DescrizioneProdotto desc){
-       if(descrizioni.contains(desc)){
-           descrizioni.remove(desc);
-       } 
-    }*/
 
-    public List getMonitored() {
+    public List<IDescrizioneProdotto> getMonitored() 
+    {
         return descrizioni;
     }   
 
-    public void addListener(IObserver obs) {
+    public void addListener(IObserver obs) 
+    {
         this.listeners.add(obs);
     }
 }

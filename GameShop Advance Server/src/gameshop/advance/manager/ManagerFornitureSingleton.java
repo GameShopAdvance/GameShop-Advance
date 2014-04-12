@@ -11,11 +11,13 @@ import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
+import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.model.transazione.RigaDiTransazione;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.Iterator;
+import java.util.LinkedList;
 import java.util.List;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -28,12 +30,14 @@ public class ManagerFornitureSingleton {
     
     private static ManagerFornitureSingleton instance;
     
+    private LinkedList<IRemoteObserver> listeners = new LinkedList<>();
+    
     private HashMap<String, InformazioniProdotto> informazioni;
     
     public ManagerFornitureSingleton() throws QuantityException{
         try {
             this.informazioni = new HashMap<>();
-//            this.aggiornaDescrizioni(ManagerProdottiSingleton.getInstance().getMonitored());
+            this.aggiornaDescrizioni(ManagerProdottiSingleton.getInstance().getMonitored());
             this.aggiornaPrenotazioni(ManagerPrenotazioniSingleton.getInstance().getNotProcessed());
         } catch (RemoteException ex) {
             Logger.getLogger(ManagerFornitureSingleton.class.getName()).log(Level.SEVERE, null, ex);
@@ -46,6 +50,17 @@ public class ManagerFornitureSingleton {
             ManagerFornitureSingleton.instance = new ManagerFornitureSingleton();
         }
         return ManagerFornitureSingleton.instance;
+    }
+    
+    public void addListener(IRemoteObserver obs){
+        this.listeners.add(obs);
+    }
+    
+    public void removeListener(IRemoteObserver obs){
+        if(obs != null)
+            this.listeners.remove(obs);
+        else
+            this.listeners.clear();
     }
     
     /**

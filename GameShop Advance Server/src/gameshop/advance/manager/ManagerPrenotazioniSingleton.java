@@ -8,6 +8,7 @@ import gameshop.advance.technicalservices.db.DbPrenotazioneSingleton;
 import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.LinkedList;
+import java.util.List;
 
 /**
  *
@@ -81,7 +82,7 @@ public class ManagerPrenotazioniSingleton {
         return this.prenotazioniDaEvadere.getLast();        
     }
     
-    public LinkedList<IPrenotazione> getNotProcessed()
+    public List<IPrenotazione> getNotProcessed()
     {
         return this.prenotazioniDaEvadere;
     }

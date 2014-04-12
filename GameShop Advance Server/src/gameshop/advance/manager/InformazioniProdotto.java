@@ -8,12 +8,14 @@ package gameshop.advance.manager;
 
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
+import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  *
  * @author Lorenzo Di Giuseppe
  */
-public class InformazioniProdotto {
+public class InformazioniProdotto extends UnicastRemoteObject implements IInformazioniProdottoRemote {
     
     private IDescrizioneProdotto descrizione;
     
@@ -21,23 +23,24 @@ public class InformazioniProdotto {
     
     private int ordinati = 0;
     
-    public InformazioniProdotto(IDescrizioneProdotto desc)
+    public InformazioniProdotto(IDescrizioneProdotto desc) throws RemoteException
     {
         this(desc, 0, 0);
     }
     
-    public InformazioniProdotto(IDescrizioneProdotto desc, int prenotati)
+    public InformazioniProdotto(IDescrizioneProdotto desc, int prenotati) throws RemoteException
     {
         this(desc, prenotati, 0);
     }
     
-    public InformazioniProdotto(IDescrizioneProdotto desc, int prenotati, int ordinati)
+    public InformazioniProdotto(IDescrizioneProdotto desc, int prenotati, int ordinati) throws RemoteException
     {
         this.descrizione = desc;
         this.prenotati = prenotati;
         this.ordinati = ordinati;
     }
 
+    @Override
     public IDescrizioneProdotto getDescrizione() {
         return descrizione;
     }
@@ -46,6 +49,7 @@ public class InformazioniProdotto {
         this.descrizione = descrizione;
     }
 
+    @Override
     public int getPrenotati() {
         return prenotati;
     }
@@ -56,6 +60,7 @@ public class InformazioniProdotto {
         this.prenotati = prenotati;
     }
 
+    @Override
     public int getOrdinati() {
         return ordinati;
     }
