@@ -8,6 +8,7 @@ package gameshop.advance.controller;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.remote.IFornitureControllerRemote;
 import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
@@ -18,6 +19,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import javax.swing.JComponent;
 
 /**
  *
@@ -63,8 +65,21 @@ public class FornitureControllerSingleton {
         this.controller = factory.getAnalizzaFornitureController();
     }
     
-    public void avviaGestioneForniture() throws RemoteException{
-        UIWindowSingleton.getInstance().setPanel(new FornitureMenu());
+    private void aggiornaWindow(JComponent panel) 
+    {
+        UIWindowSingleton.getInstance().setPanel(panel);
+        UIWindowSingleton.getInstance().refreshContent();
+    }
+    
+    public void avviaGestioneForniture() throws RemoteException, QuantityException{
+        //UIWindowSingleton.getInstance().setPanel(new FornitureMenu());
+        FornitureMenu panel = new FornitureMenu();
+        this.aggiornaWindow(panel);
+        
         IIteratorWrapperRemote<IInformazioniProdottoRemote> iter = this.controller.getDatiForniture();
+        
+        while(iter.hasNext()) {
+           panel.addInfoProduct(iter.next());
+       }
     }
 }

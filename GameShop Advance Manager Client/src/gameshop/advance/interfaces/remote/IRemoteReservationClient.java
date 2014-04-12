@@ -24,6 +24,6 @@ public interface IRemoteReservationClient extends Remote {
     
     void aggiornaIdPrenotazione(int id) throws RemoteException;
 
-    void aggiornaListaProdotti(IIteratorWrapperRemote iter) throws RemoteException;
+    void aggiornaListaProdotti(IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter) throws RemoteException;
     
 }

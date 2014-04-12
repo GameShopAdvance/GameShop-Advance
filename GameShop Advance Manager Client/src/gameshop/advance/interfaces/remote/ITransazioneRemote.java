@@ -10,7 +10,6 @@ import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.utility.Money;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import java.util.Iterator;
 
 /**
  *
@@ -28,13 +27,6 @@ public interface ITransazioneRemote extends Remote {
     Money getResto() throws InvalidMoneyException, RemoteException;
 
     /**
-     *
-     * @return
-     * @throws RemoteException
-     */
-    Iterator<IRigaDiVenditaRemote> getRigheDiVendita() throws RemoteException;
-
-    /**
      * Implementazione del metodo dell'interfaccia di vendita.Calcola il totale
      * della transazione sommando i valori sub-totali di tutte le righe di vendita
      * della transazione.
@@ -50,4 +42,11 @@ public interface ITransazioneRemote extends Remote {
      */
     Integer getId() throws RemoteException;
 
+    /**
+     *
+     * @return
+     * @throws RemoteException
+     */
+    IIteratorWrapperRemote<IRigaDiTransazioneRemote> getRigheDiVendita() throws RemoteException;
+    
 }

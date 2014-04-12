@@ -6,7 +6,6 @@
 
 package gameshop.advance.interfaces.remote;
 
-
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -16,6 +15,7 @@ import java.rmi.RemoteException;
  */
 public interface IInformazioniProdottoRemote extends Remote {
 
+    IDescrizioneProdottoRemote getDescrizione() throws RemoteException;
 
     int getOrdinati() throws RemoteException;
 
