@@ -32,7 +32,7 @@ public class ManagerFornitureSingleton {
     
     private static ManagerFornitureSingleton instance;
     
-    private LinkedList<IRemoteObserver> listeners = new LinkedList<>();
+    private final LinkedList<IRemoteObserver> listeners = new LinkedList<>();
     
     private HashMap<String, IInformazioniProdotto> informazioni;
     
@@ -68,24 +68,41 @@ public class ManagerFornitureSingleton {
     /**
      *
      * @param descrizioni
+     * @throws java.rmi.RemoteException
      */
-    public void aggiornaDescrizioni(List<IDescrizioneProdotto> descrizioni) throws RemoteException{
-        
-        for(IDescrizioneProdotto desc: descrizioni){
-            IInformazioniProdotto ip = new InformazioniProdotto(desc);
+    public void aggiornaDescrizioni(List<IDescrizioneProdotto> descrizioni) throws RemoteException
+    {   
+        if(descrizioni != null && !descrizioni.isEmpty())
+        {
+            Iterator<IDescrizioneProdotto> iter = descrizioni.iterator();
+            while(iter.hasNext())
+            {
+                this.addDescrizione(iter.next());
+            }
+        }
+    }
+    
+    public void addDescrizione(IDescrizioneProdotto desc) throws RemoteException
+    {    
+        if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
+        {
+            IInformazioniProdotto ip = this.informazioni.get(desc.getCodiceProdotto().getCodice());
+            ip.setDescrizione(desc);
+        }
+        else{
+            InformazioniProdotto ip = new InformazioniProdotto(desc);
             this.informazioni.put(desc.getCodiceProdotto().getCodice(), ip);
         }
     }
     
-    public void addDescrizione(IDescrizioneProdotto desc) throws RemoteException{
-        
-        InformazioniProdotto ip = new InformazioniProdotto(desc);
-        this.informazioni.put(desc.getCodiceProdotto().getCodice(), ip);
-    }
-    
-    public void removeDescrizione(IDescrizioneProdotto desc) throws RemoteException{
-        if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice())){
-            this.informazioni.remove(desc.getCodiceProdotto().getCodice());
+    public void removeDescrizione(IDescrizioneProdotto desc) throws RemoteException
+    {
+        if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
+        {
+            IInformazioniProdotto ip = this.informazioni.get(desc.getCodiceProdotto().getCodice());
+            if(ip.getDescrizione().getQuantitaDisponibile() - ip.getPrenotati() > ip.getDescrizione().getQuantitaDiSoglia()) {
+                this.informazioni.remove(desc.getCodiceProdotto().getCodice());
+            }
         }
     }
     
@@ -95,7 +112,7 @@ public class ManagerFornitureSingleton {
      * @throws java.rmi.RemoteException
      * @throws gameshop.advance.exceptions.QuantityException
      */
-    public void aggiornaPrenotazioni(List<IPrenotazione> prenotazioni) throws RemoteException, QuantityException
+    private void aggiornaPrenotazioni(List<IPrenotazione> prenotazioni) throws RemoteException, QuantityException
     {
         if(prenotazioni != null && !prenotazioni.isEmpty())
         {
