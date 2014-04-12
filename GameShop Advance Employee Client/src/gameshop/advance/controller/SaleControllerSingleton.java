@@ -7,11 +7,15 @@ import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.remote.ICassaRemote;
+import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IRemoteClient;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.interfaces.remote.IRemoteReservationClient;
+import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.observer.RestObserver;
 import gameshop.advance.observer.TotalObserver;
+import gameshop.advance.observer.TransactionObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.employee.sale.EndSalePanel;
@@ -32,7 +36,7 @@ import javax.swing.JComponent;
  * Controller lato client delle operazioni di gestione delle vendite.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class SaleControllerSingleton extends UnicastRemoteObject implements IRemoteClient {
+public class SaleControllerSingleton extends UnicastRemoteObject implements IRemoteClient, IRemoteReservationClient {
     
     private static SaleControllerSingleton instance;
     private ICassaRemote cassa;
@@ -40,6 +44,7 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
     private IRemoteObserver saleRestObserver;
     private Money totale;
     private Money resto;
+    private TransactionObserver transactionObserver;
     
     private SaleControllerSingleton() throws RemoteException
     {
@@ -61,6 +66,7 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         this.cassa = factory.creaCassa(controllerConfig.getIdCassa());
         this.saleTotalObserver = new TotalObserver(instance);
         this.saleRestObserver = new RestObserver(instance);
+        this.transactionObserver = new TransactionObserver(instance);
     }
     
     /**
@@ -93,6 +99,7 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
     {
         this.cassa.avviaNuovaVendita();
         this.cassa.aggiungiListener(this.saleTotalObserver);
+        this.cassa.aggiungiListener(this.transactionObserver);
         aggiornaWindow(new InsertItemPanel());
     }
     
@@ -184,6 +191,16 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
     public void clearSale() {
         UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
         UIWindowSingleton.getInstance().refreshContent();
+    }
+
+    @Override
+    public void aggiornaIdPrenotazione(int id) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void aggiornaListaProdotti(IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter) throws RemoteException {
+        
     }
 
 }

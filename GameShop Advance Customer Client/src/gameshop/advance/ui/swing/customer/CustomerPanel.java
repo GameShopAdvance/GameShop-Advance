@@ -4,17 +4,18 @@
 
 package gameshop.advance.ui.swing.customer;
 
-import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JPanel;
 
 /**
@@ -39,30 +40,34 @@ public class CustomerPanel extends JPanel {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        label1 = new JLabel();
         button1 = new JButton();
 
         //======== this ========
-        setName("this");
+        setLayout(new FormLayout(
+            "[150px,min]:grow, $lcgap, [250px,default], $lcgap, [150px,min]:grow",
+            "[100px,min]:grow, $lgap, [150px,min], $lgap, fill:[100px,min]:grow"));
+
+        //---- label1 ----
+        label1.setText("Prenota uno dei nostri prodotti!");
+        label1.setFont(new Font("Dialog", Font.PLAIN, 16));
+        add(label1, CC.xy(3, 1));
 
         //---- button1 ----
         button1.setText("Avvia Prenotazione");
-        button1.setName("button1");
+        button1.setFont(new Font("Ubuntu", Font.PLAIN, 22));
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 avviaPrenotazione(e);
             }
         });
-
-        PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[150px,min]:grow, $lcgap, [150px,default], $lcgap, [150px,min]:grow",
-            "[100px,min]:grow, $lgap, 40px, $lgap, fill:[100px,min]:grow"), this);
-
-        builder.add(button1, CC.xy(3, 3, CC.FILL, CC.FILL));
+        add(button1, CC.xy(3, 3, CC.FILL, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel label1;
     private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

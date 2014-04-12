@@ -121,8 +121,9 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     }
 
     public void cancellaPrenotazione() throws RemoteException 
-    {      
+    {
         this.controller.cancellaPrenotazione();
+        this.listaPrenotati.clear();
         this.started = false;
         this.totale = new Money();
         this.acconto = new Money();

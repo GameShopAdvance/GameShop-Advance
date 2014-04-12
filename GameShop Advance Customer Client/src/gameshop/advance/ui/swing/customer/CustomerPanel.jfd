@@ -4,13 +4,22 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(min;150px):grow, labelcompgap, max(default;150px), labelcompgap, max(min;150px):grow"
-			"$rowSpecs": "max(min;100px):grow, linegap, 40px, linegap, fill:max(min;100px):grow"
+			"$columnSpecs": "max(min;150px):grow, labelcompgap, max(default;250px), labelcompgap, max(min;150px):grow"
+			"$rowSpecs": "max(min;100px):grow, linegap, max(min;150px), linegap, fill:max(min;100px):grow"
 		} ) {
 			name: "this"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "Prenota uno dei nostri prodotti!"
+				"font": new java.awt.Font( "Dialog", 0, 16 )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 1
+			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": "Avvia Prenotazione"
+				"font": new java.awt.Font( "Ubuntu", 0, 22 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "avviaPrenotazione", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
@@ -20,7 +29,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 460, 250 )
+			"size": new java.awt.Dimension( 560, 365 )
 		} )
 	}
 }
