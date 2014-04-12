@@ -28,6 +28,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
+import java.util.HashMap;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
@@ -45,6 +46,9 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
     private Money totale;
     private Money resto;
     private TransactionObserver transactionObserver;
+    
+     private HashMap<String, IRigaDiTransazioneRemote> listaProdotti = new HashMap<>();
+     private IIteratorWrapperRemote<IRigaDiTransazioneRemote> venduti;
     
     private SaleControllerSingleton() throws RemoteException
     {
@@ -200,7 +204,12 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
 
     @Override
     public void aggiornaListaProdotti(IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter) throws RemoteException {
-        
+        this.listaProdotti.clear();
+        while(iter.hasNext())
+        {
+            IRigaDiTransazioneRemote rdt = iter.next();
+            this.listaProdotti.put(rdt.getDescrizione().getCodiceProdotto().getCodice(), rdt);
+        }
     }
 
 }
