@@ -4,6 +4,7 @@
 
 package gameshop.advance.ui.swing.customer;
 
+import javax.swing.*;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
@@ -51,6 +52,7 @@ public class CustomerPanel extends JPanel {
         //---- label1 ----
         label1.setText("Prenota uno dei nostri prodotti!");
         label1.setFont(new Font("Dialog", Font.PLAIN, 16));
+        label1.setHorizontalAlignment(SwingConstants.CENTER);
         add(label1, CC.xy(3, 1));
 
         //---- button1 ----

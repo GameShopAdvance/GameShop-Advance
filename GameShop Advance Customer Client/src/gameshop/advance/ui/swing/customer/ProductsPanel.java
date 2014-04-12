@@ -4,7 +4,8 @@
 
 package gameshop.advance.ui.swing.customer;
 
-import com.jgoodies.forms.builder.PanelBuilder;
+import java.awt.*;
+import javax.swing.*;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
@@ -51,6 +52,7 @@ public class ProductsPanel extends JPanel implements PopActionListener {
         this.productDetail.setListener(this);
         this.chart = new ChartPanel();
         this.chart.setListener(this);
+        System.err.println("Chart: "+this.chart);
         CardLayout layout = (CardLayout) this.getLayout();
         layout.addLayoutComponent(this.productDetail, this.productDetail.getName());
         layout.addLayoutComponent(this.chart, this.chart.getName());
@@ -142,10 +144,15 @@ public class ProductsPanel extends JPanel implements PopActionListener {
         //======== mainPanel ========
         {
             mainPanel.setOpaque(false);
+            mainPanel.setLayout(new FormLayout(
+                "[15dlu,default], $lcgap, 73dlu, $lcgap, default:grow, $lcgap, [73dlu,default], $lcgap, [75dlu,default], $lcgap, [15dlu,default]",
+                "[15dlu,default], $lgap, [35dlu,default], $lgap, default:grow, $lgap, 15dlu, $lgap, [15dlu,default]"));
 
             //---- label1 ----
             label1.setText("Prenotazione Prodotti");
             label1.setLabelFor(productsList);
+            label1.setFont(new Font("Tahoma", Font.PLAIN, 16));
+            mainPanel.add(label1, CC.xywh(3, 3, 5, 1, CC.FILL, CC.FILL));
 
             //---- button1 ----
             button1.setText("Carrello");
@@ -155,6 +162,7 @@ public class ProductsPanel extends JPanel implements PopActionListener {
                     chartActionPerformed(e);
                 }
             });
+            mainPanel.add(button1, CC.xy(9, 3, CC.FILL, CC.FILL));
 
             //======== scrollPane1 ========
             {
@@ -170,19 +178,17 @@ public class ProductsPanel extends JPanel implements PopActionListener {
                 });
                 scrollPane1.setViewportView(productsList);
             }
+            mainPanel.add(scrollPane1, CC.xywh(3, 5, 7, 1, CC.FILL, CC.FILL));
 
             //---- label2 ----
             label2.setText("Totale");
+            label2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            label2.setHorizontalAlignment(SwingConstants.RIGHT);
+            mainPanel.add(label2, CC.xy(7, 7, CC.FILL, CC.FILL));
 
-            PanelBuilder mainPanelBuilder = new PanelBuilder(new FormLayout(
-                "[15dlu,default], $lcgap, 73dlu, $lcgap, default:grow, $lcgap, [73dlu,default], $lcgap, 73dlu, $lcgap, [15dlu,default]",
-                "2*([15dlu,default], $lgap), default:grow, $lgap, 15dlu, $lgap, [15dlu,default]"), mainPanel);
-
-            mainPanelBuilder.add(label1,      CC.xywh(3, 3,       5,       1, CC.FILL, CC.FILL));
-            mainPanelBuilder.add(button1,     CC.xy  (9, 3));
-            mainPanelBuilder.add(scrollPane1, CC.xywh(3, 5,       7,       1, CC.FILL, CC.FILL));
-            mainPanelBuilder.add(label2,      CC.xy  (7, 7, CC.FILL, CC.FILL));
-            mainPanelBuilder.add(totale,      CC.xy  (9, 7, CC.FILL, CC.FILL));
+            //---- totale ----
+            totale.setFont(new Font("Tahoma", Font.BOLD, 14));
+            mainPanel.add(totale, CC.xy(9, 7, CC.FILL, CC.FILL));
         }
         add(mainPanel, "card1");
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
