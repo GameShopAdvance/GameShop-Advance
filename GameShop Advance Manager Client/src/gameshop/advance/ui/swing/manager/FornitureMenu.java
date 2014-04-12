@@ -4,42 +4,48 @@
 
 package gameshop.advance.ui.swing.manager;
 
-import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
-import javax.swing.JLabel;
+import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
+import javax.swing.DefaultListModel;
+import javax.swing.JList;
 import javax.swing.JPanel;
-import javax.swing.SwingConstants;
+import javax.swing.JScrollPane;
 
-/**
- * @author Pippo
- */
-public class FornitureMenu extends JPanel {
-    public FornitureMenu() {
-        initComponents();
+public class FornitureMenu extends JPanel{
+    
+    private final DefaultListModel<IInformazioniProdottoRemote> infoProducts;
+    
+    public FornitureMenu() {     
+        this.infoProducts = new DefaultListModel<>();
+        this.infoList.setCellRenderer(new InfoCellRenderer());
+        this.infoList.setModel(this.infoProducts);
     }
-
+    
+    public void addInfoProduct(IInformazioniProdottoRemote infoProd){
+        this.infoProducts.addElement(infoProd);
+    }
+    
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        label1 = new JLabel();
+        scrollPane1 = new JScrollPane();
+        infoList = new JList();
 
         //======== this ========
-        setName("this");
-
-        //---- label1 ----
-        label1.setText("Coming soon");
-        label1.setHorizontalAlignment(SwingConstants.CENTER);
-        label1.setName("label1");
-
-        PanelBuilder builder = new PanelBuilder(new FormLayout(
+        setLayout(new FormLayout(
             "default, $lcgap, default:grow, $lcgap, default",
-            "[15px,default]:grow, $lgap, [35px,default,50dlu], $lgap, [15px,default]:grow"), this);
+            "[25px,default], $lgap, fill:177dlu, $lgap, [77px,default]"));
 
-        builder.add(label1, CC.xy(3, 3, CC.FILL, CC.FILL));
+        //======== scrollPane1 ========
+        {
+            scrollPane1.setViewportView(infoList);
+        }
+        add(scrollPane1, CC.xy(3, 3));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel label1;
+    private JScrollPane scrollPane1;
+    private JList infoList;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

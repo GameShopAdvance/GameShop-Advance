@@ -8,6 +8,10 @@ package gameshop.advance.controller;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.interfaces.remote.IFornitureControllerRemote;
+import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
+import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.manager.FornitureMenu;
@@ -15,6 +19,7 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import javax.swing.JComponent;
 
 /**
  *
@@ -23,6 +28,7 @@ import java.rmi.registry.Registry;
 public class FornitureControllerSingleton {
     
     private static FornitureControllerSingleton instance;
+    private IFornitureControllerRemote controller;
     
     private FornitureControllerSingleton()
     {
@@ -56,9 +62,24 @@ public class FornitureControllerSingleton {
         ConfigurationControllerSingleton controllerConfig = ConfigurationControllerSingleton.getInstance();
         Registry reg = LocateRegistry.getRegistry(controllerConfig.getServerAddress(), controllerConfig.getServerPort());
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
+        this.controller = factory.getAnalizzaFornitureController();
     }
     
-    public void avviaGestioneForniture(){
-        UIWindowSingleton.getInstance().setPanel(new FornitureMenu());
+    private void aggiornaWindow(JComponent panel) 
+    {
+        UIWindowSingleton.getInstance().setPanel(panel);
+        UIWindowSingleton.getInstance().refreshContent();
+    }
+    
+    public void avviaGestioneForniture() throws RemoteException, QuantityException{
+        //UIWindowSingleton.getInstance().setPanel(new FornitureMenu());
+        FornitureMenu panel = new FornitureMenu();
+        this.aggiornaWindow(panel);
+        
+        IIteratorWrapperRemote<IInformazioniProdottoRemote> iter = this.controller.getDatiForniture();
+        
+        while(iter.hasNext()) {
+           panel.addInfoProduct(iter.next());
+       }
     }
 }
