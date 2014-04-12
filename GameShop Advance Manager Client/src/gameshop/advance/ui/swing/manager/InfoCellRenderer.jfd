@@ -4,13 +4,74 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;227dlu), labelcompgap, 16dlu"
-			"$rowSpecs": "max(default;13dlu), linegap, 30dlu, linegap, max(default;13dlu)"
+			"$columnSpecs": "labelcompgap, 69dlu, labelcompgap, 90dlu, labelcompgap, max(default;56dlu), labelcompgap, labelcompgap, 43dlu, labelcompgap, 45dlu, labelcompgap"
+			"$rowSpecs": "linegap, fill:max(default;27dlu), linegap, fill:26dlu, linegap"
 		} ) {
 			name: "this"
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "title"
+				"editable": false
+				"text": "Titolo"
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 2
+				"gridHeight": 3
+				"gridX": 2
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "prenotazioni"
+				"editable": false
+				"text": "Prenotazioni"
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 4
+				"gridY": 2
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "quantitaPrenotazioni"
+				"text": "#qty"
+				"horizontalAlignment": 0
+				"editable": false
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 6
+				"gridY": 2
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "disponibilità"
+				"editable": false
+				"text": "Disponibilità"
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 4
+				"gridY": 4
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "quantitaDisponibile"
+				"editable": false
+				"text": "#qty"
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 6
+				"gridY": 4
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "Ordine"
+				"text": "Ordine"
+				"editable": false
+				"horizontalAlignment": 0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 9
+				"gridY": 4
+			} )
+			add( new FormComponent( "javax.swing.JTextField" ) {
+				name: "numeroOrdine"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 11
+				"gridY": 4
+			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 95 )
+			"size": new java.awt.Dimension( 490, 95 )
 		} )
 	}
 }

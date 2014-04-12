@@ -9,6 +9,7 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.FornitureControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.QuantityException;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -34,6 +35,9 @@ public class ManagerMenu extends JPanel {
             Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
         catch (RemoteException ex) {
+            Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
+            
+        } catch (QuantityException ex) {
             Logger.getLogger(ManagerMenu.class.getName()).log(Level.SEVERE, null, ex);
         }
     }

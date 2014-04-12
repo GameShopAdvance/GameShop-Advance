@@ -16,7 +16,8 @@ public class FornitureMenu extends JPanel{
     
     private final DefaultListModel<IInformazioniProdottoRemote> infoProducts;
     
-    public FornitureMenu() {     
+    public FornitureMenu() { 
+        initComponents();
         this.infoProducts = new DefaultListModel<>();
         this.infoList.setCellRenderer(new InfoCellRenderer());
         this.infoList.setModel(this.infoProducts);
