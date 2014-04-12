@@ -10,6 +10,7 @@ import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IInformazioniProdotto;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
+import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
 import gameshop.advance.remote.DescrizioneRemoteProxy;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -18,7 +19,7 @@ import java.rmi.server.UnicastRemoteObject;
  *
  * @author Lorenzo Di Giuseppe
  */
-public class InformazioniProdotto extends UnicastRemoteObject implements IInformazioniProdotto {
+public class InformazioniProdotto extends UnicastRemoteObject implements IInformazioniProdottoRemote, IInformazioniProdotto {
     
     private IDescrizioneProdottoRemote descrizione;
     

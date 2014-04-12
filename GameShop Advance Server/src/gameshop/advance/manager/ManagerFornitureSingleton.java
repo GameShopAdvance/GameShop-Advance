@@ -9,7 +9,6 @@ package gameshop.advance.manager;
 import gameshop.advance.GameShopAdvance;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
-import gameshop.advance.interfaces.IInformazioniProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
@@ -86,7 +85,7 @@ public class ManagerFornitureSingleton {
     {    
         if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
         {
-            IInformazioniProdotto ip = (IInformazioniProdotto) this.informazioni.get(desc.getCodiceProdotto().getCodice());
+            InformazioniProdotto ip = (InformazioniProdotto) this.informazioni.get(desc.getCodiceProdotto().getCodice());
             ip.setDescrizione(desc);
         }
         else{
@@ -99,7 +98,7 @@ public class ManagerFornitureSingleton {
     {
         if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
         {
-            IInformazioniProdotto ip = (IInformazioniProdotto) this.informazioni.get(desc.getCodiceProdotto().getCodice());
+            InformazioniProdotto ip = (InformazioniProdotto) this.informazioni.get(desc.getCodiceProdotto().getCodice());
             if(ip.getDescrizione().getQuantitaDisponibile() - ip.getPrenotati() > ip.getDescrizione().getQuantitaDiSoglia()) {
                 this.informazioni.remove(desc.getCodiceProdotto().getCodice());
             }
@@ -133,7 +132,7 @@ public class ManagerFornitureSingleton {
             IDescrizioneProdotto desc = rdt.getDescrizione();
             if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
             {
-                IInformazioniProdotto ip = (IInformazioniProdotto) this.informazioni.get(desc.getCodiceProdotto().getCodice());
+                InformazioniProdotto ip = (InformazioniProdotto) this.informazioni.get(desc.getCodiceProdotto().getCodice());
                 ip.setPrenotati(ip.getPrenotati()+rdt.getQuantity());
             }
             else{
@@ -153,7 +152,7 @@ public class ManagerFornitureSingleton {
             IDescrizioneProdotto desc = rdt.getDescrizione();
             if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
             {
-                IInformazioniProdotto ip = (IInformazioniProdotto) this.informazioni.get(desc.getCodiceProdotto().getCodice());
+                InformazioniProdotto ip = (InformazioniProdotto) this.informazioni.get(desc.getCodiceProdotto().getCodice());
                 int prenQty = ip.getPrenotati()-rdt.getQuantity();
                 if(prenQty > 0)
                     ip.setPrenotati(prenQty);

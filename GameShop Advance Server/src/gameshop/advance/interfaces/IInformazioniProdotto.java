@@ -7,13 +7,12 @@
 package gameshop.advance.interfaces;
 
 import gameshop.advance.exceptions.QuantityException;
-import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
 
 /**
  *
  * @author Lorenzo Di Giuseppe
  */
-public interface IInformazioniProdotto extends IInformazioniProdottoRemote{
+public interface IInformazioniProdotto {
     void setDescrizione(IDescrizioneProdotto descrizione);
 
     void setPrenotati(int prenotati) throws QuantityException;
