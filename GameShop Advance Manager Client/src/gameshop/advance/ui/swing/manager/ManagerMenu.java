@@ -4,17 +4,18 @@
 
 package gameshop.advance.ui.swing.manager;
 
-import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.FornitureControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.QuantityException;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.AbstractListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -44,109 +45,141 @@ public class ManagerMenu extends JPanel {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        panel2 = new JPanel();
-        scrollPane1 = new JScrollPane();
-        lowQuantityList = new JList();
         button4 = new JButton();
-        button7 = new JButton();
-        panel3 = new JPanel();
+        panel2 = new JPanel();
         scrollPane2 = new JScrollPane();
-        offertsList = new JList();
-        button5 = new JButton();
+        offertsList = new JList<>();
+        button7 = new JButton();
+        button1 = new JButton();
         button6 = new JButton();
+        panel3 = new JPanel();
+        scrollPane1 = new JScrollPane();
+        lowQuantityList = new JList<>();
+        button5 = new JButton();
+        button2 = new JButton();
+        button3 = new JButton();
 
         //======== this ========
-        setName("this");
-
-        //======== panel2 ========
-        {
-            panel2.setBorder(new TitledBorder("Prodotti in esaurimento scorte"));
-            panel2.setName("panel2");
-
-            //======== scrollPane1 ========
-            {
-                scrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
-                scrollPane1.setViewportBorder(null);
-                scrollPane1.setName("scrollPane1");
-
-                //---- lowQuantityList ----
-                lowQuantityList.setName("lowQuantityList");
-                scrollPane1.setViewportView(lowQuantityList);
-            }
-
-            PanelBuilder panel2Builder = new PanelBuilder(new FormLayout(
-                "[245px,pref]:grow",
-                "fill:35px:grow"), panel2);
-
-            panel2Builder.add(scrollPane1, CC.xy(1, 1));
-        }
+        setLayout(new FormLayout(
+            "$lcgap, 13dlu, [303px,pref], 20dlu, [288px,pref], $lcgap",
+            "7*($lgap, fill:30dlu)"));
 
         //---- button4 ----
         button4.setText("Gestisci Forniture");
-        button4.setName("button4");
+        button4.setFont(new Font("Tahoma", Font.PLAIN, 18));
         button4.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 fornitureActionPerformed(e);
             }
         });
+        add(button4, CC.xy(3, 2));
+
+        //======== panel2 ========
+        {
+            panel2.setBorder(new TitledBorder("Prodotti in esaurimento scorte"));
+            panel2.setLayout(new FormLayout(
+                "[245px,pref]:grow",
+                "fill:81dlu"));
+
+            //======== scrollPane2 ========
+            {
+
+                //---- offertsList ----
+                offertsList.setModel(new AbstractListModel<String>() {
+                    String[] values = {
+                        "Prodotto 1",
+                        "Prodotto 2",
+                        "Prodotto 3",
+                        "..."
+                    };
+                    @Override
+                    public int getSize() { return values.length; }
+                    @Override
+                    public String getElementAt(int i) { return values[i]; }
+                });
+                offertsList.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                scrollPane2.setViewportView(offertsList);
+            }
+            panel2.add(scrollPane2, CC.xy(1, 1));
+        }
+        add(panel2, CC.xywh(5, 2, 1, 5));
 
         //---- button7 ----
         button7.setText("Controlla Magazzino");
-        button7.setName("button7");
+        button7.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        add(button7, CC.xy(3, 4));
+
+        //---- button1 ----
+        button1.setEnabled(false);
+        add(button1, CC.xy(3, 6));
+
+        //---- button6 ----
+        button6.setText("Gestisci Prezzi");
+        button6.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        add(button6, CC.xy(3, 8));
 
         //======== panel3 ========
         {
             panel3.setBorder(new TitledBorder("Attualmente in offerta"));
-            panel3.setName("panel3");
-
-            //======== scrollPane2 ========
-            {
-                scrollPane2.setName("scrollPane2");
-
-                //---- offertsList ----
-                offertsList.setName("offertsList");
-                scrollPane2.setViewportView(offertsList);
-            }
-
-            PanelBuilder panel3Builder = new PanelBuilder(new FormLayout(
+            panel3.setLayout(new FormLayout(
                 "[245px,pref]:grow",
-                "fill:[35px,default]:grow"), panel3);
+                "fill:[35px,default]:grow"));
 
-            panel3Builder.add(scrollPane2, CC.xy(1, 1));
+            //======== scrollPane1 ========
+            {
+                scrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                scrollPane1.setViewportBorder(null);
+
+                //---- lowQuantityList ----
+                lowQuantityList.setModel(new AbstractListModel<String>() {
+                    String[] values = {
+                        "Prodotto 1",
+                        "Prodotto 2",
+                        "Prodotto 3",
+                        "..."
+                    };
+                    @Override
+                    public int getSize() { return values.length; }
+                    @Override
+                    public String getElementAt(int i) { return values[i]; }
+                });
+                lowQuantityList.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                scrollPane1.setViewportView(lowQuantityList);
+            }
+            panel3.add(scrollPane1, CC.xy(1, 1));
         }
+        add(panel3, CC.xywh(5, 8, 1, 5));
 
         //---- button5 ----
         button5.setText("Gestisci Sconti");
-        button5.setName("button5");
+        button5.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        add(button5, CC.xy(3, 10));
 
-        //---- button6 ----
-        button6.setText("Gestisci Prezzi");
-        button6.setName("button6");
+        //---- button2 ----
+        button2.setEnabled(false);
+        add(button2, CC.xy(3, 12));
 
-        PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[15px,default]:grow, $lcgap, [245px,pref], 10dlu, [185px,pref], $lcgap, [15px,default]:grow",
-            "fill:[15px,default]:grow, 2*($lgap, [25dlu,default]), $lgap, fill:[25dlu,default], $lgap, 5px, 3*($lgap, fill:[25dlu,default]), $lgap, fill:[15px,default]:grow"), this);
-
-        builder.add(panel2,  CC.xywh(3,  2,       1,       6));
-        builder.add(button4, CC.xy  (5,  3, CC.FILL, CC.FILL));
-        builder.add(button7, CC.xy  (5,  5, CC.FILL, CC.FILL));
-        builder.add(panel3,  CC.xywh(3, 10,       1,       6));
-        builder.add(button5, CC.xy  (5, 11, CC.FILL, CC.FILL));
-        builder.add(button6, CC.xy  (5, 13));
+        //---- button3 ----
+        button3.setText("Analizza Vendite");
+        button3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        add(button3, CC.xy(3, 14));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JPanel panel2;
-    private JScrollPane scrollPane1;
-    private JList lowQuantityList;
     private JButton button4;
-    private JButton button7;
-    private JPanel panel3;
+    private JPanel panel2;
     private JScrollPane scrollPane2;
-    private JList offertsList;
-    private JButton button5;
+    private JList<String> offertsList;
+    private JButton button7;
+    private JButton button1;
     private JButton button6;
+    private JPanel panel3;
+    private JScrollPane scrollPane1;
+    private JList<String> lowQuantityList;
+    private JButton button5;
+    private JButton button2;
+    private JButton button3;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

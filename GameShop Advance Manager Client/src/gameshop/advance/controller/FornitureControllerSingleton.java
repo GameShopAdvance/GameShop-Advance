@@ -15,6 +15,7 @@ import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.manager.FornitureMenu;
+import gameshop.advance.ui.swing.manager.ManagerMenu;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -81,5 +82,10 @@ public class FornitureControllerSingleton {
         while(iter.hasNext()) {
            panel.addInfoProduct(iter.next());
        }
+    }
+    
+    public void clearForniture() {
+        UIWindowSingleton.getInstance().setPanel(new ManagerMenu());
+        UIWindowSingleton.getInstance().refreshContent();
     }
 }
