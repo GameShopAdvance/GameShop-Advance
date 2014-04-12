@@ -15,6 +15,6 @@ import java.rmi.RemoteException;
  */
 public interface IFornitureControllerRemote extends Remote{
     
-    public IIteratorWrapperRemote<IDescrizioneProdottoRemote> getDatiForniture() throws RemoteException;
+    public IIteratorWrapperRemote<IInformazioniProdottoRemote> getDatiForniture() throws RemoteException;
     
 }

@@ -6,8 +6,8 @@
 
 package gameshop.advance.controller;
 
-import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IFornitureControllerRemote;
+import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
@@ -22,7 +22,7 @@ public class AnalizzaFornitureController extends UnicastRemoteObject implements 
         
     }
     @Override
-    public IIteratorWrapperRemote<IDescrizioneProdottoRemote> getDatiForniture() throws RemoteException {
+    public IIteratorWrapperRemote<IInformazioniProdottoRemote> getDatiForniture() throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
