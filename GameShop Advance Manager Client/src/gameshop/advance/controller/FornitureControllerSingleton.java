@@ -8,6 +8,9 @@ package gameshop.advance.controller;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.interfaces.remote.IFornitureControllerRemote;
+import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
+import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.manager.FornitureMenu;
@@ -23,6 +26,7 @@ import java.rmi.registry.Registry;
 public class FornitureControllerSingleton {
     
     private static FornitureControllerSingleton instance;
+    private IFornitureControllerRemote controller;
     
     private FornitureControllerSingleton()
     {
@@ -56,9 +60,11 @@ public class FornitureControllerSingleton {
         ConfigurationControllerSingleton controllerConfig = ConfigurationControllerSingleton.getInstance();
         Registry reg = LocateRegistry.getRegistry(controllerConfig.getServerAddress(), controllerConfig.getServerPort());
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
+        this.controller = factory.getAnalizzaFornitureController();
     }
     
-    public void avviaGestioneForniture(){
+    public void avviaGestioneForniture() throws RemoteException{
         UIWindowSingleton.getInstance().setPanel(new FornitureMenu());
+        IIteratorWrapperRemote<IInformazioniProdottoRemote> iter = this.controller.getDatiForniture();
     }
 }
