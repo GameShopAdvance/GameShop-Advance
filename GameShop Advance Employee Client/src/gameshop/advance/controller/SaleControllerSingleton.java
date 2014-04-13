@@ -16,8 +16,10 @@ import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.observer.RestObserver;
 import gameshop.advance.observer.TotalObserver;
 import gameshop.advance.observer.TransactionObserver;
+import gameshop.advance.ui.swing.RigheDiVenditaListModel;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
+import gameshop.advance.ui.swing.employee.sale.BookCellRenderer;
 import gameshop.advance.ui.swing.employee.sale.EndSalePanel;
 import gameshop.advance.ui.swing.employee.sale.InsertItemPanel;
 import gameshop.advance.ui.swing.employee.sale.PaymentPanel;
@@ -28,7 +30,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
@@ -47,11 +48,11 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
     private Money resto;
     private TransactionObserver transactionObserver;
     
-     private final LinkedList<IRigaDiTransazioneRemote> listaProdotti = new LinkedList<>();
+    private final RigheDiVenditaListModel listaProdotti;
     
     private SaleControllerSingleton() throws RemoteException
     {
-        
+        this.listaProdotti = new RigheDiVenditaListModel();
     }
 
     /**
@@ -101,10 +102,12 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
     public void avviaNuovaVendita() throws RemoteException
     {
         this.cassa.avviaNuovaVendita();
-        this.listaProdotti.clear();
         this.cassa.aggiungiListener(this.saleTotalObserver);
         this.cassa.aggiungiListener(this.transactionObserver);
-        aggiornaWindow(new InsertItemPanel());
+        InsertItemPanel panel = new InsertItemPanel();
+        this.listaProdotti.clear();
+        panel.setList(this.listaProdotti, new BookCellRenderer());
+        aggiornaWindow(panel);
     }
     
     /**
@@ -128,7 +131,9 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
      */
     public void concludiVendita() throws RemoteException
     {
-        this.aggiornaWindow(new PaymentPanel());
+        PaymentPanel panel = new PaymentPanel();
+        panel.setList(listaProdotti, new BookCellRenderer());
+        this.aggiornaWindow(panel);
         this.cassa.concludiVendita();
     }
     
@@ -197,11 +202,6 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         UIWindowSingleton.getInstance().refreshContent();
     }
     
-    
-    public IRigaDiTransazioneRemote getLastInserted() throws RemoteException {
-        return listaProdotti.get(this.listaProdotti.size() - 1) ;
-    }
-    
     @Override
     public void aggiornaIdPrenotazione(int id) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -212,7 +212,7 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         while(iter.hasNext())
         {
             IRigaDiTransazioneRemote rdt = iter.next();
-            this.listaProdotti.add(rdt);
+            this.listaProdotti.addElement(rdt);
         }
     }
 }

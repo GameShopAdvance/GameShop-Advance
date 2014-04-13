@@ -1,51 +1,58 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_25" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_17" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "labelcompgap, max(min;327px), center:11dlu, max(min;322px)"
-			"$rowSpecs": "pargap, fill:190px, pargap, fill:171px, linegap"
+			"$columnSpecs": "labelcompgap, default:grow, relgap, 75dlu, 15dlu, 75dlu, relgap, default:grow"
+			"$rowSpecs": "linegap, default:grow, relgap, fill:max(default;35dlu), 15dlu, fill:max(default;35dlu), relgap, default:grow"
 		} ) {
 			name: "this"
 			"maximumSize": new java.awt.Dimension( 700, 600 )
 			"minimumSize": new java.awt.Dimension( 650, 450 )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "startSale"
-				"text": "Avvia Vendita"
-				"font": new java.awt.Font( "Tahoma", 0, 24 )
+				"text": "Vendita"
+				"font": new java.awt.Font( "Tahoma", 0, 14 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startSaleActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 2
-				"gridY": 2
+				"gridX": 4
+				"gridY": 4
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "manageBook"
-				"text": "Gestisci Prenotazioni"
-				"font": new java.awt.Font( "Tahoma", 0, 24 )
+				"text": "Prenotazioni"
+				"font": new java.awt.Font( "Tahoma", 0, 14 )
 				"maximumSize": new java.awt.Dimension( 169, 37 )
 				"minimumSize": new java.awt.Dimension( 169, 37 )
 				"preferredSize": new java.awt.Dimension( 169, 37 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "manageBookActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
-				"gridY": 2
+				"gridX": 6
+				"gridY": 4
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
-				"text": "Fai Inventario"
-				"font": new java.awt.Font( "Tahoma", 0, 24 )
+				"text": "Inventario"
+				"font": new java.awt.Font( "Tahoma", 0, 14 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "faiInventario", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 2
-				"gridY": 4
+				"gridX": 4
+				"gridY": 6
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"
 				"action": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"enabled": false
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
-				"gridY": 4
+				"gridX": 6
+				"gridY": 6
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 15 )

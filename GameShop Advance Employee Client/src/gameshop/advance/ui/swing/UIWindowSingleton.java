@@ -4,9 +4,6 @@
 
 package gameshop.advance.ui.swing;
 
-import com.jgoodies.forms.builder.PanelBuilder;
-import com.jgoodies.forms.factories.CC;
-import com.jgoodies.forms.layout.FormLayout;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.event.ActionEvent;
@@ -56,22 +53,18 @@ public class UIWindowSingleton extends JFrame {
 
         //======== this ========
         setTitle("GameShopAdvance Cassa");
-        setName("this");
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
         //======== menuBar1 ========
         {
-            menuBar1.setName("menuBar1");
 
             //======== menu2 ========
             {
                 menu2.setText("File");
-                menu2.setName("menu2");
 
                 //---- menuItem3 ----
                 menuItem3.setText("Impostazioni");
-                menuItem3.setName("menuItem3");
                 menuItem3.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -82,7 +75,6 @@ public class UIWindowSingleton extends JFrame {
 
                 //---- menuItem1 ----
                 menuItem1.setText("Esci");
-                menuItem1.setName("menuItem1");
                 menuItem1.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -98,7 +90,6 @@ public class UIWindowSingleton extends JFrame {
         //======== mainPanel ========
         {
             mainPanel.setViewportBorder(null);
-            mainPanel.setName("mainPanel");
         }
         contentPane.add(mainPanel, BorderLayout.CENTER);
         setSize(700, 460);

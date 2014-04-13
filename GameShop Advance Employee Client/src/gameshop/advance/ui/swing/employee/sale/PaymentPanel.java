@@ -16,8 +16,14 @@ import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListModel;
+import javax.swing.ScrollPaneConstants;
+import javax.swing.SwingConstants;
 
 /**
  * @author Andrea
@@ -54,17 +60,11 @@ public class PaymentPanel extends JPanel {
                     + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
         }
     }
-
-    private void startSaleActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void manageBookActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void faiInventario(ActionEvent e) {
-        // TODO add your code here
+    
+    public void setList(ListModel listaProdotti, ListCellRenderer renderer)
+    {
+        this.resumeList.setCellRenderer(renderer);
+        this.resumeList.setModel(listaProdotti);
     }
 
     /**
@@ -76,6 +76,8 @@ public class PaymentPanel extends JPanel {
     
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        scrollPane1 = new JScrollPane();
+        resumeList = new JList();
         label1 = new JLabel();
         displayTotal = new JTextField();
         payment = new JTextField();
@@ -84,29 +86,42 @@ public class PaymentPanel extends JPanel {
 
         //======== this ========
         setLayout(new FormLayout(
-            "[324px,min], $lcgap, [146px,min], $lcgap, [189px,min]",
-            "fill:44dlu, [32dlu,default], $rgap, 35dlu, $rgap, fill:36dlu, fill:default:grow"));
+            "[15dlu,default], $lcgap, [350px,min,600dlu], $lcgap, [146px,min], $lcgap, [25dlu,default], $lcgap, [75dlu,default], $lcgap, [15dlu,default]",
+            "fill:[15dlu,default], 2*($rgap, [35dlu,default]), $rgap, fill:[35dlu,default], $lgap, [35dlu,default]:grow, $rgap, [15dlu,default]"));
+
+        //======== scrollPane1 ========
+        {
+            scrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            scrollPane1.setViewportView(resumeList);
+        }
+        add(scrollPane1, CC.xywh(3, 3, 1, 7));
 
         //---- label1 ----
         label1.setText("Totale");
-        label1.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        label1.setFont(new Font("Tahoma", Font.PLAIN, 16));
         label1.setAlignmentX(0.5F);
-        add(label1, CC.xy(3, 2));
+        label1.setHorizontalAlignment(SwingConstants.CENTER);
+        add(label1, CC.xy(5, 3, CC.FILL, CC.FILL));
 
         //---- displayTotal ----
         displayTotal.setEditable(false);
-        add(displayTotal, CC.xy(5, 2, CC.FILL, CC.FILL));
-        add(payment, CC.xy(5, 4, CC.FILL, CC.FILL));
+        displayTotal.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        add(displayTotal, CC.xywh(7, 3, 3, 1, CC.FILL, CC.FILL));
+
+        //---- payment ----
+        payment.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        add(payment, CC.xywh(7, 5, 3, 1, CC.FILL, CC.FILL));
 
         //---- label2 ----
         label2.setText("Pagamento");
-        label2.setFont(new Font("Tahoma", Font.PLAIN, 26));
+        label2.setFont(new Font("Tahoma", Font.PLAIN, 16));
         label2.setAlignmentX(0.5F);
-        add(label2, CC.xy(3, 4));
+        label2.setHorizontalAlignment(SwingConstants.CENTER);
+        add(label2, CC.xy(5, 5, CC.FILL, CC.FILL));
 
         //---- payButton ----
         payButton.setText("Paga");
-        payButton.setFont(new Font("Tahoma", Font.PLAIN, 24));
+        payButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         payButton.setAlignmentX(0.5F);
         payButton.addActionListener(new ActionListener() {
             @Override
@@ -114,11 +129,13 @@ public class PaymentPanel extends JPanel {
                 payButtonActionPerformed(e);
             }
         });
-        add(payButton, CC.xy(5, 6));
+        add(payButton, CC.xy(9, 7));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JScrollPane scrollPane1;
+    private JList resumeList;
     private JLabel label1;
     private JTextField displayTotal;
     private JTextField payment;

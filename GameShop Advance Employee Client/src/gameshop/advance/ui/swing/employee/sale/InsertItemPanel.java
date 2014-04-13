@@ -27,6 +27,8 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
 import javax.swing.JTextField;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
@@ -42,10 +44,7 @@ public class InsertItemPanel extends JPanel {
         this.clearSale.setBackground(UIStyleSingleton.getInstance().getAlertColor());
         this.clearSale.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
         this.payButton.setBackground(UIStyleSingleton.getInstance().getSuccessColor());
-        this.payButton.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
-        this.rdvListModel = new DefaultListModel<>();
-        this.rdvList.setCellRenderer(new rdvCellRender());
-        this.rdvList.setModel(this.rdvListModel);       
+        this.payButton.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());    
     }
 
     private void goToPaymentButtonActionPerformed(ActionEvent e) {
@@ -88,7 +87,7 @@ public class InsertItemPanel extends JPanel {
             SaleControllerSingleton.getInstance().inserisciProdotto(this.productIdTextField.getText(), quantity);
             this.clearFields();
             this.total.setText(SaleControllerSingleton.getInstance().getTotal().toString());
-            this.addrdV(SaleControllerSingleton.getInstance().getLastInserted());
+//            this.addrdV(SaleControllerSingleton.getInstance().getLastInserted());
         }
         catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
@@ -146,23 +145,6 @@ public class InsertItemPanel extends JPanel {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di configurazione. Se il problema persiste contattare l'amministratore di sistema.");
         }
         
-    }
-        
-
-    private void createUIComponents() {
-        // TODO: add custom component creation code here
-    }
-
-    private void startSaleActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void manageBookActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void faiInventario(ActionEvent e) {
-        // TODO add your code here
     }
 
     private void initComponents() {
@@ -318,6 +300,12 @@ public class InsertItemPanel extends JPanel {
             //---- clearSale ----
             clearSale.setText("Annulla");
             clearSale.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            clearSale.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    clearSaleActionPerformed(e);
+                }
+            });
             panel3.add(clearSale, CC.xy(1, 1));
         }
         add(panel3, CC.xy(3, 7, CC.FILL, CC.FILL));
@@ -358,4 +346,10 @@ public class InsertItemPanel extends JPanel {
     private JButton clearSale;
     private JButton payButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+    public void setList(ListModel listaProdotti, ListCellRenderer renderer)
+    {
+        this.rdvList.setCellRenderer(renderer);
+        this.rdvList.setModel(listaProdotti);
+    }
 }
