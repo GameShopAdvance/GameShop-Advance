@@ -28,7 +28,7 @@ public class rdvCellRender extends JPanel implements ListCellRenderer<IRigaDiTra
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        Description = new JLabel();
+        description = new JLabel();
         qty = new JLabel();
         subTotal = new JLabel();
         separator1 = new JSeparator();
@@ -38,9 +38,9 @@ public class rdvCellRender extends JPanel implements ListCellRenderer<IRigaDiTra
             "[15dlu,default], $lcgap, [40dlu,default], $lcgap, 62dlu:grow, $lcgap, 25dlu, $lcgap, default",
             "[10dlu,default], $lgap, 30dlu, $lgap, 1dlu"));
 
-        //---- Description ----
-        Description.setText("text");
-        add(Description, CC.xy(3, 3, CC.FILL, CC.FILL));
+        //---- description ----
+        description.setText("text");
+        add(description, CC.xy(3, 3, CC.FILL, CC.FILL));
 
         //---- qty ----
         qty.setText("qty #");
@@ -54,7 +54,7 @@ public class rdvCellRender extends JPanel implements ListCellRenderer<IRigaDiTra
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel Description;
+    private JLabel description;
     private JLabel qty;
     private JLabel subTotal;
     private JSeparator separator1;
@@ -63,12 +63,13 @@ public class rdvCellRender extends JPanel implements ListCellRenderer<IRigaDiTra
     @Override
     public Component getListCellRendererComponent(JList<? extends IRigaDiTransazioneRemote> list, IRigaDiTransazioneRemote value, int index, boolean isSelected, boolean cellHasFocus) {
         try {
-            this.Description.setText(value.getDescrizione().toString());
+            System.err.println("Descri:"+ value.getDescrizione().getDescrizione());
+            this.description.setText(value.getDescrizione().getDescrizione());
             this.subTotal.setText(value.getSubTotal().toString());
             this.qty.setText(Integer.toString(value.getQuantity()));
         } catch (RemoteException ex) {
             Logger.getLogger(rdvCellRender.class.getName()).log(Level.SEVERE, null, ex);
         }
-        return null;
+        return this;
     }
 }

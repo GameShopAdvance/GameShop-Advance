@@ -28,7 +28,7 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.HashMap;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JComponent;
@@ -47,8 +47,7 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
     private Money resto;
     private TransactionObserver transactionObserver;
     
-     private HashMap<String, IRigaDiTransazioneRemote> listaProdotti = new HashMap<>();
-     private IIteratorWrapperRemote<IRigaDiTransazioneRemote> venduti;
+     private final LinkedList<IRigaDiTransazioneRemote> listaProdotti = new LinkedList<>();
     
     private SaleControllerSingleton() throws RemoteException
     {
@@ -196,7 +195,12 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
         UIWindowSingleton.getInstance().refreshContent();
     }
-
+    
+    
+    public IRigaDiTransazioneRemote getLastInserted() throws RemoteException {
+        return listaProdotti.get(this.listaProdotti.size() - 1) ;
+    }
+    
     @Override
     public void aggiornaIdPrenotazione(int id) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
@@ -208,8 +212,9 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         while(iter.hasNext())
         {
             IRigaDiTransazioneRemote rdt = iter.next();
-            this.listaProdotti.put(rdt.getDescrizione().getCodiceProdotto().getCodice(), rdt);
+            this.listaProdotti.add(rdt);
         }
+        
     }
 
 }

@@ -1,183 +1,210 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_17" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
-		add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+			"$columnSpecs": "max(default;15dlu):grow, labelcompgap, max(default;150dlu), labelcompgap, max(default;100dlu):grow, labelcompgap, max(default;75dlu), labelcompgap, max(default;15dlu):grow"
+			"$rowSpecs": "fill:max(default;15dlu):grow, relgap, default, linegap, 90dlu, linegap, max(default;35dlu), linegap, max(default;15dlu):grow"
+		} ) {
 			name: "this"
 			"componentPopupMenu": sfield com.jformdesigner.model.FormObject NULL_VALUE
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.GridBagLayout ) {
-				"$columnSpecs": "5, 150, center:100, 240, center:10, 158, 5"
-				"$rowSpecs": "center:8, 150, center:159, 60, baseline:0"
-				"$alignTop": true
-				"$alignLeft": true
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+				"$columnSpecs": "70dlu, labelcompgap, 80dlu:grow, labelcompgap, max(default;75dlu)"
+				"$rowSpecs": "max(default;35dlu), linegap, max(default;35dlu)"
 			} ) {
-				name: "panel3"
+				name: "panel1"
+				"border": new javax.swing.border.TitledBorder( "Inserisci prodotto" )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label1"
+					"text": "Codice"
+					"font": new java.awt.Font( "Tahoma", 0, 14 )
+					"horizontalAlignment": 0
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 1
+					"gridY": 1
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "productIdTextField"
+					"font": &Font0 new java.awt.Font( "Tahoma", 0, 14 )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 3
+					"gridWidth": 3
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				} )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label2"
+					"text": "Quantità"
+					"font": new java.awt.Font( "Tahoma", 0, 14 )
+					"horizontalAlignment": 0
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridY": 3
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "quantityTextField"
+					"font": #Font0
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 3
+					"gridY": 3
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				} )
+				add( new FormComponent( "javax.swing.JButton" ) {
+					name: "button1"
+					"text": "Aggiungi"
+					"font": new java.awt.Font( "Tahoma", 0, 14 )
+					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addProductButtonActionPerformed", true ) )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 5
+					"gridY": 3
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				} )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 3
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+				"$columnSpecs": "max(default;10dlu):grow, labelcompgap, max(default;50dlu), labelcompgap, max(default;90dlu), labelcompgap, relgap"
+				"$rowSpecs": "max(default;25dlu), linegap, default:grow"
+			} ) {
+				name: "panel4"
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "label3"
+					"text": "Totale"
+					"font": new java.awt.Font( "Tahoma", 0, 14 )
+					"horizontalAlignment": 0
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 3
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				} )
+				add( new FormComponent( "javax.swing.JTextField" ) {
+					name: "total"
+					"font": new java.awt.Font( "Tahoma", 0, 14 )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 5
+					"gridY": 1
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				} )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JList" ) {
+						name: "rdvList"
+						"font": new java.awt.Font( "Tahoma", 0, 14 )
+					} )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"gridY": 3
+					"gridWidth": 5
+				} )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 5
+				"gridY": 3
+				"gridHeight": 3
+				"gridWidth": 4
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
+				name: "clientPanel"
+				"border": new javax.swing.border.TitledBorder( "Carta fedeltà" )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-					"$columnSpecs": "max(min;90px), labelcompgap, max(min;143px), labelcompgap, max(min;199px)"
-					"$rowSpecs": "max(default;31dlu), relgap, fill:max(default;34dlu)"
+					"$columnSpecs": "max(default;85dlu), labelcompgap, default:grow, labelcompgap, max(default;75dlu)"
+					"$rowSpecs": "max(default;35dlu), linegap, max(default;35dlu)"
 				} ) {
-					name: "panel2"
-					"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( "Prodotto" ), sfield com.jgoodies.forms.factories.Borders DLU2_BORDER )
+					name: "main"
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label2"
-						"text": "Codice Prodotto"
-						"font": new java.awt.Font( "Tahoma", 0, 16 )
-						"labelFor": new FormReference( "productIdTextField" )
+						name: "label4"
+						"text": "Numero tessera"
+						"font": new java.awt.Font( "Tahoma", 0, 14 )
+						"horizontalAlignment": 0
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
 					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "productIdTextField"
-						"nextFocusableComponent": new FormReference( "quantityTextField" )
+						name: "clientCode"
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridWidth": 3
-						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-					} )
-					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label3"
-						"text": "Quantità"
-						"font": new java.awt.Font( "Tahoma", 0, 16 )
-						"labelFor": new FormReference( "quantityTextField" )
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridY": 3
-					} )
-					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "quantityTextField"
-						"nextFocusableComponent": new FormReference( "addProductButton" )
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 3
-						"gridY": 3
-						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-					} )
-					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "addProductButton"
-						"text": "Aggiungi"
-						"foreground": sfield java.awt.Color black
-						"nextFocusableComponent": new FormReference( "clientCode" )
-						"font": new java.awt.Font( "Tahoma", 0, 20 )
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addProductButtonActionPerformed", true ) )
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 5
-						"gridY": 3
-					} )
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridx": 1
-					"gridy": 1
-					"gridwidth": 3
-				} )
-				add( new FormComponent( "javax.swing.JSeparator" ) {
-					name: "separator2"
-					"orientation": 1
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridx": 4
-					"gridy": 1
-					"gridheight": 3
-				} )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-					"$columnSpecs": "95dlu"
-					"$rowSpecs": "default"
-				} ) {
-					name: "panel4"
-					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-						name: "scrollPane1"
-						add( new FormComponent( "javax.swing.JList" ) {
-							name: "rdvList"
-						} )
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 1
-						"gridY": 1
-					} )
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridx": 5
-					"gridy": 1
-				} )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-					"$columnSpecs": "max(min;116px), labelcompgap, max(min;344px)"
-					"$rowSpecs": "max(default;33dlu), linegap, fill:31dlu"
-				} ) {
-					name: "panel1"
-					"border": new javax.swing.border.CompoundBorder( new javax.swing.border.TitledBorder( "Carta Cliente" ), sfield com.jgoodies.forms.factories.Borders DLU2_BORDER )
-					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label4"
-						"text": "Codice"
-						"font": new java.awt.Font( "Tahoma", 0, 16 )
-						"labelFor": new FormReference( "clientCode" )
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 1
-					} )
-					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "clientCode"
-						"nextFocusableComponent": new FormReference( "insertClientCode" )
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 3
 						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "insertClientCode"
+						name: "button7"
 						"text": "Inserisci"
-						"foreground": sfield java.awt.Color black
-						"nextFocusableComponent": new FormReference( "button2" )
-						"font": new java.awt.Font( "Tahoma", 0, 20 )
+						"font": new java.awt.Font( "Tahoma", 0, 14 )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "insertClientCodeActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridX": 5
+						"gridY": 3
+						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "card1"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+					"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;75dlu):grow, labelcompgap, max(default;15dlu)"
+					"$rowSpecs": "max(default;15dlu), linegap, default:grow, linegap, max(default;15dlu)"
+				} ) {
+					name: "panel5"
+					add( new FormComponent( "javax.swing.JLabel" ) {
+						name: "label5"
+						"text": "Cliente autenticato."
+						"font": new java.awt.Font( "Tahoma", 0, 14 )
+						"horizontalAlignment": 0
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 3
+						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					} )
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridx": 1
-					"gridy": 2
-					"gridwidth": 3
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "card2"
 				} )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 5
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+				"$columnSpecs": "max(default;75dlu), labelcompgap, max(default;75dlu), labelcompgap, default"
+				"$rowSpecs": "fill:default:grow"
+			} ) {
+				name: "panel3"
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "clearSale"
 					"text": "Annulla"
-					"background": new java.awt.Color( 255, 51, 0, 255 )
-					"font": new java.awt.Font( "Tahoma", 0, 22 )
-					"foreground": new java.awt.Color( 255, 255, 255, 255 )
-					"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
-					"nextFocusableComponent": new FormReference( "button2" )
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "clearSaleActionPerformed", true ) )
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "clearSaleActionPerformed", true ) )
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridy": 3
-					"hAlign": 5
-					"vAlign": 5
-					"gridx": 1
+					"font": new java.awt.Font( "Tahoma", 0, 14 )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridX": 1
+					"gridY": 1
 				} )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label1"
-					"text": "Totale"
-					"font": new com.jformdesigner.model.SwingDerivedFont( null, 0, 12, false )
-					"labelFor": new FormReference( "total" )
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridx": 2
-					"gridy": 3
-				} )
-				add( new FormComponent( "javax.swing.JTextField" ) {
-					name: "total"
-					"editable": false
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridx": 3
-					"gridy": 3
-					"vAlign": 5
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button2"
-					"text": "Avanti"
-					"background": new java.awt.Color( 102, 204, 0, 255 )
-					"font": new java.awt.Font( "Tahoma", 0, 22 )
-					"name": "nextButton"
-					"nextFocusableComponent": new FormReference( "productIdTextField" )
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToPaymentButtonActionPerformed", true ) )
-				}, new FormLayoutConstraints( class com.jformdesigner.runtime.GridBagConstraintsEx ) {
-					"gridx": 5
-					"gridy": 3
-				} )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 7
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "payButton"
+				"text": "Paga"
+				"font": new java.awt.Font( "Tahoma", 0, 14 )
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToPaymentButtonActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 7
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 5, 20 )
-			"size": new java.awt.Dimension( 685, 400 )
+			"location": new java.awt.Point( 0, 5 )
+			"size": new java.awt.Dimension( 690, 370 )
 		} )
 	}
 }

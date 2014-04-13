@@ -4,7 +4,8 @@
 
 package gameshop.advance.ui.swing.employee.sale;
 
-import com.jgoodies.forms.factories.Borders;
+import java.awt.*;
+import java.awt.event.*;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.SaleControllerSingleton;
@@ -12,16 +13,12 @@ import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.QuantityNotInStockException;
+import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIStyleSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
-import java.awt.Color;
 import java.awt.Font;
-import java.awt.GridBagConstraints;
-import java.awt.GridBagLayout;
-import java.awt.Insets;
 import java.awt.event.ActionEvent;
-import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -29,29 +26,26 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
-import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 
 /**
  * @author Matteo Gentile
  */
 
-public class InsertItemPanel extends JScrollPane {
-    private DefaultListModel<Object> rdvListModel;
+public class InsertItemPanel extends JPanel {
+    private DefaultListModel<IRigaDiTransazioneRemote> rdvListModel;
 
     public InsertItemPanel() {
         initComponents();
         this.clearSale.setBackground(UIStyleSingleton.getInstance().getAlertColor());
         this.clearSale.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
-        this.button2.setBackground(UIStyleSingleton.getInstance().getSuccessColor());
-        this.button2.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
+        this.payButton.setBackground(UIStyleSingleton.getInstance().getSuccessColor());
+        this.payButton.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
         this.rdvListModel = new DefaultListModel<>();
         this.rdvList.setCellRenderer(new rdvCellRender());
-        this.rdvList.setModel(this.rdvListModel);
-               
+        this.rdvList.setModel(this.rdvListModel);       
     }
 
     private void goToPaymentButtonActionPerformed(ActionEvent e) {
@@ -75,6 +69,10 @@ public class InsertItemPanel extends JScrollPane {
         this.quantityTextField.setText("");
     }
     
+    public void addrdV(IRigaDiTransazioneRemote rdv) {
+        this.rdvListModel.addElement(rdv);
+    }
+    
     private void addProductButtonActionPerformed(ActionEvent e) {
         try {
             Integer quantity = 1;
@@ -83,11 +81,13 @@ public class InsertItemPanel extends JScrollPane {
             }
             catch(NumberFormatException ex)
             {
-                if(!this.quantityTextField.getText().equals(""))
+                if(!this.quantityTextField.getText().equals("")) {
                     UIWindowSingleton.getInstance().displayError("Il formato di dato inserito per la quantità non è valido");
+                }
             }
             SaleControllerSingleton.getInstance().inserisciProdotto(this.productIdTextField.getText(), quantity);
             this.clearFields();
+            this.addrdV(SaleControllerSingleton.getInstance().getLastInserted());
             this.total.setText(SaleControllerSingleton.getInstance().getTotal().toString());
         }
         catch (NullPointerException ex) {
@@ -121,6 +121,8 @@ public class InsertItemPanel extends JScrollPane {
             SaleControllerSingleton.getInstance().inserisciCartaCliente(code);
             this.clientCode.setEditable(false);
             this.total.setText(SaleControllerSingleton.getInstance().getTotal().toString());
+            CardLayout layout = (CardLayout) this.clientPanel.getLayout();
+            layout.next(this.clientPanel);
         } catch (NullPointerException ex) {
              UIWindowSingleton.getInstance().displayError("Non è stato possibile convalidare il codice cliente.");
         } catch (ConfigurationException ex) {
@@ -165,212 +167,195 @@ public class InsertItemPanel extends JScrollPane {
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        panel3 = new JPanel();
-        panel2 = new JPanel();
-        label2 = new JLabel();
+        panel1 = new JPanel();
+        label1 = new JLabel();
         productIdTextField = new JTextField();
-        label3 = new JLabel();
+        label2 = new JLabel();
         quantityTextField = new JTextField();
-        addProductButton = new JButton();
-        separator2 = new JSeparator();
+        button1 = new JButton();
         panel4 = new JPanel();
+        label3 = new JLabel();
+        total = new JTextField();
         scrollPane1 = new JScrollPane();
         rdvList = new JList();
-        panel1 = new JPanel();
+        clientPanel = new JPanel();
+        main = new JPanel();
         label4 = new JLabel();
         clientCode = new JTextField();
-        insertClientCode = new JButton();
+        button7 = new JButton();
+        panel5 = new JPanel();
+        label5 = new JLabel();
+        panel3 = new JPanel();
         clearSale = new JButton();
-        label1 = new JLabel();
-        total = new JTextField();
-        button2 = new JButton();
+        payButton = new JButton();
 
         //======== this ========
         setComponentPopupMenu(null);
+        setLayout(new FormLayout(
+            "[15dlu,default]:grow, $lcgap, [150dlu,default], $lcgap, [100dlu,default]:grow, $lcgap, [75dlu,default], $lcgap, [15dlu,default]:grow",
+            "fill:[15dlu,default]:grow, $rgap, default, $lgap, 90dlu, $lgap, [35dlu,default], $lgap, [15dlu,default]:grow"));
 
-        //======== panel3 ========
+        //======== panel1 ========
         {
-            panel3.setLayout(new GridBagLayout());
-            ((GridBagLayout)panel3.getLayout()).columnWidths = new int[] {5, 150, 100, 240, 10, 158, 5, 0};
-            ((GridBagLayout)panel3.getLayout()).rowHeights = new int[] {8, 150, 159, 60, 0, 0};
-            ((GridBagLayout)panel3.getLayout()).columnWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
-            ((GridBagLayout)panel3.getLayout()).rowWeights = new double[] {0.0, 0.0, 0.0, 0.0, 0.0, 1.0E-4};
+            panel1.setBorder(new TitledBorder("Inserisci prodotto"));
+            panel1.setLayout(new FormLayout(
+                "70dlu, $lcgap, 80dlu:grow, $lcgap, [75dlu,default]",
+                "[35dlu,default], $lgap, [35dlu,default]"));
 
-            //======== panel2 ========
-            {
-                panel2.setBorder(new CompoundBorder(
-                    new TitledBorder("Prodotto"),
-                    Borders.DLU2_BORDER));
-                panel2.setLayout(new FormLayout(
-                    "[90px,min], $lcgap, [143px,min], $lcgap, [199px,min]",
-                    "[31dlu,default], $rgap, fill:[34dlu,default]"));
+            //---- label1 ----
+            label1.setText("Codice");
+            label1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            label1.setHorizontalAlignment(SwingConstants.CENTER);
+            panel1.add(label1, CC.xy(1, 1, CC.FILL, CC.FILL));
 
-                //---- label2 ----
-                label2.setText("Codice Prodotto");
-                label2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-                label2.setLabelFor(productIdTextField);
-                panel2.add(label2, CC.xy(1, 1));
+            //---- productIdTextField ----
+            productIdTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            panel1.add(productIdTextField, CC.xywh(3, 1, 3, 1, CC.FILL, CC.FILL));
 
-                //---- productIdTextField ----
-                productIdTextField.setNextFocusableComponent(quantityTextField);
-                panel2.add(productIdTextField, CC.xywh(3, 1, 3, 1, CC.DEFAULT, CC.FILL));
+            //---- label2 ----
+            label2.setText("Quantit\u00e0");
+            label2.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            label2.setHorizontalAlignment(SwingConstants.CENTER);
+            panel1.add(label2, CC.xy(1, 3, CC.FILL, CC.FILL));
 
-                //---- label3 ----
-                label3.setText("Quantit\u00e0");
-                label3.setFont(new Font("Tahoma", Font.PLAIN, 16));
-                label3.setLabelFor(quantityTextField);
-                panel2.add(label3, CC.xy(1, 3));
+            //---- quantityTextField ----
+            quantityTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            panel1.add(quantityTextField, CC.xy(3, 3, CC.FILL, CC.FILL));
 
-                //---- quantityTextField ----
-                quantityTextField.setNextFocusableComponent(addProductButton);
-                panel2.add(quantityTextField, CC.xy(3, 3, CC.DEFAULT, CC.FILL));
-
-                //---- addProductButton ----
-                addProductButton.setText("Aggiungi");
-                addProductButton.setForeground(Color.black);
-                addProductButton.setNextFocusableComponent(clientCode);
-                addProductButton.setFont(new Font("Tahoma", Font.PLAIN, 20));
-                addProductButton.addActionListener(new ActionListener() {
-                    @Override
-                    public void actionPerformed(ActionEvent e) {
-                        addProductButtonActionPerformed(e);
-                    }
-                });
-                panel2.add(addProductButton, CC.xy(5, 3));
-            }
-            panel3.add(panel2, new GridBagConstraints(1, 1, 3, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 0, 0), 0, 0));
-
-            //---- separator2 ----
-            separator2.setOrientation(SwingConstants.VERTICAL);
-            panel3.add(separator2, new GridBagConstraints(4, 1, 1, 3, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.VERTICAL,
-                new Insets(0, 0, 0, 0), 0, 0));
-
-            //======== panel4 ========
-            {
-                panel4.setLayout(new FormLayout(
-                    "95dlu",
-                    "default"));
-
-                //======== scrollPane1 ========
-                {
-                    scrollPane1.setViewportView(rdvList);
+            //---- button1 ----
+            button1.setText("Aggiungi");
+            button1.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            button1.addActionListener(new ActionListener() {
+                @Override
+                public void actionPerformed(ActionEvent e) {
+                    addProductButtonActionPerformed(e);
                 }
-                panel4.add(scrollPane1, CC.xy(1, 1));
-            }
-            panel3.add(panel4, new GridBagConstraints(5, 1, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 0, 0), 0, 0));
+            });
+            panel1.add(button1, CC.xy(5, 3, CC.FILL, CC.FILL));
+        }
+        add(panel1, CC.xy(3, 3));
 
-            //======== panel1 ========
+        //======== panel4 ========
+        {
+            panel4.setLayout(new FormLayout(
+                "[10dlu,default]:grow, $lcgap, [50dlu,default], $lcgap, [90dlu,default], $lcgap, $rgap",
+                "[25dlu,default], $lgap, default:grow"));
+
+            //---- label3 ----
+            label3.setText("Totale");
+            label3.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            label3.setHorizontalAlignment(SwingConstants.CENTER);
+            panel4.add(label3, CC.xy(3, 1, CC.FILL, CC.FILL));
+
+            //---- total ----
+            total.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            panel4.add(total, CC.xy(5, 1, CC.FILL, CC.FILL));
+
+            //======== scrollPane1 ========
             {
-                panel1.setBorder(new CompoundBorder(
-                    new TitledBorder("Carta Cliente"),
-                    Borders.DLU2_BORDER));
-                panel1.setLayout(new FormLayout(
-                    "[116px,min], $lcgap, [344px,min]",
-                    "[33dlu,default], $lgap, fill:31dlu"));
+
+                //---- rdvList ----
+                rdvList.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                scrollPane1.setViewportView(rdvList);
+            }
+            panel4.add(scrollPane1, CC.xywh(1, 3, 5, 1, CC.FILL, CC.FILL));
+        }
+        add(panel4, CC.xywh(5, 3, 4, 3));
+
+        //======== clientPanel ========
+        {
+            clientPanel.setBorder(new TitledBorder("Carta fedelt\u00e0"));
+            clientPanel.setLayout(new CardLayout());
+
+            //======== main ========
+            {
+                main.setLayout(new FormLayout(
+                    "[85dlu,default], $lcgap, default:grow, $lcgap, [75dlu,default]",
+                    "[35dlu,default], $lgap, [35dlu,default]"));
 
                 //---- label4 ----
-                label4.setText("Codice");
-                label4.setFont(new Font("Tahoma", Font.PLAIN, 16));
-                label4.setLabelFor(clientCode);
-                panel1.add(label4, CC.xy(1, 1));
+                label4.setText("Numero tessera");
+                label4.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                label4.setHorizontalAlignment(SwingConstants.CENTER);
+                main.add(label4, CC.xy(1, 1));
+                main.add(clientCode, CC.xywh(3, 1, 3, 1, CC.FILL, CC.FILL));
 
-                //---- clientCode ----
-                clientCode.setNextFocusableComponent(insertClientCode);
-                panel1.add(clientCode, CC.xy(3, 1, CC.FILL, CC.FILL));
-
-                //---- insertClientCode ----
-                insertClientCode.setText("Inserisci");
-                insertClientCode.setForeground(Color.black);
-                insertClientCode.setNextFocusableComponent(button2);
-                insertClientCode.setFont(new Font("Tahoma", Font.PLAIN, 20));
-                insertClientCode.addActionListener(new ActionListener() {
+                //---- button7 ----
+                button7.setText("Inserisci");
+                button7.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                button7.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         insertClientCodeActionPerformed(e);
                     }
                 });
-                panel1.add(insertClientCode, CC.xy(3, 3));
+                main.add(button7, CC.xy(5, 3, CC.FILL, CC.FILL));
             }
-            panel3.add(panel1, new GridBagConstraints(1, 2, 3, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.HORIZONTAL,
-                new Insets(0, 0, 0, 0), 0, 0));
+            clientPanel.add(main, "card1");
+
+            //======== panel5 ========
+            {
+                panel5.setLayout(new FormLayout(
+                    "[15dlu,default], $lcgap, [75dlu,default]:grow, $lcgap, [15dlu,default]",
+                    "[15dlu,default], $lgap, default:grow, $lgap, [15dlu,default]"));
+
+                //---- label5 ----
+                label5.setText("Cliente autenticato.");
+                label5.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                label5.setHorizontalAlignment(SwingConstants.CENTER);
+                panel5.add(label5, CC.xy(3, 3, CC.FILL, CC.FILL));
+            }
+            clientPanel.add(panel5, "card2");
+        }
+        add(clientPanel, CC.xy(3, 5, CC.FILL, CC.FILL));
+
+        //======== panel3 ========
+        {
+            panel3.setLayout(new FormLayout(
+                "2*([75dlu,default], $lcgap), default",
+                "fill:default:grow"));
 
             //---- clearSale ----
             clearSale.setText("Annulla");
-            clearSale.setBackground(new Color(255, 51, 0));
-            clearSale.setFont(new Font("Tahoma", Font.PLAIN, 22));
-            clearSale.setForeground(Color.white);
-            clearSale.setIcon(null);
-            clearSale.setNextFocusableComponent(button2);
-            clearSale.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    clearSaleActionPerformed(e);
-                    clearSaleActionPerformed(e);
-                }
-            });
-            panel3.add(clearSale, new GridBagConstraints(1, 3, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 0, 0), 0, 0));
-
-            //---- label1 ----
-            label1.setText("Totale");
-            label1.setFont(label1.getFont().deriveFont(label1.getFont().getSize() + 12f));
-            label1.setLabelFor(total);
-            panel3.add(label1, new GridBagConstraints(2, 3, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.VERTICAL,
-                new Insets(0, 0, 0, 0), 0, 0));
-
-            //---- total ----
-            total.setEditable(false);
-            panel3.add(total, new GridBagConstraints(3, 3, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 0, 0), 0, 0));
-
-            //---- button2 ----
-            button2.setText("Avanti");
-            button2.setBackground(new Color(102, 204, 0));
-            button2.setFont(new Font("Tahoma", Font.PLAIN, 22));
-            button2.setName("nextButton");
-            button2.setNextFocusableComponent(productIdTextField);
-            button2.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    goToPaymentButtonActionPerformed(e);
-                }
-            });
-            panel3.add(button2, new GridBagConstraints(5, 3, 1, 1, 0.0, 0.0,
-                GridBagConstraints.CENTER, GridBagConstraints.BOTH,
-                new Insets(0, 0, 0, 0), 0, 0));
+            clearSale.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            panel3.add(clearSale, CC.xy(1, 1));
         }
-        setViewportView(panel3);
+        add(panel3, CC.xy(3, 7, CC.FILL, CC.FILL));
+
+        //---- payButton ----
+        payButton.setText("Paga");
+        payButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        payButton.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                goToPaymentButtonActionPerformed(e);
+            }
+        });
+        add(payButton, CC.xy(7, 7, CC.FILL, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JPanel panel3;
-    private JPanel panel2;
-    private JLabel label2;
+    private JPanel panel1;
+    private JLabel label1;
     private JTextField productIdTextField;
-    private JLabel label3;
+    private JLabel label2;
     private JTextField quantityTextField;
-    private JButton addProductButton;
-    private JSeparator separator2;
+    private JButton button1;
     private JPanel panel4;
+    private JLabel label3;
+    private JTextField total;
     private JScrollPane scrollPane1;
     private JList rdvList;
-    private JPanel panel1;
+    private JPanel clientPanel;
+    private JPanel main;
     private JLabel label4;
     private JTextField clientCode;
-    private JButton insertClientCode;
+    private JButton button7;
+    private JPanel panel5;
+    private JLabel label5;
+    private JPanel panel3;
     private JButton clearSale;
-    private JLabel label1;
-    private JTextField total;
-    private JButton button2;
+    private JButton payButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }
