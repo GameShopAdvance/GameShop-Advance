@@ -4,8 +4,6 @@
 
 package gameshop.advance.ui.swing.employee.sale;
 
-import java.awt.*;
-import java.awt.event.*;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.SaleControllerSingleton;
@@ -17,8 +15,10 @@ import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIStyleSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
+import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import javax.swing.DefaultListModel;
 import javax.swing.JButton;
@@ -87,8 +87,8 @@ public class InsertItemPanel extends JPanel {
             }
             SaleControllerSingleton.getInstance().inserisciProdotto(this.productIdTextField.getText(), quantity);
             this.clearFields();
-            this.addrdV(SaleControllerSingleton.getInstance().getLastInserted());
             this.total.setText(SaleControllerSingleton.getInstance().getTotal().toString());
+            this.addrdV(SaleControllerSingleton.getInstance().getLastInserted());
         }
         catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"

@@ -16,6 +16,7 @@ import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.ListCellRenderer;
+import javax.swing.SwingConstants;
 
 /**
  * @author Matteo Gentile
@@ -28,33 +29,40 @@ public class rdvCellRender extends JPanel implements ListCellRenderer<IRigaDiTra
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        panel1 = new JPanel();
         description = new JLabel();
+        separator2 = new JSeparator();
         qty = new JLabel();
         subTotal = new JLabel();
         separator1 = new JSeparator();
 
         //======== this ========
         setLayout(new FormLayout(
-            "[15dlu,default], $lcgap, [40dlu,default], $lcgap, 62dlu:grow, $lcgap, 25dlu, $lcgap, default",
-            "[10dlu,default], $lgap, 30dlu, $lgap, 1dlu"));
+            "[228dlu,default]",
+            "22dlu, $lgap, 1dlu"));
 
-        //---- description ----
-        description.setText("text");
-        add(description, CC.xy(3, 3, CC.FILL, CC.FILL));
+        //======== panel1 ========
+        {
+            panel1.setLayout(new FormLayout(
+                "70dlu, $lcgap, 10dlu, $lcgap, 21dlu, $lcgap, default, $lcgap, 102dlu",
+                "27dlu"));
+            panel1.add(description, CC.xy(1, 1, CC.FILL, CC.FILL));
 
-        //---- qty ----
-        qty.setText("qty #");
-        add(qty, CC.xy(5, 3, CC.FILL, CC.DEFAULT));
-
-        //---- subTotal ----
-        subTotal.setText("text");
-        add(subTotal, CC.xywh(7, 3, 2, 1, CC.FILL, CC.FILL));
-        add(separator1, CC.xywh(1, 5, 9, 1));
+            //---- separator2 ----
+            separator2.setOrientation(SwingConstants.VERTICAL);
+            panel1.add(separator2, CC.xywh(3, 1, 2, 1, CC.DEFAULT, CC.FILL));
+            panel1.add(qty, CC.xy(5, 1, CC.FILL, CC.DEFAULT));
+            panel1.add(subTotal, CC.xy(9, 1, CC.FILL, CC.FILL));
+        }
+        add(panel1, CC.xy(1, 1));
+        add(separator1, CC.xy(1, 3));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JPanel panel1;
     private JLabel description;
+    private JSeparator separator2;
     private JLabel qty;
     private JLabel subTotal;
     private JSeparator separator1;

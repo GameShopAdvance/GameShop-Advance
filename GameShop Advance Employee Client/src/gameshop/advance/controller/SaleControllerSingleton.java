@@ -101,6 +101,7 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
     public void avviaNuovaVendita() throws RemoteException
     {
         this.cassa.avviaNuovaVendita();
+        this.listaProdotti.clear();
         this.cassa.aggiungiListener(this.saleTotalObserver);
         this.cassa.aggiungiListener(this.transactionObserver);
         aggiornaWindow(new InsertItemPanel());
@@ -208,13 +209,10 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
 
     @Override
     public void aggiornaListaProdotti(IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter) throws RemoteException {
-        this.listaProdotti.clear();
         while(iter.hasNext())
         {
             IRigaDiTransazioneRemote rdt = iter.next();
             this.listaProdotti.add(rdt);
         }
-        
     }
-
 }

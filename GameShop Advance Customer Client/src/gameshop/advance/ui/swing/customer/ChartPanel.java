@@ -4,20 +4,27 @@
 
 package gameshop.advance.ui.swing.customer;
 
-import java.awt.*;
-import java.awt.event.*;
-import javax.swing.*;
-import com.jgoodies.forms.factories.*;
-import com.jgoodies.forms.layout.*;
+import com.jgoodies.forms.factories.CC;
+import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.ui.interfaces.PopActionListener;
 import gameshop.advance.utility.Money;
+import java.awt.Font;
+import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
+import javax.swing.DefaultListModel;
+import javax.swing.JButton;
+import javax.swing.JLabel;
+import javax.swing.JList;
+import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.SwingConstants;
 
 /**
  * @author Lorenzo Di Giuseppe
@@ -55,6 +62,7 @@ public class ChartPanel extends JPanel {
     private void reserveActionPerformed(ActionEvent e) {
         try {
             ReservationControllerSingleton.getInstance().completaPrenotazione();
+            this.setTotal(new Money());
         }
         catch (NullPointerException ex) {
             Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -81,8 +89,7 @@ public class ChartPanel extends JPanel {
        try {
             this.clearList();
             ReservationControllerSingleton.getInstance().cancellaPrenotazione();
-            
-////            this.listener.popPanel();
+            this.listener.popPanel();
         }
         catch (RemoteException ex) {
             Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);

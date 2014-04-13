@@ -112,6 +112,9 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     public void avviaPrenotazione() throws RemoteException 
     {
        ProductsPanel panel = new ProductsPanel();
+       this.listaPrenotati.clear();
+       this.totale = new Money();
+       this.acconto = new Money();
        this.aggiornaWindow(panel);
        IIteratorWrapperRemote<IDescrizioneProdottoRemote> iter = this.controller.getDescriptions();
 
