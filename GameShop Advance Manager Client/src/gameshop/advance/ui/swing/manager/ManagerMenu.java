@@ -108,6 +108,7 @@ public class ManagerMenu extends JPanel {
         //---- button7 ----
         button7.setText("Controlla Magazzino");
         button7.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        button7.setEnabled(false);
         add(button7, CC.xy(3, 6));
 
         //---- button1 ----
@@ -117,6 +118,7 @@ public class ManagerMenu extends JPanel {
         //---- button6 ----
         button6.setText("Gestisci Prezzi");
         button6.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        button6.setEnabled(false);
         add(button6, CC.xy(3, 10));
 
         //======== panel3 ========
@@ -154,6 +156,7 @@ public class ManagerMenu extends JPanel {
         //---- button5 ----
         button5.setText("Gestisci Sconti");
         button5.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        button5.setEnabled(false);
         add(button5, CC.xy(3, 12));
 
         //---- button2 ----
@@ -163,6 +166,7 @@ public class ManagerMenu extends JPanel {
         //---- button3 ----
         button3.setText("Analizza Vendite");
         button3.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        button3.setEnabled(false);
         add(button3, CC.xy(3, 16));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }

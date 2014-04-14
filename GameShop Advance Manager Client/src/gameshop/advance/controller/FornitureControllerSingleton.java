@@ -13,27 +13,44 @@ import gameshop.advance.interfaces.remote.IFornitureControllerRemote;
 import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
+import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.manager.observer.FornitureObserver;
+import gameshop.advance.ui.interfaces.IListPanel;
 import gameshop.advance.ui.swing.UIWindowSingleton;
+import gameshop.advance.ui.swing.manager.FornitureListModel;
 import gameshop.advance.ui.swing.manager.FornitureMenu;
+import gameshop.advance.ui.swing.manager.InfoCellRenderer;
 import gameshop.advance.ui.swing.manager.ManagerMenu;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.rmi.server.UnicastRemoteObject;
 import javax.swing.JComponent;
 
 /**
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class FornitureControllerSingleton {
+public class FornitureControllerSingleton extends UnicastRemoteObject implements IRemoteFornitureClient {
     
     private static FornitureControllerSingleton instance;
     private IFornitureControllerRemote controller;
     
-    private FornitureControllerSingleton()
-    {
+    private FornitureListModel listaForniture;
+    private IRemoteObserver informationListener;
     
+    private FornitureControllerSingleton() throws RemoteException
+    {
+        this.listaForniture = new FornitureListModel();
+        this.informationListener = new FornitureObserver(this);
+    }
+    
+    @Override
+    public void setInformazioniProdotto(IIteratorWrapperRemote<IInformazioniProdottoRemote> iter) throws RemoteException
+    {
+        while(iter.hasNext())
+            this.listaForniture.addElement(iter.next());
     }
     
     public static FornitureControllerSingleton getInstance() throws ConfigurationException, RemoteException
@@ -80,12 +97,17 @@ public class FornitureControllerSingleton {
         IIteratorWrapperRemote<IInformazioniProdottoRemote> iter = this.controller.getDatiForniture();
         
         while(iter.hasNext()) {
-           panel.addInfoProduct(iter.next());
+           this.listaForniture.addElement(iter.next());
        }
     }
     
     public void clearForniture() {
         UIWindowSingleton.getInstance().setPanel(new ManagerMenu());
         UIWindowSingleton.getInstance().refreshContent();
+    }
+
+    public void setFornitureList(IListPanel panel)
+    {
+        panel.setList(this.listaForniture, new InfoCellRenderer());
     }
 }

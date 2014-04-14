@@ -10,6 +10,7 @@ import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.remote.IFornitureControllerRemote;
 import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
+import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.manager.ManagerFornitureSingleton;
 import gameshop.advance.utility.IteratorWrapper;
 import java.rmi.RemoteException;
@@ -36,4 +37,8 @@ public class AnalizzaFornitureController extends UnicastRemoteObject implements 
         return new IteratorWrapper<>(ManagerFornitureSingleton.getInstance().getInformazioni());
     }
     
+    public void addListener(IRemoteObserver obs)
+    {
+        ManagerFornitureSingleton.getInstance().addListener(obs);
+    }
 }

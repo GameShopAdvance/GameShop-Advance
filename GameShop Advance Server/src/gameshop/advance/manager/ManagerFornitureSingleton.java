@@ -25,7 +25,7 @@ import java.util.logging.Logger;
 
 /**
  *
- * @author Salx
+ * @author Lorenzo Di Giuseppe
  */
 public class ManagerFornitureSingleton {
     
@@ -35,17 +35,20 @@ public class ManagerFornitureSingleton {
     
     private HashMap<String, IInformazioniProdottoRemote> informazioni;
     
-    public ManagerFornitureSingleton() throws QuantityException{
+    public ManagerFornitureSingleton(){
         try {
             this.informazioni = new HashMap<>();
             this.aggiornaDescrizioni(ManagerProdottiSingleton.getInstance().getMonitored());
             this.aggiornaPrenotazioni(ManagerPrenotazioniSingleton.getInstance().getNotProcessed());
         } catch (RemoteException ex) {
             Logger.getLogger(ManagerFornitureSingleton.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (QuantityException ex)
+        {
+            Logger.getLogger(ManagerFornitureSingleton.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     
-    public static ManagerFornitureSingleton getInstance() throws QuantityException{
+    public static ManagerFornitureSingleton getInstance(){
         
         if (ManagerFornitureSingleton.instance == null){
             ManagerFornitureSingleton.instance = new ManagerFornitureSingleton();
@@ -62,6 +65,23 @@ public class ManagerFornitureSingleton {
             this.listeners.remove(obs);
         else
             this.listeners.clear();
+    }
+    
+    protected void notificaListeners()
+    {
+        if(this.listeners.size() > 0)
+        {
+            for(IRemoteObserver obs:this.listeners)
+            {
+                try
+                {
+                    obs.notifica(new FornitureRemoteProxy(this));
+                } catch (RemoteException ex)
+                {
+                    Logger.getLogger(ManagerFornitureSingleton.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }
     }
     
     /**
@@ -91,6 +111,7 @@ public class ManagerFornitureSingleton {
         else{
             InformazioniProdotto ip = new InformazioniProdotto(desc);
             this.informazioni.put(desc.getCodiceProdotto().getCodice(), ip);
+            this.notificaListeners();
         }
     }
     
@@ -101,6 +122,7 @@ public class ManagerFornitureSingleton {
             InformazioniProdotto ip = (InformazioniProdotto) this.informazioni.get(desc.getCodiceProdotto().getCodice());
             if(ip.getDescrizione().getQuantitaDisponibile() - ip.getPrenotati() > ip.getDescrizione().getQuantitaDiSoglia()) {
                 this.informazioni.remove(desc.getCodiceProdotto().getCodice());
+                this.notificaListeners();
             }
         }
     }
@@ -138,6 +160,7 @@ public class ManagerFornitureSingleton {
             else{
                 InformazioniProdotto ip = new InformazioniProdotto(desc, rdt.getQuantity());
                 this.informazioni.put(desc.getCodiceProdotto().getCodice(), ip);
+                this.notificaListeners();
             }
         }
         this.print();
@@ -163,7 +186,7 @@ public class ManagerFornitureSingleton {
         this.print();
     }
 
-    public Iterator<IInformazioniProdottoRemote> getInformazioni() {
+    public Iterator<IInformazioniProdottoRemote> getInformazioni(){
         return this.informazioni.values().iterator();
     }
     
