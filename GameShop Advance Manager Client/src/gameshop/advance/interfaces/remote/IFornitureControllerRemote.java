@@ -18,4 +18,6 @@ public interface IFornitureControllerRemote extends Remote{
     
     public IIteratorWrapperRemote<IInformazioniProdottoRemote> getDatiForniture() throws RemoteException, QuantityException;
     
+    public void addListener(IRemoteObserver obs) throws RemoteException;
+    
 }

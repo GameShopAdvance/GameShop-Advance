@@ -29,6 +29,7 @@ public class FornitureObserver implements IRemoteObserver
     public void notifica(Object o) throws RemoteException
     {
         IFornitureManagerRemote manager = (IFornitureManagerRemote) o;
+        System.err.println("Notifica Forniture");
         this.client.setInformazioniProdotto(manager.getInformazioni());
     }
     
