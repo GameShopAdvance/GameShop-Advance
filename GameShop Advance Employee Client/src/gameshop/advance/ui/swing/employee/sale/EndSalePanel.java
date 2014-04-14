@@ -94,21 +94,21 @@ public class EndSalePanel extends JPanel {
 
         //======== this ========
         setLayout(new FormLayout(
-            "$lcgap, center:[150px,min], [50px,min], $lcgap, center:[257px,min], [164px,min], $lcgap",
-            "21dlu, fill:25dlu, $lgap, 85dlu, $lgap, 44dlu, $rgap, 49dlu"));
+            "$lcgap, [15dlu,default]:grow, $lcgap, center:[150px,min], [50px,min], $lcgap, center:[257px,min], [164px,min], $lcgap, [15dlu,default]:grow",
+            "21dlu:grow, fill:25dlu, $lgap, 85dlu, $lgap, 44dlu, $rgap, 49dlu, $lgap, [15dlu,default]:grow"));
 
         //---- label1 ----
         label1.setText("Resto");
         label1.setLabelFor(displayRest);
         label1.setFont(new Font("Tahoma", Font.PLAIN, 22));
-        add(label1, CC.xy(3, 2, CC.FILL, CC.FILL));
-        add(displayRest, CC.xy(5, 2, CC.FILL, CC.DEFAULT));
+        add(label1, CC.xy(5, 2, CC.FILL, CC.FILL));
+        add(displayRest, CC.xy(7, 2, CC.FILL, CC.DEFAULT));
 
         //---- label2 ----
         label2.setText("Grazie per aver effettuato acquisti da noi!");
         label2.setFont(new Font("Tahoma", Font.PLAIN, 28));
         label2.setHorizontalAlignment(SwingConstants.CENTER);
-        add(label2, CC.xywh(2, 4, 5, 1, CC.FILL, CC.FILL));
+        add(label2, CC.xywh(4, 4, 5, 1, CC.FILL, CC.FILL));
 
         //---- startNewSale ----
         startNewSale.setText("Nuova Vendita");
@@ -120,7 +120,7 @@ public class EndSalePanel extends JPanel {
                 startNewSaleActionPerformed(e);
             }
         });
-        add(startNewSale, CC.xy(2, 8, CC.DEFAULT, CC.FILL));
+        add(startNewSale, CC.xy(4, 8, CC.DEFAULT, CC.FILL));
 
         //---- goToMenu ----
         goToMenu.setText("Torna al Men\u00f9");
@@ -131,7 +131,7 @@ public class EndSalePanel extends JPanel {
                 goToMenuActionPerformed(e);
             }
         });
-        add(goToMenu, CC.xy(6, 8, CC.DEFAULT, CC.FILL));
+        add(goToMenu, CC.xy(8, 8, CC.DEFAULT, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

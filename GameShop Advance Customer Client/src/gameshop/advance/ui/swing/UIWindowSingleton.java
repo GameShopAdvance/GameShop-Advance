@@ -53,22 +53,19 @@ public class UIWindowSingleton extends JFrame {
 
         //======== this ========
         setTitle("GameShopAdvance Cassa");
-        setName("this");
+        setResizable(false);
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
         //======== menuBar1 ========
         {
-            menuBar1.setName("menuBar1");
 
             //======== menu2 ========
             {
                 menu2.setText("File");
-                menu2.setName("menu2");
 
                 //---- menuItem3 ----
                 menuItem3.setText("Impostazioni");
-                menuItem3.setName("menuItem3");
                 menuItem3.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -79,7 +76,6 @@ public class UIWindowSingleton extends JFrame {
 
                 //---- menuItem1 ----
                 menuItem1.setText("Esci");
-                menuItem1.setName("menuItem1");
                 menuItem1.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -95,10 +91,9 @@ public class UIWindowSingleton extends JFrame {
         //======== mainPanel ========
         {
             mainPanel.setViewportBorder(null);
-            mainPanel.setName("mainPanel");
         }
         contentPane.add(mainPanel, BorderLayout.CENTER);
-        setSize(700, 460);
+        setSize(1025, 540);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }

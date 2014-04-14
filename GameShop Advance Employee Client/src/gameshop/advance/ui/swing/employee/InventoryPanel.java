@@ -131,8 +131,8 @@ public class InventoryPanel extends JPanel {
 
         //======== this ========
         setLayout(new FormLayout(
-            "$lcgap, 2*([75px,min]), $lcgap, [358px,min], $lcgap, 2*([75px,min]), $lcgap",
-            "68dlu, $lgap, [200px,min], $lgap, fill:[70px,min]"));
+            "$lcgap, [15dlu,default]:grow, $lcgap, 2*([75px,min]), $lcgap, [358px,min], $lcgap, 2*([75px,min]), $lcgap, [15dlu,default]:grow",
+            "[15dlu,default]:grow, $lgap, 68dlu, $lgap, [200px,min], $lgap, fill:[70px,min], $lgap, [15dlu,default]:grow"));
 
         //======== panel1 ========
         {
@@ -163,13 +163,13 @@ public class InventoryPanel extends JPanel {
             });
             panel1.add(button1, CC.xy(5, 3));
         }
-        add(panel1, CC.xy(5, 1));
+        add(panel1, CC.xy(7, 3));
 
         //======== panel ========
         {
             panel.setViewportView(table);
         }
-        add(panel, CC.xywh(3, 3, 5, 1, CC.FILL, CC.FILL));
+        add(panel, CC.xywh(4, 5, 7, 1, CC.FILL, CC.FILL));
 
         //---- cancelButton ----
         cancelButton.setText("Annulla");
@@ -180,7 +180,7 @@ public class InventoryPanel extends JPanel {
                 cancelButtonActionPerformed(e);
             }
         });
-        add(cancelButton, CC.xywh(2, 5, 2, 1));
+        add(cancelButton, CC.xywh(4, 7, 2, 1));
 
         //---- endInventoryButton ----
         endInventoryButton.setText("Fine");
@@ -191,7 +191,7 @@ public class InventoryPanel extends JPanel {
                 endInventoryButtonActionPerformed(e);
             }
         });
-        add(endInventoryButton, CC.xywh(7, 5, 2, 1));
+        add(endInventoryButton, CC.xywh(9, 7, 2, 1));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

@@ -1,11 +1,11 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_25" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "labelcompgap, center:max(min;150px), max(min;50px), labelcompgap, center:max(min;257px), max(min;164px), labelcompgap"
-			"$rowSpecs": "21dlu, fill:25dlu, linegap, 85dlu, linegap, 44dlu, relgap, 49dlu"
+			"$columnSpecs": "labelcompgap, max(default;15dlu):grow, labelcompgap, center:max(min;150px), max(min;50px), labelcompgap, center:max(min;257px), max(min;164px), labelcompgap, max(default;15dlu):grow"
+			"$rowSpecs": "21dlu:grow, fill:25dlu, linegap, 85dlu, linegap, 44dlu, relgap, 49dlu, linegap, max(default;15dlu):grow"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -15,14 +15,14 @@ new FormModel {
 				"font": new java.awt.Font( "Tahoma", 0, 22 )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-				"gridX": 3
+				"gridX": 5
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"gridY": 2
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
 				name: "displayRest"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 5
+				"gridX": 7
 				"gridY": 2
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
@@ -32,7 +32,7 @@ new FormModel {
 				"font": new java.awt.Font( "Tahoma", 0, 28 )
 				"horizontalAlignment": 0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 2
+				"gridX": 4
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"gridY": 4
@@ -47,7 +47,7 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 8
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-				"gridX": 2
+				"gridX": 4
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "goToMenu"
@@ -55,13 +55,13 @@ new FormModel {
 				"font": new java.awt.Font( "Tahoma", 0, 22 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToMenuActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 6
+				"gridX": 8
 				"gridY": 8
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 685, 400 )
+			"size": new java.awt.Dimension( 790, 405 )
 		} )
 	}
 }
