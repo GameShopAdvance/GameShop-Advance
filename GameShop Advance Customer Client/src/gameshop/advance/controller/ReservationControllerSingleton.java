@@ -21,7 +21,10 @@ import gameshop.advance.observer.PartialObserver;
 import gameshop.advance.observer.ReservationObserver;
 import gameshop.advance.observer.TotalObserver;
 import gameshop.advance.observer.TransactionObserver;
+import gameshop.advance.ui.interfaces.ListPanel;
+import gameshop.advance.ui.swing.RigheDiVenditaListModel;
 import gameshop.advance.ui.swing.UIWindowSingleton;
+import gameshop.advance.ui.swing.customer.BookCellRenderer;
 import gameshop.advance.ui.swing.customer.CompletedReservationPanel;
 import gameshop.advance.ui.swing.customer.ProductsPanel;
 import gameshop.advance.utility.IDProdotto;
@@ -31,9 +34,8 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.HashMap;
-import java.util.Iterator;
 import javax.swing.JComponent;
+import javax.swing.ListCellRenderer;
 
 /**
  *
@@ -53,8 +55,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     private Money totale;
     private Money acconto;
     
-    private HashMap<String, IRigaDiTransazioneRemote> listaPrenotati = new HashMap<>();
-    private IIteratorWrapperRemote<IRigaDiTransazioneRemote> prenotati;
+    private RigheDiVenditaListModel listaPrenotati;
     
     private boolean started = false;
     
@@ -65,6 +66,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     public ReservationControllerSingleton() throws RemoteException {
         this.totale = new Money();
         this.acconto = new Money();
+        this.listaPrenotati = new RigheDiVenditaListModel();
     }
     
      private void configure() throws ConfigurationException, RemoteException, NotBoundException 
@@ -112,7 +114,6 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     public void avviaPrenotazione() throws RemoteException 
     {
        ProductsPanel panel = new ProductsPanel();
-       this.listaPrenotati.clear();
        this.totale = new Money();
        this.acconto = new Money();
        this.aggiornaWindow(panel);
@@ -158,6 +159,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         this.controller.terminaPrenotazione();
         this.aggiornaWindow(new CompletedReservationPanel());
         this.started = false;
+        this.listaPrenotati.clear();
     }
 
     /** Aggiorna l'id della prenotazione una volta che questa è terminata
@@ -172,12 +174,9 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
 
     @Override
     public void aggiornaListaProdotti(IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter) throws RemoteException {
-//        this.prenotati = iter;
-        this.listaPrenotati.clear();
         while(iter.hasNext())
         {
-            IRigaDiTransazioneRemote rdt = iter.next();
-            this.listaPrenotati.put(rdt.getDescrizione().getCodiceProdotto().getCodice(), rdt);
+            this.listaPrenotati.addElement(iter.next());
         }
     }
 
@@ -211,10 +210,11 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     {
         return this.acconto;
     }
-    
-    public Iterator<IRigaDiTransazioneRemote> getListaProdotti()
+
+    public void setReservationList(ListPanel panel)
     {
-        return this.listaPrenotati.values().iterator();
+        ListCellRenderer renderer = new BookCellRenderer();
+        panel.setList(this.listaPrenotati, renderer);
     }
  
 }

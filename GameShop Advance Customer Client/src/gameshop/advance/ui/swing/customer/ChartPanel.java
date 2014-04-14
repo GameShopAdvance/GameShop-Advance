@@ -8,7 +8,7 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
-import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
+import gameshop.advance.ui.interfaces.ListPanel;
 import gameshop.advance.ui.interfaces.PopActionListener;
 import gameshop.advance.utility.Money;
 import java.awt.Font;
@@ -18,39 +18,25 @@ import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 
 /**
  * @author Lorenzo Di Giuseppe
  */
-public class ChartPanel extends JPanel {
+public class ChartPanel extends JPanel implements ListPanel{
     private PopActionListener listener;
     private final String name = "Chart Panel";
-    private final DefaultListModel bookListModel;
     
     public ChartPanel() {
         initComponents();
-        this.bookListModel = new DefaultListModel();
-        this.bookListModel.addElement(null);
-        this.bookList.setCellRenderer(new BookCellRenderer());
-        this.bookList.setModel(this.bookListModel);
-    }
-    
-    public void addProduct(IRigaDiTransazioneRemote rdt)
-    {
-        this.bookListModel.addElement(rdt);
-    }
-    
-    public void clearList()
-    {
-        this.bookListModel.removeAllElements();
-        this.bookListModel.addElement(null);
+        ReservationControllerSingleton.getInstance().setReservationList(this);
     }
     
     @Override
@@ -87,7 +73,6 @@ public class ChartPanel extends JPanel {
     private void cancelActionPerformed(ActionEvent e)
     {
        try {
-            this.clearList();
             ReservationControllerSingleton.getInstance().cancellaPrenotazione();
             this.listener.popPanel();
         }
@@ -193,4 +178,11 @@ public class ChartPanel extends JPanel {
     private JButton button2;
     private JButton button1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+    @Override
+    public void setList(ListModel model, ListCellRenderer renderer)
+    {
+        this.bookList.setModel(model);
+        this.bookList.setCellRenderer(renderer);
+    }
 }

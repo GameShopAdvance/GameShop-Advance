@@ -4,18 +4,18 @@
 
 package gameshop.advance.ui.swing.customer;
 
-import java.awt.*;
-import javax.swing.*;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
+import gameshop.advance.ui.interfaces.ListPanel;
 import gameshop.advance.ui.interfaces.PopActionListener;
 import gameshop.advance.utility.Money;
 import java.awt.CardLayout;
 import java.awt.Cursor;
+import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -31,11 +31,14 @@ import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListModel;
+import javax.swing.SwingConstants;
 
 /**
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class ProductsPanel extends JPanel implements PopActionListener {
+public class ProductsPanel extends JPanel implements PopActionListener, ListPanel {
     private final DefaultListModel<IDescrizioneProdottoRemote> productsModel;
     private ProductPanel productDetail;
     private ChartPanel chart;
@@ -52,7 +55,6 @@ public class ProductsPanel extends JPanel implements PopActionListener {
         this.productDetail.setListener(this);
         this.chart = new ChartPanel();
         this.chart.setListener(this);
-        System.err.println("Chart: "+this.chart);
         CardLayout layout = (CardLayout) this.getLayout();
         layout.addLayoutComponent(this.productDetail, this.productDetail.getName());
         layout.addLayoutComponent(this.chart, this.chart.getName());
@@ -207,5 +209,11 @@ public class ProductsPanel extends JPanel implements PopActionListener {
     @Override
     public void actionPerformed(ActionEvent e) {
         this.popPanel();
+    }
+
+    @Override
+    public void setList(ListModel model, ListCellRenderer renderer)
+    {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }
