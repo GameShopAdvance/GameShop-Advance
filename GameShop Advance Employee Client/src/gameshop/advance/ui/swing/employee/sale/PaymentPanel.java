@@ -9,6 +9,7 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.ui.interfaces.IListPanel;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -28,7 +29,7 @@ import javax.swing.SwingConstants;
 /**
  * @author Andrea
  */
-public class PaymentPanel extends JPanel {
+public class PaymentPanel extends JPanel implements IListPanel {
     
     public PaymentPanel() {
         initComponents();

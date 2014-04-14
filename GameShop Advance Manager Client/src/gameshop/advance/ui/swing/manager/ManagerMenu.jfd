@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_17" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -45,6 +45,7 @@ new FormModel {
 				name: "button7"
 				"text": "Controlla Magazzino"
 				"font": new java.awt.Font( "Tahoma", 0, 18 )
+				"enabled": false
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 6
@@ -60,6 +61,7 @@ new FormModel {
 				name: "button6"
 				"text": "Gestisci Prezzi"
 				"font": new java.awt.Font( "Tahoma", 0, 18 )
+				"enabled": false
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 10
@@ -94,6 +96,7 @@ new FormModel {
 				name: "button5"
 				"text": "Gestisci Sconti"
 				"font": new java.awt.Font( "Tahoma", 0, 18 )
+				"enabled": false
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 12
@@ -109,6 +112,7 @@ new FormModel {
 				name: "button3"
 				"text": "Analizza Vendite"
 				"font": new java.awt.Font( "Tahoma", 0, 18 )
+				"enabled": false
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 16

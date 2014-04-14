@@ -12,6 +12,7 @@ import gameshop.advance.interfaces.remote.IProdottiRemote;
 import gameshop.advance.remote.DescrizioneRemoteProxy;
 import gameshop.advance.utility.IteratorWrapper;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 import java.util.Iterator;
 import java.util.LinkedList;
 
@@ -19,7 +20,10 @@ import java.util.LinkedList;
  *
  * @author Salx
  */
-public class ProdottiFacade implements IProdottiRemote {
+public class ProdottiFacade extends UnicastRemoteObject implements IProdottiRemote {
+    
+    public ProdottiFacade() throws RemoteException{
+    }
 
     @Override
     public IIteratorWrapperRemote<IDescrizioneProdottoRemote> getDescrizioni() throws RemoteException {

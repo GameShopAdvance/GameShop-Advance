@@ -4,37 +4,39 @@
 
 package gameshop.advance.ui.swing.manager;
 
-import java.awt.*;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.FornitureControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
-import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
+import gameshop.advance.ui.interfaces.IListPanel;
+import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListModel;
 
-public class FornitureMenu extends JPanel{
-    
-    private final DefaultListModel<IInformazioniProdottoRemote> infoProducts;
-    
-    public FornitureMenu() { 
-        initComponents();
-        this.infoProducts = new DefaultListModel<>();
-        this.infoList.setCellRenderer(new InfoCellRenderer());
-        this.infoList.setModel(this.infoProducts);
-    }
-    
-    public void addInfoProduct(IInformazioniProdottoRemote infoProd){
-        this.infoProducts.addElement(infoProd);
+public class FornitureMenu extends JPanel implements IListPanel {
+       
+    public FornitureMenu() throws RemoteException { 
+        try
+        {
+            initComponents();
+            FornitureControllerSingleton.getInstance().setFornitureList(this);
+        } catch (ConfigurationException ex)
+        {
+            Logger.getLogger(FornitureMenu.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex)
+        {
+            Logger.getLogger(FornitureMenu.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void clearFornitureActionPerformed(ActionEvent e){ 
@@ -94,4 +96,11 @@ public class FornitureMenu extends JPanel{
     private JButton clearForniture;
     private JButton button2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
+
+    @Override
+    public void setList(ListModel model, ListCellRenderer renderer)
+    {
+        this.infoList.setCellRenderer(renderer);
+        this.infoList.setModel(model);
+    }
 }

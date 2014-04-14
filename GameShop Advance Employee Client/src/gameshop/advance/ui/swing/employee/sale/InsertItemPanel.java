@@ -13,6 +13,7 @@ import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.technicalservices.LoggerSingleton;
+import gameshop.advance.ui.interfaces.IListPanel;
 import gameshop.advance.ui.swing.UIStyleSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.CardLayout;
@@ -36,7 +37,7 @@ import javax.swing.border.TitledBorder;
  * @author Matteo Gentile
  */
 
-public class InsertItemPanel extends JPanel {
+public class InsertItemPanel extends JPanel implements IListPanel{
     private DefaultListModel<IRigaDiTransazioneRemote> rdvListModel;
 
     public InsertItemPanel() {

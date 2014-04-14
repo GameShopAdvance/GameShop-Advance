@@ -6,7 +6,6 @@
 
 package gameshop.advance.observers;
 
-import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.IObserver;
 import gameshop.advance.manager.ManagerFornitureSingleton;
 import gameshop.advance.manager.ManagerProdottiSingleton;
@@ -24,8 +23,6 @@ public class ManagerProdottiObserver implements IObserver {
     public void notifica(Object o) {
         try {
             ManagerFornitureSingleton.getInstance().aggiornaDescrizioni(ManagerProdottiSingleton.getInstance().getMonitored());
-        } catch (QuantityException ex) {
-            Logger.getLogger(ManagerProdottiObserver.class.getName()).log(Level.SEVERE, null, ex);
         } catch (RemoteException ex) {
             Logger.getLogger(ManagerProdottiObserver.class.getName()).log(Level.SEVERE, null, ex);
         }
