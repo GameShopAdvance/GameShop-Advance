@@ -33,4 +33,6 @@ public interface IRemoteFactory extends Remote{
     IPrenotaProdottoRemote getPrenotaProdottoController() throws RemoteException;
     
     IFornitureControllerRemote getAnalizzaFornitureController() throws RemoteException;
+    
+    IProdottiRemote getProdottiFacade() throws RemoteException;
 }

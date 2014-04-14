@@ -6,20 +6,15 @@ import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
-import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.model.CatalogoProdottiSingleton;
 import gameshop.advance.model.NegozioSingleton;
 import gameshop.advance.model.transazione.Prenotazione;
-import gameshop.advance.remote.DescrizioneRemoteProxy;
 import gameshop.advance.utility.IDProdotto;
-import gameshop.advance.utility.IteratorWrapper;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Iterator;
-import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
@@ -38,11 +33,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
         
     }
     
-    /**
-     *
-     * @return
-     * @throws RemoteException
-     */
+    /*
     @Override
     public IteratorWrapper<IDescrizioneProdottoRemote> getDescriptions() throws RemoteException
     {
@@ -53,7 +44,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
             list.add(new DescrizioneRemoteProxy((IDescrizioneProdottoRemote) iter.next()));
         }
         return new IteratorWrapper<> (list.iterator());
-    }
+    }*/
     
     @Override
     public void avviaPrenotazione() throws RemoteException
