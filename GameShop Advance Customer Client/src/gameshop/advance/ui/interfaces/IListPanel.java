@@ -13,7 +13,7 @@ import javax.swing.ListModel;
  *
  * @author Lorenzo Di Giuseppe
  */
-public interface ListPanel
+public interface IListPanel
 {
     void setList(ListModel model, ListCellRenderer renderer);
 }

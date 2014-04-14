@@ -13,7 +13,7 @@ import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
-import gameshop.advance.ui.interfaces.PopActionListener;
+import gameshop.advance.ui.interfaces.IPopActionListener;
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.Insets;
@@ -34,7 +34,7 @@ import org.joda.time.DateTime;
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class ProductPanel extends JPanel {
-    private PopActionListener listener;
+    private IPopActionListener listener;
     private final String name = "Product Detail";
     
     private IDescrizioneProdottoRemote product;
@@ -50,7 +50,7 @@ public class ProductPanel extends JPanel {
         return this.name;
     }
     
-    public void setListener(PopActionListener listener){
+    public void setListener(IPopActionListener listener){
         this.listener = listener;
     }
     

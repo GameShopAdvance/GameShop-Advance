@@ -6,12 +6,11 @@ package gameshop.advance.ui.swing.customer;
 
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
+import gameshop.advance.controller.ProductsControllerSingleton;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
-import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
-import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
-import gameshop.advance.ui.interfaces.ListPanel;
-import gameshop.advance.ui.interfaces.PopActionListener;
+import gameshop.advance.ui.interfaces.IListPanel;
+import gameshop.advance.ui.interfaces.IPopActionListener;
 import gameshop.advance.utility.Money;
 import java.awt.CardLayout;
 import java.awt.Cursor;
@@ -21,11 +20,9 @@ import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;
-import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -38,19 +35,14 @@ import javax.swing.SwingConstants;
 /**
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class ProductsPanel extends JPanel implements PopActionListener, ListPanel {
-    private final DefaultListModel<IDescrizioneProdottoRemote> productsModel;
+public class ProductsPanel extends JPanel implements IPopActionListener, IListPanel {
     private ProductPanel productDetail;
     private ChartPanel chart;
-    
     private LinkedList<JPanel> panelStack;
     
     public ProductsPanel() {
         initComponents();
         this.panelStack = new LinkedList<>();
-        this.productsModel = new DefaultListModel<>();
-        this.productsList.setCellRenderer(new ProductCellRenderer());
-        this.productsList.setModel(this.productsModel);
         this.productDetail = new ProductPanel();
         this.productDetail.setListener(this);
         this.chart = new ChartPanel();
@@ -61,10 +53,6 @@ public class ProductsPanel extends JPanel implements PopActionListener, ListPane
         this.add(this.productDetail);
         this.add(this.chart);
         this.aggiornaTotale();
-    }
-    
-    public void addProduct(IDescrizioneProdottoRemote desc){
-        this.productsModel.addElement(desc);
     }
 
     private void aggiornaTotale()
@@ -101,12 +89,6 @@ public class ProductsPanel extends JPanel implements PopActionListener, ListPane
         try {
             this.chart.setTotal(ReservationControllerSingleton.getInstance().getTotal());
             this.pushPanel(this.chart);
-            this.chart.clearList();
-            Iterator<IRigaDiTransazioneRemote> iter = ReservationControllerSingleton.getInstance().getListaProdotti();
-            while(iter.hasNext())
-            {
-                this.chart.addProduct(iter.next());
-            }
         }
         catch (NullPointerException ex) {
             Logger.getLogger(ProductsPanel.class.getName()).log(Level.SEVERE, null, ex);
@@ -122,7 +104,7 @@ public class ProductsPanel extends JPanel implements PopActionListener, ListPane
     private void productsListMouseClicked(MouseEvent e) {
         try {
             int index = this.productsList.getSelectedIndex();
-            this.productDetail.setValues(this.productsModel.elementAt(index));
+            this.productDetail.setValues(ProductsControllerSingleton.getInstance().getProduct(index));
             this.pushPanel(this.productDetail);
         }
         catch (RemoteException ex) {

@@ -21,7 +21,7 @@ import gameshop.advance.observer.PartialObserver;
 import gameshop.advance.observer.ReservationObserver;
 import gameshop.advance.observer.TotalObserver;
 import gameshop.advance.observer.TransactionObserver;
-import gameshop.advance.ui.interfaces.ListPanel;
+import gameshop.advance.ui.interfaces.IListPanel;
 import gameshop.advance.ui.swing.RigheDiVenditaListModel;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.customer.BookCellRenderer;
@@ -117,11 +117,6 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
        this.totale = new Money();
        this.acconto = new Money();
        this.aggiornaWindow(panel);
-       IIteratorWrapperRemote<IDescrizioneProdottoRemote> iter = this.controller.getDescriptions();
-
-       while(iter.hasNext()) {
-           panel.addProduct(iter.next());
-       }
     }
 
     public void cancellaPrenotazione() throws RemoteException 
@@ -138,7 +133,6 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         if(!this.started)
         {
             this.controller.avviaPrenotazione();
-            System.err.println("Prenotazione avviata");
             this.controller.addListener(this.totalObserver);
             this.controller.addListener(this.partialObserver);
             this.controller.addListener(this.productsObserver);
@@ -211,7 +205,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         return this.acconto;
     }
 
-    public void setReservationList(ListPanel panel)
+    public void setReservationList(IListPanel panel)
     {
         ListCellRenderer renderer = new BookCellRenderer();
         panel.setList(this.listaPrenotati, renderer);

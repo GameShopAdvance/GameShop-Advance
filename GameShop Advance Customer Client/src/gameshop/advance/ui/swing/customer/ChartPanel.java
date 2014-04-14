@@ -8,8 +8,8 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
-import gameshop.advance.ui.interfaces.ListPanel;
-import gameshop.advance.ui.interfaces.PopActionListener;
+import gameshop.advance.ui.interfaces.IListPanel;
+import gameshop.advance.ui.interfaces.IPopActionListener;
 import gameshop.advance.utility.Money;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -30,13 +30,25 @@ import javax.swing.SwingConstants;
 /**
  * @author Lorenzo Di Giuseppe
  */
-public class ChartPanel extends JPanel implements ListPanel{
-    private PopActionListener listener;
+public class ChartPanel extends JPanel implements IListPanel{
+    private IPopActionListener listener;
     private final String name = "Chart Panel";
     
     public ChartPanel() {
         initComponents();
-        ReservationControllerSingleton.getInstance().setReservationList(this);
+        try
+        {
+            ReservationControllerSingleton.getInstance().setReservationList(this);
+        } catch (NullPointerException ex)
+        {
+            Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException ex)
+        {
+            Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (ConfigurationException ex)
+        {
+            Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     @Override
@@ -61,7 +73,7 @@ public class ChartPanel extends JPanel implements ListPanel{
         }
     }
     
-    public void setListener(PopActionListener listener){
+    public void setListener(IPopActionListener listener){
         this.listener = listener;
     }
     

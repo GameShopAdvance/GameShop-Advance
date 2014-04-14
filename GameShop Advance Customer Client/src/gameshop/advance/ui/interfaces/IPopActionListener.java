@@ -13,7 +13,7 @@ import javax.swing.JPanel;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public interface PopActionListener extends ActionListener {
+public interface IPopActionListener extends ActionListener {
     
     void popPanel();
     

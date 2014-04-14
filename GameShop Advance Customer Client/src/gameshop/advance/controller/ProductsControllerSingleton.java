@@ -12,13 +12,13 @@ import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IProdottiRemote;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
-import gameshop.advance.ui.interfaces.ListPanel;
+import gameshop.advance.ui.interfaces.IListPanel;
 import gameshop.advance.ui.swing.customer.ProductCellRenderer;
+import gameshop.advance.ui.swing.customer.ProductListModel;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
-import javax.swing.DefaultListModel;
 
 /**
  *
@@ -28,7 +28,7 @@ public class ProductsControllerSingleton
 {
     private static ProductsControllerSingleton instance;
     private IProdottiRemote controller;
-    private DefaultListModel<IDescrizioneProdottoRemote> listaDescrizioni;
+    private ProductListModel listaDescrizioni;
     
     private ProductsControllerSingleton()
     {
@@ -49,12 +49,16 @@ public class ProductsControllerSingleton
         return instance;
     }
     
-    public void setDescriptions(ListPanel panel)
+    public void setDescriptions(IListPanel panel)
     {
         panel.setList(this.listaDescrizioni, new ProductCellRenderer());
     }
     
-    public void aggiornaDescrizioni()
+    public IDescrizioneProdottoRemote getProduct(int index){
+        return this.listaDescrizioni.getElementAt(index);
+    }
+    
+    public void aggiornaDescrizioni() throws RemoteException
     {
         IIteratorWrapperRemote<IDescrizioneProdottoRemote> iter = this.controller.getDescrizioni();
         while(iter.hasNext())
