@@ -8,8 +8,10 @@ import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.remote.ICassaRemote;
 import gameshop.advance.interfaces.remote.IFornitureControllerRemote;
 import gameshop.advance.interfaces.remote.IInventarioControllerRemote;
+import gameshop.advance.interfaces.remote.IProdottiRemote;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.model.Cassa;
+import gameshop.advance.model.ProdottiFacade;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;
@@ -101,5 +103,10 @@ public class RemoteFactorySingleton extends UnicastRemoteObject implements IRemo
     @Override
     public IFornitureControllerRemote getAnalizzaFornitureController() throws RemoteException {
         return new AnalizzaFornitureController();
+    }
+    
+    public IProdottiRemote getProdottiFacade() throws RemoteException {
+        
+        return new ProdottiFacade();
     }
 }

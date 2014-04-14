@@ -34,14 +34,6 @@ public interface IPrenotaProdottoRemote extends Remote{
     
     /**
      *
-     * @return
-     * @throws RemoteException
-     */
-        
-    IIteratorWrapperRemote<IDescrizioneProdottoRemote> getDescriptions() throws RemoteException;
-    
-    /**
-     *
      * @throws RemoteException
      */
     void avviaPrenotazione() throws RemoteException;
