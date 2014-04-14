@@ -10,17 +10,18 @@ import gameshop.advance.controller.IRemoteFornitureClient;
 import gameshop.advance.interfaces.remote.IFornitureManagerRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  *
  * @author Lorenzo Di Giuseppe
  */
-public class FornitureObserver implements IRemoteObserver
+public class FornitureObserver extends UnicastRemoteObject implements IRemoteObserver
 {
 
     private IRemoteFornitureClient client;
     
-    public FornitureObserver(IRemoteFornitureClient client)
+    public FornitureObserver(IRemoteFornitureClient client) throws RemoteException
     {
         this.client = client;
     }
