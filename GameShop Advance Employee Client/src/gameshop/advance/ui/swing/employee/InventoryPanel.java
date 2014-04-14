@@ -12,6 +12,7 @@ import gameshop.advance.controller.valueData.AggiuntaProdotti;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.ui.swing.UIStyleSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -38,6 +39,8 @@ public class InventoryPanel extends JPanel {
     
     public InventoryPanel() {
         initComponents();
+        this.cancelButton.setBackground(UIStyleSingleton.getInstance().getAlertColor());
+        this.cancelButton.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
         this.refreshTable();
     }
 
@@ -131,30 +134,30 @@ public class InventoryPanel extends JPanel {
 
         //======== this ========
         setLayout(new FormLayout(
-            "$lcgap, [15dlu,default]:grow, $lcgap, 2*([75px,min]), $lcgap, [358px,min], $lcgap, 2*([75px,min]), $lcgap, [15dlu,default]:grow",
-            "[15dlu,default]:grow, $lgap, 68dlu, $lgap, [200px,min], $lgap, fill:[70px,min], $lgap, [15dlu,default]:grow"));
+            "$lcgap, [15dlu,default]:grow, $lcgap, [75dlu,min], $lcgap, [200dlu,min], $lcgap, [75dlu,min], $lcgap, [15dlu,default]:grow",
+            "[15dlu,default]:grow, $lgap, 68dlu, $lgap, [200px,min], $lgap, fill:[35dlu,min], $lgap, [15dlu,default]:grow"));
 
         //======== panel1 ========
         {
             panel1.setLayout(new FormLayout(
-                "[100px,min], $lcgap, [80px,min], $lcgap, [100px,min]",
+                "70dlu, $lcgap, 80dlu, $lcgap, [75dlu,min]",
                 "fill:[40px,min], $rgap, fill:[40px,default]"));
 
             //---- label1 ----
             label1.setText("Codice Prodotto");
-            label1.setFont(new Font("Tahoma", Font.PLAIN, 18));
+            label1.setFont(new Font("Tahoma", Font.PLAIN, 14));
             panel1.add(label1, CC.xy(1, 1));
             panel1.add(codiceProdotto, CC.xywh(3, 1, 3, 1, CC.FILL, CC.DEFAULT));
 
             //---- label2 ----
             label2.setText("Quantit\u00e0");
-            label2.setFont(new Font("Tahoma", Font.PLAIN, 18));
+            label2.setFont(new Font("Tahoma", Font.PLAIN, 14));
             panel1.add(label2, CC.xy(1, 3));
             panel1.add(quantitaProdotto, CC.xy(3, 3, CC.FILL, CC.DEFAULT));
 
             //---- button1 ----
             button1.setText("Inserisci");
-            button1.setFont(new Font("Tahoma", Font.PLAIN, 20));
+            button1.setFont(new Font("Tahoma", Font.PLAIN, 14));
             button1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -163,35 +166,35 @@ public class InventoryPanel extends JPanel {
             });
             panel1.add(button1, CC.xy(5, 3));
         }
-        add(panel1, CC.xy(7, 3));
+        add(panel1, CC.xy(6, 3));
 
         //======== panel ========
         {
             panel.setViewportView(table);
         }
-        add(panel, CC.xywh(4, 5, 7, 1, CC.FILL, CC.FILL));
+        add(panel, CC.xywh(4, 5, 5, 1, CC.FILL, CC.FILL));
 
         //---- cancelButton ----
         cancelButton.setText("Annulla");
-        cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cancelButtonActionPerformed(e);
             }
         });
-        add(cancelButton, CC.xywh(4, 7, 2, 1));
+        add(cancelButton, CC.xy(4, 7));
 
         //---- endInventoryButton ----
         endInventoryButton.setText("Fine");
-        endInventoryButton.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        endInventoryButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         endInventoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 endInventoryButtonActionPerformed(e);
             }
         });
-        add(endInventoryButton, CC.xywh(9, 7, 2, 1));
+        add(endInventoryButton, CC.xy(8, 7));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

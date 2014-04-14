@@ -71,13 +71,13 @@ public class EndBookPanel extends JPanel {
 
         //======== this ========
         setLayout(new FormLayout(
-            "$lcgap, [15dlu,default]:grow, $lcgap, [150px,min], $lcgap, 56dlu, $lcgap, 155dlu, $lcgap, 80dlu, $lcgap, [15dlu,default]:grow",
-            "24dlu, $lgap, fill:37dlu, $lgap, 59dlu, $lgap, 69dlu, $lgap, 59dlu, $lgap, [15dlu,default]:grow"));
+            "$lcgap, [15dlu,default]:grow, $lcgap, [75dlu,default], $lcgap, 56dlu, $lcgap, 155dlu, $lcgap, 80dlu, $lcgap, [15dlu,default]:grow",
+            "[15dlu,default], $lgap, fill:37dlu, $lgap, 59dlu, $lgap, 69dlu, $lgap, [35dlu,default], $lgap, [15dlu,default]:grow"));
 
         //---- label1 ----
         label1.setText("Resto");
         label1.setLabelFor(displayRest);
-        label1.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        label1.setFont(new Font("Tahoma", Font.PLAIN, 14));
         add(label1, CC.xy(6, 3, CC.FILL, CC.FILL));
         add(displayRest, CC.xy(8, 3, CC.FILL, CC.DEFAULT));
 
@@ -89,7 +89,7 @@ public class EndBookPanel extends JPanel {
 
         //---- goToMenu ----
         goToMenu.setText("Torna al Men\u00f9");
-        goToMenu.setFont(new Font("Tahoma", Font.PLAIN, 22));
+        goToMenu.setFont(new Font("Tahoma", Font.PLAIN, 14));
         goToMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
