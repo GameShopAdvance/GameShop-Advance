@@ -37,7 +37,8 @@ public class AnalizzaFornitureController extends UnicastRemoteObject implements 
         return new IteratorWrapper<>(ManagerFornitureSingleton.getInstance().getInformazioni());
     }
     
-    public void addListener(IRemoteObserver obs)
+    @Override
+    public void addListener(IRemoteObserver obs) throws RemoteException
     {
         ManagerFornitureSingleton.getInstance().addListener(obs);
     }

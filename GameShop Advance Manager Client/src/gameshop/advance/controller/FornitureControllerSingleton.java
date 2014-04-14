@@ -43,7 +43,7 @@ public class FornitureControllerSingleton extends UnicastRemoteObject implements
     private FornitureControllerSingleton() throws RemoteException
     {
         this.listaForniture = new FornitureListModel();
-        this.informationListener = new FornitureObserver(this);
+        
     }
     
     @Override
@@ -81,6 +81,9 @@ public class FornitureControllerSingleton extends UnicastRemoteObject implements
         Registry reg = LocateRegistry.getRegistry(controllerConfig.getServerAddress(), controllerConfig.getServerPort());
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
         this.controller = factory.getAnalizzaFornitureController();
+        
+        this.informationListener = new FornitureObserver(instance);
+        this.controller.addListener(this.informationListener);
     }
     
     private void aggiornaWindow(JComponent panel) 

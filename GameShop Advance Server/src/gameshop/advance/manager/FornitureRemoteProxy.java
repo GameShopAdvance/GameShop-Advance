@@ -11,20 +11,22 @@ import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.utility.IteratorWrapper;
 import java.rmi.RemoteException;
+import java.rmi.server.UnicastRemoteObject;
 
 /**
  *
  * @author Lorenzo Di Giuseppe
  */
-class FornitureRemoteProxy implements IFornitureManagerRemote 
+class FornitureRemoteProxy extends UnicastRemoteObject implements IFornitureManagerRemote 
 {   
-    private ManagerFornitureSingleton manager;
-    public FornitureRemoteProxy()
+    private final ManagerFornitureSingleton manager;
+    
+    public FornitureRemoteProxy() throws RemoteException
     {
         this.manager = null;
     }
 
-    FornitureRemoteProxy(ManagerFornitureSingleton manager)
+    FornitureRemoteProxy(ManagerFornitureSingleton manager) throws RemoteException
     {
         this.manager = manager;
     }
