@@ -19,6 +19,8 @@ import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 
 /**
  *
@@ -32,6 +34,7 @@ public class ProductsControllerSingleton
     
     private ProductsControllerSingleton()
     {
+        this.listaDescrizioni = new ProductListModel();
     }
     
     private void configure() throws ConfigurationException, RemoteException, NotBoundException 
@@ -39,13 +42,26 @@ public class ProductsControllerSingleton
         ConfigurationControllerSingleton controllerConfig = ConfigurationControllerSingleton.getInstance();
         Registry reg = LocateRegistry.getRegistry(controllerConfig.getServerAddress(), controllerConfig.getServerPort());
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
-        this.controller = factory.getProdottiController();
+        this.controller = factory.getProdottiFacade();
+        this.aggiornaDescrizioni();
     }
     
-    public static ProductsControllerSingleton getInstance()
+    public static ProductsControllerSingleton getInstance() throws RemoteException
     {
-        if(instance == null)
-            instance = new ProductsControllerSingleton();
+        if(instance==null)
+        {
+            try {
+                instance = new ProductsControllerSingleton();
+                instance.configure();
+            } catch (RemoteException | NotBoundException ex) {
+                instance = null;
+                Logger.getLogger(ProductsControllerSingleton.class.getName()).log(Level.SEVERE, null, ex);
+                throw new RemoteException("Ci sono problemi di comunicazione con il server.");
+            } catch (ConfigurationException ex)
+            {
+                Logger.getLogger(ProductsControllerSingleton.class.getName()).log(Level.SEVERE, null, ex);
+            }
+        }
         return instance;
     }
     
@@ -63,7 +79,9 @@ public class ProductsControllerSingleton
         IIteratorWrapperRemote<IDescrizioneProdottoRemote> iter = this.controller.getDescrizioni();
         while(iter.hasNext())
         {
-            this.listaDescrizioni.addElement(iter.next());
+            IDescrizioneProdottoRemote desc = iter.next();
+            System.err.println("Descrizione: "+desc.getDescrizione());
+            this.listaDescrizioni.addElement(desc);
         }
     }
 }

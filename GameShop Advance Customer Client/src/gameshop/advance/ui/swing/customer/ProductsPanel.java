@@ -40,8 +40,14 @@ public class ProductsPanel extends JPanel implements IPopActionListener, IListPa
     private ChartPanel chart;
     private LinkedList<JPanel> panelStack;
     
-    public ProductsPanel() {
+    public ProductsPanel() throws RemoteException {
         initComponents();
+        this.setLinkedPanels();
+        ProductsControllerSingleton.getInstance().setDescriptions(this);
+        this.aggiornaTotale();
+    }
+
+    private void setLinkedPanels(){
         this.panelStack = new LinkedList<>();
         this.productDetail = new ProductPanel();
         this.productDetail.setListener(this);
@@ -52,9 +58,8 @@ public class ProductsPanel extends JPanel implements IPopActionListener, IListPa
         layout.addLayoutComponent(this.chart, this.chart.getName());
         this.add(this.productDetail);
         this.add(this.chart);
-        this.aggiornaTotale();
     }
-
+    
     private void aggiornaTotale()
     {
         try {
@@ -196,6 +201,7 @@ public class ProductsPanel extends JPanel implements IPopActionListener, IListPa
     @Override
     public void setList(ListModel model, ListCellRenderer renderer)
     {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        this.productsList.setModel(model);
+        this.productsList.setCellRenderer(renderer);
     }
 }

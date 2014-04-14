@@ -6,13 +6,15 @@
 
 package gameshop.advance.interfaces.remote;
 
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+
 /**
  *
- * @author Lorenzo Di Giuseppe
+ * @author Salx
  */
-public interface IProdottiRemote
-{
-
-    public IIteratorWrapperRemote<IDescrizioneProdottoRemote> getDescrizioni();
+public interface IProdottiRemote extends Remote {
+    
+    public IIteratorWrapperRemote<IDescrizioneProdottoRemote> getDescrizioni()throws RemoteException;
     
 }

@@ -23,7 +23,7 @@ import javax.swing.event.ListDataListener;
  */
 public class ProductListModel implements ListModel<IDescrizioneProdottoRemote>
 {
-    private LinkedList<ListDataListener> listeners;
+    private LinkedList<ListDataListener> listeners = new LinkedList<ListDataListener>();
     
     private HashMap<String, IDescrizioneProdottoRemote> descrizioni = new HashMap<>();
 
