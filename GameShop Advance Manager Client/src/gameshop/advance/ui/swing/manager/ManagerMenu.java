@@ -61,8 +61,8 @@ public class ManagerMenu extends JPanel {
 
         //======== this ========
         setLayout(new FormLayout(
-            "$lcgap, 13dlu, [303px,pref], 20dlu, [288px,pref], $lcgap",
-            "7*($lgap, fill:30dlu)"));
+            "$lcgap, [15dlu,default], [303px,pref], 20dlu, [288px,pref], $lcgap, [15dlu,default]:grow",
+            "$lgap, [15dlu,default]:grow, 7*($lgap, fill:30dlu), $lgap, [15dlu,default]:grow"));
 
         //---- button4 ----
         button4.setText("Gestisci Forniture");
@@ -73,7 +73,7 @@ public class ManagerMenu extends JPanel {
                 fornitureActionPerformed(e);
             }
         });
-        add(button4, CC.xy(3, 2));
+        add(button4, CC.xy(3, 4));
 
         //======== panel2 ========
         {
@@ -103,21 +103,21 @@ public class ManagerMenu extends JPanel {
             }
             panel2.add(scrollPane2, CC.xy(1, 1));
         }
-        add(panel2, CC.xywh(5, 2, 1, 5));
+        add(panel2, CC.xywh(5, 4, 1, 5));
 
         //---- button7 ----
         button7.setText("Controlla Magazzino");
         button7.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        add(button7, CC.xy(3, 4));
+        add(button7, CC.xy(3, 6));
 
         //---- button1 ----
         button1.setEnabled(false);
-        add(button1, CC.xy(3, 6));
+        add(button1, CC.xy(3, 8));
 
         //---- button6 ----
         button6.setText("Gestisci Prezzi");
         button6.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        add(button6, CC.xy(3, 8));
+        add(button6, CC.xy(3, 10));
 
         //======== panel3 ========
         {
@@ -149,21 +149,21 @@ public class ManagerMenu extends JPanel {
             }
             panel3.add(scrollPane1, CC.xy(1, 1));
         }
-        add(panel3, CC.xywh(5, 8, 1, 5));
+        add(panel3, CC.xywh(5, 10, 1, 5));
 
         //---- button5 ----
         button5.setText("Gestisci Sconti");
         button5.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        add(button5, CC.xy(3, 10));
+        add(button5, CC.xy(3, 12));
 
         //---- button2 ----
         button2.setEnabled(false);
-        add(button2, CC.xy(3, 12));
+        add(button2, CC.xy(3, 14));
 
         //---- button3 ----
         button3.setText("Analizza Vendite");
         button3.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        add(button3, CC.xy(3, 14));
+        add(button3, CC.xy(3, 16));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

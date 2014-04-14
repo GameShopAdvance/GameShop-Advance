@@ -53,6 +53,7 @@ public class UIWindowSingleton extends JFrame {
 
         //======== this ========
         setTitle("GameShopAdvance Cassa");
+        setResizable(false);
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
@@ -92,7 +93,7 @@ public class UIWindowSingleton extends JFrame {
             mainPanel.setViewportBorder(null);
         }
         contentPane.add(mainPanel, BorderLayout.CENTER);
-        setSize(700, 460);
+        setSize(1025, 540);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }

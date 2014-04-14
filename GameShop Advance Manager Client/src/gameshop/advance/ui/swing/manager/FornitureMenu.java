@@ -5,7 +5,6 @@
 package gameshop.advance.ui.swing.manager;
 
 import java.awt.*;
-import javax.swing.plaf.*;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.FornitureControllerSingleton;
@@ -58,8 +57,8 @@ public class FornitureMenu extends JPanel{
 
         //======== this ========
         setLayout(new FormLayout(
-            "default, $lcgap, 143dlu, 2*($lcgap, 20dlu), $lcgap, 143dlu, $lcgap, default",
-            "[25px,default], $lgap, fill:177dlu, $lgap, fill:[72px,default], $lgap"));
+            "[15dlu,default]:grow, $lcgap, 143dlu, 2*($lcgap, 20dlu), $lcgap, 143dlu, $lcgap, [15dlu,default]:grow",
+            "[15px,default]:grow, $lgap, fill:177dlu, $lgap, fill:[72px,default], $lgap, [15dlu,default]:grow, $lgap"));
 
         //======== scrollPane1 ========
         {

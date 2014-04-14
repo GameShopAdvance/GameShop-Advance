@@ -4,7 +4,6 @@
 
 package gameshop.advance.ui.swing.customer;
 
-import javax.swing.*;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
@@ -18,6 +17,7 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.SwingConstants;
 
 /**
  * @author Matteo Gentile
@@ -46,8 +46,8 @@ public class CustomerPanel extends JPanel {
 
         //======== this ========
         setLayout(new FormLayout(
-            "[150px,min]:grow, $lcgap, [250px,default], $lcgap, [150px,min]:grow",
-            "[100px,min]:grow, $lgap, [150px,min], $lgap, fill:[100px,min]:grow"));
+            "[150px,min]:grow, $lcgap, [75dlu,default], $lcgap, [150px,min]:grow",
+            "[100px,min]:grow, $lgap, [35dlu,min], $lgap, fill:[100px,min]:grow"));
 
         //---- label1 ----
         label1.setText("Prenota uno dei nostri prodotti!");

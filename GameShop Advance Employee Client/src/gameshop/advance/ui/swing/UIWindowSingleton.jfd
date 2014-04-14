@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_17" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -7,6 +7,7 @@ new FormModel {
 			name: "this"
 			"$sizePolicy": 1
 			"title": "GameShopAdvance Cassa"
+			"resizable": false
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "mainPanel"
 				"viewportBorder": sfield com.jformdesigner.model.FormObject NULL_VALUE
@@ -32,7 +33,7 @@ new FormModel {
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 700, 460 )
+			"size": new java.awt.Dimension( 1025, 540 )
 		} )
 	}
 }

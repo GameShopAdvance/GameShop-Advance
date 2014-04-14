@@ -71,21 +71,21 @@ public class EndBookPanel extends JPanel {
 
         //======== this ========
         setLayout(new FormLayout(
-            "$lcgap, [150px,min], $lcgap, 56dlu, $lcgap, 155dlu, $lcgap, 80dlu, $lcgap, default",
-            "24dlu, $lgap, fill:37dlu, $lgap, 59dlu, $lgap, 69dlu, $lgap, 59dlu"));
+            "$lcgap, [15dlu,default]:grow, $lcgap, [150px,min], $lcgap, 56dlu, $lcgap, 155dlu, $lcgap, 80dlu, $lcgap, [15dlu,default]:grow",
+            "24dlu, $lgap, fill:37dlu, $lgap, 59dlu, $lgap, 69dlu, $lgap, 59dlu, $lgap, [15dlu,default]:grow"));
 
         //---- label1 ----
         label1.setText("Resto");
         label1.setLabelFor(displayRest);
         label1.setFont(new Font("Tahoma", Font.PLAIN, 22));
-        add(label1, CC.xy(4, 3, CC.FILL, CC.FILL));
-        add(displayRest, CC.xy(6, 3, CC.FILL, CC.DEFAULT));
+        add(label1, CC.xy(6, 3, CC.FILL, CC.FILL));
+        add(displayRest, CC.xy(8, 3, CC.FILL, CC.DEFAULT));
 
         //---- label2 ----
         label2.setText("Prenotazione effettuata!");
         label2.setHorizontalAlignment(SwingConstants.CENTER);
         label2.setFont(new Font("Tahoma", Font.PLAIN, 30));
-        add(label2, CC.xywh(2, 5, 7, 1, CC.FILL, CC.FILL));
+        add(label2, CC.xywh(4, 5, 7, 1, CC.FILL, CC.FILL));
 
         //---- goToMenu ----
         goToMenu.setText("Torna al Men\u00f9");
@@ -96,7 +96,7 @@ public class EndBookPanel extends JPanel {
                 goToMenuActionPerformed(e);
             }
         });
-        add(goToMenu, CC.xy(2, 9, CC.DEFAULT, CC.FILL));
+        add(goToMenu, CC.xy(4, 9, CC.DEFAULT, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

@@ -1,11 +1,11 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_17" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(min;150px):grow, labelcompgap, max(default;250px), labelcompgap, max(min;150px):grow"
-			"$rowSpecs": "max(min;100px):grow, linegap, max(min;150px), linegap, fill:max(min;100px):grow"
+			"$columnSpecs": "max(min;150px):grow, labelcompgap, max(default;75dlu), labelcompgap, max(min;150px):grow"
+			"$rowSpecs": "max(min;100px):grow, linegap, max(min;35dlu), linegap, fill:max(min;100px):grow"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
