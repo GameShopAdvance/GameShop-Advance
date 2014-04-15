@@ -292,8 +292,8 @@ public class ProductPanel extends JPanel {
         }
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[15dlu,default], $lcgap, [73dlu,default], $lcgap, default:grow, $lcgap, [30dlu,default], $lcgap, [40dlu,default], $lcgap, [15dlu,default]",
-            "[15dlu,default], $lgap, default, $lgap, 15dlu, $lgap, fill:[73dlu,default], $lgap, fill:[27dlu,default]:grow, [15dlu,default]"), this);
+            "[15dlu,default], $lcgap, [75dlu,default], $lcgap, default:grow, $lcgap, [30dlu,default], $lcgap, [40dlu,default], $lcgap, [15dlu,default]",
+            "[15dlu,default], $lgap, [35dlu,default], $lgap, 15dlu, $lgap, fill:[73dlu,default], $lgap, fill:[27dlu,default]:grow, [15dlu,default]"), this);
 
         builder.add(button1,     CC.xy  (3, 3, CC.FILL, CC.FILL));
         builder.add(title,       CC.xywh(3, 5,       5,       1, CC.DEFAULT, CC.FILL));

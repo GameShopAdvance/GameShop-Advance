@@ -4,6 +4,7 @@
 
 package gameshop.advance.ui.swing.customer;
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
@@ -45,26 +46,31 @@ public class CustomerPanel extends JPanel {
         button1 = new JButton();
 
         //======== this ========
-        setLayout(new FormLayout(
-            "[150px,min]:grow, $lcgap, [75dlu,default], $lcgap, [150px,min]:grow",
-            "[100px,min]:grow, $lgap, [35dlu,min], $lgap, fill:[100px,min]:grow"));
+        setName("this");
 
         //---- label1 ----
         label1.setText("Prenota uno dei nostri prodotti!");
         label1.setFont(new Font("Dialog", Font.PLAIN, 16));
         label1.setHorizontalAlignment(SwingConstants.CENTER);
-        add(label1, CC.xy(3, 1));
+        label1.setName("label1");
 
         //---- button1 ----
         button1.setText("Avvia Prenotazione");
-        button1.setFont(new Font("Ubuntu", Font.PLAIN, 22));
+        button1.setFont(new Font("Ubuntu", Font.PLAIN, 14));
+        button1.setName("button1");
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 avviaPrenotazione(e);
             }
         });
-        add(button1, CC.xy(3, 3, CC.FILL, CC.FILL));
+
+        PanelBuilder builder = new PanelBuilder(new FormLayout(
+            "[150px,min]:grow, $lcgap, [75dlu,default], $lcgap, [150px,min]:grow",
+            "[100px,min]:grow, $lgap, [35dlu,min], $lgap, fill:[100px,min]:grow"), this);
+
+        builder.add(label1,  CC.xy(3, 1));
+        builder.add(button1, CC.xy(3, 3, CC.FILL, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
