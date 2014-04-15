@@ -7,6 +7,7 @@
 package gameshop.advance.ui.swing;
 
 import java.awt.Color;
+import java.awt.Font;
 
 /**
  *
@@ -20,7 +21,38 @@ public class UIStyleSingleton {
     
     private Color buttonTextColor = new Color(255, 255, 255);
     
+    
+    private Font bigFont = new Font("Tahoma", Font.PLAIN, 16);
+    
+    private Font normalFont = new Font("Tahoma", Font.PLAIN, 14);
+    
+    private Font boldFont = new Font("Tahoma", Font.BOLD, 14);
+    
     private static UIStyleSingleton instance;
+
+    public Font getBigFont() {
+        return bigFont;
+    }
+
+    public void setBigFont(Font bigFont) {
+        this.bigFont = bigFont;
+    }
+
+    public Font getNormalFont() {
+        return normalFont;
+    }
+
+    public void setNormalFont(Font normalFont) {
+        this.normalFont = normalFont;
+    }
+
+    public Font getBoldFont() {
+        return boldFont;
+    }
+
+    public void setBoldFont(Font boldFont) {
+        this.boldFont = boldFont;
+    }
     
     private UIStyleSingleton()
     {
