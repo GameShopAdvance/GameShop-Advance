@@ -127,6 +127,7 @@ public class ProductPanel extends JPanel {
 
         //---- button1 ----
         button1.setText("Indietro");
+        button1.setFont(new Font("Dialog", Font.PLAIN, 14));
         button1.setName("button1");
         button1.addActionListener(new ActionListener() {
             @Override

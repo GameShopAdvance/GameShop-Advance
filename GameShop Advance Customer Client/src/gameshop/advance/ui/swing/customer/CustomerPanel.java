@@ -9,6 +9,7 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.ui.swing.UIStyleSingleton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -26,8 +27,14 @@ import javax.swing.SwingConstants;
 public class CustomerPanel extends JPanel {
     public CustomerPanel() {
         initComponents();
+        this.setStyle();
     }
 
+    protected void setStyle(){
+        this.label1.setFont(UIStyleSingleton.getInstance().getBigFont());
+        this.button1.setFont(UIStyleSingleton.getInstance().getNormalFont());
+    }
+    
     private void avviaPrenotazione(ActionEvent e) {    
             try {
                 ReservationControllerSingleton.getInstance().avviaPrenotazione();
