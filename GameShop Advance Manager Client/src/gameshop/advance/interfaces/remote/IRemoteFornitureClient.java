@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.controller;
+package gameshop.advance.interfaces.remote;
 
 import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;

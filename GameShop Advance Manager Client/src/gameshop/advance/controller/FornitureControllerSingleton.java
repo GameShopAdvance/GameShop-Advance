@@ -13,8 +13,10 @@ import gameshop.advance.interfaces.remote.IFornitureControllerRemote;
 import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
+import gameshop.advance.interfaces.remote.IRemoteFornitureClient;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.manager.observer.FornitureObserver;
+import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.interfaces.IListPanel;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.manager.FornitureListModel;
@@ -62,8 +64,10 @@ public class FornitureControllerSingleton extends UnicastRemoteObject implements
                 instance.configure();
             } catch (RemoteException | NotBoundException ex) {
                 instance = null;
+                LoggerSingleton.getInstance().log(ex);
                 throw new RemoteException("Ci sono problemi di comunicazione con il server.");
                 //Instanziare un logger per tener traccia delle eccezioni e consentire la loro analisi
+                
             }
         }
         
@@ -93,7 +97,6 @@ public class FornitureControllerSingleton extends UnicastRemoteObject implements
     }
     
     public void avviaGestioneForniture() throws RemoteException, QuantityException{
-        //UIWindowSingleton.getInstance().setPanel(new FornitureMenu());
         FornitureMenu panel = new FornitureMenu();
         this.aggiornaWindow(panel);
         
