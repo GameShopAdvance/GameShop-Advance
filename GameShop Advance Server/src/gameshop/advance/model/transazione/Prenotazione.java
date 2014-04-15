@@ -35,6 +35,7 @@ public class Prenotazione extends Vendita implements IPrenotazione {
         if(this.getAcconto().greater(ammontare))
             throw new InvalidMoneyException(ammontare);
         this.acconto = new Pagamento(ammontare);
+        this.notificaListener();
     }
 
     @Override
@@ -44,6 +45,7 @@ public class Prenotazione extends Vendita implements IPrenotazione {
     
     @Override
     public Money getRestoAcconto() throws RemoteException{
+        System.err.println("GET RESTO ACCONTO");
         return this.acconto.getAmmontare().subtract(this.getAcconto());
     }
     

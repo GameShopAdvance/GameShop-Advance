@@ -25,6 +25,7 @@ public class RestPartialObserver extends UnicastRemoteObject implements IRemoteO
      * @throws RemoteException
      */
     public RestPartialObserver(IRemoteBookClient client) throws RemoteException {
+        System.err.println("Rest partial observer creato");
         this.client = client;
     }
     

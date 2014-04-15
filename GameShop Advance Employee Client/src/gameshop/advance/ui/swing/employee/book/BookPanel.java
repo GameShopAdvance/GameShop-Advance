@@ -4,6 +4,7 @@
 
 package gameshop.advance.ui.swing.employee.book;
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
@@ -202,50 +203,54 @@ public class BookPanel extends JPanel {
         payTotalButton = new JButton();
 
         //======== this ========
-        setLayout(new FormLayout(
-            "default:grow",
-            "fill:default:grow"));
+        setName("this");
 
         //======== mainPanel ========
         {
+            mainPanel.setName("mainPanel");
             mainPanel.setLayout(new CardLayout());
 
             //======== getReservationCard ========
             {
-                getReservationCard.setLayout(new FormLayout(
-                    "[15dlu,default]:grow, $lcgap, default:grow, $lcgap, [15dlu,default]:grow",
-                    "[15dlu,default], 3*($lgap, default:grow), $lgap, [15dlu,default]:grow"));
+                getReservationCard.setName("getReservationCard");
 
                 //======== panel2 ========
                 {
                     panel2.setBorder(new CompoundBorder(
                         new TitledBorder("Prenotazione"),
                         Borders.DLU2_BORDER));
-                    panel2.setLayout(new FormLayout(
-                        "center:[190px,min]:grow, $lcgap, [100dlu,min]:grow, $lcgap, [75dlu,default]:grow",
-                        "[50px,min], $rgap, fill:[35dlu,min]"));
+                    panel2.setName("panel2");
 
                     //---- label2 ----
                     label2.setText("Codice Prenotazione");
                     label2.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     label2.setLabelFor(bookCode);
-                    panel2.add(label2, CC.xy(1, 1, CC.LEFT, CC.DEFAULT));
-                    panel2.add(bookCode, CC.xywh(3, 1, 3, 1, CC.FILL, CC.FILL));
+                    label2.setName("label2");
+
+                    //---- bookCode ----
+                    bookCode.setName("bookCode");
 
                     //---- retrieveBook ----
                     retrieveBook.setText("Aggiungi");
                     retrieveBook.setForeground(Color.black);
                     retrieveBook.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     retrieveBook.setNextFocusableComponent(clientCode);
+                    retrieveBook.setName("retrieveBook");
                     retrieveBook.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             retrieveBookActionPerformed(e);
                         }
                     });
-                    panel2.add(retrieveBook, CC.xy(5, 3));
+
+                    PanelBuilder panel2Builder = new PanelBuilder(new FormLayout(
+                        "center:[190px,min]:grow, $lcgap, [100dlu,min]:grow, $lcgap, [75dlu,default]:grow",
+                        "[50px,min], $rgap, fill:[35dlu,min]"), panel2);
+
+                    panel2Builder.add(label2,       CC.xy  (1, 1, CC.LEFT, CC.DEFAULT));
+                    panel2Builder.add(bookCode,     CC.xywh(3, 1,       3,          1, CC.FILL, CC.FILL));
+                    panel2Builder.add(retrieveBook, CC.xy  (5, 3));
                 }
-                getReservationCard.add(panel2, CC.xy(3, 3));
 
                 //======== panel1 ========
                 {
@@ -253,59 +258,62 @@ public class BookPanel extends JPanel {
                         new TitledBorder("Carta Cliente"),
                         Borders.DLU2_BORDER));
                     panel1.setFont(new Font("Tahoma", Font.PLAIN, 20));
-                    panel1.setLayout(new FormLayout(
-                        "left:[100dlu,min]:grow, $lcgap, [100dlu,min]:grow, $lcgap, [75dlu,default]:grow",
-                        "[35dlu,min], $lgap, fill:[35dlu,min]"));
+                    panel1.setName("panel1");
 
                     //---- label4 ----
                     label4.setText("Codice");
                     label4.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     label4.setLabelFor(clientCode);
-                    panel1.add(label4, CC.xy(1, 1));
+                    label4.setName("label4");
 
                     //---- clientCode ----
                     clientCode.setNextFocusableComponent(insertClientCode);
-                    panel1.add(clientCode, CC.xywh(3, 1, 3, 1, CC.FILL, CC.FILL));
+                    clientCode.setName("clientCode");
 
                     //---- insertClientCode ----
                     insertClientCode.setText("Inserisci");
                     insertClientCode.setForeground(Color.black);
                     insertClientCode.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     insertClientCode.setNextFocusableComponent(goToPayPartial);
+                    insertClientCode.setName("insertClientCode");
                     insertClientCode.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             insertClientCodeActionPerformed(e);
                         }
                     });
-                    panel1.add(insertClientCode, CC.xy(5, 3));
+
+                    PanelBuilder panel1Builder = new PanelBuilder(new FormLayout(
+                        "left:[100dlu,min]:grow, $lcgap, [100dlu,min]:grow, $lcgap, [75dlu,default]:grow",
+                        "[35dlu,min], $lgap, fill:[35dlu,min]"), panel1);
+
+                    panel1Builder.add(label4,           CC.xy  (1, 1));
+                    panel1Builder.add(clientCode,       CC.xywh(3, 1, 3, 1, CC.FILL, CC.FILL));
+                    panel1Builder.add(insertClientCode, CC.xy  (5, 3));
                 }
-                getReservationCard.add(panel1, CC.xy(3, 5));
 
                 //======== panel5 ========
                 {
-                    panel5.setLayout(new FormLayout(
-                        "[75dlu,default]:grow, 2*($lcgap, default), $lcgap, center:[75dlu,default]:grow, $lcgap, default, $lcgap, center:[75dlu,default]:grow",
-                        "2*([25dlu,default], $lgap), [35dlu,default], $lgap, default"));
+                    panel5.setName("panel5");
 
                     //---- label1 ----
                     label1.setText("Totale");
                     label1.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     label1.setLabelFor(total);
-                    panel5.add(label1, CC.xy(7, 1));
+                    label1.setName("label1");
 
                     //---- label3 ----
                     label3.setText("Acconto");
                     label3.setFont(new Font("Tahoma", Font.PLAIN, 14));
-                    panel5.add(label3, CC.xy(11, 1));
+                    label3.setName("label3");
 
                     //---- total ----
                     total.setEditable(false);
-                    panel5.add(total, CC.xy(7, 3, CC.FILL, CC.FILL));
+                    total.setName("total");
 
                     //---- partial ----
                     partial.setEditable(false);
-                    panel5.add(partial, CC.xy(11, 3, CC.FILL, CC.FILL));
+                    partial.setName("partial");
 
                     //---- clearBook ----
                     clearBook.setText("Annulla");
@@ -314,167 +322,223 @@ public class BookPanel extends JPanel {
                     clearBook.setForeground(Color.white);
                     clearBook.setIcon(null);
                     clearBook.setNextFocusableComponent(null);
+                    clearBook.setName("clearBook");
                     clearBook.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             clearBookActionPerformed(e);
                         }
                     });
-                    panel5.add(clearBook, CC.xy(1, 5, CC.DEFAULT, CC.FILL));
 
                     //---- goToPayTotal ----
                     goToPayTotal.setText("Paga Totale");
                     goToPayTotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                    goToPayTotal.setName("goToPayTotal");
                     goToPayTotal.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             goToPayTotalActionPerformed(e);
                         }
                     });
-                    panel5.add(goToPayTotal, CC.xy(7, 5, CC.FILL, CC.FILL));
 
                     //---- goToPayPartial ----
                     goToPayPartial.setText("Paga Acconto");
                     goToPayPartial.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                    goToPayPartial.setName("goToPayPartial");
                     goToPayPartial.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             goToPayPartialActionPerformed(e);
                         }
                     });
-                    panel5.add(goToPayPartial, CC.xy(11, 5, CC.FILL, CC.FILL));
+
+                    PanelBuilder panel5Builder = new PanelBuilder(new FormLayout(
+                        "[75dlu,default]:grow, 2*($lcgap, default), $lcgap, center:[75dlu,default]:grow, $lcgap, default, $lcgap, center:[75dlu,default]:grow",
+                        "2*([25dlu,default], $lgap), [35dlu,default], $lgap, default"), panel5);
+
+                    panel5Builder.add(label1,         CC.xy( 7, 1));
+                    panel5Builder.add(label3,         CC.xy(11, 1));
+                    panel5Builder.add(total,          CC.xy( 7, 3,    CC.FILL, CC.FILL));
+                    panel5Builder.add(partial,        CC.xy(11, 3,    CC.FILL, CC.FILL));
+                    panel5Builder.add(clearBook,      CC.xy( 1, 5, CC.DEFAULT, CC.FILL));
+                    panel5Builder.add(goToPayTotal,   CC.xy( 7, 5,    CC.FILL, CC.FILL));
+                    panel5Builder.add(goToPayPartial, CC.xy(11, 5,    CC.FILL, CC.FILL));
                 }
-                getReservationCard.add(panel5, CC.xy(3, 7));
+
+                PanelBuilder getReservationCardBuilder = new PanelBuilder(new FormLayout(
+                    "[15dlu,default]:grow, $lcgap, default:grow, $lcgap, [15dlu,default]:grow",
+                    "[15dlu,default], 3*($lgap, default:grow), $lgap, [15dlu,default]:grow"), getReservationCard);
+
+                getReservationCardBuilder.add(panel2, CC.xy(3, 3));
+                getReservationCardBuilder.add(panel1, CC.xy(3, 5));
+                getReservationCardBuilder.add(panel5, CC.xy(3, 7));
             }
             mainPanel.add(getReservationCard, "card1");
 
             //======== payPartialCard ========
             {
-                payPartialCard.setLayout(new FormLayout(
-                    "[15dlu,default]:grow, $lcgap, 159dlu:grow, $lcgap, default:grow, $lcgap, [15dlu,default]:grow",
-                    "[15dlu,default]:grow, $lgap, default:grow, $lgap, [15dlu,default]:grow"));
+                payPartialCard.setName("payPartialCard");
 
                 //======== panel4 ========
                 {
-                    panel4.setLayout(new FormLayout(
-                        "[50px,min], $lcgap, [75dlu,default], $lcgap, [50px,min]",
-                        "default, $lgap, [35dlu,min], $lgap, default"));
+                    panel4.setName("panel4");
 
                     //---- button1 ----
                     button1.setText("Indietro");
                     button1.setFont(new Font("Ubuntu", Font.PLAIN, 14));
+                    button1.setName("button1");
                     button1.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             indietroActionPerformed(e);
                         }
                     });
-                    panel4.add(button1, CC.xy(3, 3, CC.DEFAULT, CC.FILL));
+
+                    PanelBuilder panel4Builder = new PanelBuilder(new FormLayout(
+                        "[50px,min], $lcgap, [75dlu,default], $lcgap, [50px,min]",
+                        "default, $lgap, [35dlu,min], $lgap, default"), panel4);
+
+                    panel4Builder.add(button1, CC.xy(3, 3, CC.DEFAULT, CC.FILL));
                 }
-                payPartialCard.add(panel4, CC.xy(3, 3));
 
                 //======== panel3 ========
                 {
                     panel3.setBorder(new TitledBorder("Paga Acconto"));
-                    panel3.setLayout(new FormLayout(
-                        "5dlu, $lcgap, 70dlu, $lcgap, [25dlu,default], $lcgap, [75dlu,default]",
-                        "fill:[35dlu,default], 2*($lgap, fill:[35dlu,min])"));
+                    panel3.setName("panel3");
 
                     //---- label5 ----
                     label5.setText("Acconto");
                     label5.setFont(new Font("Tahoma", Font.PLAIN, 14));
-                    panel3.add(label5, CC.xy(3, 1));
+                    label5.setName("label5");
 
                     //---- displayPartial ----
                     displayPartial.setEditable(false);
-                    panel3.add(displayPartial, CC.xywh(5, 1, 3, 1));
+                    displayPartial.setName("displayPartial");
 
                     //---- label6 ----
                     label6.setText("Pagamento");
                     label6.setFont(new Font("Tahoma", Font.PLAIN, 14));
-                    panel3.add(label6, CC.xy(3, 3));
-                    panel3.add(partialPayment, CC.xywh(5, 3, 3, 1));
+                    label6.setName("label6");
+
+                    //---- partialPayment ----
+                    partialPayment.setName("partialPayment");
 
                     //---- payPartialButton ----
                     payPartialButton.setText("Paga Acconto");
                     payPartialButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                    payPartialButton.setName("payPartialButton");
                     payPartialButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             payPartialButtonActionPerformed(e);
-                            payPartialButtonActionPerformed(e);
-                            payPartialButtonActionPerformed(e);
                         }
                     });
-                    panel3.add(payPartialButton, CC.xy(7, 5));
+
+                    PanelBuilder panel3Builder = new PanelBuilder(new FormLayout(
+                        "5dlu, $lcgap, 70dlu, $lcgap, [25dlu,default], $lcgap, [75dlu,default]",
+                        "fill:[35dlu,default], 2*($lgap, fill:[35dlu,min])"), panel3);
+
+                    panel3Builder.add(label5,           CC.xy  (3, 1));
+                    panel3Builder.add(displayPartial,   CC.xywh(5, 1, 3, 1));
+                    panel3Builder.add(label6,           CC.xy  (3, 3));
+                    panel3Builder.add(partialPayment,   CC.xywh(5, 3, 3, 1));
+                    panel3Builder.add(payPartialButton, CC.xy  (7, 5));
                 }
-                payPartialCard.add(panel3, CC.xy(5, 3));
+
+                PanelBuilder payPartialCardBuilder = new PanelBuilder(new FormLayout(
+                    "[15dlu,default]:grow, $lcgap, 159dlu:grow, $lcgap, default:grow, $lcgap, [15dlu,default]:grow",
+                    "[15dlu,default]:grow, $lgap, default:grow, $lgap, [15dlu,default]:grow"), payPartialCard);
+
+                payPartialCardBuilder.add(panel4, CC.xy(3, 3));
+                payPartialCardBuilder.add(panel3, CC.xy(5, 3));
             }
             mainPanel.add(payPartialCard, "card2");
 
             //======== payTotalCard ========
             {
-                payTotalCard.setLayout(new FormLayout(
-                    "[15dlu,default]:grow, 163dlu, default:grow, [15dlu,default]:grow",
-                    "[15dlu,default]:grow, $lgap, default:grow, $lgap, [15dlu,default]:grow"));
+                payTotalCard.setName("payTotalCard");
 
                 //======== panel6 ========
                 {
-                    panel6.setLayout(new FormLayout(
-                        "[50px,min], $lcgap, [75dlu,min], $lcgap, [50px,min]",
-                        "default, $lgap, [35dlu,min], $lgap, default"));
+                    panel6.setName("panel6");
 
                     //---- button2 ----
                     button2.setText("Indietro");
                     button2.setFont(new Font("Ubuntu", Font.PLAIN, 14));
+                    button2.setName("button2");
                     button2.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             indietroActionPerformed(e);
                         }
                     });
-                    panel6.add(button2, CC.xy(3, 3, CC.DEFAULT, CC.FILL));
+
+                    PanelBuilder panel6Builder = new PanelBuilder(new FormLayout(
+                        "[50px,min], $lcgap, [75dlu,min], $lcgap, [50px,min]",
+                        "default, $lgap, [35dlu,min], $lgap, default"), panel6);
+
+                    panel6Builder.add(button2, CC.xy(3, 3, CC.DEFAULT, CC.FILL));
                 }
-                payTotalCard.add(panel6, CC.xy(2, 3));
 
                 //======== panel8 ========
                 {
                     panel8.setBorder(new TitledBorder("Paga Totale"));
-                    panel8.setLayout(new FormLayout(
-                        "5dlu, $lcgap, 70dlu, $lcgap, [25dlu,default], $lcgap, [75dlu,default]",
-                        "2*(fill:[35dlu,min], $lgap), fill:[35dlu,min]"));
+                    panel8.setName("panel8");
 
                     //---- label7 ----
                     label7.setText("Totale");
                     label7.setFont(new Font("Tahoma", Font.PLAIN, 14));
-                    panel8.add(label7, CC.xy(3, 1));
+                    label7.setName("label7");
 
                     //---- displayTotal ----
                     displayTotal.setEditable(false);
-                    panel8.add(displayTotal, CC.xywh(5, 1, 3, 1));
+                    displayTotal.setName("displayTotal");
 
                     //---- label8 ----
                     label8.setText("Pagamento");
                     label8.setFont(new Font("Tahoma", Font.PLAIN, 14));
-                    panel8.add(label8, CC.xy(3, 3));
-                    panel8.add(totalPayment, CC.xywh(5, 3, 3, 1));
+                    label8.setName("label8");
+
+                    //---- totalPayment ----
+                    totalPayment.setName("totalPayment");
 
                     //---- payTotalButton ----
                     payTotalButton.setText("Paga Totale");
                     payTotalButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                    payTotalButton.setName("payTotalButton");
                     payTotalButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
                             payTotalButtonActionPerformed(e);
                         }
                     });
-                    panel8.add(payTotalButton, CC.xy(7, 5));
+
+                    PanelBuilder panel8Builder = new PanelBuilder(new FormLayout(
+                        "5dlu, $lcgap, 70dlu, $lcgap, [25dlu,default], $lcgap, [75dlu,default]",
+                        "2*(fill:[35dlu,min], $lgap), fill:[35dlu,min]"), panel8);
+
+                    panel8Builder.add(label7,         CC.xy  (3, 1));
+                    panel8Builder.add(displayTotal,   CC.xywh(5, 1, 3, 1));
+                    panel8Builder.add(label8,         CC.xy  (3, 3));
+                    panel8Builder.add(totalPayment,   CC.xywh(5, 3, 3, 1));
+                    panel8Builder.add(payTotalButton, CC.xy  (7, 5));
                 }
-                payTotalCard.add(panel8, CC.xy(3, 3));
+
+                PanelBuilder payTotalCardBuilder = new PanelBuilder(new FormLayout(
+                    "[15dlu,default]:grow, 163dlu, default:grow, [15dlu,default]:grow",
+                    "[15dlu,default]:grow, $lgap, default:grow, $lgap, [15dlu,default]:grow"), payTotalCard);
+
+                payTotalCardBuilder.add(panel6, CC.xy(2, 3));
+                payTotalCardBuilder.add(panel8, CC.xy(3, 3));
             }
             mainPanel.add(payTotalCard, "card3");
         }
-        add(mainPanel, CC.xy(1, 1));
+
+        PanelBuilder builder = new PanelBuilder(new FormLayout(
+            "default:grow",
+            "fill:default:grow"), this);
+
+        builder.add(mainPanel, CC.xy(1, 1));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
