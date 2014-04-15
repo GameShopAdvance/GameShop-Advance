@@ -53,4 +53,5 @@ public interface ICassaRemote extends Remote {
     
     void inserisciTesseraCliente(int codiceTessera) throws RemoteException;
     
+    void annullaVendita() throws RemoteException;
 }

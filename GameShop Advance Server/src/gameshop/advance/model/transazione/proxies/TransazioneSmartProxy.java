@@ -146,5 +146,10 @@ public class TransazioneSmartProxy implements ITransazione, Activatable{
             _activator.activate(ap);
         }
     }
+
+    @Override
+    public void annulla() throws RemoteException {
+        this.trans.annulla();
+    }
         
     }

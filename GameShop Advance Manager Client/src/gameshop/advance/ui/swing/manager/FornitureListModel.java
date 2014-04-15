@@ -7,7 +7,6 @@
 package gameshop.advance.ui.swing.manager;
 
 import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
-import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.LinkedList;
@@ -68,7 +67,7 @@ public class FornitureListModel implements ListModel<IInformazioniProdottoRemote
         this.fireContentsChanged(0, this.informazioni.size()-1);
     }
     
-    public void remove(IRigaDiTransazioneRemote riga) throws RemoteException
+    public void remove(IInformazioniProdottoRemote riga) throws RemoteException
     {
         String code = riga.getDescrizione().getCodiceProdotto().getCodice();
         this.informazioni.remove(code);

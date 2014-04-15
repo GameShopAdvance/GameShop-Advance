@@ -22,6 +22,7 @@ import gameshop.advance.utility.IteratorWrapper;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.util.HashMap;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import org.joda.time.DateTime;
@@ -74,7 +75,16 @@ public class Vendita implements ITransazione {
         else
         {
             desc.setQuantitaDisponibile(desc.getQuantitaDisponibile() - quantity);
-            System.err.println("Quantità "+desc.getDescrizione()+" : "+desc.getQuantitaDisponibile()+"/"+desc.getQuantitaDiSoglia());
+        }
+    }
+    
+    public void annulla() throws RemoteException{
+        Iterator<IRigaDiTransazioneRemote> iter = this.righeDiVendita.values().iterator();
+        while(iter.hasNext())
+        {
+            RigaDiTransazione riga = (RigaDiTransazione) iter.next();
+            IDescrizioneProdotto desc = riga.getDescrizione();
+            desc.setQuantitaDisponibile(desc.getQuantitaDisponibile() + riga.getQuantity());
         }
     }
     

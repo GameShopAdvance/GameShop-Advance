@@ -197,7 +197,8 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         return this.resto;
     }
 
-    public void clearSale() {
+    public void clearSale() throws RemoteException {
+        this.cassa.annullaVendita();
         UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
         UIWindowSingleton.getInstance().refreshContent();
     }

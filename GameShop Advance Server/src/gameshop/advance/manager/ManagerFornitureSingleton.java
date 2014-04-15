@@ -32,8 +32,10 @@ public class ManagerFornitureSingleton {
     private static ManagerFornitureSingleton instance;
     
     private final LinkedList<IRemoteObserver> listeners = new LinkedList<>();
+    private LinkedList<IRemoteObserver> removeListener = new LinkedList<IRemoteObserver>();
     
     private HashMap<String, IInformazioniProdottoRemote> informazioni;
+    
     
     public ManagerFornitureSingleton(){
         try {
@@ -84,6 +86,23 @@ public class ManagerFornitureSingleton {
         }
     }
     
+    protected void notificaRemoveListeners(IInformazioniProdottoRemote info)
+    {
+        if(this.removeListener.size() > 0)
+        {
+            for(IRemoteObserver obs:this.removeListener)
+            {
+                try
+                {
+                    obs.notifica(info);
+                } catch (RemoteException ex)
+                {
+                    Logger.getLogger(ManagerFornitureSingleton.class.getName()).log(Level.SEVERE, null, ex);
+                }
+            }
+        }        
+    }
+    
     /**
      *
      * @param descrizioni
@@ -122,8 +141,9 @@ public class ManagerFornitureSingleton {
             InformazioniProdotto ip = (InformazioniProdotto) this.informazioni.get(desc.getCodiceProdotto().getCodice());
             if(ip.getDescrizione().getQuantitaDisponibile() - ip.getPrenotati() > ip.getDescrizione().getQuantitaDiSoglia()) {
                 this.informazioni.remove(desc.getCodiceProdotto().getCodice());
-                this.notificaListeners();
             }
+            this.notificaRemoveListeners(ip);
+            this.notificaListeners();
         }
     }
     
@@ -210,5 +230,9 @@ public class ManagerFornitureSingleton {
         catch (RemoteException ex) {
             Logger.getLogger(GameShopAdvance.class.getName()).log(Level.SEVERE, null, ex);
         }
+    }
+
+    public void addRemoveListener(IRemoteObserver obs) {
+        this.removeListener.add(obs);
     }
 }

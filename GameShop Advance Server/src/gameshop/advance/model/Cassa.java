@@ -7,7 +7,9 @@ import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.remote.ICassaRemote;
+import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.model.transazione.Vendita;
 import gameshop.advance.utility.IDProdotto;
@@ -99,7 +101,11 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
         if(desc == null)
             throw new ProdottoNotFoundException(codiceProdotto);
         
+        System.err.println("Descrizione "+desc);
+        
         this.venditaCorrente.inserisciProdotto(desc, quantity);
+        
+        CatalogoProdottiSingleton.getInstance().aggiornaDescrizione(desc);
     }
 
     /**
@@ -149,4 +155,14 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
         }
     }
 
+    @Override
+    public void annullaVendita() throws RemoteException{
+        this.venditaCorrente.annulla();
+        
+        IIteratorWrapperRemote<IRigaDiTransazioneRemote> righeDiVendita = this.venditaCorrente.getRigheDiVendita();
+        while(righeDiVendita.hasNext())
+            CatalogoProdottiSingleton.getInstance().aggiornaDescrizione((IDescrizioneProdotto) righeDiVendita.next().getDescrizione());
+        this.venditaCorrente = null;
+    }
+    
 }

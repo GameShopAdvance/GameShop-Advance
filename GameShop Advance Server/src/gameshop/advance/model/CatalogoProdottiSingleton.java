@@ -1,7 +1,6 @@
 package gameshop.advance.model;
 
 import com.db4o.collections.ActivatableHashMap;
-import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
@@ -9,8 +8,6 @@ import gameshop.advance.utility.IDProdotto;
 import java.util.Collection;
 import java.util.HashMap;
 import java.util.Iterator;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /**
  * Il CatalogoProdotti rappresenta il vero catalogo di un negozio, e consente di
@@ -57,17 +54,6 @@ public class CatalogoProdottiSingleton
      */
     public IDescrizioneProdotto getDescrizioneProdotto(IDProdotto codiceProdotto) throws ProdottoNotFoundException
     {
-//        if(this.descriptions.containsKey(codiceProdotto.getCodice()))
-//            return this.descriptions.get(codiceProdotto.getCodice());
-//        else{
-//            IDescrizioneProdotto desc = DbDescrizioneProdottoSingleton.getInstance().read(codiceProdotto);
-//            
-//            if(desc == null)
-//                throw new ProdottoNotFoundException(codiceProdotto);
-//            
-//            this.descriptions.put(codiceProdotto.getCodice(), desc);
-//            return desc;
-//        }
         IDescrizioneProdotto desc = DbDescrizioneProdottoSingleton.getInstance().read(codiceProdotto);
         
         if(desc == null)
@@ -80,15 +66,16 @@ public class CatalogoProdottiSingleton
         Collection<IDescrizioneProdotto> values = this.descriptions.values();
         for(IDescrizioneProdotto desc: values)
         {
-            try {
-                DbDescrizioneProdottoSingleton.getInstance().update(desc);
-            } catch (ObjectAlreadyExistsDbException ex) {
-                Logger.getLogger(CatalogoProdottiSingleton.class.getName()).log(Level.SEVERE, null, ex);
-            }
+            DbDescrizioneProdottoSingleton.getInstance().update(desc);
         }
     }
     
     public Iterator<Object> getDescrizioni(){
         return DbDescrizioneProdottoSingleton.getInstance().read();
+    }
+    
+    public synchronized void aggiornaDescrizione(IDescrizioneProdotto desc)
+    {
+        DbDescrizioneProdottoSingleton.getInstance().update(desc);
     }
 }
