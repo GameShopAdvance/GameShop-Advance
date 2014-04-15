@@ -4,6 +4,7 @@
 
 package gameshop.advance.ui.swing.manager;
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.FornitureControllerSingleton;
@@ -58,35 +59,42 @@ public class FornitureMenu extends JPanel implements IListPanel {
         button2 = new JButton();
 
         //======== this ========
-        setLayout(new FormLayout(
-            "[15dlu,default]:grow, $lcgap, 143dlu, 2*($lcgap, 20dlu), $lcgap, 143dlu, $lcgap, [15dlu,default]:grow",
-            "[15px,default]:grow, $lgap, fill:177dlu, $lgap, fill:[72px,default], $lgap, [15dlu,default]:grow, $lgap"));
+        setName("this");
 
         //======== scrollPane1 ========
         {
+            scrollPane1.setName("scrollPane1");
 
             //---- infoList ----
             infoList.setBackground(new Color(240, 240, 240));
+            infoList.setName("infoList");
             scrollPane1.setViewportView(infoList);
         }
-        add(scrollPane1, CC.xywh(3, 3, 7, 1));
 
         //---- clearForniture ----
         clearForniture.setText("Indietro");
-        clearForniture.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        clearForniture.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        clearForniture.setName("clearForniture");
         clearForniture.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 clearFornitureActionPerformed(e);
             }
         });
-        add(clearForniture, CC.xy(3, 5));
 
         //---- button2 ----
         button2.setText("Procedi");
-        button2.setFont(new Font("Tahoma", Font.PLAIN, 20));
+        button2.setFont(new Font("Tahoma", Font.PLAIN, 14));
         button2.setEnabled(false);
-        add(button2, CC.xy(9, 5));
+        button2.setName("button2");
+
+        PanelBuilder builder = new PanelBuilder(new FormLayout(
+            "[15dlu,default]:grow, $lcgap, [75dlu,default], $lcgap, [140dlu,default]:grow, $lcgap, [75dlu,default], $lcgap, [15dlu,default]:grow",
+            "[15px,default]:grow, $lgap, fill:177dlu, $lgap, fill:[35px,default], $lgap, [15dlu,default]:grow, $lgap"), this);
+
+        builder.add(scrollPane1,    CC.xywh(3, 3, 5, 1));
+        builder.add(clearForniture, CC.xy  (3, 5));
+        builder.add(button2,        CC.xy  (7, 5));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

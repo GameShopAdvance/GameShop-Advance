@@ -11,8 +11,6 @@ import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.LinkedList;
 import java.util.List;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.ListModel;
 import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
@@ -49,21 +47,16 @@ public class FornitureListModel implements ListModel<IInformazioniProdottoRemote
     }
 
     public void clear(){
-        this.informazioni.clear();
+//        this.informazioni.clear();
     }
     
-    public void addElement(IInformazioniProdottoRemote info)
+    public void addElement(IInformazioniProdottoRemote info) throws RemoteException
     {
-        try
-        {
-            String code = info.getDescrizione().getCodiceProdotto().getCodice();
-            System.err.println("Aggiungi elemento: "+code);
-            if(!this.informazioni.containsKey(code))
-                this.informazioni.put(code, info);
-        } catch (RemoteException ex)
-        {
-            Logger.getLogger(FornitureListModel.class.getName()).log(Level.SEVERE, null, ex);
-        }
+        String code = info.getDescrizione().getCodiceProdotto().getCodice();
+        System.err.println("Aggiungi elemento: "+code);
+        if(!this.informazioni.containsKey(code))
+            this.informazioni.put(code, info);
+        System.err.println("Lista forniture dimensione: "+this.informazioni.size());
         this.fireContentsChanged(0, this.informazioni.size()-1);
     }
     

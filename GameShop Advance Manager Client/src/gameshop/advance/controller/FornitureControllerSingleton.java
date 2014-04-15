@@ -52,7 +52,6 @@ public class FornitureControllerSingleton extends UnicastRemoteObject implements
     @Override
     public void setInformazioniProdotto(IIteratorWrapperRemote<IInformazioniProdottoRemote> iter) throws RemoteException
     {
-        this.listaForniture.clear();
         while(iter.hasNext())
             this.listaForniture.addElement(iter.next());
     }
