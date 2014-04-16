@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_17" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -22,9 +22,11 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label1"
 				"text": "Totale"
-				"font": new java.awt.Font( "Tahoma", 0, 16 )
 				"alignmentX": 0.5f
 				"horizontalAlignment": 0
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 5
 				"gridY": 3
@@ -55,9 +57,11 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
 				"text": "Pagamento"
-				"font": new java.awt.Font( "Tahoma", 0, 16 )
 				"alignmentX": 0.5f
 				"horizontalAlignment": 0
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 5
 				"gridX": 5
@@ -67,8 +71,10 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "payButton"
 				"text": "Paga"
-				"font": new java.awt.Font( "Tahoma", 0, 14 )
 				"alignmentX": 0.5f
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 9
@@ -76,7 +82,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 35, 55 )
-			"size": new java.awt.Dimension( 720, 400 )
+			"size": new java.awt.Dimension( 750, 400 )
 		} )
 	}
 }

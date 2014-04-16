@@ -24,8 +24,10 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "label2"
 							"text": "Codice Prenotazione"
-							"font": new java.awt.Font( "Tahoma", 0, 14 )
 							"labelFor": new FormReference( "bookCode" )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"hAlign": sfield com.jgoodies.forms.layout.CellConstraints LEFT
 						} )
@@ -41,8 +43,10 @@ new FormModel {
 							name: "retrieveBook"
 							"text": "Aggiungi"
 							"foreground": sfield java.awt.Color black
-							"font": new java.awt.Font( "Tahoma", 0, 14 )
 							"nextFocusableComponent": new FormReference( "clientCode" )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "retrieveBookActionPerformed", true ) )
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridY": 3
@@ -53,7 +57,7 @@ new FormModel {
 						"gridY": 3
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-						"$columnSpecs": "default, labelcompgap, max(default;75dlu), labelcompgap, default, labelcompgap, max(default;75dlu), labelcompgap, default"
+						"$columnSpecs": "max(default;5dlu), labelcompgap, max(default;75dlu), labelcompgap, default, labelcompgap, max(default;75dlu), labelcompgap, max(default;5dlu)"
 						"$rowSpecs": "default:grow, linegap, default:grow, linegap, max(default;25dlu), max(default;25dlu), linegap, max(default;35dlu), linegap, default"
 					} ) {
 						name: "panel7"
@@ -69,8 +73,10 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "label1"
 							"text": "Totale"
-							"font": new java.awt.Font( "Tahoma", 0, 14 )
 							"labelFor": new FormReference( "total" )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridY": 5
 							"gridX": 3
@@ -78,7 +84,9 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "label3"
 							"text": "Acconto"
-							"font": new java.awt.Font( "Tahoma", 0, 14 )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridY": 5
 							"gridX": 7
@@ -104,7 +112,9 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "goToPayTotal"
 							"text": "Paga Totale"
-							"font": new java.awt.Font( "Tahoma", 0, 14 )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToPayTotalActionPerformed", true ) )
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridY": 8
@@ -115,7 +125,9 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "goToPayPartial"
 							"text": "Paga Acconto"
-							"font": new java.awt.Font( "Tahoma", 0, 14 )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToPayPartialActionPerformed", true ) )
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridY": 8
@@ -138,8 +150,10 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "label4"
 							"text": "Codice"
-							"font": new java.awt.Font( "Tahoma", 0, 14 )
 							"labelFor": new FormReference( "clientCode" )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridX": 1
 						} )
@@ -156,8 +170,10 @@ new FormModel {
 							name: "insertClientCode"
 							"text": "Inserisci"
 							"foreground": sfield java.awt.Color black
-							"font": new java.awt.Font( "Tahoma", 0, 14 )
 							"nextFocusableComponent": new FormReference( "goToPayPartial" )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "insertClientCodeActionPerformed", true ) )
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridX": 5
@@ -176,10 +192,12 @@ new FormModel {
 							name: "clearBook"
 							"text": "Annulla"
 							"background": new java.awt.Color( 255, 51, 0, 255 )
-							"font": new java.awt.Font( "Tahoma", 0, 14 )
 							"foreground": new java.awt.Color( 255, 255, 255, 255 )
 							"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 							"nextFocusableComponent": sfield com.jformdesigner.model.FormObject NULL_VALUE
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "clearBookActionPerformed", true ) )
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridY": 5
@@ -205,7 +223,9 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "button1"
 							"text": "Indietro"
-							"font": new java.awt.Font( "Ubuntu", 0, 14 )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "indietroActionPerformed", true ) )
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridX": 3
@@ -225,7 +245,9 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "label5"
 							"text": "Acconto"
-							"font": new java.awt.Font( "Tahoma", 0, 14 )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridX": 3
 						} )
@@ -239,7 +261,9 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "label6"
 							"text": "Pagamento"
-							"font": new java.awt.Font( "Tahoma", 0, 14 )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridX": 3
 							"gridY": 3
@@ -254,7 +278,9 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "payPartialButton"
 							"text": "Paga Acconto"
-							"font": new java.awt.Font( "Tahoma", 0, 14 )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payPartialButtonActionPerformed", true ) )
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payPartialButtonActionPerformed", true ) )
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payPartialButtonActionPerformed", true ) )
@@ -282,7 +308,9 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "button2"
 							"text": "Indietro"
-							"font": new java.awt.Font( "Ubuntu", 0, 14 )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "indietroActionPerformed", true ) )
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridX": 3
@@ -302,7 +330,9 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "label7"
 							"text": "Totale"
-							"font": new java.awt.Font( "Tahoma", 0, 14 )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridX": 3
 						} )
@@ -316,7 +346,9 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "label8"
 							"text": "Pagamento"
-							"font": new java.awt.Font( "Tahoma", 0, 14 )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridX": 3
 							"gridY": 3
@@ -331,7 +363,9 @@ new FormModel {
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "payTotalButton"
 							"text": "Paga Totale"
-							"font": new java.awt.Font( "Tahoma", 0, 14 )
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
 							addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payTotalButtonActionPerformed", true ) )
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridX": 7

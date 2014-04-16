@@ -8,11 +8,10 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.ui.swing.UIFactory;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.utility.Money;
-import java.awt.Color;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -26,7 +25,7 @@ import javax.swing.SwingConstants;
 
 
 /**
- * 
+ * @author Matteo Gentile
  */
 public class EndSalePanel extends JPanel {
     public EndSalePanel() {
@@ -72,25 +71,19 @@ public class EndSalePanel extends JPanel {
         this.displayRest.setText(rest.toString());
     }
 
-    private void startSaleActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
 
-    private void manageBookActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void faiInventario(ActionEvent e) {
-        // TODO add your code here
+    private void createUIComponents() {
+        this.label1 = UIFactory.getInstance().getBodyLabel();
+        this.label2 = UIFactory.getInstance().getBodyLabel();
+        this.goToMenu = UIFactory.getInstance().getSimpleButton();
+        this.startNewSale = UIFactory.getInstance().getSimpleButton();
     }
     
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        label1 = new JLabel();
+        createUIComponents();
+
         displayRest = new JTextField();
-        label2 = new JLabel();
-        startNewSale = new JButton();
-        goToMenu = new JButton();
 
         //======== this ========
         setLayout(new FormLayout(
@@ -100,38 +93,33 @@ public class EndSalePanel extends JPanel {
         //---- label1 ----
         label1.setText("Resto");
         label1.setLabelFor(displayRest);
-        label1.setFont(new Font("Tahoma", Font.PLAIN, 22));
         add(label1, CC.xy(5, 2, CC.FILL, CC.FILL));
         add(displayRest, CC.xy(7, 2, CC.FILL, CC.DEFAULT));
 
         //---- label2 ----
         label2.setText("Grazie per aver effettuato acquisti da noi!");
-        label2.setFont(new Font("Tahoma", Font.PLAIN, 28));
         label2.setHorizontalAlignment(SwingConstants.CENTER);
         add(label2, CC.xywh(4, 4, 5, 1, CC.FILL, CC.FILL));
 
         //---- startNewSale ----
         startNewSale.setText("Nuova Vendita");
-        startNewSale.setBackground(new Color(102, 255, 102));
-        startNewSale.setFont(new Font("Tahoma", Font.PLAIN, 22));
         startNewSale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startNewSaleActionPerformed(e);
             }
         });
-        add(startNewSale, CC.xy(4, 8, CC.DEFAULT, CC.FILL));
+        add(startNewSale, CC.xy(4, 8));
 
         //---- goToMenu ----
         goToMenu.setText("Torna al Men\u00f9");
-        goToMenu.setFont(new Font("Tahoma", Font.PLAIN, 22));
         goToMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 goToMenuActionPerformed(e);
             }
         });
-        add(goToMenu, CC.xy(8, 8, CC.DEFAULT, CC.FILL));
+        add(goToMenu, CC.xy(8, 8));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

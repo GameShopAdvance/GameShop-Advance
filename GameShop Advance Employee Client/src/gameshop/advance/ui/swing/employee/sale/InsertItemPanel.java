@@ -11,9 +11,9 @@ import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.QuantityNotInStockException;
-import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.interfaces.IListPanel;
+import gameshop.advance.ui.swing.UIFactory;
 import gameshop.advance.ui.swing.UIStyleSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.CardLayout;
@@ -21,7 +21,6 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import javax.swing.DefaultListModel;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -38,7 +37,6 @@ import javax.swing.border.TitledBorder;
  */
 
 public class InsertItemPanel extends JPanel implements IListPanel{
-    private DefaultListModel<IRigaDiTransazioneRemote> rdvListModel;
 
     public InsertItemPanel() {
         initComponents();
@@ -147,29 +145,35 @@ public class InsertItemPanel extends JPanel implements IListPanel{
         
     }
 
+    private void createUIComponents() {
+       this.button1 = UIFactory.getInstance().getSimpleButton();
+       this.button7 = UIFactory.getInstance().getSimpleButton();
+       this.clearSale = UIFactory.getInstance().getCancelButton();
+       this.payButton = UIFactory.getInstance().getConfirmButton();
+       this.label1 = UIFactory.getInstance().getBodyLabel();
+       this.label2 = UIFactory.getInstance().getBodyLabel();
+       this.label3 = UIFactory.getInstance().getBodyLabel();
+       this.label4 = UIFactory.getInstance().getBodyLabel();
+       this.label5 = UIFactory.getInstance().getBodyLabel();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        createUIComponents();
+
         panel1 = new JPanel();
-        label1 = new JLabel();
         productIdTextField = new JTextField();
-        label2 = new JLabel();
         quantityTextField = new JTextField();
-        button1 = new JButton();
         panel4 = new JPanel();
-        label3 = new JLabel();
         total = new JTextField();
         scrollPane1 = new JScrollPane();
         rdvList = new JList();
         clientPanel = new JPanel();
         main = new JPanel();
-        label4 = new JLabel();
         clientCode = new JTextField();
-        button7 = new JButton();
         panel5 = new JPanel();
         label5 = new JLabel();
         panel3 = new JPanel();
-        clearSale = new JButton();
-        payButton = new JButton();
 
         //======== this ========
         setComponentPopupMenu(null);
@@ -186,7 +190,6 @@ public class InsertItemPanel extends JPanel implements IListPanel{
 
             //---- label1 ----
             label1.setText("Codice");
-            label1.setFont(new Font("Tahoma", Font.PLAIN, 14));
             label1.setHorizontalAlignment(SwingConstants.CENTER);
             panel1.add(label1, CC.xy(1, 1, CC.FILL, CC.FILL));
 
@@ -196,7 +199,6 @@ public class InsertItemPanel extends JPanel implements IListPanel{
 
             //---- label2 ----
             label2.setText("Quantit\u00e0");
-            label2.setFont(new Font("Tahoma", Font.PLAIN, 14));
             label2.setHorizontalAlignment(SwingConstants.CENTER);
             panel1.add(label2, CC.xy(1, 3, CC.FILL, CC.FILL));
 
@@ -206,7 +208,6 @@ public class InsertItemPanel extends JPanel implements IListPanel{
 
             //---- button1 ----
             button1.setText("Aggiungi");
-            button1.setFont(new Font("Tahoma", Font.PLAIN, 14));
             button1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -225,7 +226,6 @@ public class InsertItemPanel extends JPanel implements IListPanel{
 
             //---- label3 ----
             label3.setText("Totale");
-            label3.setFont(new Font("Tahoma", Font.PLAIN, 14));
             label3.setHorizontalAlignment(SwingConstants.CENTER);
             panel4.add(label3, CC.xy(3, 1, CC.FILL, CC.FILL));
 
@@ -258,14 +258,12 @@ public class InsertItemPanel extends JPanel implements IListPanel{
 
                 //---- label4 ----
                 label4.setText("Numero tessera");
-                label4.setFont(new Font("Tahoma", Font.PLAIN, 14));
                 label4.setHorizontalAlignment(SwingConstants.CENTER);
                 main.add(label4, CC.xy(1, 1));
                 main.add(clientCode, CC.xywh(3, 1, 3, 1, CC.FILL, CC.FILL));
 
                 //---- button7 ----
                 button7.setText("Inserisci");
-                button7.setFont(new Font("Tahoma", Font.PLAIN, 14));
                 button7.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -300,7 +298,6 @@ public class InsertItemPanel extends JPanel implements IListPanel{
 
             //---- clearSale ----
             clearSale.setText("Annulla");
-            clearSale.setFont(new Font("Tahoma", Font.PLAIN, 14));
             clearSale.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -313,7 +310,6 @@ public class InsertItemPanel extends JPanel implements IListPanel{
 
         //---- payButton ----
         payButton.setText("Paga");
-        payButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         payButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -348,6 +344,7 @@ public class InsertItemPanel extends JPanel implements IListPanel{
     private JButton payButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
+    @Override
     public void setList(ListModel listaProdotti, ListCellRenderer renderer)
     {
         this.rdvList.setCellRenderer(renderer);

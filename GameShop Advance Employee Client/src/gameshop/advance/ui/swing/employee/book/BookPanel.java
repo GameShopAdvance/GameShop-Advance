@@ -11,6 +11,7 @@ import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.technicalservices.LoggerSingleton;
+import gameshop.advance.ui.swing.UIFactory;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.utility.Money;
 import java.awt.CardLayout;
@@ -33,7 +34,7 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 
 /**
- * @author Franco
+ * @author Matteo Gentile
  */
 public class BookPanel extends JPanel {
 
@@ -172,47 +173,52 @@ public class BookPanel extends JPanel {
         this.bookList.setModel(listaProdottiPrenotati);
     }
 
+    private void createUIComponents() {
+        this.insertClientCode = UIFactory.getInstance().getSimpleButton();
+        this.clearBook = UIFactory.getInstance().getCancelButton();
+        this.button1 = UIFactory.getInstance().getSimpleButton();
+        this.label1 = UIFactory.getInstance().getBodyLabel();
+        this.label2 = UIFactory.getInstance().getBodyLabel();
+        this.label3 = UIFactory.getInstance().getBodyLabel();
+        this.label4 = UIFactory.getInstance().getBodyLabel();
+        this.label5 = UIFactory.getInstance().getBodyLabel();
+        this.label6 = UIFactory.getInstance().getBodyLabel();
+        this.label7 = UIFactory.getInstance().getBodyLabel();
+        this.label8 = UIFactory.getInstance().getBodyLabel();
+        this.goToPayPartial = UIFactory.getInstance().getSimpleButton();
+        this.goToPayTotal = UIFactory.getInstance().getSimpleButton();
+        this.retrieveBook = UIFactory.getInstance().getSimpleButton();
+        this.payPartialButton = UIFactory.getInstance().getSimpleButton();
+        this.payTotalButton = UIFactory.getInstance().getSimpleButton();
+        this.button2 = UIFactory.getInstance().getSimpleButton();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        createUIComponents();
+
         mainPanel = new JPanel();
         getReservationCard = new JPanel();
         panel2 = new JPanel();
-        label2 = new JLabel();
         bookCode = new JTextField();
-        retrieveBook = new JButton();
         panel7 = new JPanel();
         scrollPane1 = new JScrollPane();
         bookList = new JList();
-        label1 = new JLabel();
-        label3 = new JLabel();
         total = new JTextField();
         partial = new JTextField();
-        goToPayTotal = new JButton();
-        goToPayPartial = new JButton();
         panel1 = new JPanel();
-        label4 = new JLabel();
         clientCode = new JTextField();
-        insertClientCode = new JButton();
         panel5 = new JPanel();
-        clearBook = new JButton();
         payPartialCard = new JPanel();
         panel4 = new JPanel();
-        button1 = new JButton();
         panel3 = new JPanel();
-        label5 = new JLabel();
         displayPartial = new JTextField();
-        label6 = new JLabel();
         partialPayment = new JTextField();
-        payPartialButton = new JButton();
         payTotalCard = new JPanel();
         panel6 = new JPanel();
-        button2 = new JButton();
         panel8 = new JPanel();
-        label7 = new JLabel();
         displayTotal = new JTextField();
-        label8 = new JLabel();
         totalPayment = new JTextField();
-        payTotalButton = new JButton();
 
         //======== this ========
         setLayout(new FormLayout(
@@ -240,7 +246,6 @@ public class BookPanel extends JPanel {
 
                     //---- label2 ----
                     label2.setText("Codice Prenotazione");
-                    label2.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     label2.setLabelFor(bookCode);
                     panel2.add(label2, CC.xy(1, 1, CC.LEFT, CC.DEFAULT));
                     panel2.add(bookCode, CC.xywh(3, 1, 3, 1, CC.FILL, CC.FILL));
@@ -248,7 +253,6 @@ public class BookPanel extends JPanel {
                     //---- retrieveBook ----
                     retrieveBook.setText("Aggiungi");
                     retrieveBook.setForeground(Color.black);
-                    retrieveBook.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     retrieveBook.setNextFocusableComponent(clientCode);
                     retrieveBook.addActionListener(new ActionListener() {
                         @Override
@@ -263,7 +267,7 @@ public class BookPanel extends JPanel {
                 //======== panel7 ========
                 {
                     panel7.setLayout(new FormLayout(
-                        "default, $lcgap, [75dlu,default], $lcgap, default, $lcgap, [75dlu,default], $lcgap, default",
+                        "[5dlu,default], $lcgap, [75dlu,default], $lcgap, default, $lcgap, [75dlu,default], $lcgap, [5dlu,default]",
                         "2*(default:grow, $lgap), 2*([25dlu,default]), $lgap, [35dlu,default], $lgap, default"));
 
                     //======== scrollPane1 ========
@@ -274,13 +278,11 @@ public class BookPanel extends JPanel {
 
                     //---- label1 ----
                     label1.setText("Totale");
-                    label1.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     label1.setLabelFor(total);
                     panel7.add(label1, CC.xy(3, 5));
 
                     //---- label3 ----
                     label3.setText("Acconto");
-                    label3.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     panel7.add(label3, CC.xy(7, 5));
 
                     //---- total ----
@@ -293,7 +295,6 @@ public class BookPanel extends JPanel {
 
                     //---- goToPayTotal ----
                     goToPayTotal.setText("Paga Totale");
-                    goToPayTotal.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     goToPayTotal.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -304,7 +305,6 @@ public class BookPanel extends JPanel {
 
                     //---- goToPayPartial ----
                     goToPayPartial.setText("Paga Acconto");
-                    goToPayPartial.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     goToPayPartial.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -327,7 +327,6 @@ public class BookPanel extends JPanel {
 
                     //---- label4 ----
                     label4.setText("Codice");
-                    label4.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     label4.setLabelFor(clientCode);
                     panel1.add(label4, CC.xy(1, 1));
 
@@ -338,7 +337,6 @@ public class BookPanel extends JPanel {
                     //---- insertClientCode ----
                     insertClientCode.setText("Inserisci");
                     insertClientCode.setForeground(Color.black);
-                    insertClientCode.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     insertClientCode.setNextFocusableComponent(goToPayPartial);
                     insertClientCode.addActionListener(new ActionListener() {
                         @Override
@@ -359,7 +357,6 @@ public class BookPanel extends JPanel {
                     //---- clearBook ----
                     clearBook.setText("Annulla");
                     clearBook.setBackground(new Color(255, 51, 0));
-                    clearBook.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     clearBook.setForeground(Color.white);
                     clearBook.setIcon(null);
                     clearBook.setNextFocusableComponent(null);
@@ -389,7 +386,6 @@ public class BookPanel extends JPanel {
 
                     //---- button1 ----
                     button1.setText("Indietro");
-                    button1.setFont(new Font("Ubuntu", Font.PLAIN, 14));
                     button1.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -409,7 +405,6 @@ public class BookPanel extends JPanel {
 
                     //---- label5 ----
                     label5.setText("Acconto");
-                    label5.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     panel3.add(label5, CC.xy(3, 1));
 
                     //---- displayPartial ----
@@ -418,13 +413,11 @@ public class BookPanel extends JPanel {
 
                     //---- label6 ----
                     label6.setText("Pagamento");
-                    label6.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     panel3.add(label6, CC.xy(3, 3));
                     panel3.add(partialPayment, CC.xywh(5, 3, 3, 1));
 
                     //---- payPartialButton ----
                     payPartialButton.setText("Paga Acconto");
-                    payPartialButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     payPartialButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -453,7 +446,6 @@ public class BookPanel extends JPanel {
 
                     //---- button2 ----
                     button2.setText("Indietro");
-                    button2.setFont(new Font("Ubuntu", Font.PLAIN, 14));
                     button2.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
@@ -473,7 +465,6 @@ public class BookPanel extends JPanel {
 
                     //---- label7 ----
                     label7.setText("Totale");
-                    label7.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     panel8.add(label7, CC.xy(3, 1));
 
                     //---- displayTotal ----
@@ -482,13 +473,11 @@ public class BookPanel extends JPanel {
 
                     //---- label8 ----
                     label8.setText("Pagamento");
-                    label8.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     panel8.add(label8, CC.xy(3, 3));
                     panel8.add(totalPayment, CC.xywh(5, 3, 3, 1));
 
                     //---- payTotalButton ----
                     payTotalButton.setText("Paga Totale");
-                    payTotalButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
                     payTotalButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {

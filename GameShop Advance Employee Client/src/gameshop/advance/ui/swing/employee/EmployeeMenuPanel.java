@@ -10,9 +10,9 @@ import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.controller.InventoryControllerSingleton;
 import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.ui.swing.UIFactory;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.NotBoundException;
@@ -50,7 +50,7 @@ public class EmployeeMenuPanel extends JPanel {
                     + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
         }
         
-    }//GEN-LAST:event_startSaleActionPerformed
+    }
 
     private void faiInventario(ActionEvent e) {
         try {
@@ -87,11 +87,16 @@ public class EmployeeMenuPanel extends JPanel {
 //        } 
     }
 
+    private void createUIComponents() {
+        this.startSale = UIFactory.getInstance().getSimpleButton();
+        this.manageBook = UIFactory.getInstance().getSimpleButton();
+        this.button1 = UIFactory.getInstance().getSimpleButton();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        startSale = new JButton();
-        manageBook = new JButton();
-        button1 = new JButton();
+        createUIComponents();
+
         button2 = new JButton();
 
         //======== this ========
@@ -103,7 +108,6 @@ public class EmployeeMenuPanel extends JPanel {
 
         //---- startSale ----
         startSale.setText("Vendita");
-        startSale.setFont(new Font("Tahoma", Font.PLAIN, 14));
         startSale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -114,7 +118,6 @@ public class EmployeeMenuPanel extends JPanel {
 
         //---- manageBook ----
         manageBook.setText("Prenotazioni");
-        manageBook.setFont(new Font("Tahoma", Font.PLAIN, 14));
         manageBook.setMaximumSize(new Dimension(169, 37));
         manageBook.setMinimumSize(new Dimension(169, 37));
         manageBook.setPreferredSize(new Dimension(169, 37));
@@ -128,7 +131,6 @@ public class EmployeeMenuPanel extends JPanel {
 
         //---- button1 ----
         button1.setText("Inventario");
-        button1.setFont(new Font("Tahoma", Font.PLAIN, 14));
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

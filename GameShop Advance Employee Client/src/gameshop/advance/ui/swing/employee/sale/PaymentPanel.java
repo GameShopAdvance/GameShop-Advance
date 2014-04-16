@@ -10,6 +10,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.ui.interfaces.IListPanel;
+import gameshop.advance.ui.swing.UIFactory;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -68,6 +69,12 @@ public class PaymentPanel extends JPanel implements IListPanel {
         this.resumeList.setModel(listaProdotti);
     }
 
+    private void createUIComponents() {
+        this.label1 = UIFactory.getInstance().getBodyLabel();
+        this.label2 = UIFactory.getInstance().getBodyLabel();
+        this.payButton = UIFactory.getInstance().getConfirmButton();
+    }
+
     /**
      * This method is called from within the constructor to initialize the form.
      * WARNING: Do NOT modify this code. The content of this method is always
@@ -77,13 +84,12 @@ public class PaymentPanel extends JPanel implements IListPanel {
     
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        createUIComponents();
+
         scrollPane1 = new JScrollPane();
         resumeList = new JList();
-        label1 = new JLabel();
         displayTotal = new JTextField();
         payment = new JTextField();
-        label2 = new JLabel();
-        payButton = new JButton();
 
         //======== this ========
         setLayout(new FormLayout(
@@ -99,7 +105,6 @@ public class PaymentPanel extends JPanel implements IListPanel {
 
         //---- label1 ----
         label1.setText("Totale");
-        label1.setFont(new Font("Tahoma", Font.PLAIN, 16));
         label1.setAlignmentX(0.5F);
         label1.setHorizontalAlignment(SwingConstants.CENTER);
         add(label1, CC.xy(5, 3, CC.FILL, CC.FILL));
@@ -115,14 +120,12 @@ public class PaymentPanel extends JPanel implements IListPanel {
 
         //---- label2 ----
         label2.setText("Pagamento");
-        label2.setFont(new Font("Tahoma", Font.PLAIN, 16));
         label2.setAlignmentX(0.5F);
         label2.setHorizontalAlignment(SwingConstants.CENTER);
         add(label2, CC.xy(5, 5, CC.FILL, CC.FILL));
 
         //---- payButton ----
         payButton.setText("Paga");
-        payButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         payButton.setAlignmentX(0.5F);
         payButton.addActionListener(new ActionListener() {
             @Override

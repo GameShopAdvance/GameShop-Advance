@@ -12,9 +12,9 @@ import gameshop.advance.controller.valueData.AggiuntaProdotti;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.ui.swing.UIFactory;
 import gameshop.advance.ui.swing.UIStyleSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.NotBoundException;
@@ -31,7 +31,7 @@ import javax.swing.JTextField;
 import javax.swing.table.AbstractTableModel;
 
 /**
- * @author Pippo
+ * @author Matteo Gentile
  */
 public class InventoryPanel extends JPanel {
         
@@ -104,33 +104,22 @@ public class InventoryPanel extends JPanel {
     }
 
     private void createUIComponents() {
-        // TODO: add custom component creation code here
-    }
-
-    private void startSaleActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void manageBookActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void faiInventario(ActionEvent e) {
-        // TODO add your code here
+        this.button1 = UIFactory.getInstance().getSimpleButton();
+        this.cancelButton = UIFactory.getInstance().getCancelButton();
+        this.endInventoryButton = UIFactory.getInstance().getConfirmButton();
+        this.label1 = UIFactory.getInstance().getBodyLabel();
+        this.label2 = UIFactory.getInstance().getBodyLabel();
     }
     
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        createUIComponents();
+
         panel1 = new JPanel();
-        label1 = new JLabel();
         codiceProdotto = new JTextField();
-        label2 = new JLabel();
         quantitaProdotto = new JTextField();
-        button1 = new JButton();
         panel = new JScrollPane();
         table = new JTable();
-        cancelButton = new JButton();
-        endInventoryButton = new JButton();
 
         //======== this ========
         setLayout(new FormLayout(
@@ -145,19 +134,16 @@ public class InventoryPanel extends JPanel {
 
             //---- label1 ----
             label1.setText("Codice Prodotto");
-            label1.setFont(new Font("Tahoma", Font.PLAIN, 14));
             panel1.add(label1, CC.xy(1, 1));
             panel1.add(codiceProdotto, CC.xywh(3, 1, 3, 1, CC.FILL, CC.DEFAULT));
 
             //---- label2 ----
             label2.setText("Quantit\u00e0");
-            label2.setFont(new Font("Tahoma", Font.PLAIN, 14));
             panel1.add(label2, CC.xy(1, 3));
             panel1.add(quantitaProdotto, CC.xy(3, 3, CC.FILL, CC.DEFAULT));
 
             //---- button1 ----
             button1.setText("Inserisci");
-            button1.setFont(new Font("Tahoma", Font.PLAIN, 14));
             button1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
@@ -176,7 +162,6 @@ public class InventoryPanel extends JPanel {
 
         //---- cancelButton ----
         cancelButton.setText("Annulla");
-        cancelButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
@@ -187,7 +172,6 @@ public class InventoryPanel extends JPanel {
 
         //---- endInventoryButton ----
         endInventoryButton.setText("Fine");
-        endInventoryButton.setFont(new Font("Tahoma", Font.PLAIN, 14));
         endInventoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

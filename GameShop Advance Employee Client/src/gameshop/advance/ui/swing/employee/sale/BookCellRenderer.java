@@ -7,10 +7,10 @@ package gameshop.advance.ui.swing.employee.sale;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
+import gameshop.advance.ui.swing.UIFactory;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -23,21 +23,26 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 /**
- * @author Pippo
+ * @author Matteo Gentile
  */
 public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDiTransazioneRemote>{
     public BookCellRenderer() {
         initComponents();
     }
 
+    private void createUIComponents() {
+       this.name = UIFactory.getInstance().getBodyLabel();
+       this.quantity = UIFactory.getInstance().getBodyLabel();
+       this.subTotal = UIFactory.getInstance().getBodyLabel();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        createUIComponents();
+
         panel1 = new JPanel();
-        name = new JLabel();
         separator2 = new JSeparator();
-        quantity = new JLabel();
         separator1 = new JSeparator();
-        subTotal = new JLabel();
         hSeparator = new JSeparator();
 
         //======== this ========
@@ -47,11 +52,8 @@ public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDi
         {
             panel1.setBorder(new EmptyBorder(5, 5, 5, 5));
             panel1.setLayout(new FormLayout(
-                "[75dlu,default]:grow, $lcgap, 10dlu, $lcgap, 15dlu, $lcgap, 10dlu, $lcgap, 35dlu",
+                "[100dlu,default]:grow, $lcgap, 10dlu, $lcgap, 30dlu, $lcgap, 10dlu, $lcgap, 50dlu",
                 "fill:[30dlu,default]:grow"));
-
-            //---- name ----
-            name.setFont(new Font("Tahoma", Font.PLAIN, 14));
             panel1.add(name, CC.xy(1, 1));
 
             //---- separator2 ----
