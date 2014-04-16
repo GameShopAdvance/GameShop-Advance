@@ -10,6 +10,7 @@ import com.db4o.activation.ActivationPurpose;
 import com.db4o.activation.Activator;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
+import gameshop.advance.interfaces.remote.IRemoteImage;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import gameshop.advance.utility.Prezzo;
@@ -87,6 +88,7 @@ public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto {
     
     @Override
     public void setQuantitaDiSoglia(int soglia){
+        this.activate(ActivationPurpose.WRITE);
         this.descrizione.setQuantitaDiSoglia(soglia);
     }
     
@@ -127,5 +129,16 @@ public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto {
     public void setQuantitaDisponibile(int quantity) {
         this.activate(ActivationPurpose.WRITE);
         this.descrizione.setQuantitaDisponibile(quantity);
+    }
+
+    @Override
+    public IRemoteImage getImmagine() throws RemoteException {
+        return this.descrizione.getImmagine();
+    }
+
+    @Override
+    public String getNomeProdotto() throws RemoteException {
+        this.activate(ActivationPurpose.READ);
+        return this.descrizione.getNomeProdotto();
     }
 }

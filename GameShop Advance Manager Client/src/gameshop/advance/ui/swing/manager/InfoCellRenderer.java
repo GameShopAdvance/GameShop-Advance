@@ -41,7 +41,8 @@ public class InfoCellRenderer extends JPanel implements ListCellRenderer<IInform
         this.ordine = UIFactory.getInstance().getBodyLabel();
         this.quantitaInArrivo = UIFactory.getInstance().getBodyLabel();
         this.quantitaOrdine = UIFactory.getInstance().getTextField();
-   
+        this.label1 = UIFactory.getInstance().getBodyLabel();
+        this.soglia = UIFactory.getInstance().getBodyLabel();
     }
 
     private void initComponents() {
@@ -103,6 +104,17 @@ public class InfoCellRenderer extends JPanel implements ListCellRenderer<IInform
         quantitaDisponibile.setBorder(new EtchedBorder());
         quantitaDisponibile.setName("quantitaDisponibile");
 
+        //---- label1 ----
+        label1.setText("/");
+        label1.setHorizontalAlignment(SwingConstants.CENTER);
+        label1.setName("label1");
+
+        //---- soglia ----
+        soglia.setText("text");
+        soglia.setBorder(new EtchedBorder());
+        soglia.setHorizontalAlignment(SwingConstants.CENTER);
+        soglia.setName("soglia");
+
         //---- ordine ----
         ordine.setText("Ordine");
         ordine.setHorizontalAlignment(SwingConstants.CENTER);
@@ -117,19 +129,21 @@ public class InfoCellRenderer extends JPanel implements ListCellRenderer<IInform
         separator1.setName("separator1");
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "$lcgap, [60dlu,default,140dlu]:grow, $ugap, [50dlu,default,100dlu]:grow, $lcgap, [20dlu,default,40dlu]:grow, $ugap, [50dlu,default,100dlu]:grow, $lcgap, [20dlu,default,40dlu]:grow, $lcgap",
+            "$lcgap, [60dlu,default,140dlu]:grow, $ugap, [50dlu,default,100dlu]:grow, $lcgap, [8dlu,default,16dlu]:grow, [4dlu,default,8dlu], [8dlu,default,16dlu]:grow, $ugap, [50dlu,default,100dlu]:grow, $lcgap, [20dlu,default,40dlu]:grow, $lcgap",
             "$lgap, fill:[27dlu,default], $lgap, fill:26dlu, $lgap, $rgap"), this);
 
         builder.add(title,                CC.xywh( 2, 2,  1, 3));
         builder.add(prenotazioni,         CC.xy  ( 4, 2));
-        builder.add(quantitaPrenotazioni, CC.xy  ( 6, 2));
-        builder.add(inArrivo,             CC.xy  ( 8, 2));
-        builder.add(quantitaInArrivo,     CC.xy  (10, 2));
+        builder.add(quantitaPrenotazioni, CC.xywh( 6, 2,  3, 1));
+        builder.add(inArrivo,             CC.xy  (10, 2));
+        builder.add(quantitaInArrivo,     CC.xy  (12, 2));
         builder.add(disponibilita,        CC.xy  ( 4, 4));
         builder.add(quantitaDisponibile,  CC.xy  ( 6, 4));
-        builder.add(ordine,               CC.xy  ( 8, 4));
-        builder.add(quantitaOrdine,       CC.xy  (10, 4));
-        builder.add(separator1,           CC.xywh( 1, 6, 11, 1));
+        builder.add(label1,               CC.xy  ( 7, 4));
+        builder.add(soglia,               CC.xy  ( 8, 4));
+        builder.add(ordine,               CC.xy  (10, 4));
+        builder.add(quantitaOrdine,       CC.xy  (12, 4));
+        builder.add(separator1,           CC.xywh( 1, 6, 13, 1));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -141,6 +155,8 @@ public class InfoCellRenderer extends JPanel implements ListCellRenderer<IInform
     private JLabel quantitaInArrivo;
     private JLabel disponibilita;
     private JLabel quantitaDisponibile;
+    private JLabel label1;
+    private JLabel soglia;
     private JLabel ordine;
     private JTextField quantitaOrdine;
     private JSeparator separator1;
@@ -149,7 +165,7 @@ public class InfoCellRenderer extends JPanel implements ListCellRenderer<IInform
     @Override
     public Component getListCellRendererComponent(JList<? extends IInformazioniProdottoRemote> list, IInformazioniProdottoRemote value, int index, boolean isSelected, boolean cellHasFocus) {
         try {
-            this.title.setText(value.getDescrizione().getDescrizione());
+            this.title.setText(value.getDescrizione().getNomeProdotto());
         }
         catch (Exception ex) {
             Logger.getLogger(InfoCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
@@ -170,6 +186,13 @@ public class InfoCellRenderer extends JPanel implements ListCellRenderer<IInform
         catch (Exception ex) {
             Logger.getLogger(InfoCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
             this.quantitaPrenotazioni.setText("???");
+        }
+        try {
+             this.soglia.setText(""+value.getDescrizione().getQuantitaDiSoglia());
+        }
+        catch (Exception ex) {
+            Logger.getLogger(InfoCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+            this.soglia.setText("???");
         }
         
         

@@ -17,7 +17,7 @@ import org.joda.time.DateTime;
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IDescrizioneProdottoRemote extends Remote {
-
+   
     /**
      *
      * @return
@@ -41,4 +41,8 @@ public interface IDescrizioneProdottoRemote extends Remote {
     
     
     int getQuantitaDiSoglia() throws RemoteException;
+    
+    IRemoteImage getImmagine() throws RemoteException;
+    
+    String getNomeProdotto() throws RemoteException;
 }

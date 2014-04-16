@@ -12,7 +12,6 @@ import gameshop.advance.ui.swing.UIFactory;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
-import java.awt.Font;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -116,7 +115,7 @@ public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDi
         }
         else{
             try {
-                this.name.setText(value.getDescrizione().getDescrizione());
+                this.name.setText(value.getDescrizione().getNomeProdotto());
             } catch (RemoteException ex) {
                 Logger.getLogger(BookCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
                 this.name.setText("Prodotto... (!!!)");

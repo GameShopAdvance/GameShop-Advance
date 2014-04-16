@@ -16,7 +16,7 @@ import org.joda.time.DateTime;
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IDescrizioneProdotto extends IDescrizioneProdottoRemote {
-
+    
     void addQuantitaDisponibile(int quantity);
 
     void addSconti(List<IScontoProdottoStrategy> sconti);

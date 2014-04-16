@@ -18,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import org.joda.time.DateTime;
 
@@ -35,6 +36,14 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
         this.title = UIFactory.getInstance().getHeaderLabel();
         this.price = UIFactory.getInstance().getBodyLabel();
         this.quantity = UIFactory.getInstance().getBodyLabel();
+        this.label1 = new JLabel();
+        /*ImageIcon image = new ImageIcon(getClass().getResource("cod4.jpg"));
+        Image img = image.getImage();
+        Image newimg = img.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
+        Icon newIcon = new ImageIcon(newimg);
+        this.label1 = new JLabel(newIcon);
+        this.label1.setIcon(newIcon);*/
+        
     }
 
     private void initComponents() {
@@ -42,7 +51,6 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
         createUIComponents();
 
         imageBox = new JPanel();
-        label1 = new JLabel();
         separator1 = new JSeparator();
 
         //======== this ========
@@ -54,27 +62,30 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
             imageBox.setName("imageBox");
 
             //---- label1 ----
-            label1.setText("Immagine");
             label1.setHorizontalAlignment(SwingConstants.CENTER);
+            label1.setBorder(new BevelBorder(BevelBorder.LOWERED));
             label1.setName("label1");
 
             PanelBuilder imageBoxBuilder = new PanelBuilder(new FormLayout(
-                "default:grow",
-                "fill:41dlu"), imageBox);
+                "[30dlu,min,50dlu]:grow",
+                "fill:100px:grow"), imageBox);
 
             imageBoxBuilder.add(label1, CC.xy(1, 1));
         }
 
         //---- title ----
         title.setText("text");
+        title.setHorizontalAlignment(SwingConstants.CENTER);
         title.setName("title");
 
         //---- price ----
         price.setText("text");
+        price.setHorizontalAlignment(SwingConstants.RIGHT);
         price.setName("price");
 
         //---- label2 ----
-        label2.setText("qty #");
+        label2.setText("Disponibili:");
+        label2.setHorizontalAlignment(SwingConstants.RIGHT);
         label2.setName("label2");
 
         //---- quantity ----
@@ -85,12 +96,12 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
         separator1.setName("separator1");
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[15dlu,default], $lcgap, [40dlu,default,120dlu]:grow, $lcgap, [50dlu,default]:grow, $lcgap, [25dlu,default,50dlu]:grow, $lcgap, [25dlu,default,50dlu], $lcgap, [15dlu,default]",
-            "[10dlu,default], 2*($lgap, 30dlu), $lgap, [10dlu,default], $lgap, 1dlu"), this);
+            "[15dlu,default], $lcgap, [40dlu,default,210px], $ugap, [50dlu,default]:grow, $lcgap, [25dlu,default,50dlu]:grow, $lcgap, [25dlu,default,50dlu], $lcgap, [15dlu,default]",
+            "[10dlu,default], 2*($lgap, [35dlu,default,120px]), $lgap, [10dlu,default], $lgap, 1dlu"), this);
 
         builder.add(imageBox,   CC.xywh(3, 3,       1,          3));
         builder.add(title,      CC.xy  (5, 3, CC.FILL,    CC.FILL));
-        builder.add(price,      CC.xywh(7, 3,       3,          1, CC.FILL, CC.FILL));
+        builder.add(price,      CC.xy  (9, 3, CC.FILL,    CC.FILL));
         builder.add(label2,     CC.xy  (7, 5, CC.FILL, CC.DEFAULT));
         builder.add(quantity,   CC.xy  (9, 5, CC.FILL, CC.DEFAULT));
         builder.add(separator1, CC.xywh(1, 9,      11,          1));
@@ -110,7 +121,7 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
     @Override
     public Component getListCellRendererComponent(JList<? extends IDescrizioneProdottoRemote> list, IDescrizioneProdottoRemote value, int index, boolean isSelected, boolean cellHasFocus) {
         try {
-            this.title.setText(value.getDescrizione());
+            this.title.setText(value.getNomeProdotto());
         }
         catch (Exception ex) {
             Logger.getLogger(ProductCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
@@ -130,6 +141,14 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
             Logger.getLogger(ProductCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
             this.quantity.setText("???");
         }
+        
+        try{
+            this.label1.setIcon(value.getImmagine().getIcon());
+        }
+        catch(Exception ex){
+            Logger.getLogger(ProductCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
         return this;
     }

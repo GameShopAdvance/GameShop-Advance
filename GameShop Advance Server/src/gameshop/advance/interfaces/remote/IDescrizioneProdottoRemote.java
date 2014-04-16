@@ -6,7 +6,6 @@
 
 package gameshop.advance.interfaces.remote;
 
-import gameshop.advance.remote.IRemoteImage;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.Remote;
@@ -18,7 +17,7 @@ import org.joda.time.DateTime;
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IDescrizioneProdottoRemote extends Remote {
-
+   
     /**
      *
      * @return
@@ -33,6 +32,7 @@ public interface IDescrizioneProdottoRemote extends Remote {
     String getDescrizione() throws RemoteException;
 
     /**
+     * @param period
      * @return il prezzo di un prodotto.
      * @throws java.rmi.RemoteException
      */
@@ -44,4 +44,6 @@ public interface IDescrizioneProdottoRemote extends Remote {
     int getQuantitaDiSoglia() throws RemoteException;
     
     IRemoteImage getImmagine() throws RemoteException;
+    
+    String getNomeProdotto() throws RemoteException;
 }

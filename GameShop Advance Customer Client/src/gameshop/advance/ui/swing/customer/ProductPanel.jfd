@@ -4,10 +4,11 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;75dlu), labelcompgap, default:grow, labelcompgap, max(default;30dlu), labelcompgap, max(default;40dlu), labelcompgap, max(default;15dlu)"
-			"$rowSpecs": "max(default;15dlu), linegap, max(default;35dlu), linegap, 15dlu, linegap, fill:max(default;73dlu), linegap, fill:max(default;27dlu):grow, max(default;15dlu)"
+			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;75dlu), labelcompgap, max(default;50dlu), unrelgap, default:grow, labelcompgap, max(default;30dlu), labelcompgap, max(default;40dlu), labelcompgap, max(default;15dlu)"
+			"$rowSpecs": "max(default;15dlu), linegap, max(default;35dlu), unrelgap, (35dlu<default<100px), linegap, fill:(75dlu<default<300px), linegap, fill:(27dlu<default<250px):grow, max(default;15dlu)"
 		} ) {
 			name: "this"
+			"minimumSize": new java.awt.Dimension( 720, 480 )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": "Indietro"
@@ -21,6 +22,23 @@ new FormModel {
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
+				name: "imagePanel"
+				"border": new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, false )
+				add( new FormComponent( "javax.swing.JLabel" ) {
+					name: "image"
+					"border": new javax.swing.border.BevelBorder( 1, null, null, sfield java.awt.Color lightGray, sfield java.awt.Color white )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "Center"
+				} )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 3
+				"gridY": 5
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridHeight": 5
+				"gridWidth": 3
+			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "title"
 				"text": "text"
@@ -28,10 +46,10 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
+				"gridX": 7
 				"gridY": 5
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-				"gridWidth": 5
+				"gridWidth": 3
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "price"
@@ -40,7 +58,7 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 9
+				"gridX": 11
 				"gridY": 5
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
@@ -49,43 +67,26 @@ new FormModel {
 				"$columnSpecs": "default:grow"
 				"$rowSpecs": "default:grow"
 			} ) {
-				name: "imagePanel"
-				"border": new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, false )
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label1"
-					"text": "Image Here"
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridX": 1
-					"gridY": 1
-					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
-					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
-				} )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
-				"gridY": 7
-				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-			} )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "default:grow"
-				"$rowSpecs": "default:grow"
-			} ) {
 				name: "panel1"
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label2"
-					"text": "Description Here"
-					auxiliary() {
-						"JavaCodeGenerator.customCreate": true
-					}
+				"border": new javax.swing.border.TitledBorder( "Descrizione" )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"horizontalScrollBarPolicy": 31
+					add( new FormComponent( "javax.swing.JTextArea" ) {
+						name: "description"
+						"background": new java.awt.Color( 238, 238, 238, 255 )
+						"lineWrap": true
+					} )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridX": 1
-					"gridY": 1
-					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 5
+				"gridX": 7
 				"gridY": 7
 				"gridWidth": 5
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
 				name: "panelSwitch"
@@ -250,13 +251,13 @@ new FormModel {
 					"value": "bookCompleted"
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
+				"gridX": 7
 				"gridY": 9
-				"gridWidth": 7
+				"gridWidth": 5
 			} )
 		}, new FormLayoutConstraints( null ) {
-			"location": new java.awt.Point( 0, 5 )
-			"size": new java.awt.Dimension( 515, 385 )
+			"location": new java.awt.Point( 5, 0 )
+			"size": new java.awt.Dimension( 690, 440 )
 		} )
 	}
 }

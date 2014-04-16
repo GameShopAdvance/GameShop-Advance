@@ -4,20 +4,23 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(default;15dlu), labelcompgap, (40dlu<default<120dlu):grow, labelcompgap, max(default;50dlu):grow, labelcompgap, (25dlu<default<50dlu):grow, labelcompgap, (25dlu<default<50dlu), labelcompgap, max(default;15dlu)"
-			"$rowSpecs": "max(default;10dlu), linegap, 30dlu, linegap, 30dlu, linegap, max(default;10dlu), linegap, 1dlu"
+			"$columnSpecs": "max(default;15dlu), labelcompgap, (40dlu<default<210px), unrelgap, max(default;50dlu):grow, labelcompgap, (25dlu<default<50dlu):grow, labelcompgap, (25dlu<default<50dlu), labelcompgap, max(default;15dlu)"
+			"$rowSpecs": "max(default;10dlu), linegap, (35dlu<default<120px), linegap, (35dlu<default<120px), linegap, max(default;10dlu), linegap, 1dlu"
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "default:grow"
-				"$rowSpecs": "fill:41dlu"
+				"$columnSpecs": "(30dlu<min<50dlu):grow"
+				"$rowSpecs": "fill:100px:grow"
 			} ) {
 				name: "imageBox"
 				"border": new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, false )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
-					"text": "Immagine"
 					"horizontalAlignment": 0
+					"border": new javax.swing.border.BevelBorder( 1, null, null, null, null )
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 1
 					"gridY": 1
@@ -30,6 +33,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "title"
 				"text": "text"
+				"horizontalAlignment": 0
 				auxiliary() {
 					"JavaCodeGenerator.customCreate": true
 				}
@@ -42,19 +46,20 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "price"
 				"text": "text"
+				"horizontalAlignment": 4
 				auxiliary() {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 7
+				"gridX": 9
 				"gridY": 3
-				"gridWidth": 3
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
-				"text": "qty #"
+				"text": "Disponibili:"
+				"horizontalAlignment": 4
 				auxiliary() {
 					"JavaCodeGenerator.customCreate": true
 				}
@@ -82,7 +87,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 400, 140 )
+			"size": new java.awt.Dimension( 400, 160 )
 		} )
 	}
 }

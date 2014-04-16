@@ -4,21 +4,19 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.observers;
+package gameshop.advance.interfaces.remote;
 
-import gameshop.advance.interfaces.IObserver;
+import java.rmi.Remote;
+import java.rmi.RemoteException;
+import javax.swing.ImageIcon;
 
 /**
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class ManagerPrenotazioniObserver implements IObserver {
-
-    private int size;
+public interface IRemoteImage extends Remote {
     
-    @Override
-    public void notifica(Object o) {
-        
-    }
+    ImageIcon getIcon() throws RemoteException;
     
+    ImageIcon getImage() throws RemoteException;
 }

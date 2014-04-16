@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.remote;
+package gameshop.advance.interfaces.remote;
 
 import java.rmi.Remote;
 import java.rmi.RemoteException;

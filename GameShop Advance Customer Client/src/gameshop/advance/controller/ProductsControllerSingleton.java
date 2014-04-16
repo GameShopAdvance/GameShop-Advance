@@ -80,7 +80,7 @@ public class ProductsControllerSingleton
         while(iter.hasNext())
         {
             IDescrizioneProdottoRemote desc = iter.next();
-            System.err.println("Descrizione: "+desc.getDescrizione());
+            System.err.println("Descrizione: "+desc.getNomeProdotto());
             this.listaDescrizioni.addElement(desc);
         }
     }

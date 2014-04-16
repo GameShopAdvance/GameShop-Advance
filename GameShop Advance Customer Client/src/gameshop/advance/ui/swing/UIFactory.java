@@ -8,6 +8,7 @@ package gameshop.advance.ui.swing;
 
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
 
 /**
@@ -87,5 +88,15 @@ public class UIFactory {
         textField.setForeground(UIStyleSingleton.getInstance().getTextColor());
         textField.setFont(UIStyleSingleton.getInstance().getNormalFont());
         return textField;
+    }
+
+    public JTextArea getLongTextArea() {
+        JTextArea textArea = new JTextArea();
+        textArea.setBackground(UIStyleSingleton.getInstance().getWindowBackgroundColor());
+        textArea.setBorder(null);
+        textArea.setLineWrap(true);
+        textArea.setWrapStyleWord(true);
+        textArea.setFont(UIStyleSingleton.getInstance().getNormalFont());
+        return textArea;
     }
 }
