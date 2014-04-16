@@ -9,6 +9,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.FornitureControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.ui.swing.UIFactory;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -43,37 +44,42 @@ public class ManagerMenu extends JPanel {
         }
     }
 
+    private void createUIComponents() {
+        this.fornitureButton = UIFactory.getInstance().getSimpleButton();
+        this.magazzinoButton = UIFactory.getInstance().getSimpleButton();
+        this.prezziButton = UIFactory.getInstance().getSimpleButton();
+        this.scontiButton = UIFactory.getInstance().getSimpleButton();
+        this.venditeButton = UIFactory.getInstance().getSimpleButton();
+        this.nullButton1 = UIFactory.getInstance().getSimpleButton();
+        this.nullButton2 = UIFactory.getInstance().getSimpleButton();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        button4 = new JButton();
+        createUIComponents();
+
         panel2 = new JPanel();
         scrollPane2 = new JScrollPane();
         offertsList = new JList<>();
-        button7 = new JButton();
-        button1 = new JButton();
-        button6 = new JButton();
         panel3 = new JPanel();
         scrollPane1 = new JScrollPane();
         lowQuantityList = new JList<>();
-        button5 = new JButton();
-        button2 = new JButton();
-        button3 = new JButton();
 
         //======== this ========
         setLayout(new FormLayout(
             "$lcgap, [15dlu,default], [303px,pref], 20dlu, [288px,pref], $lcgap, [15dlu,default]:grow",
             "$lgap, [15dlu,default]:grow, 7*($lgap, fill:30dlu), $lgap, [15dlu,default]:grow"));
 
-        //---- button4 ----
-        button4.setText("Gestisci Forniture");
-        button4.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        button4.addActionListener(new ActionListener() {
+        //---- fornitureButton ----
+        fornitureButton.setText("Gestisci Forniture");
+        fornitureButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        fornitureButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 fornitureActionPerformed(e);
             }
         });
-        add(button4, CC.xy(3, 4));
+        add(fornitureButton, CC.xy(3, 4));
 
         //======== panel2 ========
         {
@@ -105,21 +111,21 @@ public class ManagerMenu extends JPanel {
         }
         add(panel2, CC.xywh(5, 4, 1, 5));
 
-        //---- button7 ----
-        button7.setText("Controlla Magazzino");
-        button7.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        button7.setEnabled(false);
-        add(button7, CC.xy(3, 6));
+        //---- magazzinoButton ----
+        magazzinoButton.setText("Controlla Magazzino");
+        magazzinoButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        magazzinoButton.setEnabled(false);
+        add(magazzinoButton, CC.xy(3, 6));
 
-        //---- button1 ----
-        button1.setEnabled(false);
-        add(button1, CC.xy(3, 8));
+        //---- nullButton1 ----
+        nullButton1.setEnabled(false);
+        add(nullButton1, CC.xy(3, 8));
 
-        //---- button6 ----
-        button6.setText("Gestisci Prezzi");
-        button6.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        button6.setEnabled(false);
-        add(button6, CC.xy(3, 10));
+        //---- prezziButton ----
+        prezziButton.setText("Gestisci Prezzi");
+        prezziButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        prezziButton.setEnabled(false);
+        add(prezziButton, CC.xy(3, 10));
 
         //======== panel3 ========
         {
@@ -153,37 +159,37 @@ public class ManagerMenu extends JPanel {
         }
         add(panel3, CC.xywh(5, 10, 1, 5));
 
-        //---- button5 ----
-        button5.setText("Gestisci Sconti");
-        button5.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        button5.setEnabled(false);
-        add(button5, CC.xy(3, 12));
+        //---- scontiButton ----
+        scontiButton.setText("Gestisci Sconti");
+        scontiButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        scontiButton.setEnabled(false);
+        add(scontiButton, CC.xy(3, 12));
 
-        //---- button2 ----
-        button2.setEnabled(false);
-        add(button2, CC.xy(3, 14));
+        //---- nullButton2 ----
+        nullButton2.setEnabled(false);
+        add(nullButton2, CC.xy(3, 14));
 
-        //---- button3 ----
-        button3.setText("Analizza Vendite");
-        button3.setFont(new Font("Tahoma", Font.PLAIN, 18));
-        button3.setEnabled(false);
-        add(button3, CC.xy(3, 16));
+        //---- venditeButton ----
+        venditeButton.setText("Analizza Vendite");
+        venditeButton.setFont(new Font("Tahoma", Font.PLAIN, 18));
+        venditeButton.setEnabled(false);
+        add(venditeButton, CC.xy(3, 16));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JButton button4;
+    private JButton fornitureButton;
     private JPanel panel2;
     private JScrollPane scrollPane2;
     private JList<String> offertsList;
-    private JButton button7;
-    private JButton button1;
-    private JButton button6;
+    private JButton magazzinoButton;
+    private JButton nullButton1;
+    private JButton prezziButton;
     private JPanel panel3;
     private JScrollPane scrollPane1;
     private JList<String> lowQuantityList;
-    private JButton button5;
-    private JButton button2;
-    private JButton button3;
+    private JButton scontiButton;
+    private JButton nullButton2;
+    private JButton venditeButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 }

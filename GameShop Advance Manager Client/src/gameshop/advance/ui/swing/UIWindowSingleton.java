@@ -52,7 +52,7 @@ public class UIWindowSingleton extends JFrame {
         mainPanel = new JScrollPane();
 
         //======== this ========
-        setTitle("GameShopAdvance Cassa");
+        setTitle("GameShop Advance - Terminale Manager");
         setResizable(false);
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
