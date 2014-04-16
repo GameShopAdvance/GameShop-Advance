@@ -20,7 +20,7 @@ public class UIStyleSingleton {
     private Color errorColor = new Color(255, 51, 51);
     
     private Color buttonTextColor = new Color(255, 255, 255);
-    
+    private Color buttonSuccessTextColor = new Color(255, 255, 255);
     
     private Font bigFont = new Font("Tahoma", Font.PLAIN, 16);
     
@@ -29,6 +29,7 @@ public class UIStyleSingleton {
     private Font boldFont = new Font("Tahoma", Font.BOLD, 14);
     
     private static UIStyleSingleton instance;
+    
 
     public Font getBigFont() {
         return bigFont;
@@ -93,6 +94,10 @@ public class UIStyleSingleton {
 
     public Color getButtonTextColor() {
         return this.buttonTextColor;
+    }
+
+    Color getButtonSuccessTextColor() {
+        return this.buttonSuccessTextColor;
     }
 
     
