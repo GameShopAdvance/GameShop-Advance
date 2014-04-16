@@ -15,7 +15,10 @@ import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.ui.interfaces.IPopActionListener;
 import gameshop.advance.ui.swing.UIFactory;
+import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Color;
+import java.awt.Dimension;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -27,6 +30,7 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTextField;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import org.joda.time.DateTime;
 
@@ -67,6 +71,13 @@ public class ProductPanel extends JPanel {
         else
         {
             layout.show(this.panelSwitch, this.bookPanel.getName());
+        }
+        try{
+            this.image.setIcon(desc.getImmagine().getImage());
+        }
+        catch(RemoteException ex)
+        {
+            this.image.setIcon(null);
         }
         this.product = desc;
     }
@@ -120,7 +131,7 @@ public class ProductPanel extends JPanel {
         createUIComponents();
 
         imagePanel = new JPanel();
-        label1 = new JLabel();
+        image = new JLabel();
         panel1 = new JPanel();
         panelSwitch = new JPanel();
         bookPanel = new JPanel();
@@ -128,6 +139,7 @@ public class ProductPanel extends JPanel {
         bookCompleted = new JPanel();
 
         //======== this ========
+        setMinimumSize(new Dimension(720, 480));
         setName("this");
 
         //---- button1 ----
@@ -140,6 +152,18 @@ public class ProductPanel extends JPanel {
             }
         });
 
+        //======== imagePanel ========
+        {
+            imagePanel.setBorder(new LineBorder(Color.black));
+            imagePanel.setName("imagePanel");
+            imagePanel.setLayout(new BorderLayout());
+
+            //---- image ----
+            image.setBorder(new BevelBorder(BevelBorder.LOWERED, null, null, Color.lightGray, Color.white));
+            image.setName("image");
+            imagePanel.add(image, BorderLayout.CENTER);
+        }
+
         //---- title ----
         title.setText("text");
         title.setName("title");
@@ -148,24 +172,9 @@ public class ProductPanel extends JPanel {
         price.setText("text");
         price.setName("price");
 
-        //======== imagePanel ========
-        {
-            imagePanel.setBorder(LineBorder.createBlackLineBorder());
-            imagePanel.setName("imagePanel");
-
-            //---- label1 ----
-            label1.setText("Image Here");
-            label1.setName("label1");
-
-            PanelBuilder imagePanelBuilder = new PanelBuilder(new FormLayout(
-                "default:grow",
-                "default:grow"), imagePanel);
-
-            imagePanelBuilder.add(label1, CC.xy(1, 1, CC.CENTER, CC.CENTER));
-        }
-
         //======== panel1 ========
         {
+            panel1.setBorder(new LineBorder(Color.black));
             panel1.setName("panel1");
 
             //---- label2 ----
@@ -176,7 +185,7 @@ public class ProductPanel extends JPanel {
                 "default:grow",
                 "default:grow"), panel1);
 
-            panel1Builder.add(label2, CC.xy(1, 1, CC.CENTER, CC.DEFAULT));
+            panel1Builder.add(label2, CC.xy(1, 1, CC.CENTER, CC.FILL));
         }
 
         //======== panelSwitch ========
@@ -295,24 +304,24 @@ public class ProductPanel extends JPanel {
         }
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[15dlu,default], $lcgap, [75dlu,default], $lcgap, default:grow, $lcgap, [30dlu,default], $lcgap, [40dlu,default], $lcgap, [15dlu,default]",
-            "[15dlu,default], $lgap, [35dlu,default], $lgap, 15dlu, $lgap, fill:[73dlu,default], $lgap, fill:[27dlu,default]:grow, [15dlu,default]"), this);
+            "[15dlu,default], $lcgap, [75dlu,default], $lcgap, [50dlu,default], $ugap, default:grow, $lcgap, [30dlu,default], $lcgap, [40dlu,default], $lcgap, [15dlu,default]",
+            "[15dlu,default], $lgap, [35dlu,default], $ugap, [35dlu,default,100px], $lgap, fill:[75dlu,default,300px], $lgap, fill:[27dlu,default,250px]:grow, [15dlu,default]"), this);
 
-        builder.add(button1,     CC.xy  (3, 3, CC.FILL, CC.FILL));
-        builder.add(title,       CC.xywh(3, 5,       5,       1, CC.DEFAULT, CC.FILL));
-        builder.add(price,       CC.xy  (9, 5, CC.FILL, CC.FILL));
-        builder.add(imagePanel,  CC.xy  (3, 7, CC.FILL, CC.FILL));
-        builder.add(panel1,      CC.xywh(5, 7,       5,       1));
-        builder.add(panelSwitch, CC.xywh(3, 9,       7,       1));
+        builder.add(button1,     CC.xy  ( 3, 3, CC.FILL, CC.FILL));
+        builder.add(imagePanel,  CC.xywh( 3, 5,       3,       5, CC.FILL   , CC.FILL));
+        builder.add(title,       CC.xywh( 7, 5,       3,       1, CC.DEFAULT, CC.FILL));
+        builder.add(price,       CC.xy  (11, 5, CC.FILL, CC.FILL));
+        builder.add(panel1,      CC.xywh( 7, 7,       5,       1, CC.DEFAULT, CC.FILL));
+        builder.add(panelSwitch, CC.xywh( 7, 9,       5,       1));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JButton button1;
+    private JPanel imagePanel;
+    private JLabel image;
     private JLabel title;
     private JLabel price;
-    private JPanel imagePanel;
-    private JLabel label1;
     private JPanel panel1;
     private JLabel label2;
     private JPanel panelSwitch;

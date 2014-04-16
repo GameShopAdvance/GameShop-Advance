@@ -4,6 +4,7 @@
 
 package gameshop.advance.ui.swing.customer;
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
@@ -17,6 +18,7 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
+import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
 import org.joda.time.DateTime;
 
@@ -52,39 +54,56 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
         separator1 = new JSeparator();
 
         //======== this ========
-        setLayout(new FormLayout(
-            "[15dlu,default], $lcgap, [40dlu,default,60dlu], $lcgap, [50dlu,default]:grow, $lcgap, [25dlu,default,50dlu]:grow, $lcgap, [25dlu,default,50dlu], $lcgap, [15dlu,default]",
-            "[10dlu,default], 2*($lgap, 30dlu), $lgap, [10dlu,default], $lgap, 1dlu"));
+        setName("this");
 
         //======== imageBox ========
         {
             imageBox.setBorder(LineBorder.createBlackLineBorder());
-            imageBox.setLayout(new FormLayout(
-                "[30dlu,min,50dlu]:grow",
-                "fill:100px:grow"));
+            imageBox.setName("imageBox");
 
             //---- label1 ----
             label1.setHorizontalAlignment(SwingConstants.CENTER);
-            imageBox.add(label1, CC.xy(1, 1));
+            label1.setBorder(new BevelBorder(BevelBorder.LOWERED));
+            label1.setName("label1");
+
+            PanelBuilder imageBoxBuilder = new PanelBuilder(new FormLayout(
+                "[30dlu,min,50dlu]:grow",
+                "fill:100px:grow"), imageBox);
+
+            imageBoxBuilder.add(label1, CC.xy(1, 1));
         }
-        add(imageBox, CC.xywh(3, 3, 1, 3));
 
         //---- title ----
         title.setText("text");
-        add(title, CC.xy(5, 3, CC.FILL, CC.FILL));
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        title.setName("title");
 
         //---- price ----
         price.setText("text");
-        add(price, CC.xywh(7, 3, 3, 1, CC.FILL, CC.FILL));
+        price.setHorizontalAlignment(SwingConstants.RIGHT);
+        price.setName("price");
 
         //---- label2 ----
-        label2.setText("qty #");
-        add(label2, CC.xy(7, 5, CC.FILL, CC.DEFAULT));
+        label2.setText("Disponibili:");
+        label2.setName("label2");
 
         //---- quantity ----
         quantity.setText("text");
-        add(quantity, CC.xy(9, 5, CC.FILL, CC.DEFAULT));
-        add(separator1, CC.xywh(1, 9, 11, 1));
+        quantity.setName("quantity");
+
+        //---- separator1 ----
+        separator1.setName("separator1");
+
+        PanelBuilder builder = new PanelBuilder(new FormLayout(
+            "[15dlu,default], $lcgap, [40dlu,default,210px], $ugap, [50dlu,default]:grow, $lcgap, [25dlu,default,50dlu]:grow, $lcgap, [25dlu,default,50dlu], $lcgap, [15dlu,default]",
+            "[10dlu,default], 2*($lgap, [35dlu,default,120px]), $lgap, [10dlu,default], $lgap, 1dlu"), this);
+
+        builder.add(imageBox,   CC.xywh(3, 3,       1,          3));
+        builder.add(title,      CC.xy  (5, 3, CC.FILL,    CC.FILL));
+        builder.add(price,      CC.xy  (9, 3, CC.FILL,    CC.FILL));
+        builder.add(label2,     CC.xy  (7, 5, CC.FILL, CC.DEFAULT));
+        builder.add(quantity,   CC.xy  (9, 5, CC.FILL, CC.DEFAULT));
+        builder.add(separator1, CC.xywh(1, 9,      11,          1));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -123,8 +142,7 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
         }
         
         try{
-            System.err.println("imgstamp"+value.getImmagine().getIconWidth());
-            this.label1.setIcon(value.getImmagine());
+            this.label1.setIcon(value.getImmagine().getIcon());
         }
         catch(Exception ex){
             Logger.getLogger(ProductCellRenderer.class.getName()).log(Level.SEVERE, null, ex);

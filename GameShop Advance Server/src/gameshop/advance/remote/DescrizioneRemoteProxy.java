@@ -6,8 +6,8 @@
 
 package gameshop.advance.remote;
 
-import gameshop.advance.interfaces.remote.IRemoteImage;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
+import gameshop.advance.interfaces.remote.IRemoteImage;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
@@ -60,5 +60,10 @@ public class DescrizioneRemoteProxy extends UnicastRemoteObject implements IDesc
     @Override
     public IRemoteImage getImmagine() throws RemoteException {
         return this.desc.getImmagine();
+    }
+
+    @Override
+    public String getNomeProdotto() throws RemoteException {
+        return this.desc.getNomeProdotto();
     }
 }

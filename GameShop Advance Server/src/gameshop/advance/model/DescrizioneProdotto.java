@@ -3,8 +3,8 @@ package gameshop.advance.model;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IObserver;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
-import gameshop.advance.observers.DescrizioneProdottoObserver;
 import gameshop.advance.interfaces.remote.IRemoteImage;
+import gameshop.advance.observers.DescrizioneProdottoObserver;
 import gameshop.advance.remote.ImageProxy;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
@@ -26,7 +26,8 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
     private IDProdotto codiceProdotto;
     private LinkedList<Prezzo> prezzi = new LinkedList<>();
     private String descrizione;
-    private String urlImmagine;
+    private String nomeProdotto;
+    private String urlImmagine = "skyrim.png";
     private LinkedList<IScontoProdottoStrategy> sconti;
     private Integer quantitaDisponibile;
     private Integer quantitaDiSoglia;
@@ -42,23 +43,40 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
      * @param soglia
      * @throws java.rmi.RemoteException
      */
-    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione, int disponibile, int soglia ) throws RemoteException{
+    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String nome, String descrizione, int disponibile, int soglia ) throws RemoteException{
         this.descrizione = descrizione;
         this.prezzi.add(prezzo);
         this.codiceProdotto = codiceProdotto;
+        this.nomeProdotto = nome;
         this.sconti = new LinkedList<>();
         this.quantitaDisponibile = new Integer(disponibile);
         this.quantitaDiSoglia = new Integer(soglia);
         this.listener = new DescrizioneProdottoObserver();
-        this.urlImmagine = "cod4.jpg";
     }
     
-    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione, int disponibile) throws RemoteException{
-        this(codiceProdotto, prezzo, descrizione, disponibile, 0);
+    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String nome, String descrizione, int disponibile) throws RemoteException{
+        this(codiceProdotto, prezzo, descrizione, nome, disponibile, 0);
     }
     
-    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione) throws RemoteException{
-        this(codiceProdotto, prezzo, descrizione, 1, 0);
+    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String nome, String descrizione) throws RemoteException{
+        this(codiceProdotto, prezzo, descrizione, nome, 1, 0);
+    }
+
+    @Override
+    public String getNomeProdotto() throws RemoteException {
+        return nomeProdotto;
+    }
+
+    public void setNomeProdotto(String nomeProdotto) {
+        this.nomeProdotto = nomeProdotto;
+    }
+
+    public String getUrlImmagine() {
+        return urlImmagine;
+    }
+
+    public void setUrlImmagine(String urlImmagine) {
+        this.urlImmagine = urlImmagine;
     }
 
     /**

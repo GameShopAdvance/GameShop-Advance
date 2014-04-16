@@ -43,4 +43,6 @@ public interface IDescrizioneProdottoRemote extends Remote {
     int getQuantitaDiSoglia() throws RemoteException;
     
     IRemoteImage getImmagine() throws RemoteException;
+    
+    String getNomeProdotto() throws RemoteException;
 }

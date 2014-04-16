@@ -88,6 +88,7 @@ public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto {
     
     @Override
     public void setQuantitaDiSoglia(int soglia){
+        this.activate(ActivationPurpose.WRITE);
         this.descrizione.setQuantitaDiSoglia(soglia);
     }
     
@@ -133,5 +134,11 @@ public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto {
     @Override
     public IRemoteImage getImmagine() throws RemoteException {
         return this.descrizione.getImmagine();
+    }
+
+    @Override
+    public String getNomeProdotto() throws RemoteException {
+        this.activate(ActivationPurpose.READ);
+        return this.descrizione.getNomeProdotto();
     }
 }

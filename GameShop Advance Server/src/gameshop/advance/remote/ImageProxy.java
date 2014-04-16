@@ -17,7 +17,7 @@ import javax.swing.ImageIcon;
  */
 public class ImageProxy extends UnicastRemoteObject implements IRemoteImage {
     
-    private static String imageDir = "./img/";
+    private static final String imageDir = "./img/";
     private final String imagePath;
     
     public ImageProxy(String path) throws RemoteException {
@@ -26,13 +26,15 @@ public class ImageProxy extends UnicastRemoteObject implements IRemoteImage {
 
     @Override
     public ImageIcon getIcon() throws RemoteException {
-        String fullPath = imageDir.concat("small/").concat(this.imagePath);
-        return new ImageIcon(fullPath);
+        String fullPath = imageDir+"small/"+this.imagePath;
+        ImageIcon icon = new ImageIcon(fullPath);
+        return icon;
     }
 
     @Override
     public ImageIcon getImage() throws RemoteException {
-        String fullPath = imageDir.concat("regular/").concat(this.imagePath);
-        return new ImageIcon(fullPath);
+        String fullPath = imageDir+"regular/"+this.imagePath;
+        ImageIcon icon = new ImageIcon(fullPath);
+        return icon;
     }
 }

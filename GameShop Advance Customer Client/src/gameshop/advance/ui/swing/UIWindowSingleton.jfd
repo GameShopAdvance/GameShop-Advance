@@ -7,7 +7,6 @@ new FormModel {
 			name: "this"
 			"$sizePolicy": 1
 			"title": "GameShop Advance - Terminale Cliente"
-			"resizable": false
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "mainPanel"
 				"viewportBorder": sfield com.jformdesigner.model.FormObject NULL_VALUE
