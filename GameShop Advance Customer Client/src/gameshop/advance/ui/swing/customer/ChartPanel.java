@@ -107,29 +107,29 @@ public class ChartPanel extends JPanel implements IListPanel{
     }
 
     private void createUIComponents() {
+        this.title = UIFactory.getInstance().getHeaderLabel();
         this.confirm = UIFactory.getInstance().getConfirmButton();
+        this.totalLabel = UIFactory.getInstance().getBodyLabel();
+        this.totale = UIFactory.getInstance().getBoldLabel();
+        this.back = UIFactory.getInstance().getSimpleButton();
+        this.cancel = UIFactory.getInstance().getCancelButton();
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         createUIComponents();
 
-        label2 = new JLabel();
-        totalLabel = new JLabel();
         scrollPane1 = new JScrollPane();
         bookList = new JList();
-        totale = new JLabel();
-        back = new JButton();
-        button2 = new JButton();
 
         //======== this ========
         setName("this");
 
-        //---- label2 ----
-        label2.setText("Riepilogo prenotazione");
-        label2.setHorizontalAlignment(SwingConstants.CENTER);
-        label2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        label2.setName("label2");
+        //---- title ----
+        title.setText("Riepilogo prenotazione");
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        title.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        title.setName("title");
 
         //---- totalLabel ----
         totalLabel.setText("Totale");
@@ -163,11 +163,11 @@ public class ChartPanel extends JPanel implements IListPanel{
             }
         });
 
-        //---- button2 ----
-        button2.setText("Cancella");
-        button2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        button2.setName("button2");
-        button2.addActionListener(new ActionListener() {
+        //---- cancel ----
+        cancel.setText("Cancella");
+        cancel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        cancel.setName("cancel");
+        cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cancelActionPerformed(e);
@@ -189,24 +189,24 @@ public class ChartPanel extends JPanel implements IListPanel{
             "[15dlu,default], $lcgap, [75dlu,default], $lcgap, default:grow, 2*($lcgap, [75dlu,default]), $lcgap, [15dlu,default]",
             "[15dlu,default], $lgap, [20dlu,default], $lgap, [50dlu,default]:grow, $lgap, [20dlu,default], $lgap, [35dlu,default], $lgap, [15dlu,default]"), this);
 
-        builder.add(label2,      CC.xywh(5, 3,          3,       1, CC.FILL, CC.FILL));
+        builder.add(title,       CC.xywh(5, 3,          3,       1, CC.FILL, CC.FILL));
         builder.add(totalLabel,  CC.xy  (7, 7, CC.DEFAULT, CC.FILL));
         builder.add(scrollPane1, CC.xywh(3, 5,          7,       1, CC.FILL, CC.FILL));
         builder.add(totale,      CC.xy  (9, 7,    CC.FILL, CC.FILL));
         builder.add(back,        CC.xy  (3, 9,    CC.FILL, CC.FILL));
-        builder.add(button2,     CC.xy  (7, 9,    CC.FILL, CC.FILL));
+        builder.add(cancel,      CC.xy  (7, 9,    CC.FILL, CC.FILL));
         builder.add(confirm,     CC.xy  (9, 9,    CC.FILL, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel label2;
+    private JLabel title;
     private JLabel totalLabel;
     private JScrollPane scrollPane1;
     private JList bookList;
     private JLabel totale;
     private JButton back;
-    private JButton button2;
+    private JButton cancel;
     private JButton confirm;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 

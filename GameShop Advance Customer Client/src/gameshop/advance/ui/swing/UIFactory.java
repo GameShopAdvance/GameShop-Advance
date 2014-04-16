@@ -6,7 +6,6 @@
 
 package gameshop.advance.ui.swing;
 
-import java.awt.Color;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JTextField;
@@ -44,43 +43,44 @@ public class UIFactory {
     
     public JButton getCancelButton(){
         JButton button = new JButton();
-        button.setBackground(UIStyleSingleton.getInstance().getSuccessColor());
-        button.setForeground(UIStyleSingleton.getInstance().getButtonSuccessTextColor());
+        button.setBackground(UIStyleSingleton.getInstance().getAlertColor());
+        button.setForeground(UIStyleSingleton.getInstance().getButtonAlertTextColor());
         this.setButtonSize(button);
         return button;
     }
     
     public JButton getSimpleButton(){
         JButton button = new JButton();
-        button.setBackground(UIStyleSingleton.getInstance().getSuccessColor());
-        button.setForeground(UIStyleSingleton.getInstance().getButtonSuccessTextColor());
+//        button.setBackground(UIStyleSingleton.getInstance().getSuccessColor());
+//        button.setForeground(UIStyleSingleton.getInstance().getButtonSuccessTextColor());
         this.setButtonSize(button);
         return button;     
     }
     
     public JLabel getHeaderLabel(){
         JLabel label = new JLabel();
-        label.setForeground(Color.red);
+        label.setForeground(UIStyleSingleton.getInstance().getHeaderTextColor());
         label.setFont(UIStyleSingleton.getInstance().getBigFont());
         return label;        
     }
     
     public JLabel getBoldLabel(){
         JLabel label = new JLabel();
-        label.setForeground(Color.red);
+        label.setForeground(UIStyleSingleton.getInstance().getTextColor());
         label.setFont(UIStyleSingleton.getInstance().getBoldFont());
         return label;        
     }
     
     public JLabel getBodyLabel(){
         JLabel label = new JLabel();
-        label.setForeground(Color.red);
+        label.setForeground(UIStyleSingleton.getInstance().getTextColor());
         label.setFont(UIStyleSingleton.getInstance().getNormalFont());
         return label; 
     }
     
     public JTextField getTextField(){
         JTextField textField = new JTextField();
+        textField.setForeground(UIStyleSingleton.getInstance().getTextColor());
         textField.setFont(UIStyleSingleton.getInstance().getNormalFont());
         return textField;
     }
