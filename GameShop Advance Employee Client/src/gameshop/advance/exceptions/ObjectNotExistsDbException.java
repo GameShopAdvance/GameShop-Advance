@@ -8,8 +8,8 @@ package gameshop.advance.exceptions;
 
 /**
  *
- * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
+ * @author matteog
  */
-public class ObjectAlreadyExistsDbException extends Exception{
+public class ObjectNotExistsDbException extends Exception{
     
 }

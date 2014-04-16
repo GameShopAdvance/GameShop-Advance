@@ -4,6 +4,7 @@
 
 package gameshop.advance.ui.swing.employee.sale;
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.SaleControllerSingleton;
@@ -177,146 +178,182 @@ public class InsertItemPanel extends JPanel implements IListPanel{
 
         //======== this ========
         setComponentPopupMenu(null);
-        setLayout(new FormLayout(
-            "[15dlu,default]:grow, $lcgap, [150dlu,default], $lcgap, [100dlu,default]:grow, $lcgap, [75dlu,default], $lcgap, [15dlu,default]:grow",
-            "fill:[15dlu,default]:grow, $rgap, default, $lgap, 90dlu, $lgap, [35dlu,default], $lgap, [15dlu,default]:grow"));
+        setName("this");
 
         //======== panel1 ========
         {
             panel1.setBorder(new TitledBorder("Inserisci prodotto"));
-            panel1.setLayout(new FormLayout(
-                "70dlu, $lcgap, 80dlu:grow, $lcgap, [75dlu,default]",
-                "[35dlu,default], $lgap, [35dlu,default]"));
+            panel1.setName("panel1");
 
             //---- label1 ----
             label1.setText("Codice");
             label1.setHorizontalAlignment(SwingConstants.CENTER);
-            panel1.add(label1, CC.xy(1, 1, CC.FILL, CC.FILL));
+            label1.setName("label1");
 
             //---- productIdTextField ----
             productIdTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-            panel1.add(productIdTextField, CC.xywh(3, 1, 3, 1, CC.FILL, CC.FILL));
+            productIdTextField.setName("productIdTextField");
 
             //---- label2 ----
             label2.setText("Quantit\u00e0");
             label2.setHorizontalAlignment(SwingConstants.CENTER);
-            panel1.add(label2, CC.xy(1, 3, CC.FILL, CC.FILL));
+            label2.setName("label2");
 
             //---- quantityTextField ----
             quantityTextField.setFont(new Font("Tahoma", Font.PLAIN, 14));
-            panel1.add(quantityTextField, CC.xy(3, 3, CC.FILL, CC.FILL));
+            quantityTextField.setName("quantityTextField");
 
             //---- button1 ----
             button1.setText("Aggiungi");
+            button1.setName("button1");
             button1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     addProductButtonActionPerformed(e);
                 }
             });
-            panel1.add(button1, CC.xy(5, 3, CC.FILL, CC.FILL));
+
+            PanelBuilder panel1Builder = new PanelBuilder(new FormLayout(
+                "70dlu, $lcgap, 80dlu:grow, $lcgap, [75dlu,default]",
+                "[35dlu,default], $lgap, [35dlu,default]"), panel1);
+
+            panel1Builder.add(label1,             CC.xy  (1, 1, CC.FILL, CC.FILL));
+            panel1Builder.add(productIdTextField, CC.xywh(3, 1,       3,       1, CC.FILL, CC.FILL));
+            panel1Builder.add(label2,             CC.xy  (1, 3, CC.FILL, CC.FILL));
+            panel1Builder.add(quantityTextField,  CC.xy  (3, 3, CC.FILL, CC.FILL));
+            panel1Builder.add(button1,            CC.xy  (5, 3, CC.FILL, CC.FILL));
         }
-        add(panel1, CC.xy(3, 3));
 
         //======== panel4 ========
         {
-            panel4.setLayout(new FormLayout(
-                "[10dlu,default]:grow, $lcgap, [50dlu,default], $lcgap, [90dlu,default], $lcgap, $rgap",
-                "[25dlu,default], $lgap, default:grow"));
+            panel4.setName("panel4");
 
             //---- label3 ----
             label3.setText("Totale");
             label3.setHorizontalAlignment(SwingConstants.CENTER);
-            panel4.add(label3, CC.xy(3, 1, CC.FILL, CC.FILL));
+            label3.setName("label3");
 
             //---- total ----
             total.setFont(new Font("Tahoma", Font.PLAIN, 14));
             total.setEditable(false);
-            panel4.add(total, CC.xy(5, 1, CC.FILL, CC.FILL));
+            total.setName("total");
 
             //======== scrollPane1 ========
             {
+                scrollPane1.setName("scrollPane1");
 
                 //---- rdvList ----
                 rdvList.setFont(new Font("Tahoma", Font.PLAIN, 14));
+                rdvList.setName("rdvList");
                 scrollPane1.setViewportView(rdvList);
             }
-            panel4.add(scrollPane1, CC.xywh(1, 3, 5, 1, CC.FILL, CC.FILL));
+
+            PanelBuilder panel4Builder = new PanelBuilder(new FormLayout(
+                "[10dlu,default]:grow, $lcgap, [50dlu,default], $lcgap, [90dlu,default], $lcgap, $rgap",
+                "[25dlu,default], $lgap, default:grow"), panel4);
+
+            panel4Builder.add(label3,      CC.xy  (3, 1, CC.FILL, CC.FILL));
+            panel4Builder.add(total,       CC.xy  (5, 1, CC.FILL, CC.FILL));
+            panel4Builder.add(scrollPane1, CC.xywh(1, 3,       5,       1, CC.FILL, CC.FILL));
         }
-        add(panel4, CC.xywh(5, 3, 4, 3));
 
         //======== clientPanel ========
         {
             clientPanel.setBorder(new TitledBorder("Carta fedelt\u00e0"));
+            clientPanel.setName("clientPanel");
             clientPanel.setLayout(new CardLayout());
 
             //======== main ========
             {
-                main.setLayout(new FormLayout(
-                    "[85dlu,default], $lcgap, default:grow, $lcgap, [75dlu,default]",
-                    "[35dlu,default], $lgap, [35dlu,default]"));
+                main.setName("main");
 
                 //---- label4 ----
                 label4.setText("Numero tessera");
                 label4.setHorizontalAlignment(SwingConstants.CENTER);
-                main.add(label4, CC.xy(1, 1));
-                main.add(clientCode, CC.xywh(3, 1, 3, 1, CC.FILL, CC.FILL));
+                label4.setName("label4");
+
+                //---- clientCode ----
+                clientCode.setName("clientCode");
 
                 //---- button7 ----
                 button7.setText("Inserisci");
+                button7.setName("button7");
                 button7.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
                         insertClientCodeActionPerformed(e);
                     }
                 });
-                main.add(button7, CC.xy(5, 3, CC.FILL, CC.FILL));
+
+                PanelBuilder mainBuilder = new PanelBuilder(new FormLayout(
+                    "70dlu, $lcgap, default:grow, $lcgap, [75dlu,default]",
+                    "[35dlu,default], $lgap, [35dlu,default]"), main);
+
+                mainBuilder.add(label4,     CC.xy  (1, 1));
+                mainBuilder.add(clientCode, CC.xywh(3, 1,       3,       1, CC.FILL, CC.FILL));
+                mainBuilder.add(button7,    CC.xy  (5, 3, CC.FILL, CC.FILL));
             }
             clientPanel.add(main, "card1");
 
             //======== panel5 ========
             {
-                panel5.setLayout(new FormLayout(
-                    "[15dlu,default], $lcgap, [75dlu,default]:grow, $lcgap, [15dlu,default]",
-                    "[15dlu,default], $lgap, default:grow, $lgap, [15dlu,default]"));
+                panel5.setName("panel5");
 
                 //---- label5 ----
                 label5.setText("Cliente autenticato.");
                 label5.setFont(new Font("Tahoma", Font.PLAIN, 14));
                 label5.setHorizontalAlignment(SwingConstants.CENTER);
-                panel5.add(label5, CC.xy(3, 3, CC.FILL, CC.FILL));
+                label5.setName("label5");
+
+                PanelBuilder panel5Builder = new PanelBuilder(new FormLayout(
+                    "[15dlu,default], $lcgap, [75dlu,default]:grow, $lcgap, [15dlu,default]",
+                    "[15dlu,default], $lgap, default:grow, $lgap, [15dlu,default]"), panel5);
+
+                panel5Builder.add(label5, CC.xy(3, 3, CC.FILL, CC.FILL));
             }
             clientPanel.add(panel5, "card2");
         }
-        add(clientPanel, CC.xy(3, 5, CC.FILL, CC.FILL));
 
         //======== panel3 ========
         {
-            panel3.setLayout(new FormLayout(
-                "2*([75dlu,default], $lcgap), default",
-                "fill:default:grow"));
+            panel3.setName("panel3");
 
             //---- clearSale ----
             clearSale.setText("Annulla");
+            clearSale.setName("clearSale");
             clearSale.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     clearSaleActionPerformed(e);
                 }
             });
-            panel3.add(clearSale, CC.xy(1, 1));
+
+            PanelBuilder panel3Builder = new PanelBuilder(new FormLayout(
+                "2*([75dlu,default], $lcgap), default",
+                "fill:default:grow"), panel3);
+
+            panel3Builder.add(clearSale, CC.xy(1, 1));
         }
-        add(panel3, CC.xy(3, 7, CC.FILL, CC.FILL));
 
         //---- payButton ----
         payButton.setText("Paga");
+        payButton.setName("payButton");
         payButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 goToPaymentButtonActionPerformed(e);
             }
         });
-        add(payButton, CC.xy(7, 7, CC.FILL, CC.FILL));
+
+        PanelBuilder builder = new PanelBuilder(new FormLayout(
+            "[15dlu,default]:grow, $lcgap, [150dlu,default], $lcgap, [100dlu,default]:grow, $lcgap, [75dlu,default], $lcgap, [15dlu,default]:grow",
+            "fill:[15dlu,default]:grow, $rgap, default, $lgap, 90dlu, $lgap, [35dlu,default], $lgap, [15dlu,default]:grow"), this);
+
+        builder.add(panel1,      CC.xy  (3, 3));
+        builder.add(panel4,      CC.xywh(5, 3,       4,       3));
+        builder.add(clientPanel, CC.xy  (3, 5, CC.FILL, CC.FILL));
+        builder.add(panel3,      CC.xy  (3, 7, CC.FILL, CC.FILL));
+        builder.add(payButton,   CC.xy  (7, 7, CC.FILL, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

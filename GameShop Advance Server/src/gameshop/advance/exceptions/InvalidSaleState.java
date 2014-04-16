@@ -10,6 +10,9 @@ package gameshop.advance.exceptions;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class ObjectAlreadyExistsDbException extends Exception{
+public class InvalidSaleState extends Exception {
+
+    public InvalidSaleState() {
+    }
     
 }

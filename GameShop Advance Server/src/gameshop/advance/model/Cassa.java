@@ -1,6 +1,8 @@
 package gameshop.advance.model;
 
+import gameshop.advance.exceptions.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.InvalidSaleState;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.QuantityNotInStockException;
@@ -128,7 +130,7 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
      * @throws gameshop.advance.exceptions.InvalidMoneyException
      */
     @Override
-    public void gestisciPagamento(Money ammontare) throws RemoteException, InvalidMoneyException {
+    public void gestisciPagamento(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException {
         this.venditaCorrente.gestisciPagamento(ammontare);
         this.venditaCorrente.setId(NegozioSingleton.getInstance().getNextSaleId());
         this.venditaCorrente.rimuoviListener(null);

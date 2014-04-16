@@ -4,6 +4,7 @@ import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IObserver;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.observers.DescrizioneProdottoObserver;
+import gameshop.advance.remote.IRemoteImage;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import gameshop.advance.utility.Prezzo;
@@ -30,7 +31,7 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
     private Integer quantitaDisponibile;
     private Integer quantitaDiSoglia;
     private IObserver listener;
-
+    
     /**
      * Il Costruttore imposta tutte le variabili di DescrizioneProdotto utilizzando
      * i valori ricevuti in input.
@@ -205,5 +206,10 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
         }
         final DescrizioneProdotto other = (DescrizioneProdotto) obj;
         return Objects.equals(this.codiceProdotto, other.codiceProdotto);
+    }
+
+    @Override
+    public IRemoteImage getImmagine() throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 }

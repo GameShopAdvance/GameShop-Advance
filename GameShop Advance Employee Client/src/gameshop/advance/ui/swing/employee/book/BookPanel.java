@@ -8,8 +8,10 @@ import com.jgoodies.forms.factories.Borders;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.BookControllerSingleton;
+import gameshop.advance.exceptions.AlredyPayedException;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.InvalidSaleState;
 import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIFactory;
 import gameshop.advance.ui.swing.UIWindowSingleton;
@@ -151,6 +153,12 @@ public class BookPanel extends JPanel {
         } catch (InvalidMoneyException ex) {
             Logger.getLogger(BookPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
+        catch (InvalidSaleState ex) {
+            Logger.getLogger(BookPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (AlredyPayedException ex) {
+            Logger.getLogger(BookPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
 
     private void payTotalButtonActionPerformed(ActionEvent e) {
@@ -158,12 +166,19 @@ public class BookPanel extends JPanel {
             BookControllerSingleton.getInstance().gestisciPagamento(Double.parseDouble(this.totalPayment.getText()));
         } catch (NullPointerException ex) {
              UIWindowSingleton.getInstance().displayError("Non è possibile convalidare l'importo inserito.");   
+             LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
             UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
                     + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
         } catch (ConfigurationException ex) {
              UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+        }
+        catch (InvalidSaleState ex) {
+            Logger.getLogger(BookPanel.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        catch (AlredyPayedException ex) {
+            Logger.getLogger(BookPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     

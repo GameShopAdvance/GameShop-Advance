@@ -9,7 +9,9 @@ package gameshop.advance.model.transazione.proxies;
 import com.db4o.activation.ActivationPurpose;
 import com.db4o.activation.Activator;
 import com.db4o.ta.Activatable;
+import gameshop.advance.exceptions.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.InvalidSaleState;
 import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
@@ -40,7 +42,7 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
     }
     
     @Override
-    public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException {
+    public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException {
         this.prenotazione.pagaAcconto(ammontare);
     }
 
@@ -55,7 +57,7 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
     }
 
     @Override
-    public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException {
+    public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException, InvalidSaleState, AlredyPayedException {
         this.prenotazione.gestisciPagamento(ammontare);
     }
 

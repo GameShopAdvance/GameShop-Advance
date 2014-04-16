@@ -6,7 +6,9 @@
 
 package gameshop.advance.model.transazione;
 
+import gameshop.advance.exceptions.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.InvalidSaleState;
 import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
@@ -22,7 +24,7 @@ import java.util.List;
  */
 public class Prenotazione extends Vendita implements IPrenotazione {
     private Pagamento acconto;
-    private int percentualeAcconto;
+    private final int percentualeAcconto;
     private boolean evasa = false;
 
     public Prenotazione(int percentualeAcconto) {
@@ -30,8 +32,22 @@ public class Prenotazione extends Vendita implements IPrenotazione {
         this.percentualeAcconto = percentualeAcconto;
     }
     
+    public boolean pagataAcconto() throws RemoteException
+    {
+        if(this.acconto == null)
+            return false;
+        Money partial = this.getAcconto();
+        return this.acconto.getAmmontare().greater(partial) || this.acconto.getAmmontare().equals(partial);
+    }
+    
     @Override
-    public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException {
+    public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException {
+        if(!this.completata)
+            throw new InvalidSaleState();
+        Money total = this.getTotal();
+        Money partial = this.getAcconto();
+        if(this.pagataAcconto() || this.pagataTotale())
+            throw new AlredyPayedException();
         if(this.getAcconto().greater(ammontare))
             throw new InvalidMoneyException(ammontare);
         this.acconto = new Pagamento(ammontare);
@@ -47,6 +63,18 @@ public class Prenotazione extends Vendita implements IPrenotazione {
     public Money getRestoAcconto() throws RemoteException{
         System.err.println("GET RESTO ACCONTO");
         return this.acconto.getAmmontare().subtract(this.getAcconto());
+    }
+    
+    @Override
+    public Money getTotal() throws RemoteException{
+        Money total = super.getTotal();
+        if(this.pagataAcconto())
+            return total.subtract(this.getAcconto());
+        else
+            return total;
+                    
+        
+        
     }
     
     @Override

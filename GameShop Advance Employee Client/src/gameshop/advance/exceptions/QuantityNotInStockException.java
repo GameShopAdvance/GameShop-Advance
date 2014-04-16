@@ -7,7 +7,7 @@
 package gameshop.advance.exceptions;
 
 /**
- * Classe che si occupa delle Exception riguardanti la quantità eccessiva di un prodotto inserita.
+ *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class QuantityNotInStockException extends Exception{

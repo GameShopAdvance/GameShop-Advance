@@ -6,7 +6,9 @@
 
 package gameshop.advance.model.transazione;
 
+import gameshop.advance.exceptions.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.InvalidSaleState;
 import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
@@ -153,8 +155,13 @@ public class Vendita implements ITransazione {
      * @throws java.rmi.RemoteException
      */
     @Override
-    public void gestisciPagamento(Money ammontare) throws InvalidMoneyException,RemoteException {
-        if(this.getTotal().greater(ammontare)) {
+    public void gestisciPagamento(Money ammontare) throws InvalidMoneyException,RemoteException, InvalidSaleState, AlredyPayedException {
+        if(!this.completata)
+            throw new InvalidSaleState();
+        Money total = this.getTotal();
+        if(this.pagataTotale())
+            throw new AlredyPayedException();
+        if(total.greater(ammontare)) {
             throw new InvalidMoneyException(ammontare);
         }
         this.pagamento = new Pagamento(ammontare);
@@ -203,6 +210,14 @@ public class Vendita implements ITransazione {
         this.strategiaDiSconto = sconto;
     }
 
+    public boolean pagataTotale() throws RemoteException
+    {
+        if(this.pagamento == null)
+            return false;
+        Money total = this.getTotal();
+        return this.pagamento.getAmmontare().greater(total) || this.pagamento.getAmmontare().equals(total);
+    }    
+    
     @Override
     public void addSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali) throws RemoteException {
         for (IScontoVenditaStrategy sconto : scontiAttuali) {

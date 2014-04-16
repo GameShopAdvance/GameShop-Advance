@@ -6,6 +6,7 @@
 
 package gameshop.advance.interfaces.remote;
 
+import gameshop.advance.remote.IRemoteImage;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.Remote;
@@ -45,4 +46,6 @@ public interface IDescrizioneProdottoRemote extends Remote {
     
     
     int getQuantitaDiSoglia() throws RemoteException;
+    
+    IRemoteImage getImmagine() throws RemoteException;
 }

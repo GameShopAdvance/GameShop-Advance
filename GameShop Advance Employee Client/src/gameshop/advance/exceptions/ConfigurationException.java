@@ -7,7 +7,7 @@
 package gameshop.advance.exceptions;
 
 /**
- * Classe che si occupa delle Exception riguardanti la configurazione.
+ * Classe che gestisce le eccezioni di configurazione dell'architettura.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class ConfigurationException extends Exception{
