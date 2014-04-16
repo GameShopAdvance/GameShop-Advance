@@ -12,6 +12,7 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
+import javax.swing.ImageIcon;
 import org.joda.time.DateTime;
 
 /**
@@ -24,6 +25,7 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
     private IDProdotto codiceProdotto;
     private LinkedList<Prezzo> prezzi = new LinkedList<>();
     private String descrizione;
+    private String urlImmagine;
     private LinkedList<IScontoProdottoStrategy> sconti;
     private Integer quantitaDisponibile;
     private Integer quantitaDiSoglia;
@@ -47,6 +49,13 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
         this.quantitaDisponibile = new Integer(disponibile);
         this.quantitaDiSoglia = new Integer(soglia);
         this.listener = new DescrizioneProdottoObserver();
+        this.urlImmagine = "cod4.jpg";
+    }
+    
+    
+    public ImageIcon getImmagine() throws RemoteException{
+        ImageIcon img = new ImageIcon(getClass().getResource("cod4.jpg"));
+        return img;
     }
     
     public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione, int disponibile) throws RemoteException{

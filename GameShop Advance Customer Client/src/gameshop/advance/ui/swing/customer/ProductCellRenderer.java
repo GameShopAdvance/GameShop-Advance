@@ -4,7 +4,6 @@
 
 package gameshop.advance.ui.swing.customer;
 
-import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
@@ -35,6 +34,14 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
         this.title = UIFactory.getInstance().getHeaderLabel();
         this.price = UIFactory.getInstance().getBodyLabel();
         this.quantity = UIFactory.getInstance().getBodyLabel();
+        this.label1 = new JLabel();
+        /*ImageIcon image = new ImageIcon(getClass().getResource("cod4.jpg"));
+        Image img = image.getImage();
+        Image newimg = img.getScaledInstance(100, 100, java.awt.Image.SCALE_SMOOTH);
+        Icon newIcon = new ImageIcon(newimg);
+        this.label1 = new JLabel(newIcon);
+        this.label1.setIcon(newIcon);*/
+        
     }
 
     private void initComponents() {
@@ -42,58 +49,42 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
         createUIComponents();
 
         imageBox = new JPanel();
-        label1 = new JLabel();
         separator1 = new JSeparator();
 
         //======== this ========
-        setName("this");
+        setLayout(new FormLayout(
+            "[15dlu,default], $lcgap, [40dlu,default,60dlu], $lcgap, [50dlu,default]:grow, $lcgap, [25dlu,default,50dlu]:grow, $lcgap, [25dlu,default,50dlu], $lcgap, [15dlu,default]",
+            "[10dlu,default], 2*($lgap, 30dlu), $lgap, [10dlu,default], $lgap, 1dlu"));
 
         //======== imageBox ========
         {
             imageBox.setBorder(LineBorder.createBlackLineBorder());
-            imageBox.setName("imageBox");
+            imageBox.setLayout(new FormLayout(
+                "[30dlu,min,50dlu]:grow",
+                "fill:100px:grow"));
 
             //---- label1 ----
-            label1.setText("Immagine");
             label1.setHorizontalAlignment(SwingConstants.CENTER);
-            label1.setName("label1");
-
-            PanelBuilder imageBoxBuilder = new PanelBuilder(new FormLayout(
-                "default:grow",
-                "fill:41dlu"), imageBox);
-
-            imageBoxBuilder.add(label1, CC.xy(1, 1));
+            imageBox.add(label1, CC.xy(1, 1));
         }
+        add(imageBox, CC.xywh(3, 3, 1, 3));
 
         //---- title ----
         title.setText("text");
-        title.setName("title");
+        add(title, CC.xy(5, 3, CC.FILL, CC.FILL));
 
         //---- price ----
         price.setText("text");
-        price.setName("price");
+        add(price, CC.xywh(7, 3, 3, 1, CC.FILL, CC.FILL));
 
         //---- label2 ----
         label2.setText("qty #");
-        label2.setName("label2");
+        add(label2, CC.xy(7, 5, CC.FILL, CC.DEFAULT));
 
         //---- quantity ----
         quantity.setText("text");
-        quantity.setName("quantity");
-
-        //---- separator1 ----
-        separator1.setName("separator1");
-
-        PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[15dlu,default], $lcgap, [40dlu,default,120dlu]:grow, $lcgap, [50dlu,default]:grow, $lcgap, [25dlu,default,50dlu]:grow, $lcgap, [25dlu,default,50dlu], $lcgap, [15dlu,default]",
-            "[10dlu,default], 2*($lgap, 30dlu), $lgap, [10dlu,default], $lgap, 1dlu"), this);
-
-        builder.add(imageBox,   CC.xywh(3, 3,       1,          3));
-        builder.add(title,      CC.xy  (5, 3, CC.FILL,    CC.FILL));
-        builder.add(price,      CC.xywh(7, 3,       3,          1, CC.FILL, CC.FILL));
-        builder.add(label2,     CC.xy  (7, 5, CC.FILL, CC.DEFAULT));
-        builder.add(quantity,   CC.xy  (9, 5, CC.FILL, CC.DEFAULT));
-        builder.add(separator1, CC.xywh(1, 9,      11,          1));
+        add(quantity, CC.xy(9, 5, CC.FILL, CC.DEFAULT));
+        add(separator1, CC.xywh(1, 9, 11, 1));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -130,6 +121,15 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
             Logger.getLogger(ProductCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
             this.quantity.setText("???");
         }
+        
+        try{
+            System.err.println("imgstamp"+value.getImmagine().getIconWidth());
+            this.label1.setIcon(value.getImmagine());
+        }
+        catch(Exception ex){
+            Logger.getLogger(ProductCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+        }
+        
         
         return this;
     }

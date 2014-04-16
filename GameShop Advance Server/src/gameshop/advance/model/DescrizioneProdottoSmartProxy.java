@@ -15,6 +15,7 @@ import gameshop.advance.utility.Money;
 import gameshop.advance.utility.Prezzo;
 import java.rmi.RemoteException;
 import java.util.List;
+import javax.swing.ImageIcon;
 import org.joda.time.DateTime;
 
 /**
@@ -29,6 +30,14 @@ public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto {
     public DescrizioneProdottoSmartProxy(IDescrizioneProdotto desc)
     {
         this.descrizione = desc;
+    }
+    
+    
+
+    @Override
+    public ImageIcon getImmagine() throws RemoteException {
+        this.activate(ActivationPurpose.READ);
+        return this.descrizione.getImmagine();
     }
     
     @Override

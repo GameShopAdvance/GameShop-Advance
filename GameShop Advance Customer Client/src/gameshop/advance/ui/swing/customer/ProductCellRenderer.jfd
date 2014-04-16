@@ -1,23 +1,25 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_25" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(default;15dlu), labelcompgap, (40dlu<default<120dlu):grow, labelcompgap, max(default;50dlu):grow, labelcompgap, (25dlu<default<50dlu):grow, labelcompgap, (25dlu<default<50dlu), labelcompgap, max(default;15dlu)"
+			"$columnSpecs": "max(default;15dlu), labelcompgap, (40dlu<default<60dlu), labelcompgap, max(default;50dlu):grow, labelcompgap, (25dlu<default<50dlu):grow, labelcompgap, (25dlu<default<50dlu), labelcompgap, max(default;15dlu)"
 			"$rowSpecs": "max(default;10dlu), linegap, 30dlu, linegap, 30dlu, linegap, max(default;10dlu), linegap, 1dlu"
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "default:grow"
-				"$rowSpecs": "fill:41dlu"
+				"$columnSpecs": "(30dlu<min<50dlu):grow"
+				"$rowSpecs": "fill:100px:grow"
 			} ) {
 				name: "imageBox"
 				"border": new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, false )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
-					"text": "Immagine"
 					"horizontalAlignment": 0
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 1
 					"gridY": 1
