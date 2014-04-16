@@ -4,17 +4,18 @@
 
 package gameshop.advance.ui.swing.manager;
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
 import gameshop.advance.ui.swing.UIFactory;
-import java.awt.Color;
 import java.awt.Component;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
+import javax.swing.JSeparator;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
@@ -55,63 +56,80 @@ public class InfoCellRenderer extends JPanel implements ListCellRenderer<IInform
         disponibilita = new JLabel();
         quantitaDisponibile = new JLabel();
         ordine = new JLabel();
+        separator1 = new JSeparator();
 
         //======== this ========
-        setLayout(new FormLayout(
-            "$lcgap, 69dlu, $lcgap, 90dlu, $lcgap, [56dlu,default], 10dlu, $lcgap, 64dlu, $lcgap, 45dlu, $lcgap",
-            "$lgap, fill:[27dlu,default], $lgap, fill:26dlu, $lgap"));
+        setName("this");
 
         //---- title ----
         title.setText("Titolo");
         title.setHorizontalAlignment(SwingConstants.CENTER);
-        title.setBorder(new LineBorder(Color.black));
-        add(title, CC.xywh(2, 2, 1, 3));
+        title.setBorder(LineBorder.createBlackLineBorder());
+        title.setName("title");
 
         //---- prenotazioni ----
         prenotazioni.setText("Prenotati");
         prenotazioni.setHorizontalAlignment(SwingConstants.CENTER);
         prenotazioni.setBorder(new EtchedBorder());
-        add(prenotazioni, CC.xy(4, 2));
+        prenotazioni.setName("prenotazioni");
 
         //---- quantitaPrenotazioni ----
         quantitaPrenotazioni.setText("#qty");
         quantitaPrenotazioni.setHorizontalAlignment(SwingConstants.CENTER);
         quantitaPrenotazioni.setBorder(new EtchedBorder());
-        add(quantitaPrenotazioni, CC.xy(6, 2));
+        quantitaPrenotazioni.setName("quantitaPrenotazioni");
 
         //---- inArrivo ----
         inArrivo.setText("In Arrivo");
         inArrivo.setHorizontalAlignment(SwingConstants.CENTER);
         inArrivo.setBorder(new EtchedBorder());
-        add(inArrivo, CC.xy(9, 2));
+        inArrivo.setName("inArrivo");
 
         //---- quantitaInArrivo ----
-        quantitaInArrivo.setText("#qty");
+        quantitaInArrivo.setText("0");
         quantitaInArrivo.setHorizontalAlignment(SwingConstants.CENTER);
         quantitaInArrivo.setBorder(new EtchedBorder());
-        add(quantitaInArrivo, CC.xy(11, 2));
+        quantitaInArrivo.setName("quantitaInArrivo");
 
         //---- disponibilita ----
         disponibilita.setText("Disponibili");
         disponibilita.setHorizontalAlignment(SwingConstants.CENTER);
         disponibilita.setBorder(new EtchedBorder());
-        add(disponibilita, CC.xy(4, 4));
+        disponibilita.setName("disponibilita");
 
         //---- quantitaDisponibile ----
         quantitaDisponibile.setText("#qty");
         quantitaDisponibile.setHorizontalAlignment(SwingConstants.CENTER);
         quantitaDisponibile.setBorder(new EtchedBorder());
-        add(quantitaDisponibile, CC.xy(6, 4));
+        quantitaDisponibile.setName("quantitaDisponibile");
 
         //---- ordine ----
         ordine.setText("Ordine");
         ordine.setHorizontalAlignment(SwingConstants.CENTER);
         ordine.setBorder(new EtchedBorder());
-        add(ordine, CC.xy(9, 4));
+        ordine.setName("ordine");
 
         //---- quantitaOrdine ----
         quantitaOrdine.setHorizontalAlignment(SwingConstants.CENTER);
-        add(quantitaOrdine, CC.xy(11, 4));
+        quantitaOrdine.setName("quantitaOrdine");
+
+        //---- separator1 ----
+        separator1.setName("separator1");
+
+        PanelBuilder builder = new PanelBuilder(new FormLayout(
+            "$lcgap, [60dlu,default,140dlu]:grow, $ugap, [50dlu,default,100dlu]:grow, $lcgap, [20dlu,default,40dlu]:grow, $ugap, [50dlu,default,100dlu]:grow, $lcgap, [20dlu,default,40dlu]:grow, $lcgap",
+            "$lgap, fill:[27dlu,default], $lgap, fill:26dlu, $lgap, $rgap"), this);
+
+        builder.add(title,                CC.xywh( 2, 2,  1, 3));
+        builder.add(prenotazioni,         CC.xy  ( 4, 2));
+        builder.add(quantitaPrenotazioni, CC.xy  ( 6, 2));
+        builder.add(inArrivo,             CC.xy  ( 8, 2));
+        builder.add(quantitaInArrivo,     CC.xy  (10, 2));
+        builder.add(disponibilita,        CC.xy  ( 4, 4));
+        builder.add(quantitaDisponibile,  CC.xy  ( 6, 4));
+        builder.add(ordine,               CC.xy  ( 8, 4));
+        builder.add(quantitaOrdine,       CC.xy  (10, 4));
+        builder.add(separator1,           CC.xywh( 1, 6, 11, 1));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -125,6 +143,7 @@ public class InfoCellRenderer extends JPanel implements ListCellRenderer<IInform
     private JLabel quantitaDisponibile;
     private JLabel ordine;
     private JTextField quantitaOrdine;
+    private JSeparator separator1;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     @Override

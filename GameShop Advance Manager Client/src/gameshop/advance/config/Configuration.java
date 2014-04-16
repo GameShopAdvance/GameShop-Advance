@@ -13,7 +13,6 @@ public class Configuration {
 
     private String serverAddress;
     private int serverPort;
-    private int idCassa;
     
     public Configuration() throws ConfigurationException
     {
@@ -30,8 +29,7 @@ public class Configuration {
         String configuration;
         configuration = " Configurazione del terminale - " +
                 " Server Address: "+ this.getServerAddress() +
-                " Server Port: " + this.getServerPort() +
-                " Numero Cassa: " + this.getIdCassa();
+                " Server Port: " + this.getServerPort();
         
         return configuration;
     }
@@ -50,14 +48,6 @@ public class Configuration {
 
     public void setServerPort(int serverPort) {
         this.serverPort = serverPort;
-    }
-    
-    public int getIdCassa() {
-        return idCassa;
-    }
-    
-    public void setIdCassa(int idCassa){
-        this.idCassa = idCassa;
     }
     
 }
