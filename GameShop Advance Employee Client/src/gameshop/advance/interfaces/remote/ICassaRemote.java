@@ -1,6 +1,8 @@
 package gameshop.advance.interfaces.remote;
 
+import gameshop.advance.exceptions.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.InvalidSaleState;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.QuantityNotInStockException;
@@ -25,7 +27,7 @@ public interface ICassaRemote extends Remote {
      * @throws RemoteException
      * @throws InvalidMoneyException
      */
-    void gestisciPagamento(Money ammontare) throws RemoteException, InvalidMoneyException;
+    void gestisciPagamento(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException;
 
     /**
      *

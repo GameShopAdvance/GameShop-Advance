@@ -1,8 +1,10 @@
 package gameshop.advance.controller;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
+import gameshop.advance.exceptions.AlredyPayedException;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.InvalidSaleState;
 import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.IRemoteBookClient;
@@ -138,7 +140,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      * @throws RemoteException
      * @throws InvalidMoneyException
      */
-    public void pagaAcconto(Double acconto) throws RemoteException, InvalidMoneyException{
+    public void pagaAcconto(Double acconto) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException{
         try{
             System.err.println("PAga acconto");
             this.controller.addListener(new RestPartialObserver(instance));
@@ -154,7 +156,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      * Funziona che avvia il pagamento del totale di una prenotazione.
      * @param ammontare
      */
-    public void gestisciPagamento(Double ammontare){
+    public void gestisciPagamento(Double ammontare) throws InvalidSaleState, AlredyPayedException{
         
         try{
             this.controller.addListener(new RestObserver(instance));

@@ -212,6 +212,8 @@ public class Vendita implements ITransazione {
 
     public boolean pagataTotale() throws RemoteException
     {
+        if(this.pagamento == null)
+            return false;
         Money total = this.getTotal();
         return this.pagamento.getAmmontare().greater(total) || this.pagamento.getAmmontare().equals(total);
     }    

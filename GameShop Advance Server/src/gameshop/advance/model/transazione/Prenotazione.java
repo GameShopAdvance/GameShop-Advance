@@ -34,8 +34,10 @@ public class Prenotazione extends Vendita implements IPrenotazione {
     
     public boolean pagataAcconto() throws RemoteException
     {
+        if(this.acconto == null)
+            return false;
         Money partial = this.getAcconto();
-        return this.pagamento.getAmmontare().greater(partial) || this.pagamento.getAmmontare().equals(partial);
+        return this.acconto.getAmmontare().greater(partial) || this.acconto.getAmmontare().equals(partial);
     }
     
     @Override
@@ -61,6 +63,18 @@ public class Prenotazione extends Vendita implements IPrenotazione {
     public Money getRestoAcconto() throws RemoteException{
         System.err.println("GET RESTO ACCONTO");
         return this.acconto.getAmmontare().subtract(this.getAcconto());
+    }
+    
+    @Override
+    public Money getTotal() throws RemoteException{
+        Money total = super.getTotal();
+        if(this.pagataAcconto())
+            return total.subtract(this.getAcconto());
+        else
+            return total;
+                    
+        
+        
     }
     
     @Override
