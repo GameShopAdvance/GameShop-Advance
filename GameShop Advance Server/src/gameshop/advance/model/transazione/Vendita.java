@@ -200,8 +200,9 @@ public class Vendita implements ITransazione {
     }
 
     @Override
-    public void setCliente(CartaCliente c) {
+    public void setCliente(CartaCliente c) throws RemoteException {
         this.cliente = c;
+        this.notificaListener();
     }
     
     @Override

@@ -144,7 +144,7 @@ class DbInitializeSingleton {
         LinkedList<TipologiaCliente> applicable = new LinkedList<>();
         applicable.add(this.tipiCliente.get(1));
         applicable.add(this.tipiCliente.get(2));
-        sconti.add(new ScontoPercentualeClienteProdottoStrategy(20, this.clienti));
+        sconti.add(new ScontoPercentualeClienteProdottoStrategy(20, time1, this.clienti));
         sconti.add(new ScontoPrendiPaghiClienteProdottoStrategy(3, 2, time1, applicable));
         this.descrizioni.get(1).addSconto(sconti.get(0));
         this.descrizioni.get(9).addSconto(sconti.get(1));

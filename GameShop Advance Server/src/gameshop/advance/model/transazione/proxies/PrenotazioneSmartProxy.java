@@ -68,7 +68,7 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
     }
 
     @Override
-    public void setCliente(CartaCliente c) {
+    public void setCliente(CartaCliente c) throws RemoteException {
         this.prenotazione.setCliente(c);
     }
 

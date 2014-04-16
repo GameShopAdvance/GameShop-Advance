@@ -53,7 +53,7 @@ public interface ITransazione extends ITransazioneRemote {
 
     CartaCliente getCliente();
 
-    void setCliente(CartaCliente c);
+    void setCliente(CartaCliente c) throws RemoteException;
 
     void setId(Integer idVendita) throws RemoteException;
     

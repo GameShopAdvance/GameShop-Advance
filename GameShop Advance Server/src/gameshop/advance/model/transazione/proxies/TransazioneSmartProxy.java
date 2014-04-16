@@ -62,7 +62,7 @@ public class TransazioneSmartProxy implements ITransazione, Activatable{
     }
 
     @Override
-    public void setCliente(CartaCliente c) {
+    public void setCliente(CartaCliente c) throws RemoteException {
         this.trans.setCliente(c);
     }
 

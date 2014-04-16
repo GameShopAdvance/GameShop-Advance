@@ -27,9 +27,10 @@ public class ScontoPercentualeClienteProdottoStrategy implements IScontoProdotto
     private IntervalloDiTempo periodo;
     private int percentuale;
     
-    public ScontoPercentualeClienteProdottoStrategy(int percentuale, List applicable)
+    public ScontoPercentualeClienteProdottoStrategy(int percentuale, IntervalloDiTempo time, List applicable)
     {
         this.percentuale = percentuale;
+        this.periodo = time;
         this.applicabile = applicable;
     }
 
