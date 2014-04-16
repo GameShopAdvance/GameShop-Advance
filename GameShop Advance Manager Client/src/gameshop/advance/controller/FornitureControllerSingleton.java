@@ -16,6 +16,7 @@ import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.interfaces.remote.IRemoteFornitureClient;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.manager.observer.FornitureObserver;
+import gameshop.advance.manager.observer.FornitureRemoveObserver;
 import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.interfaces.IListPanel;
 import gameshop.advance.ui.swing.UIWindowSingleton;
@@ -41,11 +42,11 @@ public class FornitureControllerSingleton extends UnicastRemoteObject implements
     
     private FornitureListModel listaForniture;
     private IRemoteObserver informationListener;
+    private IRemoteObserver informationRemovedListener;
     
     private FornitureControllerSingleton() throws RemoteException
     {
         this.listaForniture = new FornitureListModel();
-        
     }
     
     @Override
@@ -87,7 +88,9 @@ public class FornitureControllerSingleton extends UnicastRemoteObject implements
         this.controller = factory.getAnalizzaFornitureController();
         
         this.informationListener = new FornitureObserver(instance);
+        this.informationRemovedListener = new FornitureRemoveObserver(instance);
         this.controller.addListener(this.informationListener);
+        this.controller.addDeleteListener(this.informationRemovedListener);
     }
     
     private void aggiornaWindow(JComponent panel) 
@@ -101,7 +104,6 @@ public class FornitureControllerSingleton extends UnicastRemoteObject implements
         this.aggiornaWindow(panel);
         
         IIteratorWrapperRemote<IInformazioniProdottoRemote> iter = this.controller.getDatiForniture();
-        
         while(iter.hasNext()) {
            this.listaForniture.addElement(iter.next());
        }
@@ -115,5 +117,10 @@ public class FornitureControllerSingleton extends UnicastRemoteObject implements
     public void setFornitureList(IListPanel panel)
     {
         panel.setList(this.listaForniture, new InfoCellRenderer());
+    }
+
+    @Override
+    public void rimuoviInformazioneProdotto(IInformazioniProdottoRemote info) throws RemoteException {
+        this.listaForniture.remove(info);
     }
 }

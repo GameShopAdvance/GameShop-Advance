@@ -2,15 +2,12 @@ package gameshop.advance.model;
 
 import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.QuantityException;
-import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
-import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.manager.ManagerPrenotazioniSingleton;
 import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
-import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
 import gameshop.advance.technicalservices.db.DbPrenotazioneSingleton;
 import gameshop.advance.technicalservices.db.DbScontoVenditaSingleton;
 import gameshop.advance.technicalservices.db.DbVenditaSingleton;
@@ -78,11 +75,7 @@ public class NegozioSingleton
         try {
             DbVenditaSingleton.getInstance().create(v);
 //            CatalogoProdottiSingleton.getInstance().aggiornaDescrizioni();
-            Iterator<IRigaDiTransazioneRemote> righeDiVendita = (Iterator<IRigaDiTransazioneRemote>) v.getRigheDiVendita();
-            while(righeDiVendita.hasNext())
-            {
-                DbDescrizioneProdottoSingleton.getInstance().update((IDescrizioneProdotto) righeDiVendita.next().getDescrizione());
-            }
+            
         } catch (ObjectAlreadyExistsDbException ex) {
             Logger.getLogger(NegozioSingleton.class.getName()).log(Level.SEVERE, null, ex);
         }

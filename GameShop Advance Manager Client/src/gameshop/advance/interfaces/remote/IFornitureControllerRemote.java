@@ -20,4 +20,6 @@ public interface IFornitureControllerRemote extends Remote{
     
     public void addListener(IRemoteObserver obs) throws RemoteException;
     
+    void addDeleteListener(IRemoteObserver obs) throws RemoteException;
+    
 }

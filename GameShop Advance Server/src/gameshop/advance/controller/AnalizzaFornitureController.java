@@ -42,4 +42,9 @@ public class AnalizzaFornitureController extends UnicastRemoteObject implements 
     {
         ManagerFornitureSingleton.getInstance().addListener(obs);
     }
+    
+    public void addDeleteListener(IRemoteObserver obs) throws RemoteException
+    {
+        ManagerFornitureSingleton.getInstance().addRemoveListener(obs);
+    }
 }

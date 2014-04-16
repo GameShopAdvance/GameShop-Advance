@@ -173,5 +173,10 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
         this.activate(ActivationPurpose.READ);
         return this.prenotazione.getEvasa();
     }
+
+    @Override
+    public void annulla() throws RemoteException {
+        
+    }
     
 }

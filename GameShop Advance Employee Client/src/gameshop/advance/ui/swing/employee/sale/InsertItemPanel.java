@@ -134,12 +134,15 @@ public class InsertItemPanel extends JPanel implements IListPanel{
         try{
             SaleControllerSingleton.getInstance().clearSale();
         } catch (NullPointerException ex) {
-             UIWindowSingleton.getInstance().displayError("Non è stato possibile convalidare il codice cliente.");       
+             UIWindowSingleton.getInstance().displayError("Non è stato possibile convalidare il codice cliente.");     
+             LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
             UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
                     + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+            LoggerSingleton.getInstance().log(ex);
         } catch (ConfigurationException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di configurazione. Se il problema persiste contattare l'amministratore di sistema.");
+            LoggerSingleton.getInstance().log(ex);
         }
         
     }

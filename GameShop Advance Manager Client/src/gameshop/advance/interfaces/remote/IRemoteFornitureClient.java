@@ -6,8 +6,6 @@
 
 package gameshop.advance.interfaces.remote;
 
-import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
-import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
@@ -19,5 +17,7 @@ public interface IRemoteFornitureClient extends Remote
 {
 
     void setInformazioniProdotto(IIteratorWrapperRemote<IInformazioniProdottoRemote> iter) throws RemoteException;
+
+    public void rimuoviInformazioneProdotto(IInformazioniProdottoRemote info) throws RemoteException;
     
 }

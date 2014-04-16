@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(default;15dlu):grow, labelcompgap, 143dlu, labelcompgap, 20dlu, labelcompgap, 20dlu, labelcompgap, 143dlu, labelcompgap, max(default;15dlu):grow"
-			"$rowSpecs": "max(default;15px):grow, linegap, fill:177dlu, linegap, fill:max(default;72px), linegap, max(default;15dlu):grow, linegap"
+			"$columnSpecs": "max(default;15dlu):grow, labelcompgap, max(default;75dlu), labelcompgap, max(default;140dlu):grow, labelcompgap, max(default;75dlu), labelcompgap, max(default;15dlu):grow"
+			"$rowSpecs": "max(default;15px):grow, linegap, fill:177dlu, linegap, fill:max(default;35px), linegap, max(default;15dlu):grow, linegap"
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -17,12 +17,12 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 3
-				"gridWidth": 7
+				"gridWidth": 5
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "clearForniture"
 				"text": "Indietro"
-				"font": new java.awt.Font( "Tahoma", 0, 20 )
+				"font": new java.awt.Font( "Tahoma", 0, 14 )
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "clearFornitureActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
@@ -31,10 +31,10 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"
 				"text": "Procedi"
-				"font": new java.awt.Font( "Tahoma", 0, 20 )
+				"font": new java.awt.Font( "Tahoma", 0, 14 )
 				"enabled": false
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 9
+				"gridX": 7
 				"gridY": 5
 			} )
 		}, new FormLayoutConstraints( null ) {

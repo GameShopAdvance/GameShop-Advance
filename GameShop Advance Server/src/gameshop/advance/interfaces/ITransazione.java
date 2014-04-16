@@ -69,4 +69,5 @@ public interface ITransazione extends ITransazioneRemote {
         
     DateTime getDate();
     
+    void annulla() throws RemoteException;
 }

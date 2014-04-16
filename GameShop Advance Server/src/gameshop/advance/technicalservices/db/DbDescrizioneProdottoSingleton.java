@@ -50,7 +50,7 @@ public class DbDescrizioneProdottoSingleton {
     }
     
     //metodo provvisorio
-    public void update(IDescrizioneProdotto desc) throws ObjectAlreadyExistsDbException{
+    public void update(IDescrizioneProdotto desc) {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         client.store(desc);
         client.commit();

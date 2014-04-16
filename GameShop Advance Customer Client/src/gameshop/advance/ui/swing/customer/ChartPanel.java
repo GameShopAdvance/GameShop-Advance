@@ -4,12 +4,14 @@
 
 package gameshop.advance.ui.swing.customer;
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.ui.interfaces.IListPanel;
 import gameshop.advance.ui.interfaces.IPopActionListener;
+import gameshop.advance.ui.swing.UIFactory;
 import gameshop.advance.utility.Money;
 import java.awt.Font;
 import java.awt.SystemColor;
@@ -36,6 +38,7 @@ public class ChartPanel extends JPanel implements IListPanel{
     
     public ChartPanel() {
         initComponents();
+        
         try
         {
             ReservationControllerSingleton.getInstance().setReservationList(this);
@@ -103,92 +106,108 @@ public class ChartPanel extends JPanel implements IListPanel{
         this.listener.popPanel();
     }
 
+    private void createUIComponents() {
+        this.title = UIFactory.getInstance().getHeaderLabel();
+        this.confirm = UIFactory.getInstance().getConfirmButton();
+        this.totalLabel = UIFactory.getInstance().getBodyLabel();
+        this.totale = UIFactory.getInstance().getBoldLabel();
+        this.back = UIFactory.getInstance().getSimpleButton();
+        this.cancel = UIFactory.getInstance().getCancelButton();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        label2 = new JLabel();
-        totalLabel = new JLabel();
+        createUIComponents();
+
         scrollPane1 = new JScrollPane();
         bookList = new JList();
-        totale = new JLabel();
-        back = new JButton();
-        button2 = new JButton();
-        button1 = new JButton();
 
         //======== this ========
-        setLayout(new FormLayout(
-            "[15dlu,default], $lcgap, [75dlu,default], $lcgap, default:grow, 2*($lcgap, [75dlu,default]), $lcgap, [15dlu,default]",
-            "[15dlu,default], $lgap, [20dlu,default], $lgap, [50dlu,default]:grow, $lgap, [20dlu,default], $lgap, [35dlu,default], $lgap, [15dlu,default]"));
+        setName("this");
 
-        //---- label2 ----
-        label2.setText("Riepilogo prenotazione");
-        label2.setHorizontalAlignment(SwingConstants.CENTER);
-        label2.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        add(label2, CC.xywh(5, 3, 3, 1, CC.FILL, CC.FILL));
+        //---- title ----
+        title.setText("Riepilogo prenotazione");
+        title.setHorizontalAlignment(SwingConstants.CENTER);
+        title.setFont(new Font("Tahoma", Font.PLAIN, 16));
+        title.setName("title");
 
         //---- totalLabel ----
         totalLabel.setText("Totale");
         totalLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
         totalLabel.setHorizontalAlignment(SwingConstants.RIGHT);
-        add(totalLabel, CC.xy(7, 7, CC.DEFAULT, CC.FILL));
+        totalLabel.setName("totalLabel");
 
         //======== scrollPane1 ========
         {
+            scrollPane1.setName("scrollPane1");
 
             //---- bookList ----
             bookList.setFont(new Font("Tahoma", Font.PLAIN, 14));
             bookList.setBackground(SystemColor.controlHighlight);
+            bookList.setName("bookList");
             scrollPane1.setViewportView(bookList);
         }
-        add(scrollPane1, CC.xywh(3, 5, 7, 1, CC.FILL, CC.FILL));
 
         //---- totale ----
         totale.setFont(new Font("Tahoma", Font.BOLD, 14));
-        add(totale, CC.xy(9, 7, CC.FILL, CC.FILL));
+        totale.setName("totale");
 
         //---- back ----
         back.setText("Indietro");
         back.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        back.setName("back");
         back.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 backActionPerformed(e);
             }
         });
-        add(back, CC.xy(3, 9, CC.FILL, CC.FILL));
 
-        //---- button2 ----
-        button2.setText("Cancella");
-        button2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        button2.addActionListener(new ActionListener() {
+        //---- cancel ----
+        cancel.setText("Cancella");
+        cancel.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        cancel.setName("cancel");
+        cancel.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cancelActionPerformed(e);
             }
         });
-        add(button2, CC.xy(7, 9, CC.FILL, CC.FILL));
 
-        //---- button1 ----
-        button1.setText("Conferma");
-        button1.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        button1.addActionListener(new ActionListener() {
+        //---- confirm ----
+        confirm.setText("Conferma");
+        confirm.setFont(new Font("Tahoma", Font.PLAIN, 14));
+        confirm.setName("confirm");
+        confirm.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 reserveActionPerformed(e);
             }
         });
-        add(button1, CC.xy(9, 9, CC.FILL, CC.FILL));
+
+        PanelBuilder builder = new PanelBuilder(new FormLayout(
+            "[15dlu,default], $lcgap, [75dlu,default], $lcgap, default:grow, 2*($lcgap, [75dlu,default]), $lcgap, [15dlu,default]",
+            "[15dlu,default], $lgap, [20dlu,default], $lgap, [50dlu,default]:grow, $lgap, [20dlu,default], $lgap, [35dlu,default], $lgap, [15dlu,default]"), this);
+
+        builder.add(title,       CC.xywh(5, 3,          3,       1, CC.FILL, CC.FILL));
+        builder.add(totalLabel,  CC.xy  (7, 7, CC.DEFAULT, CC.FILL));
+        builder.add(scrollPane1, CC.xywh(3, 5,          7,       1, CC.FILL, CC.FILL));
+        builder.add(totale,      CC.xy  (9, 7,    CC.FILL, CC.FILL));
+        builder.add(back,        CC.xy  (3, 9,    CC.FILL, CC.FILL));
+        builder.add(cancel,      CC.xy  (7, 9,    CC.FILL, CC.FILL));
+        builder.add(confirm,     CC.xy  (9, 9,    CC.FILL, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel label2;
+    private JLabel title;
     private JLabel totalLabel;
     private JScrollPane scrollPane1;
     private JList bookList;
     private JLabel totale;
     private JButton back;
-    private JButton button2;
-    private JButton button1;
+    private JButton cancel;
+    private JButton confirm;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     @Override
