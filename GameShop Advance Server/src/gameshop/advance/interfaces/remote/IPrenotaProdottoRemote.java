@@ -6,7 +6,9 @@
 
 package gameshop.advance.interfaces.remote;
 
+import gameshop.advance.exceptions.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.InvalidSaleState;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
@@ -77,8 +79,10 @@ public interface IPrenotaProdottoRemote extends Remote{
      * @param amount
      * @throws RemoteException
      * @throws InvalidMoneyException
+     * @throws gameshop.advance.exceptions.InvalidSaleState
+     * @throws gameshop.advance.exceptions.AlredyPayedException
      */
-    void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException;
+    void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException;
     
     //metodo per la richiesta di pagamento in acconto
 
@@ -87,8 +91,10 @@ public interface IPrenotaProdottoRemote extends Remote{
      * @param ammontare
      * @throws RemoteException
      * @throws InvalidMoneyException
+     * @throws gameshop.advance.exceptions.InvalidSaleState
+     * @throws gameshop.advance.exceptions.AlredyPayedException
      */
-     void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException;
+    void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException;
      
      public void cancellaPrenotazione() throws RemoteException;
 }

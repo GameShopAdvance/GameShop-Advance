@@ -6,7 +6,9 @@
 
 package gameshop.advance.interfaces;
 
+import gameshop.advance.exceptions.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.InvalidSaleState;
 import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
 import gameshop.advance.interfaces.remote.ITransazioneRemote;
@@ -47,7 +49,7 @@ public interface ITransazione extends ITransazioneRemote {
      * @throws gameshop.advance.exceptions.InvalidMoneyException
      * @throws java.rmi.RemoteException
      */
-    void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException;
+    void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException, InvalidSaleState, AlredyPayedException;
 
     CartaCliente getCliente();
 

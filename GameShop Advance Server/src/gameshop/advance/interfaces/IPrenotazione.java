@@ -6,7 +6,9 @@
 
 package gameshop.advance.interfaces;
 
+import gameshop.advance.exceptions.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.InvalidSaleState;
 import gameshop.advance.interfaces.remote.IPrenotazioneRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
@@ -17,7 +19,7 @@ import java.rmi.RemoteException;
  */
 public interface IPrenotazione extends ITransazione, IPrenotazioneRemote {
 
-    void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException;
+    void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException;
     
     public void evadi();
     

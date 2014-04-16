@@ -1,6 +1,8 @@
 package gameshop.advance.controller;
 
+import gameshop.advance.exceptions.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.InvalidSaleState;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.QuantityNotInStockException;
@@ -94,7 +96,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     }
     
     @Override
-    public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException
+    public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException
     {
         this.prenotazione.pagaAcconto(ammontare);
         try {
@@ -127,7 +129,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
      * @throws InvalidMoneyException
      */
     @Override
-    public void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException
+    public void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException
     {
         this.prenotazione.gestisciPagamento(amount);
         try {
