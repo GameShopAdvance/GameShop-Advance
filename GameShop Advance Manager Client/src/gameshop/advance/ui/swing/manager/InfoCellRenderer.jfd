@@ -4,7 +4,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "labelcompgap, (60dlu<default<140dlu):grow, unrelgap, (50dlu<default<100dlu):grow, labelcompgap, (20dlu<default<40dlu):grow, unrelgap, (50dlu<default<100dlu):grow, labelcompgap, (20dlu<default<40dlu):grow, labelcompgap"
+			"$columnSpecs": "labelcompgap, (60dlu<default<140dlu):grow, unrelgap, (50dlu<default<100dlu):grow, labelcompgap, (8dlu<default<16dlu):grow, (4dlu<default<8dlu), (8dlu<default<16dlu):grow, unrelgap, (50dlu<default<100dlu):grow, labelcompgap, (20dlu<default<40dlu):grow, labelcompgap"
 			"$rowSpecs": "linegap, fill:max(default;27dlu), linegap, fill:26dlu, linegap, relgap"
 		} ) {
 			name: "this"
@@ -35,6 +35,7 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 6
 				"gridY": 2
+				"gridWidth": 3
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "inArrivo"
@@ -42,7 +43,7 @@ new FormModel {
 				"horizontalAlignment": 0
 				"border": #EtchedBorder0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 8
+				"gridX": 10
 				"gridY": 2
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -51,7 +52,7 @@ new FormModel {
 				"horizontalAlignment": 0
 				"border": #EtchedBorder0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 10
+				"gridX": 12
 				"gridY": 2
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -73,12 +74,35 @@ new FormModel {
 				"gridY": 4
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "label1"
+				"text": "/"
+				"horizontalAlignment": 0
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 7
+				"gridY": 4
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "soglia"
+				"text": "text"
+				"border": new javax.swing.border.EtchedBorder( 1, null, null )
+				"horizontalAlignment": 0
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 8
+				"gridY": 4
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "ordine"
 				"text": "Ordine"
 				"horizontalAlignment": 0
 				"border": #EtchedBorder0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 8
+				"gridX": 10
 				"gridY": 4
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
@@ -88,14 +112,14 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 10
+				"gridX": 12
 				"gridY": 4
 			} )
 			add( new FormComponent( "javax.swing.JSeparator" ) {
 				name: "separator1"
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 6
-				"gridWidth": 11
+				"gridWidth": 13
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

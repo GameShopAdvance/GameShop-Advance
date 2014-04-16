@@ -28,10 +28,14 @@ import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
+import javax.swing.JScrollPane;
+import javax.swing.JTextArea;
 import javax.swing.JTextField;
+import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 import javax.swing.border.BevelBorder;
 import javax.swing.border.LineBorder;
+import javax.swing.border.TitledBorder;
 import org.joda.time.DateTime;
 
 /**
@@ -60,7 +64,8 @@ public class ProductPanel extends JPanel {
     
     public void setValues(IDescrizioneProdottoRemote desc) throws RemoteException{
         this.price.setText(desc.getPrezzo(DateTime.now()).toString());
-        this.title.setText(desc.getDescrizione());
+        this.title.setText(desc.getNomeProdotto());
+        this.description.setText(desc.getDescrizione());
         Integer quantity = desc.getQuantitaDisponibile();
         this.quantity.setText(quantity.toString());
         CardLayout layout = (CardLayout) this.panelSwitch.getLayout();
@@ -118,7 +123,7 @@ public class ProductPanel extends JPanel {
         this.button1 = UIFactory.getInstance().getSimpleButton();
         this.quantity = UIFactory.getInstance().getBodyLabel();
         this.label10 = UIFactory.getInstance().getBodyLabel();
-        this.label2 = UIFactory.getInstance().getBodyLabel();
+        this.description = UIFactory.getInstance().getLongTextArea();
         this.label3 = UIFactory.getInstance().getBodyLabel();
         this.label4 = UIFactory.getInstance().getBodyLabel();
         this.label6 = UIFactory.getInstance().getBodyLabel();
@@ -133,6 +138,8 @@ public class ProductPanel extends JPanel {
         imagePanel = new JPanel();
         image = new JLabel();
         panel1 = new JPanel();
+        scrollPane1 = new JScrollPane();
+        description = new JTextArea();
         panelSwitch = new JPanel();
         bookPanel = new JPanel();
         buyPanel = new JPanel();
@@ -154,7 +161,7 @@ public class ProductPanel extends JPanel {
 
         //======== imagePanel ========
         {
-            imagePanel.setBorder(new LineBorder(Color.black));
+            imagePanel.setBorder(LineBorder.createBlackLineBorder());
             imagePanel.setName("imagePanel");
             imagePanel.setLayout(new BorderLayout());
 
@@ -174,18 +181,27 @@ public class ProductPanel extends JPanel {
 
         //======== panel1 ========
         {
-            panel1.setBorder(new LineBorder(Color.black));
+            panel1.setBorder(new TitledBorder("Descrizione"));
             panel1.setName("panel1");
 
-            //---- label2 ----
-            label2.setText("Description Here");
-            label2.setName("label2");
+            //======== scrollPane1 ========
+            {
+                scrollPane1.setBorder(null);
+                scrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+                scrollPane1.setName("scrollPane1");
+
+                //---- description ----
+                description.setBackground(new Color(238, 238, 238));
+                description.setLineWrap(true);
+                description.setName("description");
+                scrollPane1.setViewportView(description);
+            }
 
             PanelBuilder panel1Builder = new PanelBuilder(new FormLayout(
                 "default:grow",
                 "default:grow"), panel1);
 
-            panel1Builder.add(label2, CC.xy(1, 1, CC.CENTER, CC.FILL));
+            panel1Builder.add(scrollPane1, CC.xy(1, 1, CC.FILL, CC.FILL));
         }
 
         //======== panelSwitch ========
@@ -323,7 +339,8 @@ public class ProductPanel extends JPanel {
     private JLabel title;
     private JLabel price;
     private JPanel panel1;
-    private JLabel label2;
+    private JScrollPane scrollPane1;
+    private JTextArea description;
     private JPanel panelSwitch;
     private JPanel bookPanel;
     private JLabel notAvailableLabel;

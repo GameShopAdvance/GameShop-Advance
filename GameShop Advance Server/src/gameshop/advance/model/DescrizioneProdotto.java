@@ -27,7 +27,7 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
     private LinkedList<Prezzo> prezzi = new LinkedList<>();
     private String descrizione;
     private String nomeProdotto;
-    private String urlImmagine = "skyrim.png";
+    private String urlImmagine;
     private LinkedList<IScontoProdottoStrategy> sconti;
     private Integer quantitaDisponibile;
     private Integer quantitaDiSoglia;
@@ -43,7 +43,7 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
      * @param soglia
      * @throws java.rmi.RemoteException
      */
-    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String nome, String descrizione, int disponibile, int soglia ) throws RemoteException{
+    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String nome, String descrizione, String img, int disponibile, int soglia ) throws RemoteException{
         this.descrizione = descrizione;
         this.prezzi.add(prezzo);
         this.codiceProdotto = codiceProdotto;
@@ -52,16 +52,21 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
         this.quantitaDisponibile = new Integer(disponibile);
         this.quantitaDiSoglia = new Integer(soglia);
         this.listener = new DescrizioneProdottoObserver();
+        this.urlImmagine = img;
     }
     
-    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String nome, String descrizione, int disponibile) throws RemoteException{
-        this(codiceProdotto, prezzo, descrizione, nome, disponibile, 0);
+    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String nome, String descrizione, String img, int disponibile) throws RemoteException{
+        this(codiceProdotto, prezzo, nome, descrizione, img, disponibile, 0);
+    }
+    
+    public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String nome, String descrizione, String img) throws RemoteException{
+        this(codiceProdotto, prezzo, descrizione, nome, img, 1, 0);
     }
     
     public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String nome, String descrizione) throws RemoteException{
-        this(codiceProdotto, prezzo, descrizione, nome, 1, 0);
+        this(codiceProdotto, prezzo, descrizione, nome, null, 1, 0);
     }
-
+    
     @Override
     public String getNomeProdotto() throws RemoteException {
         return nomeProdotto;

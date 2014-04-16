@@ -36,6 +36,7 @@ public class DbCartaClienteSingleton {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         CartaCliente example = new CartaCliente(carta.getId());
         int exist = client.queryByExample(example).size();
+        System.err.println("Clienti n."+exist);
         if(exist > 0)
             throw new ObjectAlreadyExistsDbException();
         client.store(carta);

@@ -85,6 +85,7 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
 
         //---- label2 ----
         label2.setText("Disponibili:");
+        label2.setHorizontalAlignment(SwingConstants.RIGHT);
         label2.setName("label2");
 
         //---- quantity ----
@@ -120,7 +121,7 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
     @Override
     public Component getListCellRendererComponent(JList<? extends IDescrizioneProdottoRemote> list, IDescrizioneProdottoRemote value, int index, boolean isSelected, boolean cellHasFocus) {
         try {
-            this.title.setText(value.getDescrizione());
+            this.title.setText(value.getNomeProdotto());
         }
         catch (Exception ex) {
             Logger.getLogger(ProductCellRenderer.class.getName()).log(Level.SEVERE, null, ex);

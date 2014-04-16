@@ -59,6 +59,7 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
 				"text": "Disponibili:"
+				"horizontalAlignment": 4
 				auxiliary() {
 					"JavaCodeGenerator.customCreate": true
 				}

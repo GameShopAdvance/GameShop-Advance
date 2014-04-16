@@ -24,6 +24,7 @@ public class UIStyleSingleton {
     private Color buttonAlertTextColor = new Color(255, 255, 255);
     private Color headerTextColor = new Color(0, 0, 0);
     private Color textColor = new Color(0, 0, 0);
+    private Color windowBackgroundColor = new Color(238, 238, 238);
     
     private Font bigFont = new Font("Tahoma", Font.PLAIN, 16);
     private Font normalFont = new Font("Tahoma", Font.PLAIN, 14);
@@ -113,6 +114,10 @@ public class UIStyleSingleton {
 
     public Color getTextColor(){
         return this.textColor;
+    }
+
+    Color getWindowBackgroundColor() {
+        return this.windowBackgroundColor;
     }
     
 }

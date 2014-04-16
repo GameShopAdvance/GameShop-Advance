@@ -24,7 +24,7 @@ new FormModel {
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 				name: "imagePanel"
-				"border": &LineBorder0 new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, false )
+				"border": new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, false )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "image"
 					"border": new javax.swing.border.BevelBorder( 1, null, null, sfield java.awt.Color lightGray, sfield java.awt.Color white )
@@ -68,18 +68,19 @@ new FormModel {
 				"$rowSpecs": "default:grow"
 			} ) {
 				name: "panel1"
-				"border": #LineBorder0
-				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label2"
-					"text": "Description Here"
-					auxiliary() {
-						"JavaCodeGenerator.customCreate": true
-					}
+				"border": new javax.swing.border.TitledBorder( "Descrizione" )
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					"horizontalScrollBarPolicy": 31
+					add( new FormComponent( "javax.swing.JTextArea" ) {
+						name: "description"
+						"background": new java.awt.Color( 238, 238, 238, 255 )
+						"lineWrap": true
+					} )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridX": 1
-					"gridY": 1
-					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
 					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
