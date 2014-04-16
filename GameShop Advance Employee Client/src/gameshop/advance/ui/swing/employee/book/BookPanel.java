@@ -83,9 +83,10 @@ public class BookPanel extends JPanel {
     }
     private void goToPayTotalActionPerformed(ActionEvent e) {
         try {
-            CardLayout layout = (CardLayout) this.mainPanel.getLayout();
-            this.displayTotal.setText(BookControllerSingleton.getInstance().getTotal().toString());
-            layout.last(this.mainPanel);
+            //CardLayout layout = (CardLayout) this.mainPanel.getLayout();
+//            this.displayTotal.setText(BookControllerSingleton.getInstance().getTotal().toString());
+            BookControllerSingleton.getInstance().vaiAlpagamentoTotale();
+           // layout.last(this.mainPanel);
         } catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Errore di sistema. "
                     + "Se il problema persiste, contattare l'amministratore di sistema.");
@@ -100,12 +101,15 @@ public class BookPanel extends JPanel {
     
     private void goToPayPartialActionPerformed(ActionEvent e) {
         try {
-            CardLayout layout = (CardLayout) this.mainPanel.getLayout();
-            this.displayPartial.setText(BookControllerSingleton.getInstance().getPartial().toString());
-            layout.next(this.mainPanel);
+//            CardLayout layout = (CardLayout) this.mainPanel.getLayout();
+//            this.displayPartial.setText(BookControllerSingleton.getInstance().getPartial().toString());
+            BookControllerSingleton.getInstance().vaiAlpagamentoAcconto();
+//            layout.next(this.mainPanel);
         } catch (NullPointerException ex) {
+             LoggerSingleton.getInstance().log(ex);
             UIWindowSingleton.getInstance().displayError("Errore di sistema. "
                     + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+           
         } catch (RemoteException ex) {
             UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
                     + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
@@ -436,8 +440,6 @@ public class BookPanel extends JPanel {
                     payPartialButton.addActionListener(new ActionListener() {
                         @Override
                         public void actionPerformed(ActionEvent e) {
-                            payPartialButtonActionPerformed(e);
-                            payPartialButtonActionPerformed(e);
                             payPartialButtonActionPerformed(e);
                         }
                     });

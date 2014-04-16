@@ -22,6 +22,7 @@ import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.employee.book.BookPanel;
 import gameshop.advance.ui.swing.employee.book.EndBookPanel;
+import gameshop.advance.ui.swing.employee.book.PaymentPanel;
 import gameshop.advance.ui.swing.employee.sale.BookCellRenderer;
 import gameshop.advance.utility.Money;
 import java.rmi.NotBoundException;
@@ -112,6 +113,20 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         this.controller.addListener(this.transactionObserver);
         this.listaProdottiPrenotati.clear();
         this.controller.completaPrenotazione();
+    }
+    
+    public void vaiAlpagamentoAcconto() {
+        PaymentPanel panel = new PaymentPanel();
+        panel.setList(listaProdottiPrenotati, new BookCellRenderer());
+        panel.setPagaAcconto();
+        this.aggiornaWindow(panel);
+    }
+    
+    public void vaiAlpagamentoTotale() {
+        PaymentPanel panel = new PaymentPanel();
+        panel.setList(listaProdottiPrenotati, new BookCellRenderer());
+        panel.setPagaTotale();
+        this.aggiornaWindow(panel);
     }
     
     /**
