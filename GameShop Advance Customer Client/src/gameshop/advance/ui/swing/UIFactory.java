@@ -96,6 +96,7 @@ public class UIFactory {
         textArea.setBorder(null);
         textArea.setLineWrap(true);
         textArea.setWrapStyleWord(true);
+        textArea.setFont(UIStyleSingleton.getInstance().getNormalFont());
         return textArea;
     }
 }
