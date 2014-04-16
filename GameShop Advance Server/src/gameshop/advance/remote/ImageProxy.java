@@ -6,6 +6,7 @@
 
 package gameshop.advance.remote;
 
+import gameshop.advance.interfaces.remote.IRemoteImage;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import javax.swing.ImageIcon;

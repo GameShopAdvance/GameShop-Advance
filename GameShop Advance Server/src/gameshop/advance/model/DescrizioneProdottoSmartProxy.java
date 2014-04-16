@@ -10,12 +10,12 @@ import com.db4o.activation.ActivationPurpose;
 import com.db4o.activation.Activator;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
+import gameshop.advance.interfaces.remote.IRemoteImage;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import gameshop.advance.utility.Prezzo;
 import java.rmi.RemoteException;
 import java.util.List;
-import javax.swing.ImageIcon;
 import org.joda.time.DateTime;
 
 /**
@@ -30,14 +30,6 @@ public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto {
     public DescrizioneProdottoSmartProxy(IDescrizioneProdotto desc)
     {
         this.descrizione = desc;
-    }
-    
-    
-
-    @Override
-    public ImageIcon getImmagine() throws RemoteException {
-        this.activate(ActivationPurpose.READ);
-        return this.descrizione.getImmagine();
     }
     
     @Override
@@ -136,5 +128,10 @@ public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto {
     public void setQuantitaDisponibile(int quantity) {
         this.activate(ActivationPurpose.WRITE);
         this.descrizione.setQuantitaDisponibile(quantity);
+    }
+
+    @Override
+    public IRemoteImage getImmagine() throws RemoteException {
+        return this.descrizione.getImmagine();
     }
 }

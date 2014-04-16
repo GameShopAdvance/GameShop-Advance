@@ -6,12 +6,12 @@
 
 package gameshop.advance.remote;
 
+import gameshop.advance.interfaces.remote.IRemoteImage;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
-import javax.swing.ImageIcon;
 import org.joda.time.DateTime;
 
 /**
@@ -52,8 +52,13 @@ public class DescrizioneRemoteProxy extends UnicastRemoteObject implements IDesc
         return this.desc.getQuantitaDiSoglia();
     }
 
+    /**
+     *
+     * @return
+     * @throws RemoteException
+     */
     @Override
-    public ImageIcon getImmagine() throws RemoteException {
+    public IRemoteImage getImmagine() throws RemoteException {
         return this.desc.getImmagine();
     }
 }

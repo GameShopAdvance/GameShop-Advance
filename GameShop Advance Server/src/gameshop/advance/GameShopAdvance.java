@@ -33,6 +33,7 @@ import java.rmi.Naming;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
+import java.util.LinkedList;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 import org.joda.time.DateTime;
@@ -105,6 +106,8 @@ public class GameShopAdvance {
         ManagerProdottiSingleton.getInstance().addListener(new ManagerProdottiObserver());
     }
     
-    
+    private static void createDescription(){
+        LinkedList<DescrizioneProdotto> descriptions;
+    }
     
 }

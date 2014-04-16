@@ -4,7 +4,8 @@ import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IObserver;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.observers.DescrizioneProdottoObserver;
-import gameshop.advance.remote.IRemoteImage;
+import gameshop.advance.interfaces.remote.IRemoteImage;
+import gameshop.advance.remote.ImageProxy;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import gameshop.advance.utility.Prezzo;
@@ -13,7 +14,6 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 import java.util.Objects;
-import javax.swing.ImageIcon;
 import org.joda.time.DateTime;
 
 /**
@@ -51,12 +51,6 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
         this.quantitaDiSoglia = new Integer(soglia);
         this.listener = new DescrizioneProdottoObserver();
         this.urlImmagine = "cod4.jpg";
-    }
-    
-    
-    public ImageIcon getImmagine() throws RemoteException{
-        ImageIcon img = new ImageIcon(getClass().getResource("cod4.jpg"));
-        return img;
     }
     
     public DescrizioneProdotto(IDProdotto codiceProdotto, Prezzo prezzo, String descrizione, int disponibile) throws RemoteException{
@@ -210,6 +204,6 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
 
     @Override
     public IRemoteImage getImmagine() throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+        return new ImageProxy(urlImmagine);
     }
 }

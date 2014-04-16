@@ -10,7 +10,6 @@ import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
-import javax.swing.ImageIcon;
 import org.joda.time.DateTime;
 
 /**
@@ -18,9 +17,7 @@ import org.joda.time.DateTime;
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IDescrizioneProdottoRemote extends Remote {
-
-    ImageIcon getImmagine() throws RemoteException;
-    
+   
     /**
      *
      * @return
@@ -44,4 +41,6 @@ public interface IDescrizioneProdottoRemote extends Remote {
     
     
     int getQuantitaDiSoglia() throws RemoteException;
+    
+    IRemoteImage getImmagine() throws RemoteException;
 }
