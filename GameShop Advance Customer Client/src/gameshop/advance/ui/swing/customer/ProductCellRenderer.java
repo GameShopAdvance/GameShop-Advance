@@ -85,7 +85,7 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
         separator1.setName("separator1");
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[15dlu,default], $lcgap, [40dlu,default], $lcgap, 62dlu:grow, 2*($lcgap, 25dlu), $lcgap, [15dlu,default], $lcgap, default",
+            "[15dlu,default], $lcgap, [40dlu,default,120dlu]:grow, $lcgap, [50dlu,default]:grow, $lcgap, [25dlu,default,50dlu]:grow, $lcgap, [25dlu,default,50dlu], $lcgap, [15dlu,default]",
             "[10dlu,default], 2*($lgap, 30dlu), $lgap, [10dlu,default], $lgap, 1dlu"), this);
 
         builder.add(imageBox,   CC.xywh(3, 3,       1,          3));
@@ -93,7 +93,7 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
         builder.add(price,      CC.xywh(7, 3,       3,          1, CC.FILL, CC.FILL));
         builder.add(label2,     CC.xy  (7, 5, CC.FILL, CC.DEFAULT));
         builder.add(quantity,   CC.xy  (9, 5, CC.FILL, CC.DEFAULT));
-        builder.add(separator1, CC.xywh(1, 9,      13,          1));
+        builder.add(separator1, CC.xywh(1, 9,      11,          1));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

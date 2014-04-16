@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_25" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -11,7 +11,6 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "fornitureButton"
 				"text": "Gestisci Forniture"
-				"font": new java.awt.Font( "Tahoma", 0, 18 )
 				auxiliary() {
 					"JavaCodeGenerator.customCreate": true
 				}
@@ -47,7 +46,6 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "magazzinoButton"
 				"text": "Controlla Magazzino"
-				"font": new java.awt.Font( "Tahoma", 0, 18 )
 				"enabled": false
 				auxiliary() {
 					"JavaCodeGenerator.customCreate": true
@@ -69,7 +67,6 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "prezziButton"
 				"text": "Gestisci Prezzi"
-				"font": new java.awt.Font( "Tahoma", 0, 18 )
 				"enabled": false
 				auxiliary() {
 					"JavaCodeGenerator.customCreate": true
@@ -107,7 +104,6 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "scontiButton"
 				"text": "Gestisci Sconti"
-				"font": new java.awt.Font( "Tahoma", 0, 18 )
 				"enabled": false
 				auxiliary() {
 					"JavaCodeGenerator.customCreate": true
@@ -129,7 +125,6 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "venditeButton"
 				"text": "Analizza Vendite"
-				"font": new java.awt.Font( "Tahoma", 0, 18 )
 				"enabled": false
 				auxiliary() {
 					"JavaCodeGenerator.customCreate": true

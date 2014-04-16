@@ -57,7 +57,6 @@ public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDi
             panel1.setName("panel1");
 
             //---- name ----
-            name.setFont(new Font("Tahoma", Font.PLAIN, 14));
             name.setName("name");
 
             //---- separator2 ----
@@ -77,7 +76,7 @@ public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDi
             subTotal.setName("subTotal");
 
             PanelBuilder panel1Builder = new PanelBuilder(new FormLayout(
-                "[100dlu,default]:grow, $lcgap, 10dlu, $lcgap, 50dlu, $lcgap, 10dlu, $lcgap, 50dlu",
+                "[100dlu,default]:grow, $lcgap, 10dlu, $lcgap, [20dlu,default,40dlu]:grow, $lcgap, 10dlu, $lcgap, [25dlu,default,75dlu]:grow",
                 "fill:[30dlu,default]:grow"), panel1);
 
             panel1Builder.add(name,       CC.xy(1, 1));
