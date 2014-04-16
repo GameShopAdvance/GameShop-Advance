@@ -117,6 +117,7 @@ public class ManagerFornitureSingleton {
             {
                 this.addDescrizione(iter.next());
             }
+            this.notificaListeners();
         }
     }
     
@@ -168,6 +169,7 @@ public class ManagerFornitureSingleton {
     
     public void addPrenotazione(IPrenotazione pren) throws RemoteException, QuantityException{
         IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter = pren.getRigheDiVendita();
+        boolean notify = false;
         while(iter.hasNext())
         {
             RigaDiTransazione rdt = (RigaDiTransazione) iter.next();
@@ -178,11 +180,14 @@ public class ManagerFornitureSingleton {
                 ip.setPrenotati(ip.getPrenotati()+rdt.getQuantity());
             }
             else{
+                if(!notify)
+                    notify = true;
                 InformazioniProdotto ip = new InformazioniProdotto(desc, rdt.getQuantity());
                 this.informazioni.put(desc.getCodiceProdotto().getCodice(), ip);
-                this.notificaListeners();
             }
         }
+        if(notify)
+            this.notificaListeners();
         this.print();
     }
     

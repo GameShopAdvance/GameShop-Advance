@@ -97,6 +97,11 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException
     {
         this.prenotazione.pagaAcconto(ammontare);
+        try {
+            NegozioSingleton.getInstance().registraPrenotazione(this.prenotazione);
+        } catch (QuantityException ex) {
+            Logger.getLogger(PrenotaProdottoController.class.getName()).log(Level.SEVERE, null, ex);
+        }
     }
     
     /**
