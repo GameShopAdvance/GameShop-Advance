@@ -93,7 +93,7 @@ public class UIWindowSingleton extends JFrame {
             mainPanel.setViewportBorder(null);
         }
         contentPane.add(mainPanel, BorderLayout.CENTER);
-        setSize(1025, 540);
+        setSize(1200, 580);
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
