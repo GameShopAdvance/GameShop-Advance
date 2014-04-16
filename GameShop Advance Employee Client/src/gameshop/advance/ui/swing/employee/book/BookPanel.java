@@ -158,6 +158,7 @@ public class BookPanel extends JPanel {
             BookControllerSingleton.getInstance().gestisciPagamento(Double.parseDouble(this.totalPayment.getText()));
         } catch (NullPointerException ex) {
              UIWindowSingleton.getInstance().displayError("Non è possibile convalidare l'importo inserito.");   
+             LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
             UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
                     + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");

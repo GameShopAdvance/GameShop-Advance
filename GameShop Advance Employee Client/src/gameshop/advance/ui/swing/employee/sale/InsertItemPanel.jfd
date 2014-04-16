@@ -124,7 +124,7 @@ new FormModel {
 				name: "clientPanel"
 				"border": new javax.swing.border.TitledBorder( "Carta fedeltà" )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-					"$columnSpecs": "max(default;85dlu), labelcompgap, default:grow, labelcompgap, max(default;75dlu)"
+					"$columnSpecs": "70dlu, labelcompgap, default:grow, labelcompgap, max(default;75dlu)"
 					"$rowSpecs": "max(default;35dlu), linegap, max(default;35dlu)"
 				} ) {
 					name: "main"

@@ -4,10 +4,12 @@
 
 package gameshop.advance.ui.swing;
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dialog;
 import java.awt.Frame;
@@ -16,7 +18,6 @@ import java.awt.event.ActionListener;
 import java.net.UnknownHostException;
 import javax.swing.JButton;
 import javax.swing.JDialog;
-import javax.swing.JFormattedTextField;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.JTabbedPane;
@@ -119,12 +120,16 @@ public class ConfigurationDialog extends JDialog {
     }
 
     private void createUIComponents() {
-        this.button1 = UIFactory.getInstance().getConfirmButton();
-        this.button2 = UIFactory.getInstance().getCancelButton();
+        this.button2 = UIFactory.getInstance().getConfirmButton();
+        this.button1 = UIFactory.getInstance().getCancelButton();
         this.label1 = UIFactory.getInstance().getBodyLabel();
         this.label2 = UIFactory.getInstance().getBodyLabel();
         this.label3 = UIFactory.getInstance().getBodyLabel();
         this.label4 = UIFactory.getInstance().getBodyLabel();
+        this.serverAddress = UIFactory.getInstance().getTextField();
+        this.serverPort = UIFactory.getInstance().getTextField();
+        this.newIdCassa = UIFactory.getInstance().getTextField();
+        this.idCassa = UIFactory.getInstance().getTextField();
     }
     
     private void initComponents() {
@@ -133,87 +138,110 @@ public class ConfigurationDialog extends JDialog {
 
         tabbedPane1 = new JTabbedPane();
         panel1 = new JPanel();
-        serverAddress = new JFormattedTextField();
-        serverPort = new JTextField();
         panel2 = new JPanel();
-        idCassa = new JTextField();
-        newIdCassa = new JTextField();
-        button1 = new JButton();
 
         //======== this ========
+        setName("this");
         Container contentPane = getContentPane();
-        contentPane.setLayout(new FormLayout(
-            "[15dlu,default], $lcgap, [70dlu,default], $lcgap, [98dlu,default]:grow, $lcgap, 70dlu, $lcgap, [15dlu,default]",
-            "[20dlu,default], $lgap, fill:[125dlu,default]:grow, $rgap, 25dlu, $lgap, 20dlu"));
 
         //======== tabbedPane1 ========
         {
+            tabbedPane1.setName("tabbedPane1");
 
             //======== panel1 ========
             {
-                panel1.setLayout(new FormLayout(
-                    "10dlu, $lcgap, 70dlu, $lcgap, 75dlu, $lcgap, [53dlu,default]:grow, $lcgap, [10dlu,default]",
-                    "15dlu, $lgap, [30dlu,default], $ugap, [30dlu,default]"));
+                panel1.setName("panel1");
 
                 //---- label1 ----
                 label1.setText("Indirizzo server");
-                panel1.add(label1, CC.xy(3, 3));
-                panel1.add(serverAddress, CC.xywh(5, 3, 3, 1, CC.FILL, CC.DEFAULT));
+                label1.setName("label1");
+
+                //---- serverAddress ----
+                serverAddress.setName("serverAddress");
 
                 //---- label2 ----
                 label2.setText("Porta");
                 label2.setLabelFor(serverPort);
-                panel1.add(label2, CC.xy(3, 5));
-                panel1.add(serverPort, CC.xy(5, 5));
+                label2.setName("label2");
+
+                //---- serverPort ----
+                serverPort.setName("serverPort");
+
+                PanelBuilder panel1Builder = new PanelBuilder(new FormLayout(
+                    "10dlu, $lcgap, 70dlu, $lcgap, 75dlu, $lcgap, [53dlu,default]:grow, $lcgap, [10dlu,default]",
+                    "15dlu, $lgap, [30dlu,default], $ugap, [30dlu,default]"), panel1);
+
+                panel1Builder.add(label1,        CC.xy  (3, 3, CC.DEFAULT, CC.FILL));
+                panel1Builder.add(serverAddress, CC.xywh(5, 3,          3,       1, CC.FILL, CC.FILL));
+                panel1Builder.add(label2,        CC.xy  (3, 5,    CC.FILL, CC.FILL));
+                panel1Builder.add(serverPort,    CC.xy  (5, 5,    CC.FILL, CC.FILL));
             }
             tabbedPane1.addTab("Connessione", panel1);
 
             //======== panel2 ========
             {
-                panel2.setLayout(new FormLayout(
-                    "[10dlu,default], $lcgap, [100dlu,default], $lcgap, [10dlu,default], $lcgap, [35dlu,default], 2*($lcgap, default)",
-                    "15dlu, $lgap, 30dlu, $rgap, [30dlu,default]"));
+                panel2.setName("panel2");
 
                 //---- label3 ----
                 label3.setText("Numero di cassa attuale");
                 label3.setLabelFor(idCassa);
-                panel2.add(label3, CC.xy(3, 3));
+                label3.setName("label3");
 
                 //---- idCassa ----
                 idCassa.setEditable(false);
-                panel2.add(idCassa, CC.xy(7, 3));
+                idCassa.setName("idCassa");
 
                 //---- label4 ----
                 label4.setText("Nuovo numero di cassa");
                 label4.setLabelFor(newIdCassa);
-                panel2.add(label4, CC.xy(3, 5));
-                panel2.add(newIdCassa, CC.xy(7, 5));
+                label4.setName("label4");
+
+                //---- newIdCassa ----
+                newIdCassa.setName("newIdCassa");
+
+                PanelBuilder panel2Builder = new PanelBuilder(new FormLayout(
+                    "[10dlu,default], $lcgap, [100dlu,default], $lcgap, [10dlu,default], $lcgap, [35dlu,default], 2*($lcgap, default)",
+                    "15dlu, $lgap, 30dlu, $rgap, [30dlu,default]"), panel2);
+
+                panel2Builder.add(label3,     CC.xy(3, 3, CC.FILL, CC.FILL));
+                panel2Builder.add(idCassa,    CC.xy(7, 3, CC.FILL, CC.FILL));
+                panel2Builder.add(label4,     CC.xy(3, 5, CC.FILL, CC.FILL));
+                panel2Builder.add(newIdCassa, CC.xy(7, 5, CC.FILL, CC.FILL));
             }
             tabbedPane1.addTab("Cassa", panel2);
         }
-        contentPane.add(tabbedPane1, CC.xywh(3, 3, 5, 1, CC.FILL, CC.FILL));
 
         //---- button1 ----
         button1.setText("Annulla");
         button1.setToolTipText("Annulla i cambiamenti");
+        button1.setName("button1");
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cancelModify(e);
             }
         });
-        contentPane.add(button1, CC.xy(3, 5));
 
         //---- button2 ----
         button2.setText("Salva");
         button2.setToolTipText("Salva le modifiche apportate");
+        button2.setName("button2");
         button2.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 saveConfiguration(e);
             }
         });
-        contentPane.add(button2, CC.xy(7, 5));
+
+        PanelBuilder contentPaneBuilder = new PanelBuilder(new FormLayout(
+            "[15dlu,default], $lcgap, [70dlu,default], $lcgap, [98dlu,default]:grow, $lcgap, 70dlu, $lcgap, [15dlu,default]",
+            "[20dlu,default], $lgap, fill:[125dlu,default]:grow, $rgap, [35dlu,default], $lgap, 20dlu"));
+        contentPane.setLayout(new BorderLayout());
+        contentPane.add(contentPaneBuilder.getPanel(), BorderLayout.CENTER);
+
+        contentPaneBuilder.add(tabbedPane1, CC.xywh(3, 3,       5,       1, CC.FILL, CC.FILL));
+        contentPaneBuilder.add(button1,     CC.xy  (3, 5, CC.FILL, CC.FILL));
+        contentPaneBuilder.add(button2,     CC.xy  (7, 5, CC.FILL, CC.FILL));
         pack();
         setLocationRelativeTo(getOwner());
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -223,7 +251,7 @@ public class ConfigurationDialog extends JDialog {
     private JTabbedPane tabbedPane1;
     private JPanel panel1;
     private JLabel label1;
-    private JFormattedTextField serverAddress;
+    private JTextField serverAddress;
     private JLabel label2;
     private JTextField serverPort;
     private JPanel panel2;

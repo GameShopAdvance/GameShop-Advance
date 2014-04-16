@@ -5,7 +5,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormWindow( "javax.swing.JDialog", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;70dlu), labelcompgap, max(default;98dlu):grow, labelcompgap, 70dlu, labelcompgap, max(default;15dlu)"
-			"$rowSpecs": "max(default;20dlu), linegap, fill:max(default;125dlu):grow, relgap, 25dlu, linegap, 20dlu"
+			"$rowSpecs": "max(default;20dlu), linegap, fill:max(default;125dlu):grow, relgap, max(default;35dlu), linegap, 20dlu"
 		} ) {
 			name: "this"
 			"$sizePolicy": 0
@@ -25,14 +25,19 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 3
+						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					} )
-					add( new FormComponent( "javax.swing.JFormattedTextField" ) {
+					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "serverAddress"
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 5
 						"gridY": 3
 						"gridWidth": 3
 						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label2"
@@ -44,12 +49,19 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 5
+						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "serverPort"
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 5
 						"gridY": 5
+						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "Connessione"
@@ -69,13 +81,20 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridY": 3
 						"gridX": 3
+						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "idCassa"
 						"editable": false
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 7
 						"gridY": 3
+						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label4"
@@ -87,12 +106,19 @@ new FormModel {
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 5
+						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					} )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "newIdCassa"
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 7
 						"gridY": 5
+						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					} )
 				}, new FormLayoutConstraints( null ) {
 					"title": "Cassa"
@@ -108,10 +134,15 @@ new FormModel {
 				name: "button1"
 				"text": "Annulla"
 				"toolTipText": "Annulla i cambiamenti"
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cancelModify", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 5
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button2"
@@ -124,6 +155,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
 				"gridY": 5
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

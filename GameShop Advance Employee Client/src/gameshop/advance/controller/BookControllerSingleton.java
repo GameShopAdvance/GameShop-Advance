@@ -47,7 +47,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     private Money resto = new Money();
     
     private final RigheDiVenditaListModel listaProdottiPrenotati;
-    BookPanel panel = new BookPanel();
+    
     
     private BookControllerSingleton() throws RemoteException{
         
@@ -92,7 +92,10 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      * @throws RemoteException
      */
     public void gestisciPrenotazione() throws RemoteException{
-        this.aggiornaWindow(this.panel);
+        this.listaProdottiPrenotati.clear();
+        BookPanel panel = new BookPanel();
+        panel.setList(this.listaProdottiPrenotati, new BookCellRenderer());
+        this.aggiornaWindow(panel);
     }
     
     /**
@@ -106,8 +109,6 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         this.controller.addListener(this.bookTotalObserver);
         this.controller.addListener(this.transactionObserver);
         this.listaProdottiPrenotati.clear();
-        panel.setList(this.listaProdottiPrenotati, new BookCellRenderer());
-        aggiornaWindow(panel);
         this.controller.completaPrenotazione();
     }
     
