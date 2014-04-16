@@ -6,14 +6,16 @@ new FormModel {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "max(default;75dlu):grow, labelcompgap, 10dlu, labelcompgap, 15dlu, labelcompgap, 10dlu, labelcompgap, 35dlu"
+				"$columnSpecs": "max(default;100dlu):grow, labelcompgap, 10dlu, labelcompgap, 30dlu, labelcompgap, 10dlu, labelcompgap, 50dlu"
 				"$rowSpecs": "fill:max(default;30dlu):grow"
 			} ) {
 				name: "panel1"
 				"border": new javax.swing.border.EmptyBorder( 5, 5, 5, 5 )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "name"
-					"font": new java.awt.Font( "Tahoma", 0, 14 )
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 1
 					"gridY": 1
@@ -29,8 +31,12 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "quantity"
 					"horizontalAlignment": 0
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 5
+					"gridY": 1
 				} )
 				add( new FormComponent( "javax.swing.JSeparator" ) {
 					name: "separator1"
@@ -43,6 +49,9 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "subTotal"
 					"horizontalAlignment": 0
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 9
 					"gridY": 1

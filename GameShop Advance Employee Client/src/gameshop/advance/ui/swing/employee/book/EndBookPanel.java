@@ -8,10 +8,10 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.ui.swing.UIFactory;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.employee.sale.EndSalePanel;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -24,7 +24,7 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 /**
- * @author Franco
+ * @author Matteo Gentile
  */
 public class EndBookPanel extends JPanel {
     public EndBookPanel() {
@@ -50,24 +50,18 @@ public class EndBookPanel extends JPanel {
         UIWindowSingleton.getInstance().refreshContent();
     }
 
-    private void startSaleActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
 
-    private void manageBookActionPerformed(ActionEvent e) {
-        // TODO add your code here
-    }
-
-    private void faiInventario(ActionEvent e) {
-        // TODO add your code here
+    private void createUIComponents() {
+        this.label1 = UIFactory.getInstance().getBodyLabel();
+        this.label2 = UIFactory.getInstance().getHeaderLabel();
+        this.goToMenu = UIFactory.getInstance().getSimpleButton();
     }
 
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        label1 = new JLabel();
+        createUIComponents();
+
         displayRest = new JTextField();
-        label2 = new JLabel();
-        goToMenu = new JButton();
 
         //======== this ========
         setLayout(new FormLayout(
@@ -77,19 +71,16 @@ public class EndBookPanel extends JPanel {
         //---- label1 ----
         label1.setText("Resto");
         label1.setLabelFor(displayRest);
-        label1.setFont(new Font("Tahoma", Font.PLAIN, 14));
         add(label1, CC.xy(6, 3, CC.FILL, CC.FILL));
         add(displayRest, CC.xy(8, 3, CC.FILL, CC.DEFAULT));
 
         //---- label2 ----
         label2.setText("Prenotazione effettuata!");
         label2.setHorizontalAlignment(SwingConstants.CENTER);
-        label2.setFont(new Font("Tahoma", Font.PLAIN, 30));
         add(label2, CC.xywh(4, 5, 7, 1, CC.FILL, CC.FILL));
 
         //---- goToMenu ----
         goToMenu.setText("Torna al Men\u00f9");
-        goToMenu.setFont(new Font("Tahoma", Font.PLAIN, 14));
         goToMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {

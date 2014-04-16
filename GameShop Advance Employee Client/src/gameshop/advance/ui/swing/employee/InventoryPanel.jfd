@@ -16,7 +16,9 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
 					"text": "Codice Prodotto"
-					"font": new java.awt.Font( "Tahoma", 0, 14 )
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 1
 					"gridY": 1
@@ -31,7 +33,9 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
 					"text": "Quantità"
-					"font": new java.awt.Font( "Tahoma", 0, 14 )
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 1
 					"gridY": 3
@@ -46,7 +50,9 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "button1"
 					"text": "Inserisci"
-					"font": new java.awt.Font( "Tahoma", 0, 14 )
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "aggiungiProdotto", true ) )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 5
@@ -71,7 +77,9 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "cancelButton"
 				"text": "Annulla"
-				"font": new java.awt.Font( "Tahoma", 0, 14 )
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cancelButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 7
@@ -80,7 +88,9 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "endInventoryButton"
 				"text": "Fine"
-				"font": new java.awt.Font( "Tahoma", 0, 14 )
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "endInventoryButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 8

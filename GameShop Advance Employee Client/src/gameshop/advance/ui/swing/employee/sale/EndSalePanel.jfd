@@ -12,7 +12,9 @@ new FormModel {
 				name: "label1"
 				"text": "Resto"
 				"labelFor": new FormReference( "displayRest" )
-				"font": new java.awt.Font( "Tahoma", 0, 22 )
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"gridX": 5
@@ -29,8 +31,10 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "label2"
 				"text": "Grazie per aver effettuato acquisti da noi!"
-				"font": new java.awt.Font( "Tahoma", 0, 28 )
 				"horizontalAlignment": 0
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 4
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
@@ -41,23 +45,24 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "startNewSale"
 				"text": "Nuova Vendita"
-				"background": new java.awt.Color( 102, 255, 102, 255 )
-				"font": new java.awt.Font( "Tahoma", 0, 22 )
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startNewSaleActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 8
-				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"gridX": 4
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "goToMenu"
 				"text": "Torna al Menù"
-				"font": new java.awt.Font( "Tahoma", 0, 22 )
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToMenuActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 8
 				"gridY": 8
-				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

@@ -6,7 +6,7 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
 			"$sizePolicy": 1
-			"title": "GameShopAdvance Cassa"
+			"title": "Terminale Impiegato"
 			"resizable": false
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "mainPanel"

@@ -18,8 +18,10 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label1"
 					"text": "Codice"
-					"font": new java.awt.Font( "Tahoma", 0, 14 )
 					"horizontalAlignment": 0
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 1
 					"gridY": 1
@@ -38,8 +40,10 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
 					"text": "Quantità"
-					"font": new java.awt.Font( "Tahoma", 0, 14 )
 					"horizontalAlignment": 0
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridY": 3
 					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
@@ -57,7 +61,9 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "button1"
 					"text": "Aggiungi"
-					"font": new java.awt.Font( "Tahoma", 0, 14 )
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "addProductButtonActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 5
@@ -77,8 +83,10 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label3"
 					"text": "Totale"
-					"font": new java.awt.Font( "Tahoma", 0, 14 )
 					"horizontalAlignment": 0
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 3
 					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
@@ -123,8 +131,10 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label4"
 						"text": "Numero tessera"
-						"font": new java.awt.Font( "Tahoma", 0, 14 )
 						"horizontalAlignment": 0
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
 					add( new FormComponent( "javax.swing.JTextField" ) {
 						name: "clientCode"
@@ -137,7 +147,9 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "button7"
 						"text": "Inserisci"
-						"font": new java.awt.Font( "Tahoma", 0, 14 )
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "insertClientCodeActionPerformed", true ) )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 5
@@ -181,7 +193,9 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "clearSale"
 					"text": "Annulla"
-					"font": new java.awt.Font( "Tahoma", 0, 14 )
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "clearSaleActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 1
@@ -196,7 +210,9 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "payButton"
 				"text": "Paga"
-				"font": new java.awt.Font( "Tahoma", 0, 14 )
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToPaymentButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
