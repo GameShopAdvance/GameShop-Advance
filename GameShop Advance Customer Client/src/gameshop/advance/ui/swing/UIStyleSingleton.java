@@ -23,9 +23,7 @@ public class UIStyleSingleton {
     private Color buttonSuccessTextColor = new Color(255, 255, 255);
     
     private Font bigFont = new Font("Tahoma", Font.PLAIN, 16);
-    
     private Font normalFont = new Font("Tahoma", Font.PLAIN, 14);
-    
     private Font boldFont = new Font("Tahoma", Font.BOLD, 14);
     
     private static UIStyleSingleton instance;

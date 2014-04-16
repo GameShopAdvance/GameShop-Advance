@@ -216,17 +216,4 @@ public class ChartPanel extends JPanel implements IListPanel{
         this.bookList.setModel(model);
         this.bookList.setCellRenderer(renderer);
     }
-
-    private void initElements() {
-        this.confirm = UIFactory.getInstance().getConfirmButton();
-        confirm.setText("Conferma");
-        confirm.setFont(new Font("Tahoma", Font.PLAIN, 14));
-        confirm.setName("confirm");
-        confirm.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                reserveActionPerformed(e);
-            }
-        });
-    }
 }
