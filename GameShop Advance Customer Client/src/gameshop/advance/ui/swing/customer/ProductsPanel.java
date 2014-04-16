@@ -4,6 +4,7 @@
 
 package gameshop.advance.ui.swing.customer;
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ProductsControllerSingleton;
@@ -11,10 +12,10 @@ import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.ui.interfaces.IListPanel;
 import gameshop.advance.ui.interfaces.IPopActionListener;
+import gameshop.advance.ui.swing.UIFactory;
 import gameshop.advance.utility.Money;
 import java.awt.CardLayout;
 import java.awt.Cursor;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.awt.event.MouseAdapter;
@@ -116,16 +117,21 @@ public class ProductsPanel extends JPanel implements IPopActionListener, IListPa
             Logger.getLogger(ProductsPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private void createUIComponents() {
+        this.chartButton = UIFactory.getInstance().getSimpleButton();
+        this.title = UIFactory.getInstance().getHeaderLabel();
+        this.totaleLabel = UIFactory.getInstance().getBodyLabel();
+        this.totale = UIFactory.getInstance().getBoldLabel();
+    }
     
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        createUIComponents();
+
         mainPanel = new JPanel();
-        label1 = new JLabel();
-        button1 = new JButton();
         scrollPane1 = new JScrollPane();
         productsList = new JList();
-        label2 = new JLabel();
-        totale = new JLabel();
 
         //======== this ========
         setLayout(new CardLayout());
@@ -133,25 +139,19 @@ public class ProductsPanel extends JPanel implements IPopActionListener, IListPa
         //======== mainPanel ========
         {
             mainPanel.setOpaque(false);
-            mainPanel.setLayout(new FormLayout(
-                "[15dlu,default], $lcgap, 73dlu, $lcgap, default:grow, $lcgap, [73dlu,default], $lcgap, [75dlu,default], $lcgap, [15dlu,default]",
-                "[15dlu,default], $lgap, [35dlu,default], $lgap, default:grow, $lgap, 15dlu, $lgap, [15dlu,default]"));
 
-            //---- label1 ----
-            label1.setText("Prenotazione Prodotti");
-            label1.setLabelFor(productsList);
-            label1.setFont(new Font("Tahoma", Font.PLAIN, 16));
-            mainPanel.add(label1, CC.xywh(3, 3, 5, 1, CC.FILL, CC.FILL));
+            //---- title ----
+            title.setText("Prenotazione Prodotti");
+            title.setLabelFor(productsList);
 
-            //---- button1 ----
-            button1.setText("Carrello");
-            button1.addActionListener(new ActionListener() {
+            //---- chartButton ----
+            chartButton.setText("Carrello");
+            chartButton.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     chartActionPerformed(e);
                 }
             });
-            mainPanel.add(button1, CC.xy(9, 3, CC.FILL, CC.FILL));
 
             //======== scrollPane1 ========
             {
@@ -167,17 +167,20 @@ public class ProductsPanel extends JPanel implements IPopActionListener, IListPa
                 });
                 scrollPane1.setViewportView(productsList);
             }
-            mainPanel.add(scrollPane1, CC.xywh(3, 5, 7, 1, CC.FILL, CC.FILL));
 
-            //---- label2 ----
-            label2.setText("Totale");
-            label2.setFont(new Font("Tahoma", Font.PLAIN, 14));
-            label2.setHorizontalAlignment(SwingConstants.RIGHT);
-            mainPanel.add(label2, CC.xy(7, 7, CC.FILL, CC.FILL));
+            //---- totaleLabel ----
+            totaleLabel.setText("Totale");
+            totaleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
-            //---- totale ----
-            totale.setFont(new Font("Tahoma", Font.BOLD, 14));
-            mainPanel.add(totale, CC.xy(9, 7, CC.FILL, CC.FILL));
+            PanelBuilder mainPanelBuilder = new PanelBuilder(new FormLayout(
+                "[15dlu,default], $lcgap, 73dlu, $lcgap, default:grow, $lcgap, [73dlu,default], $lcgap, [75dlu,default], $lcgap, [15dlu,default]",
+                "[15dlu,default], $lgap, [35dlu,default], $lgap, default:grow, $lgap, 15dlu, $lgap, [15dlu,default]"), mainPanel);
+
+            mainPanelBuilder.add(title,       CC.xywh(3, 3,       5,       1, CC.FILL, CC.FILL));
+            mainPanelBuilder.add(chartButton, CC.xy  (9, 3, CC.FILL, CC.FILL));
+            mainPanelBuilder.add(scrollPane1, CC.xywh(3, 5,       7,       1, CC.FILL, CC.FILL));
+            mainPanelBuilder.add(totaleLabel, CC.xy  (7, 7, CC.FILL, CC.FILL));
+            mainPanelBuilder.add(totale,      CC.xy  (9, 7, CC.FILL, CC.FILL));
         }
         add(mainPanel, "card1");
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -185,11 +188,11 @@ public class ProductsPanel extends JPanel implements IPopActionListener, IListPa
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel mainPanel;
-    private JLabel label1;
-    private JButton button1;
+    private JLabel title;
+    private JButton chartButton;
     private JScrollPane scrollPane1;
     private JList productsList;
-    private JLabel label2;
+    private JLabel totaleLabel;
     private JLabel totale;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 

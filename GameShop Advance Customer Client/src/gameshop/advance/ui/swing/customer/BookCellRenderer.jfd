@@ -13,7 +13,6 @@ new FormModel {
 				"border": new javax.swing.border.EmptyBorder( 5, 5, 5, 5 )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "name"
-					"font": new java.awt.Font( "Tahoma", 0, 14 )
 					auxiliary() {
 						"JavaCodeGenerator.customCreate": true
 					}

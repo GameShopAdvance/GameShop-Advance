@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_17" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -13,10 +13,12 @@ new FormModel {
 				name: "mainPanel"
 				"opaque": false
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label1"
+					name: "title"
 					"text": "Prenotazione Prodotti"
 					"labelFor": new FormReference( "productsList" )
-					"font": new java.awt.Font( "Tahoma", 0, 16 )
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
@@ -25,8 +27,11 @@ new FormModel {
 					"gridWidth": 5
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button1"
+					name: "chartButton"
 					"text": "Carrello"
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "chartActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 9
@@ -50,10 +55,12 @@ new FormModel {
 					"gridWidth": 7
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
-					name: "label2"
+					name: "totaleLabel"
 					"text": "Totale"
-					"font": new java.awt.Font( "Tahoma", 0, 14 )
 					"horizontalAlignment": 4
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 7
 					"gridY": 7
@@ -62,7 +69,9 @@ new FormModel {
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "totale"
-					"font": new java.awt.Font( "Tahoma", 1, 14 )
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 9
 					"gridY": 7

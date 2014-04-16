@@ -11,7 +11,9 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "button1"
 				"text": "Indietro"
-				"font": new java.awt.Font( "Dialog", 0, 14 )
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "backActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
@@ -22,6 +24,9 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "title"
 				"text": "text"
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 5
@@ -31,6 +36,9 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "price"
 				"text": "text"
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 9
 				"gridY": 5
@@ -66,6 +74,9 @@ new FormModel {
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "label2"
 					"text": "Description Here"
+					auxiliary() {
+						"JavaCodeGenerator.customCreate": true
+					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 1
 					"gridY": 1
@@ -79,14 +90,17 @@ new FormModel {
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
 				name: "panelSwitch"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-					"$columnSpecs": "54dlu:grow, labelcompgap, max(default;49dlu), labelcompgap, max(default;0dlu):grow, labelcompgap, 73dlu"
-					"$rowSpecs": "default:grow, linegap, 15dlu, linegap, max(default;15dlu), linegap, fill:6dlu:grow, linegap, max(default;20dlu)"
+					"$columnSpecs": "54dlu:grow, labelcompgap, max(default;49dlu), labelcompgap, max(default;0dlu):grow, labelcompgap, max(default;75dlu)"
+					"$rowSpecs": "default:grow, linegap, 15dlu, linegap, max(default;15dlu), linegap, fill:6dlu:grow, linegap, max(default;35dlu)"
 				} ) {
 					name: "bookPanel"
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label5"
+						name: "notAvailableLabel"
 						"text": "Siamo spiacenti, ma il prodotto non è al momento disponibile"
 						"horizontalAlignment": 0
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 						"gridWidth": 7
@@ -96,6 +110,9 @@ new FormModel {
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "label6"
 						"text": "Se lo desidera può prenotarlo."
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridY": 5
 						"gridWidth": 7
@@ -106,6 +123,9 @@ new FormModel {
 						name: "label7"
 						"text": "Quantità"
 						"horizontalAlignment": 0
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 1
 						"gridY": 9
@@ -116,14 +136,21 @@ new FormModel {
 						name: "requiredQuantity"
 						"text": "1"
 						"horizontalAlignment": 2
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 9
 						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					} )
 					add( new FormComponent( "javax.swing.JButton" ) {
 						name: "bookButton"
 						"text": "Prenota"
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "bookActionPerformed", true ) )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 7
@@ -145,7 +172,9 @@ new FormModel {
 						name: "label3"
 						"text": "Il prodotto è disponibile presso gli sportelli."
 						"horizontalAlignment": 0
-						"font": new java.awt.Font( "Dialog", 0, 12 )
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 						"row": 1
 						"colSpan": 3
@@ -154,11 +183,17 @@ new FormModel {
 						name: "label4"
 						"text": "Quantità disponibile"
 						"horizontalAlignment": 0
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 						"row": 2
 					} )
 					add( new FormComponent( "javax.swing.JLabel" ) {
 						name: "quantity"
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					}, new FormLayoutConstraints( class com.intellij.uiDesigner.core.GridConstraints ) {
 						"column": 2
 						"row": 2
@@ -173,10 +208,12 @@ new FormModel {
 				} ) {
 					name: "bookCompleted"
 					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label8"
+						name: "bookedLabel"
 						"text": "L'oggetto è stato aggiunto alla tua prenotazione."
 						"horizontalAlignment": 0
-						"font": new java.awt.Font( "Dialog", 1, 11 )
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 3
@@ -187,6 +224,9 @@ new FormModel {
 						name: "label9"
 						"text": "Ricorda: puoi rivedere e modificare i dettagli della tua "
 						"horizontalAlignment": 0
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 5
@@ -197,6 +237,9 @@ new FormModel {
 						name: "label10"
 						"text": "prenotazione facendo click su carrello."
 						"horizontalAlignment": 0
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 3
 						"gridY": 7
@@ -213,7 +256,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 5 )
-			"size": new java.awt.Dimension( 500, 350 )
+			"size": new java.awt.Dimension( 515, 385 )
 		} )
 	}
 }

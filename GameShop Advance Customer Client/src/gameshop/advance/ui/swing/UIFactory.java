@@ -57,6 +57,10 @@ public class UIFactory {
         return button;     
     }
     
+    public JButton getMenuButton(){
+        return this.getSimpleButton();
+    }
+    
     public JLabel getHeaderLabel(){
         JLabel label = new JLabel();
         label.setForeground(UIStyleSingleton.getInstance().getHeaderTextColor());

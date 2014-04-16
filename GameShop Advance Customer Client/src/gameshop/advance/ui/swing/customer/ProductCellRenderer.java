@@ -8,7 +8,7 @@ import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
-import java.awt.Color;
+import gameshop.advance.ui.swing.UIFactory;
 import java.awt.Component;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,14 +30,19 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
         initComponents();
     }
 
+    private void createUIComponents() {
+        this.label2 = UIFactory.getInstance().getBodyLabel();
+        this.title = UIFactory.getInstance().getHeaderLabel();
+        this.price = UIFactory.getInstance().getBodyLabel();
+        this.quantity = UIFactory.getInstance().getBodyLabel();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        createUIComponents();
+
         imageBox = new JPanel();
         label1 = new JLabel();
-        title = new JLabel();
-        price = new JLabel();
-        label2 = new JLabel();
-        quantity = new JLabel();
         separator1 = new JSeparator();
 
         //======== this ========
@@ -45,7 +50,7 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
 
         //======== imageBox ========
         {
-            imageBox.setBorder(new LineBorder(Color.black));
+            imageBox.setBorder(LineBorder.createBlackLineBorder());
             imageBox.setName("imageBox");
 
             //---- label1 ----

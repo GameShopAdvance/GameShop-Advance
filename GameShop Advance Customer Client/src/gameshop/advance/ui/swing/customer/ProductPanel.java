@@ -14,8 +14,8 @@ import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.ui.interfaces.IPopActionListener;
+import gameshop.advance.ui.swing.UIFactory;
 import java.awt.CardLayout;
-import java.awt.Font;
 import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -96,38 +96,42 @@ public class ProductPanel extends JPanel {
             Logger.getLogger(ProductPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
+
+    private void createUIComponents() {
+        this.bookButton = UIFactory.getInstance().getConfirmButton();
+        this.title = UIFactory.getInstance().getHeaderLabel();
+        this.price = UIFactory.getInstance().getBoldLabel();
+        this.requiredQuantity = UIFactory.getInstance().getTextField();
+        this.notAvailableLabel = UIFactory.getInstance().getBoldLabel();
+        this.bookedLabel = UIFactory.getInstance().getBoldLabel();
+        this.button1 = UIFactory.getInstance().getSimpleButton();
+        this.quantity = UIFactory.getInstance().getBodyLabel();
+        this.label10 = UIFactory.getInstance().getBodyLabel();
+        this.label2 = UIFactory.getInstance().getBodyLabel();
+        this.label3 = UIFactory.getInstance().getBodyLabel();
+        this.label4 = UIFactory.getInstance().getBodyLabel();
+        this.label6 = UIFactory.getInstance().getBodyLabel();
+        this.label7 = UIFactory.getInstance().getBodyLabel();
+        this.label9 = UIFactory.getInstance().getBodyLabel();
+    }
     
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        button1 = new JButton();
-        title = new JLabel();
-        price = new JLabel();
+        createUIComponents();
+
         imagePanel = new JPanel();
         label1 = new JLabel();
         panel1 = new JPanel();
-        label2 = new JLabel();
         panelSwitch = new JPanel();
         bookPanel = new JPanel();
-        label5 = new JLabel();
-        label6 = new JLabel();
-        label7 = new JLabel();
-        requiredQuantity = new JTextField();
-        bookButton = new JButton();
         buyPanel = new JPanel();
-        label3 = new JLabel();
-        label4 = new JLabel();
-        quantity = new JLabel();
         bookCompleted = new JPanel();
-        label8 = new JLabel();
-        label9 = new JLabel();
-        label10 = new JLabel();
 
         //======== this ========
         setName("this");
 
         //---- button1 ----
         button1.setText("Indietro");
-        button1.setFont(new Font("Dialog", Font.PLAIN, 14));
         button1.setName("button1");
         button1.addActionListener(new ActionListener() {
             @Override
@@ -184,10 +188,10 @@ public class ProductPanel extends JPanel {
             {
                 bookPanel.setName("bookPanel");
 
-                //---- label5 ----
-                label5.setText("Siamo spiacenti, ma il prodotto non \u00e8 al momento disponibile");
-                label5.setHorizontalAlignment(SwingConstants.CENTER);
-                label5.setName("label5");
+                //---- notAvailableLabel ----
+                notAvailableLabel.setText("Siamo spiacenti, ma il prodotto non \u00e8 al momento disponibile");
+                notAvailableLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                notAvailableLabel.setName("notAvailableLabel");
 
                 //---- label6 ----
                 label6.setText("Se lo desidera pu\u00f2 prenotarlo.");
@@ -214,14 +218,14 @@ public class ProductPanel extends JPanel {
                 });
 
                 PanelBuilder bookPanelBuilder = new PanelBuilder(new FormLayout(
-                    "54dlu:grow, $lcgap, [49dlu,default], $lcgap, [0dlu,default]:grow, $lcgap, 73dlu",
-                    "default:grow, $lgap, 15dlu, $lgap, [15dlu,default], $lgap, fill:6dlu:grow, $lgap, [20dlu,default]"), bookPanel);
+                    "54dlu:grow, $lcgap, [49dlu,default], $lcgap, [0dlu,default]:grow, $lcgap, [75dlu,default]",
+                    "default:grow, $lgap, 15dlu, $lgap, [15dlu,default], $lgap, fill:6dlu:grow, $lgap, [35dlu,default]"), bookPanel);
 
-                bookPanelBuilder.add(label5,           CC.xywh(1, 3,          7,       1, CC.FILL  , CC.FILL));
-                bookPanelBuilder.add(label6,           CC.xywh(1, 5,          7,       1, CC.CENTER, CC.FILL));
-                bookPanelBuilder.add(label7,           CC.xy  (1, 9,    CC.FILL, CC.FILL));
-                bookPanelBuilder.add(requiredQuantity, CC.xy  (3, 9, CC.DEFAULT, CC.FILL));
-                bookPanelBuilder.add(bookButton,       CC.xy  (7, 9,    CC.FILL, CC.FILL));
+                bookPanelBuilder.add(notAvailableLabel, CC.xywh(1, 3,       7,       1, CC.FILL  , CC.FILL));
+                bookPanelBuilder.add(label6,            CC.xywh(1, 5,       7,       1, CC.CENTER, CC.FILL));
+                bookPanelBuilder.add(label7,            CC.xy  (1, 9, CC.FILL, CC.FILL));
+                bookPanelBuilder.add(requiredQuantity,  CC.xy  (3, 9, CC.FILL, CC.FILL));
+                bookPanelBuilder.add(bookButton,        CC.xy  (7, 9, CC.FILL, CC.FILL));
             }
             panelSwitch.add(bookPanel, "bookPanel");
 
@@ -233,7 +237,6 @@ public class ProductPanel extends JPanel {
                 //---- label3 ----
                 label3.setText("Il prodotto \u00e8 disponibile presso gli sportelli.");
                 label3.setHorizontalAlignment(SwingConstants.CENTER);
-                label3.setFont(new Font("Dialog", Font.PLAIN, 12));
                 label3.setName("label3");
                 buyPanel.add(label3, new GridConstraints(1, 0, 1, 3,
                     GridConstraints.ANCHOR_CENTER, GridConstraints.FILL_NONE,
@@ -265,11 +268,10 @@ public class ProductPanel extends JPanel {
             {
                 bookCompleted.setName("bookCompleted");
 
-                //---- label8 ----
-                label8.setText("L'oggetto \u00e8 stato aggiunto alla tua prenotazione.");
-                label8.setHorizontalAlignment(SwingConstants.CENTER);
-                label8.setFont(new Font("Dialog", Font.BOLD, 11));
-                label8.setName("label8");
+                //---- bookedLabel ----
+                bookedLabel.setText("L'oggetto \u00e8 stato aggiunto alla tua prenotazione.");
+                bookedLabel.setHorizontalAlignment(SwingConstants.CENTER);
+                bookedLabel.setName("bookedLabel");
 
                 //---- label9 ----
                 label9.setText("Ricorda: puoi rivedere e modificare i dettagli della tua ");
@@ -285,9 +287,9 @@ public class ProductPanel extends JPanel {
                     "[15dlu,default]:grow, $lcgap, default:grow, $lcgap, [15dlu,default]:grow",
                     "[15dlu,default]:grow, $lgap, 17dlu, 5dlu, 2*(12dlu, $lgap), [15dlu,default]:grow"), bookCompleted);
 
-                bookCompletedBuilder.add(label8,  CC.xy(3, 3, CC.FILL, CC.FILL));
-                bookCompletedBuilder.add(label9,  CC.xy(3, 5, CC.FILL, CC.FILL));
-                bookCompletedBuilder.add(label10, CC.xy(3, 7, CC.FILL, CC.FILL));
+                bookCompletedBuilder.add(bookedLabel, CC.xy(3, 3, CC.FILL, CC.FILL));
+                bookCompletedBuilder.add(label9,      CC.xy(3, 5, CC.FILL, CC.FILL));
+                bookCompletedBuilder.add(label10,     CC.xy(3, 7, CC.FILL, CC.FILL));
             }
             panelSwitch.add(bookCompleted, "bookCompleted");
         }
@@ -315,7 +317,7 @@ public class ProductPanel extends JPanel {
     private JLabel label2;
     private JPanel panelSwitch;
     private JPanel bookPanel;
-    private JLabel label5;
+    private JLabel notAvailableLabel;
     private JLabel label6;
     private JLabel label7;
     private JTextField requiredQuantity;
@@ -325,7 +327,7 @@ public class ProductPanel extends JPanel {
     private JLabel label4;
     private JLabel quantity;
     private JPanel bookCompleted;
-    private JLabel label8;
+    private JLabel bookedLabel;
     private JLabel label9;
     private JLabel label10;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

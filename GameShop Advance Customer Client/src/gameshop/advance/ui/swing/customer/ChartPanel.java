@@ -128,12 +128,10 @@ public class ChartPanel extends JPanel implements IListPanel{
         //---- title ----
         title.setText("Riepilogo prenotazione");
         title.setHorizontalAlignment(SwingConstants.CENTER);
-        title.setFont(new Font("Tahoma", Font.PLAIN, 16));
         title.setName("title");
 
         //---- totalLabel ----
         totalLabel.setText("Totale");
-        totalLabel.setFont(new Font("Tahoma", Font.PLAIN, 14));
         totalLabel.setHorizontalAlignment(SwingConstants.RIGHT);
         totalLabel.setName("totalLabel");
 
@@ -149,12 +147,10 @@ public class ChartPanel extends JPanel implements IListPanel{
         }
 
         //---- totale ----
-        totale.setFont(new Font("Tahoma", Font.BOLD, 14));
         totale.setName("totale");
 
         //---- back ----
         back.setText("Indietro");
-        back.setFont(new Font("Tahoma", Font.PLAIN, 14));
         back.setName("back");
         back.addActionListener(new ActionListener() {
             @Override
@@ -165,7 +161,6 @@ public class ChartPanel extends JPanel implements IListPanel{
 
         //---- cancel ----
         cancel.setText("Cancella");
-        cancel.setFont(new Font("Tahoma", Font.PLAIN, 14));
         cancel.setName("cancel");
         cancel.addActionListener(new ActionListener() {
             @Override
@@ -176,7 +171,6 @@ public class ChartPanel extends JPanel implements IListPanel{
 
         //---- confirm ----
         confirm.setText("Conferma");
-        confirm.setFont(new Font("Tahoma", Font.PLAIN, 14));
         confirm.setName("confirm");
         confirm.addActionListener(new ActionListener() {
             @Override
