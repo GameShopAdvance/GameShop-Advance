@@ -2,15 +2,15 @@
  * Created by JFormDesigner on Tue Apr 01 14:37:18 CEST 2014
  */
 
-package gameshop.advance.ui.swing.employee.sale;
+package gameshop.advance.ui.swing.employee.book;
 
+import gameshop.advance.ui.swing.employee.sale.*;
+import java.awt.*;
+import javax.swing.border.*;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
-import java.awt.BorderLayout;
 import java.awt.Component;
-import java.awt.Dimension;
-import java.awt.Font;
 import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -20,7 +20,6 @@ import javax.swing.JPanel;
 import javax.swing.JSeparator;
 import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
-import javax.swing.border.EmptyBorder;
 
 /**
  * @author Pippo
@@ -47,7 +46,7 @@ public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDi
         {
             panel1.setBorder(new EmptyBorder(5, 5, 5, 5));
             panel1.setLayout(new FormLayout(
-                "[75dlu,default]:grow, $lcgap, 10dlu, $lcgap, 15dlu, $lcgap, 10dlu, $lcgap, 35dlu",
+                "[100dlu,default]:grow, $lcgap, 10dlu, $lcgap, 50dlu, $lcgap, 10dlu, $lcgap, 50dlu",
                 "fill:[30dlu,default]:grow"));
 
             //---- name ----

@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_17" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -6,7 +6,7 @@ new FormModel {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "max(default;75dlu):grow, labelcompgap, 10dlu, labelcompgap, 15dlu, labelcompgap, 10dlu, labelcompgap, 35dlu"
+				"$columnSpecs": "max(default;100dlu):grow, labelcompgap, 10dlu, labelcompgap, 50dlu, labelcompgap, 10dlu, labelcompgap, 50dlu"
 				"$rowSpecs": "fill:max(default;30dlu):grow"
 			} ) {
 				name: "panel1"
@@ -31,6 +31,7 @@ new FormModel {
 					"horizontalAlignment": 0
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 5
+					"gridY": 1
 				} )
 				add( new FormComponent( "javax.swing.JSeparator" ) {
 					name: "separator1"

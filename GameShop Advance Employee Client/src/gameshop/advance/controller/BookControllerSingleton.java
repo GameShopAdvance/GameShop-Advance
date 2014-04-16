@@ -3,18 +3,24 @@ package gameshop.advance.controller;
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.IRemoteBookClient;
 import gameshop.advance.interfaces.remote.IRemoteFactory;
 import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.interfaces.remote.IRemoteReservationClient;
+import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
 import gameshop.advance.observer.PartialObserver;
 import gameshop.advance.observer.RestObserver;
 import gameshop.advance.observer.RestPartialObserver;
 import gameshop.advance.observer.TotalObserver;
+import gameshop.advance.observer.TransactionObserver;
+import gameshop.advance.ui.swing.RigheDiVenditaListModel;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.employee.book.BookPanel;
 import gameshop.advance.ui.swing.employee.book.EndBookPanel;
+import gameshop.advance.ui.swing.employee.sale.BookCellRenderer;
 import gameshop.advance.utility.Money;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -29,17 +35,23 @@ import javax.swing.JComponent;
  * Controller lato client delle funzioni relative alle prenotazioni.
  * @author Salx
  */
-public class BookControllerSingleton  extends UnicastRemoteObject implements IRemoteBookClient{
+public class BookControllerSingleton  extends UnicastRemoteObject implements IRemoteBookClient, IRemoteReservationClient{
     
     private static BookControllerSingleton instance;
     private IPrenotaProdottoRemote controller;
     private IRemoteObserver bookPartialObserver;
     private IRemoteObserver bookTotalObserver;
+    private TransactionObserver transactionObserver;
     private Money totale = new Money();
     private Money acconto = new Money();
     private Money resto = new Money();
     
+    private final RigheDiVenditaListModel listaProdottiPrenotati;
+    BookPanel panel = new BookPanel();
+    
     private BookControllerSingleton() throws RemoteException{
+        
+         this.listaProdottiPrenotati = new RigheDiVenditaListModel();
         
     }
     
@@ -51,6 +63,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         this.controller = factory.getPrenotaProdottoController();
         this.bookPartialObserver = new PartialObserver(instance);
         this.bookTotalObserver = new TotalObserver(instance);
+        this.transactionObserver = new TransactionObserver(instance);
     }
 
     /**
@@ -79,7 +92,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      * @throws RemoteException
      */
     public void gestisciPrenotazione() throws RemoteException{
-        this.aggiornaWindow(new BookPanel());
+        this.aggiornaWindow(this.panel);
     }
     
     /**
@@ -91,6 +104,10 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         this.controller.recuperaPrenotazione(codicePrenotazione);
         this.controller.addListener(this.bookPartialObserver);
         this.controller.addListener(this.bookTotalObserver);
+        this.controller.addListener(this.transactionObserver);
+        this.listaProdottiPrenotati.clear();
+        panel.setList(this.listaProdottiPrenotati, new BookCellRenderer());
+        aggiornaWindow(panel);
         this.controller.completaPrenotazione();
     }
     
@@ -196,5 +213,19 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      */
     public void inserisciCartaCliente(Integer code) {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void aggiornaIdPrenotazione(int id) throws RemoteException {
+        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    }
+
+    @Override
+    public void aggiornaListaProdotti(IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter) throws RemoteException {
+         while(iter.hasNext())
+        {
+            IRigaDiTransazioneRemote rdt = iter.next();
+            this.listaProdottiPrenotati.addElement(rdt);
+        }
     }
 }

@@ -69,10 +69,7 @@ public class InsertItemPanel extends JPanel implements IListPanel{
         this.quantityTextField.setText("");
     }
     
-    public void addrdV(IRigaDiTransazioneRemote rdv) {
-        this.rdvListModel.addElement(rdv);
-    }
-    
+
     private void addProductButtonActionPerformed(ActionEvent e) {
         try {
             Integer quantity = 1;
@@ -88,7 +85,6 @@ public class InsertItemPanel extends JPanel implements IListPanel{
             SaleControllerSingleton.getInstance().inserisciProdotto(this.productIdTextField.getText(), quantity);
             this.clearFields();
             this.total.setText(SaleControllerSingleton.getInstance().getTotal().toString());
-//            this.addrdV(SaleControllerSingleton.getInstance().getLastInserted());
         }
         catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
@@ -235,6 +231,7 @@ public class InsertItemPanel extends JPanel implements IListPanel{
 
             //---- total ----
             total.setFont(new Font("Tahoma", Font.PLAIN, 14));
+            total.setEditable(false);
             panel4.add(total, CC.xy(5, 1, CC.FILL, CC.FILL));
 
             //======== scrollPane1 ========
