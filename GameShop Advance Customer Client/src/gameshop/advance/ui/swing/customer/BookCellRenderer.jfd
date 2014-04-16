@@ -6,14 +6,13 @@ new FormModel {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "max(default;100dlu):grow, labelcompgap, 10dlu, labelcompgap, 50dlu, labelcompgap, 10dlu, labelcompgap, 50dlu"
+				"$columnSpecs": "max(default;100dlu):grow, labelcompgap, 10dlu, labelcompgap, (20dlu<default<40dlu):grow, labelcompgap, 10dlu, labelcompgap, (25dlu<default<75dlu):grow"
 				"$rowSpecs": "fill:max(default;30dlu):grow"
 			} ) {
 				name: "panel1"
 				"border": new javax.swing.border.EmptyBorder( 5, 5, 5, 5 )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "name"
-					"font": new java.awt.Font( "Tahoma", 0, 14 )
 					auxiliary() {
 						"JavaCodeGenerator.customCreate": true
 					}

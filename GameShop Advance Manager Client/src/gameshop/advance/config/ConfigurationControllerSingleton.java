@@ -40,11 +40,10 @@ public class ConfigurationControllerSingleton {
         return instance;
     }
     
-    public void setConfiguration(String address, int port, int idCassa){
+    public void setConfiguration(String address, int port){
         
         this.config.setServerAddress(address);
         this.config.setServerPort(port);
-        this.config.setIdCassa(idCassa);     
     }
     
     public Configuration getConfiguration(){
@@ -77,17 +76,6 @@ public class ConfigurationControllerSingleton {
         int port;
         port = this.config.getServerPort();
         return port;
-    }
-    
-    public void setIdCassa(int idCassa){
-        
-        this.config.setIdCassa(idCassa);
-    }
-    
-    public int getIdCassa(){
-        int idCassa;
-        idCassa = this.config.getIdCassa();
-        return idCassa;
     }
     
 

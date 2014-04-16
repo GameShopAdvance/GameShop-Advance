@@ -8,7 +8,7 @@ import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
-import java.awt.Color;
+import gameshop.advance.ui.swing.UIFactory;
 import java.awt.Component;
 import java.util.logging.Level;
 import java.util.logging.Logger;
@@ -30,14 +30,19 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
         initComponents();
     }
 
+    private void createUIComponents() {
+        this.label2 = UIFactory.getInstance().getBodyLabel();
+        this.title = UIFactory.getInstance().getHeaderLabel();
+        this.price = UIFactory.getInstance().getBodyLabel();
+        this.quantity = UIFactory.getInstance().getBodyLabel();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        createUIComponents();
+
         imageBox = new JPanel();
         label1 = new JLabel();
-        title = new JLabel();
-        price = new JLabel();
-        label2 = new JLabel();
-        quantity = new JLabel();
         separator1 = new JSeparator();
 
         //======== this ========
@@ -45,7 +50,7 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
 
         //======== imageBox ========
         {
-            imageBox.setBorder(new LineBorder(Color.black));
+            imageBox.setBorder(LineBorder.createBlackLineBorder());
             imageBox.setName("imageBox");
 
             //---- label1 ----
@@ -80,7 +85,7 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
         separator1.setName("separator1");
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[15dlu,default], $lcgap, [40dlu,default], $lcgap, 62dlu:grow, 2*($lcgap, 25dlu), $lcgap, [15dlu,default], $lcgap, default",
+            "[15dlu,default], $lcgap, [40dlu,default,120dlu]:grow, $lcgap, [50dlu,default]:grow, $lcgap, [25dlu,default,50dlu]:grow, $lcgap, [25dlu,default,50dlu], $lcgap, [15dlu,default]",
             "[10dlu,default], 2*($lgap, 30dlu), $lgap, [10dlu,default], $lgap, 1dlu"), this);
 
         builder.add(imageBox,   CC.xywh(3, 3,       1,          3));
@@ -88,7 +93,7 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
         builder.add(price,      CC.xywh(7, 3,       3,          1, CC.FILL, CC.FILL));
         builder.add(label2,     CC.xy  (7, 5, CC.FILL, CC.DEFAULT));
         builder.add(quantity,   CC.xy  (9, 5, CC.FILL, CC.DEFAULT));
-        builder.add(separator1, CC.xywh(1, 9,      13,          1));
+        builder.add(separator1, CC.xywh(1, 9,      11,          1));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

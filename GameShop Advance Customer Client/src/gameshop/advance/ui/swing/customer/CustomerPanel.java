@@ -9,6 +9,7 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.ui.swing.UIFactory;
 import gameshop.advance.ui.swing.UIStyleSingleton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
@@ -47,10 +48,16 @@ public class CustomerPanel extends JPanel {
             }
     }
 
+    private void createUIComponents() {
+        this.label1 = UIFactory.getInstance().getHeaderLabel();
+        this.button1 = UIFactory.getInstance().getMenuButton();
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
+        createUIComponents();
+
         label1 = new JLabel();
-        button1 = new JButton();
 
         //======== this ========
         setName("this");

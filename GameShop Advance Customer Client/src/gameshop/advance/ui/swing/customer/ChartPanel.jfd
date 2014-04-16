@@ -12,7 +12,6 @@ new FormModel {
 				name: "title"
 				"text": "Riepilogo prenotazione"
 				"horizontalAlignment": 0
-				"font": new java.awt.Font( "Tahoma", 0, 16 )
 				auxiliary() {
 					"JavaCodeGenerator.customCreate": true
 				}
@@ -26,7 +25,6 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "totalLabel"
 				"text": "Totale"
-				"font": new java.awt.Font( "Tahoma", 0, 14 )
 				"horizontalAlignment": 4
 				auxiliary() {
 					"JavaCodeGenerator.customCreate": true
@@ -52,7 +50,6 @@ new FormModel {
 			} )
 			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "totale"
-				"font": new java.awt.Font( "Tahoma", 1, 14 )
 				auxiliary() {
 					"JavaCodeGenerator.customCreate": true
 				}
@@ -65,7 +62,6 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "back"
 				"text": "Indietro"
-				"font": new java.awt.Font( "Tahoma", 0, 14 )
 				auxiliary() {
 					"JavaCodeGenerator.customCreate": true
 				}
@@ -79,7 +75,6 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "cancel"
 				"text": "Cancella"
-				"font": new java.awt.Font( "Tahoma", 0, 14 )
 				auxiliary() {
 					"JavaCodeGenerator.customCreate": true
 				}
@@ -93,7 +88,6 @@ new FormModel {
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "confirm"
 				"text": "Conferma"
-				"font": new java.awt.Font( "Tahoma", 0, 14 )
 				auxiliary() {
 					"JavaCodeGenerator.customCreate": true
 				}

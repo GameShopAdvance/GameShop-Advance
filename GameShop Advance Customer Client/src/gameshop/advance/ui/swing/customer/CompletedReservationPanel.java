@@ -9,8 +9,8 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.ui.swing.UIFactory;
 import gameshop.advance.utility.Money;
-import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
@@ -84,77 +84,73 @@ public class CompletedReservationPanel extends JPanel {
         }
         
     }
+
+    private void createUIComponents() {
+        this.title = UIFactory.getInstance().getHeaderLabel();
+        this.button1 = UIFactory.getInstance().getConfirmButton();
+        
+        this.totale = UIFactory.getInstance().getBodyLabel();
+        this.acconto = UIFactory.getInstance().getBodyLabel();
+        this.totaleLabel = UIFactory.getInstance().getBoldLabel();
+        this.accontoLabel = UIFactory.getInstance().getBoldLabel();
+        
+        this.label2 = UIFactory.getInstance().getBodyLabel();
+        this.label3 = UIFactory.getInstance().getBodyLabel();
+        this.label4 = UIFactory.getInstance().getBodyLabel();
+        this.label7 = UIFactory.getInstance().getBodyLabel();
+        this.numeroPrenotazione = UIFactory.getInstance().getBoldLabel();
+    }
     
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
-        label1 = new JLabel();
-        label2 = new JLabel();
-        label3 = new JLabel();
-        numeroPrenotazione = new JLabel();
-        label7 = new JLabel();
-        label5 = new JLabel();
-        label6 = new JLabel();
-        totale = new JLabel();
-        acconto = new JLabel();
-        label4 = new JLabel();
-        button1 = new JButton();
+        createUIComponents();
+
 
         //======== this ========
         setName("this");
 
-        //---- label1 ----
-        label1.setText("Congratulazioni: la tua prenotazione \u00e8 completata");
-        label1.setFont(new Font("Tahoma", Font.BOLD, 16));
-        label1.setName("label1");
+        //---- title ----
+        title.setText("Congratulazioni: la tua prenotazione \u00e8 completata");
+        title.setName("title");
 
         //---- label2 ----
         label2.setText("Puoi pagare i prodotti prenotati in cassa fornendo il numero di prenotazione");
-        label2.setFont(new Font("Tahoma", Font.PLAIN, 14));
         label2.setName("label2");
 
         //---- label3 ----
         label3.setText("Numero prenotazione");
-        label3.setFont(new Font("Tahoma", Font.BOLD, 14));
         label3.setHorizontalAlignment(SwingConstants.RIGHT);
         label3.setName("label3");
 
         //---- numeroPrenotazione ----
-        numeroPrenotazione.setFont(new Font("Tahoma", Font.PLAIN, 14));
         numeroPrenotazione.setName("numeroPrenotazione");
 
         //---- label7 ----
         label7.setText("Se desideri puoi lasciare un acconto e saldare il totale quando avrai i prodotti");
-        label7.setFont(new Font("Tahoma", Font.PLAIN, 14));
         label7.setName("label7");
 
-        //---- label5 ----
-        label5.setText("Totale");
-        label5.setFont(new Font("Tahoma", Font.BOLD, 14));
-        label5.setName("label5");
+        //---- totaleLabel ----
+        totaleLabel.setText("Totale");
+        totaleLabel.setName("totaleLabel");
 
-        //---- label6 ----
-        label6.setText("Acconto");
-        label6.setFont(new Font("Tahoma", Font.BOLD, 14));
-        label6.setName("label6");
+        //---- accontoLabel ----
+        accontoLabel.setText("Acconto");
+        accontoLabel.setName("accontoLabel");
 
         //---- totale ----
         totale.setHorizontalAlignment(SwingConstants.CENTER);
-        totale.setFont(new Font("Tahoma", Font.PLAIN, 14));
         totale.setName("totale");
 
         //---- acconto ----
         acconto.setHorizontalAlignment(SwingConstants.CENTER);
-        acconto.setFont(new Font("Tahoma", Font.PLAIN, 14));
         acconto.setName("acconto");
 
         //---- label4 ----
         label4.setText("Ti ringraziamo per aver scelto di utilizzare i nostri sistemi automatici.");
-        label4.setFont(new Font("Tahoma", Font.PLAIN, 14));
         label4.setName("label4");
 
         //---- button1 ----
         button1.setText("Chiudi");
-        button1.setFont(new Font("Tahoma", Font.PLAIN, 14));
         button1.setName("button1");
         button1.addActionListener(new ActionListener() {
             @Override
@@ -167,13 +163,13 @@ public class CompletedReservationPanel extends JPanel {
             "[15dlu,default], $lcgap, 100dlu, $lcgap, default:grow, $lcgap, [75dlu,default], $lcgap, default:grow, $lcgap, 100dlu, $lcgap, [15dlu,default]",
             "15dlu, $lgap, [20dlu,default], 5dlu, fill:15dlu, $lgap, fill:20dlu, 5dlu, 3*(15dlu, $lgap), [30dlu,default]:grow, $lgap, [35dlu,default], $lgap, 16dlu"), this);
 
-        builder.add(label1,             CC.xywh( 3,  3,         9,       1, CC.CENTER, CC.FILL   ));
+        builder.add(title,              CC.xywh( 3,  3,         9,       1, CC.CENTER, CC.FILL   ));
         builder.add(label2,             CC.xywh( 3,  5,         9,       1, CC.CENTER, CC.FILL   ));
         builder.add(label3,             CC.xywh( 3,  7,         3,       1, CC.FILL  , CC.DEFAULT));
         builder.add(numeroPrenotazione, CC.xy  ( 7,  7));
         builder.add(label7,             CC.xywh( 3,  9,         9,       1, CC.CENTER, CC.FILL   ));
-        builder.add(label5,             CC.xy  ( 3, 11, CC.CENTER, CC.FILL));
-        builder.add(label6,             CC.xy  (11, 11, CC.CENTER, CC.FILL));
+        builder.add(totaleLabel,        CC.xy  ( 3, 11, CC.CENTER, CC.FILL));
+        builder.add(accontoLabel,       CC.xy  (11, 11, CC.CENTER, CC.FILL));
         builder.add(totale,             CC.xy  ( 3, 13,   CC.FILL, CC.FILL));
         builder.add(acconto,            CC.xy  (11, 13,   CC.FILL, CC.FILL));
         builder.add(label4,             CC.xywh( 3, 15,         9,       1, CC.CENTER, CC.FILL   ));
@@ -182,13 +178,13 @@ public class CompletedReservationPanel extends JPanel {
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JLabel label1;
+    private JLabel title;
     private JLabel label2;
     private JLabel label3;
     private JLabel numeroPrenotazione;
     private JLabel label7;
-    private JLabel label5;
-    private JLabel label6;
+    private JLabel totaleLabel;
+    private JLabel accontoLabel;
     private JLabel totale;
     private JLabel acconto;
     private JLabel label4;

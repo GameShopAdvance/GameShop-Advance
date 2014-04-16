@@ -1,77 +1,105 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_25" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "labelcompgap, 69dlu, labelcompgap, 90dlu, labelcompgap, max(default;56dlu), labelcompgap, labelcompgap, 43dlu, labelcompgap, 45dlu, labelcompgap"
-			"$rowSpecs": "linegap, fill:max(default;27dlu), linegap, fill:26dlu, linegap"
+			"$columnSpecs": "labelcompgap, (60dlu<default<140dlu):grow, unrelgap, (50dlu<default<100dlu):grow, labelcompgap, (20dlu<default<40dlu):grow, unrelgap, (50dlu<default<100dlu):grow, labelcompgap, (20dlu<default<40dlu):grow, labelcompgap"
+			"$rowSpecs": "linegap, fill:max(default;27dlu), linegap, fill:26dlu, linegap, relgap"
 		} ) {
 			name: "this"
-			add( new FormComponent( "javax.swing.JTextField" ) {
+			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "title"
-				"editable": false
 				"text": "Titolo"
 				"horizontalAlignment": 0
+				"border": new javax.swing.border.LineBorder( sfield java.awt.Color black, 1, false )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 2
 				"gridY": 2
 				"gridHeight": 3
-				"gridX": 2
 			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
+			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "prenotazioni"
-				"editable": false
-				"text": "Prenotazioni"
+				"text": "Prenotati"
 				"horizontalAlignment": 0
+				"border": &EtchedBorder0 new javax.swing.border.EtchedBorder( 1, null, null )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 4
 				"gridY": 2
 			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
+			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "quantitaPrenotazioni"
 				"text": "#qty"
 				"horizontalAlignment": 0
-				"editable": false
+				"border": #EtchedBorder0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 6
 				"gridY": 2
 			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "disponibilità"
-				"editable": false
-				"text": "Disponibilità"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "inArrivo"
+				"text": "In Arrivo"
 				"horizontalAlignment": 0
+				"border": #EtchedBorder0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 8
+				"gridY": 2
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "quantitaInArrivo"
+				"text": "0"
+				"horizontalAlignment": 0
+				"border": #EtchedBorder0
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 10
+				"gridY": 2
+			} )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "disponibilita"
+				"text": "Disponibili"
+				"horizontalAlignment": 0
+				"border": #EtchedBorder0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 4
 				"gridY": 4
 			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
+			add( new FormComponent( "javax.swing.JLabel" ) {
 				name: "quantitaDisponibile"
-				"editable": false
 				"text": "#qty"
 				"horizontalAlignment": 0
+				"border": #EtchedBorder0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 6
 				"gridY": 4
 			} )
-			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "Ordine"
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "ordine"
 				"text": "Ordine"
-				"editable": false
 				"horizontalAlignment": 0
+				"border": #EtchedBorder0
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 9
+				"gridX": 8
 				"gridY": 4
 			} )
 			add( new FormComponent( "javax.swing.JTextField" ) {
-				name: "numeroOrdine"
+				name: "quantitaOrdine"
+				"horizontalAlignment": 0
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 11
+				"gridX": 10
 				"gridY": 4
+			} )
+			add( new FormComponent( "javax.swing.JSeparator" ) {
+				name: "separator1"
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 6
+				"gridWidth": 11
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 490, 95 )
+			"size": new java.awt.Dimension( 615, 100 )
 		} )
 	}
 }

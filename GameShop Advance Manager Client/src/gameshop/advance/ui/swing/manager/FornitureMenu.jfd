@@ -23,16 +23,21 @@ new FormModel {
 				name: "clearForniture"
 				"text": "Indietro"
 				"font": new java.awt.Font( "Tahoma", 0, 14 )
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "clearFornitureActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 3
 				"gridY": 5
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
-				name: "button2"
+				name: "procediButton"
 				"text": "Procedi"
-				"font": new java.awt.Font( "Tahoma", 0, 14 )
 				"enabled": false
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 7
 				"gridY": 5
