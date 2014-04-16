@@ -32,6 +32,7 @@ public interface IDescrizioneProdottoRemote extends Remote {
     String getDescrizione() throws RemoteException;
 
     /**
+     * @param period
      * @return il prezzo di un prodotto.
      * @throws java.rmi.RemoteException
      */

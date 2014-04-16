@@ -20,10 +20,10 @@ import gameshop.advance.observer.TransactionObserver;
 import gameshop.advance.ui.swing.RigheDiVenditaListModel;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
+import gameshop.advance.ui.swing.employee.book.BookCellRenderer;
 import gameshop.advance.ui.swing.employee.book.BookPanel;
 import gameshop.advance.ui.swing.employee.book.EndBookPanel;
 import gameshop.advance.ui.swing.employee.book.PaymentPanel;
-import gameshop.advance.ui.swing.employee.sale.BookCellRenderer;
 import gameshop.advance.utility.Money;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -95,7 +95,6 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      * @throws RemoteException
      */
     public void gestisciPrenotazione() throws RemoteException{
-        this.listaProdottiPrenotati.clear();
         BookPanel panel = new BookPanel();
         panel.setList(this.listaProdottiPrenotati, new BookCellRenderer());
         this.aggiornaWindow(panel);
@@ -111,8 +110,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         this.controller.addListener(this.bookPartialObserver);
         this.controller.addListener(this.bookTotalObserver);
         this.controller.addListener(this.transactionObserver);
-        this.listaProdottiPrenotati.clear();
-        this.controller.completaPrenotazione();
+        this.controller.riprendiPrenotazione();
     }
     
     public void vaiAlpagamentoAcconto() {
@@ -190,6 +188,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     }
     
     public void clearBook() {
+        this.listaProdottiPrenotati.clear();
         UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
         UIWindowSingleton.getInstance().refreshContent();
     }
@@ -229,8 +228,8 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     /**
      * @param code
      */
-    public void inserisciCartaCliente(Integer code) {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
+    public void inserisciCartaCliente(Integer code) throws RemoteException {
+        this.controller.inserisciCartaCliente(code);
     }
 
     @Override

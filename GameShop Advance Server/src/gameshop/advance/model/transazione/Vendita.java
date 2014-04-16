@@ -248,6 +248,7 @@ public class Vendita implements ITransazione {
     
     protected void notificaListener() throws RemoteException
     {
+        System.err.println("Listeners Vendita");
         if(this.listeners != null)
         {
             for(IRemoteObserver obs:this.listeners)

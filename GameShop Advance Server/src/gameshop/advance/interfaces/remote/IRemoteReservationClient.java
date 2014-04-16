@@ -16,13 +16,7 @@ import java.rmi.RemoteException;
  */
 public interface IRemoteReservationClient extends Remote {
     
-    /** Metodo che consente di aggiornare l'identificativo di prenotazione effettuata dal cliente
-     *
-     * @param id
-     * @throws RemoteException
-     */
     
-    void aggiornaIdPrenotazione(int id) throws RemoteException;
 
     void aggiornaListaProdotti(IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter) throws RemoteException;
     

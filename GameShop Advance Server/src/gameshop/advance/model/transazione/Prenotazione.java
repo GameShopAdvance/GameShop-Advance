@@ -34,10 +34,10 @@ public class Prenotazione extends Vendita implements IPrenotazione {
     
     public boolean pagataAcconto() throws RemoteException
     {
-        if(this.acconto == null)
+//        if(this.acconto == null)
             return false;
-        Money partial = this.getAcconto();
-        return this.acconto.getAmmontare().greater(partial) || this.acconto.getAmmontare().equals(partial);
+//        Money partial = this.getAcconto();
+//        return this.acconto.getAmmontare().greater(partial) || this.acconto.getAmmontare().equals(partial);
     }
     
     @Override
@@ -72,14 +72,13 @@ public class Prenotazione extends Vendita implements IPrenotazione {
             return total.subtract(this.getAcconto());
         else
             return total;
-                    
-        
-        
     }
     
     @Override
     protected void notificaListener() throws RemoteException {
+        System.err.println("Notifica Listener ");
         List<IRemoteObserver> listeners = this.getListeners();
+        System.err.println("N. observers: "+listeners.size());
         if(listeners != null)
         {
             for(IRemoteObserver obs:listeners) {
@@ -103,5 +102,10 @@ public class Prenotazione extends Vendita implements IPrenotazione {
     public boolean getEvasa()
     {
         return this.evasa;
+    }
+
+    @Override
+    public void riprendiPrenotazione() throws RemoteException {
+        this.notificaListener();
     }
 }

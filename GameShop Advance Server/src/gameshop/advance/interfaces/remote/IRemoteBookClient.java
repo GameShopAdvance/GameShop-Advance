@@ -16,6 +16,14 @@ import java.rmi.RemoteException;
  */
 public interface IRemoteBookClient extends IRemoteClient {
 
+    /** Metodo che consente di aggiornare l'identificativo di prenotazione effettuata dal cliente
+     *
+     * @param id
+     * @throws RemoteException
+     */
+    
+    void aggiornaIdPrenotazione(int id) throws RemoteException;
+    
     /**
      *
      * @param ammontare

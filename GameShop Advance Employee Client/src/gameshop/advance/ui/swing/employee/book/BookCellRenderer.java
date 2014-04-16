@@ -102,7 +102,7 @@ public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDi
         }
         else{
             try {
-                this.name.setText(value.getDescrizione().getDescrizione());
+                this.name.setText(value.getDescrizione().getNomeProdotto());
             } catch (RemoteException ex) {
                 Logger.getLogger(BookCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
                 this.name.setText("Prodotto... (!!!)");

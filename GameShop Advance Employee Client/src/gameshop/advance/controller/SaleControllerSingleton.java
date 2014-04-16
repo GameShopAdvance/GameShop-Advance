@@ -19,7 +19,7 @@ import gameshop.advance.observer.TransactionObserver;
 import gameshop.advance.ui.swing.RigheDiVenditaListModel;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
-import gameshop.advance.ui.swing.employee.sale.BookCellRenderer;
+import gameshop.advance.ui.swing.employee.book.BookCellRenderer;
 import gameshop.advance.ui.swing.employee.sale.EndSalePanel;
 import gameshop.advance.ui.swing.employee.sale.InsertItemPanel;
 import gameshop.advance.ui.swing.employee.sale.PaymentPanel;
@@ -201,11 +201,6 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
         this.cassa.annullaVendita();
         UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
         UIWindowSingleton.getInstance().refreshContent();
-    }
-    
-    @Override
-    public void aggiornaIdPrenotazione(int id) throws RemoteException {
-        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
     @Override

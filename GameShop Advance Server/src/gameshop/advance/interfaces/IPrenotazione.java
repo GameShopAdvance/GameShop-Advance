@@ -24,5 +24,7 @@ public interface IPrenotazione extends ITransazione, IPrenotazioneRemote {
     public void evadi();
     
     public boolean getEvasa();
+
+    public void riprendiPrenotazione() throws RemoteException;
     
 }

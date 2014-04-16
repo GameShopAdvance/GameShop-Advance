@@ -97,4 +97,9 @@ public interface IPrenotaProdottoRemote extends Remote{
     void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException;
      
      public void cancellaPrenotazione() throws RemoteException;
+     
+     public void inserisciCartaCliente(Integer code) throws RemoteException;
+     
+     public void riprendiPrenotazione() throws RemoteException;
+     
 }
