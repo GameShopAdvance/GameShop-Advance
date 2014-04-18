@@ -6,8 +6,8 @@
 
 package gameshop.advance.controller;
 
-import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
-import gameshop.advance.exceptions.ProdottoNotFoundException;
+import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
+import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;

@@ -8,7 +8,7 @@ package gameshop.advance.technicalservices.db;
 
 import com.db4o.ObjectContainer;
 import com.db4o.query.Query;
-import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.model.transazione.CartaCliente;
 
 /**

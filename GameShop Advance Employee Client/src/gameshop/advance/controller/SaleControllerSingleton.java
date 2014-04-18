@@ -3,9 +3,9 @@ package gameshop.advance.controller;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
-import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
-import gameshop.advance.exceptions.QuantityNotInStockException;
+import gameshop.advance.exceptions.products.ProdottoNotFoundException;
+import gameshop.advance.exceptions.products.QuantityNotInStockException;
 import gameshop.advance.interfaces.remote.factory.ICassaRemote;
 import gameshop.advance.interfaces.remote.factory.IRemoteFactory;
 import gameshop.advance.interfaces.remote.sales.IRemoteClient;

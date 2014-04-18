@@ -1,6 +1,6 @@
 package gameshop.advance.model;
 
-import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;

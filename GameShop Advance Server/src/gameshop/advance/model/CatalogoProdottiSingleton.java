@@ -1,7 +1,7 @@
 package gameshop.advance.model;
 
 import com.db4o.collections.ActivatableHashMap;
-import gameshop.advance.exceptions.ProdottoNotFoundException;
+import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.technicalservices.db.DbDescrizioneProdottoSingleton;
 import gameshop.advance.utility.IDProdotto;

@@ -6,7 +6,7 @@
 
 package gameshop.advance;
 
-import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.model.transazione.CartaCliente;

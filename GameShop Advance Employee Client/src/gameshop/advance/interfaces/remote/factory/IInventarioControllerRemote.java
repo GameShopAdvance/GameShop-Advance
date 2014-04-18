@@ -6,8 +6,8 @@
 
 package gameshop.advance.interfaces.remote.factory;
 
-import gameshop.advance.exceptions.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
 import gameshop.advance.utility.IDProdotto;

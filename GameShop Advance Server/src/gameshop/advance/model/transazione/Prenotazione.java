@@ -6,10 +6,10 @@
 
 package gameshop.advance.model.transazione;
 
-import gameshop.advance.exceptions.AlredyPayedException;
+import gameshop.advance.exceptions.sales.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.exceptions.InvalidSaleState;
-import gameshop.advance.exceptions.QuantityNotInStockException;
+import gameshop.advance.exceptions.sales.InvalidSaleState;
+import gameshop.advance.exceptions.products.QuantityNotInStockException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.remote.utility.IRemoteObserver;

@@ -11,7 +11,7 @@ import com.db4o.ObjectSet;
 import com.db4o.collections.ActivatableLinkedList;
 import com.db4o.query.Predicate;
 import com.db4o.query.QueryComparator;
-import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.model.transazione.proxies.PrenotazioneSmartProxy;
 import java.rmi.RemoteException;

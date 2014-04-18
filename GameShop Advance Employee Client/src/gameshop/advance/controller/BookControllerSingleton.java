@@ -1,10 +1,10 @@
 package gameshop.advance.controller;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
-import gameshop.advance.exceptions.AlredyPayedException;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.exceptions.InvalidSaleState;
+import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.remote.factory.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.factory.IRemoteFactory;
 import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;

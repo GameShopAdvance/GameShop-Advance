@@ -6,7 +6,7 @@
 
 package gameshop.advance;
 
-import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.remote.factory.IRemoteFactory;
 import gameshop.advance.remote.RemoteFactorySingleton;
 import java.io.File;

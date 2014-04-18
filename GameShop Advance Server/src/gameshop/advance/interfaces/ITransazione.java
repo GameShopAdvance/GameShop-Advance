@@ -6,10 +6,10 @@
 
 package gameshop.advance.interfaces;
 
-import gameshop.advance.exceptions.AlredyPayedException;
+import gameshop.advance.exceptions.sales.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.exceptions.InvalidSaleState;
-import gameshop.advance.exceptions.QuantityNotInStockException;
+import gameshop.advance.exceptions.sales.InvalidSaleState;
+import gameshop.advance.exceptions.products.QuantityNotInStockException;
 import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
 import gameshop.advance.interfaces.remote.sales.ITransazioneRemote;
 import gameshop.advance.model.transazione.CartaCliente;

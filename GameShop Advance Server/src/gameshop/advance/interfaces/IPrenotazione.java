@@ -6,9 +6,9 @@
 
 package gameshop.advance.interfaces;
 
-import gameshop.advance.exceptions.AlredyPayedException;
+import gameshop.advance.exceptions.sales.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.exceptions.InvalidSaleState;
+import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.remote.sales.reservations.IPrenotazioneRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;

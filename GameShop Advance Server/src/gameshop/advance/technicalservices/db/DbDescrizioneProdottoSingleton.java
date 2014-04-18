@@ -10,7 +10,7 @@ import com.db4o.ObjectContainer;
 import com.db4o.ObjectSet;
 import com.db4o.collections.ActivatableLinkedList;
 import com.db4o.query.Predicate;
-import gameshop.advance.exceptions.ObjectAlreadyExistsDbException;
+import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.model.DescrizioneProdottoSmartProxy;
 import gameshop.advance.utility.IDProdotto;
