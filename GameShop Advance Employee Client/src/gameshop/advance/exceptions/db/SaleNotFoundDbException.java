@@ -4,15 +4,12 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.exceptions.sales;
+package gameshop.advance.exceptions.db;
 
 /**
- * Classe che gestisce le eccezioni di transazioni che risultano già pagate.
+ *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class AlredyPayedException extends Exception {
-
-    public AlredyPayedException() {
-    }
+public class SaleNotFoundDbException extends Exception {
     
 }

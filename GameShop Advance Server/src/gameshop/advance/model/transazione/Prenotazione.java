@@ -8,7 +8,7 @@ package gameshop.advance.model.transazione;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
-import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPartialPayedException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
@@ -49,14 +49,15 @@ public class Prenotazione extends Vendita implements IPrenotazione {
      * @throws java.rmi.RemoteException
      * @throws gameshop.advance.exceptions.InvalidMoneyException
      * @throws gameshop.advance.exceptions.sales.InvalidSaleState
+     * @throws gameshop.advance.exceptions.sales.AlreadyPartialPayedException
      * @throws gameshop.advance.exceptions.sales.AlredyPayedException
      */
     @Override
-    public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException {
+    public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlreadyPartialPayedException {
         if(!this.completata)
             throw new InvalidSaleState();
         if(this.pagataAcconto() || this.pagataTotale())
-            throw new AlredyPayedException();
+            throw new AlreadyPartialPayedException();
         if(this.getAcconto().greater(ammontare))
             throw new InvalidMoneyException(ammontare);
         this.acconto = new Pagamento(ammontare);

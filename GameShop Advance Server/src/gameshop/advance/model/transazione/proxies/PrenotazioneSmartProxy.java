@@ -11,7 +11,8 @@ import com.db4o.activation.Activator;
 import com.db4o.ta.Activatable;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
-import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPartialPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPayedException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
@@ -41,8 +42,16 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
         this.prenotazione = prenotazione;
     }
     
+    /**
+     *
+     * @param ammontare
+     * @throws RemoteException
+     * @throws InvalidMoneyException
+     * @throws InvalidSaleState
+     * @throws AlreadyPartialPayedException
+     */
     @Override
-    public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException {
+    public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlreadyPartialPayedException {
         this.prenotazione.pagaAcconto(ammontare);
     }
 
@@ -57,7 +66,7 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
     }
 
     @Override
-    public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException, InvalidSaleState, AlredyPayedException {
+    public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException, InvalidSaleState, AlreadyPayedException {
         this.prenotazione.gestisciPagamento(ammontare);
     }
 

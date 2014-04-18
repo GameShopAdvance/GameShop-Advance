@@ -11,6 +11,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.InventoryControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.interfaces.IListPanel;
 import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
@@ -99,6 +100,10 @@ public class InventoryPanel extends JPanel implements IListPanel {
             UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException | NotBoundException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+        }
+        catch (ObjectAlreadyExistsDbException ex) {
             UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         }

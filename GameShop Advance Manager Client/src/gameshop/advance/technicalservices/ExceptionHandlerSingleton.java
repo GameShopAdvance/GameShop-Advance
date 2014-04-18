@@ -12,9 +12,12 @@ import gameshop.advance.exceptions.InvalidOperationException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.db.ObjectNotExistsDbException;
+import gameshop.advance.exceptions.db.ReservationNotFoundDbException;
+import gameshop.advance.exceptions.db.SaleNotFoundDbException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
-import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPartialPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPayedException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -44,7 +47,7 @@ public class ExceptionHandlerSingleton {
      * @param ex
      * @return
      */
-    public String getMessage(AlredyPayedException ex){
+    public String getMessage(AlreadyPayedException ex){
         return "Ti siamo grati, ma è già stato trovato un pagamento. "
                 + "GSA non ama rubare soldi ai suoi clienti.";
     }
@@ -149,10 +152,20 @@ public class ExceptionHandlerSingleton {
         return "L'oggetto richiesto non esiste.";
     }
     
-    /**
-     * @param ex
-     * @return
-     */
+    public String getMessage(SaleNotFoundDbException ex){
+        return "La vendita che si stava cercando non esiste. "
+                + "Controllare l'identificativo inserito. ";
+    }
+    
+    public String getMessage(ReservationNotFoundDbException ex){
+        return "La prenotazione cercata non esiste. Controllare il numero di prenotazione inserito.";
+    }
+    
+    public String getMessage(AlreadyPartialPayedException ex){
+        return "Ci spiace, ma è già stato versato un acconto. "
+                + "Si prega di saldare il totale per completare la prenotazione.";
+    }
+    
     public String getMessage(Exception ex){
         return ex.getMessage();
     }

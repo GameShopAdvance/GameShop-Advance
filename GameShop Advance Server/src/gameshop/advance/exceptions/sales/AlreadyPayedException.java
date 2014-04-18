@@ -12,9 +12,9 @@ package gameshop.advance.exceptions.sales;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class AlredyPayedException extends Exception {
+public class AlreadyPayedException extends Exception {
 
-    public AlredyPayedException() {
+    public AlreadyPayedException() {
     }
     
     @Override

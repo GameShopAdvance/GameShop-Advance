@@ -11,16 +11,16 @@ import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-/**
- * Interfaccia remota per l'esportazione RMI della lista di prodotti.
+/** 
+ * Interfaccia remota per l'esportazione dei metodi utili ad ottenere i prodotti presenti in catalogo 
+ * 
  * @author Salx
  */
 public interface IProdottiRemote extends Remote {
-    
-    /**
-     * @return
-     * @throws RemoteException
-     */
+/** 
+ * @return 
+ * @throws java.rmi.RemoteException
+ */
     public IIteratorWrapperRemote<IDescrizioneProdottoRemote> getDescrizioni()throws RemoteException;
     
 }

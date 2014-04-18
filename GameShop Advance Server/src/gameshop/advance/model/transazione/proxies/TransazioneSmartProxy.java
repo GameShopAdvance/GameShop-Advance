@@ -11,7 +11,7 @@ import com.db4o.activation.Activator;
 import com.db4o.ta.Activatable;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
-import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPayedException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
@@ -52,7 +52,7 @@ public class TransazioneSmartProxy implements ITransazione, Activatable{
     }
 
     @Override
-    public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException, InvalidSaleState, AlredyPayedException {
+    public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException, InvalidSaleState, AlreadyPayedException {
         this.trans.gestisciPagamento(ammontare);
     }
 

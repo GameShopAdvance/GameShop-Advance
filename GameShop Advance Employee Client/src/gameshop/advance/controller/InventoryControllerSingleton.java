@@ -5,6 +5,7 @@ import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.controller.valueData.AggiuntaProdotti;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.interfaces.IListPanel;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
@@ -119,7 +120,7 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
     /**
      * @throws RemoteException
      */
-    public void terminaInventario() throws RemoteException
+    public void terminaInventario() throws RemoteException, ObjectAlreadyExistsDbException
     {
         this.controller.rimuoviListener(this.observer);
         this.controller.terminaInventario();

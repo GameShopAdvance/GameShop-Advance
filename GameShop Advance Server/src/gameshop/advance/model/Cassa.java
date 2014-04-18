@@ -4,7 +4,8 @@ import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
-import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPayedException;
+import gameshop.advance.exceptions.sales.ClientNotFoundException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.ITransazione;
@@ -125,7 +126,7 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
      * @throws gameshop.advance.exceptions.InvalidMoneyException
      */
     @Override
-    public void gestisciPagamento(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException {
+    public void gestisciPagamento(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlreadyPayedException {
         this.venditaCorrente.gestisciPagamento(ammontare);
         this.venditaCorrente.setId(NegozioSingleton.getInstance().getNextSaleId());
         this.venditaCorrente.rimuoviListener(null);
@@ -141,7 +142,7 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
     }
     
     @Override
-    public void inserisciTesseraCliente(int codiceTessera) throws RemoteException
+    public void inserisciTesseraCliente(int codiceTessera) throws RemoteException, ClientNotFoundException
     {
         CartaCliente carta = NegozioSingleton.getInstance().getCliente(codiceTessera);
         if(carta!=null)

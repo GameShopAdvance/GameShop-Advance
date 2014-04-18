@@ -5,7 +5,9 @@ import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.db.ReservationNotFoundDbException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
-import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPartialPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPayedException;
+import gameshop.advance.exceptions.sales.ClientNotFoundException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
@@ -112,10 +114,11 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
      * @throws java.rmi.RemoteException   
      * @throws gameshop.advance.exceptions.InvalidMoneyException   
      * @throws gameshop.advance.exceptions.sales.InvalidSaleState   
-     * @throws gameshop.advance.exceptions.sales.AlredyPayedException   
+     * @throws gameshop.advance.exceptions.sales.AlreadyPartialPayedException   
+     * @throws gameshop.advance.exceptions.sales.AlreadyPayedException   
     */
     @Override
-    public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException
+    public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlreadyPartialPayedException
     {
         this.prenotazione.pagaAcconto(ammontare);
         this.prenotazione.rimuoviListener(null);
@@ -148,10 +151,10 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
      * @throws RemoteException
      * @throws InvalidMoneyException
      * @throws gameshop.advance.exceptions.sales.InvalidSaleState
-     * @throws gameshop.advance.exceptions.sales.AlredyPayedException
+     * @throws gameshop.advance.exceptions.sales.AlreadyPayedException
      */
     @Override
-    public void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException
+    public void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlreadyPayedException
     {
         this.prenotazione.gestisciPagamento(amount);
         this.prenotazione.rimuoviListener(null);
@@ -175,7 +178,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
      * @throws java.rmi.RemoteException
      */
     @Override
-    public void inserisciCartaCliente(Integer code) throws RemoteException {
+    public void inserisciCartaCliente(Integer code) throws RemoteException, ClientNotFoundException {
         CartaCliente carta = NegozioSingleton.getInstance().getCliente(code);
         if(carta!=null)
         {

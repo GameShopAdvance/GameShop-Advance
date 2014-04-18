@@ -7,7 +7,8 @@ import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
-import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPayedException;
+import gameshop.advance.exceptions.sales.ClientNotFoundException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.remote.factory.ICassaRemote;
 import gameshop.advance.interfaces.remote.factory.IRemoteFactory;
@@ -142,7 +143,7 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
      * @param payment
      * @throws RemoteException
      */
-    public void effettuaPagamento(Double payment) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException
+    public void effettuaPagamento(Double payment) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlreadyPayedException
     {
             cassa.aggiungiListener(this.saleRestObserver);
             cassa.gestisciPagamento(new Money(payment));
@@ -153,7 +154,7 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
      * @param code
      * @throws RemoteException
      */
-    public void inserisciCartaCliente(int code) throws RemoteException
+    public void inserisciCartaCliente(int code) throws RemoteException, ClientNotFoundException
     {
         cassa.inserisciTesseraCliente(code);
     }

@@ -3,7 +3,10 @@ package gameshop.advance.controller;
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.db.ReservationNotFoundDbException;
+import gameshop.advance.exceptions.sales.AlreadyPartialPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPayedException;
+import gameshop.advance.exceptions.sales.ClientNotFoundException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.remote.factory.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.factory.IRemoteFactory;
@@ -105,7 +108,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      * @param codicePrenotazione
      * @throws RemoteException
      */
-    public void recuperaPrenotazione(int codicePrenotazione) throws RemoteException {
+    public void recuperaPrenotazione(int codicePrenotazione) throws RemoteException, ReservationNotFoundDbException {
         this.controller.recuperaPrenotazione(codicePrenotazione);
         this.controller.addListener(this.bookPartialObserver);
         this.controller.addListener(this.bookTotalObserver);
@@ -163,9 +166,9 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      * @throws RemoteException
      * @throws InvalidMoneyException
      * @throws gameshop.advance.exceptions.sales.InvalidSaleState
-     * @throws gameshop.advance.exceptions.sales.AlredyPayedException
+     * @throws gameshop.advance.exceptions.sales.AlreadyPayedException
      */
-    public void pagaAcconto(Double acconto) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException{
+    public void pagaAcconto(Double acconto) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlreadyPayedException, AlreadyPartialPayedException{
         try{
             this.controller.addListener(new RestPartialObserver(instance));
             this.controller.pagaAcconto(new Money(acconto));
@@ -181,11 +184,11 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      * Funziona che avvia il pagamento del totale di una prenotazione.
      * @param ammontare
      * @throws gameshop.advance.exceptions.sales.InvalidSaleState
-     * @throws gameshop.advance.exceptions.sales.AlredyPayedException
+     * @throws gameshop.advance.exceptions.sales.AlreadyPayedException
      * @throws gameshop.advance.exceptions.InvalidMoneyException
      * @throws java.rmi.RemoteException
      */
-    public void gestisciPagamento(Double ammontare) throws InvalidSaleState, AlredyPayedException, InvalidMoneyException, RemoteException{
+    public void gestisciPagamento(Double ammontare) throws InvalidSaleState, AlreadyPayedException, InvalidMoneyException, RemoteException{
         
         try{
             this.controller.addListener(new RestObserver(instance));
@@ -239,8 +242,10 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
 
     /**
      * @param code
+     * @throws java.rmi.RemoteException
+     * @throws gameshop.advance.exceptions.sales.ClientNotFoundException
      */
-    public void inserisciCartaCliente(Integer code) throws RemoteException {
+    public void inserisciCartaCliente(Integer code) throws RemoteException, ClientNotFoundException {
         this.controller.inserisciCartaCliente(code);
     }
 

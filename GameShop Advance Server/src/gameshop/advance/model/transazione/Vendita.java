@@ -8,7 +8,7 @@ package gameshop.advance.model.transazione;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
-import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPayedException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
@@ -165,12 +165,12 @@ public class Vendita implements ITransazione {
      * @throws java.rmi.RemoteException
      */
     @Override
-    public void gestisciPagamento(Money ammontare) throws InvalidMoneyException,RemoteException, InvalidSaleState, AlredyPayedException {
+    public void gestisciPagamento(Money ammontare) throws InvalidMoneyException,RemoteException, InvalidSaleState, AlreadyPayedException {
         if(!this.completata)
             throw new InvalidSaleState();
         Money total = this.getTotal();
         if(this.pagataTotale())
-            throw new AlredyPayedException();
+            throw new AlreadyPayedException();
         if(total.greater(ammontare)) {
             throw new InvalidMoneyException(ammontare);
         }

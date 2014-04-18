@@ -3,6 +3,7 @@ package gameshop.advance.model;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.db.ReservationNotFoundDbException;
+import gameshop.advance.exceptions.sales.ClientNotFoundException;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
@@ -107,8 +108,11 @@ public class NegozioSingleton
         return read;
     }
     
-    public CartaCliente getCliente(int codiceTessera) {
-            return DbCartaClienteSingleton.getInstance().read(codiceTessera);
+    public CartaCliente getCliente(int codiceTessera) throws ClientNotFoundException {
+        CartaCliente read = DbCartaClienteSingleton.getInstance().read(codiceTessera);
+        if(read == null)
+            throw new ClientNotFoundException(codiceTessera);
+        return read;
     }
     
     /**

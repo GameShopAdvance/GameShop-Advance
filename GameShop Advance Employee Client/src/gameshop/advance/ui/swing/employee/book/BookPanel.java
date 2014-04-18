@@ -10,6 +10,8 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.db.ReservationNotFoundDbException;
+import gameshop.advance.exceptions.sales.ClientNotFoundException;
 import gameshop.advance.interfaces.IPopActionListener;
 import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
 import gameshop.advance.technicalservices.LoggerSingleton;
@@ -22,6 +24,8 @@ import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
+import java.util.logging.Level;
+import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -67,6 +71,10 @@ public class BookPanel extends JPanel implements IPopActionListener {
         } catch (ConfigurationException ex) {
             UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
+        }
+        catch (ReservationNotFoundDbException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }  
     }
     private void insertClientCodeActionPerformed(ActionEvent e) {
@@ -82,6 +90,9 @@ public class BookPanel extends JPanel implements IPopActionListener {
             UIWindowSingleton.getInstance().displayError("Ci sono problemi di configurazione. Se il problema persiste contattare l'amministratore di sistema.");
         } catch (NumberFormatException ex){
             UIWindowSingleton.getInstance().displayError("Il codice cliente inserito non è valido o il suo formato non è corretto");
+        }
+        catch (ClientNotFoundException ex) {
+            Logger.getLogger(BookPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
     private void goToPayTotalActionPerformed(ActionEvent e) {

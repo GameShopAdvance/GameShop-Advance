@@ -10,7 +10,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPayedException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.IPopActionListener;
 import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
@@ -72,7 +72,7 @@ public class PaymentPanel extends JPanel {
         } catch (InvalidSaleState ex) {
             UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
-        } catch (AlredyPayedException ex) {
+        } catch (AlreadyPayedException ex) {
             UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         }
@@ -129,7 +129,7 @@ public class PaymentPanel extends JPanel {
         } catch (InvalidSaleState ex) {
             UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
-        } catch (AlredyPayedException ex) {
+        } catch (AlreadyPayedException ex) {
             UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         }

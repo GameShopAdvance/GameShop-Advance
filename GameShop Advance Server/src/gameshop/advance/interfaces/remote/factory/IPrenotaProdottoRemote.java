@@ -9,7 +9,9 @@ package gameshop.advance.interfaces.remote.factory;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.db.ReservationNotFoundDbException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
-import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPartialPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPayedException;
+import gameshop.advance.exceptions.sales.ClientNotFoundException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
 import gameshop.advance.utility.IDProdotto;
@@ -76,6 +78,7 @@ public interface IPrenotaProdottoRemote extends Remote{
      *
      * @param id
      * @throws RemoteException
+     * @throws gameshop.advance.exceptions.db.ReservationNotFoundDbException
      */
     void recuperaPrenotazione(Integer id) throws RemoteException, ReservationNotFoundDbException;
     
@@ -85,9 +88,9 @@ public interface IPrenotaProdottoRemote extends Remote{
      * @throws RemoteException
      * @throws InvalidMoneyException
      * @throws gameshop.advance.exceptions.sales.InvalidSaleState
-     * @throws gameshop.advance.exceptions.sales.AlredyPayedException
+     * @throws gameshop.advance.exceptions.sales.AlreadyPayedException
      */
-    void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException;
+    void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlreadyPayedException;
     
     //metodo per la richiesta di pagamento in acconto
 
@@ -97,9 +100,9 @@ public interface IPrenotaProdottoRemote extends Remote{
      * @throws RemoteException
      * @throws InvalidMoneyException
      * @throws gameshop.advance.exceptions.sales.InvalidSaleState
-     * @throws gameshop.advance.exceptions.sales.AlredyPayedException
+     * @throws gameshop.advance.exceptions.sales.AlreadyPartialPayedException
      */
-    void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException;
+    void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlreadyPartialPayedException;
     
     /**
      *
@@ -110,7 +113,8 @@ public interface IPrenotaProdottoRemote extends Remote{
      *
      * @param code
      * @throws RemoteException
+     * @throws gameshop.advance.exceptions.sales.ClientNotFoundException
      */
-    public void inserisciCartaCliente(Integer code) throws RemoteException;
+    public void inserisciCartaCliente(Integer code) throws RemoteException, ClientNotFoundException;
     
 }

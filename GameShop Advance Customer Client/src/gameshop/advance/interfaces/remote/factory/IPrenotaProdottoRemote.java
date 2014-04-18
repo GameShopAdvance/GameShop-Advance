@@ -7,8 +7,11 @@
 package gameshop.advance.interfaces.remote.factory;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.db.ReservationNotFoundDbException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
-import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPartialPayedException;
+import gameshop.advance.exceptions.sales.AlreadyPayedException;
+import gameshop.advance.exceptions.sales.ClientNotFoundException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
 import gameshop.advance.utility.IDProdotto;
@@ -16,13 +19,17 @@ import gameshop.advance.utility.Money;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-/**
- * Interfaccia remota per la classe che gestisce i prodotti prenotati.
+/** 
+ * Interfaccia remota per l'esportazione delle classi che la implementano tramite
+ * Java RMI, IPrenotaProdottoRemote renderà invocabili da remoto tutti i metodi necessari a effettuare una prenotazione sia esso lato cliente o lato commesso
+ * Esporta PrenotaProdotto Controller.
+ *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IPrenotaProdottoRemote extends Remote{
 
     /**
+     *
      * @param obs
      * @throws RemoteException
      */
@@ -35,11 +42,13 @@ public interface IPrenotaProdottoRemote extends Remote{
     **********************************/
     
     /**
+     *
      * @throws RemoteException
      */
     void avviaPrenotazione() throws RemoteException;
 
     /**
+     *
      * @param codiceProdotto
      * @param quantity
      * @throws RemoteException
@@ -48,6 +57,7 @@ public interface IPrenotaProdottoRemote extends Remote{
     void prenotaProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException, ProdottoNotFoundException;
     
     /**
+     *
      * @throws RemoteException
      */
     void terminaPrenotazione() throws RemoteException;
@@ -59,45 +69,52 @@ public interface IPrenotaProdottoRemote extends Remote{
     **********************************/
 
     /**
+     *
      * @throws RemoteException
      */
     void completaPrenotazione() throws RemoteException;
     
     /**
+     *
      * @param id
      * @throws RemoteException
+     * @throws gameshop.advance.exceptions.db.ReservationNotFoundDbException
      */
-    void recuperaPrenotazione(Integer id) throws RemoteException;
+    void recuperaPrenotazione(Integer id) throws RemoteException, ReservationNotFoundDbException;
     
     /**
+     *
      * @param amount
      * @throws RemoteException
      * @throws InvalidMoneyException
      * @throws gameshop.advance.exceptions.sales.InvalidSaleState
-     * @throws gameshop.advance.exceptions.sales.AlredyPayedException
+     * @throws gameshop.advance.exceptions.sales.AlreadyPayedException
      */
-    void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException;
+    void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlreadyPayedException;
     
+    //metodo per la richiesta di pagamento in acconto
 
     /**
-     * Metodo per la richiesta di pagamento in acconto
+     *
      * @param ammontare
      * @throws RemoteException
      * @throws InvalidMoneyException
      * @throws gameshop.advance.exceptions.sales.InvalidSaleState
-     * @throws gameshop.advance.exceptions.sales.AlredyPayedException
+     * @throws gameshop.advance.exceptions.sales.AlreadyPartialPayedException
      */
-    void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException;
-     
+    void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlreadyPartialPayedException;
+    
     /**
+     *
      * @throws RemoteException
      */
     public void cancellaPrenotazione() throws RemoteException;
-
     /**
+     *
      * @param code
      * @throws RemoteException
+     * @throws gameshop.advance.exceptions.sales.ClientNotFoundException
      */
-    public void inserisciCartaCliente(Integer code) throws RemoteException;
+    public void inserisciCartaCliente(Integer code) throws RemoteException, ClientNotFoundException;
     
 }
