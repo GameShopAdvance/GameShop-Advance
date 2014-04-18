@@ -9,15 +9,16 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.FornitureControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.ExceptionHandlerSingleton;
 import gameshop.advance.interfaces.IListPanel;
+import gameshop.advance.technicalservices.LoggerSingleton;
+import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
 import java.awt.Color;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -34,10 +35,12 @@ public class FornitureMenu extends JPanel implements IListPanel {
             FornitureControllerSingleton.getInstance().setFornitureList(this);
         } catch (ConfigurationException ex)
         {
-            Logger.getLogger(FornitureMenu.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex)
         {
-            Logger.getLogger(FornitureMenu.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
 
@@ -45,9 +48,11 @@ public class FornitureMenu extends JPanel implements IListPanel {
         try{
             FornitureControllerSingleton.getInstance().clearForniture();
         } catch (ConfigurationException ex) {
-            Logger.getLogger(FornitureMenu.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
-            Logger.getLogger(FornitureMenu.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
 

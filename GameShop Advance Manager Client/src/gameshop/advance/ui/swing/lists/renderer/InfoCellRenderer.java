@@ -8,10 +8,10 @@ import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.interfaces.remote.forniture.IInformazioniProdottoRemote;
+import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
 import java.awt.Component;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.rmi.RemoteException;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -167,31 +167,31 @@ public class InfoCellRenderer extends JPanel implements ListCellRenderer<IInform
         try {
             this.title.setText(value.getDescrizione().getNomeProdotto());
         }
-        catch (Exception ex) {
-            Logger.getLogger(InfoCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+        catch (RemoteException ex) {
+            LoggerSingleton.getInstance().log(ex);
             this.title.setText("???");
         }
          
         try {
              this.quantitaPrenotazioni.setText(""+value.getPrenotati());
         }
-        catch (Exception ex) {
-            Logger.getLogger(InfoCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+        catch (RemoteException ex) {
+            LoggerSingleton.getInstance().log(ex);
             this.quantitaPrenotazioni.setText("???");
         }
         
         try {
              this.quantitaDisponibile.setText(""+value.getDescrizione().getQuantitaDisponibile());
         }
-        catch (Exception ex) {
-            Logger.getLogger(InfoCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+        catch (RemoteException ex) {
+            LoggerSingleton.getInstance().log(ex);
             this.quantitaPrenotazioni.setText("???");
         }
         try {
              this.soglia.setText(""+value.getDescrizione().getQuantitaDiSoglia());
         }
-        catch (Exception ex) {
-            Logger.getLogger(InfoCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+        catch (RemoteException ex) {
+            LoggerSingleton.getInstance().log(ex);
             this.soglia.setText("???");
         }
         
