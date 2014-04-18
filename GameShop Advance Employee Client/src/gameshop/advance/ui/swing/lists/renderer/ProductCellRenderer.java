@@ -11,6 +11,7 @@ import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
 import java.awt.Component;
+import java.rmi.RemoteException;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -122,21 +123,21 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
         try {
             this.title.setText(value.getNomeProdotto());
         }
-        catch (Exception ex) {
+        catch (RemoteException ex) {
             LoggerSingleton.getInstance().log(ex);
             this.title.setText("???");
         }
         try {
             this.price.setText(value.getPrezzo(DateTime.now()).toString());
         }
-        catch (Exception ex) {
+        catch (RemoteException ex) {
             LoggerSingleton.getInstance().log(ex);
             this.price.setText("???");
         }
         try{
             this.quantity.setText(""+value.getQuantitaDisponibile());
         }
-        catch(Exception ex){
+        catch(RemoteException ex){
             LoggerSingleton.getInstance().log(ex);
             this.quantity.setText("???");
         }
@@ -144,7 +145,7 @@ public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDes
         try{
             this.label1.setIcon(value.getImmagine().getIcon());
         }
-        catch(Exception ex){
+        catch(RemoteException ex){
             this.label1.setText("Immagine non trovata");
             LoggerSingleton.getInstance().log(ex);
         }
