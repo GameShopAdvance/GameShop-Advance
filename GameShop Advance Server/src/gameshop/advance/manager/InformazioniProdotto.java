@@ -15,7 +15,7 @@ import gameshop.advance.remote.DescrizioneRemoteProxy;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-/**
+/** Mantiene informazioni sui prodotti del negozio come la descrizione, le quantità ordinate e prenotate
  *
  * @author Lorenzo Di Giuseppe
  */
@@ -49,6 +49,7 @@ public class InformazioniProdotto extends UnicastRemoteObject implements IInform
         return new DescrizioneRemoteProxy(this.descrizione);
     }
 
+    @Override
     public void setDescrizione(IDescrizioneProdotto descrizione) {
         this.descrizione = descrizione;
     }
@@ -58,6 +59,7 @@ public class InformazioniProdotto extends UnicastRemoteObject implements IInform
         return prenotati;
     }
 
+    @Override
     public void setPrenotati(int prenotati) throws QuantityException {
         if(prenotati < 0)
             throw new QuantityException(prenotati);
@@ -69,6 +71,7 @@ public class InformazioniProdotto extends UnicastRemoteObject implements IInform
         return ordinati;
     }
 
+    @Override
     public void setOrdinati(int ordinati) throws QuantityException {
         if(ordinati < 0)
             throw new QuantityException(ordinati);

@@ -10,8 +10,8 @@ import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
- *
+/** Gestisce le informazioni sulle pernotazioni
+ * 
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class ManagerPrenotazioniSingleton {
@@ -58,7 +58,12 @@ public class ManagerPrenotazioniSingleton {
             iter.next().notifica(this);
         }
     }
-    
+    /**
+     *
+     * @param pren
+     * @throws java.rmi.RemoteException
+     * @throws gameshop.advance.exceptions.QuantityException
+     */
     public void addPrenotazione(IPrenotazione pren) throws RemoteException, QuantityException{
         if(pren != null && pren.isCompleted() && !pren.getEvasa() && this.prenotazioniDaEvadere.indexOf(pren) < 0)
         {
@@ -66,7 +71,12 @@ public class ManagerPrenotazioniSingleton {
             ManagerFornitureSingleton.getInstance().addPrenotazione(pren);
         }
     }
-    
+     /**
+     *
+     * @param pren
+     * @throws java.rmi.RemoteException
+     * @throws gameshop.advance.exceptions.QuantityException
+     */
     public void removePrenotazione(IPrenotazione pren) throws QuantityException, RemoteException{
         if(pren != null && pren.isCompleted() && !pren.getEvasa())
         {
@@ -77,11 +87,17 @@ public class ManagerPrenotazioniSingleton {
             ManagerFornitureSingleton.getInstance().removePrenotazione(pren);
         }
     }
-    
+     /**
+     *
+     * @return L'ultima prenotazione non evasa
+     */
     public IPrenotazione getLastNotProcessed(){
         return this.prenotazioniDaEvadere.getLast();        
     }
-    
+     /**
+     *
+     * @return Lista delle prenotazioni da evadere
+     */
     public List<IPrenotazione> getNotProcessed()
     {
         return this.prenotazioniDaEvadere;

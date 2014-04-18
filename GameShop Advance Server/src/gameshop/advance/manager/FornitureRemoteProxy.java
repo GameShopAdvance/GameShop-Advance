@@ -14,6 +14,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
+ *  Proxy delle forniture consente di al manager si ottenere informazioni sui prodotti nel negozio
  *
  * @author Lorenzo Di Giuseppe
  */
@@ -25,12 +26,20 @@ class FornitureRemoteProxy extends UnicastRemoteObject implements IFornitureMana
     {
         this.manager = null;
     }
-
+    /**
+     * @throws RemoteException
+     */
     FornitureRemoteProxy(ManagerFornitureSingleton manager) throws RemoteException
     {
         this.manager = manager;
     }
-
+    /**
+     * Permette di osservare i prodotti e le informazioni su di essi per 
+     * al fine di analizzarle
+     * 
+     * @throws RemoteException
+     * @return Iteratore sulle informazioniProdotto
+     */
     @Override
     public IIteratorWrapperRemote<IInformazioniProdottoRemote> getInformazioni() throws RemoteException
     {

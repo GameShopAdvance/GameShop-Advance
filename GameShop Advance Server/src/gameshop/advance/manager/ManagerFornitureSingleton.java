@@ -6,7 +6,6 @@
 
 package gameshop.advance.manager;
 
-import gameshop.advance.GameShopAdvance;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
@@ -24,6 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Recupera e gestisce le informazioni sui prodotti e alle prenotazioni effettuate su di questi
  *
  * @author Lorenzo Di Giuseppe
  */
@@ -120,7 +120,11 @@ public class ManagerFornitureSingleton {
             this.notificaListeners();
         }
     }
-    
+    /**
+     *
+     * @param desc
+     * @throws java.rmi.RemoteException
+     */
     public void addDescrizione(IDescrizioneProdotto desc) throws RemoteException
     {    
         if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
@@ -134,7 +138,11 @@ public class ManagerFornitureSingleton {
             this.notificaListeners();
         }
     }
-    
+    /**
+     *
+     * @param desc
+     * @throws java.rmi.RemoteException
+     */
     public void removeDescrizione(IDescrizioneProdotto desc) throws RemoteException
     {
         if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
@@ -166,7 +174,12 @@ public class ManagerFornitureSingleton {
             }
         }
     }
-    
+    /**
+     *
+     * @param pren
+     * @throws java.rmi.RemoteException
+     * @throws gameshop.advance.exceptions.QuantityException
+     */
     public void addPrenotazione(IPrenotazione pren) throws RemoteException, QuantityException{
         IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter = pren.getRigheDiVendita();
         boolean notify = false;
@@ -188,10 +201,14 @@ public class ManagerFornitureSingleton {
         }
         if(notify)
             this.notificaListeners();
-        this.print();
     }
     
-    
+    /**
+     *
+     * @param pren
+     * @throws java.rmi.RemoteException
+     * @throws gameshop.advance.exceptions.QuantityException
+     */
     public void removePrenotazione(IPrenotazione pren) throws RemoteException, QuantityException{
         IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter = pren.getRigheDiVendita();
         while(iter.hasNext())
@@ -208,35 +225,15 @@ public class ManagerFornitureSingleton {
                     ip.setPrenotati(0);
             }
         }
-        this.print();
     }
-
+    /**
+     *
+     * @return L'iteratore delle informazioni prodotto
+     */
     public Iterator<IInformazioniProdottoRemote> getInformazioni(){
         return this.informazioni.values().iterator();
     }
     
-    private void print(){
-        try {
-            Iterator<IInformazioniProdottoRemote> iter = this.getInformazioni();
-            System.err.println("------FORNITURE------");
-            while(iter.hasNext())
-            {
-                IInformazioniProdottoRemote next = iter.next();
-                System.err.println(next.getDescrizione().getDescrizione());
-                System.err.println("In stock: "+next.getDescrizione().getQuantitaDisponibile() +"/"
-                                   +next.getDescrizione().getQuantitaDiSoglia());
-                System.err.println("Prenotata: "+next.getPrenotati());
-                System.err.println("Ordinata: "+next.getOrdinati());
-                if(iter.hasNext())
-                    System.err.println("--------------------");
-            }
-            System.err.println("------END------");
-        }
-        catch (RemoteException ex) {
-            Logger.getLogger(GameShopAdvance.class.getName()).log(Level.SEVERE, null, ex);
-        }
-    }
-
     public void addRemoveListener(IRemoteObserver obs) {
         this.removeListener.add(obs);
     }

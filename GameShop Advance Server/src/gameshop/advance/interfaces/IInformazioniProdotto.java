@@ -10,12 +10,12 @@ import gameshop.advance.exceptions.QuantityException;
 
 /**
  * Interfaccia remota per l'esportazione delle classi che la implementano tramite
- * Java RMI, IInformazioniProdotto consente di modificare le informazioni relative a un prodotto del catalogo..
+ * Java RMI, IInformazioniProdotto consente di modificare le informazioni relative a un prodotto del catalogo.
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IInformazioniProdotto {
-    /** Aggiunge descrizioni prodotto tramite inventario
+    /** Aggiunge descrizioni prodotto 
      *
      * @param descrizione
      */

@@ -14,7 +14,7 @@ import java.rmi.RemoteException;
 import java.util.LinkedList;
 import java.util.List;
 
-/**
+/** Gestisce le informazioni sulle prodotti
  *
  * @author Salx
  */
@@ -41,18 +41,16 @@ public class ManagerProdottiSingleton {
     public void addDescrizione(IDescrizioneProdotto desc) throws QuantityException, RemoteException
     {    
         ManagerFornitureSingleton.getInstance().addDescrizione(desc);
-        /*if(descrizioni.contains(desc)){
-        }
-        else {
-            descrizioni.add(desc);
-        }*/
     }
     
     public void deleteDescrizione(IDescrizioneProdotto desc) throws QuantityException, RemoteException
     {
         ManagerFornitureSingleton.getInstance().removeDescrizione(desc);
     }
-
+     /**
+     *
+     * @return Lista dei prodotti che sono al di sotto della soglia
+     */
     public List<IDescrizioneProdotto> getMonitored() 
     {
         return descrizioni;
