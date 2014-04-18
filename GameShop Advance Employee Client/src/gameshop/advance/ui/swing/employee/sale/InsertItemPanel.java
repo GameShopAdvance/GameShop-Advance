@@ -348,7 +348,7 @@ public class InsertItemPanel extends JPanel implements IListPanel{
         });
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[15dlu,default]:grow, $lcgap, [150dlu,default], $lcgap, [100dlu,default]:grow, $lcgap, [75dlu,default], $lcgap, [15dlu,default]:grow",
+            "[15dlu,default], $lcgap, [150dlu,default], $lcgap, [100dlu,default]:grow, $lcgap, [75dlu,default], $lcgap, [15dlu,default]",
             "fill:[15dlu,default]:grow, $rgap, default, $lgap, 90dlu, $lgap, [35dlu,default], $lgap, [15dlu,default]:grow"), this);
 
         builder.add(panel1,      CC.xy  (3, 3));

@@ -220,7 +220,7 @@ public class BookPanel extends JPanel implements IPopActionListener {
                     });
 
                     PanelBuilder panel2Builder = new PanelBuilder(new FormLayout(
-                        "[100dlu,default]:grow, $lcgap, [100dlu,min]:grow, $lcgap, [75dlu,default]:grow",
+                        "70dlu, $lcgap, default:grow, $lcgap, [75dlu,default]",
                         "[50px,min], $rgap, fill:[35dlu,min]"), panel2);
 
                     panel2Builder.add(label2,       CC.xy  (1, 1, CC.LEFT, CC.DEFAULT));
@@ -321,11 +321,11 @@ public class BookPanel extends JPanel implements IPopActionListener {
                     });
 
                     PanelBuilder panel1Builder = new PanelBuilder(new FormLayout(
-                        "left:[100dlu,default], $lcgap, [100dlu,min]:grow, $lcgap, [75dlu,default]:grow",
+                        "70dlu, $lcgap, default:grow, $lcgap, [75dlu,default]",
                         "[35dlu,min], $lgap, fill:[35dlu,min]"), panel1);
 
-                    panel1Builder.add(label4,           CC.xy  (1, 1));
-                    panel1Builder.add(clientCode,       CC.xywh(3, 1, 3, 1, CC.FILL, CC.FILL));
+                    panel1Builder.add(label4,           CC.xy  (1, 1, CC.FILL, CC.DEFAULT));
+                    panel1Builder.add(clientCode,       CC.xywh(3, 1,       3,          1, CC.FILL, CC.FILL));
                     panel1Builder.add(insertClientCode, CC.xy  (5, 3));
                 }
 
@@ -353,8 +353,8 @@ public class BookPanel extends JPanel implements IPopActionListener {
                 }
 
                 PanelBuilder getReservationCardBuilder = new PanelBuilder(new FormLayout(
-                    "[15dlu,default], $lcgap, [50dlu,default,200dlu], $ugap, [150dlu,default]:grow, [15dlu,default]",
-                    "[15dlu,default], 3*($lgap, default:grow), $lgap, [15dlu,default]:grow"), getReservationCard);
+                    "[15dlu,default], $lcgap, [50dlu,default,200dlu], $ugap, [150dlu,default]:grow, $lcgap, [15dlu,default]",
+                    "[15dlu,default]:grow, 3*($lgap, default:grow), $lgap, [15dlu,default]:grow"), getReservationCard);
 
                 getReservationCardBuilder.add(panel2, CC.xy  (3, 3));
                 getReservationCardBuilder.add(panel7, CC.xywh(5, 3, 1, 5));
