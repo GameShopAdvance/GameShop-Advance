@@ -25,7 +25,7 @@ public class ManagerProdottiSingleton {
     private LinkedList<IObserver> listeners;
     
     
-    public ManagerProdottiSingleton()
+    private ManagerProdottiSingleton()
     {
         descrizioni = DbDescrizioneProdottoSingleton.getInstance().readBelowThreshold();
     }

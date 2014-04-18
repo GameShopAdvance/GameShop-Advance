@@ -11,9 +11,9 @@ import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.remote.forniture.IInformazioniProdottoRemote;
+import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
 import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
-import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
 import gameshop.advance.model.transazione.RigaDiTransazione;
 import java.rmi.RemoteException;
 import java.util.HashMap;
@@ -37,7 +37,7 @@ public class ManagerFornitureSingleton {
     private HashMap<String, IInformazioniProdottoRemote> informazioni;
     
     
-    public ManagerFornitureSingleton(){
+    private ManagerFornitureSingleton(){
         try {
             this.informazioni = new HashMap<>();
             this.aggiornaDescrizioni(ManagerProdottiSingleton.getInstance().getMonitored());

@@ -1,11 +1,11 @@
 package gameshop.advance.controller;
 
-import gameshop.advance.exceptions.sales.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.exceptions.sales.InvalidSaleState;
-import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
+import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.remote.factory.IPrenotaProdottoRemote;
@@ -92,6 +92,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
         this.prenotazione.pagaAcconto(ammontare);
         this.prenotazione.rimuoviListener(null);
         try {
+            System.err.println("Prenotazione in controller: "+this.prenotazione);
             NegozioSingleton.getInstance().registraPrenotazione(this.prenotazione);
         } catch (QuantityException ex) {
             Logger.getLogger(PrenotaProdottoController.class.getName()).log(Level.SEVERE, null, ex);

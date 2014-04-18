@@ -1,7 +1,7 @@
 package gameshop.advance.manager;
 
-import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IObserver;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.technicalservices.db.DbPrenotazioneSingleton;
@@ -17,12 +17,14 @@ import java.util.List;
 public class ManagerPrenotazioniSingleton {
     
     private static ManagerPrenotazioniSingleton instance;
-    private LinkedList<IPrenotazione> prenotazioniDaEvadere;
+    private LinkedList<IPrenotazione> prenotazioniDaEvadere = new LinkedList<IPrenotazione>();
     private LinkedList<IObserver> listeners;
     
-    public ManagerPrenotazioniSingleton(){
+    private ManagerPrenotazioniSingleton(){
         this.listeners = new LinkedList<IObserver>();
-        this.prenotazioniDaEvadere = DbPrenotazioneSingleton.getInstance().readNotProcessed();
+        LinkedList<IPrenotazione> readNotProcessed = DbPrenotazioneSingleton.getInstance().readNotProcessed();
+        if(readNotProcessed != null)
+            this.prenotazioniDaEvadere = readNotProcessed;
     }
     
     public static ManagerPrenotazioniSingleton getInstance(){
@@ -46,9 +48,13 @@ public class ManagerPrenotazioniSingleton {
     
     public void store(IPrenotazione prenotazione) throws ObjectAlreadyExistsDbException, RemoteException, QuantityException
     {
+        System.err.println("Prenotazione in manager: "+prenotazione);
         DbPrenotazioneSingleton.getInstance().create(prenotazione);
+        System.err.println("Prenotazione in manager dopo create: "+prenotazione);
         this.addPrenotazione(prenotazione);
+        System.err.println("Prenotazione in manager dopo addPrenotazione: "+prenotazione);
         this.notificaListeners();
+        System.err.println("Prenotazione in manager dopo notificaListeners: "+prenotazione);
     }
 
     private void notificaListeners() {
@@ -60,6 +66,7 @@ public class ManagerPrenotazioniSingleton {
     }
     
     public void addPrenotazione(IPrenotazione pren) throws RemoteException, QuantityException{
+        System.err.println("Prenotazione in addPrenotazione: "+pren);
         if(pren != null && pren.isCompleted() && !pren.getEvasa() && this.prenotazioniDaEvadere.indexOf(pren) < 0)
         {
             this.prenotazioniDaEvadere.push(pren);

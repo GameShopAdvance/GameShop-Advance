@@ -116,7 +116,7 @@ public class PaymentPanel extends JPanel {
 
     private void payPartialButtonActionPerformed(ActionEvent e) {
         try {
-            BookControllerSingleton.getInstance().pagaAcconto(Double.parseDouble(this.totalPayment.getText()));
+            BookControllerSingleton.getInstance().pagaAcconto(Double.parseDouble(this.partialPayment.getText()));
         } catch (NullPointerException ex) {
             UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);  
