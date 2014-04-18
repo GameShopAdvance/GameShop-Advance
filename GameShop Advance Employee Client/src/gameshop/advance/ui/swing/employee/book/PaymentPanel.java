@@ -315,12 +315,12 @@ public class PaymentPanel extends JPanel {
         });
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[15dlu,default], $lcgap, [75dlu,default], $lcgap, [75dlu,default]:grow, 2*($lcgap, [75dlu,default]), $lcgap, [15dlu,default]",
+            "$rgap, [75dlu,default], $lcgap, [150dlu,default]:grow, $lcgap, right:[72dlu,default,112dlu], $lcgap, [75dlu,default,75dlu], $rgap",
             "[15dlu,default]:grow, 2*($lgap, 90dlu), $rgap, bottom:[35dlu,default], $lgap, [15dlu,default]:grow"), this);
 
-        builder.add(panel6,    CC.xywh(3, 3,          3,       3, CC.FILL, CC.FILL));
-        builder.add(swapPanel, CC.xywh(7, 3,          3,       5, CC.FILL, CC.FILL));
-        builder.add(button2,   CC.xy  (3, 7, CC.DEFAULT, CC.FILL));
+        builder.add(panel6,    CC.xywh(2, 3,          3,       3, CC.FILL, CC.FILL));
+        builder.add(swapPanel, CC.xywh(6, 3,          3,       5, CC.FILL, CC.FILL));
+        builder.add(button2,   CC.xy  (2, 7, CC.DEFAULT, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
