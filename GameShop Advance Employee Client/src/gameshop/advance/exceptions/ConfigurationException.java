@@ -14,15 +14,25 @@ public class ConfigurationException extends Exception{
 
     private final String filePath;
     
+    /**
+     * @param path
+     */
     public ConfigurationException(String path) {
         this.filePath = path;
     }
     
+    /**
+     * @param path
+     * @param message
+     */
     public ConfigurationException(String path, String message){
         super(message);
         this.filePath = path;
     }
     
+    /**
+     * @return
+     */
     public String getConfigurationPath()
     {
         return this.filePath;

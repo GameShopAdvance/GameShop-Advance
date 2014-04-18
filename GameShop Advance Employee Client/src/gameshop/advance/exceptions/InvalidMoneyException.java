@@ -16,14 +16,23 @@ public class InvalidMoneyException extends Exception {
         
     private Money amount;
         
+    /**
+     * @param amount
+     */
     public InvalidMoneyException(Money amount) {
             this.amount = amount;
     }
     
+    /**
+     * @param message
+     */
     public InvalidMoneyException(String message) {
            super(message);
     }
     
+    /**
+     * @return
+     */
     public Money getAmount()
    {
      return amount;

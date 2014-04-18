@@ -14,13 +14,12 @@ import java.rmi.RemoteException;
 import org.joda.time.DateTime;
 
 /**
- *
+ * Interfaccia remota della descrizione del prodotto.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IDescrizioneProdottoRemote extends Remote {
    
     /**
-     *
      * @return
      * @throws RemoteException
      */
@@ -39,12 +38,27 @@ public interface IDescrizioneProdottoRemote extends Remote {
      */
     Money getPrezzo(DateTime period) throws RemoteException;
     
+    /**
+     * @return
+     * @throws RemoteException
+     */
     int getQuantitaDisponibile() throws RemoteException;
-    
-    
+
+    /**
+     * @return
+     * @throws RemoteException
+     */
     int getQuantitaDiSoglia() throws RemoteException;
     
+    /**
+     * @return
+     * @throws RemoteException
+     */
     IRemoteImage getImmagine() throws RemoteException;
     
+    /**
+     * @return
+     * @throws RemoteException
+     */
     String getNomeProdotto() throws RemoteException;
 }

@@ -11,22 +11,20 @@ import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 
 
-/** Interfaccia remota per l'esportazione delle classi che la implementano tramite
+/** 
+ * Interfaccia remota per l'esportazione delle classi che la implementano tramite
  * Java RMI.
- *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IPrenotazioneRemote extends ITransazioneRemote {
 
     /**
-     *
      * @return
      * @throws RemoteException
      */
     Money getAcconto() throws RemoteException;
 
     /**
-     *
      * @return
      * @throws RemoteException
      */

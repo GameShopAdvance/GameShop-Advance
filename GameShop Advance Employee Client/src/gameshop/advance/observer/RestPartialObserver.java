@@ -36,7 +36,6 @@ public class RestPartialObserver extends UnicastRemoteObject implements IRemoteO
     @Override
     public void notifica(Object o) throws RemoteException{
         IPrenotazioneRemote prenotazione = (IPrenotazioneRemote) o;
-        System.err.println("Observer del resto del pagamento in acconto, client: "+this.client);
         this.client.aggiornaResto(prenotazione.getRestoAcconto());
     }
     

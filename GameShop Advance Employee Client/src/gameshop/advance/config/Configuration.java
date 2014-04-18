@@ -15,6 +15,9 @@ public class Configuration {
     private int serverPort;
     private int idCassa;
     
+    /**
+     * @throws ConfigurationException
+     */
     public Configuration() throws ConfigurationException{
         
     }
@@ -35,26 +38,44 @@ public class Configuration {
         return configuration;
     }
 
+    /**
+     * @return
+     */
     public String getServerAddress() {
         return serverAddress;
     }
 
+    /**
+     * @param serverAddress
+     */
     public void setServerAddress(String serverAddress) {
         this.serverAddress = serverAddress;
     }
 
+    /**
+     * @return
+     */
     public int getServerPort() {
         return serverPort;
     }
 
+    /**
+     * @param serverPort
+     */
     public void setServerPort(int serverPort) {
         this.serverPort = serverPort;
     }
 
+    /**
+     * @return
+     */
     public int getIdCassa() {
         return idCassa;
     }
  
+    /**
+     * @param idCassa
+     */
     public void setIdCassa(int idCassa){
         this.idCassa = idCassa;
     }

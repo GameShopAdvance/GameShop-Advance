@@ -11,28 +11,35 @@ import java.rmi.RemoteException;
 public interface IRemoteFactory extends Remote{
 
     /**
-     *
      * @param numeroCassa
      * @return
      * @throws RemoteException
      */
     ICassaRemote creaCassa(int numeroCassa) throws RemoteException;
     
-    /** Ritorna il controller necessario all'inventario
-     *
+    /** 
+     * Ritorna il controller necessario all'inventario
      * @return IInventarioControllerRemote
      * @throws RemoteException
      */
     IInventarioControllerRemote getGestisciInventarioController()  throws RemoteException;
     
-    /** Ritorna il controller necessario alla prenotazione
-     *
+    /** 
+     * Ritorna il controller necessario alla prenotazione
      * @return IPrenotaProdottoRemote
      * @throws RemoteException
      */
     IPrenotaProdottoRemote getPrenotaProdottoController() throws RemoteException;
     
+    /**
+     * @return
+     * @throws RemoteException
+     */
     IFornitureControllerRemote getAnalizzaFornitureController() throws RemoteException;
     
+    /**
+     * @return
+     * @throws RemoteException
+     */
     IProdottiRemote getProdottiFacade() throws RemoteException;
 }

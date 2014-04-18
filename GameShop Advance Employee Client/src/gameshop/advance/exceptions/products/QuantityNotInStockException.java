@@ -7,7 +7,8 @@
 package gameshop.advance.exceptions.products;
 
 /**
- *
+ * Classe che gestisce le eccezioni riguardanti la richiesta di un numero di prodotti
+ * non presenti all'interno del negozio.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class QuantityNotInStockException extends Exception{

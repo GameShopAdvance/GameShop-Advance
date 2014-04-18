@@ -43,7 +43,6 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
         this.listaProdotti = new InventoryListModel();
         this.listaProdotti.setHeader(true);
         this.observer = new DescriptionsObserver(this);
-        System.err.println("observer: "+this.observer);
     }
     
     /**
@@ -80,7 +79,6 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
         Registry reg = LocateRegistry.getRegistry(controllerConfig.getServerAddress(), controllerConfig.getServerPort());
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
         this.controller = factory.getGestisciInventarioController();
-        System.err.println("Controller: " +this.controller);
     }
     
     /**

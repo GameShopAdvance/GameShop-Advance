@@ -59,6 +59,9 @@ public class ConfigurationControllerSingleton {
         this.config.setIdCassa(idCassa);     
     }
 
+    /**
+     * @return
+     */
     public Configuration getConfiguration(){
         
         return this.config;
@@ -76,6 +79,9 @@ public class ConfigurationControllerSingleton {
         this.config.setServerAddress(address);
     }
     
+    /**
+     * @return
+     */
     public String getServerAddress(){
         
         String address;
@@ -83,11 +89,17 @@ public class ConfigurationControllerSingleton {
         return address;
     }
     
+    /**
+     * @param port
+     */
     public void setServerPort(int port){
      
         this.config.setServerPort(port);
     }
     
+    /**
+     * @return
+     */
     public int getServerPort(){
         
         int port;
@@ -95,11 +107,17 @@ public class ConfigurationControllerSingleton {
         return port;
     }
     
+    /**
+     * @param idCassa
+     */
     public void setIdCassa(int idCassa){
         
         this.config.setIdCassa(idCassa);
     }
     
+    /**
+     * @return
+     */
     public int getIdCassa(){
         int idCassa;
         idCassa = this.config.getIdCassa();

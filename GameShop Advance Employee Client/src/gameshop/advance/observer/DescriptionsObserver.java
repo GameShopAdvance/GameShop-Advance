@@ -36,10 +36,7 @@ public class DescriptionsObserver extends UnicastRemoteObject implements IRemote
      */
     @Override
     public void notifica(Object o) throws RemoteException{
-        System.err.println("Notifica Observer");
         IInventarioControllerRemote inventory = (IInventarioControllerRemote) o;
-        System.err.println("Observer delle descrizioni, server: "+o);
-        System.err.println("Observer delle descrizioni, client: "+this.client);
         try{
             this.client.addDescription(inventory.getLastDescription());
         }catch(RemoteException e)
