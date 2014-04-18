@@ -1,4 +1,4 @@
-JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_25" encoding: "UTF-8"
+JFDML JFormDesigner: "5.1.2.0.134" Java: "1.7.0_51" encoding: "UTF-8"
 
 new FormModel {
 	contentType: "form/swing"
@@ -7,10 +7,11 @@ new FormModel {
 			name: "this"
 			"$sizePolicy": 1
 			"title": "GameShop Advance - Terminale Manager"
-			"resizable": false
+			addEvent( new FormEvent( "java.awt.event.ComponentListener", "componentResized", "thisComponentResized", true ) )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "mainPanel"
 				"viewportBorder": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"horizontalScrollBarPolicy": 31
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"
 			} )

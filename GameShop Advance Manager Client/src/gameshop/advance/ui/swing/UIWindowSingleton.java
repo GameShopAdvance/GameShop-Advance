@@ -6,8 +6,11 @@ package gameshop.advance.ui.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -16,6 +19,7 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 /**
  * 
@@ -45,6 +49,16 @@ public class UIWindowSingleton extends JFrame {
         System.exit(0);
     }
 
+    private void thisComponentResized(ComponentEvent e) {
+        Dimension d = UIWindowSingleton.getInstance().getSize();
+        Dimension minD = UIWindowSingleton.getInstance().getMinimumSize();
+        if(d.width<minD.width)
+            d.width=minD.width;
+        if(d.height<minD.height)
+            d.height=minD.height;
+        UIWindowSingleton.getInstance().setSize(d);
+    }
+
     private void initComponents() {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         menuBar1 = new JMenuBar();
@@ -55,19 +69,28 @@ public class UIWindowSingleton extends JFrame {
 
         //======== this ========
         setTitle("GameShop Advance - Terminale Manager");
-        setResizable(false);
+        setName("this");
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                thisComponentResized(e);
+            }
+        });
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
         //======== menuBar1 ========
         {
+            menuBar1.setName("menuBar1");
 
             //======== menu2 ========
             {
                 menu2.setText("File");
+                menu2.setName("menu2");
 
                 //---- menuItem3 ----
                 menuItem3.setText("Impostazioni");
+                menuItem3.setName("menuItem3");
                 menuItem3.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -78,6 +101,7 @@ public class UIWindowSingleton extends JFrame {
 
                 //---- menuItem1 ----
                 menuItem1.setText("Esci");
+                menuItem1.setName("menuItem1");
                 menuItem1.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
@@ -93,6 +117,8 @@ public class UIWindowSingleton extends JFrame {
         //======== mainPanel ========
         {
             mainPanel.setViewportBorder(null);
+            mainPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            mainPanel.setName("mainPanel");
         }
         contentPane.add(mainPanel, BorderLayout.CENTER);
         setSize(1025, 540);

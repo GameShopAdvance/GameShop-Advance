@@ -6,8 +6,11 @@ package gameshop.advance.ui.swing;
 
 import java.awt.BorderLayout;
 import java.awt.Container;
+import java.awt.Dimension;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.awt.event.ComponentAdapter;
+import java.awt.event.ComponentEvent;
 import javax.swing.JComponent;
 import javax.swing.JDialog;
 import javax.swing.JFrame;
@@ -16,8 +19,10 @@ import javax.swing.JMenuBar;
 import javax.swing.JMenuItem;
 import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
+import javax.swing.ScrollPaneConstants;
 
 /**
+ * 
  * @author Matteo Gentile
  */
 public class UIWindowSingleton extends JFrame {
@@ -25,7 +30,7 @@ public class UIWindowSingleton extends JFrame {
     private static JFrame instance;
     
     private JComponent panel;
-    
+
     
     public UIWindowSingleton() {
         this.panel = null;
@@ -33,6 +38,7 @@ public class UIWindowSingleton extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    
     private void modificaConfigurazione(ActionEvent e) {
           JDialog d = new ConfigurationDialog(UIWindowSingleton.getInstance());
           d.setVisible(true);
@@ -41,6 +47,16 @@ public class UIWindowSingleton extends JFrame {
     private void exit(ActionEvent e) {
         this.dispose();
         System.exit(0);
+    }
+
+    private void thisComponentResized(ComponentEvent e) {
+        Dimension d = UIWindowSingleton.getInstance().getSize();
+        Dimension minD = UIWindowSingleton.getInstance().getMinimumSize();
+        if(d.width<minD.width)
+            d.width=minD.width;
+        if(d.height<minD.height)
+            d.height=minD.height;
+        UIWindowSingleton.getInstance().setSize(d);
     }
 
     private void initComponents() {
@@ -52,8 +68,14 @@ public class UIWindowSingleton extends JFrame {
         mainPanel = new JScrollPane();
 
         //======== this ========
-        setTitle("GameShop Advance - Terminale Cliente");
+        setTitle("GameShop Advance - Terminale Manager");
         setName("this");
+        addComponentListener(new ComponentAdapter() {
+            @Override
+            public void componentResized(ComponentEvent e) {
+                thisComponentResized(e);
+            }
+        });
         Container contentPane = getContentPane();
         contentPane.setLayout(new BorderLayout());
 
@@ -95,6 +117,7 @@ public class UIWindowSingleton extends JFrame {
         //======== mainPanel ========
         {
             mainPanel.setViewportBorder(null);
+            mainPanel.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
             mainPanel.setName("mainPanel");
         }
         contentPane.add(mainPanel, BorderLayout.CENTER);
@@ -104,7 +127,6 @@ public class UIWindowSingleton extends JFrame {
     }
     
     /**
-     * 
      * @return UIWindowSingletonSingletonSingleton unica istanza di classe.
      * Metodo di accesso all'unica istanza di classe.
      */
@@ -118,7 +140,6 @@ public class UIWindowSingleton extends JFrame {
     }
     
      /**
-     * 
      * @param panel pannello da visualizzare nella finestra.
      */
     public void setPanel(JComponent panel)
@@ -129,7 +150,6 @@ public class UIWindowSingleton extends JFrame {
     }
     
     /**
-     * 
      * @return JPanel
      */
     public JComponent getPanel()
