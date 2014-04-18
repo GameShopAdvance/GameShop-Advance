@@ -2,6 +2,7 @@ package gameshop.advance.controller;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.exceptions.db.ReservationNotFoundDbException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
 import gameshop.advance.exceptions.sales.AlredyPayedException;
@@ -14,6 +15,7 @@ import gameshop.advance.model.CatalogoProdottiSingleton;
 import gameshop.advance.model.NegozioSingleton;
 import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.model.transazione.Prenotazione;
+import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
@@ -75,7 +77,9 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
         try {
             NegozioSingleton.getInstance().registraPrenotazione(this.prenotazione);
         } catch (QuantityException ex) {
-            Logger.getLogger(PrenotaProdottoController.class.getName()).log(Level.SEVERE, null, ex);
+            LoggerSingleton.getInstance().log(ex);
+            //Questa eccezione non dovrebbe propagarsi, è una situazione che con una prenotazione
+            //non dovrebbe verificarsi mai
         }
            
     }
@@ -86,9 +90,10 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
      * 
      * @param id
      * @throws java.rmi.RemoteException   
+     * @throws gameshop.advance.exceptions.db.ReservationNotFoundDbException   
     */
     @Override
-    public void recuperaPrenotazione(Integer id) throws RemoteException
+    public void recuperaPrenotazione(Integer id) throws RemoteException, ReservationNotFoundDbException
     {
         this.prenotazione = (IPrenotazione) NegozioSingleton.getInstance().riprendiPrenotazione(id);
         this.prenotazione.rimuoviListener(null);

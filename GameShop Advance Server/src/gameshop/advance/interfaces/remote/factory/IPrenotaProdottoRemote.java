@@ -7,6 +7,7 @@
 package gameshop.advance.interfaces.remote.factory;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.db.ReservationNotFoundDbException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.sales.AlredyPayedException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
@@ -76,7 +77,7 @@ public interface IPrenotaProdottoRemote extends Remote{
      * @param id
      * @throws RemoteException
      */
-    void recuperaPrenotazione(Integer id) throws RemoteException;
+    void recuperaPrenotazione(Integer id) throws RemoteException, ReservationNotFoundDbException;
     
     /**
      *

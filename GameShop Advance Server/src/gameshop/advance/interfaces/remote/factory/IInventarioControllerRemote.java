@@ -7,6 +7,7 @@
 package gameshop.advance.interfaces.remote.factory;
 
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
@@ -35,8 +36,9 @@ public interface IInventarioControllerRemote extends Remote{
     /**
      * 
      * @throws RemoteException
+     * @throws gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException
      */
-    public void terminaInventario() throws RemoteException;
+    public void terminaInventario() throws RemoteException, ObjectAlreadyExistsDbException;
     
     /**
      *

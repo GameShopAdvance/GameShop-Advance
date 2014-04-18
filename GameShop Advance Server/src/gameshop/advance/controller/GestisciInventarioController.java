@@ -119,12 +119,13 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
      * @throws RemoteException
      */
     @Override
-    public void terminaInventario() throws RemoteException{
+    public void terminaInventario() throws RemoteException, ObjectAlreadyExistsDbException{
         for (IDescrizioneProdotto desc : this.descrizioni) {
             try {
                 DbDescrizioneProdottoSingleton.getInstance().create(desc);
             } catch (ObjectAlreadyExistsDbException ex) {
                 Logger.getLogger(GestisciInventarioController.class.getName()).log(Level.SEVERE, null, ex);
+                throw ex;
             }
         }
         this.descrizioni = null;

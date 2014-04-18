@@ -10,9 +10,8 @@ import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.interfaces.IObserver;
 import gameshop.advance.manager.ManagerProdottiSingleton;
 import gameshop.advance.model.DescrizioneProdotto;
+import gameshop.advance.technicalservices.LoggerSingleton;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 
 /** Observer che notifica gli ogetti interessati quando un prodotto scende sotto la soglia prevista.
  * 
@@ -32,18 +31,18 @@ public class DescrizioneProdottoObserver implements IObserver {
             try {
                 ManagerProdottiSingleton.getInstance().addDescrizione(desc);
             } catch (QuantityException ex) {
-                Logger.getLogger(DescrizioneProdottoObserver.class.getName()).log(Level.SEVERE, null, ex);
+                LoggerSingleton.getInstance().log(ex);
             } catch (RemoteException ex) {
-                Logger.getLogger(DescrizioneProdottoObserver.class.getName()).log(Level.SEVERE, null, ex);
+                LoggerSingleton.getInstance().log(ex);
             }
         }
         else {
             try {
                 ManagerProdottiSingleton.getInstance().deleteDescrizione(desc);
             } catch (QuantityException ex) {
-                Logger.getLogger(DescrizioneProdottoObserver.class.getName()).log(Level.SEVERE, null, ex);
+                LoggerSingleton.getInstance().log(ex);
             } catch (RemoteException ex) {
-                Logger.getLogger(DescrizioneProdottoObserver.class.getName()).log(Level.SEVERE, null, ex);
+                LoggerSingleton.getInstance().log(ex);
             }
         }
     }
