@@ -204,7 +204,7 @@ public class ManagerMenu extends JPanel {
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
             "$rgap, [303px,pref]:grow, $ugap, [288px,pref]:grow, $rgap",
-            "$rgap, 6*(fill:30dlu, $lgap), fill:30dlu, $rgap, default:grow"), this);
+            "$rgap, 6*(fill:30dlu, $lgap), fill:30dlu, $rgap, default:grow, $rgap"), this);
 
         builder.add(fornitureButton, CC.xy  (2,  2));
         builder.add(panel1,          CC.xywh(4,  2, 1, 15));
