@@ -55,6 +55,7 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
     private SaleControllerSingleton() throws RemoteException
     {
         this.listaProdotti = new RigheDiVenditaListModel();
+        this.listaProdotti.setHeader(true);
     }
 
     /**

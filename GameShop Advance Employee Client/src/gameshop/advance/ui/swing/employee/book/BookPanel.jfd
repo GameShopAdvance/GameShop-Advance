@@ -7,7 +7,7 @@ new FormModel {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 				"$columnSpecs": "relgap, center:(140dlu<default<180dlu), labelcompgap, left:max(default;72dlu):grow, labelcompgap, left:max(default;75dlu), labelcompgap, left:max(min;75dlu), relgap"
-				"$rowSpecs": "fill:max(default;15dlu):grow, linegap, default, linegap, 90dlu, linegap, default:grow, relgap, max(default;35dlu), linegap, fill:max(default;15dlu):grow"
+				"$rowSpecs": "relgap, default, linegap, 90dlu, linegap, default:grow, relgap, max(default;35dlu), relgap"
 			} ) {
 				name: "getReservationCard"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
@@ -50,7 +50,7 @@ new FormModel {
 						"gridX": 5
 					} )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridY": 3
+					"gridY": 2
 					"gridX": 2
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
@@ -102,7 +102,7 @@ new FormModel {
 					} )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 					"gridX": 4
-					"gridY": 3
+					"gridY": 2
 					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					"gridWidth": 5
@@ -151,7 +151,7 @@ new FormModel {
 						"gridY": 3
 					} )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridY": 5
+					"gridY": 4
 					"gridX": 2
 				} )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
@@ -173,7 +173,7 @@ new FormModel {
 						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					} )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridY": 9
+					"gridY": 8
 					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					"gridX": 2
 				} )
@@ -185,7 +185,7 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToPayPartialActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridY": 9
+					"gridY": 8
 					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					"gridX": 6
@@ -198,7 +198,7 @@ new FormModel {
 					}
 					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToPayTotalActionPerformed", true ) )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridY": 9
+					"gridY": 8
 					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					"gridX": 8

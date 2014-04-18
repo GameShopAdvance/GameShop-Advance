@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "relgap, max(default;15dlu):grow, labelcompgap, center:max(default;75dlu), labelcompgap, max(min;50px), labelcompgap, center:max(min;257px), labelcompgap, max(default;75dlu), labelcompgap, max(default;15dlu):grow, labelcompgap, default"
-			"$rowSpecs": "21dlu:grow, fill:25dlu, linegap, 85dlu, linegap, 44dlu, relgap, max(default;35dlu), linegap, max(default;15dlu):grow"
+			"$columnSpecs": "relgap, center:max(default;75dlu), labelcompgap, default:grow, labelcompgap, max(min;50px), labelcompgap, center:max(min;257px), labelcompgap, default:grow, labelcompgap, max(default;75dlu), relgap"
+			"$rowSpecs": "21dlu:grow, fill:25dlu, linegap, 85dlu, linegap, 44dlu, relgap, max(default;35dlu), relgap"
 		} ) {
 			name: "this"
 			add( new FormComponent( "javax.swing.JLabel" ) {
@@ -36,11 +36,11 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"gridY": 4
-				"gridWidth": 7
+				"gridWidth": 11
+				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "startNewSale"
@@ -51,9 +51,9 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "startNewSaleActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 8
-				"gridX": 4
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "goToMenu"
@@ -63,7 +63,7 @@ new FormModel {
 				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToMenuActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 10
+				"gridX": 12
 				"gridY": 8
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL

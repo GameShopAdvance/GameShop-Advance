@@ -5,7 +5,7 @@ new FormModel {
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 			"$columnSpecs": "relgap, max(min;75dlu), labelcompgap, default:grow, labelcompgap, max(min;200dlu), labelcompgap, default:grow, labelcompgap, max(min;75dlu), relgap"
-			"$rowSpecs": "max(default;15dlu):grow, linegap, 68dlu, linegap, max(min;200px), linegap, fill:max(min;35dlu), linegap, max(default;15dlu):grow"
+			"$rowSpecs": "relgap, 68dlu, linegap, max(min;200px):grow, linegap, fill:max(min;35dlu), relgap"
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
@@ -60,7 +60,7 @@ new FormModel {
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 6
-				"gridY": 3
+				"gridY": 2
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
@@ -68,7 +68,7 @@ new FormModel {
 					name: "insertedList"
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 5
+				"gridY": 4
 				"gridWidth": 9
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
@@ -82,7 +82,7 @@ new FormModel {
 				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cancelButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 7
+				"gridY": 6
 				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -94,7 +94,7 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "endInventoryButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 10
-				"gridY": 7
+				"gridY": 6
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )

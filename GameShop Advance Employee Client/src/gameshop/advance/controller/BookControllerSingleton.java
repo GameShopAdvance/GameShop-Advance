@@ -58,7 +58,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
     private BookControllerSingleton() throws RemoteException{
         
          this.listaProdottiPrenotati = new RigheDiVenditaListModel();
-        
+         this.listaProdottiPrenotati.setHeader(true);
     }
     
     private void configure() throws ConfigurationException, RemoteException, NotBoundException {
