@@ -17,4 +17,9 @@ public class AlredyPayedException extends Exception {
     public AlredyPayedException() {
     }
     
+    @Override
+     public String getMessage() {
+        return "Attenzione la prenotazione è già stata competata e pagata!";
+    }
+
 }
