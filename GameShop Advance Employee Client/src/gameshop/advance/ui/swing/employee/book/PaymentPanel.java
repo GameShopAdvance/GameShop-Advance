@@ -193,14 +193,14 @@ public class PaymentPanel extends JPanel {
                 });
 
                 PanelBuilder payPartialCardBuilder = new PanelBuilder(new FormLayout(
-                    "5dlu, $lcgap, 70dlu, $lcgap, [25dlu,default], $lcgap, [75dlu,default]",
+                    "[50dlu,default], $lcgap, [10dlu,default]:grow, $lcgap, [75dlu,default]",
                     "fill:[35dlu,default], 2*($lgap, fill:[35dlu,min])"), payPartialCard);
 
-                payPartialCardBuilder.add(label5,           CC.xy  (3, 1));
-                payPartialCardBuilder.add(displayPartial,   CC.xywh(5, 1, 3, 1));
-                payPartialCardBuilder.add(label6,           CC.xy  (3, 3));
-                payPartialCardBuilder.add(partialPayment,   CC.xywh(5, 3, 3, 1));
-                payPartialCardBuilder.add(payPartialButton, CC.xy  (7, 5));
+                payPartialCardBuilder.add(label5,           CC.xy  (1, 1));
+                payPartialCardBuilder.add(displayPartial,   CC.xywh(3, 1, 3, 1));
+                payPartialCardBuilder.add(label6,           CC.xy  (1, 3));
+                payPartialCardBuilder.add(partialPayment,   CC.xywh(3, 3, 3, 1));
+                payPartialCardBuilder.add(payPartialButton, CC.xy  (5, 5));
             }
             swapPanel.add(payPartialCard, "card1");
 
@@ -235,14 +235,14 @@ public class PaymentPanel extends JPanel {
                 });
 
                 PanelBuilder payTotalCardBuilder = new PanelBuilder(new FormLayout(
-                    "5dlu, $lcgap, 70dlu, $lcgap, [25dlu,default], $lcgap, [75dlu,default]",
+                    "50dlu, $lcgap, [10dlu,default]:grow, $lcgap, [75dlu,default]",
                     "2*(fill:[35dlu,min], $lgap), fill:[35dlu,min]"), payTotalCard);
 
-                payTotalCardBuilder.add(label7,         CC.xy  (3, 1));
-                payTotalCardBuilder.add(displayTotal,   CC.xywh(5, 1, 3, 1));
-                payTotalCardBuilder.add(label8,         CC.xy  (3, 3));
-                payTotalCardBuilder.add(totalPayment,   CC.xywh(5, 3, 3, 1));
-                payTotalCardBuilder.add(payTotalButton, CC.xy  (7, 5));
+                payTotalCardBuilder.add(label7,         CC.xy  (1, 1));
+                payTotalCardBuilder.add(displayTotal,   CC.xywh(3, 1, 3, 1));
+                payTotalCardBuilder.add(label8,         CC.xy  (1, 3));
+                payTotalCardBuilder.add(totalPayment,   CC.xywh(3, 3, 3, 1));
+                payTotalCardBuilder.add(payTotalButton, CC.xy  (5, 5));
             }
             swapPanel.add(payTotalCard, "card2");
         }
@@ -264,7 +264,7 @@ public class PaymentPanel extends JPanel {
                 "[75dlu,default]:grow, $lcgap, [75dlu,default], $lcgap, [75dlu,default]:grow, $lcgap, [25dlu,default]",
                 "default:grow, $lgap, [35dlu,default]:grow, $lgap, [35dlu,default]"), panel6);
 
-            panel6Builder.add(scrollPane1, CC.xywh(1, 1, 5, 5, CC.FILL, CC.FILL));
+            panel6Builder.add(scrollPane1, CC.xywh(1, 1, 5, 3, CC.FILL, CC.FILL));
         }
 
         //---- button2 ----
@@ -278,8 +278,8 @@ public class PaymentPanel extends JPanel {
         });
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[15dlu,default], $lcgap, [75dlu,default], $lcgap, [150dlu,default], $lcgap, [150dlu,default]:grow, $lcgap, [15dlu,default]",
-            "[15dlu,default], $lgap, default, $lgap, [35dlu,default]:grow, $lgap, [35dlu,default], $lgap, [15dlu,default]"), this);
+            "[15dlu,default], 2*($lcgap, [75dlu,default]), $lcgap, [150dlu,default]:grow, $lcgap, [15dlu,default]",
+            "[15dlu,default]:grow, $lgap, [100dlu,default], $lgap, 80dlu, $lgap, bottom:[35dlu,default], $lgap, [15dlu,default]:grow"), this);
 
         builder.add(swapPanel, CC.xywh(3, 3,          3,       1, CC.FILL, CC.FILL));
         builder.add(panel6,    CC.xywh(7, 3,          1,       5, CC.FILL, CC.FILL));
