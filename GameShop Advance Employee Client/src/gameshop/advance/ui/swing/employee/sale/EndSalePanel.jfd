@@ -4,7 +4,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "labelcompgap, max(default;15dlu):grow, labelcompgap, center:max(default;75dlu), labelcompgap, max(min;50px), labelcompgap, center:max(min;257px), labelcompgap, max(default;75dlu), labelcompgap, max(default;15dlu):grow"
+			"$columnSpecs": "relgap, max(default;15dlu):grow, labelcompgap, center:max(default;75dlu), labelcompgap, max(min;50px), labelcompgap, center:max(min;257px), labelcompgap, max(default;75dlu), labelcompgap, max(default;15dlu):grow, labelcompgap, default"
 			"$rowSpecs": "21dlu:grow, fill:25dlu, linegap, 85dlu, linegap, 44dlu, relgap, max(default;35dlu), linegap, max(default;15dlu):grow"
 		} ) {
 			name: "this"
