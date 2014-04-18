@@ -4,7 +4,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "relgap, max(default;15dlu):grow, labelcompgap, max(pref;303px), 20dlu, max(pref;288px), labelcompgap, max(default;15dlu):grow, relgap"
+			"$columnSpecs": "relgap, max(pref;303px):grow, 20dlu, max(pref;288px):grow, relgap"
 			"$rowSpecs": "max(default;15dlu):grow, linegap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu, linegap, max(default;15dlu):grow"
 		} ) {
 			name: "this"
@@ -17,8 +17,8 @@ new FormModel {
 				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "fornitureActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
 				"gridY": 3
+				"gridX": 2
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 				"$columnSpecs": "max(pref;245px):grow"
@@ -40,7 +40,7 @@ new FormModel {
 					} )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 6
+				"gridX": 4
 				"gridY": 3
 				"gridHeight": 5
 			} )
@@ -52,8 +52,8 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
 				"gridY": 5
+				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "nullButton1"
@@ -62,8 +62,8 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
 				"gridY": 7
+				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "prezziButton"
@@ -73,8 +73,8 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
 				"gridY": 9
+				"gridX": 2
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 				"$columnSpecs": "max(pref;245px):grow"
@@ -98,7 +98,7 @@ new FormModel {
 					} )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 6
+				"gridX": 4
 				"gridY": 9
 				"gridHeight": 5
 			} )
@@ -110,8 +110,8 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
 				"gridY": 11
+				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "nullButton2"
@@ -120,8 +120,8 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
 				"gridY": 13
+				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "venditeButton"
@@ -131,8 +131,8 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
 				"gridY": 15
+				"gridX": 2
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 15, 0 )

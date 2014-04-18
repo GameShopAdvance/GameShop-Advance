@@ -4,7 +4,6 @@
 
 package gameshop.advance.ui.swing.manager;
 
-import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.FornitureControllerSingleton;
@@ -79,7 +78,7 @@ public class ManagerMenu extends JPanel {
         //======== this ========
         setMinimumSize(new Dimension(720, 480));
         setLayout(new FormLayout(
-            "$rgap, [15dlu,default]:grow, $lcgap, [303px,pref], 20dlu, [288px,pref], $lcgap, [15dlu,default]:grow, $rgap",
+            "$rgap, [303px,pref]:grow, 20dlu, [288px,pref]:grow, $rgap",
             "[15dlu,default]:grow, 7*($lgap, fill:30dlu), $lgap, [15dlu,default]:grow"));
 
         //---- fornitureButton ----
@@ -90,7 +89,7 @@ public class ManagerMenu extends JPanel {
                 fornitureActionPerformed(e);
             }
         });
-        add(fornitureButton, CC.xy(4, 3));
+        add(fornitureButton, CC.xy(2, 3));
 
         //======== panel2 ========
         {
@@ -120,21 +119,21 @@ public class ManagerMenu extends JPanel {
             }
             panel2.add(scrollPane2, CC.xy(1, 1));
         }
-        add(panel2, CC.xywh(6, 3, 1, 5));
+        add(panel2, CC.xywh(4, 3, 1, 5));
 
         //---- magazzinoButton ----
         magazzinoButton.setText("Controlla Magazzino");
         magazzinoButton.setEnabled(false);
-        add(magazzinoButton, CC.xy(4, 5));
+        add(magazzinoButton, CC.xy(2, 5));
 
         //---- nullButton1 ----
         nullButton1.setEnabled(false);
-        add(nullButton1, CC.xy(4, 7));
+        add(nullButton1, CC.xy(2, 7));
 
         //---- prezziButton ----
         prezziButton.setText("Gestisci Prezzi");
         prezziButton.setEnabled(false);
-        add(prezziButton, CC.xy(4, 9));
+        add(prezziButton, CC.xy(2, 9));
 
         //======== panel3 ========
         {
@@ -166,21 +165,21 @@ public class ManagerMenu extends JPanel {
             }
             panel3.add(scrollPane1, CC.xy(1, 1));
         }
-        add(panel3, CC.xywh(6, 9, 1, 5));
+        add(panel3, CC.xywh(4, 9, 1, 5));
 
         //---- scontiButton ----
         scontiButton.setText("Gestisci Sconti");
         scontiButton.setEnabled(false);
-        add(scontiButton, CC.xy(4, 11));
+        add(scontiButton, CC.xy(2, 11));
 
         //---- nullButton2 ----
         nullButton2.setEnabled(false);
-        add(nullButton2, CC.xy(4, 13));
+        add(nullButton2, CC.xy(2, 13));
 
         //---- venditeButton ----
         venditeButton.setText("Analizza Vendite");
         venditeButton.setEnabled(false);
-        add(venditeButton, CC.xy(4, 15));
+        add(venditeButton, CC.xy(2, 15));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

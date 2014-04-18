@@ -20,6 +20,7 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
 import javax.swing.JButton;
+import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
@@ -66,6 +67,7 @@ public class FornitureMenu extends JPanel implements IListPanel {
     private void createUIComponents() {
         this.clearForniture = UIFactory.getInstance().getSimpleButton();
         this.procediButton = UIFactory.getInstance().getSimpleButton();
+        this.title = UIFactory.getInstance().getHeaderLabel();
     }
 
     
@@ -79,8 +81,12 @@ public class FornitureMenu extends JPanel implements IListPanel {
         //======== this ========
         setMinimumSize(new Dimension(720, 480));
         setLayout(new FormLayout(
-            "$rgap, [15dlu,default]:grow, $lcgap, [75dlu,default], $lcgap, [140dlu,default]:grow, $lcgap, [75dlu,default], $lcgap, [15dlu,default]:grow, $rgap",
+            "$rgap, [75dlu,default], $lcgap, [140dlu,default]:grow, $lcgap, [75dlu,default], $rgap",
             "[15px,default]:grow, $lgap, fill:177dlu, $lgap, fill:[35px,default], $lgap, [15dlu,default]:grow, $lgap"));
+
+        //---- title ----
+        title.setText("Prodotti da ordinare");
+        add(title, CC.xy(4, 1, CC.CENTER, CC.DEFAULT));
 
         //======== scrollPane1 ========
         {
@@ -89,7 +95,7 @@ public class FornitureMenu extends JPanel implements IListPanel {
             infoList.setBackground(new Color(240, 240, 240));
             scrollPane1.setViewportView(infoList);
         }
-        add(scrollPane1, CC.xywh(4, 3, 5, 1));
+        add(scrollPane1, CC.xywh(2, 3, 5, 1));
 
         //---- clearForniture ----
         clearForniture.setText("Indietro");
@@ -100,16 +106,17 @@ public class FornitureMenu extends JPanel implements IListPanel {
                 clearFornitureActionPerformed(e);
             }
         });
-        add(clearForniture, CC.xy(4, 5));
+        add(clearForniture, CC.xy(2, 5));
 
         //---- procediButton ----
         procediButton.setText("Procedi");
         procediButton.setEnabled(false);
-        add(procediButton, CC.xy(8, 5));
+        add(procediButton, CC.xy(6, 5));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
+    private JLabel title;
     private JScrollPane scrollPane1;
     private JList infoList;
     private JButton clearForniture;

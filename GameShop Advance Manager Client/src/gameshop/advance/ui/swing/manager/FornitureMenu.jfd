@@ -4,11 +4,22 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "relgap, max(default;15dlu):grow, labelcompgap, max(default;75dlu), labelcompgap, max(default;140dlu):grow, labelcompgap, max(default;75dlu), labelcompgap, max(default;15dlu):grow, relgap"
+			"$columnSpecs": "relgap, max(default;75dlu), labelcompgap, max(default;140dlu):grow, labelcompgap, max(default;75dlu), relgap"
 			"$rowSpecs": "max(default;15px):grow, linegap, fill:177dlu, linegap, fill:max(default;35px), linegap, max(default;15dlu):grow, linegap"
 		} ) {
 			name: "this"
 			"minimumSize": new java.awt.Dimension( 720, 480 )
+			add( new FormComponent( "javax.swing.JLabel" ) {
+				name: "title"
+				"text": "Prodotti da ordinare"
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridX": 4
+				"gridY": 1
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
+			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JList" ) {
@@ -16,9 +27,9 @@ new FormModel {
 					"background": new javax.swing.plaf.ColorUIResource( 240, 240, 240 )
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
 				"gridY": 3
 				"gridWidth": 5
+				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "clearForniture"
@@ -29,8 +40,8 @@ new FormModel {
 				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "clearFornitureActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
 				"gridY": 5
+				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "procediButton"
@@ -40,7 +51,7 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 8
+				"gridX": 6
 				"gridY": 5
 			} )
 		}, new FormLayoutConstraints( null ) {
