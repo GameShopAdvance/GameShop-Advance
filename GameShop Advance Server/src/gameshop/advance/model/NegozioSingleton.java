@@ -2,11 +2,13 @@ package gameshop.advance.model;
 
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
+import gameshop.advance.exceptions.db.ReservationNotFoundDbException;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.manager.ManagerPrenotazioniSingleton;
 import gameshop.advance.model.transazione.CartaCliente;
+import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.technicalservices.db.DbCartaClienteSingleton;
 import gameshop.advance.technicalservices.db.DbPrenotazioneSingleton;
 import gameshop.advance.technicalservices.db.DbScontoVenditaSingleton;
@@ -14,8 +16,6 @@ import gameshop.advance.technicalservices.db.DbVenditaSingleton;
 import java.rmi.RemoteException;
 import java.util.Iterator;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import org.joda.time.DateTime;
 
 /**
@@ -72,6 +72,7 @@ public class NegozioSingleton
      * 
      * @param v
      * @throws java.rmi.RemoteException
+     * @throws gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException
      */
     public void registraVendita(ITransazione v) throws RemoteException
     {
@@ -79,7 +80,7 @@ public class NegozioSingleton
             DbVenditaSingleton.getInstance().create(v);
             
         } catch (ObjectAlreadyExistsDbException ex) {
-            Logger.getLogger(NegozioSingleton.class.getName()).log(Level.SEVERE, null, ex);
+            LoggerSingleton.getInstance().log(ex);
         }
     }
     /**
@@ -94,13 +95,16 @@ public class NegozioSingleton
         try {
             ManagerPrenotazioniSingleton.getInstance().store(p);
         } catch (ObjectAlreadyExistsDbException ex) {
-            Logger.getLogger(NegozioSingleton.class.getName()).log(Level.SEVERE, null, ex);
+            LoggerSingleton.getInstance().log(ex);
         }
     }
     
-    public ITransazione riprendiPrenotazione(Integer id)
+    public ITransazione riprendiPrenotazione(Integer id) throws ReservationNotFoundDbException
     {
-        return DbPrenotazioneSingleton.getInstance().read(id);
+        IPrenotazione read = DbPrenotazioneSingleton.getInstance().read(id);
+        if(read == null)
+            throw new ReservationNotFoundDbException();
+        return read;
     }
     
     public CartaCliente getCliente(int codiceTessera) {

@@ -45,7 +45,6 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
     public Cassa(int idCassa) throws RemoteException, InvalidMoneyException {
         this.venditaCorrente = null;
         this.numeroCassa = idCassa;
-        System.err.println("Nuova cassa: n°" + this.numeroCassa);
     }
 
     /**
@@ -55,7 +54,6 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
     @Override
     public void avviaNuovaVendita() throws RemoteException {
         this.venditaCorrente = new Vendita();
-        System.err.println("Wrapped decorator");
         this.venditaCorrente.addSconti(NegozioSingleton.getInstance().getScontiAttuali());
     }
 
@@ -146,7 +144,6 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
     public void inserisciTesseraCliente(int codiceTessera) throws RemoteException
     {
         CartaCliente carta = NegozioSingleton.getInstance().getCliente(codiceTessera);
-        System.err.println("Tessera: "+carta);
         if(carta!=null)
         {
             this.venditaCorrente.setCliente(carta);
@@ -156,7 +153,6 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
     @Override
     public void annullaVendita() throws RemoteException{
         this.venditaCorrente.annulla();
-        
         IIteratorWrapperRemote<IRigaDiTransazioneRemote> righeDiVendita = this.venditaCorrente.getRigheDiVendita();
         while(righeDiVendita.hasNext())
             CatalogoProdottiSingleton.getInstance().aggiornaDescrizione((IDescrizioneProdotto) righeDiVendita.next().getDescrizione());

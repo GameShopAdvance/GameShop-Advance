@@ -23,7 +23,7 @@ import org.joda.time.DateTime;
  *
  * @author Salx
  */
-public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto , Activatable{
+public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto, Activatable{
 
     private final IDescrizioneProdotto descrizione;
     private transient Activator activator;
