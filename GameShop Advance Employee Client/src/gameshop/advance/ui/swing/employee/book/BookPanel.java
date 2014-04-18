@@ -108,7 +108,7 @@ public class BookPanel extends JPanel implements IPopActionListener {
             this.panel.setPayment(BookControllerSingleton.getInstance().getPartial());
             this.pushPanel(this.panel);
         } catch (NullPointerException ex) {
-             LoggerSingleton.getInstance().log(ex);
+            LoggerSingleton.getInstance().log(ex);
             UIWindowSingleton.getInstance().displayError("Errore di sistema. "
                     + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
            

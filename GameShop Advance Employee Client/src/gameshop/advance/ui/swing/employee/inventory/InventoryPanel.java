@@ -15,7 +15,7 @@ import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.interfaces.IListPanel;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
-import gameshop.advance.ui.swing.factory.UIStyleSingleton;
+import gameshop.advance.ui.swing.utility.UIStyleSingleton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.NotBoundException;

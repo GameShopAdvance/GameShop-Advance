@@ -4,7 +4,7 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.ui.swing.factory;
+package gameshop.advance.ui.swing.utility;
 
 import java.awt.Color;
 import java.awt.Font;
@@ -116,7 +116,7 @@ public class UIStyleSingleton {
         return this.textColor;
     }
 
-    Color getWindowBackgroundColor() {
+    public Color getWindowBackgroundColor() {
         return this.windowBackgroundColor;
     }
     

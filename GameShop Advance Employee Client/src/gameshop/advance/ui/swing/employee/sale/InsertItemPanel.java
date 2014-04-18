@@ -16,7 +16,7 @@ import gameshop.advance.interfaces.IListPanel;
 import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
-import gameshop.advance.ui.swing.factory.UIStyleSingleton;
+import gameshop.advance.ui.swing.utility.UIStyleSingleton;
 import java.awt.CardLayout;
 import java.awt.Font;
 import java.awt.event.ActionEvent;

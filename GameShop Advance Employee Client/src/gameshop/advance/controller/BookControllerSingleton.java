@@ -152,6 +152,8 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      * @param acconto
      * @throws RemoteException
      * @throws InvalidMoneyException
+     * @throws gameshop.advance.exceptions.sales.InvalidSaleState
+     * @throws gameshop.advance.exceptions.sales.AlredyPayedException
      */
     public void pagaAcconto(Double acconto) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException{
         try{
@@ -162,14 +164,19 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         }
         catch (InvalidMoneyException | RemoteException ex) {
             Logger.getLogger(SaleControllerSingleton.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         }
     }
         
     /**
      * Funziona che avvia il pagamento del totale di una prenotazione.
      * @param ammontare
+     * @throws gameshop.advance.exceptions.sales.InvalidSaleState
+     * @throws gameshop.advance.exceptions.sales.AlredyPayedException
+     * @throws gameshop.advance.exceptions.InvalidMoneyException
+     * @throws java.rmi.RemoteException
      */
-    public void gestisciPagamento(Double ammontare) throws InvalidSaleState, AlredyPayedException{
+    public void gestisciPagamento(Double ammontare) throws InvalidSaleState, AlredyPayedException, InvalidMoneyException, RemoteException{
         
         try{
             this.controller.addListener(new RestObserver(instance));
@@ -178,6 +185,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         }
         catch (InvalidMoneyException | RemoteException ex) {
             Logger.getLogger(SaleControllerSingleton.class.getName()).log(Level.SEVERE, null, ex);
+            throw ex;
         }
     }
     

@@ -3,9 +3,12 @@ package gameshop.advance.controller;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
+import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.remote.factory.ICassaRemote;
 import gameshop.advance.interfaces.remote.factory.IRemoteFactory;
 import gameshop.advance.interfaces.remote.sales.IRemoteClient;
@@ -30,8 +33,6 @@ import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JComponent;
 
 /**
@@ -141,16 +142,11 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
      * @param payment
      * @throws RemoteException
      */
-    public void effettuaPagamento(Double payment) throws RemoteException
+    public void effettuaPagamento(Double payment) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException
     {
-        try{
             cassa.aggiungiListener(this.saleRestObserver);
             cassa.gestisciPagamento(new Money(payment));
             aggiornaWindow(new EndSalePanel());
-        }
-        catch (Exception ex) {
-            Logger.getLogger(SaleControllerSingleton.class.getName()).log(Level.SEVERE, null, ex);
-        }
     }
     
     /**

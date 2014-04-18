@@ -80,7 +80,6 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
         Registry reg = LocateRegistry.getRegistry(controllerConfig.getServerAddress(), controllerConfig.getServerPort());
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
         this.controller = factory.getGestisciInventarioController();
-        System.err.println("Controller: " +this.controller);
     }
     
     /**
