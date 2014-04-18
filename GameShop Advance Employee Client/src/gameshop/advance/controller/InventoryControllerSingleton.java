@@ -6,6 +6,7 @@ import gameshop.advance.controller.valueData.AggiuntaProdotti;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
+import gameshop.advance.interfaces.IListPanel;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.IRemoteDescriptionClient;
 import gameshop.advance.interfaces.remote.factory.IInventarioControllerRemote;
@@ -15,15 +16,16 @@ import gameshop.advance.observer.DescriptionsObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.employee.inventory.InventoryPanel;
+import gameshop.advance.ui.swing.lists.models.InventoryListModel;
+import gameshop.advance.ui.swing.lists.renderer.InventoryCellRenderer;
 import gameshop.advance.utility.IDProdotto;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
 import java.rmi.registry.Registry;
 import java.rmi.server.UnicastRemoteObject;
-import java.util.Collection;
-import java.util.HashMap;
 import javax.swing.JComponent;
+import javax.swing.JPanel;
 
 /**
  * Controller lato client delle operazioni di gestione dell'inventario.
@@ -33,12 +35,13 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
     
     private static InventoryControllerSingleton instance;
     private IInventarioControllerRemote controller;
-    private HashMap<String, AggiuntaProdotti> addedItems;
+    private InventoryListModel listaProdotti;
     private IRemoteObserver observer;
     
     private InventoryControllerSingleton() throws RemoteException
     {
-        this.addedItems = new HashMap<>();
+        this.listaProdotti = new InventoryListModel();
+        this.listaProdotti.setHeader(true);
         this.observer = new DescriptionsObserver(this);
         System.err.println("observer: "+this.observer);
     }
@@ -89,7 +92,9 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
     {
         this.controller.avviaInventario();
         this.controller.aggiungiListener(this.observer);
-        aggiornaWindow(new InventoryPanel());
+        IListPanel panel = new InventoryPanel();
+        panel.setList(listaProdotti, new InventoryCellRenderer());
+        aggiornaWindow((JPanel) panel);
     }
     
     /**
@@ -103,14 +108,11 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
     {
         IDProdotto id = new IDProdotto(codiceProdotto);
         try{
-            System.err.println("Pre aggiunta hash :"+this.addedItems.size());
-            this.addedItems.put(id.getCodice(), new AggiuntaProdotti(null, quantity));
-            System.err.println("Post aggiunta hash :"+this.addedItems.size());
+            this.listaProdotti.addElement(id.getCodice(), new AggiuntaProdotti(null, quantity));
             this.controller.inserisciProdotto(id, quantity);
         }catch(ProdottoNotFoundException | QuantityException e)
         {
-            System.err.println("Err aggiunta hash");
-            this.addedItems.remove(id.getCodice());
+            this.listaProdotti.remove(id.getCodice());
             throw e;
         }
         
@@ -132,23 +134,15 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
      */
     @Override
     public void addDescription(IDescrizioneProdottoRemote desc) throws RemoteException{
-        System.err.println("OBSERVER CALL");
-        AggiuntaProdotti aggiunta = this.addedItems.get(desc.getCodiceProdotto().getCodice());
+        AggiuntaProdotti aggiunta = this.listaProdotti.getElement(desc.getCodiceProdotto().getCodice());
         if(aggiunta != null)
         {
             aggiunta.setDescription(desc);
-            this.addedItems.put(desc.getCodiceProdotto().getCodice(), aggiunta);
+            this.listaProdotti.remove(desc.getCodiceProdotto().getCodice());
+            this.listaProdotti.addElement(desc.getCodiceProdotto().getCodice(), aggiunta);
         }
         else
-            this.addedItems.put(desc.getCodiceProdotto().getCodice(), new AggiuntaProdotti(desc, 0));
-    }
-
-    /**
-     * @return valori degli oggetti appena inseriti
-     * @throws RemoteException
-     */
-    public Collection<AggiuntaProdotti> getDescriptionList() throws RemoteException {
-        return this.addedItems.values();
+            this.listaProdotti.addElement(desc.getCodiceProdotto().getCodice(), new AggiuntaProdotti(desc, 0));
     }
 
     /**

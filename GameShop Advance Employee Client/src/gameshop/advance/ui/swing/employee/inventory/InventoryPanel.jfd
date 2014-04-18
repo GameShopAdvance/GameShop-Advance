@@ -63,16 +63,16 @@ new FormModel {
 				"gridY": 3
 			} )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-				name: "panel"
-				add( new FormComponent( "javax.swing.JTable" ) {
-					name: "table"
+				name: "scrollPane1"
+				add( new FormComponent( "javax.swing.JList" ) {
+					name: "insertedList"
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 4
 				"gridY": 5
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"gridWidth": 5
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "cancelButton"

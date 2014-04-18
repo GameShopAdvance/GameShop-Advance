@@ -42,8 +42,6 @@ public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDi
         createUIComponents();
 
         panel1 = new JPanel();
-        separator2 = new JSeparator();
-        separator1 = new JSeparator();
         hSeparator = new JSeparator();
 
         //======== this ========
@@ -58,31 +56,21 @@ public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDi
             //---- name ----
             name.setName("name");
 
-            //---- separator2 ----
-            separator2.setOrientation(SwingConstants.VERTICAL);
-            separator2.setName("separator2");
-
             //---- quantity ----
             quantity.setHorizontalAlignment(SwingConstants.CENTER);
             quantity.setName("quantity");
-
-            //---- separator1 ----
-            separator1.setOrientation(SwingConstants.VERTICAL);
-            separator1.setName("separator1");
 
             //---- subTotal ----
             subTotal.setHorizontalAlignment(SwingConstants.CENTER);
             subTotal.setName("subTotal");
 
             PanelBuilder panel1Builder = new PanelBuilder(new FormLayout(
-                "[100dlu,default]:grow, $lcgap, 10dlu, $lcgap, [20dlu,default,40dlu]:grow, $lcgap, 10dlu, $lcgap, [25dlu,default,75dlu]:grow",
+                "[200dlu,default]:grow, $lcgap, [20dlu,default,40dlu]:grow, $lcgap, [25dlu,default,75dlu]:grow",
                 "fill:[30dlu,default]:grow"), panel1);
 
-            panel1Builder.add(name,       CC.xy(1, 1));
-            panel1Builder.add(separator2, CC.xy(3, 1, CC.CENTER, CC.DEFAULT));
-            panel1Builder.add(quantity,   CC.xy(5, 1));
-            panel1Builder.add(separator1, CC.xy(7, 1, CC.CENTER, CC.DEFAULT));
-            panel1Builder.add(subTotal,   CC.xy(9, 1));
+            panel1Builder.add(name,     CC.xy(1, 1));
+            panel1Builder.add(quantity, CC.xy(3, 1));
+            panel1Builder.add(subTotal, CC.xy(5, 1));
         }
         add(panel1, BorderLayout.CENTER);
 
@@ -98,9 +86,7 @@ public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDi
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
     private JPanel panel1;
     private JLabel name;
-    private JSeparator separator2;
     private JLabel quantity;
-    private JSeparator separator1;
     private JLabel subTotal;
     private JSeparator hSeparator;
     // JFormDesigner - End of variables declaration  //GEN-END:variables

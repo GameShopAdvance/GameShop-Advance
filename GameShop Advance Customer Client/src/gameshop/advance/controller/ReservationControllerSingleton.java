@@ -9,6 +9,7 @@ package gameshop.advance.controller;
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
+import gameshop.advance.interfaces.IListPanel;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.factory.IPrenotaProdottoRemote;
 import gameshop.advance.interfaces.remote.factory.IRemoteFactory;
@@ -21,12 +22,11 @@ import gameshop.advance.observer.PartialObserver;
 import gameshop.advance.observer.ReservationObserver;
 import gameshop.advance.observer.TotalObserver;
 import gameshop.advance.observer.TransactionObserver;
-import gameshop.advance.interfaces.IListPanel;
-import gameshop.advance.ui.swing.lists.models.RigheDiVenditaListModel;
 import gameshop.advance.ui.swing.UIWindowSingleton;
-import gameshop.advance.ui.swing.lists.renderer.BookCellRenderer;
 import gameshop.advance.ui.swing.customer.CompletedReservationPanel;
 import gameshop.advance.ui.swing.customer.ProductsPanel;
+import gameshop.advance.ui.swing.lists.models.RigheDiVenditaListModel;
+import gameshop.advance.ui.swing.lists.renderer.BookCellRenderer;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.NotBoundException;
@@ -67,6 +67,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         this.totale = new Money();
         this.acconto = new Money();
         this.listaPrenotati = new RigheDiVenditaListModel();
+        this.listaPrenotati.setHeader(true);
     }
     
      private void configure() throws ConfigurationException, RemoteException, NotBoundException 

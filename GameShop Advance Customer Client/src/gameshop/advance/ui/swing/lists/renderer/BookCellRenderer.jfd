@@ -6,7 +6,7 @@ new FormModel {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "max(default;100dlu):grow, labelcompgap, 10dlu, labelcompgap, (20dlu<default<40dlu):grow, labelcompgap, 10dlu, labelcompgap, (25dlu<default<75dlu):grow"
+				"$columnSpecs": "max(default;200dlu):grow, labelcompgap, (20dlu<default<40dlu):grow, labelcompgap, (25dlu<default<75dlu):grow"
 				"$rowSpecs": "fill:max(default;30dlu):grow"
 			} ) {
 				name: "panel1"
@@ -20,14 +20,6 @@ new FormModel {
 					"gridX": 1
 					"gridY": 1
 				} )
-				add( new FormComponent( "javax.swing.JSeparator" ) {
-					name: "separator2"
-					"orientation": 1
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridX": 3
-					"gridY": 1
-					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
-				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "quantity"
 					"horizontalAlignment": 0
@@ -35,16 +27,8 @@ new FormModel {
 						"JavaCodeGenerator.customCreate": true
 					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridX": 5
+					"gridX": 3
 					"gridY": 1
-				} )
-				add( new FormComponent( "javax.swing.JSeparator" ) {
-					name: "separator1"
-					"orientation": 1
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridX": 7
-					"gridY": 1
-					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints CENTER
 				} )
 				add( new FormComponent( "javax.swing.JLabel" ) {
 					name: "subTotal"
@@ -53,7 +37,7 @@ new FormModel {
 						"JavaCodeGenerator.customCreate": true
 					}
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridX": 9
+					"gridX": 5
 					"gridY": 1
 				} )
 			}, new FormLayoutConstraints( class java.lang.String ) {

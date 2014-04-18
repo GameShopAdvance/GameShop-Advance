@@ -27,6 +27,8 @@ public class RigheDiVenditaListModel implements ListModel<IRigaDiTransazioneRemo
     
     private HashMap<String, IRigaDiTransazioneRemote> righe = new HashMap<String, IRigaDiTransazioneRemote>();
     
+    private boolean header;
+    
     public RigheDiVenditaListModel()
     {
         this.listeners = new LinkedList<>();
@@ -43,9 +45,17 @@ public class RigheDiVenditaListModel implements ListModel<IRigaDiTransazioneRemo
         }
     }
     
+    public void setHeader(boolean head)
+    {
+        this.header = head;
+    }
+    
     @Override
     public int getSize() {
-        return this.righe.size();
+        if(!header)
+            return this.righe.size();
+        else
+            return this.righe.size()+1;
     }
 
     public void clear(){
@@ -77,6 +87,12 @@ public class RigheDiVenditaListModel implements ListModel<IRigaDiTransazioneRemo
     @Override
     public IRigaDiTransazioneRemote getElementAt(int index) {
         System.err.println("Asked index: "+index);
+        if(header)
+        {
+            if(index == 0)
+                return null;
+            index -= 1;
+        }
         return (IRigaDiTransazioneRemote) this.righe.values().toArray()[index];
     }
 

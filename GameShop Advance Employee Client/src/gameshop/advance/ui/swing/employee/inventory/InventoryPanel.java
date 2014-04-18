@@ -5,13 +5,14 @@
 package gameshop.advance.ui.swing.employee.inventory;
 
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.InventoryControllerSingleton;
-import gameshop.advance.controller.valueData.AggiuntaProdotti;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
+import gameshop.advance.interfaces.IListPanel;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
 import gameshop.advance.ui.swing.factory.UIStyleSingleton;
@@ -19,21 +20,19 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.Collection;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
+import javax.swing.JList;
 import javax.swing.JPanel;
 import javax.swing.JScrollPane;
-import javax.swing.JTable;
 import javax.swing.JTextField;
-import javax.swing.table.AbstractTableModel;
+import javax.swing.ListCellRenderer;
+import javax.swing.ListModel;
 
 /**
  * @author Matteo Gentile
  */
-public class InventoryPanel extends JPanel {
+public class InventoryPanel extends JPanel implements IListPanel {
         
     private final String[] columnNames = {"id", "descrizione", "quantità aggiunta"};
     
@@ -41,7 +40,6 @@ public class InventoryPanel extends JPanel {
         initComponents();
         this.cancelButton.setBackground(UIStyleSingleton.getInstance().getAlertColor());
         this.cancelButton.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
-        this.refreshTable();
     }
 
     private void aggiungiProdotto(ActionEvent e) {
@@ -58,7 +56,6 @@ public class InventoryPanel extends JPanel {
             
             InventoryControllerSingleton.getInstance().inserisciProdotto(this.codiceProdotto.getText(), quantity);
             this.clearFields();
-            this.refreshTable();
         } catch (RemoteException | NotBoundException ex) {
              UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
                     + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
@@ -118,67 +115,88 @@ public class InventoryPanel extends JPanel {
         panel1 = new JPanel();
         codiceProdotto = new JTextField();
         quantitaProdotto = new JTextField();
-        panel = new JScrollPane();
-        table = new JTable();
+        scrollPane1 = new JScrollPane();
+        insertedList = new JList();
 
         //======== this ========
-        setLayout(new FormLayout(
-            "$lcgap, [15dlu,default]:grow, $lcgap, [75dlu,min], $lcgap, [200dlu,min], $lcgap, [75dlu,min], $lcgap, [15dlu,default]:grow",
-            "[15dlu,default]:grow, $lgap, 68dlu, $lgap, [200px,min], $lgap, fill:[35dlu,min], $lgap, [15dlu,default]:grow"));
+        setName("this");
 
         //======== panel1 ========
         {
-            panel1.setLayout(new FormLayout(
-                "70dlu, $lcgap, 80dlu, $lcgap, [75dlu,min]",
-                "fill:[40px,min], $rgap, fill:[40px,default]"));
+            panel1.setName("panel1");
 
             //---- label1 ----
             label1.setText("Codice Prodotto");
-            panel1.add(label1, CC.xy(1, 1));
-            panel1.add(codiceProdotto, CC.xywh(3, 1, 3, 1, CC.FILL, CC.DEFAULT));
+            label1.setName("label1");
+
+            //---- codiceProdotto ----
+            codiceProdotto.setName("codiceProdotto");
 
             //---- label2 ----
             label2.setText("Quantit\u00e0");
-            panel1.add(label2, CC.xy(1, 3));
-            panel1.add(quantitaProdotto, CC.xy(3, 3, CC.FILL, CC.DEFAULT));
+            label2.setName("label2");
+
+            //---- quantitaProdotto ----
+            quantitaProdotto.setName("quantitaProdotto");
 
             //---- button1 ----
             button1.setText("Inserisci");
+            button1.setName("button1");
             button1.addActionListener(new ActionListener() {
                 @Override
                 public void actionPerformed(ActionEvent e) {
                     aggiungiProdotto(e);
                 }
             });
-            panel1.add(button1, CC.xy(5, 3));
-        }
-        add(panel1, CC.xy(6, 3));
 
-        //======== panel ========
-        {
-            panel.setViewportView(table);
+            PanelBuilder panel1Builder = new PanelBuilder(new FormLayout(
+                "70dlu, $lcgap, 80dlu, $lcgap, [75dlu,min]",
+                "fill:[40px,min], $rgap, fill:[40px,default]"), panel1);
+
+            panel1Builder.add(label1,           CC.xy  (1, 1));
+            panel1Builder.add(codiceProdotto,   CC.xywh(3, 1,       3,          1, CC.FILL, CC.DEFAULT));
+            panel1Builder.add(label2,           CC.xy  (1, 3));
+            panel1Builder.add(quantitaProdotto, CC.xy  (3, 3, CC.FILL, CC.DEFAULT));
+            panel1Builder.add(button1,          CC.xy  (5, 3));
         }
-        add(panel, CC.xywh(4, 5, 5, 1, CC.FILL, CC.FILL));
+
+        //======== scrollPane1 ========
+        {
+            scrollPane1.setName("scrollPane1");
+
+            //---- insertedList ----
+            insertedList.setName("insertedList");
+            scrollPane1.setViewportView(insertedList);
+        }
 
         //---- cancelButton ----
         cancelButton.setText("Annulla");
+        cancelButton.setName("cancelButton");
         cancelButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 cancelButtonActionPerformed(e);
             }
         });
-        add(cancelButton, CC.xy(4, 7));
 
         //---- endInventoryButton ----
         endInventoryButton.setText("Fine");
+        endInventoryButton.setName("endInventoryButton");
         endInventoryButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 endInventoryButtonActionPerformed(e);
             }
         });
-        add(endInventoryButton, CC.xy(8, 7));
+
+        PanelBuilder builder = new PanelBuilder(new FormLayout(
+            "$lcgap, [15dlu,default]:grow, $lcgap, [75dlu,min], $lcgap, [200dlu,min], $lcgap, [75dlu,min], $lcgap, [15dlu,default]:grow",
+            "[15dlu,default]:grow, $lgap, 68dlu, $lgap, [200px,min], $lgap, fill:[35dlu,min], $lgap, [15dlu,default]:grow"), this);
+
+        builder.add(panel1,             CC.xy  (6, 3));
+        builder.add(scrollPane1,        CC.xywh(4, 5, 5, 1, CC.FILL, CC.FILL));
+        builder.add(cancelButton,       CC.xy  (4, 7));
+        builder.add(endInventoryButton, CC.xy  (8, 7));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -189,58 +207,17 @@ public class InventoryPanel extends JPanel {
     private JLabel label2;
     private JTextField quantitaProdotto;
     private JButton button1;
-    private JScrollPane panel;
-    private JTable table;
+    private JScrollPane scrollPane1;
+    private JList insertedList;
     private JButton cancelButton;
     private JButton endInventoryButton;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
-    private void refreshTable() {
-        try {
-            Collection<AggiuntaProdotti> descriptions = InventoryControllerSingleton.getInstance().getDescriptionList();
-            final Object[] aggiunte = descriptions.toArray();
-            for(Object o: aggiunte)
-                System.err.println("Aggiunte "+o.toString());
-            final String[] names = this.columnNames;
-            this.table.setModel(new AbstractTableModel() {
-
-                @Override
-                public String getColumnName(int column){
-                    return names[column];
-                }
-                
-                @Override
-                public int getRowCount() {
-                    return aggiunte.length;
-                }
-
-                @Override
-                public int getColumnCount() {
-                    return names.length;
-                }
-
-                @Override
-                public Object getValueAt(int rowIndex, int columnIndex) {
-                    try {
-                        AggiuntaProdotti ap = (AggiuntaProdotti) aggiunte[rowIndex];
-                        switch(columnIndex)
-                        {
-                            case 0: return ap.getId();
-                            case 1: return ap.getDescrizione();
-                            case 2: return ap.getAddedQuantity();
-                        }
-                    } catch (RemoteException ex) {
-                        Logger.getLogger(InventoryPanel.class.getName()).log(Level.SEVERE, null, ex);
-                    }
-                    return null;
-                }
-            });
-        } catch (RemoteException | NotBoundException ex) {
-            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
-        } catch (ConfigurationException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
-                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
-        }
+    @Override
+    public void setList(ListModel model, ListCellRenderer renderer) {
+        this.insertedList.setModel(model);
+        this.insertedList.setCellRenderer(renderer);
     }
+
+    
 }

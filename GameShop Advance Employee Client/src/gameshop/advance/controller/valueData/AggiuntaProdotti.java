@@ -41,8 +41,8 @@ public class AggiuntaProdotti {
      * @return descrizione
      * @throws RemoteException
      */
-    public String getDescrizione() throws RemoteException {
-        return this.descrizione.getDescrizione();
+    public IDescrizioneProdottoRemote getDescrizione() throws RemoteException {
+        return this.descrizione;
     }
 
     public int getAddedQuantity() {
