@@ -9,6 +9,8 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
+import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
 import gameshop.advance.ui.swing.factory.UIFactory;
@@ -16,8 +18,6 @@ import gameshop.advance.utility.Money;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -34,15 +34,14 @@ public class EndSalePanel extends JPanel {
         try {
             this.displayRest.setText(SaleControllerSingleton.getInstance().getResto().toString());
         } catch (NullPointerException ex) {
-            Logger.getLogger(EndSalePanel.class.getName()).log(Level.SEVERE, null, ex);
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
-                    + " si prega di controllare la configurazione del sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
-           UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (ConfigurationException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
-                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
     
@@ -51,14 +50,14 @@ public class EndSalePanel extends JPanel {
         try{
             SaleControllerSingleton.getInstance().avviaNuovaVendita();
         } catch (NullPointerException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
-                    + " si prega di controllare la configurazione del sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
-            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (ConfigurationException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
-                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }                                            
 

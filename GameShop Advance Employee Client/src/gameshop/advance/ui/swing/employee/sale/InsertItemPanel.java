@@ -13,6 +13,7 @@ import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
 import gameshop.advance.interfaces.IListPanel;
+import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
 import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
@@ -51,14 +52,14 @@ public class InsertItemPanel extends JPanel implements IListPanel{
         try {
             SaleControllerSingleton.getInstance().concludiVendita();
         } catch (NullPointerException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
-                    + " si prega di controllare la configurazione del sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
-            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (ConfigurationException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
-                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
 
@@ -78,7 +79,8 @@ public class InsertItemPanel extends JPanel implements IListPanel{
             catch(NumberFormatException ex)
             {
                 if(!this.quantityTextField.getText().equals("")) {
-                    UIWindowSingleton.getInstance().displayError("Il formato di dato inserito per la quantità non è valido");
+                    UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+                    LoggerSingleton.getInstance().log(ex);
                 }
             }
             SaleControllerSingleton.getInstance().inserisciProdotto(this.productIdTextField.getText(), quantity);
@@ -86,26 +88,23 @@ public class InsertItemPanel extends JPanel implements IListPanel{
             this.total.setText(SaleControllerSingleton.getInstance().getTotal().toString());
         }
         catch (NullPointerException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
-                    + " si prega di controllare la configurazione del sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
-            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         } catch (ConfigurationException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
-                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         } catch (ProdottoNotFoundException ex) {
-            UIWindowSingleton.getInstance().displayError("Il codice prodotto: " +ex.getCodice()+" inserito non è valido.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         }  catch (QuantityException ex){
-            UIWindowSingleton.getInstance().displayError("La quantità inserita: " +ex.getQuantity()+ "non è valida.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         }
         catch (QuantityNotInStockException ex) {
-            UIWindowSingleton.getInstance().displayError("La quantità non è presente in magazzino, si consiglia di prenotarla.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         }
     }
@@ -119,13 +118,17 @@ public class InsertItemPanel extends JPanel implements IListPanel{
             CardLayout layout = (CardLayout) this.clientPanel.getLayout();
             layout.next(this.clientPanel);
         } catch (NullPointerException ex) {
-             UIWindowSingleton.getInstance().displayError("Non è stato possibile convalidare il codice cliente.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (ConfigurationException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi di configurazione. Se il problema persiste contattare l'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
-            UIWindowSingleton.getInstance().displayError("Non è stato possibile convalidare il codice cliente.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (NumberFormatException ex){
-            UIWindowSingleton.getInstance().displayError("Il codice cliente inserito non è valido o il suo formato non è corretto");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
 
@@ -133,14 +136,13 @@ public class InsertItemPanel extends JPanel implements IListPanel{
         try{
             SaleControllerSingleton.getInstance().clearSale();
         } catch (NullPointerException ex) {
-             UIWindowSingleton.getInstance().displayError("Non è stato possibile convalidare il codice cliente.");     
-             LoggerSingleton.getInstance().log(ex);
+             UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
-            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         } catch (ConfigurationException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi di configurazione. Se il problema persiste contattare l'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         }
         

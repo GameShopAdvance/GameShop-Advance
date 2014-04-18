@@ -11,6 +11,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.interfaces.IPopActionListener;
+import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
 import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
@@ -57,16 +58,13 @@ public class BookPanel extends JPanel implements IPopActionListener {
             this.partial.setText(partial.toString());
             this.total.setText(BookControllerSingleton.getInstance().getTotal().toString());
         } catch (NullPointerException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
-                    + " si prega di controllare la configurazione del sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
-            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         } catch (ConfigurationException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
-                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         }  
     }

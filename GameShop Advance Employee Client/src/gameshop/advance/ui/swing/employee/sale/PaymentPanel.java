@@ -9,7 +9,12 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.IListPanel;
+import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
+import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
 import java.awt.Font;
@@ -37,14 +42,14 @@ public class PaymentPanel extends JPanel implements IListPanel {
         try {
             this.displayTotal.setText(SaleControllerSingleton.getInstance().getTotal().toString());
         } catch (NullPointerException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
-                    + " si prega di controllare la configurazione del sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
-            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (ConfigurationException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
-                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
 
@@ -52,14 +57,26 @@ public class PaymentPanel extends JPanel implements IListPanel {
         try{
             SaleControllerSingleton.getInstance().effettuaPagamento(Double.parseDouble(this.payment.getText()));
         } catch (NullPointerException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
-                    + " si prega di controllare la configurazione del sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
-            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (ConfigurationException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
-                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+        }
+        catch (InvalidMoneyException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+        }
+        catch (InvalidSaleState ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+        }
+        catch (AlredyPayedException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
     

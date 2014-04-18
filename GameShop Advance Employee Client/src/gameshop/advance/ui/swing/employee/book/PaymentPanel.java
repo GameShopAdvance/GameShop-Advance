@@ -13,6 +13,8 @@ import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.sales.AlredyPayedException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.IPopActionListener;
+import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
+import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
 import gameshop.advance.utility.Money;
@@ -20,8 +22,6 @@ import java.awt.CardLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -61,17 +61,24 @@ public class PaymentPanel extends JPanel {
         try {
             BookControllerSingleton.getInstance().gestisciPagamento(Double.parseDouble(this.totalPayment.getText()));
         } catch (NullPointerException ex) {
-             UIWindowSingleton.getInstance().displayError("Non è possibile convalidare l'importo inserito.");   
+             UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException ex) {
-            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (ConfigurationException ex) {
-             UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
-                   + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (InvalidSaleState ex) {
-            Logger.getLogger(PaymentPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (AlredyPayedException ex) {
-            Logger.getLogger(PaymentPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+        }
+        catch (InvalidMoneyException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
     
@@ -111,20 +118,24 @@ public class PaymentPanel extends JPanel {
         try {
             BookControllerSingleton.getInstance().pagaAcconto(Double.parseDouble(this.totalPayment.getText()));
         } catch (NullPointerException ex) {
-             UIWindowSingleton.getInstance().displayError("Non è possibile convalidare l'importo inserito.");   
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);  
         } catch (RemoteException ex) {
-            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (ConfigurationException ex) {
-             UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
-                   + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (InvalidSaleState ex) {
-            Logger.getLogger(PaymentPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (AlredyPayedException ex) {
-            Logger.getLogger(PaymentPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         catch (InvalidMoneyException ex) {
-            Logger.getLogger(PaymentPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
 

@@ -72,22 +72,27 @@ public class ExceptionHandlerSingleton {
     }
     
     public String getMessage(ProdottoNotFoundException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return ex.getMessage();
     }
     
     public String getMessage(QuantityNotInStockException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return ex.getMessage();
     }
     
     public String getMessage(InvalidSaleState ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return "Sembra che la vendita/prenotazione non sia stata conclusa correttamente.";
     }
     
     public String getMessage(ObjectAlreadyExistsDbException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return "Si è verificato un errore interno. "
+                + "Si prega di contattare l'amministratore del sistema.";
     }
     
     public String getMessage(ObjectNotExistsDbException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return "L'oggetto richiesto non esiste.";
+    }
+    
+    public String getMessage(Exception ex){
+        return ex.getMessage();
     }
 }

@@ -36,7 +36,8 @@ public class ExceptionHandlerSingleton {
     }
     
     public String getMessage(AlredyPayedException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return "Ti siamo grati, ma è già stato trovato un pagamento. "
+                + "GSA non ama rubare soldi ai suoi clienti.";
     }
     
     public String getMessage(RemoteException ex){
@@ -49,19 +50,20 @@ public class ExceptionHandlerSingleton {
     }
     
     public String getMessage(NotBoundException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return "Ci sono problemi di comunicazione con il server. "
+                + "Potrebbe non essere attivo. Si prega di contattare l'amministratore di sistema.";
     }
     
     public String getMessage(InvalidMoneyException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return ex.getMessage();
     }
     
     public String getMessage(InvalidOperationException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return "L'operazione che si tentava di eseguire non è consentita.";
     }
     
     public String getMessage(QuantityException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return ex.getMessage();
     }
     
     public String getMessage(ConfigurationException ex){
@@ -70,22 +72,27 @@ public class ExceptionHandlerSingleton {
     }
     
     public String getMessage(ProdottoNotFoundException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return ex.getMessage();
     }
     
     public String getMessage(QuantityNotInStockException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return ex.getMessage();
     }
     
     public String getMessage(InvalidSaleState ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return "Sembra che la vendita/prenotazione non sia stata conclusa correttamente.";
     }
     
     public String getMessage(ObjectAlreadyExistsDbException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return "Si è verificato un errore interno. "
+                + "Si prega di contattare l'amministratore del sistema.";
     }
     
     public String getMessage(ObjectNotExistsDbException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return "L'oggetto richiesto non esiste.";
+    }
+    
+    public String getMessage(Exception ex){
+        return ex.getMessage();
     }
 }

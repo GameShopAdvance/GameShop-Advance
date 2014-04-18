@@ -10,6 +10,8 @@ import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.controller.InventoryControllerSingleton;
 import gameshop.advance.controller.SaleControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
+import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
 import java.awt.Dimension;
@@ -17,8 +19,6 @@ import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JPanel;
 
@@ -39,15 +39,15 @@ public class EmployeeMenuPanel extends JPanel {
        
         try{
             SaleControllerSingleton.getInstance().avviaNuovaVendita();
-        } catch(NullPointerException e){
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
-                    + " si prega di controllare la configurazione del sistema.");
-        } catch(RemoteException e){  
-            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+        } catch(NullPointerException ex){
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+        } catch(RemoteException ex){  
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (ConfigurationException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
-                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         
     }
@@ -56,11 +56,11 @@ public class EmployeeMenuPanel extends JPanel {
         try {
             InventoryControllerSingleton.getInstance().avviaInventario();
         } catch (ConfigurationException ex) {
-            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
-                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         } catch (RemoteException | NotBoundException ex) {
-            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
 
@@ -68,23 +68,20 @@ public class EmployeeMenuPanel extends JPanel {
     private void manageBookActionPerformed(ActionEvent e) {
         try {
             BookControllerSingleton.getInstance().gestisciPrenotazione();
-        } catch (Exception ex) {
-            Logger.getLogger(EmployeeMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
         }
-//        } catch (ConfigurationException ex) {
-//            UIWindowSingleton.getInstance().displayError("Ci sono problemi nella lettura del file di configurazione: "+ex.getConfigurationPath()+"."
-//                    + " Per maggiori informazioni rivolgersi all'amministratore di sistema.");
-//         catch (RemoteException ex) {
-//            UIWindowSingleton.getInstance().displayError("Non è possibile contattare il server. "
-//                    + "Si prega di riprovare. Se il problema persiste, contattare l'amministratore di sistema.");
-//        } catch(NullPointerException ex){
-//            UIWindowSingleton.getInstance().displayError("Ci sono problemi di comunicazione,"
-//                    + " si prega di controllare la configurazione del sistema.");
-//        }
-//        
-//        catch (ConfigurationException ex) {
-//            Logger.getLogger(EmployeeMenuPanel.class.getName()).log(Level.SEVERE, null, ex);
-//        } 
+        catch (NullPointerException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+        }
+        catch (ConfigurationException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+        }
+        catch (RemoteException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+        }
+
     }
 
     private void createUIComponents() {

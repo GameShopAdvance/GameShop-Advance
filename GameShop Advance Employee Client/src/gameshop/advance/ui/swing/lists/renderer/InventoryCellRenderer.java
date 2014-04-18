@@ -8,11 +8,10 @@ import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.valueData.AggiuntaProdotti;
+import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
 import java.awt.Component;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -95,21 +94,21 @@ public class InventoryCellRenderer extends JPanel implements ListCellRenderer<Ag
             }
             catch (RemoteException ex) {
                 this.codiceProdotto.setText("???");
-                Logger.getLogger(InventoryCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+                LoggerSingleton.getInstance().log(ex);
             }
             try {
                 this.nomeProdotto.setText(value.getDescrizione().getNomeProdotto());
             }
             catch (RemoteException ex) {
                 this.nomeProdotto.setText("???");
-                Logger.getLogger(InventoryCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+                LoggerSingleton.getInstance().log(ex);
             }
             try {
                 this.quantitaDisponibile.setText(""+value.getDescrizione().getQuantitaDisponibile());
             }
             catch (RemoteException ex) {
                 this.quantitaDisponibile.setText("???");
-                Logger.getLogger(InventoryCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+                LoggerSingleton.getInstance().log(ex);
             }
             this.quantitaAggiunta.setText(""+value.getAddedQuantity());
         }
