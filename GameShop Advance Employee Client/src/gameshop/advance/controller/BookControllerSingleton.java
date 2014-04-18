@@ -99,6 +99,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      */
     public void gestisciPrenotazione() throws RemoteException{
         BookPanel panel = new BookPanel();
+        this.listaProdottiPrenotati.clear();
         panel.setList(this.listaProdottiPrenotati, new BookCellRenderer());
         this.aggiornaWindow(panel);
     }
