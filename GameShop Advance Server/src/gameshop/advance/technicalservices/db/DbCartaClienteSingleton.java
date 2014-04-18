@@ -7,6 +7,7 @@
 package gameshop.advance.technicalservices.db;
 
 import com.db4o.ObjectContainer;
+import com.db4o.ObjectSet;
 import com.db4o.query.Query;
 import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.model.transazione.CartaCliente;
@@ -49,8 +50,11 @@ public class DbCartaClienteSingleton {
         Query query=client.query();
         query.constrain(CartaCliente.class);
         query.descend("codice").constrain(id);
-        CartaCliente cliente = (CartaCliente) query.execute().get(0);
-        return cliente;
+
+        ObjectSet<CartaCliente> cliente = query.execute();
+        if(cliente.isEmpty())
+            return null;
+        return cliente.get(0);
     }
     
 }

@@ -81,6 +81,7 @@ public class PaymentPanel extends JPanel implements IListPanel {
         }
     }
     
+    @Override
     public void setList(ListModel listaProdotti, ListCellRenderer renderer)
     {
         this.resumeList.setCellRenderer(renderer);
