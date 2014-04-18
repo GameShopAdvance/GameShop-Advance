@@ -4,8 +4,12 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.exceptions;
+package gameshop.advance.technicalservices;
 
+import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.InvalidOperationException;
+import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.db.ObjectNotExistsDbException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
@@ -32,7 +36,8 @@ public class ExceptionHandlerSingleton {
     }
     
     public String getMessage(AlredyPayedException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return "Ti siamo grati, ma è già stato trovato un pagamento. "
+                + "GSA non ama rubare soldi ai suoi clienti.";
     }
     
     public String getMessage(RemoteException ex){
@@ -45,19 +50,20 @@ public class ExceptionHandlerSingleton {
     }
     
     public String getMessage(NotBoundException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return "Ci sono problemi di comunicazione con il server. "
+                + "Potrebbe non essere attivo. Si prega di contattare l'amministratore di sistema.";
     }
     
     public String getMessage(InvalidMoneyException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return ex.getMessage();
     }
     
     public String getMessage(InvalidOperationException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return "L'operazione che si tentava di eseguire non è consentita.";
     }
     
     public String getMessage(QuantityException ex){
-        return "MESSAGGIO VUOTO "+ex.getClass().toString();
+        return ex.getMessage();
     }
     
     public String getMessage(ConfigurationException ex){

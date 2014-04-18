@@ -11,7 +11,7 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
-import gameshop.advance.exceptions.ExceptionHandlerSingleton;
+import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.interfaces.IPopActionListener;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;

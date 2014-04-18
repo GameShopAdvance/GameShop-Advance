@@ -4,8 +4,12 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.exceptions;
+package gameshop.advance.technicalservices;
 
+import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.InvalidOperationException;
+import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.db.ObjectNotExistsDbException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
@@ -32,7 +36,7 @@ public class ExceptionHandlerSingleton {
     }
     
     public String getMessage(AlredyPayedException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(RemoteException ex){
@@ -45,19 +49,19 @@ public class ExceptionHandlerSingleton {
     }
     
     public String getMessage(NotBoundException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(InvalidMoneyException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(InvalidOperationException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(QuantityException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(ConfigurationException ex){
@@ -66,22 +70,22 @@ public class ExceptionHandlerSingleton {
     }
     
     public String getMessage(ProdottoNotFoundException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(QuantityNotInStockException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(InvalidSaleState ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(ObjectAlreadyExistsDbException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(ObjectNotExistsDbException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
 }
