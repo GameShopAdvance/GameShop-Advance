@@ -11,7 +11,7 @@ new FormModel {
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
 				name: "mainPanel"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-					"$columnSpecs": "max(default;15dlu):grow, labelcompgap, default:grow, labelcompgap, max(default;150dlu):grow, max(default;15dlu):grow"
+					"$columnSpecs": "max(default;15dlu), labelcompgap, (50dlu<default<200dlu), unrelgap, max(default;150dlu):grow, max(default;15dlu)"
 					"$rowSpecs": "max(default;15dlu), linegap, default:grow, linegap, default:grow, linegap, default:grow, linegap, max(default;15dlu):grow"
 				} ) {
 					name: "getReservationCard"
@@ -57,7 +57,7 @@ new FormModel {
 						"gridY": 3
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-						"$columnSpecs": "max(default;5dlu), labelcompgap, max(default;75dlu), labelcompgap, default, labelcompgap, max(default;75dlu), labelcompgap, max(default;5dlu)"
+						"$columnSpecs": "max(default;5dlu):grow, relgap, max(default;75dlu), labelcompgap, max(default;75dlu), relgap, max(default;5dlu):grow"
 						"$rowSpecs": "default:grow, linegap, default:grow, linegap, max(default;25dlu), max(default;25dlu), linegap, max(default;35dlu), linegap, default"
 					} ) {
 						name: "panel7"
@@ -67,8 +67,10 @@ new FormModel {
 								name: "bookList"
 							} )
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-							"gridWidth": 9
+							"gridWidth": 7
 							"gridHeight": 4
+							"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+							"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 						} )
 						add( new FormComponent( "javax.swing.JLabel" ) {
 							name: "label1"
@@ -89,7 +91,7 @@ new FormModel {
 							}
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 							"gridY": 5
-							"gridX": 7
+							"gridX": 5
 						} )
 						add( new FormComponent( "javax.swing.JTextField" ) {
 							name: "total"
@@ -104,7 +106,7 @@ new FormModel {
 							name: "partial"
 							"editable": false
 						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-							"gridX": 7
+							"gridX": 5
 							"gridY": 6
 							"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 							"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
@@ -133,7 +135,7 @@ new FormModel {
 							"gridY": 8
 							"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 							"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-							"gridX": 7
+							"gridX": 5
 						} )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 5
@@ -184,7 +186,7 @@ new FormModel {
 						"gridX": 3
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-						"$columnSpecs": "max(default;75dlu), labelcompgap, center:max(default;75dlu):grow, labelcompgap, default, labelcompgap, center:max(default;75dlu):grow"
+						"$columnSpecs": "max(default;75dlu), labelcompgap, center:max(default;75dlu), labelcompgap, center:max(default;75dlu)"
 						"$rowSpecs": "max(default;25dlu), linegap, max(default;25dlu), linegap, max(default;35dlu), linegap, default"
 					} ) {
 						name: "panel5"

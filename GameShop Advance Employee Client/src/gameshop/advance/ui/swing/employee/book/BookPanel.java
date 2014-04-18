@@ -279,16 +279,16 @@ public class BookPanel extends JPanel implements IPopActionListener {
                     });
 
                     PanelBuilder panel7Builder = new PanelBuilder(new FormLayout(
-                        "[5dlu,default], $lcgap, [75dlu,default], $lcgap, default, $lcgap, [75dlu,default], $lcgap, [5dlu,default]",
+                        "[5dlu,default]:grow, $rgap, [75dlu,default], $lcgap, [75dlu,default], $rgap, [5dlu,default]:grow",
                         "2*(default:grow, $lgap), 2*([25dlu,default]), $lgap, [35dlu,default], $lgap, default"), panel7);
 
-                    panel7Builder.add(scrollPane1,    CC.xywh(1, 1,       9,       4));
+                    panel7Builder.add(scrollPane1,    CC.xywh(1, 1,       7,       4, CC.FILL, CC.FILL));
                     panel7Builder.add(label1,         CC.xy  (3, 5));
-                    panel7Builder.add(label3,         CC.xy  (7, 5));
+                    panel7Builder.add(label3,         CC.xy  (5, 5));
                     panel7Builder.add(total,          CC.xy  (3, 6, CC.FILL, CC.FILL));
-                    panel7Builder.add(partial,        CC.xy  (7, 6, CC.FILL, CC.FILL));
+                    panel7Builder.add(partial,        CC.xy  (5, 6, CC.FILL, CC.FILL));
                     panel7Builder.add(goToPayTotal,   CC.xy  (3, 8, CC.FILL, CC.FILL));
-                    panel7Builder.add(goToPayPartial, CC.xy  (7, 8, CC.FILL, CC.FILL));
+                    panel7Builder.add(goToPayPartial, CC.xy  (5, 8, CC.FILL, CC.FILL));
                 }
 
                 //======== panel1 ========
@@ -346,14 +346,14 @@ public class BookPanel extends JPanel implements IPopActionListener {
                     });
 
                     PanelBuilder panel5Builder = new PanelBuilder(new FormLayout(
-                        "[75dlu,default], $lcgap, center:[75dlu,default]:grow, $lcgap, default, $lcgap, center:[75dlu,default]:grow",
+                        "[75dlu,default], 2*($lcgap, center:[75dlu,default])",
                         "2*([25dlu,default], $lgap), [35dlu,default], $lgap, default"), panel5);
 
                     panel5Builder.add(clearBook, CC.xy(1, 5, CC.DEFAULT, CC.FILL));
                 }
 
                 PanelBuilder getReservationCardBuilder = new PanelBuilder(new FormLayout(
-                    "[15dlu,default]:grow, $lcgap, default:grow, $lcgap, [150dlu,default]:grow, [15dlu,default]:grow",
+                    "[15dlu,default], $lcgap, [50dlu,default,200dlu], $ugap, [150dlu,default]:grow, [15dlu,default]",
                     "[15dlu,default], 3*($lgap, default:grow), $lgap, [15dlu,default]:grow"), getReservationCard);
 
                 getReservationCardBuilder.add(panel2, CC.xy  (3, 3));
