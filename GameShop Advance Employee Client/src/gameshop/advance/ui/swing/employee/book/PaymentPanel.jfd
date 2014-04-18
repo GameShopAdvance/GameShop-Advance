@@ -9,8 +9,8 @@ new FormModel {
 		} ) {
 			name: "this"
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "max(min;25dlu), labelcompgap, max(min;168dlu), labelcompgap, max(default;25dlu)"
-				"$rowSpecs": "default:grow, linegap, max(default;35dlu), linegap, max(default;35dlu)"
+				"$columnSpecs": "max(default;75dlu), labelcompgap, max(default;75dlu), labelcompgap, max(default;75dlu), labelcompgap, max(default;25dlu)"
+				"$rowSpecs": "default:grow, linegap, max(default;35dlu):grow, linegap, max(default;35dlu)"
 			} ) {
 				name: "panel6"
 				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
@@ -19,8 +19,10 @@ new FormModel {
 						name: "resumeList"
 					} )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridY": 3
-					"gridX": 3
+					"gridWidth": 5
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"gridHeight": 3
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				} )
 				add( new FormComponent( "javax.swing.JButton" ) {
 					name: "button2"
@@ -37,6 +39,8 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 3
 				"gridX": 3
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
 				name: "swapPanel"
@@ -85,8 +89,6 @@ new FormModel {
 						auxiliary() {
 							"JavaCodeGenerator.customCreate": true
 						}
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payPartialButtonActionPerformed", true ) )
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payPartialButtonActionPerformed", true ) )
 						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payPartialButtonActionPerformed", true ) )
 					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 						"gridX": 7

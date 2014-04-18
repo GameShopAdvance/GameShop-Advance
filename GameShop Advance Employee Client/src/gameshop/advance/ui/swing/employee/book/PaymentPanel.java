@@ -181,11 +181,11 @@ public class PaymentPanel extends JPanel {
             });
 
             PanelBuilder panel6Builder = new PanelBuilder(new FormLayout(
-                "[25dlu,min], $lcgap, [168dlu,min], $lcgap, [25dlu,default]",
-                "default:grow, 2*($lgap, [35dlu,default])"), panel6);
+                "3*([75dlu,default], $lcgap), [25dlu,default]",
+                "default:grow, $lgap, [35dlu,default]:grow, $lgap, [35dlu,default]"), panel6);
 
-            panel6Builder.add(scrollPane1, CC.xy(3, 3));
-            panel6Builder.add(button2,     CC.xy(3, 5, CC.DEFAULT, CC.FILL));
+            panel6Builder.add(scrollPane1, CC.xywh(1, 1,          5,       3, CC.FILL, CC.FILL));
+            panel6Builder.add(button2,     CC.xy  (3, 5, CC.DEFAULT, CC.FILL));
         }
 
         //======== swapPanel ========
@@ -219,8 +219,6 @@ public class PaymentPanel extends JPanel {
                 payPartialButton.addActionListener(new ActionListener() {
                     @Override
                     public void actionPerformed(ActionEvent e) {
-                        payPartialButtonActionPerformed(e);
-                        payPartialButtonActionPerformed(e);
                         payPartialButtonActionPerformed(e);
                     }
                 });
@@ -284,7 +282,7 @@ public class PaymentPanel extends JPanel {
             "[15dlu,default], $lcgap, [150dlu,default]:grow, $lcgap, 193dlu:grow, $lcgap, [15dlu,default]",
             "[15dlu,default], $lgap, default:grow, $lgap, [15dlu,default]"), this);
 
-        builder.add(panel6,    CC.xy(3, 3));
+        builder.add(panel6,    CC.xy(3, 3, CC.FILL, CC.FILL));
         builder.add(swapPanel, CC.xy(5, 3));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
