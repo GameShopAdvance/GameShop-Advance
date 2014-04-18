@@ -76,6 +76,7 @@ public class BookPanel extends JPanel implements IPopActionListener {
             BookControllerSingleton.getInstance().inserisciCartaCliente(code);
             this.clientCode.setEditable(false);
             this.partial.setText(BookControllerSingleton.getInstance().getPartial().toString());
+            this.total.setText(BookControllerSingleton.getInstance().getTotal().toString());
         } catch (NullPointerException | RemoteException ex) {
              UIWindowSingleton.getInstance().displayError("Non è stato possibile convalidare il codice cliente.");
         } catch (ConfigurationException ex) {
