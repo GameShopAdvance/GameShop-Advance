@@ -9,14 +9,15 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.ExceptionHandlerSingleton;
+import gameshop.advance.technicalservices.LoggerSingleton;
+import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
 import gameshop.advance.ui.swing.factory.UIStyleSingleton;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -37,15 +38,18 @@ public class CustomerPanel extends JPanel {
     }
     
     private void avviaPrenotazione(ActionEvent e) {    
-            try {
-                ReservationControllerSingleton.getInstance().avviaPrenotazione();
-            } catch (NullPointerException ex) {
-                Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (RemoteException ex) {
-                Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
-            } catch (ConfigurationException ex) {
-                Logger.getLogger(CustomerPanel.class.getName()).log(Level.SEVERE, null, ex);
-            }
+        try {
+            ReservationControllerSingleton.getInstance().avviaPrenotazione();
+        } catch (NullPointerException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+        } catch (RemoteException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+        } catch (ConfigurationException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+        }
     }
 
     private void createUIComponents() {

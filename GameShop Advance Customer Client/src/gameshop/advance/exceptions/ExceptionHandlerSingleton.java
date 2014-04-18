@@ -32,7 +32,7 @@ public class ExceptionHandlerSingleton {
     }
     
     public String getMessage(AlredyPayedException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(RemoteException ex){
@@ -45,19 +45,19 @@ public class ExceptionHandlerSingleton {
     }
     
     public String getMessage(NotBoundException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(InvalidMoneyException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(InvalidOperationException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(QuantityException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(ConfigurationException ex){
@@ -66,22 +66,22 @@ public class ExceptionHandlerSingleton {
     }
     
     public String getMessage(ProdottoNotFoundException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(QuantityNotInStockException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(InvalidSaleState ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(ObjectAlreadyExistsDbException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
     
     public String getMessage(ObjectNotExistsDbException ex){
-        return null;
+        return "MESSAGGIO VUOTO "+ex.getClass().toString();
     }
 }

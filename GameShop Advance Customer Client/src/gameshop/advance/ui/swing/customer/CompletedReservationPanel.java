@@ -9,13 +9,14 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.ExceptionHandlerSingleton;
+import gameshop.advance.technicalservices.LoggerSingleton;
+import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
 import gameshop.advance.utility.Money;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -38,13 +39,16 @@ public class CompletedReservationPanel extends JPanel {
             this.setPartial(ReservationControllerSingleton.getInstance().getPartial());
         }
         catch (NullPointerException ex) {
-            Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         catch (RemoteException ex) {
-            Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         catch (ConfigurationException ex) {
-            Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
     
@@ -74,13 +78,16 @@ public class CompletedReservationPanel extends JPanel {
             ReservationControllerSingleton.getInstance().avviaPrenotazione();
         }
         catch (NullPointerException ex) {
-            Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         catch (ConfigurationException ex) {
-            Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         catch (RemoteException ex) {
-            Logger.getLogger(CompletedReservationPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         
     }

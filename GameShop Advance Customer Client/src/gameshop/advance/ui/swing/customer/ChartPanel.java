@@ -9,8 +9,11 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.ExceptionHandlerSingleton;
 import gameshop.advance.interfaces.IListPanel;
 import gameshop.advance.interfaces.IPopActionListener;
+import gameshop.advance.technicalservices.LoggerSingleton;
+import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
 import gameshop.advance.utility.Money;
 import java.awt.Font;
@@ -18,8 +21,6 @@ import java.awt.SystemColor;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -42,15 +43,19 @@ public class ChartPanel extends JPanel implements IListPanel{
         try
         {
             ReservationControllerSingleton.getInstance().setReservationList(this);
-        } catch (NullPointerException ex)
+        } 
+        catch (NullPointerException ex)
         {
-            Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (RemoteException ex)
-        {
-            Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);
-        } catch (ConfigurationException ex)
-        {
-            Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+        }
+        catch (RemoteException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+        }
+        catch (ConfigurationException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
     
@@ -66,13 +71,16 @@ public class ChartPanel extends JPanel implements IListPanel{
             this.setTotal(new Money());
         }
         catch (NullPointerException ex) {
-            Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         catch (ConfigurationException ex) {
-            Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         catch (RemoteException ex) {
-            Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
     
@@ -92,13 +100,16 @@ public class ChartPanel extends JPanel implements IListPanel{
             this.listener.popPanel();
         }
         catch (RemoteException ex) {
-            Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         catch (NullPointerException ex) {
-            Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         catch (ConfigurationException ex) {
-            Logger.getLogger(ChartPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
 

@@ -11,9 +11,12 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.ExceptionHandlerSingleton;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
-import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.IPopActionListener;
+import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
+import gameshop.advance.technicalservices.LoggerSingleton;
+import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
@@ -23,8 +26,6 @@ import java.awt.Insets;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JPanel;
@@ -100,16 +101,20 @@ public class ProductPanel extends JPanel {
             layout.show(this.panelSwitch, this.bookCompleted.getName());
         }
         catch (RemoteException ex) {
-            Logger.getLogger(ProductPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         catch (ProdottoNotFoundException ex) {
-            Logger.getLogger(ProductPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         catch (NullPointerException ex) {
-            Logger.getLogger(ProductPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         catch (ConfigurationException ex) {
-            Logger.getLogger(ProductPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
 

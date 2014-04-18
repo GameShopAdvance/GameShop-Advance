@@ -8,13 +8,12 @@ import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
+import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
 import java.awt.BorderLayout;
 import java.awt.Component;
 import java.awt.Dimension;
 import java.rmi.RemoteException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JLabel;
 import javax.swing.JList;
 import javax.swing.JPanel;
@@ -103,19 +102,19 @@ public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDi
             try {
                 this.name.setText(value.getDescrizione().getNomeProdotto());
             } catch (RemoteException ex) {
-                Logger.getLogger(BookCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+                LoggerSingleton.getInstance().log(ex);
                 this.name.setText("Prodotto... (!!!)");
             }
             try {
                 this.quantity.setText(""+value.getQuantity());
             } catch (RemoteException ex) {
-                Logger.getLogger(BookCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+                LoggerSingleton.getInstance().log(ex);
                 this.quantity.setText("...");
             }
             try {
                 this.subTotal.setText(value.getSubTotal().toString());
             } catch (RemoteException ex) {
-                Logger.getLogger(BookCellRenderer.class.getName()).log(Level.SEVERE, null, ex);
+                LoggerSingleton.getInstance().log(ex);
                 this.subTotal.setText("!!!");
             }
         }

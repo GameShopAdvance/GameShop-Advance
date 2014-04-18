@@ -10,8 +10,11 @@ import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ProductsControllerSingleton;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.ExceptionHandlerSingleton;
 import gameshop.advance.interfaces.IListPanel;
 import gameshop.advance.interfaces.IPopActionListener;
+import gameshop.advance.technicalservices.LoggerSingleton;
+import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
 import gameshop.advance.utility.Money;
 import java.awt.CardLayout;
@@ -22,8 +25,6 @@ import java.awt.event.MouseAdapter;
 import java.awt.event.MouseEvent;
 import java.rmi.RemoteException;
 import java.util.LinkedList;
-import java.util.logging.Level;
-import java.util.logging.Logger;
 import javax.swing.JButton;
 import javax.swing.JLabel;
 import javax.swing.JList;
@@ -66,9 +67,22 @@ public class ProductsPanel extends JPanel implements IPopActionListener, IListPa
         try {
             this.totale.setText(ReservationControllerSingleton.getInstance().getTotal().toString());
         }
-        catch (NullPointerException | RemoteException | ConfigurationException ex) {
+        catch(NullPointerException ex){
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
             this.totale.setText(new Money().toString());
         }
+        catch (RemoteException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+            this.totale.setText(new Money().toString());
+        }
+        catch (ConfigurationException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+            this.totale.setText(new Money().toString());
+        }
+        
     }
     
     @Override
@@ -97,13 +111,16 @@ public class ProductsPanel extends JPanel implements IPopActionListener, IListPa
             this.pushPanel(this.chart);
         }
         catch (NullPointerException ex) {
-            Logger.getLogger(ProductsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         catch (RemoteException ex) {
-            Logger.getLogger(ProductsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
         catch (ConfigurationException ex) {
-            Logger.getLogger(ProductsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
 
@@ -114,7 +131,8 @@ public class ProductsPanel extends JPanel implements IPopActionListener, IListPa
             this.pushPanel(this.productDetail);
         }
         catch (RemoteException ex) {
-            Logger.getLogger(ProductsPanel.class.getName()).log(Level.SEVERE, null, ex);
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
         }
     }
 
