@@ -5,6 +5,7 @@ import gameshop.advance.utility.Money;
 /**
  * Il Pagamento contiene la variabile Money e rappresenta il pagamento di una 
  * vendita.
+ * 
  * @author Salx
  */
 public class Pagamento

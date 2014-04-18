@@ -9,7 +9,8 @@ package gameshop.advance.interfaces.remote.utility;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-/** Interfaccia remota per l'esportazione delle classi che la implementano tramite
+/** 
+ * Interfaccia remota per l'esportazione delle classi che la implementano tramite
  * Java RMI.GLi IteratorWrapper si occuperanno di wrappare gli iteratori necessari per recuperare le descrizioni prodotto.
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
@@ -19,14 +20,14 @@ public interface IIteratorWrapperRemote<T1> extends Remote {
 
     /**
      *
-     * @return
+     * @return 
      * @throws RemoteException
      */
     boolean hasNext() throws RemoteException;
 
     /**
      *
-     * @return
+     * @return L'oggetto wrappato
      * @throws RemoteException
      */
     T1 next() throws RemoteException;

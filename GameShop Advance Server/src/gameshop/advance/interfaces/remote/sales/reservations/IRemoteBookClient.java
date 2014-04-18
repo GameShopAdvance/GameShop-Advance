@@ -11,7 +11,7 @@ import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 
 /** Interfaccia remota che consente esportazione di metodi per la prenotazione del cliente tramite
- *  Java RMI. I RemoteBookClient si preoccuperà di aggiornare l'acconto dovuto relativo a una prenotazione.
+ *  Java RMI Consente di esportare i metodi necesssari ad aggiornare l'acconto dovuto relativo a una prenotazione e il suo identificativo.
  *
  *  @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
@@ -26,7 +26,7 @@ public interface IRemoteBookClient extends IRemoteClient {
     void aggiornaIdPrenotazione(int id) throws RemoteException;
     
     /**
-     *
+     * Metodo che consente di aggiornare l'acconto
      * @param ammontare
      * @throws RemoteException
      */

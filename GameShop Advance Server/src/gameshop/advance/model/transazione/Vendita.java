@@ -29,7 +29,7 @@ import java.util.LinkedList;
 import java.util.List;
 import org.joda.time.DateTime;
 
-/**
+/** MOdel della vendita
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
@@ -55,7 +55,7 @@ public class Vendita implements ITransazione {
 
     /**
      *
-     * @return
+     * @return la data in cui è stata effettuata la vendita
      */
     @Override
     public DateTime getDate()
@@ -68,7 +68,13 @@ public class Vendita implements ITransazione {
         this.idVendita = idVendita;
         this.notificaListener();
     }
-
+    /**
+     *
+     * @param desc
+     * @param quantity
+     * @throws gameshop.advance.exceptions.products.QuantityNotInStockException
+     * @throws java.rmi.RemoteException
+     */
     protected void quantityCheck(IDescrizioneProdotto desc, int quantity) throws QuantityNotInStockException, RemoteException{
         if(desc.getQuantitaDisponibile() < quantity)
         {
@@ -79,7 +85,10 @@ public class Vendita implements ITransazione {
             desc.setQuantitaDisponibile(desc.getQuantitaDisponibile() - quantity);
         }
     }
-    
+     /**
+     *
+     * @throws java.rmi.RemoteException
+     */
     @Override
     public void annulla() throws RemoteException{
         Iterator<IRigaDiTransazioneRemote> iter = this.righeDiVendita.values().iterator();

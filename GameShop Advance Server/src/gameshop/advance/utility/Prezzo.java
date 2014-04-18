@@ -9,6 +9,7 @@ package gameshop.advance.utility;
 import org.joda.time.DateTime;
 
 /**
+ * Classe che modella i prezzi associando a una quantità in denaro un intervallo di tempo
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */

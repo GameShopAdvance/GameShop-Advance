@@ -6,7 +6,8 @@
 
 package gameshop.advance.model.transazione;
 
-/**
+/** 
+ * Classe che modella le varie tipologie cliente
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
@@ -24,8 +25,8 @@ public class TipologiaCliente {
     
     /**
      *
-     * @param cliente
-     * @return 
+     * @param tc
+     * @return Booleano risultato del controllo fra due tipologie cliente
      */
     public boolean equals(TipologiaCliente tc)
     {

@@ -17,7 +17,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 import org.joda.time.DateTime;
 
-/**
+/** Strategy degli sconti percentuali sul tipo di cliente
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
@@ -33,7 +33,12 @@ public class ScontoPercentualeClienteProdottoStrategy implements IScontoProdotto
         this.periodo = time;
         this.applicabile = applicable;
     }
-
+    /**
+     * @param rdv
+     * @param trans 
+     * @return Il sottototale con eventuali sconti applicati
+     * @throws java.rmi.RemoteException
+     */
     @Override
     public Money getSubtotal(RigaDiTransazione rdv, ITransazione trans) throws RemoteException {
         CartaCliente c = trans.getCliente();
@@ -46,7 +51,12 @@ public class ScontoPercentualeClienteProdottoStrategy implements IScontoProdotto
     
     @Override
     public void add(IScontoProdottoStrategy sp){}
-    
+    /**
+     * Controllo sull'applicabilità  dello sconto
+     * 
+     * @param tc 
+     * @return Booleano risultato del controllo
+     */
     private boolean checkApplicable(TipologiaCliente tc)
     {
         for(TipologiaCliente tcliente: applicabile)
@@ -56,7 +66,12 @@ public class ScontoPercentualeClienteProdottoStrategy implements IScontoProdotto
         }
         return false;
     }
-
+    /**
+     * Controllo sulla validità temporale dello sconto
+     * 
+     * @param period 
+     * @return Booleano risultato del controllo
+     */
     @Override
     public boolean isValid(DateTime period) {
         if(period == null)

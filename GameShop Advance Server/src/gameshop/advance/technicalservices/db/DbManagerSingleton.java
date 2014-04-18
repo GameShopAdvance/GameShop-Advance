@@ -28,7 +28,6 @@ public class DbManagerSingleton {
     
     private final ObjectServer server;
     
-//    private HashMap<Long, ObjectContainer>  clients;
     
     private ObjectContainer client;
     
@@ -36,15 +35,12 @@ public class DbManagerSingleton {
     private DbManagerSingleton()
     {
         ServerConfiguration configuration = Db4oClientServer.newServerConfiguration();
-//        configuration.common().objectClass(ITransazione.class).cascadeOnUpdate(true);
-//        configuration.common().objectClass(DescrizioneProdotto.class).cascadeOnUpdate(true);
         configuration.common().add(new TransparentActivationSupport());
         configuration.common().objectClass(DescrizioneProdottoSmartProxy.class).cascadeOnUpdate(true);
         configuration.common().objectClass(TransazioneSmartProxy.class).cascadeOnUpdate(true);
-        System.err.println("SERVER DB OPENING");
+
         this.server = Db4oClientServer.openServer(configuration, this.dbName, 0);
-        System.err.println("SERVER DB: "+this.server);
-//        this.clients = new HashMap<>();
+
         this.client = this.server.openClient();
     }
     
@@ -58,21 +54,6 @@ public class DbManagerSingleton {
     
     public ObjectContainer getClient()
     {
-//        Thread t = Thread.currentThread();
-//        ObjectContainer client = this.clients.get(t.getId());
-//        if(client == null)
-//        {
-//            client = this.server.openClient();
-//            this.clients.put(t.getId(), client);
-//        }
-//        System.err.println("Thread di esecuzione client: "+t.getId());
-//        
-//        for(ObjectContainer obj:this.clients.values())
-//        {
-//            System.err.println("Client: "+obj.hashCode());
-//        }
-//        return client;
-        
         if(this.client == null)
             this.client = this.server.openClient();
         return this.client;
@@ -80,15 +61,6 @@ public class DbManagerSingleton {
     
     public void close()
     {
-//        
-//        Set<Map.Entry<Long, ObjectContainer>> values = this.clients.entrySet();
-//        Iterator iter = values.iterator();
-//        while(iter.hasNext()){
-//            Entry next = (Entry<Long, ObjectContainer>) iter.next();
-//            
-//            this.clients.remove((Long) next.getKey());
-//            ((ObjectContainer) next.getValue()).close();
-//        }
         this.client.close();
         this.client = null;
     }
@@ -104,7 +76,6 @@ public class DbManagerSingleton {
         while(iter.hasNext())
         {
             DescrizioneProdotto desc = (DescrizioneProdotto) iter.next();
-            System.err.println("Descrizione Prodotto:"+i+" - "+desc);
             List<IScontoProdottoStrategy> sconti = desc.getTuttiSconti();
             for(IScontoProdottoStrategy sconto:sconti)
             {

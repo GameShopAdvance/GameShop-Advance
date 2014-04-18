@@ -1,7 +1,7 @@
 package gameshop.advance.model;
 
-import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
@@ -22,6 +22,7 @@ import org.joda.time.DateTime;
  * Il Negozio rappresenta il vero Negozio fisico.Dato che il negozio è uno e uno solo,
  * tale classe è stata implementata come Singleton.Imposta e restituisce le casse e il 
  * catalogo dei prodotti.Inoltre contiene una lista di tutte le vendite completate.
+ * 
  * @author Salx
  */
 public class NegozioSingleton
@@ -39,7 +40,8 @@ public class NegozioSingleton
 
     /**
      * Impedisce la creazione di più oggetti Negozio dato che Negozio è Singleton-
-     * @return Negozio
+     * 
+     * @return NegozioSingleton
      */
     public static synchronized NegozioSingleton getInstance()
     {
@@ -67,6 +69,7 @@ public class NegozioSingleton
     
     /**
      * Aggiunge la vendita ricevuta all'elenco delle vendite completate nel negozio.
+     * 
      * @param v
      * @throws java.rmi.RemoteException
      */
@@ -74,13 +77,18 @@ public class NegozioSingleton
     {
         try {
             DbVenditaSingleton.getInstance().create(v);
-//            CatalogoProdottiSingleton.getInstance().aggiornaDescrizioni();
             
         } catch (ObjectAlreadyExistsDbException ex) {
             Logger.getLogger(NegozioSingleton.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-    
+    /**
+     * Aggiunge la prenotazione ricevuta all'elenco delle prenotazioni effettuate snel negozio.
+     * 
+     * @param p
+     * @throws java.rmi.RemoteException
+     * @throws gameshop.advance.exceptions.QuantityException
+     */
      public void registraPrenotazione(IPrenotazione p) throws RemoteException, QuantityException
     {
         try {
@@ -96,11 +104,13 @@ public class NegozioSingleton
     }
     
     public CartaCliente getCliente(int codiceTessera) {
-        System.err.println("Negozio ---- looking for client");
             return DbCartaClienteSingleton.getInstance().read(codiceTessera);
     }
     
-    
+    /**
+     * 
+     * @return gli sconti applicabili in quel momento
+     */
     public LinkedList<IScontoVenditaStrategy> getScontiAttuali(){
       
         LinkedList<IScontoVenditaStrategy> scontiAttuali = new LinkedList<>();

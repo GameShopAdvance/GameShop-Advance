@@ -14,6 +14,7 @@ import java.util.Iterator;
  * recuperare tutti i prodotti che il negozio tratta.Dato che il catalogo è uno e uno
  * solo tale classe è stata implementata come Singleton.Attualmente crea dentro di sè
  * i prodotti presenti in negozio; successivamente recupererà tali prodotti da un database.
+ * 
  * @author Salx
  */
 public class CatalogoProdottiSingleton
@@ -50,7 +51,7 @@ public class CatalogoProdottiSingleton
      * l'id del prodotto ricevuto in input.
      * @param codiceProdotto
      * @return  la descrizione del prodotto
-     * @throws gameshop.advance.exceptions.ProdottoNotFoundException
+     * @throws gameshop.advance.exceptions.products.ProdottoNotFoundException
      */
     public IDescrizioneProdotto getDescrizioneProdotto(IDProdotto codiceProdotto) throws ProdottoNotFoundException
     {

@@ -15,7 +15,7 @@ import java.util.LinkedList;
 import java.util.List;
 import org.joda.time.DateTime;
 
-/**
+/** 
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
@@ -53,10 +53,20 @@ public abstract class ScontoProdottoStrategyComposite implements IScontoProdotto
     {
         return true;
     }
-    
+    /**
+     * @param rdv
+     * @param trans 
+     * @return Il sottototale con eventuali sconti applicati
+     * @throws java.rmi.RemoteException
+     */
     @Override
     public abstract Money getSubtotal(RigaDiTransazione rdv, ITransazione trans) throws RemoteException;
-    
+    /**
+     * @param rdv
+     * @param trans 
+     * @return Il sottototale con eventuali sconti applicati e dopo averne controllato la validità
+     * @throws java.rmi.RemoteException
+     */
     public Money getRealSubtotal(RigaDiTransazione rdv, DateTime period) throws RemoteException
     {
         Money subtotal =  rdv.getDescrizione().getPrezzo(period).multiply(rdv.getQuantity());

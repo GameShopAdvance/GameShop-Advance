@@ -11,7 +11,7 @@ import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import org.joda.time.DateTime;
 
-/**
+/** Interfaccia della strategia di sconto sui prodotti
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
@@ -20,6 +20,7 @@ public interface IScontoProdottoStrategy {
     /**
      *
      * @param rdv
+     * @param trans
      * @return
      * @throws RemoteException
      */
@@ -31,6 +32,9 @@ public interface IScontoProdottoStrategy {
      * @return
      */
     public boolean isValid(DateTime period);
-    
+    /**
+     *
+     * @param sp
+     */
     public void add(IScontoProdottoStrategy sp);
 }

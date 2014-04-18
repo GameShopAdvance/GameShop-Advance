@@ -11,12 +11,22 @@ import java.rmi.RemoteException;
 import javax.swing.ImageIcon;
 
 /**
+ *  Interfaccia remota per l'esportazione delle classi che la implementano tramite
+ * Java RMI.GLi IRemoteImage rendono disponibili i metodi per ottenere icone e immagini dei prodotti
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IRemoteImage extends Remote {
-    
+    /**
+     *
+     * @return L'icona
+     * @throws RemoteException
+     */
     ImageIcon getIcon() throws RemoteException;
-    
+    /**
+     *
+     * @return L'immagine
+     * @throws RemoteException
+     */
     ImageIcon getImage() throws RemoteException;
 }

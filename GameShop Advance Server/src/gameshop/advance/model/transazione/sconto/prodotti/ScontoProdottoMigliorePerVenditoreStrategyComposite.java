@@ -14,6 +14,7 @@ import java.rmi.RemoteException;
 import java.util.List;
 
 /**
+ * Stategy composita migliore per cliente
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
@@ -23,7 +24,12 @@ public class ScontoProdottoMigliorePerVenditoreStrategyComposite extends ScontoP
         super(trans);
     }
     
-    
+    /**
+     * @param rdv
+     * @param trans 
+     * @return Il sottototale con eventuali sconti applicati
+     * @throws java.rmi.RemoteException
+     */
     @Override
     public Money getSubtotal(RigaDiTransazione rdv, ITransazione trans) throws RemoteException 
     {

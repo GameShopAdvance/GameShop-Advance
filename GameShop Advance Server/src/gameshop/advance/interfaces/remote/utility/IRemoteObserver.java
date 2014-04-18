@@ -11,7 +11,8 @@ import java.rmi.RemoteException;
 
 /**
  * Interfaccia remota per l'esportazione delle classi observer che la implementano tramite
- * Java RMI.
+ * Java RMI, Consente di implementare agli observer il metodo notifica che serve ad aggiornare gli oggetti interessati.
+ * 
  * @author Salx
  */
 public interface IRemoteObserver extends Remote {

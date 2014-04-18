@@ -12,7 +12,8 @@ import java.util.Locale;
 
 /**
  * Gestisce tutte le operazioni riguardanti il denaro.
- * @author loki
+ * 
+ * @author Lorenzo Di Giuseppe
  */
 public class Money implements Serializable{
     
@@ -93,6 +94,7 @@ public class Money implements Serializable{
         return false;
     }
     
+    @Override
     public String toString()
     {
         long mainAmount = this.cents/100;

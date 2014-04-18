@@ -14,8 +14,8 @@ import java.rmi.RemoteException;
 import java.util.logging.Level;
 import java.util.logging.Logger;
 
-/**
- *
+/** Observer che notifica gli ogetti interessati quando un prodotto scende sotto la soglia prevista.
+ * 
  * @author Salx
  */
 public class DescrizioneProdottoObserver implements IObserver {

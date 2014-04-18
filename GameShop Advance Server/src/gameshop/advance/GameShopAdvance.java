@@ -22,7 +22,7 @@ import java.util.logging.Logger;
  * Classe che si occupa della creazione del registry RMI, con il quale comunicheranno
  * tutti i client.Su tale registry vengono implementate le interfaccie presenti all'interno
  * dei client.
- * @author loki
+ * @author Lorenzo di Giuseppe
  */
 public class GameShopAdvance {
 

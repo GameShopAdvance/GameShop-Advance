@@ -7,6 +7,7 @@
 package gameshop.advance.model.transazione;
 
 /**
+ * Model della carta cliente
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
@@ -24,17 +25,23 @@ public class CartaCliente {
         this.codice = code;
         this.tipo = tipo;
     }
-    
+    /**
+     * @param id
+     */
     public CartaCliente(int id)
     {
         this.codice = id;
     }
-    
+    /**
+     * @return  La tipologia di cliente associata alla carta
+     */
     public TipologiaCliente getTipo()
     {
         return tipo;
     }
-    
+    /**
+     * @return  Il codice della carta
+     */
     public int getId()
     {
         return this.codice;

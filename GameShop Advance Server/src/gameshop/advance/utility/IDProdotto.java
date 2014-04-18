@@ -8,7 +8,8 @@ import java.util.Objects;
 /**
  * Tale classe gestisce tutte le operazioni riguardanti l'id di un prodotto.La 
  * classe verrà estesa in un periodo successivo.
- * @author loki
+ * 
+ * @author Lorenzo Di Giuseppe
  */
 public class IDProdotto implements Serializable{
     private String codice;

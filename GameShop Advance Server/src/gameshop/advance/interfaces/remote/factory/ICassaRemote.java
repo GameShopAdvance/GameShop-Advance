@@ -1,11 +1,11 @@
 package gameshop.advance.interfaces.remote.factory;
 
-import gameshop.advance.exceptions.sales.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.exceptions.sales.InvalidSaleState;
-import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
+import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
@@ -14,12 +14,19 @@ import java.rmi.RemoteException;
 
 /**
  * Interfaccia remota per esportare cassa sui client tramite Java RMI.
- * @author loki
+ * 
+ * @author Lorenzo Di Giuseppe
  */
 public interface ICassaRemote extends Remote {
-
+    /**
+     *
+     * @throws RemoteException
+     */
     void avviaNuovaVendita() throws RemoteException;
-
+    /**
+     *
+     * @throws RemoteException
+     */
     void concludiVendita() throws RemoteException;
 
     /**
@@ -27,6 +34,8 @@ public interface ICassaRemote extends Remote {
      * @param ammontare
      * @throws RemoteException
      * @throws InvalidMoneyException
+     * @throws gameshop.advance.exceptions.sales.InvalidSaleState
+     * @throws gameshop.advance.exceptions.sales.AlredyPayedException
      */
     void gestisciPagamento(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException;
 
@@ -49,12 +58,18 @@ public interface ICassaRemote extends Remote {
      * @param codiceProdotto
      * @param quantity
      * @throws java.rmi.RemoteException
-     * @throws gameshop.advance.exceptions.ProdottoNotFoundException
+     * @throws gameshop.advance.exceptions.products.ProdottoNotFoundException
      * @throws gameshop.advance.exceptions.QuantityException
+     * @throws gameshop.advance.exceptions.products.QuantityNotInStockException
      */
     void inserisciProdotto(IDProdotto codiceProdotto, Integer quantity) throws RemoteException, ProdottoNotFoundException, QuantityException, QuantityNotInStockException;
-    
+    /**
+     * @param codiceTessera
+     * @throws RemoteException
+     */
     void inserisciTesseraCliente(int codiceTessera) throws RemoteException;
-    
+    /**
+     * @throws RemoteException
+     */
     void annullaVendita() throws RemoteException;
 }

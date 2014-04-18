@@ -19,6 +19,7 @@ import org.joda.time.DateTime;
 /**
  * La DescrizioneProdotto contiene tutte le informazioni relative ad un tipo di
  * prodotto: id, prezzo e descrizione testuale.
+ * 
  * @author Salx
  */
 public class DescrizioneProdotto implements IDescrizioneProdotto
@@ -38,7 +39,9 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
      * i valori ricevuti in input.
      * @param codiceProdotto
      * @param prezzo
+     * @param nome
      * @param descrizione
+     * @param img
      * @param disponibile
      * @param soglia
      * @throws java.rmi.RemoteException
@@ -180,7 +183,7 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
     public synchronized void addQuantitaDisponibile(int quantity){
         this.quantitaDisponibile = new Integer(this.quantitaDisponibile.intValue() + quantity);
     }
-
+   
     private Prezzo getPrezzoAttuale() {
         
         Iterator iter = this.prezzi.iterator();
@@ -224,7 +227,10 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
         final DescrizioneProdotto other = (DescrizioneProdotto) obj;
         return Objects.equals(this.codiceProdotto, other.codiceProdotto);
     }
-
+    /**
+     * @return immagine associata all'url
+     * @throws java.rmi.RemoteException
+     */
     @Override
     public IRemoteImage getImmagine() throws RemoteException {
         return new ImageProxy(urlImmagine);

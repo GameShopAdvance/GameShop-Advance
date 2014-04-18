@@ -6,20 +6,22 @@
 
 package gameshop.advance.interfaces.remote.sales.reservations;
 
-import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
+import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /** Interfaccia remota per l'esportazione delle classi che la implementano tramite
- * Java RMI.I RemoteReservationClient si preoccuperà di aggiornare l'id di una prenotazione.
+ * Java RMI IL metodo che si occupa di esportare si preoccuperà di aggiornare la sista dei prodotti presente in una prenotazione
  *
  * @author Matteo Gentile
  */
 public interface IRemoteReservationClient extends Remote {
-    
-    
-
+  /** 
+    * 
+    * @param iter
+    * @throws java.rmi.RemoteException
+    */
     void aggiornaListaProdotti(IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter) throws RemoteException;
     
 }

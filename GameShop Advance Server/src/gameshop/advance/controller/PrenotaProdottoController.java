@@ -1,11 +1,11 @@
 package gameshop.advance.controller;
 
-import gameshop.advance.exceptions.sales.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.exceptions.sales.InvalidSaleState;
-import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
+import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.remote.factory.IPrenotaProdottoRemote;
@@ -22,6 +22,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
+ * Controller che consente la gestione delle prenotazioni lato cliente e commesso
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
@@ -31,31 +32,41 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     
     //OPERAZIONI DI SISTEMA LATO CLIENTE
     
+    /**
+     * @throws java.rmi.RemoteException   
+    */
     public PrenotaProdottoController() throws RemoteException
     {
         
     }
-    
+   /**
+     * @throws java.rmi.RemoteException   
+    */
     @Override
     public void avviaPrenotazione() throws RemoteException
     {
         this.prenotazione = new Prenotazione(NegozioSingleton.getInstance().getPercentualeAcconto());
-        System.err.println("Prenotazione creata");
     }
-    
+    /** Consente al cliente di prenotare un prodotto non disponibile in negozio
+     * @param quantity 
+     * @param codiceProdotto 
+     * @throws java.rmi.RemoteException   
+     * @throws gameshop.advance.exceptions.products.ProdottoNotFoundException   
+    */
     @Override
     public void prenotaProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException, ProdottoNotFoundException
     {
         IDescrizioneProdotto desc;
         desc = CatalogoProdottiSingleton.getInstance().getDescrizioneProdotto(codiceProdotto);
-        System.err.println("Descrizione: "+desc);
         try {
             this.prenotazione.inserisciProdotto(desc, quantity);
         } catch (QuantityNotInStockException ex) {
             throw new RemoteException(ex.getMessage());
         }
     }
-    
+    /**
+     * @throws java.rmi.RemoteException   
+    */
     @Override
     public void terminaPrenotazione() throws RemoteException
     {
@@ -71,21 +82,33 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     
     //OPERAZIONI DI SISTEMA LATO COMMESSO
     
+    /** Consente al commesso di recuperare una prenotazione avviata da un cliente e successivamente completarla
+     * 
+     * @param id
+     * @throws java.rmi.RemoteException   
+    */
     @Override
     public void recuperaPrenotazione(Integer id) throws RemoteException
     {
-        System.err.println("Recupera prenotazione");
         this.prenotazione = (IPrenotazione) NegozioSingleton.getInstance().riprendiPrenotazione(id);
         this.prenotazione.rimuoviListener(null);
-        System.err.println("Recuperata "+this.prenotazione);
     }
-    
+    /** 
+     * @throws java.rmi.RemoteException   
+    */
     @Override
     public void completaPrenotazione() throws RemoteException
     {
         this.prenotazione.completaTransazione();
     }
-    
+    /** Permette di pagare l'acconto relativo a una prenotazione avviata da un cliente 
+     * 
+     * @param ammontare 
+     * @throws java.rmi.RemoteException   
+     * @throws gameshop.advance.exceptions.InvalidMoneyException   
+     * @throws gameshop.advance.exceptions.sales.InvalidSaleState   
+     * @throws gameshop.advance.exceptions.sales.AlredyPayedException   
+    */
     @Override
     public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException
     {
@@ -114,11 +137,13 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
         this.prenotazione.rimuoviListener(obs);
     }
     
-    /**
+    /** Permette al commesso di pagare il totale della prenotazione al momento del ritiro del prodotto
      *
      * @param amount
      * @throws RemoteException
      * @throws InvalidMoneyException
+     * @throws gameshop.advance.exceptions.sales.InvalidSaleState
+     * @throws gameshop.advance.exceptions.sales.AlredyPayedException
      */
     @Override
     public void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException
@@ -131,19 +156,24 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
             Logger.getLogger(PrenotaProdottoController.class.getName()).log(Level.SEVERE, null, ex);
         }
     }
-
+    /** Annulla una prenotazione in corso 
+     *
+     * @throws java.rmi.RemoteException
+     */
     @Override
-    public void cancellaPrenotazione() {
+    public void cancellaPrenotazione() throws RemoteException{
         this.prenotazione = null;
     }
-
+    /** Consente di aggiungere alla prenotazione una carta cliente la quale può dar luogo a sconti per il possessore
+     *
+     * @param code
+     * @throws java.rmi.RemoteException
+     */
     @Override
     public void inserisciCartaCliente(Integer code) throws RemoteException {
         CartaCliente carta = NegozioSingleton.getInstance().getCliente(code);
-        System.err.println("Tessera: "+carta);
         if(carta!=null)
         {
-            System.err.println("Carta cliente:"+carta);
             this.prenotazione.setCliente(carta);
         }
     }

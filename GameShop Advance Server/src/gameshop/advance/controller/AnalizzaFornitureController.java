@@ -16,19 +16,22 @@ import gameshop.advance.utility.IteratorWrapper;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-/**
+/** 
+ * Controller che implementa le operazioni di sistema necessarie al Manager per poter analizzare le forniture del negozio
  *
- * @author matteog
+ * @author Matteo Gentile
  */
 public class AnalizzaFornitureController extends UnicastRemoteObject implements IFornitureControllerRemote {
+   /** 
+     * @throws java.rmi.RemoteException
+    */
     public AnalizzaFornitureController() throws RemoteException
     {
-        
     }
 
-    /**
+    /** 
      *
-     * @return
+     * @return L'iteratore collegato alla HashMap delle informazioni su prenotazioni e quantità dei prodotti 
      * @throws RemoteException
      * @throws QuantityException
      */
@@ -36,13 +39,21 @@ public class AnalizzaFornitureController extends UnicastRemoteObject implements 
     public IIteratorWrapperRemote<IInformazioniProdottoRemote> getDatiForniture() throws RemoteException, QuantityException {
         return new IteratorWrapper<>(ManagerFornitureSingleton.getInstance().getInformazioni());
     }
-    
+    /** 
+     *
+     * @param obs
+     * @throws java.rmi.RemoteException
+     */
     @Override
     public void addListener(IRemoteObserver obs) throws RemoteException
     {
         ManagerFornitureSingleton.getInstance().addListener(obs);
     }
-    
+    /** 
+     *
+     * @param obs
+     * @throws java.rmi.RemoteException
+     */
     @Override
     public void addDeleteListener(IRemoteObserver obs) throws RemoteException
     {

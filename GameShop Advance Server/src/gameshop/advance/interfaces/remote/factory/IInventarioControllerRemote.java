@@ -6,34 +6,34 @@
 
 package gameshop.advance.interfaces.remote.factory;
 
-import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
 import gameshop.advance.utility.IDProdotto;
 import java.rmi.Remote;
 import java.rmi.RemoteException;
 
-/*** Interfaccia remota per l'esportazione delle classi che la implementano tramite
+/** 
+ * Interfaccia remota per l'esportazione da parte delle classi che la implementano tramite
  * Java RMI.I InventarioControllerRemote renderanno invocabili da remoto tutti i metodi necessari a effettuare l'inventario
- * del negozio. Esporta GestisciInventarioController.
+ * del negozio, Esporta GestisciInventarioController.
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IInventarioControllerRemote extends Remote{
     
     /**
-     *
-     * @param code
-     * @param quantity
-     * @throws RemoteException
-     * @throws QuantityException
-     * @throws ProdottoNotFoundException
-     */
+     * @param code 
+     * @param quantity 
+     * @throws java.rmi.RemoteException
+     * @throws gameshop.advance.exceptions.QuantityException
+     * @throws gameshop.advance.exceptions.products.ProdottoNotFoundException
+    */
     public void inserisciProdotto(IDProdotto code, int quantity) throws RemoteException, QuantityException, ProdottoNotFoundException;
     
     /**
-     *
+     * 
      * @throws RemoteException
      */
     public void terminaInventario() throws RemoteException;

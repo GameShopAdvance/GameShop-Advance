@@ -9,7 +9,7 @@ package gameshop.advance.remote;
 import gameshop.advance.model.Cassa;
 import java.util.LinkedList;
 
-/**
+/** Gestisce la disponibilità dei terminali di tipo cassa.
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */

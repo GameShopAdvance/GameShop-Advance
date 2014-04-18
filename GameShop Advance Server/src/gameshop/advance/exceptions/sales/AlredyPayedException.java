@@ -7,6 +7,8 @@
 package gameshop.advance.exceptions.sales;
 
 /**
+ * Classe che gestisce le eccezioni lanciate quando si tenta di pagare un prodotto prenotato più di una volta 
+
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */

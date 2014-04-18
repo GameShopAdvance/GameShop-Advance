@@ -8,16 +8,16 @@ package gameshop.advance.model.transazione;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.ITransazione;
-import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
 import gameshop.advance.interfaces.remote.sales.ITransazioneRemote;
+import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
 import gameshop.advance.utility.IteratorWrapper;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.LinkedList;
 
-/**
+/** Proxy di protezione della transazione
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
@@ -44,7 +44,11 @@ public class TransazioneRemoteProxy extends UnicastRemoteObject implements ITran
     public Integer getId() throws RemoteException {
         return this.protectedRemoteTransaction.getId();
     }
-
+    /**
+     *
+     * @return Le righe di vendita wrappate
+     * @throws java.rmi.RemoteException
+     */
     @Override
     public IIteratorWrapperRemote<IRigaDiTransazioneRemote> getRigheDiVendita() throws RemoteException {
         IIteratorWrapperRemote<IRigaDiTransazioneRemote> righeDiVendita = this.protectedRemoteTransaction.getRigheDiVendita();

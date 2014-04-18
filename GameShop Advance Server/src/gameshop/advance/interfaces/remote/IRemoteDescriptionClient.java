@@ -10,6 +10,8 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
+ * Interfaccia remota per l'esportazione delle classi che la implementano tramite
+ * Java RMI, IRemoteDescriptionClient rende possibile aggiungere prodotti durante l'inventario.
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */

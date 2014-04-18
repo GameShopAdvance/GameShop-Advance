@@ -12,14 +12,25 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- *
- * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
+ *  Interfaccia remota per l'esportazione delle classi che la implementano tramite
+ *  Java RMI.I metodi esportati da IRigaDiTransazioneRemote sono necessari sia alla vendita che alla prenotazione.
+ * 
+ *  @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IRigaDiTransazioneRemote extends Remote{
-
+    /** 
+     * @return  La descrizione presente in una rdt
+     * @throws RemoteException
+     */
     IDescrizioneProdottoRemote getDescrizione() throws RemoteException;
-
+     /** 
+     * @return  La quantità di prodotti presenti in una rdt
+     * @throws RemoteException
+     */
     int getQuantity() throws RemoteException;
-    
+    /** 
+     * @return  Il sottototale associato a una rdt
+     * @throws RemoteException
+     */
     Money getSubTotal() throws RemoteException;
 }

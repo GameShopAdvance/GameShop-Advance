@@ -1,17 +1,17 @@
 package gameshop.advance.model;
 
-import gameshop.advance.exceptions.sales.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.exceptions.sales.InvalidSaleState;
-import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
+import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.ITransazione;
 import gameshop.advance.interfaces.remote.factory.ICassaRemote;
+import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
 import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
-import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
 import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.model.transazione.Vendita;
 import gameshop.advance.utility.IDProdotto;
@@ -89,8 +89,6 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
      * @param quantity
      * @throws java.rmi.RemoteException
      * @throws gameshop.advance.exceptions.QuantityException
-     * @throws gameshop.advance.exceptions.ProdottoNotFoundException
-     * @throws gameshop.advance.exceptions.QuantityNotInStockException
      */
     @Override
     public void inserisciProdotto(IDProdotto codiceProdotto, Integer quantity) throws RemoteException, QuantityException, ProdottoNotFoundException, QuantityNotInStockException
@@ -102,8 +100,7 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
         
         if(desc == null)
             throw new ProdottoNotFoundException(codiceProdotto);
-        
-        System.err.println("Descrizione "+desc);
+       
         
         this.venditaCorrente.inserisciProdotto(desc, quantity);
         
@@ -152,7 +149,6 @@ public class Cassa extends UnicastRemoteObject implements ICassaRemote {
         System.err.println("Tessera: "+carta);
         if(carta!=null)
         {
-            System.err.println("Carta cliente:"+carta);
             this.venditaCorrente.setCliente(carta);
         }
     }

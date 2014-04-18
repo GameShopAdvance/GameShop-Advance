@@ -10,6 +10,7 @@ import java.rmi.RemoteException;
 /**
  * Rappresenta la riga di vendita che verrà stampata sullo scontrino.Contiene
  * la descrizione del prodotto e la quantità di prodotti acquistata.
+ * 
  * @author Salx
  */
 public class RigaDiTransazione implements IRigaDiTransazioneRemote
@@ -23,6 +24,7 @@ public class RigaDiTransazione implements IRigaDiTransazioneRemote
      * quantità) per creare una nuova riga di vendita.
      * @param desc
      * @param quantity
+     * @param sconto
      */
     public RigaDiTransazione(IDescrizioneProdotto desc, int quantity, IScontoProdottoStrategy sconto)
     {
@@ -49,6 +51,7 @@ public class RigaDiTransazione implements IRigaDiTransazioneRemote
         this.quantity = quantity;
     }
 
+    @Override
     public Money getSubTotal() throws RemoteException
     {
         return this.strategiaDiSconto.getSubtotal(this, null);

@@ -6,12 +6,12 @@
 
 package gameshop.advance.interfaces;
 
-import gameshop.advance.exceptions.sales.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
-import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
+import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.remote.sales.ITransazioneRemote;
+import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
 import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
@@ -19,7 +19,7 @@ import java.rmi.RemoteException;
 import java.util.LinkedList;
 import org.joda.time.DateTime;
 
-/**
+/** Interfaccia della Transazione
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
@@ -28,6 +28,7 @@ public interface ITransazione extends ITransazioneRemote {
     /**
      * Imposta lo stato della vendita come completata e invia una notifica agli
      * osservatori in ascolto.
+     * @throws java.rmi.RemoteException
      */
     void completaTransazione() throws RemoteException;
 
@@ -39,6 +40,7 @@ public interface ITransazione extends ITransazioneRemote {
      * @param desc
      * @param quantity
      * @throws java.rmi.RemoteException
+     * @throws gameshop.advance.exceptions.products.QuantityNotInStockException
      */
     void inserisciProdotto(IDescrizioneProdotto desc, int quantity) throws RemoteException, QuantityNotInStockException;
 
@@ -48,6 +50,8 @@ public interface ITransazione extends ITransazioneRemote {
      * @param ammontare
      * @throws gameshop.advance.exceptions.InvalidMoneyException
      * @throws java.rmi.RemoteException
+     * @throws gameshop.advance.exceptions.sales.InvalidSaleState
+     * @throws gameshop.advance.exceptions.sales.AlredyPayedException
      */
     void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException, InvalidSaleState, AlredyPayedException;
 

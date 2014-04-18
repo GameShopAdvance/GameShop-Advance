@@ -13,7 +13,9 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- *
+ *  Interfaccia remota per l'esportazione delle classi che la implementano tramite
+ *  Java RMI.I metodi esportati da ITransazioneRemote sono necessari sia alla vendita che alla prenotazione.
+ * 
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface ITransazioneRemote extends Remote {
@@ -38,14 +40,14 @@ public interface ITransazioneRemote extends Remote {
     
     /**
      *
-     * @return
+     * @return L'id della transazione
      * @throws RemoteException
      */
     Integer getId() throws RemoteException;
 
     /**
      *
-     * @return
+     * @return Le righe di transazione
      * @throws RemoteException
      */
     IIteratorWrapperRemote<IRigaDiTransazioneRemote> getRigheDiVendita() throws RemoteException;

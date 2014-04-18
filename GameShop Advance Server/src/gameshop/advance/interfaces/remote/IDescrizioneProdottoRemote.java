@@ -14,7 +14,9 @@ import java.rmi.RemoteException;
 import org.joda.time.DateTime;
 
 /**
- *
+ * Interfaccia remota per l'esportazione delle classi che la implementano tramite
+ * Java RMI, Interfaccia remota delle descrizioni prodotto.
+ * 
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IDescrizioneProdottoRemote extends Remote {
@@ -38,13 +40,25 @@ public interface IDescrizioneProdottoRemote extends Remote {
      * @throws java.rmi.RemoteException
      */
     Money getPrezzo(DateTime period) throws RemoteException;
-    
+    /**
+     * @return quantità disponibile di un prodotto.
+     * @throws java.rmi.RemoteException
+     */
     int getQuantitaDisponibile() throws RemoteException;
     
-    
+    /**
+     * @return quantità di soglia imposta su un prodotto
+     * @throws java.rmi.RemoteException
+     */
     int getQuantitaDiSoglia() throws RemoteException;
-    
+    /**
+     * @return immagine di un prodotto
+     * @throws java.rmi.RemoteException
+     */
     IRemoteImage getImmagine() throws RemoteException;
-    
+    /**
+     * @return nome del prodotto
+     * @throws java.rmi.RemoteException
+     */
     String getNomeProdotto() throws RemoteException;
 }

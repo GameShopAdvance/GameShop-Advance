@@ -18,7 +18,7 @@ import java.util.LinkedList;
 import java.util.List;
 import org.joda.time.DateTime;
 
-/**
+/** Strategy degli sconti sulle quantità di prodotti acquistate
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
@@ -45,7 +45,12 @@ public class ScontoPrendiPaghiClienteProdottoStrategy implements IScontoProdotto
         list.add(applicable);
         this.applicabile = list;
     }
-    
+    /**
+     * @param rdv
+     * @param trans 
+     * @return Il sottototale con eventuali sconti applicati
+     * @throws java.rmi.RemoteException
+     */
     @Override
     public Money getSubtotal(RigaDiTransazione rdv, ITransazione trans) throws RemoteException {
         CartaCliente c = trans.getCliente();
@@ -59,7 +64,12 @@ public class ScontoPrendiPaghiClienteProdottoStrategy implements IScontoProdotto
 
         return rdv.getDescrizione().getPrezzo(trans.getDate()).multiply(quantity);
     }
-
+    /**
+     * Controllo sull'applicabilità  dello sconto
+     * 
+     * @param tc 
+     * @return Booleano risultato del controllo
+     */
     private boolean checkApplicable(TipologiaCliente tc)
     {
         for(TipologiaCliente tcliente: applicabile)
@@ -69,7 +79,12 @@ public class ScontoPrendiPaghiClienteProdottoStrategy implements IScontoProdotto
         }
         return false;
     }
-    
+    /**
+     * Controllo sulla validità temporale dello sconto
+     * 
+     * @param period 
+     * @return Booleano risultato del controllo
+     */
     @Override
     public boolean isValid(DateTime period) {
         return this.periodo.isInPeriod(period);

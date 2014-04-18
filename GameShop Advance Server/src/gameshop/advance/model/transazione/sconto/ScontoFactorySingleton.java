@@ -6,7 +6,7 @@ import gameshop.advance.model.transazione.sconto.prodotti.ScontoProdottoMigliore
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaMigliorePerClienteStrategyComposite;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 
-/**
+/** Factory degli sconti
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
@@ -22,20 +22,24 @@ public class ScontoFactorySingleton {
             instance = new ScontoFactorySingleton();
         return instance;
     }
-    
+    /** 
+     * @return La strategia di sconto applicata sulla vendita
+     */
     public ScontoVenditaStrategyComposite getStrategiaScontoVendita()
     {
         return new ScontoVenditaMigliorePerClienteStrategyComposite();
     }
-    
+    /**
+     * @param t 
+     * @return La strategia di sconto applicata sul prodotto
+     */
     public IScontoProdottoStrategy getStrategiaScontoProdotto(ITransazione t)
     {
-        //String className = System.getProperty( "strategiadiscontoprodotti.class.name" );
-        //IScontoProdottoStrategy strategy = (IScontoProdottoStrategy) Class.forName( className ).newInstance();
-        //return strategy;
         return new ScontoProdottoMigliorePerClienteStrategyComposite(t);
     }
-
+    /** 
+     * @return La strategia di sconto applicata sulla prenotazione
+     */
     public ScontoVenditaStrategyComposite getStrategiaScontoPrenotazione() {
         return new ScontoVenditaMigliorePerClienteStrategyComposite();
     }

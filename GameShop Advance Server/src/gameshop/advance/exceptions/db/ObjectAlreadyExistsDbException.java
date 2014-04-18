@@ -7,7 +7,8 @@
 package gameshop.advance.exceptions.db;
 
 /**
- *
+ * Classe Eccezione che gestisce errori relativi di oggetti persistenti duplicati
+ * 
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class ObjectAlreadyExistsDbException extends Exception{

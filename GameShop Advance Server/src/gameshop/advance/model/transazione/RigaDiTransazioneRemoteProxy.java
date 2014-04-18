@@ -13,9 +13,9 @@ import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
-/**
- *
- * @author Lorenzo Di Giuseppe
+/** Proxy di protezione delle righe di transazione
+ * 
+ * @author Matteo Gentile
  */
 class RigaDiTransazioneRemoteProxy extends UnicastRemoteObject implements IRigaDiTransazioneRemote {
 

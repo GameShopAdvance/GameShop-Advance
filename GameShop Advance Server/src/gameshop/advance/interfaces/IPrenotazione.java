@@ -6,14 +6,14 @@
 
 package gameshop.advance.interfaces;
 
-import gameshop.advance.exceptions.sales.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.sales.AlredyPayedException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.remote.sales.reservations.IPrenotazioneRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 
-/**
+/** Interfaccia della Prenotazione
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */

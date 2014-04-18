@@ -9,7 +9,7 @@ import org.joda.time.DateTime;
 
 /**
  *
- * @author matteog
+ * @author Matteo Gentile
  */
 public class IntervalloDiTempo {
     

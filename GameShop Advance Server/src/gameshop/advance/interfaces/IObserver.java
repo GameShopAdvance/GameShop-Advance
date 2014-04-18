@@ -6,12 +6,16 @@
 
 package gameshop.advance.interfaces;
 
-/**
+/** Consente di implementare agli observer  che lo estendono il metodo notifica che serve ad aggiornare gli oggetti interessati.
+ * 
  *
  * @author Salx
  */
 public interface IObserver {
-    
+    /**
+     *
+     * @param o
+     */
     void notifica(Object o);
     
 }

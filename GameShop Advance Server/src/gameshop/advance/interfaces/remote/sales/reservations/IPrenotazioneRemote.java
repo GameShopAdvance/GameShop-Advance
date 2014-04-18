@@ -20,14 +20,14 @@ public interface IPrenotazioneRemote extends ITransazioneRemote {
 
     /**
      *
-     * @return
+     * @return  L'importo dell'acconto
      * @throws RemoteException
      */
     Money getAcconto() throws RemoteException;
 
     /**
      *
-     * @return
+     * @return  Il resto dell'acconto
      * @throws RemoteException
      */
     Money getRestoAcconto() throws RemoteException;

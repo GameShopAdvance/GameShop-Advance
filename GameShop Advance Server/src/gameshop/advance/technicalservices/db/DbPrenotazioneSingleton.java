@@ -78,7 +78,11 @@ public class DbPrenotazioneSingleton {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         return client.queryByExample(PrenotazioneSmartProxy.class).size();
     }
-     
+     /**
+     * Restituisce gli oggetti Prenotazione che non sono stati evasi
+     * 
+     * @return Lista delle prenotazioni non evase
+     */
      public LinkedList<IPrenotazione> readNotProcessed()
      {
          ObjectContainer client = DbManagerSingleton.getInstance().getClient();

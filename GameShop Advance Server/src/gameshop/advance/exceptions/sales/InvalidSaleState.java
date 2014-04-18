@@ -7,6 +7,7 @@
 package gameshop.advance.exceptions.sales;
 
 /**
+ * Classe Eccezione che gestisce errori relativi allo stato di una prenotazione
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */

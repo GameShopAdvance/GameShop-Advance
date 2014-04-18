@@ -14,7 +14,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import org.joda.time.DateTime;
 
-/**
+/** Proxy delle descrizioni prodotto
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
@@ -54,7 +54,7 @@ public class DescrizioneRemoteProxy extends UnicastRemoteObject implements IDesc
 
     /**
      *
-     * @return
+     * @return l'immagine associata alla descrizione
      * @throws RemoteException
      */
     @Override

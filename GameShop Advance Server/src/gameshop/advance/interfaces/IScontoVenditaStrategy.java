@@ -11,6 +11,7 @@ import java.rmi.RemoteException;
 import org.joda.time.DateTime;
 
 /**
+ * Interfaccia della strategia di sconto sulle vendite
  *
  * @author Salx
  */

@@ -12,8 +12,9 @@ import java.rmi.RemoteException;
 
 /**
  * Interfaccia remota per l'esportazione delle classi che la implementano tramite
- * Java RMI.I RemoteClient si occuperanno di aggiornare e far visualizzare le
+ * Java RMI.I metodi esportati da IRemoteClient serviranno aggiornare e far visualizzare le
  * informazioni di una vendita.
+ * 
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IRemoteClient extends Remote {

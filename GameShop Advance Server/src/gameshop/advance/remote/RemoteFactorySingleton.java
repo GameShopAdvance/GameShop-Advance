@@ -76,7 +76,11 @@ public class RemoteFactorySingleton extends UnicastRemoteObject implements IRemo
             throw new RemoteException(ex.getMessage());
         }
     }
-    
+     /**
+     * Crea un'istanza di un'oggetto remoto per gestire l'inventario.
+     * @return GestisciInventarioController
+     * @throws RemoteException
+     */
     @Override
     public IInventarioControllerRemote getGestisciInventarioController() throws RemoteException{
         System.err.println("Factory's creating controller of inventory");
@@ -88,7 +92,13 @@ public class RemoteFactorySingleton extends UnicastRemoteObject implements IRemo
         }
         return null;
     }
-    
+     /**
+     * Crea un'istanza di un'oggetto remoto necessario a gestire le prenotazioni
+     * 
+     * @return renotaProdottoController
+     * @throws RemoteException
+     */
+    @Override
     public PrenotaProdottoController getPrenotaProdottoController() throws RemoteException{
         System.err.println("Creazione controller della prenotazione");
         try{
@@ -99,12 +109,23 @@ public class RemoteFactorySingleton extends UnicastRemoteObject implements IRemo
         }
         return null;
     }
-
+    /**
+     * Crea un'istanza di un'oggetto remoto necessario al manager ad analizzare le forniture del negozio
+     * 
+     * @return AnalizzaFornitureController
+     * @throws RemoteException
+     */
     @Override
     public IFornitureControllerRemote getAnalizzaFornitureController() throws RemoteException {
         return new AnalizzaFornitureController();
     }
-    
+    /**
+     * Crea un'istanza di un'oggetto remoto che serve ad ottenere le descrizioni prodotto presenti nel catalogo del negozio
+     * 
+     * @return ProdottiFacade
+     * @throws RemoteException
+     */
+    @Override
     public IProdottiRemote getProdottiFacade() throws RemoteException {
         
         return new ProdottiFacade();

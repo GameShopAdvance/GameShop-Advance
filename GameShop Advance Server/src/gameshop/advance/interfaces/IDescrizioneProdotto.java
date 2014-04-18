@@ -23,10 +23,12 @@ public interface IDescrizioneProdotto extends IDescrizioneProdottoRemote {
 
     void addSconto(IScontoProdottoStrategy sconto);
 
+    @Override
     int getQuantitaDisponibile();
     
     void setQuantitaDiSoglia(int soglia);
     
+    @Override
     int getQuantitaDiSoglia();
     
     boolean sottoSoglia();

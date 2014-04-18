@@ -21,7 +21,7 @@ import java.util.List;
 
 /**
  *
- * @author matteog
+ * @author Matteo Gentile
  */
 public class DbDescrizioneProdottoSingleton {
     
@@ -49,7 +49,7 @@ public class DbDescrizioneProdottoSingleton {
         client.commit();
     }
     
-    //metodo provvisorio
+    
     public void update(IDescrizioneProdotto desc) {
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         client.store(desc);
@@ -86,7 +86,10 @@ public class DbDescrizioneProdottoSingleton {
        client.ext().refresh(desc, 10);
        return desc;  
    }
-    
+    /**
+     * Restituisce gli oggetti DescrizioneProdotto che si trovano al di sotto della soglia stabilita
+     * @return Lista delle descrizioni sotto soglia
+     */
     public LinkedList<IDescrizioneProdotto> readBelowThreshold(){
         ObjectContainer client = DbManagerSingleton.getInstance().getClient();
         ObjectSet<IDescrizioneProdotto> result = client.query(new Predicate<IDescrizioneProdotto>() {
