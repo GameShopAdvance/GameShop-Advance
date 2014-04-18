@@ -22,7 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 /**
- * 
+ * Frame che conterrà tutte le schermate del client.
  * @author Matteo Gentile
  */
 public class UIWindowSingleton extends JFrame {
@@ -31,7 +31,6 @@ public class UIWindowSingleton extends JFrame {
     
     private JComponent panel;
 
-    
     public UIWindowSingleton() {
         this.panel = null;
         this.initComponents();
@@ -46,7 +45,6 @@ public class UIWindowSingleton extends JFrame {
 
     private void exit(ActionEvent e) {
         this.dispose();
-        System.exit(0);
     }
 
     private void thisComponentResized(ComponentEvent e) {
@@ -127,8 +125,8 @@ public class UIWindowSingleton extends JFrame {
     }
     
     /**
-     * @return UIWindowSingletonSingletonSingleton unica istanza di classe.
      * Metodo di accesso all'unica istanza di classe.
+     * @return UIWindowSingletonSingletonSingleton unica istanza di classe.
      */
     public static UIWindowSingleton getInstance()
     {

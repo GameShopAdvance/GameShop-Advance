@@ -11,10 +11,10 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
-import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.interfaces.IPopActionListener;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
+import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
 import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
@@ -40,9 +40,11 @@ import javax.swing.border.TitledBorder;
 import org.joda.time.DateTime;
 
 /**
+ * Schermata di dettaglio di un prodotto.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class ProductPanel extends JPanel {
+    
     private IPopActionListener listener;
     private final String name = "Product Detail";
     
@@ -59,10 +61,17 @@ public class ProductPanel extends JPanel {
         return this.name;
     }
     
+    /**
+     * @param listener
+     */
     public void setListener(IPopActionListener listener){
         this.listener = listener;
     }
     
+    /**
+     * @param desc
+     * @throws RemoteException
+     */
     public void setValues(IDescrizioneProdottoRemote desc) throws RemoteException{
         this.price.setText(desc.getPrezzo(DateTime.now()).toString());
         this.title.setText(desc.getNomeProdotto());

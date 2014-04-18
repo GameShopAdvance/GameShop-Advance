@@ -18,7 +18,9 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
 /**
- *
+ * Classe che si occupa della gestione delle righe di transazione su terminale Customer.Tale classe raccoglie le
+ * righe di transazione dei vari prodotti prenotati in una hashmap per la corretta e ordinata visualizzazione
+ * sul terminale.
  * @author Lorenzo Di Giuseppe
  */
 public class RigheDiVenditaListModel implements ListModel<IRigaDiTransazioneRemote> {
@@ -29,11 +31,16 @@ public class RigheDiVenditaListModel implements ListModel<IRigaDiTransazioneRemo
     
     private boolean header;
     
+
     public RigheDiVenditaListModel()
     {
         this.listeners = new LinkedList<>();
     }
     
+    /**
+     * @param righe
+     * @throws RemoteException
+     */
     public RigheDiVenditaListModel(List<IRigaDiTransazioneRemote> righe) throws RemoteException
     {
         this();
@@ -45,6 +52,9 @@ public class RigheDiVenditaListModel implements ListModel<IRigaDiTransazioneRemo
         }
     }
     
+    /**
+     * @param head
+     */
     public void setHeader(boolean head)
     {
         this.header = head;
@@ -62,12 +72,14 @@ public class RigheDiVenditaListModel implements ListModel<IRigaDiTransazioneRemo
         this.righe.clear();
     }
     
+    /**
+     * @param riga
+     */
     public void addElement(IRigaDiTransazioneRemote riga)
     {
         try
         {
             String code = riga.getDescrizione().getCodiceProdotto().getCodice();
-            System.err.println("Aggiungi elemento: "+code);
             if(!this.righe.containsKey(code))
                 this.righe.put(code, riga);
         } catch (RemoteException ex)
@@ -77,6 +89,10 @@ public class RigheDiVenditaListModel implements ListModel<IRigaDiTransazioneRemo
         this.fireContentsChanged(0, this.righe.size()-1);
     }
     
+    /**
+     * @param riga
+     * @throws RemoteException
+     */
     public void remove(IRigaDiTransazioneRemote riga) throws RemoteException
     {
         String code = riga.getDescrizione().getCodiceProdotto().getCodice();
@@ -84,9 +100,11 @@ public class RigheDiVenditaListModel implements ListModel<IRigaDiTransazioneRemo
         this.fireContentsChanged(0, this.righe.size()-1);
     }
     
+    /**
+     * @param index
+     */
     @Override
     public IRigaDiTransazioneRemote getElementAt(int index) {
-        System.err.println("Asked index: "+index);
         if(header)
         {
             if(index == 0)
@@ -101,6 +119,9 @@ public class RigheDiVenditaListModel implements ListModel<IRigaDiTransazioneRemo
         this.listeners.add(l);
     }
     
+    /**
+     * @return
+     */
     public ListDataListener[] getListDataListeners(){
         return (ListDataListener[]) this.listeners.toArray();
     }
@@ -110,6 +131,10 @@ public class RigheDiVenditaListModel implements ListModel<IRigaDiTransazioneRemo
         this.listeners.remove(l);
     }  
 
+    /**
+     * @param index0
+     * @param index1
+     */
     protected void fireIntervalAdded(int index0, int index1)
     {
         if(this.listeners.size() > 0)
@@ -120,6 +145,11 @@ public class RigheDiVenditaListModel implements ListModel<IRigaDiTransazioneRemo
         }
     }
     
+    /**
+     * @param source
+     * @param index0
+     * @param index1
+     */
     protected void fireIntervalRemoved(Object source, int index0, int index1)
     {
         if(this.listeners.size() > 0)
@@ -130,6 +160,10 @@ public class RigheDiVenditaListModel implements ListModel<IRigaDiTransazioneRemo
         }
     }
     
+    /**
+     * @param index0
+     * @param index1
+     */
     protected void fireContentsChanged(int index0, int index1)
     {
         if(this.listeners.size() > 0)

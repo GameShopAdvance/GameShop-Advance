@@ -213,7 +213,6 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
      */
     @Override
     public void aggiornaTotale(Money m) throws RemoteException {
-        System.err.println("Totale: "+m.toString());
         this.totale = m;
     }
 

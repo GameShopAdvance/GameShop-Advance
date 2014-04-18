@@ -30,7 +30,6 @@ public class TotalObserver extends UnicastRemoteObject implements IRemoteObserve
     @Override
     public void notifica(Object o) throws RemoteException{
         ITransazioneRemote vendita = (ITransazioneRemote) o;
-        System.err.println("Observer del totale, client: "+this.client);
         this.client.aggiornaTotale(vendita.getTotal());
     }
 
