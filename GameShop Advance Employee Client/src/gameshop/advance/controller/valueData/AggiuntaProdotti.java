@@ -45,18 +45,30 @@ public class AggiuntaProdotti {
         return this.descrizione;
     }
 
+    /**
+     * @return
+     */
     public int getAddedQuantity() {
         return quantity;
     }
 
+    /**
+     * @param quantity
+     */
     public void setAddedQuantity(int quantity) {
         this.quantity = quantity;
     }
 
+    /**
+     * @param desc
+     */
     public void setDescription(IDescrizioneProdottoRemote desc) {
         this.descrizione = desc;
     }
     
+    /**
+     * @return
+     */
     @Override
     public String toString()
     {

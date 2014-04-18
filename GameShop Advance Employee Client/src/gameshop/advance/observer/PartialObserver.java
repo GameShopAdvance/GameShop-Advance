@@ -35,7 +35,6 @@ public class PartialObserver extends UnicastRemoteObject implements IRemoteObser
     @Override
     public void notifica(Object o) throws RemoteException{
         IPrenotazioneRemote prenotazione = (IPrenotazioneRemote) o;
-        System.err.println("Observer del totale, client: "+this.client);
         this.client.aggiornaAcconto(prenotazione.getAcconto());
     }
     

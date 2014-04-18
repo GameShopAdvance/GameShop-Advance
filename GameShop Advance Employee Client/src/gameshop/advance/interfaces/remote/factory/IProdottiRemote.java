@@ -12,11 +12,15 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- *
+ * Interfaccia remota per l'esportazione RMI della lista di prodotti.
  * @author Salx
  */
 public interface IProdottiRemote extends Remote {
     
+    /**
+     * @return
+     * @throws RemoteException
+     */
     public IIteratorWrapperRemote<IDescrizioneProdottoRemote> getDescrizioni()throws RemoteException;
     
 }

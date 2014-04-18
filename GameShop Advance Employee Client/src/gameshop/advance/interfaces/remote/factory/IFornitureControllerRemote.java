@@ -14,14 +14,27 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- *
+ * Interfaccia remota per il controller delle forniture.
  * @author matteog
  */
 public interface IFornitureControllerRemote extends Remote{
     
+    /**
+     * @return
+     * @throws RemoteException
+     * @throws QuantityException
+     */
     IIteratorWrapperRemote<IInformazioniProdottoRemote> getDatiForniture() throws RemoteException, QuantityException;
     
+    /**
+     * @param obs
+     * @throws RemoteException
+     */
     void addListener(IRemoteObserver obs) throws RemoteException;
     
+    /**
+     * @param obs
+     * @throws RemoteException
+     */
     void addDeleteListener(IRemoteObserver obs) throws RemoteException;
 }

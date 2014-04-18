@@ -173,7 +173,6 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
     @Override
     public void aggiornaResto(Money m)
     {
-        System.err.println("Resto "+m);
         this.resto = m;
     }
     
@@ -189,16 +188,22 @@ public class SaleControllerSingleton extends UnicastRemoteObject implements IRem
     
     public Money getResto()
     {
-        System.err.println("Resto "+this.resto.toString());
         return this.resto;
     }
 
+    /**
+     * @throws RemoteException
+     */
     public void clearSale() throws RemoteException {
         this.cassa.annullaVendita();
         UIWindowSingleton.getInstance().setPanel(new EmployeeMenuPanel());
         UIWindowSingleton.getInstance().refreshContent();
     }
 
+    /**
+     * @param iter
+     * @throws RemoteException
+     */
     @Override
     public void aggiornaListaProdotti(IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter) throws RemoteException {
         while(iter.hasNext())

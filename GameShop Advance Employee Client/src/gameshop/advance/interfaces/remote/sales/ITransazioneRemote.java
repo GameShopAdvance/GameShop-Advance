@@ -13,7 +13,7 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- *
+ * Interfaccia remota per l'esportazione RMI della transazione.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface ITransazioneRemote extends Remote {
@@ -37,14 +37,12 @@ public interface ITransazioneRemote extends Remote {
     Money getTotal() throws RemoteException;
     
     /**
-     *
      * @return
      * @throws RemoteException
      */
     Integer getId() throws RemoteException;
 
     /**
-     *
      * @return
      * @throws RemoteException
      */

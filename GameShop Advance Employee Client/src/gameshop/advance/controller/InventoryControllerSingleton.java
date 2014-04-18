@@ -43,7 +43,6 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
         this.listaProdotti = new InventoryListModel();
         this.listaProdotti.setHeader(true);
         this.observer = new DescriptionsObserver(this);
-        System.err.println("observer: "+this.observer);
     }
     
     /**

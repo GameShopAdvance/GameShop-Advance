@@ -113,6 +113,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         this.controller.completaPrenotazione();
     }
     
+  
     public void vaiAlpagamentoAcconto() {
         PaymentPanel panel = new PaymentPanel();
         panel.setList(listaProdottiPrenotati, new BookCellRenderer());
@@ -135,14 +136,23 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         this.controller.terminaPrenotazione();
     }
     
+    /**
+     * @return
+     */
     public Money getTotal(){
         return this.totale;
     }
     
+    /**
+     * @return
+     */
     public Money getPartial(){
         return this.acconto;
     }
     
+    /**
+     * @return
+     */
     public Money getResto(){
         return this.resto;
     }
@@ -157,7 +167,6 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      */
     public void pagaAcconto(Double acconto) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException{
         try{
-            System.err.println("PAga acconto");
             this.controller.addListener(new RestPartialObserver(instance));
             this.controller.pagaAcconto(new Money(acconto));
             aggiornaWindow(new EndBookPanel());
@@ -207,9 +216,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      */
     @Override
     public void aggiornaAcconto(Money m) throws RemoteException {
-        System.out.println("Acconto: "+m);
         this.acconto = m;
-        System.err.println("Acconto da controller: "+this.acconto);
     }
     
     /**
@@ -218,9 +225,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      */
     @Override
     public void aggiornaTotale(Money m) throws RemoteException {
-        System.out.println("Totale: "+m);
         this.totale = m;
-        System.err.println("Totale da controller: "+this.totale);
     }
 
     /**
@@ -229,7 +234,6 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
      */
     @Override
     public void aggiornaResto(Money m) throws RemoteException {
-        System.out.println("Resto: "+m);
         this.resto = m;
     }
 
@@ -240,11 +244,19 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         this.controller.inserisciCartaCliente(code);
     }
 
+    /**
+     * @param id
+     * @throws java.rmi.RemoteException
+     */
     @Override
     public void aggiornaIdPrenotazione(int id) throws RemoteException {
         throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
     }
 
+    /**
+     * @param iter
+     * @throws java.rmi.RemoteException
+     */
     @Override
     public void aggiornaListaProdotti(IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter) throws RemoteException {
          while(iter.hasNext())

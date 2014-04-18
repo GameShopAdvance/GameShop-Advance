@@ -10,7 +10,6 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class LoggerSingleton {
@@ -36,7 +35,6 @@ public class LoggerSingleton {
      */
     public void log(Exception ex)
     {
-        System.err.println("Logger Singleton says:\n");
         Logger.getLogger(LoggerSingleton.class.getName()).log(Level.SEVERE, null, ex);
     }
     
