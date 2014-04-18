@@ -4,8 +4,12 @@
  * and open the template in the editor.
  */
 
-package gameshop.advance.exceptions;
+package gameshop.advance.technicalservices;
 
+import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.InvalidOperationException;
+import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.exceptions.db.ObjectNotExistsDbException;
 import gameshop.advance.exceptions.products.ProdottoNotFoundException;
