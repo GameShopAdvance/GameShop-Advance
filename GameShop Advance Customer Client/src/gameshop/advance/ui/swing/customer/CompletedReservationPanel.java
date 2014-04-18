@@ -9,7 +9,7 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
-import gameshop.advance.ui.swing.UIFactory;
+import gameshop.advance.ui.swing.factory.UIFactory;
 import gameshop.advance.utility.Money;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;

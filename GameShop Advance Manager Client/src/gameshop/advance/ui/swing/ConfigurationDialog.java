@@ -9,6 +9,8 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.ui.swing.factory.UIFactory;
+import gameshop.advance.ui.swing.factory.UIStyleSingleton;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dialog;

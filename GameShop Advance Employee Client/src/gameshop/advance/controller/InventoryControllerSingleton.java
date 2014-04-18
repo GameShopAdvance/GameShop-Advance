@@ -14,7 +14,7 @@ import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
 import gameshop.advance.observer.DescriptionsObserver;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.employee.EmployeeMenuPanel;
-import gameshop.advance.ui.swing.employee.InventoryPanel;
+import gameshop.advance.ui.swing.employee.inventory.InventoryPanel;
 import gameshop.advance.utility.IDProdotto;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;

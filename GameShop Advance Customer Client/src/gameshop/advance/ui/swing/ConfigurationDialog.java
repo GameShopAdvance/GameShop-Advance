@@ -4,6 +4,8 @@
 
 package gameshop.advance.ui.swing;
 
+import gameshop.advance.ui.swing.factory.UIStyleSingleton;
+import gameshop.advance.ui.swing.factory.UIFactory;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
