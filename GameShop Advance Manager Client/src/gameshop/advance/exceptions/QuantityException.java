@@ -13,14 +13,23 @@ package gameshop.advance.exceptions;
 public class QuantityException extends Exception {
     private int quantity;
         
+    /**
+     * @param message
+     */
     public QuantityException(String message) {
         super(message);
     }
     
+    /**
+     * @param quantity
+     */
     public QuantityException(int quantity) {
         this.quantity = quantity;
     }
     
+    /**
+     * @return
+     */
     public int getQuantity(){
     return quantity;}
     

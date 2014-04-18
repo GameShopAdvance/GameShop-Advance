@@ -23,9 +23,11 @@ import javax.swing.SwingConstants;
 import javax.swing.border.EmptyBorder;
 
 /**
+ * Layout associato ai vari prodotti compresi nella prenotazione.
  * @author Lorenzo Di Giuseppe
  */
 public class BookCellRenderer extends JPanel implements ListCellRenderer<IRigaDiTransazioneRemote>{
+    
     public BookCellRenderer() {
         initComponents();
     }

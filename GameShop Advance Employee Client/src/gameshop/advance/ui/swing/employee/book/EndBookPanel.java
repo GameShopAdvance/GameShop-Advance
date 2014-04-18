@@ -4,6 +4,7 @@
 
 package gameshop.advance.ui.swing.employee.book;
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.BookControllerSingleton;
@@ -62,30 +63,39 @@ public class EndBookPanel extends JPanel {
         displayRest = new JTextField();
 
         //======== this ========
-        setLayout(new FormLayout(
-            "$lcgap, [15dlu,default]:grow, $lcgap, [75dlu,default], $lcgap, 56dlu, $lcgap, 155dlu, $lcgap, 80dlu, $lcgap, [15dlu,default]:grow",
-            "[15dlu,default], $lgap, fill:37dlu, $lgap, 59dlu, $lgap, 69dlu, $lgap, [35dlu,default], $lgap, [15dlu,default]:grow"));
+        setName("this");
 
         //---- label1 ----
         label1.setText("Resto");
         label1.setLabelFor(displayRest);
-        add(label1, CC.xy(6, 3, CC.FILL, CC.FILL));
-        add(displayRest, CC.xy(8, 3, CC.FILL, CC.DEFAULT));
+        label1.setName("label1");
+
+        //---- displayRest ----
+        displayRest.setName("displayRest");
 
         //---- label2 ----
         label2.setText("Prenotazione effettuata!");
         label2.setHorizontalAlignment(SwingConstants.CENTER);
-        add(label2, CC.xywh(4, 5, 7, 1, CC.FILL, CC.FILL));
+        label2.setName("label2");
 
         //---- goToMenu ----
         goToMenu.setText("Torna al Men\u00f9");
+        goToMenu.setName("goToMenu");
         goToMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 goToMenuActionPerformed(e);
             }
         });
-        add(goToMenu, CC.xy(4, 9, CC.DEFAULT, CC.FILL));
+
+        PanelBuilder builder = new PanelBuilder(new FormLayout(
+            "$lcgap, [15dlu,default]:grow, $lcgap, 56dlu, 2*($lcgap, [75dlu,default]), $lcgap, [15dlu,default]:grow",
+            "[15dlu,default]:grow, $lgap, fill:37dlu, $lgap, [35dlu,default], $ugap, [35dlu,default], $lgap, [15dlu,default]:grow"), this);
+
+        builder.add(label1,      CC.xy  (4, 3,    CC.FILL, CC.FILL));
+        builder.add(displayRest, CC.xywh(6, 3,          3,       1, CC.FILL, CC.DEFAULT));
+        builder.add(label2,      CC.xywh(4, 5,          5,       1, CC.FILL, CC.FILL   ));
+        builder.add(goToMenu,    CC.xy  (6, 7, CC.DEFAULT, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

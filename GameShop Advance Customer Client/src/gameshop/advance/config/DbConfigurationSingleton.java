@@ -48,9 +48,7 @@ public class DbConfigurationSingleton {
      * @param config la configurazione da salvare
      */
     public void store (Configuration config) {
-        System.err.println("Salvataggio in corso!");
         db.store(config);
-        System.out.print("Object Stored: "+ config);
         db.commit();
     }
     

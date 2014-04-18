@@ -24,9 +24,12 @@ import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
 /**
+ * Schermata iniziale del client del Customer.
  * @author Matteo Gentile
  */
 public class CustomerPanel extends JPanel {
+    
+    
     public CustomerPanel() {
         initComponents();
         this.setStyle();

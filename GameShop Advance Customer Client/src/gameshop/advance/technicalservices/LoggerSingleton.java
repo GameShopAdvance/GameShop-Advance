@@ -36,7 +36,6 @@ public class LoggerSingleton {
      */
     public void log(Exception ex)
     {
-        System.err.println("Logger Singleton says:\n");
         Logger.getLogger(LoggerSingleton.class.getName()).log(Level.SEVERE, null, ex);
     }
     

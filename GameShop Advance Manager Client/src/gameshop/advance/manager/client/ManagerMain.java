@@ -10,7 +10,7 @@ import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.manager.ManagerMenu;
 
 /**
- *
+ * Main class per il client Manager. 
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class ManagerMain {

@@ -9,9 +9,9 @@ import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
-import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
 import gameshop.advance.interfaces.IListPanel;
 import gameshop.advance.interfaces.IPopActionListener;
+import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
 import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
@@ -31,12 +31,13 @@ import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 
 /**
+ * Schermata di Carrello per riepilogare la prenotazione fino a quel punto effettuata.
  * @author Lorenzo Di Giuseppe
  */
 public class ChartPanel extends JPanel implements IListPanel{
     private IPopActionListener listener;
     private final String name = "Chart Panel";
-    
+
     public ChartPanel() {
         initComponents();
         

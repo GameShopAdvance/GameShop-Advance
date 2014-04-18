@@ -17,13 +17,12 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- *
+ * Interfaccia remota per la classe che gestisce i prodotti prenotati.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IPrenotaProdottoRemote extends Remote{
 
     /**
-     *
      * @param obs
      * @throws RemoteException
      */
@@ -36,7 +35,6 @@ public interface IPrenotaProdottoRemote extends Remote{
     **********************************/
     
     /**
-     *
      * @throws RemoteException
      */
     void avviaPrenotazione() throws RemoteException;
@@ -51,7 +49,6 @@ public interface IPrenotaProdottoRemote extends Remote{
     void prenotaProdotto(IDProdotto codiceProdotto, int quantity) throws RemoteException, ProdottoNotFoundException;
     
     /**
-     *
      * @throws RemoteException
      */
     void terminaPrenotazione() throws RemoteException;
@@ -63,7 +60,6 @@ public interface IPrenotaProdottoRemote extends Remote{
     **********************************/
 
     /**
-     *
      * @throws RemoteException
      */
     void completaPrenotazione() throws RemoteException;
@@ -76,29 +72,33 @@ public interface IPrenotaProdottoRemote extends Remote{
     void recuperaPrenotazione(Integer id) throws RemoteException;
     
     /**
-     *
      * @param amount
      * @throws RemoteException
      * @throws InvalidMoneyException
-     * @throws gameshop.advance.exceptions.InvalidSaleState
-     * @throws gameshop.advance.exceptions.AlredyPayedException
+     * @throws InvalidSaleState
+     * @throws AlredyPayedException
      */
     void gestisciPagamento(Money amount) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException;
-    
-    //metodo per la richiesta di pagamento in acconto
 
     /**
-     *
+     * Metodo per la richiesta di pagamento in acconto
      * @param ammontare
      * @throws RemoteException
      * @throws InvalidMoneyException
-     * @throws gameshop.advance.exceptions.InvalidSaleState
-     * @throws gameshop.advance.exceptions.AlredyPayedException
+     * @throws InvalidSaleState
+     * @throws AlredyPayedException
      */
     void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException;
      
+    /**
+     * @throws RemoteException
+     */
     public void cancellaPrenotazione() throws RemoteException;
 
+    /**
+     * @param code
+     * @throws RemoteException
+     */
     public void inserisciCartaCliente(Integer code) throws RemoteException;
     
 }

@@ -4,6 +4,8 @@
 
 package gameshop.advance.ui.swing.manager;
 
+import java.awt.Dimension;
+import javax.swing.plaf.ColorUIResource;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
@@ -26,8 +28,15 @@ import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 
+/**
+ * Panel che contiene la lista dei prodotti che dovranno essere ordinati dal negozio.
+ * @author Salx
+ */
 public class FornitureMenu extends JPanel implements IListPanel {
        
+    /**
+     * @throws RemoteException
+     */
     public FornitureMenu() throws RemoteException { 
         try
         {
@@ -70,6 +79,7 @@ public class FornitureMenu extends JPanel implements IListPanel {
         infoList = new JList();
 
         //======== this ========
+        setMinimumSize(new Dimension(720, 480));
         setName("this");
 
         //======== scrollPane1 ========

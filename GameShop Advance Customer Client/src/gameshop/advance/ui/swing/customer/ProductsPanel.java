@@ -10,9 +10,9 @@ import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.ProductsControllerSingleton;
 import gameshop.advance.controller.ReservationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
-import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
 import gameshop.advance.interfaces.IListPanel;
 import gameshop.advance.interfaces.IPopActionListener;
+import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
 import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
@@ -35,13 +35,18 @@ import javax.swing.ListModel;
 import javax.swing.SwingConstants;
 
 /**
+ * Schermata che mostra la lista di tutti i prodotti presenti all'interno del negozio.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class ProductsPanel extends JPanel implements IPopActionListener, IListPanel {
+    
     private ProductPanel productDetail;
     private ChartPanel chart;
     private LinkedList<JPanel> panelStack;
     
+    /**
+     * @throws RemoteException
+     */
     public ProductsPanel() throws RemoteException {
         initComponents();
         this.setLinkedPanels();
@@ -85,6 +90,9 @@ public class ProductsPanel extends JPanel implements IPopActionListener, IListPa
         
     }
     
+    /**
+     * @param panel
+     */
     @Override
     public void pushPanel(JPanel panel){
         this.panelStack.push(panel);

@@ -30,6 +30,7 @@ import javax.swing.JScrollPane;
 import javax.swing.JTextField;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
+import javax.swing.SwingConstants;
 import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 
@@ -158,8 +159,8 @@ public class BookPanel extends JPanel implements IPopActionListener {
         this.label2 = UIFactory.getInstance().getBodyLabel();
         this.label3 = UIFactory.getInstance().getBodyLabel();
         this.label4 = UIFactory.getInstance().getBodyLabel();
-        this.goToPayPartial = UIFactory.getInstance().getSimpleButton();
-        this.goToPayTotal = UIFactory.getInstance().getSimpleButton();
+        this.goToPayPartial = UIFactory.getInstance().getConfirmButton();
+        this.goToPayTotal = UIFactory.getInstance().getConfirmButton();
         this.retrieveBook = UIFactory.getInstance().getSimpleButton();
     }
 
@@ -171,14 +172,13 @@ public class BookPanel extends JPanel implements IPopActionListener {
         getReservationCard = new JPanel();
         panel2 = new JPanel();
         bookCode = new JTextField();
-        panel7 = new JPanel();
+        panel3 = new JPanel();
+        partial = new JTextField();
+        total = new JTextField();
         scrollPane1 = new JScrollPane();
         bookList = new JList();
-        total = new JTextField();
-        partial = new JTextField();
         panel1 = new JPanel();
         clientCode = new JTextField();
-        panel5 = new JPanel();
 
         //======== this ========
         setName("this");
@@ -200,8 +200,9 @@ public class BookPanel extends JPanel implements IPopActionListener {
                     panel2.setName("panel2");
 
                     //---- label2 ----
-                    label2.setText("Codice Prenotazione");
+                    label2.setText("Codice");
                     label2.setLabelFor(bookCode);
+                    label2.setHorizontalAlignment(SwingConstants.CENTER);
                     label2.setName("label2");
 
                     //---- bookCode ----
@@ -223,14 +224,35 @@ public class BookPanel extends JPanel implements IPopActionListener {
                         "70dlu, $lcgap, default:grow, $lcgap, [75dlu,default]",
                         "[50px,min], $rgap, fill:[35dlu,min]"), panel2);
 
-                    panel2Builder.add(label2,       CC.xy  (1, 1, CC.LEFT, CC.DEFAULT));
-                    panel2Builder.add(bookCode,     CC.xywh(3, 1,       3,          1, CC.FILL, CC.FILL));
+                    panel2Builder.add(label2,       CC.xy  (1, 1, CC.FILL, CC.FILL));
+                    panel2Builder.add(bookCode,     CC.xywh(3, 1,       3,       1, CC.FILL, CC.FILL));
                     panel2Builder.add(retrieveBook, CC.xy  (5, 3));
                 }
 
-                //======== panel7 ========
+                //======== panel3 ========
                 {
-                    panel7.setName("panel7");
+                    panel3.setName("panel3");
+
+                    //---- label3 ----
+                    label3.setText("Acconto");
+                    label3.setHorizontalAlignment(SwingConstants.CENTER);
+                    label3.setName("label3");
+
+                    //---- partial ----
+                    partial.setEditable(false);
+                    partial.setHorizontalAlignment(SwingConstants.CENTER);
+                    partial.setName("partial");
+
+                    //---- label1 ----
+                    label1.setText("Totale");
+                    label1.setLabelFor(total);
+                    label1.setHorizontalAlignment(SwingConstants.CENTER);
+                    label1.setName("label1");
+
+                    //---- total ----
+                    total.setEditable(false);
+                    total.setHorizontalAlignment(SwingConstants.CENTER);
+                    total.setName("total");
 
                     //======== scrollPane1 ========
                     {
@@ -241,54 +263,15 @@ public class BookPanel extends JPanel implements IPopActionListener {
                         scrollPane1.setViewportView(bookList);
                     }
 
-                    //---- label1 ----
-                    label1.setText("Totale");
-                    label1.setLabelFor(total);
-                    label1.setName("label1");
+                    PanelBuilder panel3Builder = new PanelBuilder(new FormLayout(
+                        "[1dlu,default]:grow, $lcgap, [50dlu,default], $lcgap, [90dlu,default], $lcgap, [50dlu,default], $lcgap, [90dlu,default]",
+                        "2*([35dlu,default], $lgap), default:grow"), panel3);
 
-                    //---- label3 ----
-                    label3.setText("Acconto");
-                    label3.setName("label3");
-
-                    //---- total ----
-                    total.setEditable(false);
-                    total.setName("total");
-
-                    //---- partial ----
-                    partial.setEditable(false);
-                    partial.setName("partial");
-
-                    //---- goToPayTotal ----
-                    goToPayTotal.setText("Paga Totale");
-                    goToPayTotal.setName("goToPayTotal");
-                    goToPayTotal.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            goToPayTotalActionPerformed(e);
-                        }
-                    });
-
-                    //---- goToPayPartial ----
-                    goToPayPartial.setText("Paga Acconto");
-                    goToPayPartial.setName("goToPayPartial");
-                    goToPayPartial.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            goToPayPartialActionPerformed(e);
-                        }
-                    });
-
-                    PanelBuilder panel7Builder = new PanelBuilder(new FormLayout(
-                        "[5dlu,default]:grow, $rgap, [75dlu,default], $lcgap, [75dlu,default], $rgap, [5dlu,default]:grow",
-                        "2*(default:grow, $lgap), 2*([25dlu,default]), $lgap, [35dlu,default], $lgap, default"), panel7);
-
-                    panel7Builder.add(scrollPane1,    CC.xywh(1, 1,       7,       4, CC.FILL, CC.FILL));
-                    panel7Builder.add(label1,         CC.xy  (3, 5));
-                    panel7Builder.add(label3,         CC.xy  (5, 5));
-                    panel7Builder.add(total,          CC.xy  (3, 6, CC.FILL, CC.FILL));
-                    panel7Builder.add(partial,        CC.xy  (5, 6, CC.FILL, CC.FILL));
-                    panel7Builder.add(goToPayTotal,   CC.xy  (3, 8, CC.FILL, CC.FILL));
-                    panel7Builder.add(goToPayPartial, CC.xy  (5, 8, CC.FILL, CC.FILL));
+                    panel3Builder.add(label3,      CC.xy  (3, 1, CC.FILL, CC.FILL));
+                    panel3Builder.add(partial,     CC.xy  (5, 1, CC.FILL, CC.FILL));
+                    panel3Builder.add(label1,      CC.xy  (7, 1, CC.FILL, CC.FILL));
+                    panel3Builder.add(total,       CC.xy  (9, 1, CC.FILL, CC.FILL));
+                    panel3Builder.add(scrollPane1, CC.xywh(1, 3,       9,       3, CC.FILL, CC.FILL));
                 }
 
                 //======== panel1 ========
@@ -300,8 +283,9 @@ public class BookPanel extends JPanel implements IPopActionListener {
                     panel1.setName("panel1");
 
                     //---- label4 ----
-                    label4.setText("Codice");
+                    label4.setText("Numero tessera");
                     label4.setLabelFor(clientCode);
+                    label4.setHorizontalAlignment(SwingConstants.CENTER);
                     label4.setName("label4");
 
                     //---- clientCode ----
@@ -324,42 +308,53 @@ public class BookPanel extends JPanel implements IPopActionListener {
                         "70dlu, $lcgap, default:grow, $lcgap, [75dlu,default]",
                         "[35dlu,min], $lgap, fill:[35dlu,min]"), panel1);
 
-                    panel1Builder.add(label4,           CC.xy  (1, 1, CC.FILL, CC.DEFAULT));
-                    panel1Builder.add(clientCode,       CC.xywh(3, 1,       3,          1, CC.FILL, CC.FILL));
+                    panel1Builder.add(label4,           CC.xy  (1, 1, CC.FILL, CC.FILL));
+                    panel1Builder.add(clientCode,       CC.xywh(3, 1,       3,       1, CC.FILL, CC.FILL));
                     panel1Builder.add(insertClientCode, CC.xy  (5, 3));
                 }
 
-                //======== panel5 ========
-                {
-                    panel5.setName("panel5");
+                //---- clearBook ----
+                clearBook.setText("Annulla");
+                clearBook.setIcon(null);
+                clearBook.setNextFocusableComponent(null);
+                clearBook.setName("clearBook");
+                clearBook.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        clearBookActionPerformed(e);
+                    }
+                });
 
-                    //---- clearBook ----
-                    clearBook.setText("Annulla");
-                    clearBook.setIcon(null);
-                    clearBook.setNextFocusableComponent(null);
-                    clearBook.setName("clearBook");
-                    clearBook.addActionListener(new ActionListener() {
-                        @Override
-                        public void actionPerformed(ActionEvent e) {
-                            clearBookActionPerformed(e);
-                        }
-                    });
+                //---- goToPayPartial ----
+                goToPayPartial.setText("Paga Acconto");
+                goToPayPartial.setName("goToPayPartial");
+                goToPayPartial.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        goToPayPartialActionPerformed(e);
+                    }
+                });
 
-                    PanelBuilder panel5Builder = new PanelBuilder(new FormLayout(
-                        "[75dlu,default], 2*($lcgap, center:[75dlu,default])",
-                        "2*([25dlu,default], $lgap), [35dlu,default], $lgap, default"), panel5);
-
-                    panel5Builder.add(clearBook, CC.xy(1, 5, CC.DEFAULT, CC.FILL));
-                }
+                //---- goToPayTotal ----
+                goToPayTotal.setText("Paga Totale");
+                goToPayTotal.setName("goToPayTotal");
+                goToPayTotal.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        goToPayTotalActionPerformed(e);
+                    }
+                });
 
                 PanelBuilder getReservationCardBuilder = new PanelBuilder(new FormLayout(
-                    "[15dlu,default], $lcgap, [50dlu,default,200dlu], $ugap, [150dlu,default]:grow, $lcgap, [15dlu,default]",
-                    "[15dlu,default]:grow, 3*($lgap, default:grow), $lgap, [15dlu,default]:grow"), getReservationCard);
+                    "[15dlu,default], $lcgap, [75dlu,default], $lcgap, [100dlu,default,200dlu], $lcgap, [34dlu,default]:grow, 2*($lcgap, [75dlu,default]), $lcgap, [15dlu,default]",
+                    "fill:[15dlu,default]:grow, $lgap, default, $lgap, 90dlu, $rgap, [35dlu,default], $lgap, fill:[15dlu,default]:grow"), getReservationCard);
 
-                getReservationCardBuilder.add(panel2, CC.xy  (3, 3));
-                getReservationCardBuilder.add(panel7, CC.xywh(5, 3, 1, 5));
-                getReservationCardBuilder.add(panel1, CC.xy  (3, 5));
-                getReservationCardBuilder.add(panel5, CC.xy  (3, 7));
+                getReservationCardBuilder.add(panel2,         CC.xywh( 3, 3,       3,       1));
+                getReservationCardBuilder.add(panel3,         CC.xywh( 7, 3,       5,       3, CC.FILL, CC.FILL));
+                getReservationCardBuilder.add(panel1,         CC.xywh( 3, 5,       3,       1));
+                getReservationCardBuilder.add(clearBook,      CC.xy  ( 3, 7, CC.FILL, CC.FILL));
+                getReservationCardBuilder.add(goToPayPartial, CC.xy  ( 9, 7, CC.FILL, CC.FILL));
+                getReservationCardBuilder.add(goToPayTotal,   CC.xy  (11, 7, CC.FILL, CC.FILL));
             }
             mainPanel.add(getReservationCard, "card1");
         }
@@ -368,7 +363,7 @@ public class BookPanel extends JPanel implements IPopActionListener {
             "default:grow",
             "fill:default:grow"), this);
 
-        builder.add(mainPanel, CC.xy(1, 1));
+        builder.add(mainPanel, CC.xy(1, 1, CC.CENTER, CC.CENTER));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
@@ -379,21 +374,20 @@ public class BookPanel extends JPanel implements IPopActionListener {
     private JLabel label2;
     private JTextField bookCode;
     private JButton retrieveBook;
-    private JPanel panel7;
+    private JPanel panel3;
+    private JLabel label3;
+    private JTextField partial;
+    private JLabel label1;
+    private JTextField total;
     private JScrollPane scrollPane1;
     private JList bookList;
-    private JLabel label1;
-    private JLabel label3;
-    private JTextField total;
-    private JTextField partial;
-    private JButton goToPayTotal;
-    private JButton goToPayPartial;
     private JPanel panel1;
     private JLabel label4;
     private JTextField clientCode;
     private JButton insertClientCode;
-    private JPanel panel5;
     private JButton clearBook;
+    private JButton goToPayPartial;
+    private JButton goToPayTotal;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     @Override

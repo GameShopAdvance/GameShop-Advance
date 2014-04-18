@@ -35,7 +35,6 @@ public class TransactionObserver extends UnicastRemoteObject implements IRemoteO
     @Override
     public void notifica(Object o) throws RemoteException {
         ITransazioneRemote trans = (ITransazioneRemote) o;
-        System.err.println("Observer della Transazione: "+trans);
         this.client.aggiornaListaProdotti(trans.getRigheDiVendita());
     }
 

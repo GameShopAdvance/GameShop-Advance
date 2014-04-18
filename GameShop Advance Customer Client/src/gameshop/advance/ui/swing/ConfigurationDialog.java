@@ -4,13 +4,13 @@
 
 package gameshop.advance.ui.swing;
 
-import gameshop.advance.ui.swing.factory.UIStyleSingleton;
-import gameshop.advance.ui.swing.factory.UIFactory;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.ui.swing.factory.UIFactory;
+import gameshop.advance.ui.swing.factory.UIStyleSingleton;
 import java.awt.BorderLayout;
 import java.awt.Container;
 import java.awt.Dialog;
@@ -25,6 +25,7 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
+ * Schermata per la configurazione della connessione del client.
  * @author Lorenzo Di Giuseppe
  */
 public class ConfigurationDialog extends JDialog {
@@ -39,6 +40,9 @@ public class ConfigurationDialog extends JDialog {
         this.button2.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
     }
 
+    /**
+     * @param owner
+     */
     public ConfigurationDialog(Dialog owner) {
         super(owner);
         initComponents();
@@ -48,7 +52,6 @@ public class ConfigurationDialog extends JDialog {
     private void setConfigurationValues()
     {
         try{
-            System.err.println("Config ip: "+ConfigurationControllerSingleton.getInstance().getServerAddress());
             this.serverAddress.setText(ConfigurationControllerSingleton.getInstance().getServerAddress());
             this.serverPort.setText(""+ConfigurationControllerSingleton.getInstance().getServerPort());
         } catch (ConfigurationException ex) {
@@ -58,7 +61,6 @@ public class ConfigurationDialog extends JDialog {
 
     private void saveConfiguration(ActionEvent e) {
         try {
-            System.err.println("Config: "+ConfigurationControllerSingleton.getInstance());
             boolean error = false;
             
             try{
@@ -71,7 +73,6 @@ public class ConfigurationDialog extends JDialog {
             }
             
             String port = this.serverPort.getText();
-            System.out.println("Porta: " + port);
             if(!port.isEmpty())
             {
                 int nPort = Integer.decode(port);

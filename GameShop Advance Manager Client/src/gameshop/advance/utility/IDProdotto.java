@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Classe da estendere in un periodo successivo
+ * Classe che rappresenta i codici univoci dei prodotti.
  * @author loki
  */
 public class IDProdotto implements Serializable{
@@ -17,7 +17,6 @@ public class IDProdotto implements Serializable{
     }
     
     /**
-     *
      * @return
      */
     @Override

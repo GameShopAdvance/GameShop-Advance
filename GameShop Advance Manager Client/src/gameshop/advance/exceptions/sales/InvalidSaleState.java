@@ -7,7 +7,7 @@
 package gameshop.advance.exceptions.sales;
 
 /**
- *
+ * Classe che gestisce le eccezioni di uno stato non consentito per una transazione.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class InvalidSaleState extends Exception {

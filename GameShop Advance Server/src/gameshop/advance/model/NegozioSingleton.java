@@ -90,7 +90,7 @@ public class NegozioSingleton
      * @throws gameshop.advance.exceptions.QuantityException
      */
      public void registraPrenotazione(IPrenotazione p) throws RemoteException, QuantityException
-    {
+    { 
         try {
             ManagerPrenotazioniSingleton.getInstance().store(p);
         } catch (ObjectAlreadyExistsDbException ex) {

@@ -22,8 +22,8 @@ import javax.swing.JLabel;
 import javax.swing.JPanel;
 import javax.swing.SwingConstants;
 
-/*
- *
+/**
+ * Schermata riepilogativa di fine prenotazione.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
  
@@ -31,6 +31,7 @@ public class CompletedReservationPanel extends JPanel {
     
     private final String name = "Completed Panel";
     
+
     public CompletedReservationPanel() {
         try {
             initComponents();
@@ -58,16 +59,25 @@ public class CompletedReservationPanel extends JPanel {
         return this.name;
     }
     
+    /**
+     * @param id
+     */
     public void setID(Integer id)
     {
         this.numeroPrenotazione.setText(id.toString());
     }
 
+    /**
+     * @param m
+     */
     public void setTotal(Money m)
     {
         this.totale.setText(m.toString());
     }
     
+    /**
+     * @param m
+     */
     public void setPartial(Money m)
     {
         this.acconto.setText(m.toString());

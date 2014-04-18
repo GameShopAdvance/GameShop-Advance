@@ -13,7 +13,7 @@ import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 
 /**
- *
+ * Osservatore delle forniture.Si occupa di eliminare un prodotto dall'elenco di prodotti da ordinare.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class FornitureRemoveObserver extends UnicastRemoteObject implements IRemoteObserver {
@@ -22,16 +22,22 @@ public class FornitureRemoveObserver extends UnicastRemoteObject implements IRem
     private int length = 0;
     private IRemoteFornitureClient client;
     
+    /**
+     * @param client
+     * @throws RemoteException
+     */
     public FornitureRemoveObserver(IRemoteFornitureClient client) throws RemoteException
     {
-        
         this.client = client;
     }
     
+    /**
+     * @param o
+     * @throws RemoteException
+     */
     @Override
     public void notifica(Object o) throws RemoteException {
         IInformazioniProdottoRemote info = (IInformazioniProdottoRemote) o;
-        System.err.println("Notifica Forniture");
         this.client.rimuoviInformazioneProdotto(info);
     }
     

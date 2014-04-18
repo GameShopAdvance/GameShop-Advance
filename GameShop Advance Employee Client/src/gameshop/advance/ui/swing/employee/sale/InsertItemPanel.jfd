@@ -112,7 +112,7 @@ new FormModel {
 					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					"gridY": 3
-					"gridWidth": 5
+					"gridWidth": 7
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 5

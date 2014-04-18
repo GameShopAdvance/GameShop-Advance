@@ -6,11 +6,12 @@ new FormModel {
 		add( new FormWindow( "javax.swing.JFrame", new FormLayoutManager( class java.awt.BorderLayout ) ) {
 			name: "this"
 			"$sizePolicy": 1
-			"title": "Terminale Impiegato"
-			"resizable": false
+			"title": "GameShop Advance - Terminale Manager"
+			addEvent( new FormEvent( "java.awt.event.ComponentListener", "componentResized", "thisComponentResized", true ) )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "mainPanel"
 				"viewportBorder": sfield com.jformdesigner.model.FormObject NULL_VALUE
+				"horizontalScrollBarPolicy": 31
 			}, new FormLayoutConstraints( class java.lang.String ) {
 				"value": "Center"
 			} )
@@ -33,7 +34,7 @@ new FormModel {
 			}
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 1200, 580 )
+			"size": new java.awt.Dimension( 1025, 540 )
 		} )
 	}
 }

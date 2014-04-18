@@ -256,7 +256,7 @@ public class InsertItemPanel extends JPanel implements IListPanel{
 
             panel4Builder.add(label3,      CC.xy  (3, 1, CC.FILL, CC.FILL));
             panel4Builder.add(total,       CC.xy  (5, 1, CC.FILL, CC.FILL));
-            panel4Builder.add(scrollPane1, CC.xywh(1, 3,       5,       1, CC.FILL, CC.FILL));
+            panel4Builder.add(scrollPane1, CC.xywh(1, 3,       7,       1, CC.FILL, CC.FILL));
         }
 
         //======== clientPanel ========

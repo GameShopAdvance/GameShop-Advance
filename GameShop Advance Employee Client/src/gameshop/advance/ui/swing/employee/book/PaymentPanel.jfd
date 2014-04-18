@@ -4,127 +4,12 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;75dlu), labelcompgap, max(default;150dlu), labelcompgap, max(default;150dlu):grow, labelcompgap, max(default;15dlu)"
-			"$rowSpecs": "max(default;15dlu), linegap, default, linegap, max(default;35dlu):grow, linegap, max(default;35dlu), linegap, max(default;15dlu)"
+			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;75dlu), labelcompgap, max(default;75dlu):grow, labelcompgap, max(default;75dlu), labelcompgap, max(default;75dlu), labelcompgap, max(default;15dlu)"
+			"$rowSpecs": "max(default;15dlu):grow, linegap, 90dlu, linegap, 90dlu, relgap, bottom:max(default;35dlu), linegap, max(default;15dlu):grow"
 		} ) {
 			name: "this"
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
-				name: "swapPanel"
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-					"$columnSpecs": "5dlu, labelcompgap, 70dlu, labelcompgap, max(default;25dlu), labelcompgap, max(default;75dlu)"
-					"$rowSpecs": "fill:max(default;35dlu), linegap, fill:max(min;35dlu), linegap, fill:max(min;35dlu)"
-				} ) {
-					name: "payPartialCard"
-					"border": new javax.swing.border.TitledBorder( "Paga Acconto" )
-					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label5"
-						"text": "Acconto"
-						auxiliary() {
-							"JavaCodeGenerator.customCreate": true
-						}
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 3
-					} )
-					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "displayPartial"
-						"editable": false
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 5
-						"gridWidth": 3
-					} )
-					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label6"
-						"text": "Pagamento"
-						auxiliary() {
-							"JavaCodeGenerator.customCreate": true
-						}
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 3
-						"gridY": 3
-					} )
-					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "partialPayment"
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 5
-						"gridY": 3
-						"gridWidth": 3
-					} )
-					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "payPartialButton"
-						"text": "Paga Acconto"
-						auxiliary() {
-							"JavaCodeGenerator.customCreate": true
-						}
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payPartialButtonActionPerformed", true ) )
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 7
-						"gridY": 5
-					} )
-				}, new FormLayoutConstraints( class java.lang.String ) {
-					"value": "card1"
-				} )
-				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-					"$columnSpecs": "5dlu, labelcompgap, 70dlu, labelcompgap, max(default;25dlu), labelcompgap, max(default;75dlu)"
-					"$rowSpecs": "fill:max(min;35dlu), linegap, fill:max(min;35dlu), linegap, fill:max(min;35dlu)"
-				} ) {
-					name: "payTotalCard"
-					"border": new javax.swing.border.TitledBorder( "Paga Totale" )
-					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label7"
-						"text": "Totale"
-						auxiliary() {
-							"JavaCodeGenerator.customCreate": true
-						}
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 3
-					} )
-					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "displayTotal"
-						"editable": false
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 5
-						"gridWidth": 3
-					} )
-					add( new FormComponent( "javax.swing.JLabel" ) {
-						name: "label8"
-						"text": "Pagamento"
-						auxiliary() {
-							"JavaCodeGenerator.customCreate": true
-						}
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 3
-						"gridY": 3
-					} )
-					add( new FormComponent( "javax.swing.JTextField" ) {
-						name: "totalPayment"
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 5
-						"gridY": 3
-						"gridWidth": 3
-					} )
-					add( new FormComponent( "javax.swing.JButton" ) {
-						name: "payTotalButton"
-						"text": "Paga Totale"
-						auxiliary() {
-							"JavaCodeGenerator.customCreate": true
-						}
-						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payTotalButtonActionPerformed", true ) )
-					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-						"gridX": 7
-						"gridY": 5
-					} )
-				}, new FormLayoutConstraints( class java.lang.String ) {
-					"value": "card2"
-				} )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 3
-				"gridX": 3
-				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-				"gridWidth": 3
-			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "max(default;75dlu):grow, labelcompgap, max(default;75dlu), labelcompgap, max(default;75dlu):grow, labelcompgap, max(default;25dlu)"
+				"$columnSpecs": "max(default;75dlu):grow"
 				"$rowSpecs": "default:grow, linegap, max(default;35dlu):grow, linegap, max(default;35dlu)"
 			} ) {
 				name: "panel6"
@@ -134,16 +19,146 @@ new FormModel {
 						name: "resumeList"
 					} )
 				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridWidth": 5
 					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 					"gridHeight": 5
 					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 3
+				"gridX": 3
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridHeight": 3
+				"gridWidth": 3
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
+				name: "swapPanel"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+					"$columnSpecs": "max(default;50dlu), labelcompgap, max(default;10dlu):grow, labelcompgap, max(default;75dlu)"
+					"$rowSpecs": "fill:max(default;35dlu), linegap, default:grow, linegap, fill:max(min;35dlu)"
+				} ) {
+					name: "payPartialCard"
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+						"$columnSpecs": "max(default;50dlu), labelcompgap, max(default;10dlu):grow, labelcompgap, max(default;75dlu)"
+						"$rowSpecs": "fill:max(default;35dlu), linegap, fill:max(min;35dlu)"
+					} ) {
+						name: "panel1"
+						"border": new javax.swing.border.TitledBorder( "Paga acconto" )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label5"
+							"text": "Acconto"
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
+						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "displayPartial"
+							"editable": false
+						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+							"gridX": 3
+							"gridWidth": 3
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label6"
+							"text": "Pagamento"
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
+						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+							"gridY": 3
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "partialPayment"
+						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+							"gridX": 3
+							"gridY": 3
+							"gridWidth": 3
+						} )
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridWidth": 5
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "payPartialButton"
+						"text": "Paga Acconto"
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payPartialButtonActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridX": 5
+						"gridY": 5
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "card1"
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+					"$columnSpecs": "50dlu, labelcompgap, max(default;10dlu):grow, labelcompgap, max(default;75dlu)"
+					"$rowSpecs": "fill:max(min;35dlu), linegap, default:grow, linegap, max(default;35dlu)"
+				} ) {
+					name: "payTotalCard"
+					"border": sfield com.jformdesigner.model.FormObject NULL_VALUE
+					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+						"$columnSpecs": "50dlu, labelcompgap, max(default;10dlu):grow, labelcompgap, max(default;75dlu)"
+						"$rowSpecs": "fill:max(min;35dlu), linegap, fill:max(min;35dlu)"
+					} ) {
+						name: "panel2"
+						"border": new javax.swing.border.TitledBorder( "Paga totale" )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label7"
+							"text": "Totale"
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
+						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "displayTotal"
+							"editable": false
+						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+							"gridX": 3
+							"gridWidth": 3
+						} )
+						add( new FormComponent( "javax.swing.JLabel" ) {
+							name: "label8"
+							"text": "Pagamento"
+							auxiliary() {
+								"JavaCodeGenerator.customCreate": true
+							}
+						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+							"gridY": 3
+						} )
+						add( new FormComponent( "javax.swing.JTextField" ) {
+							name: "totalPayment"
+						}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+							"gridX": 3
+							"gridY": 3
+							"gridWidth": 3
+						} )
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridWidth": 5
+					} )
+					add( new FormComponent( "javax.swing.JButton" ) {
+						name: "payTotalButton"
+						"text": "Paga Totale"
+						auxiliary() {
+							"JavaCodeGenerator.customCreate": true
+						}
+						addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "payTotalButtonActionPerformed", true ) )
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+						"gridY": 5
+						"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+						"gridX": 5
+					} )
+				}, new FormLayoutConstraints( class java.lang.String ) {
+					"value": "card2"
+				} )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 3
 				"gridX": 7
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridWidth": 3
 				"gridHeight": 5
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -155,12 +170,12 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "indietroActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-				"gridX": 3
 				"gridY": 7
+				"gridX": 3
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 5, 5 )
-			"size": new java.awt.Dimension( 965, 515 )
+			"size": new java.awt.Dimension( 745, 430 )
 		} )
 	}
 }

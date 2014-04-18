@@ -37,7 +37,6 @@ public class ReservationObserver extends UnicastRemoteObject implements IRemoteO
     @Override
     public void notifica(Object o) throws RemoteException{
         ITransazioneRemote reservation = (ITransazioneRemote ) o;
-        System.err.println("Observer delle Prenotazioni, server: "+o);
         try{
             this.client.aggiornaIdPrenotazione(reservation.getId());
         }catch(RemoteException e)
