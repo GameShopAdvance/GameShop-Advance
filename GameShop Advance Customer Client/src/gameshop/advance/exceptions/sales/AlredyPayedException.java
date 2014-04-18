@@ -7,7 +7,7 @@
 package gameshop.advance.exceptions.sales;
 
 /**
- *
+ * Classe che gestisce le eccezioni di transazioni che risultano già pagate.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class AlredyPayedException extends Exception {

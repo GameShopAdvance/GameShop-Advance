@@ -10,10 +10,15 @@ import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 
 /**
- *
+ * Classe Interfaccia che imposta una lista per visualizzare gli oggetti sul terminale.
  * @author Lorenzo Di Giuseppe
  */
 public interface IListPanel
 {
+
+    /**
+     * @param model
+     * @param renderer
+     */
     void setList(ListModel model, ListCellRenderer renderer);
 }

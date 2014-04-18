@@ -10,7 +10,7 @@ import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.customer.CustomerPanel;
 
 /**
- *
+ * Main class per il client Customer. 
  * @author Matteo Gentile
  */
 public class GameShopAdvanceCustomerClient {
