@@ -192,16 +192,16 @@ public class ChartPanel extends JPanel implements IListPanel{
         });
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[15dlu,default], $lcgap, [75dlu,default], $lcgap, default:grow, 2*($lcgap, [75dlu,default]), $lcgap, [15dlu,default]",
-            "[15dlu,default], $lgap, [20dlu,default], $lgap, [50dlu,default]:grow, $lgap, [20dlu,default], $lgap, [35dlu,default], $lgap, [15dlu,default]"), this);
+            "$rgap, [75dlu,default], $lcgap, default:grow, 2*($lcgap, [75dlu,default]), $rgap",
+            "$rgap, [20dlu,default], $lgap, [50dlu,default]:grow, 2*($lgap, [35dlu,default]), $rgap"), this);
 
-        builder.add(title,       CC.xywh(5, 3,          3,       1, CC.FILL, CC.FILL));
-        builder.add(totalLabel,  CC.xy  (7, 7, CC.DEFAULT, CC.FILL));
-        builder.add(scrollPane1, CC.xywh(3, 5,          7,       1, CC.FILL, CC.FILL));
-        builder.add(totale,      CC.xy  (9, 7,    CC.FILL, CC.FILL));
-        builder.add(back,        CC.xy  (3, 9,    CC.FILL, CC.FILL));
-        builder.add(cancel,      CC.xy  (7, 9,    CC.FILL, CC.FILL));
-        builder.add(confirm,     CC.xy  (9, 9,    CC.FILL, CC.FILL));
+        builder.add(title,       CC.xywh(4, 2,          3,       1, CC.FILL, CC.FILL));
+        builder.add(totalLabel,  CC.xy  (6, 6, CC.DEFAULT, CC.FILL));
+        builder.add(scrollPane1, CC.xywh(2, 4,          7,       1, CC.FILL, CC.FILL));
+        builder.add(totale,      CC.xy  (8, 6,    CC.FILL, CC.FILL));
+        builder.add(back,        CC.xy  (2, 8,    CC.FILL, CC.FILL));
+        builder.add(cancel,      CC.xy  (6, 8,    CC.FILL, CC.FILL));
+        builder.add(confirm,     CC.xy  (8, 8,    CC.FILL, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

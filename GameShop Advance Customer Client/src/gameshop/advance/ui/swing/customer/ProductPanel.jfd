@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;75dlu), labelcompgap, max(default;50dlu), unrelgap, default:grow, labelcompgap, max(default;30dlu), labelcompgap, max(default;40dlu), labelcompgap, max(default;15dlu)"
-			"$rowSpecs": "max(default;15dlu), linegap, max(default;35dlu), unrelgap, (35dlu<default<100px), linegap, fill:(75dlu<default<300px), linegap, fill:(27dlu<default<250px):grow, max(default;15dlu)"
+			"$columnSpecs": "relgap, max(default;75dlu), labelcompgap, max(default;50dlu), unrelgap, default:grow, labelcompgap, max(default;30dlu), labelcompgap, max(default;40dlu), relgap"
+			"$rowSpecs": "relgap, max(default;35dlu), unrelgap, (35dlu<default<100px), linegap, fill:(75dlu<default<300px), linegap, fill:(27dlu<default<250px):grow, relgap"
 		} ) {
 			name: "this"
 			"minimumSize": new java.awt.Dimension( 720, 480 )
@@ -17,8 +17,8 @@ new FormModel {
 				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "backActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
-				"gridY": 3
+				"gridX": 2
+				"gridY": 2
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
@@ -32,8 +32,8 @@ new FormModel {
 					"value": "Center"
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
-				"gridY": 5
+				"gridX": 2
+				"gridY": 4
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"gridHeight": 5
@@ -46,8 +46,8 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 7
-				"gridY": 5
+				"gridX": 6
+				"gridY": 4
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"gridWidth": 3
 			} )
@@ -58,8 +58,8 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 11
-				"gridY": 5
+				"gridX": 10
+				"gridY": 4
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
@@ -83,8 +83,8 @@ new FormModel {
 					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 7
-				"gridY": 7
+				"gridX": 6
+				"gridY": 6
 				"gridWidth": 5
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
@@ -251,13 +251,13 @@ new FormModel {
 					"value": "bookCompleted"
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 7
-				"gridY": 9
+				"gridX": 6
+				"gridY": 8
 				"gridWidth": 5
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 5, 0 )
-			"size": new java.awt.Dimension( 690, 440 )
+			"size": new java.awt.Dimension( 900, 440 )
 		} )
 	}
 }

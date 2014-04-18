@@ -199,14 +199,14 @@ public class ProductsPanel extends JPanel implements IPopActionListener, IListPa
             totaleLabel.setHorizontalAlignment(SwingConstants.RIGHT);
 
             PanelBuilder mainPanelBuilder = new PanelBuilder(new FormLayout(
-                "[15dlu,default], $lcgap, 73dlu, $lcgap, default:grow, $lcgap, [73dlu,default], $lcgap, [75dlu,default], $lcgap, [15dlu,default]",
-                "[15dlu,default], $lgap, [35dlu,default], $lgap, default:grow, $lgap, 15dlu, $lgap, [15dlu,default]"), mainPanel);
+                "$rgap, 73dlu, $lcgap, default:grow, $lcgap, [73dlu,default], $lcgap, [75dlu,default], $rgap",
+                "$rgap, [35dlu,default], $lgap, default:grow, $lgap, [35dlu,default], $rgap"), mainPanel);
 
-            mainPanelBuilder.add(title,       CC.xywh(3, 3,       5,       1, CC.FILL, CC.FILL));
-            mainPanelBuilder.add(chartButton, CC.xy  (9, 3, CC.FILL, CC.FILL));
-            mainPanelBuilder.add(scrollPane1, CC.xywh(3, 5,       7,       1, CC.FILL, CC.FILL));
-            mainPanelBuilder.add(totaleLabel, CC.xy  (7, 7, CC.FILL, CC.FILL));
-            mainPanelBuilder.add(totale,      CC.xy  (9, 7, CC.FILL, CC.FILL));
+            mainPanelBuilder.add(title,       CC.xywh(2, 2,       5,       1, CC.FILL, CC.FILL));
+            mainPanelBuilder.add(chartButton, CC.xy  (8, 2, CC.FILL, CC.FILL));
+            mainPanelBuilder.add(scrollPane1, CC.xywh(2, 4,       7,       1, CC.FILL, CC.FILL));
+            mainPanelBuilder.add(totaleLabel, CC.xy  (6, 6, CC.FILL, CC.FILL));
+            mainPanelBuilder.add(totale,      CC.xy  (8, 6, CC.FILL, CC.FILL));
         }
         add(mainPanel, "card1");
         // JFormDesigner - End of component initialization  //GEN-END:initComponents

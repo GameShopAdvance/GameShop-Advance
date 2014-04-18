@@ -334,15 +334,15 @@ public class ProductPanel extends JPanel {
         }
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[15dlu,default], $lcgap, [75dlu,default], $lcgap, [50dlu,default], $ugap, default:grow, $lcgap, [30dlu,default], $lcgap, [40dlu,default], $lcgap, [15dlu,default]",
-            "[15dlu,default], $lgap, [35dlu,default], $ugap, [35dlu,default,100px], $lgap, fill:[75dlu,default,300px], $lgap, fill:[27dlu,default,250px]:grow, [15dlu,default]"), this);
+            "$rgap, [75dlu,default], $lcgap, [50dlu,default], $ugap, default:grow, $lcgap, [30dlu,default], $lcgap, [40dlu,default], $rgap",
+            "$rgap, [35dlu,default], $ugap, [35dlu,default,100px], $lgap, fill:[75dlu,default,300px], $lgap, fill:[27dlu,default,250px]:grow, $rgap"), this);
 
-        builder.add(button1,     CC.xy  ( 3, 3, CC.FILL, CC.FILL));
-        builder.add(imagePanel,  CC.xywh( 3, 5,       3,       5, CC.FILL   , CC.FILL));
-        builder.add(title,       CC.xywh( 7, 5,       3,       1, CC.DEFAULT, CC.FILL));
-        builder.add(price,       CC.xy  (11, 5, CC.FILL, CC.FILL));
-        builder.add(panel1,      CC.xywh( 7, 7,       5,       1, CC.DEFAULT, CC.FILL));
-        builder.add(panelSwitch, CC.xywh( 7, 9,       5,       1));
+        builder.add(button1,     CC.xy  ( 2, 2, CC.FILL, CC.FILL));
+        builder.add(imagePanel,  CC.xywh( 2, 4,       3,       5, CC.FILL   , CC.FILL));
+        builder.add(title,       CC.xywh( 6, 4,       3,       1, CC.DEFAULT, CC.FILL));
+        builder.add(price,       CC.xy  (10, 4, CC.FILL, CC.FILL));
+        builder.add(panel1,      CC.xywh( 6, 6,       5,       1, CC.DEFAULT, CC.FILL));
+        builder.add(panelSwitch, CC.xywh( 6, 8,       5,       1));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

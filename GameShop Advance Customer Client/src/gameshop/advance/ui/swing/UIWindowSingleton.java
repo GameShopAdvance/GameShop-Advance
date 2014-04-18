@@ -22,7 +22,7 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 
 /**
- * Frame che conterrà tutte le schermate del client.
+ * 
  * @author Matteo Gentile
  */
 public class UIWindowSingleton extends JFrame {
@@ -30,11 +30,14 @@ public class UIWindowSingleton extends JFrame {
     private static JFrame instance;
     
     private JComponent panel;
-
+    
+    private Dimension minimumSize = new Dimension(920, 480);
+    
     public UIWindowSingleton() {
         this.panel = null;
         this.initComponents();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setMinimumSize(this.minimumSize);
     }
 
     
@@ -45,11 +48,12 @@ public class UIWindowSingleton extends JFrame {
 
     private void exit(ActionEvent e) {
         this.dispose();
+        System.exit(0);
     }
 
     private void thisComponentResized(ComponentEvent e) {
         Dimension d = UIWindowSingleton.getInstance().getSize();
-        Dimension minD = UIWindowSingleton.getInstance().getMinimumSize();
+        Dimension minD = this.minimumSize;
         if(d.width<minD.width)
             d.width=minD.width;
         if(d.height<minD.height)
@@ -67,6 +71,7 @@ public class UIWindowSingleton extends JFrame {
 
         //======== this ========
         setTitle("GameShop Advance - Terminale Manager");
+        setMinimumSize(new Dimension(920, 480));
         setName("this");
         addComponentListener(new ComponentAdapter() {
             @Override
@@ -125,8 +130,8 @@ public class UIWindowSingleton extends JFrame {
     }
     
     /**
-     * Metodo di accesso all'unica istanza di classe.
      * @return UIWindowSingletonSingletonSingleton unica istanza di classe.
+     * Metodo di accesso all'unica istanza di classe.
      */
     public static UIWindowSingleton getInstance()
     {
