@@ -16,7 +16,7 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
 /**
- *
+ * Classe che definisce gli elementi della lista che conterrà tutti i vari prodotti da ordinare.
  * @author Lorenzo Di Giuseppe
  */
 public class FornitureListModel implements ListModel<IInformazioniProdottoRemote>
@@ -25,11 +25,18 @@ public class FornitureListModel implements ListModel<IInformazioniProdottoRemote
     
     private HashMap<String, IInformazioniProdottoRemote> informazioni = new HashMap<>();
     
+    /**
+     *
+     */
     public FornitureListModel()
     {
         this.listeners = new LinkedList<>();
     }
     
+    /**
+     * @param informazioni
+     * @throws RemoteException
+     */
     public FornitureListModel(List<IInformazioniProdottoRemote> informazioni) throws RemoteException
     {
         this();
@@ -50,16 +57,22 @@ public class FornitureListModel implements ListModel<IInformazioniProdottoRemote
 //        this.informazioni.clear();
     }
     
+    /**
+     * @param info
+     * @throws RemoteException
+     */
     public void addElement(IInformazioniProdottoRemote info) throws RemoteException
     {
         String code = info.getDescrizione().getCodiceProdotto().getCodice();
-        System.err.println("Aggiungi elemento: "+code);
         if(!this.informazioni.containsKey(code))
             this.informazioni.put(code, info);
-        System.err.println("Lista forniture dimensione: "+this.informazioni.size());
         this.fireContentsChanged(0, this.informazioni.size()-1);
     }
     
+    /**
+     * @param riga
+     * @throws RemoteException
+     */
     public void remove(IInformazioniProdottoRemote riga) throws RemoteException
     {
         String code = riga.getDescrizione().getCodiceProdotto().getCodice();
@@ -67,17 +80,25 @@ public class FornitureListModel implements ListModel<IInformazioniProdottoRemote
         this.fireContentsChanged(0, this.informazioni.size()-1);
     }
     
+    /**
+     * @param index
+     */
     @Override
     public IInformazioniProdottoRemote getElementAt(int index) {
-        System.err.println("Asked index: "+index);
         return (IInformazioniProdottoRemote) this.informazioni.values().toArray()[index];
     }
 
+    /**
+     * @param l
+     */
     @Override
     public void addListDataListener(ListDataListener l) {
         this.listeners.add(l);
     }
     
+    /**
+     * @return
+     */
     public ListDataListener[] getListDataListeners(){
         return (ListDataListener[]) this.listeners.toArray();
     }
@@ -87,6 +108,10 @@ public class FornitureListModel implements ListModel<IInformazioniProdottoRemote
         this.listeners.remove(l);
     }  
 
+    /**
+     * @param index0
+     * @param index1
+     */
     protected void fireIntervalAdded(int index0, int index1)
     {
         if(this.listeners.size() > 0)
@@ -97,6 +122,11 @@ public class FornitureListModel implements ListModel<IInformazioniProdottoRemote
         }
     }
     
+    /**
+     * @param source
+     * @param index0
+     * @param index1
+     */
     protected void fireIntervalRemoved(Object source, int index0, int index1)
     {
         if(this.listeners.size() > 0)
@@ -107,6 +137,10 @@ public class FornitureListModel implements ListModel<IInformazioniProdottoRemote
         }
     }
     
+    /**
+     * @param index0
+     * @param index1
+     */
     protected void fireContentsChanged(int index0, int index1)
     {
         if(this.listeners.size() > 0)

@@ -17,8 +17,10 @@ import gameshop.advance.utility.IDProdotto;
 public class ProdottoNotFoundException extends Exception {
     
     private IDProdotto codice;
-  
-   
+
+    /**
+     * @param codice
+     */
     public ProdottoNotFoundException(IDProdotto codice)
     {
         this.codice = codice;

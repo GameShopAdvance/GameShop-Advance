@@ -11,12 +11,16 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- *
+ * Interfaccia remota per la classe di gestione delle forniture.
  * @author Lorenzo Di Giuseppe
  */
 public interface IFornitureManagerRemote extends Remote
 {
 
+    /**
+     * @return
+     * @throws RemoteException
+     */
     IIteratorWrapperRemote<IInformazioniProdottoRemote> getInformazioni() throws RemoteException;
     
 }

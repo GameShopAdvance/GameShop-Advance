@@ -26,7 +26,12 @@ import javax.swing.JScrollPane;
 import javax.swing.ScrollPaneConstants;
 import javax.swing.border.TitledBorder;
 
+/**
+ * Schermata principale del Client Manager.Contiene il menu delle operazioni che può effettuare il manager.
+ * @author Salx
+ */
 public class ManagerMenu extends JPanel {
+    
     public ManagerMenu() {
         initComponents();
     }
