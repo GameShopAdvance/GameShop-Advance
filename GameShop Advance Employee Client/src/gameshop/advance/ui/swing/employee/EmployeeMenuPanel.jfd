@@ -8,8 +8,7 @@ new FormModel {
 			"$rowSpecs": "linegap, default:grow, relgap, fill:max(default;35dlu), 15dlu, fill:max(default;35dlu), relgap, default:grow"
 		} ) {
 			name: "this"
-			"maximumSize": new java.awt.Dimension( 700, 600 )
-			"minimumSize": new java.awt.Dimension( 650, 450 )
+			"maximumSize": new java.awt.Dimension( 111111, 111111 )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "startSale"
 				"text": "Vendita"

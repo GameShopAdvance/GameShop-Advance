@@ -36,6 +36,7 @@ public class UIWindowSingleton extends JFrame {
         this.panel = null;
         this.initComponents();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        this.setMinimumSize(new Dimension(1024, 480));
     }
 
     
@@ -69,6 +70,7 @@ public class UIWindowSingleton extends JFrame {
 
         //======== this ========
         setTitle("GameShop Advance - Terminale Manager");
+        setMinimumSize(new Dimension(920, 480));
         setName("this");
         addComponentListener(new ComponentAdapter() {
             @Override

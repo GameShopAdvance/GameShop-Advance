@@ -4,6 +4,7 @@
 
 package gameshop.advance.ui.swing.employee;
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.BookControllerSingleton;
@@ -98,49 +99,55 @@ public class EmployeeMenuPanel extends JPanel {
         button2 = new JButton();
 
         //======== this ========
-        setMaximumSize(new Dimension(700, 600));
-        setMinimumSize(new Dimension(650, 450));
-        setLayout(new FormLayout(
-            "$lcgap, default:grow, $rgap, 75dlu, 15dlu, 75dlu, $rgap, default:grow",
-            "$lgap, default:grow, $rgap, fill:[35dlu,default], 15dlu, fill:[35dlu,default], $rgap, default:grow"));
+        setMaximumSize(new Dimension(111111, 111111));
+        setName("this");
 
         //---- startSale ----
         startSale.setText("Vendita");
+        startSale.setName("startSale");
         startSale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startSaleActionPerformed(e);
             }
         });
-        add(startSale, CC.xy(4, 4, CC.FILL, CC.FILL));
 
         //---- manageBook ----
         manageBook.setText("Prenotazioni");
         manageBook.setMaximumSize(new Dimension(169, 37));
         manageBook.setMinimumSize(new Dimension(169, 37));
         manageBook.setPreferredSize(new Dimension(169, 37));
+        manageBook.setName("manageBook");
         manageBook.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 manageBookActionPerformed(e);
             }
         });
-        add(manageBook, CC.xy(6, 4, CC.FILL, CC.FILL));
 
         //---- button1 ----
         button1.setText("Inventario");
+        button1.setName("button1");
         button1.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 faiInventario(e);
             }
         });
-        add(button1, CC.xy(4, 6, CC.FILL, CC.FILL));
 
         //---- button2 ----
         button2.setAction(null);
         button2.setEnabled(false);
-        add(button2, CC.xy(6, 6));
+        button2.setName("button2");
+
+        PanelBuilder builder = new PanelBuilder(new FormLayout(
+            "$lcgap, default:grow, $rgap, 75dlu, 15dlu, 75dlu, $rgap, default:grow",
+            "$lgap, default:grow, $rgap, fill:[35dlu,default], 15dlu, fill:[35dlu,default], $rgap, default:grow"), this);
+
+        builder.add(startSale,  CC.xy(4, 4, CC.FILL, CC.FILL));
+        builder.add(manageBook, CC.xy(6, 4, CC.FILL, CC.FILL));
+        builder.add(button1,    CC.xy(4, 6, CC.FILL, CC.FILL));
+        builder.add(button2,    CC.xy(6, 6));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

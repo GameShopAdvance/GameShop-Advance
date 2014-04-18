@@ -5,6 +5,7 @@
 package gameshop.advance.ui.swing.employee.sale;
 
 
+import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.SaleControllerSingleton;
@@ -111,48 +112,60 @@ public class PaymentPanel extends JPanel implements IListPanel {
         payment = new JTextField();
 
         //======== this ========
-        setLayout(new FormLayout(
-            "[15dlu,default], $lcgap, [350px,min,600dlu], $lcgap, [146px,min], $lcgap, [25dlu,default], $lcgap, [75dlu,default], $lcgap, [15dlu,default]",
-            "fill:[15dlu,default], 2*($rgap, [35dlu,default]), $rgap, fill:[35dlu,default], $lgap, [35dlu,default]:grow, $rgap, [15dlu,default]"));
+        setName("this");
 
         //======== scrollPane1 ========
         {
             scrollPane1.setHorizontalScrollBarPolicy(ScrollPaneConstants.HORIZONTAL_SCROLLBAR_NEVER);
+            scrollPane1.setName("scrollPane1");
+
+            //---- resumeList ----
+            resumeList.setName("resumeList");
             scrollPane1.setViewportView(resumeList);
         }
-        add(scrollPane1, CC.xywh(3, 3, 1, 7));
 
         //---- label1 ----
         label1.setText("Totale");
         label1.setAlignmentX(0.5F);
         label1.setHorizontalAlignment(SwingConstants.CENTER);
-        add(label1, CC.xy(5, 3, CC.FILL, CC.FILL));
+        label1.setName("label1");
 
         //---- displayTotal ----
         displayTotal.setEditable(false);
         displayTotal.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        add(displayTotal, CC.xywh(7, 3, 3, 1, CC.FILL, CC.FILL));
+        displayTotal.setName("displayTotal");
 
         //---- payment ----
         payment.setFont(new Font("Tahoma", Font.PLAIN, 16));
-        add(payment, CC.xywh(7, 5, 3, 1, CC.FILL, CC.FILL));
+        payment.setName("payment");
 
         //---- label2 ----
         label2.setText("Pagamento");
         label2.setAlignmentX(0.5F);
         label2.setHorizontalAlignment(SwingConstants.CENTER);
-        add(label2, CC.xy(5, 5, CC.FILL, CC.FILL));
+        label2.setName("label2");
 
         //---- payButton ----
         payButton.setText("Paga");
         payButton.setAlignmentX(0.5F);
+        payButton.setName("payButton");
         payButton.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 payButtonActionPerformed(e);
             }
         });
-        add(payButton, CC.xy(9, 7));
+
+        PanelBuilder builder = new PanelBuilder(new FormLayout(
+            "[15dlu,default], $lcgap, [350px,min,600dlu], $lcgap, [146px,min], $lcgap, [25dlu,default], $lcgap, [75dlu,default], $lcgap, [15dlu,default]",
+            "fill:[15dlu,default], 2*($rgap, [35dlu,default]), $rgap, fill:[35dlu,default], $lgap, [35dlu,default]:grow, $rgap, [15dlu,default]"), this);
+
+        builder.add(scrollPane1,  CC.xywh(3, 3,       1,       7));
+        builder.add(label1,       CC.xy  (5, 3, CC.FILL, CC.FILL));
+        builder.add(displayTotal, CC.xywh(7, 3,       3,       1, CC.FILL, CC.FILL));
+        builder.add(payment,      CC.xywh(7, 5,       3,       1, CC.FILL, CC.FILL));
+        builder.add(label2,       CC.xy  (5, 5, CC.FILL, CC.FILL));
+        builder.add(payButton,    CC.xy  (9, 7));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

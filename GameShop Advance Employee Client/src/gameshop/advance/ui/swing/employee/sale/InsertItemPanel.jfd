@@ -4,13 +4,13 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;150dlu), labelcompgap, max(default;100dlu):grow, labelcompgap, max(default;75dlu), labelcompgap, max(default;15dlu)"
-			"$rowSpecs": "fill:max(default;15dlu):grow, relgap, default, linegap, 90dlu, linegap, max(default;35dlu), linegap, max(default;15dlu):grow"
+			"$columnSpecs": "max(default;15dlu):grow, labelcompgap, max(default;150dlu), labelcompgap, max(default;200dlu):grow, labelcompgap, max(default;75dlu), labelcompgap, max(default;15dlu):grow"
+			"$rowSpecs": "fill:max(default;15dlu):grow, relgap, default, linegap, 90dlu, linegap, max(default;35dlu), linegap, fill:max(default;15dlu):grow"
 		} ) {
 			name: "this"
 			"componentPopupMenu": sfield com.jformdesigner.model.FormObject NULL_VALUE
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "70dlu, labelcompgap, 80dlu:grow, labelcompgap, max(default;75dlu)"
+				"$columnSpecs": "70dlu, labelcompgap, (40dlu<default<60dlu), labelcompgap, max(default;75dlu)"
 				"$rowSpecs": "max(default;35dlu), linegap, max(default;35dlu)"
 			} ) {
 				name: "panel1"
@@ -222,7 +222,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 5 )
-			"size": new java.awt.Dimension( 795, 390 )
+			"size": new java.awt.Dimension( 900, 390 )
 		} )
 	}
 }
