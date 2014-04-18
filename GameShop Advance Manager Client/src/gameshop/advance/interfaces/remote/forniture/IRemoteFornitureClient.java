@@ -11,13 +11,22 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- *
+ * Interfaccia remota per la classe che gestisce l'aggiunta e la rimozione di oggetti
+ * informazioni prodotto.
  * @author Lorenzo Di Giuseppe
  */
 public interface IRemoteFornitureClient extends Remote
 {
 
+    /**
+     * @param iter
+     * @throws RemoteException
+     */
     void setInformazioniProdotto(IIteratorWrapperRemote<IInformazioniProdottoRemote> iter) throws RemoteException;
     
+    /**
+     * @param info
+     * @throws RemoteException
+     */
     void rimuoviInformazioneProdotto(IInformazioniProdottoRemote info) throws RemoteException;
 }

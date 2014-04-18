@@ -18,6 +18,7 @@ import javax.swing.JOptionPane;
 import javax.swing.JScrollPane;
 
 /**
+ * 
  * @author Matteo Gentile
  */
 public class UIWindowSingleton extends JFrame {
@@ -25,7 +26,7 @@ public class UIWindowSingleton extends JFrame {
     private static JFrame instance;
     
     private JComponent panel;
-    
+
     
     public UIWindowSingleton() {
         this.panel = null;
@@ -33,6 +34,7 @@ public class UIWindowSingleton extends JFrame {
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
     }
 
+    
     private void modificaConfigurazione(ActionEvent e) {
           JDialog d = new ConfigurationDialog(UIWindowSingleton.getInstance());
           d.setVisible(true);
@@ -99,7 +101,6 @@ public class UIWindowSingleton extends JFrame {
     }
     
     /**
-     * 
      * @return UIWindowSingletonSingletonSingleton unica istanza di classe.
      * Metodo di accesso all'unica istanza di classe.
      */
@@ -113,7 +114,6 @@ public class UIWindowSingleton extends JFrame {
     }
     
      /**
-     * 
      * @param panel pannello da visualizzare nella finestra.
      */
     public void setPanel(JComponent panel)
@@ -124,7 +124,6 @@ public class UIWindowSingleton extends JFrame {
     }
     
     /**
-     * 
      * @return JPanel
      */
     public JComponent getPanel()

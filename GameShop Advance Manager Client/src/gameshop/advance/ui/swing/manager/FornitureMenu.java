@@ -26,8 +26,15 @@ import javax.swing.JScrollPane;
 import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 
+/**
+ * Panel che contiene la lista dei prodotti che dovranno essere ordinati dal negozio.
+ * @author Salx
+ */
 public class FornitureMenu extends JPanel implements IListPanel {
        
+    /**
+     * @throws RemoteException
+     */
     public FornitureMenu() throws RemoteException { 
         try
         {

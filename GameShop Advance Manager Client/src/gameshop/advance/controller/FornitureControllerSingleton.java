@@ -9,6 +9,7 @@ package gameshop.advance.controller;
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.QuantityException;
+import gameshop.advance.interfaces.IListPanel;
 import gameshop.advance.interfaces.remote.factory.IFornitureControllerRemote;
 import gameshop.advance.interfaces.remote.factory.IRemoteFactory;
 import gameshop.advance.interfaces.remote.forniture.IInformazioniProdottoRemote;
@@ -18,11 +19,10 @@ import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
 import gameshop.advance.manager.observer.FornitureObserver;
 import gameshop.advance.manager.observer.FornitureRemoveObserver;
 import gameshop.advance.technicalservices.LoggerSingleton;
-import gameshop.advance.interfaces.IListPanel;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.lists.models.FornitureListModel;
-import gameshop.advance.ui.swing.manager.FornitureMenu;
 import gameshop.advance.ui.swing.lists.renderer.InfoCellRenderer;
+import gameshop.advance.ui.swing.manager.FornitureMenu;
 import gameshop.advance.ui.swing.manager.ManagerMenu;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -32,7 +32,7 @@ import java.rmi.server.UnicastRemoteObject;
 import javax.swing.JComponent;
 
 /**
- *
+ * Controller che gestisce tutte le operazioni riguardanti la gestione delle forniture.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class FornitureControllerSingleton extends UnicastRemoteObject implements IRemoteFornitureClient {
@@ -49,6 +49,10 @@ public class FornitureControllerSingleton extends UnicastRemoteObject implements
         this.listaForniture = new FornitureListModel();
     }
     
+    /**
+     * @param iter
+     * @throws RemoteException
+     */
     @Override
     public void setInformazioniProdotto(IIteratorWrapperRemote<IInformazioniProdottoRemote> iter) throws RemoteException
     {
@@ -56,6 +60,12 @@ public class FornitureControllerSingleton extends UnicastRemoteObject implements
             this.listaForniture.addElement(iter.next());
     }
     
+    /**
+     * Metodo che ritorna l'istanza della classe Singleton.
+     * @return
+     * @throws ConfigurationException
+     * @throws RemoteException
+     */
     public static FornitureControllerSingleton getInstance() throws ConfigurationException, RemoteException
     {
         if(instance == null)
@@ -99,6 +109,10 @@ public class FornitureControllerSingleton extends UnicastRemoteObject implements
         UIWindowSingleton.getInstance().refreshContent();
     }
     
+    /**
+     * @throws RemoteException
+     * @throws QuantityException
+     */
     public void avviaGestioneForniture() throws RemoteException, QuantityException{
         FornitureMenu panel = new FornitureMenu();
         this.aggiornaWindow(panel);
@@ -114,11 +128,18 @@ public class FornitureControllerSingleton extends UnicastRemoteObject implements
         UIWindowSingleton.getInstance().refreshContent();
     }
 
+    /**
+     * @param panel
+     */
     public void setFornitureList(IListPanel panel)
     {
         panel.setList(this.listaForniture, new InfoCellRenderer());
     }
 
+    /**
+     * @param info
+     * @throws RemoteException
+     */
     @Override
     public void rimuoviInformazioneProdotto(IInformazioniProdottoRemote info) throws RemoteException {
         this.listaForniture.remove(info);

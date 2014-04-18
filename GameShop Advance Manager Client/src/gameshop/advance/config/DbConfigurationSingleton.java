@@ -13,7 +13,8 @@ import com.db4o.ObjectSet;
 import com.db4o.query.Query;
 
 /**
- *
+ * Classe che si occupa della persistenza della configurazione del client.Salva e recupera dal db
+ * l'oggetto Configuration.
  * @author Salx
  */
 public class DbConfigurationSingleton {
@@ -29,7 +30,7 @@ public class DbConfigurationSingleton {
     }
 
     /**
-     *
+     * Metodo che ritorna l'istanza della classe Singleton.
      * @return instance
      */
     public synchronized static DbConfigurationSingleton getInstance(){
@@ -43,7 +44,6 @@ public class DbConfigurationSingleton {
     }
 
     /**
-     *
      * @param config la configurazione da salvare
      */
     public void store (Configuration config) {
@@ -54,7 +54,6 @@ public class DbConfigurationSingleton {
     }
     
     /**
-     *
      * @return la configurazione salvata 
      */
     public Configuration read(){

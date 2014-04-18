@@ -23,6 +23,7 @@ import javax.swing.border.EtchedBorder;
 import javax.swing.border.LineBorder;
 
 /**
+ * Pannello che definisce il layout dei vari elementi che comporranno una lista.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class InfoCellRenderer extends JPanel implements ListCellRenderer<IInformazioniProdottoRemote>{

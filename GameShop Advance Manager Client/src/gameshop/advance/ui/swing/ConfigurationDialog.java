@@ -25,10 +25,14 @@ import javax.swing.JPanel;
 import javax.swing.JTextField;
 
 /**
+ * Schermata della configurazione del client.
  * @author Lorenzo Di Giuseppe
  */
 public class ConfigurationDialog extends JDialog {
     
+    /**
+     * @param owner
+     */
     public ConfigurationDialog(Frame owner) {
         super(owner);
         initComponents();
@@ -39,6 +43,9 @@ public class ConfigurationDialog extends JDialog {
         this.button2.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
     }
 
+    /**
+     * @param owner
+     */
     public ConfigurationDialog(Dialog owner) {
         super(owner);
         initComponents();
@@ -48,7 +55,6 @@ public class ConfigurationDialog extends JDialog {
     private void setConfigurationValues()
     {
         try{
-            System.err.println("Config ip: "+ConfigurationControllerSingleton.getInstance().getServerAddress());
             this.serverAddress.setText(ConfigurationControllerSingleton.getInstance().getServerAddress());
             this.serverPort.setText(""+ConfigurationControllerSingleton.getInstance().getServerPort());
         } catch (ConfigurationException ex) {
@@ -58,7 +64,6 @@ public class ConfigurationDialog extends JDialog {
 
     private void saveConfiguration(ActionEvent e) {
         try {
-            System.err.println("Config: "+ConfigurationControllerSingleton.getInstance());
             boolean error = false;
             
             try{
@@ -71,7 +76,6 @@ public class ConfigurationDialog extends JDialog {
             }
             
             String port = this.serverPort.getText();
-            System.out.println("Porta: " + port);
             if(!port.isEmpty())
             {
                 int nPort = Integer.decode(port);
