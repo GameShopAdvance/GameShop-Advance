@@ -6,17 +6,17 @@
 
 package gameshop.advance.model.transazione;
 
-import gameshop.advance.exceptions.sales.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
-import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
+import gameshop.advance.exceptions.sales.AlredyPayedException;
+import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
+import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
 import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
-import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
 import gameshop.advance.model.Pagamento;
 import gameshop.advance.model.transazione.sconto.ScontoFactorySingleton;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
@@ -72,7 +72,7 @@ public class Vendita implements ITransazione {
     protected void quantityCheck(IDescrizioneProdotto desc, int quantity) throws QuantityNotInStockException, RemoteException{
         if(desc.getQuantitaDisponibile() < quantity)
         {
-            throw new QuantityNotInStockException();
+            throw new QuantityNotInStockException(desc);
         }
         else
         {
@@ -80,6 +80,7 @@ public class Vendita implements ITransazione {
         }
     }
     
+    @Override
     public void annulla() throws RemoteException{
         Iterator<IRigaDiTransazioneRemote> iter = this.righeDiVendita.values().iterator();
         while(iter.hasNext())

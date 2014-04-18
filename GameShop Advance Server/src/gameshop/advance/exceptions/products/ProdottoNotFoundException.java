@@ -21,7 +21,7 @@ public class ProdottoNotFoundException extends Exception {
    
     public ProdottoNotFoundException(IDProdotto codice)
     {
-     this.codice = codice;
+        this.codice = codice;
     }
 
     /**
