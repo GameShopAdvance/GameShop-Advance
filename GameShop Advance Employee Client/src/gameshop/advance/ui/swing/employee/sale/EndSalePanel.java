@@ -89,50 +89,40 @@ public class EndSalePanel extends JPanel {
         displayRest = new JTextField();
 
         //======== this ========
-        setName("this");
+        setLayout(new FormLayout(
+            "$rgap, [15dlu,default]:grow, $lcgap, center:[75dlu,default], $lcgap, [50px,min], $lcgap, center:[257px,min], $lcgap, [75dlu,default], $lcgap, [15dlu,default]:grow, $lcgap, default",
+            "21dlu:grow, fill:25dlu, $lgap, 85dlu, $lgap, 44dlu, $rgap, [35dlu,default], $lgap, [15dlu,default]:grow"));
 
         //---- label1 ----
         label1.setText("Resto");
         label1.setLabelFor(displayRest);
-        label1.setName("label1");
-
-        //---- displayRest ----
-        displayRest.setName("displayRest");
+        add(label1, CC.xy(6, 2, CC.FILL, CC.FILL));
+        add(displayRest, CC.xy(8, 2, CC.FILL, CC.DEFAULT));
 
         //---- label2 ----
         label2.setText("Grazie per aver effettuato acquisti da noi!");
         label2.setHorizontalAlignment(SwingConstants.CENTER);
-        label2.setName("label2");
+        add(label2, CC.xywh(4, 4, 7, 1, CC.FILL, CC.FILL));
 
         //---- startNewSale ----
         startNewSale.setText("Nuova Vendita");
-        startNewSale.setName("startNewSale");
         startNewSale.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 startNewSaleActionPerformed(e);
             }
         });
+        add(startNewSale, CC.xy(4, 8, CC.FILL, CC.FILL));
 
         //---- goToMenu ----
         goToMenu.setText("Torna al Men\u00f9");
-        goToMenu.setName("goToMenu");
         goToMenu.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 goToMenuActionPerformed(e);
             }
         });
-
-        PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "$lcgap, [15dlu,default]:grow, $lcgap, center:[75dlu,default], $lcgap, [50px,min], $lcgap, center:[257px,min], $lcgap, [75dlu,default], $lcgap, [15dlu,default]:grow",
-            "21dlu:grow, fill:25dlu, $lgap, 85dlu, $lgap, 44dlu, $rgap, [35dlu,default], $lgap, [15dlu,default]:grow"), this);
-
-        builder.add(label1,       CC.xy  ( 6, 2, CC.FILL,    CC.FILL));
-        builder.add(displayRest,  CC.xy  ( 8, 2, CC.FILL, CC.DEFAULT));
-        builder.add(label2,       CC.xywh( 4, 4,       7,          1, CC.FILL, CC.FILL));
-        builder.add(startNewSale, CC.xy  ( 4, 8, CC.FILL,    CC.FILL));
-        builder.add(goToMenu,     CC.xy  (10, 8, CC.FILL,    CC.FILL));
+        add(goToMenu, CC.xy(10, 8, CC.FILL, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
