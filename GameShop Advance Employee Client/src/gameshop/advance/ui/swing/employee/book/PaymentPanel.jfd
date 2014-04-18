@@ -4,7 +4,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;75dlu), labelcompgap, max(default;75dlu):grow, labelcompgap, max(default;75dlu), labelcompgap, max(default;75dlu), labelcompgap, max(default;15dlu)"
+			"$columnSpecs": "relgap, max(default;75dlu), labelcompgap, max(default;150dlu):grow, labelcompgap, right:(72dlu<default<112dlu), labelcompgap, (75dlu<default<75dlu), relgap"
 			"$rowSpecs": "max(default;15dlu):grow, linegap, 90dlu, linegap, 90dlu, relgap, bottom:max(default;35dlu), linegap, max(default;15dlu):grow"
 		} ) {
 			name: "this"
@@ -25,7 +25,7 @@ new FormModel {
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 3
-				"gridX": 3
+				"gridX": 2
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"gridHeight": 3
@@ -155,7 +155,7 @@ new FormModel {
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 3
-				"gridX": 7
+				"gridX": 6
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"gridWidth": 3
@@ -171,11 +171,11 @@ new FormModel {
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"gridY": 7
-				"gridX": 3
+				"gridX": 2
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 5, 5 )
-			"size": new java.awt.Dimension( 745, 430 )
+			"size": new java.awt.Dimension( 900, 430 )
 		} )
 	}
 }

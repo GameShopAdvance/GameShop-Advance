@@ -201,13 +201,13 @@ public class InventoryPanel extends JPanel implements IListPanel {
         });
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "$lcgap, [15dlu,default]:grow, $lcgap, [75dlu,min], $lcgap, [200dlu,min], $lcgap, [75dlu,min], $lcgap, [15dlu,default]:grow",
+            "$rgap, [75dlu,min], $lcgap, default:grow, $lcgap, [200dlu,min], $lcgap, default:grow, $lcgap, [75dlu,min], $rgap",
             "[15dlu,default]:grow, $lgap, 68dlu, $lgap, [200px,min], $lgap, fill:[35dlu,min], $lgap, [15dlu,default]:grow"), this);
 
-        builder.add(panel1,             CC.xy  (6, 3));
-        builder.add(scrollPane1,        CC.xywh(4, 5, 5, 1, CC.FILL, CC.FILL));
-        builder.add(cancelButton,       CC.xy  (4, 7));
-        builder.add(endInventoryButton, CC.xy  (8, 7));
+        builder.add(panel1,             CC.xy  ( 6, 3));
+        builder.add(scrollPane1,        CC.xywh( 2, 5, 9, 1, CC.FILL, CC.FILL));
+        builder.add(cancelButton,       CC.xy  ( 2, 7));
+        builder.add(endInventoryButton, CC.xy  (10, 7));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

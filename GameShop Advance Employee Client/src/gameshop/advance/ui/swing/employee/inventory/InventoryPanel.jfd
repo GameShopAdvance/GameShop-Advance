@@ -4,7 +4,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "labelcompgap, max(default;15dlu):grow, labelcompgap, max(min;75dlu), labelcompgap, max(min;200dlu), labelcompgap, max(min;75dlu), labelcompgap, max(default;15dlu):grow"
+			"$columnSpecs": "relgap, max(min;75dlu), labelcompgap, default:grow, labelcompgap, max(min;200dlu), labelcompgap, default:grow, labelcompgap, max(min;75dlu), relgap"
 			"$rowSpecs": "max(default;15dlu):grow, linegap, 68dlu, linegap, max(min;200px), linegap, fill:max(min;35dlu), linegap, max(default;15dlu):grow"
 		} ) {
 			name: "this"
@@ -68,11 +68,11 @@ new FormModel {
 					name: "insertedList"
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
 				"gridY": 5
-				"gridWidth": 5
+				"gridWidth": 9
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "cancelButton"
@@ -83,7 +83,7 @@ new FormModel {
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "cancelButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 7
-				"gridX": 4
+				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "endInventoryButton"
@@ -93,12 +93,12 @@ new FormModel {
 				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "endInventoryButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 8
+				"gridX": 10
 				"gridY": 7
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 0 )
-			"size": new java.awt.Dimension( 785, 440 )
+			"size": new java.awt.Dimension( 900, 440 )
 		} )
 	}
 }
