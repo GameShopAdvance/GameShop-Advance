@@ -12,7 +12,7 @@ new FormModel {
 				name: "mainPanel"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 					"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;75dlu), labelcompgap, (100dlu<default<200dlu), labelcompgap, max(default;34dlu):grow, labelcompgap, max(default;75dlu), labelcompgap, max(default;75dlu), labelcompgap, max(default;15dlu)"
-					"$rowSpecs": "fill:max(default;15dlu):grow, linegap, default, linegap, 90dlu, unrelgap, max(default;35dlu), linegap, fill:max(default;15dlu):grow"
+					"$rowSpecs": "fill:max(default;15dlu):grow, linegap, default, linegap, 90dlu, relgap, max(default;35dlu), linegap, fill:max(default;15dlu):grow"
 				} ) {
 					name: "getReservationCard"
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {

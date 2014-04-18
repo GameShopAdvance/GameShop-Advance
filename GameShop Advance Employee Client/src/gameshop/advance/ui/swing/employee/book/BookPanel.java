@@ -347,7 +347,7 @@ public class BookPanel extends JPanel implements IPopActionListener {
 
                 PanelBuilder getReservationCardBuilder = new PanelBuilder(new FormLayout(
                     "[15dlu,default], $lcgap, [75dlu,default], $lcgap, [100dlu,default,200dlu], $lcgap, [34dlu,default]:grow, 2*($lcgap, [75dlu,default]), $lcgap, [15dlu,default]",
-                    "fill:[15dlu,default]:grow, $lgap, default, $lgap, 90dlu, $ugap, [35dlu,default], $lgap, fill:[15dlu,default]:grow"), getReservationCard);
+                    "fill:[15dlu,default]:grow, $lgap, default, $lgap, 90dlu, $rgap, [35dlu,default], $lgap, fill:[15dlu,default]:grow"), getReservationCard);
 
                 getReservationCardBuilder.add(panel2,         CC.xywh( 3, 3,       3,       1));
                 getReservationCardBuilder.add(panel3,         CC.xywh( 7, 3,       5,       3, CC.FILL, CC.FILL));
