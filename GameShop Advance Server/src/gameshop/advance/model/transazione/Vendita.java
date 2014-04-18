@@ -41,7 +41,7 @@ public class Vendita implements ITransazione {
     protected DateTime date;
     protected ScontoVenditaStrategyComposite strategiaDiSconto;
     protected boolean completata;
-    private LinkedList<IRemoteObserver> listeners = new LinkedList<IRemoteObserver>();
+    private final LinkedList<IRemoteObserver> listeners = new LinkedList<>();
 
     public Vendita() {
         this.date = new DateTime();

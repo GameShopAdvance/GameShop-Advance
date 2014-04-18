@@ -220,7 +220,7 @@ public class BookPanel extends JPanel implements IPopActionListener {
                     });
 
                     PanelBuilder panel2Builder = new PanelBuilder(new FormLayout(
-                        "center:[190px,min]:grow, $lcgap, [100dlu,min]:grow, $lcgap, [75dlu,default]:grow",
+                        "[100dlu,default]:grow, $lcgap, [100dlu,min]:grow, $lcgap, [75dlu,default]:grow",
                         "[50px,min], $rgap, fill:[35dlu,min]"), panel2);
 
                     panel2Builder.add(label2,       CC.xy  (1, 1, CC.LEFT, CC.DEFAULT));
@@ -321,7 +321,7 @@ public class BookPanel extends JPanel implements IPopActionListener {
                     });
 
                     PanelBuilder panel1Builder = new PanelBuilder(new FormLayout(
-                        "left:[100dlu,min]:grow, $lcgap, [100dlu,min]:grow, $lcgap, [75dlu,default]:grow",
+                        "left:[100dlu,default], $lcgap, [100dlu,min]:grow, $lcgap, [75dlu,default]:grow",
                         "[35dlu,min], $lgap, fill:[35dlu,min]"), panel1);
 
                     panel1Builder.add(label4,           CC.xy  (1, 1));
@@ -335,8 +335,6 @@ public class BookPanel extends JPanel implements IPopActionListener {
 
                     //---- clearBook ----
                     clearBook.setText("Annulla");
-                    clearBook.setBackground(new Color(255, 51, 0));
-                    clearBook.setForeground(Color.white);
                     clearBook.setIcon(null);
                     clearBook.setNextFocusableComponent(null);
                     clearBook.setName("clearBook");
@@ -348,7 +346,7 @@ public class BookPanel extends JPanel implements IPopActionListener {
                     });
 
                     PanelBuilder panel5Builder = new PanelBuilder(new FormLayout(
-                        "[75dlu,default]:grow, 2*($lcgap, default), $lcgap, center:[75dlu,default]:grow, $lcgap, default, $lcgap, center:[75dlu,default]:grow",
+                        "[75dlu,default], $lcgap, center:[75dlu,default]:grow, $lcgap, default, $lcgap, center:[75dlu,default]:grow",
                         "2*([25dlu,default], $lgap), [35dlu,default], $lgap, default"), panel5);
 
                     panel5Builder.add(clearBook, CC.xy(1, 5, CC.DEFAULT, CC.FILL));

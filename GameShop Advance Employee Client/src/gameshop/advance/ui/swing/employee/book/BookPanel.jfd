@@ -16,7 +16,7 @@ new FormModel {
 				} ) {
 					name: "getReservationCard"
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-						"$columnSpecs": "center:max(min;190px):grow, labelcompgap, max(min;100dlu):grow, labelcompgap, max(default;75dlu):grow"
+						"$columnSpecs": "max(default;100dlu):grow, labelcompgap, max(min;100dlu):grow, labelcompgap, max(default;75dlu):grow"
 						"$rowSpecs": "max(min;50px), relgap, fill:max(min;35dlu)"
 					} ) {
 						name: "panel2"
@@ -141,7 +141,7 @@ new FormModel {
 						"gridHeight": 5
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-						"$columnSpecs": "left:max(min;100dlu):grow, labelcompgap, max(min;100dlu):grow, labelcompgap, max(default;75dlu):grow"
+						"$columnSpecs": "left:max(default;100dlu), labelcompgap, max(min;100dlu):grow, labelcompgap, max(default;75dlu):grow"
 						"$rowSpecs": "max(min;35dlu), linegap, fill:max(min;35dlu)"
 					} ) {
 						name: "panel1"
@@ -184,15 +184,13 @@ new FormModel {
 						"gridX": 3
 					} )
 					add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-						"$columnSpecs": "max(default;75dlu):grow, labelcompgap, default, labelcompgap, default, labelcompgap, center:max(default;75dlu):grow, labelcompgap, default, labelcompgap, center:max(default;75dlu):grow"
+						"$columnSpecs": "max(default;75dlu), labelcompgap, center:max(default;75dlu):grow, labelcompgap, default, labelcompgap, center:max(default;75dlu):grow"
 						"$rowSpecs": "max(default;25dlu), linegap, max(default;25dlu), linegap, max(default;35dlu), linegap, default"
 					} ) {
 						name: "panel5"
 						add( new FormComponent( "javax.swing.JButton" ) {
 							name: "clearBook"
 							"text": "Annulla"
-							"background": new java.awt.Color( 255, 51, 0, 255 )
-							"foreground": new java.awt.Color( 255, 255, 255, 255 )
 							"icon": sfield com.jformdesigner.model.FormObject NULL_VALUE
 							"nextFocusableComponent": sfield com.jformdesigner.model.FormObject NULL_VALUE
 							auxiliary() {

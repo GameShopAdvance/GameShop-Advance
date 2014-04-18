@@ -4,44 +4,10 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;150dlu):grow, labelcompgap, 193dlu:grow, labelcompgap, max(default;15dlu)"
-			"$rowSpecs": "max(default;15dlu), linegap, default:grow, linegap, max(default;15dlu)"
+			"$columnSpecs": "max(default;15dlu), labelcompgap, max(default;75dlu), labelcompgap, max(default;150dlu), labelcompgap, max(default;150dlu):grow, labelcompgap, max(default;15dlu)"
+			"$rowSpecs": "max(default;15dlu), linegap, default, linegap, max(default;35dlu):grow, linegap, max(default;35dlu), linegap, max(default;15dlu)"
 		} ) {
 			name: "this"
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "max(default;75dlu), labelcompgap, max(default;75dlu), labelcompgap, max(default;75dlu), labelcompgap, max(default;25dlu)"
-				"$rowSpecs": "default:grow, linegap, max(default;35dlu):grow, linegap, max(default;35dlu)"
-			} ) {
-				name: "panel6"
-				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-					name: "scrollPane1"
-					add( new FormComponent( "javax.swing.JList" ) {
-						name: "resumeList"
-					} )
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"gridWidth": 5
-					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-					"gridHeight": 3
-					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-				} )
-				add( new FormComponent( "javax.swing.JButton" ) {
-					name: "button2"
-					"text": "Indietro"
-					auxiliary() {
-						"JavaCodeGenerator.customCreate": true
-					}
-					addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "indietroActionPerformed", true ) )
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-					"gridX": 3
-					"gridY": 5
-				} )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 3
-				"gridX": 3
-				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
-			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
 				name: "swapPanel"
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
@@ -152,7 +118,45 @@ new FormModel {
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridY": 3
-				"gridX": 5
+				"gridX": 3
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridWidth": 3
+			} )
+			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+				"$columnSpecs": "max(default;75dlu):grow, labelcompgap, max(default;75dlu), labelcompgap, max(default;75dlu):grow, labelcompgap, max(default;25dlu)"
+				"$rowSpecs": "default:grow, linegap, max(default;35dlu):grow, linegap, max(default;35dlu)"
+			} ) {
+				name: "panel6"
+				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+					name: "scrollPane1"
+					add( new FormComponent( "javax.swing.JList" ) {
+						name: "resumeList"
+					} )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridWidth": 5
+					"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+					"gridHeight": 5
+					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				} )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"gridY": 3
+				"gridX": 7
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridHeight": 5
+			} )
+			add( new FormComponent( "javax.swing.JButton" ) {
+				name: "button2"
+				"text": "Indietro"
+				auxiliary() {
+					"JavaCodeGenerator.customCreate": true
+				}
+				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "indietroActionPerformed", true ) )
+			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridX": 3
+				"gridY": 7
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 5, 5 )

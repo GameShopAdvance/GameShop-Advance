@@ -90,12 +90,12 @@ public class PaymentPanel extends JPanel {
     
     public void setPagaAcconto() {
        CardLayout layout = (CardLayout) this.swapPanel.getLayout();
-       layout.next(this.swapPanel);      
+       layout.show(this.swapPanel, "card1");      
     }
     
     public void setPagaTotale() {
        CardLayout layout = (CardLayout) this.swapPanel.getLayout();
-       layout.last(this.swapPanel);
+       layout.show(this.swapPanel, "card2");  
     }
     
     private void createUIComponents() {
@@ -143,9 +143,6 @@ public class PaymentPanel extends JPanel {
         // JFormDesigner - Component initialization - DO NOT MODIFY  //GEN-BEGIN:initComponents
         createUIComponents();
 
-        panel6 = new JPanel();
-        scrollPane1 = new JScrollPane();
-        resumeList = new JList();
         swapPanel = new JPanel();
         payPartialCard = new JPanel();
         displayPartial = new JTextField();
@@ -153,40 +150,12 @@ public class PaymentPanel extends JPanel {
         payTotalCard = new JPanel();
         displayTotal = new JTextField();
         totalPayment = new JTextField();
+        panel6 = new JPanel();
+        scrollPane1 = new JScrollPane();
+        resumeList = new JList();
 
         //======== this ========
         setName("this");
-
-        //======== panel6 ========
-        {
-            panel6.setName("panel6");
-
-            //======== scrollPane1 ========
-            {
-                scrollPane1.setName("scrollPane1");
-
-                //---- resumeList ----
-                resumeList.setName("resumeList");
-                scrollPane1.setViewportView(resumeList);
-            }
-
-            //---- button2 ----
-            button2.setText("Indietro");
-            button2.setName("button2");
-            button2.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    indietroActionPerformed(e);
-                }
-            });
-
-            PanelBuilder panel6Builder = new PanelBuilder(new FormLayout(
-                "3*([75dlu,default], $lcgap), [25dlu,default]",
-                "default:grow, $lgap, [35dlu,default]:grow, $lgap, [35dlu,default]"), panel6);
-
-            panel6Builder.add(scrollPane1, CC.xywh(1, 1,          5,       3, CC.FILL, CC.FILL));
-            panel6Builder.add(button2,     CC.xy  (3, 5, CC.DEFAULT, CC.FILL));
-        }
 
         //======== swapPanel ========
         {
@@ -278,20 +247,47 @@ public class PaymentPanel extends JPanel {
             swapPanel.add(payTotalCard, "card2");
         }
 
-        PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[15dlu,default], $lcgap, [150dlu,default]:grow, $lcgap, 193dlu:grow, $lcgap, [15dlu,default]",
-            "[15dlu,default], $lgap, default:grow, $lgap, [15dlu,default]"), this);
+        //======== panel6 ========
+        {
+            panel6.setName("panel6");
 
-        builder.add(panel6,    CC.xy(3, 3, CC.FILL, CC.FILL));
-        builder.add(swapPanel, CC.xy(5, 3));
+            //======== scrollPane1 ========
+            {
+                scrollPane1.setName("scrollPane1");
+
+                //---- resumeList ----
+                resumeList.setName("resumeList");
+                scrollPane1.setViewportView(resumeList);
+            }
+
+            PanelBuilder panel6Builder = new PanelBuilder(new FormLayout(
+                "[75dlu,default]:grow, $lcgap, [75dlu,default], $lcgap, [75dlu,default]:grow, $lcgap, [25dlu,default]",
+                "default:grow, $lgap, [35dlu,default]:grow, $lgap, [35dlu,default]"), panel6);
+
+            panel6Builder.add(scrollPane1, CC.xywh(1, 1, 5, 5, CC.FILL, CC.FILL));
+        }
+
+        //---- button2 ----
+        button2.setText("Indietro");
+        button2.setName("button2");
+        button2.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                indietroActionPerformed(e);
+            }
+        });
+
+        PanelBuilder builder = new PanelBuilder(new FormLayout(
+            "[15dlu,default], $lcgap, [75dlu,default], $lcgap, [150dlu,default], $lcgap, [150dlu,default]:grow, $lcgap, [15dlu,default]",
+            "[15dlu,default], $lgap, default, $lgap, [35dlu,default]:grow, $lgap, [35dlu,default], $lgap, [15dlu,default]"), this);
+
+        builder.add(swapPanel, CC.xywh(3, 3,          3,       1, CC.FILL, CC.FILL));
+        builder.add(panel6,    CC.xywh(7, 3,          1,       5, CC.FILL, CC.FILL));
+        builder.add(button2,   CC.xy  (3, 7, CC.DEFAULT, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 
     // JFormDesigner - Variables declaration - DO NOT MODIFY  //GEN-BEGIN:variables
-    private JPanel panel6;
-    private JScrollPane scrollPane1;
-    private JList resumeList;
-    private JButton button2;
     private JPanel swapPanel;
     private JPanel payPartialCard;
     private JLabel label5;
@@ -305,6 +301,10 @@ public class PaymentPanel extends JPanel {
     private JLabel label8;
     private JTextField totalPayment;
     private JButton payTotalButton;
+    private JPanel panel6;
+    private JScrollPane scrollPane1;
+    private JList resumeList;
+    private JButton button2;
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
    
