@@ -4,8 +4,8 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "relgap, max(pref;303px):grow, 20dlu, max(pref;288px):grow, relgap"
-			"$rowSpecs": "max(default;15dlu):grow, linegap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu, linegap, max(default;15dlu):grow"
+			"$columnSpecs": "relgap, max(pref;303px):grow, unrelgap, max(pref;288px):grow, relgap"
+			"$rowSpecs": "relgap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu, relgap, default:grow"
 		} ) {
 			name: "this"
 			"minimumSize": new java.awt.Dimension( 720, 480 )
@@ -17,32 +17,66 @@ new FormModel {
 				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "fornitureActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 3
+				"gridY": 2
 				"gridX": 2
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "max(pref;245px):grow"
-				"$rowSpecs": "fill:81dlu"
+				"$columnSpecs": "max(pref;288px):grow"
+				"$rowSpecs": "fill:30dlu, linegap, fill:30dlu:grow, linegap, fill:30dlu, linegap, fill:30dlu, linegap, fill:30dlu:grow, linegap, fill:30dlu"
+				"$rowGroupIds": "2, 0, 2, 0, 2, 0, 1, 0, 1, 0, 1"
 			} ) {
-				name: "panel2"
-				"border": new javax.swing.border.TitledBorder( "Prodotti in esaurimento scorte" )
-				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-					name: "scrollPane2"
-					add( new FormComponent( "javax.swing.JList" ) {
-						name: "offertsList"
-						"model": new javax.swing.DefaultListModel {
-							addElement( "Prodotto 1" )
-							addElement( "Prodotto 2" )
-							addElement( "Prodotto 3" )
-							addElement( "..." )
-						}
-						"font": new java.awt.Font( "Tahoma", 0, 14 )
-					} )
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
+				name: "panel1"
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+					"$columnSpecs": "max(pref;245px):grow"
+					"$rowSpecs": "fill:81dlu:grow"
+				} ) {
+					name: "panel2"
+					"border": new javax.swing.border.TitledBorder( "Prodotti in esaurimento scorte" )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane2"
+						add( new FormComponent( "javax.swing.JList" ) {
+							name: "offertsList"
+							"model": new javax.swing.DefaultListModel {
+								addElement( "Prodotto 1" )
+								addElement( "Prodotto 2" )
+								addElement( "Prodotto 3" )
+								addElement( "..." )
+							}
+							"font": new java.awt.Font( "Tahoma", 0, 14 )
+						} )
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridHeight": 5
+				} )
+				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
+					"$columnSpecs": "max(pref;245px):grow"
+					"$rowSpecs": "fill:max(default;35px):grow"
+				} ) {
+					name: "panel3"
+					"border": new javax.swing.border.TitledBorder( "Attualmente in offerta" )
+					add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
+						name: "scrollPane1"
+						"horizontalScrollBarPolicy": 31
+						"viewportBorder": sfield com.jformdesigner.model.FormObject NULL_VALUE
+						add( new FormComponent( "javax.swing.JList" ) {
+							name: "lowQuantityList"
+							"model": new javax.swing.DefaultListModel {
+								addElement( "Prodotto 1" )
+								addElement( "Prodotto 2" )
+								addElement( "Prodotto 3" )
+								addElement( "..." )
+							}
+							"font": new java.awt.Font( "Tahoma", 0, 14 )
+						} )
+					}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
+				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
+					"gridY": 7
+					"gridHeight": 5
+				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
 				"gridX": 4
-				"gridY": 3
-				"gridHeight": 5
+				"gridY": 2
+				"gridHeight": 15
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "magazzinoButton"
@@ -52,7 +86,7 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 5
+				"gridY": 4
 				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -62,7 +96,7 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 7
+				"gridY": 6
 				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -73,34 +107,8 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 9
+				"gridY": 8
 				"gridX": 2
-			} )
-			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "max(pref;245px):grow"
-				"$rowSpecs": "fill:max(default;35px):grow"
-			} ) {
-				name: "panel3"
-				"border": new javax.swing.border.TitledBorder( "Attualmente in offerta" )
-				add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
-					name: "scrollPane1"
-					"horizontalScrollBarPolicy": 31
-					"viewportBorder": sfield com.jformdesigner.model.FormObject NULL_VALUE
-					add( new FormComponent( "javax.swing.JList" ) {
-						name: "lowQuantityList"
-						"model": new javax.swing.DefaultListModel {
-							addElement( "Prodotto 1" )
-							addElement( "Prodotto 2" )
-							addElement( "Prodotto 3" )
-							addElement( "..." )
-						}
-						"font": new java.awt.Font( "Tahoma", 0, 14 )
-					} )
-				}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) )
-			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 4
-				"gridY": 9
-				"gridHeight": 5
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "scontiButton"
@@ -110,7 +118,7 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 11
+				"gridY": 10
 				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -120,7 +128,7 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 13
+				"gridY": 12
 				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
@@ -131,7 +139,7 @@ new FormModel {
 					"JavaCodeGenerator.customCreate": true
 				}
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridY": 15
+				"gridY": 14
 				"gridX": 2
 			} )
 		}, new FormLayoutConstraints( null ) {
