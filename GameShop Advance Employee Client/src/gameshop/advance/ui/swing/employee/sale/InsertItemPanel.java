@@ -223,7 +223,7 @@ public class InsertItemPanel extends JPanel implements IListPanel{
             });
 
             PanelBuilder panel1Builder = new PanelBuilder(new FormLayout(
-                "70dlu, $lcgap, [40dlu,default,60dlu], $lcgap, [75dlu,default]",
+                "60dlu, $lcgap, [30dlu,default,60dlu], $lcgap, [75dlu,default]",
                 "[35dlu,default], $lgap, [35dlu,default]"), panel1);
 
             panel1Builder.add(label1,             CC.xy  (1, 1, CC.FILL, CC.FILL));
@@ -295,7 +295,7 @@ public class InsertItemPanel extends JPanel implements IListPanel{
                 });
 
                 PanelBuilder mainBuilder = new PanelBuilder(new FormLayout(
-                    "70dlu, $lcgap, default:grow, $lcgap, [75dlu,default]",
+                    "60dlu, $lcgap, default:grow, $lcgap, [75dlu,default]",
                     "[35dlu,default], $lgap, [35dlu,default]"), main);
 
                 mainBuilder.add(label4,     CC.xy  (1, 1));
@@ -355,7 +355,7 @@ public class InsertItemPanel extends JPanel implements IListPanel{
         });
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "$rgap, [145dlu,default], $lcgap, [150dlu,default]:grow, $lcgap, [75dlu,default], $rgap",
+            "$rgap, [140dlu,default,180dlu], $lcgap, [150dlu,default]:grow, $lcgap, [75dlu,default], $rgap",
             "fill:[15dlu,default]:grow, $rgap, default, $lgap, 90dlu, $lgap, [35dlu,default], $lgap, fill:[15dlu,default]:grow"), this);
 
         builder.add(panel1,      CC.xy  (2, 3));

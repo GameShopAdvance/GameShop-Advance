@@ -4,13 +4,13 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "relgap, max(default;145dlu), labelcompgap, max(default;150dlu):grow, labelcompgap, max(default;75dlu), relgap"
+			"$columnSpecs": "relgap, (140dlu<default<180dlu), labelcompgap, max(default;150dlu):grow, labelcompgap, max(default;75dlu), relgap"
 			"$rowSpecs": "fill:max(default;15dlu):grow, relgap, default, linegap, 90dlu, linegap, max(default;35dlu), linegap, fill:max(default;15dlu):grow"
 		} ) {
 			name: "this"
 			"componentPopupMenu": sfield com.jformdesigner.model.FormObject NULL_VALUE
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-				"$columnSpecs": "70dlu, labelcompgap, (40dlu<default<60dlu), labelcompgap, max(default;75dlu)"
+				"$columnSpecs": "60dlu, labelcompgap, (30dlu<default<60dlu), labelcompgap, max(default;75dlu)"
 				"$rowSpecs": "max(default;35dlu), linegap, max(default;35dlu)"
 			} ) {
 				name: "panel1"
@@ -124,7 +124,7 @@ new FormModel {
 				name: "clientPanel"
 				"border": new javax.swing.border.TitledBorder( "Carta fedeltà" )
 				add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-					"$columnSpecs": "70dlu, labelcompgap, default:grow, labelcompgap, max(default;75dlu)"
+					"$columnSpecs": "60dlu, labelcompgap, default:grow, labelcompgap, max(default;75dlu)"
 					"$rowSpecs": "max(default;35dlu), linegap, max(default;35dlu)"
 				} ) {
 					name: "main"
@@ -222,7 +222,7 @@ new FormModel {
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 5 )
-			"size": new java.awt.Dimension( 870, 390 )
+			"size": new java.awt.Dimension( 900, 390 )
 		} )
 	}
 }

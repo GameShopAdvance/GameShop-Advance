@@ -197,6 +197,7 @@ public class BookPanel extends JPanel implements IPopActionListener {
         bookList = new JList();
         panel1 = new JPanel();
         clientCode = new JTextField();
+        panel4 = new JPanel();
 
         //======== this ========
         setName("this");
@@ -324,17 +325,28 @@ public class BookPanel extends JPanel implements IPopActionListener {
                 panel1Builder.add(insertClientCode, CC.xy  (5, 3));
             }
 
-            //---- clearBook ----
-            clearBook.setText("Annulla");
-            clearBook.setIcon(null);
-            clearBook.setNextFocusableComponent(null);
-            clearBook.setName("clearBook");
-            clearBook.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    clearBookActionPerformed(e);
-                }
-            });
+            //======== panel4 ========
+            {
+                panel4.setName("panel4");
+
+                //---- clearBook ----
+                clearBook.setText("Annulla");
+                clearBook.setIcon(null);
+                clearBook.setNextFocusableComponent(null);
+                clearBook.setName("clearBook");
+                clearBook.addActionListener(new ActionListener() {
+                    @Override
+                    public void actionPerformed(ActionEvent e) {
+                        clearBookActionPerformed(e);
+                    }
+                });
+
+                PanelBuilder panel4Builder = new PanelBuilder(new FormLayout(
+                    "left:[86dlu,default]",
+                    "[35dlu,default]"), panel4);
+
+                panel4Builder.add(clearBook, CC.xy(1, 1, CC.FILL, CC.FILL));
+            }
 
             //---- goToPayPartial ----
             goToPayPartial.setText("Paga Acconto");
@@ -357,15 +369,15 @@ public class BookPanel extends JPanel implements IPopActionListener {
             });
 
             PanelBuilder getReservationCardBuilder = new PanelBuilder(new FormLayout(
-                "$rgap, [70dlu,default], $lcgap, center:[100dlu,default,200dlu], $lcgap, default:grow, $rgap, left:[100dlu,default,200dlu], $lcgap, left:[75dlu,default], $lcgap, left:[75dlu,min], $rgap",
+                "$rgap, center:[140dlu,default,180dlu], $lcgap, left:[72dlu,default]:grow, $lcgap, left:[75dlu,default], $lcgap, left:[75dlu,min], $rgap",
                 "fill:[15dlu,default]:grow, $lgap, default, $lgap, 90dlu, $lgap, default:grow, $rgap, [35dlu,default], $lgap, fill:[15dlu,default]:grow"), getReservationCard);
 
-            getReservationCardBuilder.add(panel2,         CC.xywh( 2, 3,       3,       1));
-            getReservationCardBuilder.add(panel3,         CC.xywh( 6, 3,       7,       5, CC.FILL, CC.FILL));
-            getReservationCardBuilder.add(panel1,         CC.xywh( 2, 5,       3,       1));
-            getReservationCardBuilder.add(clearBook,      CC.xy  ( 2, 9, CC.FILL, CC.FILL));
-            getReservationCardBuilder.add(goToPayPartial, CC.xy  (10, 9, CC.FILL, CC.FILL));
-            getReservationCardBuilder.add(goToPayTotal,   CC.xy  (12, 9, CC.FILL, CC.FILL));
+            getReservationCardBuilder.add(panel2,         CC.xy  (2, 3));
+            getReservationCardBuilder.add(panel3,         CC.xywh(4, 3,       5,          5, CC.FILL, CC.FILL));
+            getReservationCardBuilder.add(panel1,         CC.xy  (2, 5));
+            getReservationCardBuilder.add(panel4,         CC.xy  (2, 9, CC.FILL, CC.DEFAULT));
+            getReservationCardBuilder.add(goToPayPartial, CC.xy  (6, 9, CC.FILL,    CC.FILL));
+            getReservationCardBuilder.add(goToPayTotal,   CC.xy  (8, 9, CC.FILL,    CC.FILL));
         }
         add(getReservationCard, "card2");
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
@@ -388,6 +400,7 @@ public class BookPanel extends JPanel implements IPopActionListener {
     private JLabel label4;
     private JTextField clientCode;
     private JButton insertClientCode;
+    private JPanel panel4;
     private JButton clearBook;
     private JButton goToPayPartial;
     private JButton goToPayTotal;
