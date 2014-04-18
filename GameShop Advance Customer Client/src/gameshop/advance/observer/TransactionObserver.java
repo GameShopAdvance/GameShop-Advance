@@ -6,9 +6,9 @@
 
 package gameshop.advance.observer;
 
-import gameshop.advance.interfaces.remote.IRemoteObserver;
-import gameshop.advance.interfaces.remote.IRemoteReservationClient;
-import gameshop.advance.interfaces.remote.ITransazioneRemote;
+import gameshop.advance.interfaces.remote.sales.ITransazioneRemote;
+import gameshop.advance.interfaces.remote.sales.reservations.IRemoteReservationClient;
+import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 

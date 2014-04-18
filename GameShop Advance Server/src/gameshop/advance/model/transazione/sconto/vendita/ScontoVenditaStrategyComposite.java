@@ -2,8 +2,8 @@ package gameshop.advance.model.transazione.sconto.vendita;
 
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
-import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
-import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
+import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
+import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 import java.util.LinkedList;

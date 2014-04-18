@@ -14,9 +14,9 @@ import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
-import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
-import gameshop.advance.interfaces.remote.IRemoteObserver;
-import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
+import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
+import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
+import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
 import gameshop.advance.model.Pagamento;
 import gameshop.advance.model.transazione.sconto.ScontoFactorySingleton;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
@@ -41,7 +41,7 @@ public class Vendita implements ITransazione {
     protected DateTime date;
     protected ScontoVenditaStrategyComposite strategiaDiSconto;
     protected boolean completata;
-    private LinkedList<IRemoteObserver> listeners;
+    private LinkedList<IRemoteObserver> listeners = new LinkedList<IRemoteObserver>();
 
     public Vendita() {
         this.date = new DateTime();
@@ -215,8 +215,8 @@ public class Vendita implements ITransazione {
     {
         if(this.pagamento == null)
             return false;
-        Money total = this.getTotal();
-        return this.pagamento.getAmmontare().greater(total) || this.pagamento.getAmmontare().equals(total);
+        else
+            return true;
     }    
     
     @Override
@@ -234,15 +234,13 @@ public class Vendita implements ITransazione {
 
     @Override
     public void aggiungiListener(IRemoteObserver obs) {
-        if(this.listeners == null)
-            this.listeners = new LinkedList<>();
         this.listeners.add(obs);
     }
 
     @Override
     public void rimuoviListener(IRemoteObserver obs) {
         if(obs == null)
-            this.listeners = null;
+            this.listeners.clear();
         else
             this.listeners.remove(obs);
     }

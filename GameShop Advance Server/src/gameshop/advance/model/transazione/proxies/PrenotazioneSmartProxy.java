@@ -16,9 +16,9 @@ import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
-import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
-import gameshop.advance.interfaces.remote.IRemoteObserver;
-import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
+import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
+import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
+import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
 import gameshop.advance.model.transazione.CartaCliente;
 import gameshop.advance.model.transazione.sconto.vendita.ScontoVenditaStrategyComposite;
 import gameshop.advance.utility.Money;
@@ -181,9 +181,4 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
         
     }
 
-    @Override
-    public void riprendiPrenotazione() throws RemoteException {
-        this.prenotazione.riprendiPrenotazione();
-    }
-    
 }

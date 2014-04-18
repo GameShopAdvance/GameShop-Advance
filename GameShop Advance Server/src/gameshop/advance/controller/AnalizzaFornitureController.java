@@ -7,10 +7,10 @@
 package gameshop.advance.controller;
 
 import gameshop.advance.exceptions.QuantityException;
-import gameshop.advance.interfaces.remote.IFornitureControllerRemote;
-import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
-import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
-import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.interfaces.remote.factory.IFornitureControllerRemote;
+import gameshop.advance.interfaces.remote.forniture.IInformazioniProdottoRemote;
+import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
+import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
 import gameshop.advance.manager.ManagerFornitureSingleton;
 import gameshop.advance.utility.IteratorWrapper;
 import java.rmi.RemoteException;

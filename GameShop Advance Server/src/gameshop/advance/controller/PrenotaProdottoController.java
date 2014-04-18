@@ -8,8 +8,8 @@ import gameshop.advance.exceptions.QuantityException;
 import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
-import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
-import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.interfaces.remote.factory.IPrenotaProdottoRemote;
+import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
 import gameshop.advance.model.CatalogoProdottiSingleton;
 import gameshop.advance.model.NegozioSingleton;
 import gameshop.advance.model.transazione.CartaCliente;
@@ -76,6 +76,7 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
     {
         System.err.println("Recupera prenotazione");
         this.prenotazione = (IPrenotazione) NegozioSingleton.getInstance().riprendiPrenotazione(id);
+        this.prenotazione.rimuoviListener(null);
         System.err.println("Recuperata "+this.prenotazione);
     }
     
@@ -145,11 +146,6 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
             System.err.println("Carta cliente:"+carta);
             this.prenotazione.setCliente(carta);
         }
-    }
-
-    @Override
-    public void riprendiPrenotazione() throws RemoteException {
-        this.prenotazione.riprendiPrenotazione();
     }
     
 }

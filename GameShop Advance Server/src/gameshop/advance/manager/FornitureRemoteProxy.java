@@ -6,9 +6,9 @@
 
 package gameshop.advance.manager;
 
-import gameshop.advance.interfaces.remote.IFornitureManagerRemote;
-import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
-import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
+import gameshop.advance.interfaces.remote.forniture.IFornitureManagerRemote;
+import gameshop.advance.interfaces.remote.forniture.IInformazioniProdottoRemote;
+import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
 import gameshop.advance.utility.IteratorWrapper;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;

@@ -9,7 +9,7 @@ package gameshop.advance.interfaces;
 import gameshop.advance.exceptions.AlredyPayedException;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.InvalidSaleState;
-import gameshop.advance.interfaces.remote.IPrenotazioneRemote;
+import gameshop.advance.interfaces.remote.sales.reservations.IPrenotazioneRemote;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
 
@@ -25,6 +25,4 @@ public interface IPrenotazione extends ITransazione, IPrenotazioneRemote {
     
     public boolean getEvasa();
 
-    public void riprendiPrenotazione() throws RemoteException;
-    
 }

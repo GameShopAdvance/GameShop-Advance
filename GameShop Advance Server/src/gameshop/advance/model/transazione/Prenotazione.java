@@ -12,11 +12,13 @@ import gameshop.advance.exceptions.InvalidSaleState;
 import gameshop.advance.exceptions.QuantityNotInStockException;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IPrenotazione;
-import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
 import gameshop.advance.model.Pagamento;
+import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.utility.Money;
+import java.rmi.ConnectException;
 import java.rmi.RemoteException;
-import java.util.List;
+import java.util.Iterator;
 
 /**
  *
@@ -34,18 +36,16 @@ public class Prenotazione extends Vendita implements IPrenotazione {
     
     public boolean pagataAcconto() throws RemoteException
     {
-//        if(this.acconto == null)
+        if(this.acconto == null)
             return false;
-//        Money partial = this.getAcconto();
-//        return this.acconto.getAmmontare().greater(partial) || this.acconto.getAmmontare().equals(partial);
+        else
+            return true;
     }
     
     @Override
     public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlredyPayedException {
         if(!this.completata)
             throw new InvalidSaleState();
-        Money total = this.getTotal();
-        Money partial = this.getAcconto();
         if(this.pagataAcconto() || this.pagataTotale())
             throw new AlredyPayedException();
         if(this.getAcconto().greater(ammontare))
@@ -77,14 +77,23 @@ public class Prenotazione extends Vendita implements IPrenotazione {
     @Override
     protected void notificaListener() throws RemoteException {
         System.err.println("Notifica Listener ");
-        List<IRemoteObserver> listeners = this.getListeners();
-        System.err.println("N. observers: "+listeners.size());
-        if(listeners != null)
-        {
-            for(IRemoteObserver obs:listeners) {
+        System.err.println("#Observers: "+this.getListeners().size());
+        Iterator<IRemoteObserver> listeners = this.getListeners().iterator();
+        while(listeners.hasNext()){
+            IRemoteObserver obs = listeners.next();
+            try{
                 obs.notifica(new PrenotazioneRemoteProxy(this));
+            }catch(ConnectException ex)
+            {
+                this.rimuoviListener(obs);
+                LoggerSingleton.getInstance().log(ex);
+            }
+            catch(Exception ex){
+                System.err.println("Generica eccezione");
+                LoggerSingleton.getInstance().log(ex);
             }
         }
+        System.err.println("#Observers: "+this.getListeners().size());
     }
     
     @Override
@@ -102,10 +111,5 @@ public class Prenotazione extends Vendita implements IPrenotazione {
     public boolean getEvasa()
     {
         return this.evasa;
-    }
-
-    @Override
-    public void riprendiPrenotazione() throws RemoteException {
-        this.notificaListener();
     }
 }

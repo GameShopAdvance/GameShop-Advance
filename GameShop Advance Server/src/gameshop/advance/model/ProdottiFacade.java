@@ -7,8 +7,8 @@
 package gameshop.advance.model;
 
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
-import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
-import gameshop.advance.interfaces.remote.IProdottiRemote;
+import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
+import gameshop.advance.interfaces.remote.factory.IProdottiRemote;
 import gameshop.advance.remote.DescrizioneRemoteProxy;
 import gameshop.advance.utility.IteratorWrapper;
 import java.rmi.RemoteException;

@@ -8,9 +8,9 @@ package gameshop.advance.model.transazione;
 
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.interfaces.ITransazione;
-import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
-import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
-import gameshop.advance.interfaces.remote.ITransazioneRemote;
+import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
+import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
+import gameshop.advance.interfaces.remote.sales.ITransazioneRemote;
 import gameshop.advance.utility.IteratorWrapper;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;

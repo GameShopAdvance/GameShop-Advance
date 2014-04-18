@@ -10,7 +10,7 @@ import com.db4o.activation.ActivationPurpose;
 import com.db4o.activation.Activator;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
-import gameshop.advance.interfaces.remote.IRemoteImage;
+import gameshop.advance.interfaces.remote.utility.IRemoteImage;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import gameshop.advance.utility.Prezzo;

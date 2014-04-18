@@ -7,7 +7,7 @@ package gameshop.advance.ui.swing.manager;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
-import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
+import gameshop.advance.interfaces.remote.forniture.IInformazioniProdottoRemote;
 import gameshop.advance.ui.swing.UIFactory;
 import java.awt.Component;
 import java.util.logging.Level;

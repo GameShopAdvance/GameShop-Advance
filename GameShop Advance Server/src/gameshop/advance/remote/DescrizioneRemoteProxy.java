@@ -7,7 +7,7 @@
 package gameshop.advance.remote;
 
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
-import gameshop.advance.interfaces.remote.IRemoteImage;
+import gameshop.advance.interfaces.remote.utility.IRemoteImage;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;

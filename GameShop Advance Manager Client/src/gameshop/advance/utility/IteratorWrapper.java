@@ -6,7 +6,7 @@
 
 package gameshop.advance.utility;
 
-import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
+import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.Iterator;

@@ -2,7 +2,7 @@ package gameshop.advance.model.transazione;
 
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
-import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
+import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
 import gameshop.advance.model.DescrizioneProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;

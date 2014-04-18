@@ -7,7 +7,7 @@
 package gameshop.advance.model.transazione;
 
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
-import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
+import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
 import gameshop.advance.remote.DescrizioneRemoteProxy;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;

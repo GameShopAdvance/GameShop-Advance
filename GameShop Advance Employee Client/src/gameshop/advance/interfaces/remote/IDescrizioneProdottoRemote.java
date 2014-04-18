@@ -6,6 +6,7 @@
 
 package gameshop.advance.interfaces.remote;
 
+import gameshop.advance.interfaces.remote.utility.IRemoteImage;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.Remote;

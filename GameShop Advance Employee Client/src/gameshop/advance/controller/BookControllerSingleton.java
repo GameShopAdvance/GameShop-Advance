@@ -5,13 +5,13 @@ import gameshop.advance.exceptions.AlredyPayedException;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.InvalidMoneyException;
 import gameshop.advance.exceptions.InvalidSaleState;
-import gameshop.advance.interfaces.remote.IIteratorWrapperRemote;
-import gameshop.advance.interfaces.remote.IPrenotaProdottoRemote;
-import gameshop.advance.interfaces.remote.IRemoteBookClient;
-import gameshop.advance.interfaces.remote.IRemoteFactory;
-import gameshop.advance.interfaces.remote.IRemoteObserver;
-import gameshop.advance.interfaces.remote.IRemoteReservationClient;
-import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
+import gameshop.advance.interfaces.remote.factory.IPrenotaProdottoRemote;
+import gameshop.advance.interfaces.remote.factory.IRemoteFactory;
+import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
+import gameshop.advance.interfaces.remote.sales.reservations.IRemoteBookClient;
+import gameshop.advance.interfaces.remote.sales.reservations.IRemoteReservationClient;
+import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
+import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
 import gameshop.advance.observer.PartialObserver;
 import gameshop.advance.observer.RestObserver;
 import gameshop.advance.observer.RestPartialObserver;
@@ -110,7 +110,7 @@ public class BookControllerSingleton  extends UnicastRemoteObject implements IRe
         this.controller.addListener(this.bookPartialObserver);
         this.controller.addListener(this.bookTotalObserver);
         this.controller.addListener(this.transactionObserver);
-        this.controller.riprendiPrenotazione();
+        this.controller.completaPrenotazione();
     }
     
     public void vaiAlpagamentoAcconto() {

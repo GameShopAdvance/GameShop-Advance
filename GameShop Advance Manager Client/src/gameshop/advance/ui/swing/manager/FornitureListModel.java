@@ -6,7 +6,7 @@
 
 package gameshop.advance.ui.swing.manager;
 
-import gameshop.advance.interfaces.remote.IInformazioniProdottoRemote;
+import gameshop.advance.interfaces.remote.forniture.IInformazioniProdottoRemote;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.LinkedList;

@@ -6,7 +6,7 @@
 
 package gameshop.advance.ui.swing;
 
-import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
+import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
 import java.rmi.RemoteException;
 import java.util.HashMap;
 import java.util.LinkedList;

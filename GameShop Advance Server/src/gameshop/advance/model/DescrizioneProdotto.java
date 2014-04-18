@@ -3,7 +3,7 @@ package gameshop.advance.model;
 import gameshop.advance.interfaces.IDescrizioneProdotto;
 import gameshop.advance.interfaces.IObserver;
 import gameshop.advance.interfaces.IScontoProdottoStrategy;
-import gameshop.advance.interfaces.remote.IRemoteImage;
+import gameshop.advance.interfaces.remote.utility.IRemoteImage;
 import gameshop.advance.observers.DescrizioneProdottoObserver;
 import gameshop.advance.remote.ImageProxy;
 import gameshop.advance.utility.IDProdotto;

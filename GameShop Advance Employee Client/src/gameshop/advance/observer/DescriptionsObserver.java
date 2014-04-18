@@ -6,9 +6,9 @@
 
 package gameshop.advance.observer;
 
-import gameshop.advance.interfaces.remote.IInventarioControllerRemote;
 import gameshop.advance.interfaces.remote.IRemoteDescriptionClient;
-import gameshop.advance.interfaces.remote.IRemoteObserver;
+import gameshop.advance.interfaces.remote.factory.IInventarioControllerRemote;
+import gameshop.advance.interfaces.remote.utility.IRemoteObserver;
 import java.rmi.RemoteException;
 import java.rmi.server.UnicastRemoteObject;
 import java.util.logging.Level;

@@ -6,6 +6,7 @@
 
 package gameshop.advance.interfaces.remote;
 
+import gameshop.advance.interfaces.remote.utility.IRemoteImage;
 import gameshop.advance.utility.IDProdotto;
 import gameshop.advance.utility.Money;
 import java.rmi.Remote;
@@ -32,6 +33,7 @@ public interface IDescrizioneProdottoRemote extends Remote {
     String getDescrizione() throws RemoteException;
 
     /**
+     * @param period
      * @return il prezzo di un prodotto.
      * @throws java.rmi.RemoteException
      */

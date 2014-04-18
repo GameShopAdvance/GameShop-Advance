@@ -7,7 +7,7 @@ package gameshop.advance.ui.swing.customer;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
-import gameshop.advance.interfaces.remote.IRigaDiTransazioneRemote;
+import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
 import gameshop.advance.ui.swing.UIFactory;
 import java.awt.BorderLayout;
 import java.awt.Component;
