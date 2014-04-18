@@ -32,6 +32,7 @@ import javax.swing.ListCellRenderer;
 import javax.swing.ListModel;
 
 /**
+ * Schermata dell'inventario.Permette al commesso di registrare i nuovi prodotti arrivati al negozio.
  * @author Matteo Gentile
  */
 public class InventoryPanel extends JPanel implements IListPanel {

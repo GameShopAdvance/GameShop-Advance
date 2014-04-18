@@ -35,6 +35,8 @@ import javax.swing.border.CompoundBorder;
 import javax.swing.border.TitledBorder;
 
 /**
+ * Schermata per il recupero di una prenotazione effettuata da terminale cliente.La recupera e la mostra, e permette
+ * il pagamento.
  * @author Matteo Gentile
  */
 public class BookPanel extends JPanel implements IPopActionListener {
@@ -54,7 +56,6 @@ public class BookPanel extends JPanel implements IPopActionListener {
         try {
             BookControllerSingleton.getInstance().recuperaPrenotazione(Integer.parseInt(this.bookCode.getText()));
             Money partial = BookControllerSingleton.getInstance().getPartial();
-            System.err.println("Partial in panel: "+partial);
             this.disableField();
             this.partial.setText(partial.toString());
             this.total.setText(BookControllerSingleton.getInstance().getTotal().toString());

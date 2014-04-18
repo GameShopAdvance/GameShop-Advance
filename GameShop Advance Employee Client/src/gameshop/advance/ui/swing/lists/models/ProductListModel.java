@@ -17,7 +17,8 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
 /**
- *
+ * Classe che si occupa della gestione delle informazioni prodotto raccolta in una hashmap per la corretta
+ * e ordinata visualizzazione sul terminale.
  * @author Lorenzo Di Giuseppe
  */
 public class ProductListModel implements ListModel<IDescrizioneProdottoRemote>
@@ -30,17 +31,19 @@ public class ProductListModel implements ListModel<IDescrizioneProdottoRemote>
     public int getSize() {
         return this.descrizioni.size();
     }
-
+    
     public void clear(){
         this.descrizioni.clear();
     }
     
+    /**
+     * @param descrizione
+     */
     public void addElement(IDescrizioneProdottoRemote descrizione)
     {
         try
         {
             String code = descrizione.getCodiceProdotto().getCodice();
-            System.err.println("Aggiungi elemento: "+code);
             if(!this.descrizioni.containsKey(code))
                 this.descrizioni.put(code, descrizione);
         } catch (RemoteException ex)
@@ -50,6 +53,10 @@ public class ProductListModel implements ListModel<IDescrizioneProdottoRemote>
         this.fireContentsChanged(0, this.descrizioni.size()-1);
     }
 
+    /**
+     * @param descrizione
+     * @throws RemoteException
+     */
     public void remove(IDescrizioneProdottoRemote descrizione) throws RemoteException
     {
         String code = descrizione.getCodiceProdotto().getCodice();
@@ -59,7 +66,6 @@ public class ProductListModel implements ListModel<IDescrizioneProdottoRemote>
     
     @Override
     public IDescrizioneProdottoRemote getElementAt(int index) {
-        System.err.println("Asked index: "+index);
         return (IDescrizioneProdottoRemote) this.descrizioni.values().toArray()[index];
     }
 
@@ -68,6 +74,9 @@ public class ProductListModel implements ListModel<IDescrizioneProdottoRemote>
         this.listeners.add(l);
     }
     
+    /**
+     * @return
+     */
     public ListDataListener[] getListDataListeners(){
         return (ListDataListener[]) this.listeners.toArray();
     }
@@ -77,6 +86,10 @@ public class ProductListModel implements ListModel<IDescrizioneProdottoRemote>
         this.listeners.remove(l);
     }  
 
+    /**
+     * @param index0
+     * @param index1
+     */
     protected void fireIntervalAdded(int index0, int index1)
     {
         if(this.listeners.size() > 0)
@@ -87,6 +100,11 @@ public class ProductListModel implements ListModel<IDescrizioneProdottoRemote>
         }
     }
     
+    /**
+     * @param source
+     * @param index0
+     * @param index1
+     */
     protected void fireIntervalRemoved(Object source, int index0, int index1)
     {
         if(this.listeners.size() > 0)
@@ -97,6 +115,10 @@ public class ProductListModel implements ListModel<IDescrizioneProdottoRemote>
         }
     }
     
+    /**
+     * @param index0
+     * @param index1
+     */
     protected void fireContentsChanged(int index0, int index1)
     {
         if(this.listeners.size() > 0)

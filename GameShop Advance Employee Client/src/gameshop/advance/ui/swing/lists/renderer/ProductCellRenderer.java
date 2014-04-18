@@ -23,6 +23,7 @@ import javax.swing.border.LineBorder;
 import org.joda.time.DateTime;
 
 /**
+ * Layout associato alla descrizione dei dettagli di un prodotto.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class ProductCellRenderer extends JPanel implements ListCellRenderer<IDescrizioneProdottoRemote>{

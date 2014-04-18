@@ -35,6 +35,8 @@ import javax.swing.SwingConstants;
 import javax.swing.border.TitledBorder;
 
 /**
+ * Schermata che permette di inserire nuovi prodotti alla vendita.Mostra tutti i prodotti precedentemente
+ * inseriti e aggiunge alla lista gli altri in tempo reale.
  * @author Matteo Gentile
  */
 
