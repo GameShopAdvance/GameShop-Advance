@@ -8,6 +8,7 @@ new FormModel {
 			"$rowSpecs": "max(default;15px):grow, linegap, fill:177dlu, linegap, fill:max(default;35px), linegap, max(default;15dlu):grow, linegap"
 		} ) {
 			name: "this"
+			"minimumSize": new java.awt.Dimension( 720, 480 )
 			add( new FormContainer( "javax.swing.JScrollPane", new FormLayoutManager( class javax.swing.JScrollPane ) ) {
 				name: "scrollPane1"
 				add( new FormComponent( "javax.swing.JList" ) {

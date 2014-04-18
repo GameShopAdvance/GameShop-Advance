@@ -14,6 +14,7 @@ import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
 import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
+import java.awt.Dimension;
 import java.awt.Font;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -76,6 +77,7 @@ public class ManagerMenu extends JPanel {
         lowQuantityList = new JList<>();
 
         //======== this ========
+        setMinimumSize(new Dimension(720, 480));
         setName("this");
 
         //---- fornitureButton ----
@@ -187,18 +189,18 @@ public class ManagerMenu extends JPanel {
         venditeButton.setName("venditeButton");
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "$lcgap, [15dlu,default], [303px,pref], 20dlu, [288px,pref], $lcgap, [15dlu,default]:grow",
-            "$lgap, [15dlu,default]:grow, 7*($lgap, fill:30dlu), $lgap, [15dlu,default]:grow"), this);
+            "[15dlu,default]:grow, $lcgap, [303px,pref], 20dlu, [288px,pref], $lcgap, [15dlu,default]:grow",
+            "[15dlu,default]:grow, 7*($lgap, fill:30dlu), $lgap, [15dlu,default]:grow"), this);
 
-        builder.add(fornitureButton, CC.xy  (3,  4));
-        builder.add(panel2,          CC.xywh(5,  4, 1, 5));
-        builder.add(magazzinoButton, CC.xy  (3,  6));
-        builder.add(nullButton1,     CC.xy  (3,  8));
-        builder.add(prezziButton,    CC.xy  (3, 10));
-        builder.add(panel3,          CC.xywh(5, 10, 1, 5));
-        builder.add(scontiButton,    CC.xy  (3, 12));
-        builder.add(nullButton2,     CC.xy  (3, 14));
-        builder.add(venditeButton,   CC.xy  (3, 16));
+        builder.add(fornitureButton, CC.xy  (3,  3));
+        builder.add(panel2,          CC.xywh(5,  3, 1, 5));
+        builder.add(magazzinoButton, CC.xy  (3,  5));
+        builder.add(nullButton1,     CC.xy  (3,  7));
+        builder.add(prezziButton,    CC.xy  (3,  9));
+        builder.add(panel3,          CC.xywh(5,  9, 1, 5));
+        builder.add(scontiButton,    CC.xy  (3, 11));
+        builder.add(nullButton2,     CC.xy  (3, 13));
+        builder.add(venditeButton,   CC.xy  (3, 15));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

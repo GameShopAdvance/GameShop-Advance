@@ -4,6 +4,8 @@
 
 package gameshop.advance.ui.swing.manager;
 
+import java.awt.Dimension;
+import javax.swing.plaf.ColorUIResource;
 import com.jgoodies.forms.builder.PanelBuilder;
 import com.jgoodies.forms.factories.CC;
 import com.jgoodies.forms.layout.FormLayout;
@@ -77,6 +79,7 @@ public class FornitureMenu extends JPanel implements IListPanel {
         infoList = new JList();
 
         //======== this ========
+        setMinimumSize(new Dimension(720, 480));
         setName("this");
 
         //======== scrollPane1 ========
