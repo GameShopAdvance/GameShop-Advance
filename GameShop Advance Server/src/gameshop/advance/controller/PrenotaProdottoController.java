@@ -92,7 +92,6 @@ public class PrenotaProdottoController extends UnicastRemoteObject implements IP
         this.prenotazione.pagaAcconto(ammontare);
         this.prenotazione.rimuoviListener(null);
         try {
-            System.err.println("Prenotazione in controller: "+this.prenotazione);
             NegozioSingleton.getInstance().registraPrenotazione(this.prenotazione);
         } catch (QuantityException ex) {
             Logger.getLogger(PrenotaProdottoController.class.getName()).log(Level.SEVERE, null, ex);

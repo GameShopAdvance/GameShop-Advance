@@ -17,14 +17,12 @@ import java.util.List;
 public class ManagerPrenotazioniSingleton {
     
     private static ManagerPrenotazioniSingleton instance;
-    private LinkedList<IPrenotazione> prenotazioniDaEvadere = new LinkedList<IPrenotazione>();
-    private LinkedList<IObserver> listeners;
+    private final LinkedList<IPrenotazione> prenotazioniDaEvadere;
+    private final LinkedList<IObserver> listeners;
     
     private ManagerPrenotazioniSingleton(){
-        this.listeners = new LinkedList<IObserver>();
-        LinkedList<IPrenotazione> readNotProcessed = DbPrenotazioneSingleton.getInstance().readNotProcessed();
-        if(readNotProcessed != null)
-            this.prenotazioniDaEvadere = readNotProcessed;
+        this.listeners = new LinkedList<>();
+        this.prenotazioniDaEvadere = DbPrenotazioneSingleton.getInstance().readNotProcessed();
     }
     
     public static ManagerPrenotazioniSingleton getInstance(){
@@ -48,13 +46,9 @@ public class ManagerPrenotazioniSingleton {
     
     public void store(IPrenotazione prenotazione) throws ObjectAlreadyExistsDbException, RemoteException, QuantityException
     {
-        System.err.println("Prenotazione in manager: "+prenotazione);
         DbPrenotazioneSingleton.getInstance().create(prenotazione);
-        System.err.println("Prenotazione in manager dopo create: "+prenotazione);
         this.addPrenotazione(prenotazione);
-        System.err.println("Prenotazione in manager dopo addPrenotazione: "+prenotazione);
         this.notificaListeners();
-        System.err.println("Prenotazione in manager dopo notificaListeners: "+prenotazione);
     }
 
     private void notificaListeners() {
@@ -66,7 +60,6 @@ public class ManagerPrenotazioniSingleton {
     }
     
     public void addPrenotazione(IPrenotazione pren) throws RemoteException, QuantityException{
-        System.err.println("Prenotazione in addPrenotazione: "+pren);
         if(pren != null && pren.isCompleted() && !pren.getEvasa() && this.prenotazioniDaEvadere.indexOf(pren) < 0)
         {
             this.prenotazioniDaEvadere.push(pren);

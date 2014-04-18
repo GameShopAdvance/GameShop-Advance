@@ -106,7 +106,7 @@ public class DbPrenotazioneSingleton {
                 }
          );
          if(result.isEmpty())
-            return null;
+            return new ActivatableLinkedList<>();
          else{
              LinkedList<IPrenotazione> list = new ActivatableLinkedList<>(result);
              return list;

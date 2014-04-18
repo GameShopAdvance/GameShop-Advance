@@ -82,8 +82,7 @@ public class NegozioSingleton
     }
     
      public void registraPrenotazione(IPrenotazione p) throws RemoteException, QuantityException
-    {
-        System.err.println("Prenotazione in negozio: "+p);
+    { 
         try {
             ManagerPrenotazioniSingleton.getInstance().store(p);
         } catch (ObjectAlreadyExistsDbException ex) {
