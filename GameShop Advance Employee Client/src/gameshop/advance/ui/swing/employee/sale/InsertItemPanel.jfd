@@ -4,7 +4,7 @@ new FormModel {
 	contentType: "form/swing"
 	root: new FormRoot {
 		add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
-			"$columnSpecs": "max(default;15dlu):grow, labelcompgap, max(default;150dlu), labelcompgap, max(default;200dlu):grow, labelcompgap, max(default;75dlu), labelcompgap, max(default;15dlu):grow"
+			"$columnSpecs": "relgap, max(default;145dlu), labelcompgap, max(default;150dlu):grow, labelcompgap, max(default;75dlu), relgap"
 			"$rowSpecs": "fill:max(default;15dlu):grow, relgap, default, linegap, 90dlu, linegap, max(default;35dlu), linegap, fill:max(default;15dlu):grow"
 		} ) {
 			name: "this"
@@ -72,8 +72,8 @@ new FormModel {
 					"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
 				"gridY": 3
+				"gridX": 2
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 				"$columnSpecs": "max(default;10dlu):grow, labelcompgap, max(default;50dlu), labelcompgap, max(default;90dlu), labelcompgap, relgap"
@@ -115,10 +115,10 @@ new FormModel {
 					"gridWidth": 7
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 5
+				"gridX": 4
 				"gridY": 3
 				"gridHeight": 3
-				"gridWidth": 4
+				"gridWidth": 3
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class java.awt.CardLayout ) ) {
 				name: "clientPanel"
@@ -180,10 +180,10 @@ new FormModel {
 					"value": "card2"
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
 				"gridY": 5
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridX": 2
 			} )
 			add( new FormContainer( "javax.swing.JPanel", new FormLayoutManager( class com.jgoodies.forms.layout.FormLayout ) {
 				"$columnSpecs": "max(default;75dlu), labelcompgap, max(default;75dlu), labelcompgap, default"
@@ -202,10 +202,10 @@ new FormModel {
 					"gridY": 1
 				} )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 3
 				"gridY": 7
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
+				"gridX": 2
 			} )
 			add( new FormComponent( "javax.swing.JButton" ) {
 				name: "payButton"
@@ -215,14 +215,14 @@ new FormModel {
 				}
 				addEvent( new FormEvent( "java.awt.event.ActionListener", "actionPerformed", "goToPaymentButtonActionPerformed", true ) )
 			}, new FormLayoutConstraints( class com.jgoodies.forms.layout.CellConstraints ) {
-				"gridX": 7
+				"gridX": 6
 				"gridY": 7
 				"vAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 				"hAlign": sfield com.jgoodies.forms.layout.CellConstraints FILL
 			} )
 		}, new FormLayoutConstraints( null ) {
 			"location": new java.awt.Point( 0, 5 )
-			"size": new java.awt.Dimension( 900, 390 )
+			"size": new java.awt.Dimension( 870, 390 )
 		} )
 	}
 }

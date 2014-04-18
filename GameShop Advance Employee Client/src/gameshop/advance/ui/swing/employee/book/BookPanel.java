@@ -253,6 +253,7 @@ public class BookPanel extends JPanel implements IPopActionListener {
                 label1.setName("label1");
 
                 //---- partial ----
+                partial.setEditable(false);
                 partial.setName("partial");
 
                 //---- label3 ----
@@ -261,6 +262,7 @@ public class BookPanel extends JPanel implements IPopActionListener {
                 label3.setName("label3");
 
                 //---- total ----
+                total.setEditable(false);
                 total.setName("total");
 
                 //======== scrollPane1 ========
@@ -273,14 +275,14 @@ public class BookPanel extends JPanel implements IPopActionListener {
                 }
 
                 PanelBuilder panel3Builder = new PanelBuilder(new FormLayout(
-                    "[10dlu,default]:grow, $lcgap, [40dlu,default], $lcgap, [60dlu,default], $lcgap, [40dlu,default], $lcgap, [60dlu,default]",
+                    "[40dlu,default]:grow, $lcgap, [60dlu,default], $lcgap, [40dlu,default]:grow, $lcgap, [60dlu,default]",
                     "[35dlu,default], $lgap, fill:default:grow"), panel3);
 
-                panel3Builder.add(label1,      CC.xy  (3, 1, CC.FILL, CC.FILL));
-                panel3Builder.add(partial,     CC.xy  (5, 1, CC.FILL, CC.FILL));
-                panel3Builder.add(label3,      CC.xy  (7, 1, CC.FILL, CC.FILL));
-                panel3Builder.add(total,       CC.xy  (9, 1, CC.FILL, CC.FILL));
-                panel3Builder.add(scrollPane1, CC.xywh(1, 3,       9,       1));
+                panel3Builder.add(label1,      CC.xy  (1, 1, CC.DEFAULT, CC.FILL));
+                panel3Builder.add(partial,     CC.xy  (3, 1, CC.DEFAULT, CC.FILL));
+                panel3Builder.add(label3,      CC.xy  (5, 1, CC.DEFAULT, CC.FILL));
+                panel3Builder.add(total,       CC.xy  (7, 1, CC.DEFAULT, CC.FILL));
+                panel3Builder.add(scrollPane1, CC.xywh(1, 3,          7,       1));
             }
 
             //======== panel1 ========
@@ -355,15 +357,15 @@ public class BookPanel extends JPanel implements IPopActionListener {
             });
 
             PanelBuilder getReservationCardBuilder = new PanelBuilder(new FormLayout(
-                "[10dlu,default]:grow(0.5), $lcgap, [75dlu,default], $lcgap, [100dlu,default,200dlu], $lcgap, [120dlu,default]:grow, $lcgap, [75dlu,default], $lcgap, [75dlu,min], $lcgap, [10dlu,default]:grow(0.5)",
-                "fill:[10dlu,default]:grow, $lgap, default, $lgap, 90dlu, $rgap, [35dlu,default], $lgap, fill:[10dlu,default]:grow"), getReservationCard);
+                "$rgap, [70dlu,default], $lcgap, center:[100dlu,default,200dlu], $lcgap, default:grow, $rgap, left:[100dlu,default,200dlu], $lcgap, left:[75dlu,default], $lcgap, left:[75dlu,min], $rgap",
+                "fill:[15dlu,default]:grow, $lgap, default, $lgap, 90dlu, $lgap, default:grow, $rgap, [35dlu,default], $lgap, fill:[15dlu,default]:grow"), getReservationCard);
 
-            getReservationCardBuilder.add(panel2,         CC.xywh( 3, 3,       3,       1));
-            getReservationCardBuilder.add(panel3,         CC.xywh( 7, 3,       5,       3, CC.FILL, CC.FILL));
-            getReservationCardBuilder.add(panel1,         CC.xywh( 3, 5,       3,       1));
-            getReservationCardBuilder.add(clearBook,      CC.xy  ( 3, 7, CC.FILL, CC.FILL));
-            getReservationCardBuilder.add(goToPayPartial, CC.xy  ( 9, 7, CC.FILL, CC.FILL));
-            getReservationCardBuilder.add(goToPayTotal,   CC.xy  (11, 7, CC.FILL, CC.FILL));
+            getReservationCardBuilder.add(panel2,         CC.xywh( 2, 3,       3,       1));
+            getReservationCardBuilder.add(panel3,         CC.xywh( 6, 3,       7,       5, CC.FILL, CC.FILL));
+            getReservationCardBuilder.add(panel1,         CC.xywh( 2, 5,       3,       1));
+            getReservationCardBuilder.add(clearBook,      CC.xy  ( 2, 9, CC.FILL, CC.FILL));
+            getReservationCardBuilder.add(goToPayPartial, CC.xy  (10, 9, CC.FILL, CC.FILL));
+            getReservationCardBuilder.add(goToPayTotal,   CC.xy  (12, 9, CC.FILL, CC.FILL));
         }
         add(getReservationCard, "card2");
         // JFormDesigner - End of component initialization  //GEN-END:initComponents

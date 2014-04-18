@@ -355,14 +355,14 @@ public class InsertItemPanel extends JPanel implements IListPanel{
         });
 
         PanelBuilder builder = new PanelBuilder(new FormLayout(
-            "[15dlu,default]:grow, $lcgap, [150dlu,default], $lcgap, [200dlu,default]:grow, $lcgap, [75dlu,default], $lcgap, [15dlu,default]:grow",
+            "$rgap, [145dlu,default], $lcgap, [150dlu,default]:grow, $lcgap, [75dlu,default], $rgap",
             "fill:[15dlu,default]:grow, $rgap, default, $lgap, 90dlu, $lgap, [35dlu,default], $lgap, fill:[15dlu,default]:grow"), this);
 
-        builder.add(panel1,      CC.xy  (3, 3));
-        builder.add(panel4,      CC.xywh(5, 3,       4,       3));
-        builder.add(clientPanel, CC.xy  (3, 5, CC.FILL, CC.FILL));
-        builder.add(panel3,      CC.xy  (3, 7, CC.FILL, CC.FILL));
-        builder.add(payButton,   CC.xy  (7, 7, CC.FILL, CC.FILL));
+        builder.add(panel1,      CC.xy  (2, 3));
+        builder.add(panel4,      CC.xywh(4, 3,       3,       3));
+        builder.add(clientPanel, CC.xy  (2, 5, CC.FILL, CC.FILL));
+        builder.add(panel3,      CC.xy  (2, 7, CC.FILL, CC.FILL));
+        builder.add(payButton,   CC.xy  (6, 7, CC.FILL, CC.FILL));
         // JFormDesigner - End of component initialization  //GEN-END:initComponents
     }
 

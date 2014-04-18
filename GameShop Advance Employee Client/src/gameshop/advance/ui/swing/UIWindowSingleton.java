@@ -30,13 +30,14 @@ public class UIWindowSingleton extends JFrame {
     private static JFrame instance;
     
     private JComponent panel;
-
+    
+    private Dimension minimumSize = new Dimension(920, 480);
     
     public UIWindowSingleton() {
         this.panel = null;
         this.initComponents();
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
-        this.setMinimumSize(new Dimension(1024, 480));
+        this.setMinimumSize(this.minimumSize);
     }
 
     
@@ -52,7 +53,7 @@ public class UIWindowSingleton extends JFrame {
 
     private void thisComponentResized(ComponentEvent e) {
         Dimension d = UIWindowSingleton.getInstance().getSize();
-        Dimension minD = UIWindowSingleton.getInstance().getMinimumSize();
+        Dimension minD = this.minimumSize;
         if(d.width<minD.width)
             d.width=minD.width;
         if(d.height<minD.height)
