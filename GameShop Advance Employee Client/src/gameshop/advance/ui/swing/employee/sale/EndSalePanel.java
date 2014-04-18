@@ -26,9 +26,12 @@ import javax.swing.SwingConstants;
 
 
 /**
+ * Schermata mostrata al termine della vendita.Mostra il resto dovuto.Permette di cominciare una nuova 
+ * vendita o di tornare al menu.
  * @author Matteo Gentile
  */
 public class EndSalePanel extends JPanel {
+    
     public EndSalePanel() {
         initComponents();
         try {

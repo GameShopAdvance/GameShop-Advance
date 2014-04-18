@@ -33,9 +33,12 @@ import javax.swing.ListModel;
 import javax.swing.border.TitledBorder;
 
 /**
+ * Schermata del pagamento di una prenotazione.E' permesso il pagamento completo dell'operazione, o dell'acconto 
+ * della stessa.
  * @author Matteo Gentile
  */
 public class PaymentPanel extends JPanel {
+    
     private final String name = "Payment Panel";
     private IPopActionListener listener;
     
@@ -49,6 +52,9 @@ public class PaymentPanel extends JPanel {
         return this.name;
     }
     
+    /**
+     * @param listener
+     */
     public void setListener(IPopActionListener listener){
         this.listener = listener;
     }

@@ -33,6 +33,7 @@ import javax.swing.ScrollPaneConstants;
 import javax.swing.SwingConstants;
 
 /**
+ * Schermata per il pagamento della vendita.Mostra il riepilogo degli oggetti acquistati, e il totale da pagare.
  * @author Andrea
  */
 public class PaymentPanel extends JPanel implements IListPanel {

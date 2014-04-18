@@ -15,7 +15,8 @@ import javax.swing.event.ListDataEvent;
 import javax.swing.event.ListDataListener;
 
 /**
- *
+ * Classe che gestisce sotto forma di hashmap i vari prodotti che verranno aggiunti dalla schermata 
+ * dell'inventario.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class InventoryListModel implements ListModel<AggiuntaProdotti>{
@@ -33,15 +34,23 @@ public class InventoryListModel implements ListModel<AggiuntaProdotti>{
             return this.inventory.size();
     }
 
+
     public void clear(){
         this.inventory.clear();
     }
     
+    /**
+     * @param head
+     */
     public void setHeader(boolean head)
     {
         this.header = head;
     }
     
+    /**
+     * @param code
+     * @param aggiunta
+     */
     public void addElement(String code, AggiuntaProdotti aggiunta)
     {
         if(!this.inventory.containsKey(code))
@@ -49,6 +58,10 @@ public class InventoryListModel implements ListModel<AggiuntaProdotti>{
         this.fireContentsChanged(0, this.inventory.size()-1);
     }
 
+    /**
+     * @param code
+     * @throws RemoteException
+     */
     public void remove(String code) throws RemoteException
     {
         this.inventory.remove(code);
@@ -71,6 +84,9 @@ public class InventoryListModel implements ListModel<AggiuntaProdotti>{
         this.listeners.add(l);
     }
     
+    /**
+     * @return
+     */
     public ListDataListener[] getListDataListeners(){
         return (ListDataListener[]) this.listeners.toArray();
     }
@@ -80,6 +96,10 @@ public class InventoryListModel implements ListModel<AggiuntaProdotti>{
         this.listeners.remove(l);
     }  
 
+    /**
+     * @param index0
+     * @param index1
+     */
     protected void fireIntervalAdded(int index0, int index1)
     {
         if(this.listeners.size() > 0)
@@ -90,6 +110,11 @@ public class InventoryListModel implements ListModel<AggiuntaProdotti>{
         }
     }
     
+    /**
+     * @param source
+     * @param index0
+     * @param index1
+     */
     protected void fireIntervalRemoved(Object source, int index0, int index1)
     {
         if(this.listeners.size() > 0)
@@ -100,6 +125,10 @@ public class InventoryListModel implements ListModel<AggiuntaProdotti>{
         }
     }
     
+    /**
+     * @param index0
+     * @param index1
+     */
     protected void fireContentsChanged(int index0, int index1)
     {
         if(this.listeners.size() > 0)
@@ -110,6 +139,10 @@ public class InventoryListModel implements ListModel<AggiuntaProdotti>{
         }
     }
 
+    /**
+     * @param codice
+     * @return
+     */
     public AggiuntaProdotti getElement(String codice) {
         return this.inventory.get(codice);
     }

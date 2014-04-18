@@ -24,9 +24,13 @@ import javax.swing.JTextField;
 import javax.swing.SwingConstants;
 
 /**
+ * Schermata mostrata al termine del pagamento di una prenotazione.Mostra il risultato dell'operazione e il resto
+ * dovuto.
  * @author Matteo Gentile
  */
 public class EndBookPanel extends JPanel {
+    
+
     public EndBookPanel() {
         initComponents();
         try {

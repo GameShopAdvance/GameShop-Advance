@@ -10,7 +10,7 @@ import java.awt.Color;
 import java.awt.Font;
 
 /**
- *
+ * Classe che definisce lo stile degli elementi delle varie schermate.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class UIStyleSingleton {

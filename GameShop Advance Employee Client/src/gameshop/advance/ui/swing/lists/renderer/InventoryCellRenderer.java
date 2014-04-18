@@ -19,7 +19,8 @@ import javax.swing.ListCellRenderer;
 import javax.swing.SwingConstants;
 
 /**
- * @author Pippo
+ * Layout associato ai vari prodotti nella lista dei prodotti aggiunti all'inventario del negozio.
+ * @author Salx
  */
 public class InventoryCellRenderer extends JPanel implements ListCellRenderer<AggiuntaProdotti> {
     

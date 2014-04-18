@@ -23,6 +23,7 @@ import javax.swing.JButton;
 import javax.swing.JPanel;
 
 /**
+ * Schermata principale del Client del commesso.Mostra tutte le operazioni che può effettuare il commesso.
  * @author Matteo Gentile
  */
 public class EmployeeMenuPanel extends JPanel {
