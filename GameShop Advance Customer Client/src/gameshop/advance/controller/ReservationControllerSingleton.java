@@ -38,7 +38,7 @@ import javax.swing.JComponent;
 import javax.swing.ListCellRenderer;
 
 /**
- *
+ * Classe Controller che si occupa della gestione delle prenotazioni sul client Customer.
  * @author Matteo Gentile
  */
 public class ReservationControllerSingleton extends UnicastRemoteObject implements IRemoteReservationClient, IRemoteBookClient{
@@ -60,7 +60,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     private boolean started = false;
     
     /**
-     *
+     * Costruttore di classe.
      * @throws RemoteException
      */
     public ReservationControllerSingleton() throws RemoteException {
@@ -70,8 +70,15 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         this.listaPrenotati.setHeader(true);
     }
     
-     private void configure() throws ConfigurationException, RemoteException, NotBoundException 
-     {    
+    /**
+     * Metodo che si occupa della configurazione degli attributi di classe e della comunicazione RMI.
+     * @return
+     * @throws ConfigurationException
+     * @throws RemoteException
+     * @throws NotBoundException
+     */
+    private void configure() throws ConfigurationException, RemoteException, NotBoundException 
+    {    
         ConfigurationControllerSingleton controllerConfig = ConfigurationControllerSingleton.getInstance();
         Registry reg = LocateRegistry.getRegistry(controllerConfig.getServerAddress(), controllerConfig.getServerPort());
         IRemoteFactory factory = (IRemoteFactory) reg.lookup("RemoteFactory");
@@ -83,7 +90,7 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     }
     
     /**
-     *
+     * Metodo che ritorna l'istanza della classe Singleton.
      * @return
      * @throws NullPointerException
      * @throws RemoteException
@@ -111,7 +118,9 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         UIWindowSingleton.getInstance().refreshContent();
     }
 
-    
+    /**
+     * @throws RemoteException
+     */
     public void avviaPrenotazione() throws RemoteException 
     {
        ProductsPanel panel = new ProductsPanel();
@@ -120,6 +129,9 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
        this.aggiornaWindow(panel);
     }
 
+    /**
+     * @throws RemoteException
+     */
     public void cancellaPrenotazione() throws RemoteException 
     {
         this.controller.cancellaPrenotazione();
@@ -129,6 +141,12 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         this.acconto = new Money();
     }
 
+    /**
+     * @param desc
+     * @param quantity
+     * @throws RemoteException
+     * @throws ProdottoNotFoundException
+     */
     public void inserisciProdotto(IDescrizioneProdottoRemote desc, int quantity) throws RemoteException, ProdottoNotFoundException 
     {
         if(!this.started)
@@ -143,9 +161,9 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         this.controller.prenotaProdotto(codiceProdotto, quantity);
     }
 
-    /** Metodo che si occupa di prendere dalla tabella dei prodotti disponibili per la prenotazione
-     *  quelli selezionati e le rispettive quantità e richiede al controller di aggiungerli alla prenotazione.
-     *
+    /** 
+     * Metodo che si occupa di prendere dalla tabella dei prodotti disponibili per la prenotazione
+     * quelli selezionati e le rispettive quantità e richiede al controller di aggiungerli alla prenotazione.
      * @throws RemoteException
      */
     public void completaPrenotazione() throws RemoteException 
@@ -157,8 +175,8 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         this.listaPrenotati.clear();
     }
 
-    /** Aggiorna l'id della prenotazione una volta che questa è terminata
-     *
+    /** 
+     * Aggiorna l'id della prenotazione una volta che questa è terminata
      * @param id
      * @throws RemoteException
      */
@@ -166,7 +184,12 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
     public void aggiornaIdPrenotazione(int id) throws RemoteException {
         this.idPrenotazione = id;
     }
-
+    
+    
+    /** 
+     * @param iter
+     * @throws RemoteException
+     */
     @Override
     public void aggiornaListaProdotti(IIteratorWrapperRemote<IRigaDiTransazioneRemote> iter) throws RemoteException {
         while(iter.hasNext())
@@ -175,37 +198,61 @@ public class ReservationControllerSingleton extends UnicastRemoteObject implemen
         }
     }
 
+    /** 
+     * @param ammontare
+     * @throws RemoteException
+     */
     @Override
     public void aggiornaAcconto(Money ammontare) throws RemoteException {
         this.acconto = ammontare;
     }
 
+    /** 
+     * @param m
+     * @throws RemoteException
+     */
     @Override
     public void aggiornaTotale(Money m) throws RemoteException {
         System.err.println("Totale: "+m.toString());
         this.totale = m;
     }
 
+    /** 
+     * @param m
+     * @throws RemoteException
+     */
     @Override
     public void aggiornaResto(Money m) throws RemoteException {
         
     }
-    
+
+    /**
+     * @return
+     */
     public Integer getID()
     {
         return this.idPrenotazione;
     }
     
+    /**
+     * @return
+     */
     public Money getTotal()
     {
         return this.totale;
     }
     
+    /**
+     * @return
+     */
     public Money getPartial()
     {
         return this.acconto;
     }
 
+    /**
+     * @param panel
+     */
     public void setReservationList(IListPanel panel)
     {
         ListCellRenderer renderer = new BookCellRenderer();

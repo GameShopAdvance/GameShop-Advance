@@ -17,7 +17,6 @@ import java.rmi.RemoteException;
 public interface IRemoteObserver extends Remote {
 
     /**
-     *
      * @param o
      * @throws RemoteException
      */

@@ -12,14 +12,26 @@ import java.rmi.Remote;
 import java.rmi.RemoteException;
 
 /**
- *
+ * Interfaccia remota per l'esportazione RMI delle righe di transazione.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IRigaDiTransazioneRemote extends Remote{
 
+    /**
+     * @return
+     * @throws RemoteException
+     */
     IDescrizioneProdottoRemote getDescrizione() throws RemoteException;
 
+    /**
+     * @return
+     * @throws RemoteException
+     */
     int getQuantity() throws RemoteException;
     
+    /**
+     * @return
+     * @throws RemoteException
+     */
     Money getSubTotal() throws RemoteException;
 }

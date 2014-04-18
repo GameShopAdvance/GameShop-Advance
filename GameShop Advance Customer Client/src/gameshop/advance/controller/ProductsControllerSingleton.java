@@ -8,13 +8,13 @@ package gameshop.advance.controller;
 
 import gameshop.advance.config.ConfigurationControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
+import gameshop.advance.interfaces.IListPanel;
 import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import gameshop.advance.interfaces.remote.factory.IProdottiRemote;
 import gameshop.advance.interfaces.remote.factory.IRemoteFactory;
 import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
-import gameshop.advance.interfaces.IListPanel;
-import gameshop.advance.ui.swing.lists.renderer.ProductCellRenderer;
 import gameshop.advance.ui.swing.lists.models.ProductListModel;
+import gameshop.advance.ui.swing.lists.renderer.ProductCellRenderer;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
 import java.rmi.registry.LocateRegistry;
@@ -23,7 +23,7 @@ import java.util.logging.Level;
 import java.util.logging.Logger;
 
 /**
- *
+ * Classe Controller che si occupa della gestione dei prodotti sul client Customer.
  * @author Lorenzo Di Giuseppe
  */
 public class ProductsControllerSingleton
@@ -37,6 +37,12 @@ public class ProductsControllerSingleton
         this.listaDescrizioni = new ProductListModel();
     }
     
+    /**
+     * Metodo che si occupa della configurazione degli attributi di classe e della comunicazione RMI.
+     * @throws ConfigurationException
+     * @throws RemoteException
+     * @throws NotBoundException
+     */
     private void configure() throws ConfigurationException, RemoteException, NotBoundException 
      {    
         ConfigurationControllerSingleton controllerConfig = ConfigurationControllerSingleton.getInstance();
@@ -46,6 +52,11 @@ public class ProductsControllerSingleton
         this.aggiornaDescrizioni();
     }
     
+    /**
+     * Metodo che ritorna l'istanza della classe Singleton.
+     * @return
+     * @throws RemoteException
+     */
     public static ProductsControllerSingleton getInstance() throws RemoteException
     {
         if(instance==null)
@@ -65,22 +76,32 @@ public class ProductsControllerSingleton
         return instance;
     }
     
+    /**
+     * @param panel
+     */
     public void setDescriptions(IListPanel panel)
     {
         panel.setList(this.listaDescrizioni, new ProductCellRenderer());
     }
     
+    /**
+     * @param index
+     * @return
+     */
     public IDescrizioneProdottoRemote getProduct(int index){
         return this.listaDescrizioni.getElementAt(index);
     }
     
+    /**
+     * Aggiorna la lista di descrizioni prodotto che ha come attributo.
+     * @throws RemoteException
+     */
     public void aggiornaDescrizioni() throws RemoteException
     {
         IIteratorWrapperRemote<IDescrizioneProdottoRemote> iter = this.controller.getDescrizioni();
         while(iter.hasNext())
         {
             IDescrizioneProdottoRemote desc = iter.next();
-            System.err.println("Descrizione: "+desc.getNomeProdotto());
             this.listaDescrizioni.addElement(desc);
         }
     }

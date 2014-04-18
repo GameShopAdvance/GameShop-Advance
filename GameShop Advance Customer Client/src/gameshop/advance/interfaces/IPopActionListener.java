@@ -10,7 +10,8 @@ import java.awt.event.ActionListener;
 import javax.swing.JPanel;
 
 /**
- *
+ * Classe Interfaccia che si occupa della gestione dello spostamento tra le varie schermata all'interno del 
+ * terminale Customer.
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public interface IPopActionListener extends ActionListener {

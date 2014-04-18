@@ -18,8 +18,8 @@ public class Money implements Serializable{
     
     private long cents;
     private Currency currency;
-    
-    
+
+
     public Money() 
     {   
         this(0.00);

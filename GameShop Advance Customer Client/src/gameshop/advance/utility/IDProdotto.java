@@ -6,7 +6,7 @@ import java.io.Serializable;
 import java.util.Objects;
 
 /**
- * Classe da estendere in un periodo successivo
+ * Classe che rappresenta i codici univoci dei prodotti.
  * @author loki
  */
 public class IDProdotto implements Serializable{
@@ -17,7 +17,6 @@ public class IDProdotto implements Serializable{
     }
     
     /**
-     *
      * @return
      */
     @Override
@@ -26,6 +25,10 @@ public class IDProdotto implements Serializable{
         return this.codice;
     }
 
+    /**
+     * @param obj
+     * @return
+     */
     @Override
     public boolean equals(Object obj) {
         if (obj == null) {
@@ -41,6 +44,9 @@ public class IDProdotto implements Serializable{
         return true;
     }
 
+    /**
+     * @return
+     */
     @Override
     public int hashCode() {
         int hash = 7;
@@ -49,10 +55,16 @@ public class IDProdotto implements Serializable{
         return hash;
     }
     
+    /**
+     * @param codice
+     */
     public void setCodice(String codice) {
         this.codice = codice;
     }
     
+    /**
+     * @param id
+     */
     public IDProdotto(String id)
     {
         this.codice = id;

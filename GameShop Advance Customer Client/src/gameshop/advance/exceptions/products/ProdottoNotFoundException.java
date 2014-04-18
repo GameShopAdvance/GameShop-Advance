@@ -10,23 +10,25 @@ import gameshop.advance.utility.IDProdotto;
 
 
 /**
- * Classe che gestisce le estensioni riguardanti i prodotti non trovati
- * dopo l'imput del codice del prodotto.
+ * Classe che gestisce le eccezioni riguardanti i prodotti non trovati
+ * dopo l'input del codice del prodotto.
  * @author matteog
  */
 public class ProdottoNotFoundException extends Exception {
     
     private IDProdotto codice;
-  
-   
+
+    /**
+     * @param codice
+     */
     public ProdottoNotFoundException(IDProdotto codice)
     {
      this.codice = codice;
     }
 
     /**
-    * @return  l'id del prodotto.
-    */
+     * @return  l'id del prodotto.
+     */
     public IDProdotto getCodice()
     {
         return codice;
