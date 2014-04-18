@@ -18,6 +18,7 @@ import gameshop.advance.exceptions.products.ProdottoNotFoundException;
 import gameshop.advance.exceptions.products.QuantityNotInStockException;
 import gameshop.advance.exceptions.sales.AlreadyPartialPayedException;
 import gameshop.advance.exceptions.sales.AlreadyPayedException;
+import gameshop.advance.exceptions.sales.ClientNotFoundException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import java.rmi.NotBoundException;
 import java.rmi.RemoteException;
@@ -152,6 +153,11 @@ public class ExceptionHandlerSingleton {
         return "L'oggetto richiesto non esiste.";
     }
     
+    /**
+     *
+     * @param ex
+     * @return
+     */
     public String getMessage(SaleNotFoundDbException ex){
         return "La vendita che si stava cercando non esiste. "
                 + "Controllare l'identificativo inserito. ";
@@ -164,6 +170,15 @@ public class ExceptionHandlerSingleton {
     public String getMessage(AlreadyPartialPayedException ex){
         return "Ci spiace, ma è già stato versato un acconto. "
                 + "Si prega di saldare il totale per completare la prenotazione.";
+    }
+    
+    public String getMessage(NumberFormatException ex){
+        return "Si prega di inserire un numero valido.";
+    }
+    
+    public String getMessage(ClientNotFoundException ex){
+        return "Il numero di carta cliente "+ex.getCodiceTessera()+" non sembra essere valido. "
+               + "Si prega di provare una carta differente o di contattare l'amministratore di sistema.";
     }
     
     public String getMessage(Exception ex){

@@ -55,7 +55,8 @@ public class InventoryPanel extends JPanel implements IListPanel {
             catch(NumberFormatException ex)
             {
                 if(!this.quantitaProdotto.getText().equals(""))
-                    UIWindowSingleton.getInstance().displayError("Il formato di dato inserito per la quantità non è valido");
+                    UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+                LoggerSingleton.getInstance().log(ex);
             }
             
             InventoryControllerSingleton.getInstance().inserisciProdotto(this.codiceProdotto.getText(), quantity);

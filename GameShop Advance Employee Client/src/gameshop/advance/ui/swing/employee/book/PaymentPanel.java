@@ -10,6 +10,7 @@ import com.jgoodies.forms.layout.FormLayout;
 import gameshop.advance.controller.BookControllerSingleton;
 import gameshop.advance.exceptions.ConfigurationException;
 import gameshop.advance.exceptions.InvalidMoneyException;
+import gameshop.advance.exceptions.sales.AlreadyPartialPayedException;
 import gameshop.advance.exceptions.sales.AlreadyPayedException;
 import gameshop.advance.exceptions.sales.InvalidSaleState;
 import gameshop.advance.interfaces.IPopActionListener;
@@ -140,6 +141,10 @@ public class PaymentPanel extends JPanel {
             LoggerSingleton.getInstance().log(ex);
         }
         catch (InvalidMoneyException ex) {
+            UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
+            LoggerSingleton.getInstance().log(ex);
+        }
+        catch (AlreadyPartialPayedException ex) {
             UIWindowSingleton.getInstance().displayError(ExceptionHandlerSingleton.getInstance().getMessage(ex));
             LoggerSingleton.getInstance().log(ex);
         }
