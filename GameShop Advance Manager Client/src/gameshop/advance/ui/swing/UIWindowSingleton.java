@@ -53,11 +53,10 @@ public class UIWindowSingleton extends JFrame {
 
     private void thisComponentResized(ComponentEvent e) {
         Dimension d = UIWindowSingleton.getInstance().getSize();
-        Dimension minD = this.minimumSize;
-        if(d.width<minD.width)
-            d.width=minD.width;
-        if(d.height<minD.height)
-            d.height=minD.height;
+        if(d.width < this.minimumSize.width)
+            d.width=this.minimumSize.width;
+        if(d.height<this.minimumSize.height)
+            d.height = this.minimumSize.height;
         UIWindowSingleton.getInstance().setSize(d);
     }
 
