@@ -7,8 +7,9 @@
 package gameshop.advance.exceptions.db;
 
 /**
- * Classe che gestisce le eccezioni dell'assenza di un oggetto nel db.
- * @author matteog
+ * Classe Eccezione che gestisce errori relativi alla non esistenza di oggetti persistenti
+ *
+ * @author Matteo Gentile
  */
 public class ObjectNotExistsDbException extends Exception{
     

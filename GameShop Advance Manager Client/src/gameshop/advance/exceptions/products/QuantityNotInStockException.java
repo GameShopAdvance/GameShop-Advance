@@ -10,19 +10,20 @@ import gameshop.advance.interfaces.remote.IDescrizioneProdottoRemote;
 import java.rmi.RemoteException;
 
 /**
- * Classe che gestisce le eccezioni riguardanti la richiesta di un numero di prodotti
- * non presenti all'interno del negozio.
+ * Classe che gestisce le eccezioni riguardanti i prodotti non presenti in inventario
+
+ *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class QuantityNotInStockException extends Exception{
+public class QuantityNotInStockException extends Exception {
     
     private final int disponibili;
     private final String nome;
-
+    
     /**
      * @param desc
-     * @throws RemoteException
-     */
+     * @throws java.rmi.RemoteException
+    */
     public QuantityNotInStockException(IDescrizioneProdottoRemote desc) throws RemoteException
     {
         this.disponibili = desc.getQuantitaDisponibile();
@@ -34,6 +35,6 @@ public class QuantityNotInStockException extends Exception{
     */
     @Override
     public String getMessage() {
-        return "Sono disponibili"+ this.disponibili +" unità di "+this.nome;
+        return "Sono disponibili "+ this.disponibili +" unità di "+this.nome;
     }
 }

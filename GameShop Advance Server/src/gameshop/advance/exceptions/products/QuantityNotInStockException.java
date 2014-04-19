@@ -15,7 +15,7 @@ import java.rmi.RemoteException;
  *
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
-public class QuantityNotInStockException extends Exception{
+public class QuantityNotInStockException extends Exception {
     
     private final int disponibili;
     private final String nome;
@@ -35,6 +35,6 @@ public class QuantityNotInStockException extends Exception{
     */
     @Override
     public String getMessage() {
-        return "Sono disponibili"+ this.disponibili +" unità di "+this.nome;
+        return "Sono disponibili "+ this.disponibili +" unità di "+this.nome;
     }
 }

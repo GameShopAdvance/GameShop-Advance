@@ -7,29 +7,30 @@
 package gameshop.advance.exceptions;
 
 /**
- * Classe che gestisce le eccezioni riguardanti la quantità dei prodotti acquistati.
- * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
+ * Classe che gestisce le eccezioni riguardanti le quantità di prodotto che si stanno acquistando.
+ * 
+ * @author Matteo Gentile
  */
 public class QuantityException extends Exception {
     private int quantity;
-        
     /**
-     * @param message
-     */
+    * 
+    * @param message
+    */
     public QuantityException(String message) {
         super(message);
     }
-    
-    /**
-     * @param quantity
-     */
+  /**
+    * 
+    * @param quantity
+    */
     public QuantityException(int quantity) {
         this.quantity = quantity;
     }
-    
-    /**
-     * @return
-     */
+  /**
+    * 
+    * @return La quantità inserita che ha generato l'errore
+    */
     public int getQuantity(){
     return quantity;}
     

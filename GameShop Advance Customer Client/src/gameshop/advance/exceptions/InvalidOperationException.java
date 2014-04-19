@@ -7,7 +7,8 @@
 package gameshop.advance.exceptions;
 
 /**
- * Classe che gestisce le eccezioni delle operazioni non consentite.
+ * Classe che gestisce le eccezioni relative a operazioni non valide 
+ * 
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class InvalidOperationException extends Exception {
