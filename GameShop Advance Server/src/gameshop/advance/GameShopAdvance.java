@@ -9,6 +9,7 @@ package gameshop.advance;
 import gameshop.advance.exceptions.db.ObjectAlreadyExistsDbException;
 import gameshop.advance.interfaces.remote.factory.IRemoteFactory;
 import gameshop.advance.remote.RemoteFactorySingleton;
+import gameshop.advance.technicalservices.LoggerSingleton;
 import java.io.File;
 import java.net.MalformedURLException;
 import java.rmi.Naming;
@@ -44,11 +45,8 @@ public class GameShopAdvance {
             System.err.println("Server registry: "+LocateRegistry.getRegistry());
             IRemoteFactory factory = (IRemoteFactory) RemoteFactorySingleton.getIstance();
             Naming.rebind("RemoteFactory", factory);
-        } catch (RemoteException | MalformedURLException ex) {
-            Logger.getLogger(GameShopAdvance.class.getName()).log(Level.SEVERE, null, ex);
-        }
-        catch (ObjectAlreadyExistsDbException ex) {
-            Logger.getLogger(GameShopAdvance.class.getName()).log(Level.SEVERE, null, ex);
+        } catch (RemoteException | MalformedURLException | ObjectAlreadyExistsDbException ex) {
+            LoggerSingleton.getInstance().log(ex);
         }
     }
     
