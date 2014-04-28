@@ -70,7 +70,7 @@ public class UIWindowSingleton extends JFrame {
         mainPanel = new JScrollPane();
 
         //======== this ========
-        setTitle("GameShop Advance - Terminale Cliente");
+        setTitle("GameShop Advance - Terminale Manager");
         setMinimumSize(new Dimension(920, 480));
         setName("this");
         addComponentListener(new ComponentAdapter() {
