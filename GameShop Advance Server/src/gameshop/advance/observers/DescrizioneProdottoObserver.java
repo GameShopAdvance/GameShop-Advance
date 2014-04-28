@@ -27,7 +27,7 @@ public class DescrizioneProdottoObserver implements IObserver {
     public void notifica(Object o) {
         
         DescrizioneProdotto desc = (DescrizioneProdotto) o;
-        if (desc.sottoSoglia()){
+        if(desc.sottoSoglia()){
             try {
                 ManagerProdottiSingleton.getInstance().addDescrizione(desc);
             } catch (QuantityException ex) {

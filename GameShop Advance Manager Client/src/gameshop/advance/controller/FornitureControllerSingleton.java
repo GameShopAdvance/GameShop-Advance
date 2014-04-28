@@ -40,7 +40,7 @@ public class FornitureControllerSingleton extends UnicastRemoteObject implements
     private static FornitureControllerSingleton instance;
     private IFornitureControllerRemote controller;
     
-    private FornitureListModel listaForniture;
+    private final FornitureListModel listaForniture;
     private IRemoteObserver informationListener;
     private IRemoteObserver informationRemovedListener;
     

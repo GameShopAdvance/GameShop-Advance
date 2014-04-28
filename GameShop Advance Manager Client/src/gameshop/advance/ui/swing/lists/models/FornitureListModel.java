@@ -65,8 +65,10 @@ public class FornitureListModel implements ListModel<IInformazioniProdottoRemote
     {
         String code = info.getDescrizione().getCodiceProdotto().getCodice();
         if(!this.informazioni.containsKey(code))
+        {
             this.informazioni.put(code, info);
-        this.fireContentsChanged(0, this.informazioni.size()-1);
+            this.fireContentsChanged(0, this.informazioni.size()-1);
+        }
     }
     
     /**

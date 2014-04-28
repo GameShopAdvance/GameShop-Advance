@@ -124,6 +124,7 @@ public class InventoryControllerSingleton extends UnicastRemoteObject implements
     {
         this.controller.rimuoviListener(this.observer);
         this.controller.terminaInventario();
+        this.listaProdotti.clear();
         this.aggiornaWindow(new EmployeeMenuPanel());
     }
 

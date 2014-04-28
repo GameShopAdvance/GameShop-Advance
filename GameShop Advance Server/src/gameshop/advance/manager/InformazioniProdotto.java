@@ -55,7 +55,7 @@ public class InformazioniProdotto extends UnicastRemoteObject implements IInform
     }
 
     @Override
-    public int getPrenotati() {
+    public int getPrenotati() throws RemoteException {
         return prenotati;
     }
 
@@ -67,7 +67,7 @@ public class InformazioniProdotto extends UnicastRemoteObject implements IInform
     }
 
     @Override
-    public int getOrdinati() {
+    public int getOrdinati() throws RemoteException {
         return ordinati;
     }
 

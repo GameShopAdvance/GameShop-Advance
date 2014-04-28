@@ -78,6 +78,7 @@ public class Vendita implements ITransazione {
     protected void quantityCheck(IDescrizioneProdotto desc, int quantity) throws QuantityNotInStockException, RemoteException{
         if(desc.getQuantitaDisponibile() < quantity)
         {
+            System.err.println("Quantità disponibile: "+desc.getQuantitaDisponibile()+" richiesta: "+quantity);
             throw new QuantityNotInStockException(desc);
         }
         else

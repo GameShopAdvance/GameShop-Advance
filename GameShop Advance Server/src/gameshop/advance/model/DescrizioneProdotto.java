@@ -182,6 +182,7 @@ public class DescrizioneProdotto implements IDescrizioneProdotto
     @Override
     public synchronized void addQuantitaDisponibile(int quantity){
         this.quantitaDisponibile = new Integer(this.quantitaDisponibile.intValue() + quantity);
+        this.notifica();
     }
    
     private Prezzo getPrezzoAttuale() {

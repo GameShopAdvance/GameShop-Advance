@@ -164,7 +164,7 @@ public class InfoCellRenderer extends JPanel implements ListCellRenderer<IInform
     // JFormDesigner - End of variables declaration  //GEN-END:variables
 
     @Override
-    public Component getListCellRendererComponent(JList<? extends IInformazioniProdottoRemote> list, IInformazioniProdottoRemote value, int index, boolean isSelected, boolean cellHasFocus) {
+    public Component getListCellRendererComponent(JList<? extends IInformazioniProdottoRemote> list, IInformazioniProdottoRemote value, int index, boolean isSelected, boolean cellHasFocus) {      
         try {
             this.title.setText(value.getDescrizione().getNomeProdotto());
         }
@@ -195,8 +195,7 @@ public class InfoCellRenderer extends JPanel implements ListCellRenderer<IInform
             LoggerSingleton.getInstance().log(ex);
             this.soglia.setText("???");
         }
-        
-        
+
         return this;
     }
 

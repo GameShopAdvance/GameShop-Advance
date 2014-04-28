@@ -17,9 +17,6 @@ import java.rmi.server.UnicastRemoteObject;
  * @author Lorenzo Di Giuseppe <lorenzo.digiuseppe88@gmail.com>
  */
 public class FornitureRemoveObserver extends UnicastRemoteObject implements IRemoteObserver {
-
-    
-    private int length = 0;
     private IRemoteFornitureClient client;
     
     /**

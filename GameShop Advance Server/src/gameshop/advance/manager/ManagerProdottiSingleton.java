@@ -45,6 +45,7 @@ public class ManagerProdottiSingleton {
     
     public void deleteDescrizione(IDescrizioneProdotto desc) throws QuantityException, RemoteException
     {
+        this.descrizioni.remove(desc);
         ManagerFornitureSingleton.getInstance().removeDescrizione(desc);
     }
      /**

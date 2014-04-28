@@ -136,8 +136,8 @@ public class ManagerFornitureSingleton {
         else{
             InformazioniProdotto ip = new InformazioniProdotto(desc);
             this.informazioni.put(desc.getCodiceProdotto().getCodice(), ip);
-            this.notificaListeners();
         }
+        this.notificaListeners();
     }
     /**
      *
@@ -146,6 +146,7 @@ public class ManagerFornitureSingleton {
      */
     public void removeDescrizione(IDescrizioneProdotto desc) throws RemoteException
     {
+        System.err.println("Rimuovi da manager "+desc.getNomeProdotto());
         if(this.informazioni.containsKey(desc.getCodiceProdotto().getCodice()))
         {
             InformazioniProdotto ip = (InformazioniProdotto) this.informazioni.get(desc.getCodiceProdotto().getCodice());
@@ -153,7 +154,6 @@ public class ManagerFornitureSingleton {
                 this.informazioni.remove(desc.getCodiceProdotto().getCodice());
             }
             this.notificaRemoveListeners(ip);
-            this.notificaListeners();
         }
     }
     
