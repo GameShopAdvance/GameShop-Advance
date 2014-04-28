@@ -77,6 +77,4 @@ public class InformazioniProdotto extends UnicastRemoteObject implements IInform
             throw new QuantityException(ordinati);
         this.ordinati = ordinati;
     }
-    
-    
 }

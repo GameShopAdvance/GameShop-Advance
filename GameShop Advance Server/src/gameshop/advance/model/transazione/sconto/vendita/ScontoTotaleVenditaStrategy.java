@@ -8,8 +8,8 @@ package gameshop.advance.model.transazione.sconto.vendita;
 
 import gameshop.advance.interfaces.IScontoVenditaStrategy;
 import gameshop.advance.interfaces.ITransazione;
-import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
 import gameshop.advance.interfaces.remote.sales.IRigaDiTransazioneRemote;
+import gameshop.advance.interfaces.remote.utility.IIteratorWrapperRemote;
 import gameshop.advance.utility.IntervalloDiTempo;
 import gameshop.advance.utility.Money;
 import java.rmi.RemoteException;
@@ -48,7 +48,10 @@ public class ScontoTotaleVenditaStrategy implements IScontoVenditaStrategy {
         {
             totale = totale.add(righe.next().getSubTotal());
         }
-        return totale.subtract(this.ammontare);
+        totale = totale.subtract(this.ammontare);
+        if(totale.greater(new Money()))
+            return totale;
+        return new Money();
     }
     
     @Override

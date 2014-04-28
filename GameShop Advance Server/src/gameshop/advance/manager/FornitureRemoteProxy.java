@@ -29,7 +29,7 @@ class FornitureRemoteProxy extends UnicastRemoteObject implements IFornitureMana
     /**
      * @throws RemoteException
      */
-    FornitureRemoteProxy(ManagerFornitureSingleton manager) throws RemoteException
+    public FornitureRemoteProxy(ManagerFornitureSingleton manager) throws RemoteException
     {
         this.manager = manager;
     }

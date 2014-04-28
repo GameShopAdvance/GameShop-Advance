@@ -71,21 +71,25 @@ public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto, Acti
 
     @Override
     public void addQuantitaDisponibile(int quantity) {
+        this.activate(ActivationPurpose.WRITE);
         this.descrizione.addQuantitaDisponibile(quantity);
     }
 
     @Override
     public void addSconti(List<IScontoProdottoStrategy> sconti) {
+        this.activate(ActivationPurpose.WRITE);
         this.descrizione.addSconti(sconti);
     }
 
     @Override
     public void addSconto(IScontoProdottoStrategy sconto) {
+        this.activate(ActivationPurpose.WRITE);
         this.descrizione.addSconto(sconto);
     }
 
     @Override
     public int getQuantitaDisponibile() {
+        this.activate(ActivationPurpose.READ);
         return this.descrizione.getQuantitaDisponibile();
     }
     
@@ -97,11 +101,13 @@ public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto, Acti
     
     @Override
     public int getQuantitaDiSoglia(){
+        this.activate(ActivationPurpose.READ);
         return this.descrizione.getQuantitaDiSoglia();
     }
     
     @Override
     public boolean sottoSoglia(){
+        this.activate(ActivationPurpose.READ);
         return this.descrizione.sottoSoglia();
     }
 
@@ -125,6 +131,7 @@ public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto, Acti
 
     @Override
     public void setDescrizione(String descrizione) {
+        this.activate(ActivationPurpose.WRITE);
         this.descrizione.setDescrizione(descrizione);
     }
 
@@ -136,6 +143,7 @@ public class DescrizioneProdottoSmartProxy implements IDescrizioneProdotto, Acti
 
     @Override
     public IRemoteImage getImmagine() throws RemoteException {
+        this.activate(ActivationPurpose.READ);
         return this.descrizione.getImmagine();
     }
 

@@ -103,10 +103,9 @@ public class DbDescrizioneProdottoSingleton {
             }
         });
         if(result.isEmpty())
-           return null;
+           return new ActivatableLinkedList<>();
         else{
             LinkedList<IDescrizioneProdotto> list = new ActivatableLinkedList<>(result);
-            client.ext().refresh(list, 15);
             return list;
         }
     }

@@ -37,8 +37,10 @@ public class AnalizzaFornitureController extends UnicastRemoteObject implements 
      */
     @Override
     public IIteratorWrapperRemote<IInformazioniProdottoRemote> getDatiForniture() throws RemoteException, QuantityException {
+        System.err.println("getDatiForniture");
         return new IteratorWrapper<>(ManagerFornitureSingleton.getInstance().getInformazioni());
     }
+    
     /** 
      *
      * @param obs

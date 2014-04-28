@@ -52,21 +52,25 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
      */
     @Override
     public void pagaAcconto(Money ammontare) throws RemoteException, InvalidMoneyException, InvalidSaleState, AlreadyPartialPayedException {
+        this.activate(ActivationPurpose.WRITE);
         this.prenotazione.pagaAcconto(ammontare);
     }
 
     @Override
     public void completaTransazione() throws RemoteException {
+        this.activate(ActivationPurpose.WRITE);
         this.prenotazione.completaTransazione();
     }
 
     @Override
     public void inserisciProdotto(IDescrizioneProdotto desc, int quantity) throws RemoteException, QuantityNotInStockException {
+        this.activate(ActivationPurpose.WRITE);
         this.prenotazione.inserisciProdotto(desc, quantity);
     }
 
     @Override
     public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException, InvalidSaleState, AlreadyPayedException {
+        this.activate(ActivationPurpose.WRITE);
         this.prenotazione.gestisciPagamento(ammontare);
     }
 
@@ -78,11 +82,13 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
 
     @Override
     public void setCliente(CartaCliente c) throws RemoteException {
+        this.activate(ActivationPurpose.WRITE);
         this.prenotazione.setCliente(c);
     }
 
     @Override
     public void setId(Integer idVendita) throws RemoteException {
+        this.activate(ActivationPurpose.WRITE);
         this.prenotazione.setId(idVendita);
     }
 
@@ -94,16 +100,19 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
 
     @Override
     public void addSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali) throws RemoteException {
+        this.activate(ActivationPurpose.WRITE);
         this.prenotazione.addSconti(scontiAttuali);
     }
 
     @Override
     public void setStrategiaSconto(ScontoVenditaStrategyComposite sconto) {
+        this.activate(ActivationPurpose.WRITE);
         this.prenotazione.setStrategiaSconto(sconto);
     }
 
     @Override
     public boolean isCompleted() {
+        this.activate(ActivationPurpose.READ);
         return this.prenotazione.isCompleted();
     }
 
@@ -125,11 +134,13 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
 
     @Override
     public Money getResto() throws InvalidMoneyException, RemoteException {
+        this.activate(ActivationPurpose.READ);
         return this.prenotazione.getResto();
     }
 
     @Override
     public IIteratorWrapperRemote<IRigaDiTransazioneRemote> getRigheDiVendita() throws RemoteException {
+        this.activate(ActivationPurpose.READ);
         return this.prenotazione.getRigheDiVendita();
     }
 
@@ -153,6 +164,7 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
 
     @Override
     public Money getRestoAcconto() throws RemoteException {
+        this.activate(ActivationPurpose.READ);
         return this.prenotazione.getRestoAcconto();
     }
 
@@ -176,6 +188,7 @@ public class PrenotazioneSmartProxy implements IPrenotazione, Activatable {
 
     @Override
     public void evadi() {
+        this.activate(ActivationPurpose.WRITE);
         this.prenotazione.evadi();
     }
 

@@ -43,16 +43,19 @@ public class TransazioneSmartProxy implements ITransazione, Activatable{
     
     @Override
     public void completaTransazione() throws RemoteException {
+        this.activate(ActivationPurpose.WRITE);
         this.trans.completaTransazione();
     }
 
     @Override
     public void inserisciProdotto(IDescrizioneProdotto desc, int quantity) throws RemoteException, QuantityNotInStockException {
+        this.activate(ActivationPurpose.WRITE);
         this.trans.inserisciProdotto(desc, quantity);
     }
 
     @Override
     public void gestisciPagamento(Money ammontare) throws InvalidMoneyException, RemoteException, InvalidSaleState, AlreadyPayedException {
+        this.activate(ActivationPurpose.WRITE);
         this.trans.gestisciPagamento(ammontare);
     }
 
@@ -64,32 +67,38 @@ public class TransazioneSmartProxy implements ITransazione, Activatable{
 
     @Override
     public void setCliente(CartaCliente c) throws RemoteException {
+        this.activate(ActivationPurpose.WRITE);
         this.trans.setCliente(c);
     }
 
     @Override
     public void setId(Integer idVendita) throws RemoteException {
+       this.activate(ActivationPurpose.WRITE);
        this.trans.setId(idVendita);
     }
 
     @Override
     public Money getPagamento() {
+        this.activate(ActivationPurpose.READ);
         return this.trans.getPagamento();
     }
 
     @Override
     public void addSconti(LinkedList<IScontoVenditaStrategy> scontiAttuali) throws RemoteException {
+        this.activate(ActivationPurpose.WRITE);
         this.trans.addSconti(scontiAttuali);
     }
 
     @Override
     public void setStrategiaSconto(ScontoVenditaStrategyComposite sconto) {
+        this.activate(ActivationPurpose.WRITE);
         this.trans.setStrategiaSconto(sconto);
     }
 
     @Override
     public boolean isCompleted() {
-            return this.isCompleted();
+        this.activate(ActivationPurpose.READ);
+        return this.isCompleted();
     }
 
     @Override
@@ -110,19 +119,19 @@ public class TransazioneSmartProxy implements ITransazione, Activatable{
 
     @Override
     public Money getResto() throws InvalidMoneyException, RemoteException {
-         activate(ActivationPurpose.READ);
+        activate(ActivationPurpose.READ);
         return this.getResto();
     }
 
     @Override
     public IIteratorWrapperRemote<IRigaDiTransazioneRemote> getRigheDiVendita() throws RemoteException {
-         activate(ActivationPurpose.READ);
+        activate(ActivationPurpose.READ);
         return this.trans.getRigheDiVendita();
     }
 
     @Override
     public Money getTotal() throws RemoteException {
-         activate(ActivationPurpose.READ);
+        activate(ActivationPurpose.READ);
         return this.trans.getTotal();
     }
 
@@ -155,4 +164,4 @@ public class TransazioneSmartProxy implements ITransazione, Activatable{
         this.trans.annulla();
     }
         
-    }
+}

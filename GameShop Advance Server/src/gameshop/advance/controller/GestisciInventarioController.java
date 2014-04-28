@@ -111,7 +111,7 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
      */
     @Override
     public void cancel() throws RemoteException{
-        
+        this.descrizioni.clear();
     }
      /**
      * Chiude l'inventario e salva le modifiche
@@ -128,7 +128,7 @@ public class GestisciInventarioController extends UnicastRemoteObject implements
                 throw ex;
             }
         }
-        this.descrizioni = null;
+        this.descrizioni.clear();
     }
 
     

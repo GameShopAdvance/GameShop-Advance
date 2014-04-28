@@ -76,12 +76,14 @@ public class FornitureListModel implements ListModel<IInformazioniProdottoRemote
     public void remove(IInformazioniProdottoRemote riga) throws RemoteException
     {
         String code = riga.getDescrizione().getCodiceProdotto().getCodice();
+        System.err.println("Remove "+code);
         this.informazioni.remove(code);
         this.fireContentsChanged(0, this.informazioni.size()-1);
     }
     
     /**
      * @param index
+     * @return 
      */
     @Override
     public IInformazioniProdottoRemote getElementAt(int index) {

@@ -18,7 +18,6 @@ import gameshop.advance.technicalservices.ExceptionHandlerSingleton;
 import gameshop.advance.technicalservices.LoggerSingleton;
 import gameshop.advance.ui.swing.UIWindowSingleton;
 import gameshop.advance.ui.swing.factory.UIFactory;
-import gameshop.advance.ui.swing.utility.UIStyleSingleton;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 import java.rmi.NotBoundException;
@@ -38,12 +37,8 @@ import javax.swing.ListModel;
  */
 public class InventoryPanel extends JPanel implements IListPanel {
         
-    private final String[] columnNames = {"id", "descrizione", "quantità aggiunta"};
-    
     public InventoryPanel() {
         initComponents();
-        this.cancelButton.setBackground(UIStyleSingleton.getInstance().getAlertColor());
-        this.cancelButton.setForeground(UIStyleSingleton.getInstance().getButtonTextColor());
     }
 
     private void aggiungiProdotto(ActionEvent e) {

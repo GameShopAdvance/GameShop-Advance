@@ -110,6 +110,7 @@ public class ManagerFornitureSingleton {
      */
     public void aggiornaDescrizioni(List<IDescrizioneProdotto> descrizioni) throws RemoteException
     {   
+        System.err.println("Descrizioni forniture: "+descrizioni.size());
         if(descrizioni != null && !descrizioni.isEmpty())
         {
             Iterator<IDescrizioneProdotto> iter = descrizioni.iterator();
