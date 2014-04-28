@@ -94,7 +94,7 @@ public class DbPrenotazioneSingleton {
                         if(candidate.getClass() != PrenotazioneSmartProxy.class)
                             return false;
                         else
-                           return !candidate.getEvasa();
+                           return !candidate.getEvasa() && candidate.isCompleted();
                     }
                 },
                 new QueryComparator()
