@@ -77,23 +77,23 @@ class DbInitializeSingleton {
     
     protected void initializeDescrizioni() throws RemoteException{
         descrizioni.add(new DescrizioneProdotto(new IDProdotto("ab1"), 
-                new Prezzo(new Money(39.98), this.time1), "Angry Birds: Star Wars", 
-                this.lorem, "angryBirds.jpg", 15, 4));
+                new Prezzo(new Money(29.98), this.time1), "Half Life 2", 
+                this.lorem, "ab1.jpg", 4, 2));
         descrizioni.add(new DescrizioneProdotto(new IDProdotto("ab2"), 
-                new Prezzo(new Money(30.98), this.time1), "Call of Duty 4: Modern Warfare", 
-                this.lorem, "cod4.jpg", 7, 3));
+                new Prezzo(new Money(19.99), this.time1), "Enemy Territory: Quake Wars", 
+                this.lorem, "ab2.jpg", 2, 0));
         descrizioni.add(new DescrizioneProdotto(new IDProdotto("ab3"), 
-                new Prezzo(new Money(40.98), this.time1), "Diablo 3", 
-                this.lorem, "diablo.jpg", 6, 9));
+                new Prezzo(new Money(40.98), this.time1), "Diablo 2", 
+                this.lorem, "ab3.jpg", 3, 0));
         descrizioni.add(new DescrizioneProdotto(new IDProdotto("ab4"), 
-                new Prezzo(new Money(9.99), this.time1), "Doom 2", 
-                this.lorem, "doom.jpg", 3, 1));
+                new Prezzo(new Money(40.98), this.time1), "Super Mario Galaxy", 
+                this.lorem, "ab4.jpg", 4, 1));
         descrizioni.add(new DescrizioneProdotto(new IDProdotto("ab5"), 
-                new Prezzo(new Money(70.98), this.time1), "GTA V", 
-                this.lorem, "gta5.jpg", 7, 6));
+                new Prezzo(new Money(70.98), this.time1), "GTA IV", 
+                this.lorem, "ab5.jpg", 3, 0));
         descrizioni.add(new DescrizioneProdotto(new IDProdotto("ab6"), 
-                new Prezzo(new Money(53.73), this.time1), "Metal Gear Solid 5", 
-                this.lorem, "metalGear.jpg", 5, 10));
+                new Prezzo(new Money(53.73), this.time1), "Guitar Hero III", 
+                this.lorem, "ab6.jpg", 2, 1));
         descrizioni.add(new DescrizioneProdotto(new IDProdotto("ab7"), 
                 new Prezzo(new Money(20.00), this.time1), "Minecraft", 
                 this.lorem, "minecraft.jpg", 13, 5));
@@ -118,6 +118,21 @@ class DbInitializeSingleton {
         descrizioni.add(new DescrizioneProdotto(new IDProdotto("ab14"), 
                 new Prezzo(new Money(60.98), this.time1), "Watch Dogs", 
                 this.lorem, "watchDogs.jpg", 0, 0));
+        descrizioni.add(new DescrizioneProdotto(new IDProdotto("ab15"), 
+                new Prezzo(new Money(39.98), this.time1), "Angry Birds: Star Wars", 
+                this.lorem, "angryBirds.jpg", 15, 4));
+        descrizioni.add(new DescrizioneProdotto(new IDProdotto("ab16"), 
+                new Prezzo(new Money(30.98), this.time1), "Call of Duty 4: Modern Warfare", 
+                this.lorem, "cod4.jpg", 7, 3));
+        descrizioni.add(new DescrizioneProdotto(new IDProdotto("ab17"), 
+                new Prezzo(new Money(40.98), this.time1), "Diablo 3", 
+                this.lorem, "diablo.jpg", 6, 9));
+        descrizioni.add(new DescrizioneProdotto(new IDProdotto("ab18"), 
+                new Prezzo(new Money(9.99), this.time1), "Doom 2", 
+                this.lorem, "doom.jpg", 3, 1));
+        descrizioni.add(new DescrizioneProdotto(new IDProdotto("ab19"), 
+                new Prezzo(new Money(53.73), this.time1), "Metal Gear Solid 5", 
+                this.lorem, "metalGear.jpg", 5, 10));
         descrizioni.add(new DescrizioneProdotto(new IDProdotto("cd1"), 
                 new Prezzo(new Money(499.99), this.time1), "Xbox One", 
                 this.lorem, "xboxone.jpg", 4, 2));
@@ -133,25 +148,26 @@ class DbInitializeSingleton {
         this.tipiCliente.add(new TipologiaCliente("Gold", "Clienti di fiducia", 1));
         this.tipiCliente.add(new TipologiaCliente("Premium", "Clienti abituali", 2));
         this.tipiCliente.add(new TipologiaCliente("Regular", "Clienti con carta semplice", 3));
-        this.clienti.add(new CartaCliente("Santa", "Pazienza", 1, this.tipiCliente.get(2)));
-        this.clienti.add(new CartaCliente("Margherita", "Pizza", 2, this.tipiCliente.get(1)));
+        this.clienti.add(new CartaCliente("Serafino", "Cicerone", 1, this.tipiCliente.get(1)));
+        this.clienti.add(new CartaCliente("Margherita", "Pizza", 2, this.tipiCliente.get(2)));
         this.clienti.add(new CartaCliente("Guido", "Di Rado", 3, this.tipiCliente.get(0)));
         this.clienti.add(new CartaCliente("Kevin", "Costa", 4, this.tipiCliente.get(1)));
     }
     
     protected void initializeSconti() throws ObjectAlreadyExistsDbException{
         LinkedList<IScontoProdottoStrategy> sconti = new LinkedList<>();
-        LinkedList<TipologiaCliente> applicable = new LinkedList<>();
-        applicable.add(this.tipiCliente.get(1));
-        applicable.add(this.tipiCliente.get(2));
-        sconti.add(new ScontoPercentualeClienteProdottoStrategy(20, time1, applicable));
-        sconti.add(new ScontoPrendiPaghiClienteProdottoStrategy(3, 2, time1, applicable));
+        LinkedList<TipologiaCliente> applicable1 = new LinkedList<>();
+        applicable1.add(this.tipiCliente.get(1));
+        applicable1.add(this.tipiCliente.get(2));
+        LinkedList<TipologiaCliente> applicable2 = new LinkedList<>();
+        applicable2.add(this.tipiCliente.get(1));
+        sconti.add(new ScontoPercentualeClienteProdottoStrategy(20, time1, applicable1));
+        sconti.add(new ScontoPrendiPaghiClienteProdottoStrategy(3, 2, time1, applicable2));
         this.descrizioni.get(1).addSconto(sconti.get(0));
         this.descrizioni.get(9).addSconto(sconti.get(1));
         this.descrizioni.get(11).addSconti(sconti);
         this.descrizioni.get(15).addSconto(sconti.get(1));
         this.descrizioni.get(16).addSconto(sconti.get(0));
-
         DbScontoVenditaSingleton.getInstance().create(new ScontoTotaleVenditaStrategy(new Money(5.0), time1));
     }
 
