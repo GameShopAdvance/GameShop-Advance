@@ -1,0 +1,1 @@
+java -Djava.security.manager -Djava.security.policy=permission.any -jar GameShop_Advance_Customer_Client.jar

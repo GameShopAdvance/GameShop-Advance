@@ -1,0 +1,3 @@
+Vista la presenza di alcuni oggetti dipendenti dal tempo (prezzi, sconti, ecc...), qualora dovessero presentarsi problemi a runtime, si consiglia di cancellare il database del server poichè le istanze usate dall'applicazione sono scadute.
+
+Il team GSA

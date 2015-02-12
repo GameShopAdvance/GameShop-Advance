@@ -7,7 +7,6 @@
 \title{Visione GameShop+}
 \author{Lorenzo Di Giuseppe, Matteo Gentile, Andrea Salini}
 
-
 \begin{document}
   \maketitle
 
@@ -20,6 +19,8 @@
       \hline
       Bozza ideazione & 21.10.2013 & Prima bozza da raffinare
       successivamente & Matteo Gentile, Andrea Salini, Lorenzo Di Giuseppe\\
+      \hline
+      Revisione iterazione 2 & 03.02.2014 & Aggiornati vincoli di implementazione & Matteo Gentile, Andrea Salini, Lorenzo Di Giuseppe\\
       \hline
     \end{tabular}
   \end{center}
@@ -56,10 +57,11 @@ Gli acquirenti del sistema possono adattarlo alle proprie esigenze per raggiunge
  \section*{Vincoli di implementazione}
 
  \subsection*{Componenti open source}
-Nello sviluppo del sistema si vuole massimizzare l'utilizzo di tecnologia Java e dei componenti open source presenti, tra i quali l'ORM Hibernate.
+Nello sviluppo del sistema si vuole massimizzare l'utilizzo di tecnologia Java e dei componenti open source presenti, tra i quali si segnala l’utilizzo del database ad oggetti db4o di Versant.
 
  \subsection*{Architettura del sistema e problematiche legate}
 Il sistema sarà costituito da uno o più “core”, per far fronte alle variazioni di carico, accessibili attraverso una rete LAN da tutti i terminali del punto vendita. Tra di essi vanno considerati quelli di Commessi e del Direttore, oltre che i terminali messi a servizio degli utenti per effettuare le ricerche.
+
 L’architettura di rete deve essere modificabile, ma per semplicità e maggior chiarezza, si faccia riferimento alla figura ~\ref{fig:deploy}, dove è stata riportata una configurazione a stella, ma sarà possibile realizzare diverse configurazioni di rete.
 \begin{figure}[!ht]
 \centering
@@ -73,9 +75,13 @@ L’architettura di rete deve essere modificabile, ma per semplicità e maggior 
  \section*{Interfacce}
  \subsection*{Hardware e interfacce significative}
 Personal Computer installati in negozio.
+
 Lettore laser per il codice a barre (normalmente sono collegati a una tastiera speciale, e l’input della scansione è considerata nel software come tasti premuti).
+
 Stampante per le ricevute.
+
 Stampante per le etichette (codice identificativo, prezzo, status se nuovo o usato) da applicare ai prodotti usati e/o nuovi (da definire).
+
 Lettore di carte di credito o bancomat.
 
  \subsection*{Interfacce software}
