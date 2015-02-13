@@ -23,7 +23,7 @@ The version you can get from here is fully working, but some requirements needs 
 
 ### Technology constraints
 
-GameShopAdvance needs open source software to work properly:
+GameShopAdvance needs some open source software to work properly:
 
 * [Java Runtime Environment] - Java SE Runtime Environment 7
 * [db4o] - database for objects, Java Version
