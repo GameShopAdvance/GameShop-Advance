@@ -89,8 +89,17 @@ If you want to test the customer client, you have to insert products code and qu
 |---------------------------------------------------------------|
 NB. Prices are not realistic.
 
-3.2. Prenote a product:
-
+3.2. Reserve a product:
+To reserve a product you have to interact first with the Customer Client to start up the reservation, and then you have to lead to the cash-box (the Salesman Client) to proceed with the payment and then to complete the reservation.
+You can only reserve a product that is over in the shop, or a product that is not already in commerce.
+Here we report the principal steps needed to reserve a product:
+1)Start the Customer Client;
+2)Select a product, wich quantity is zero;
+3)Proceed with the reservation. The Client will give the ID of the reservation (in a real context the client would give you a ticket).
+4)Start the Salesman Client;
+5)Select the option to complete a reservation;
+6)Insert the reservation ID;
+7)Proceed with the payment of the reservation.
 
 
 4. Warning:
