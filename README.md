@@ -72,6 +72,8 @@ C:\path-to-cloned-GameShopAdvance-directory\build\Client Employee> GSA_client.ba
 
 When a Client is started for the first time must be configured it from the configuration menu in the window. You should insert the IP address of the machine where the application server is running.
 
+GSA stores products in a data-base. Since some products prices or discounts expire in time, if you experiment problems with the application it's suggested to delete the db, that will be created again at runtime. To delete the data-base simply open the server folder and remove "GSA.db".
+
 License
 ----
 
