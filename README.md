@@ -31,8 +31,9 @@ GameShopAdvance needs open source software to work properly:
 
 ### How to run
 
-On a Debian/Ubuntu based machine:
-- Open a command terminal
+<h5>On a Debian/Ubuntu based machine:</h5>
+
+- Open your favorite Terminal and run these commands.
 - Open your /etc/hosts as superuser with your favorite editor
 - Comment out the following line
 - `127.0.1.1  <your-username>` to `#127.0.1.1 <your-username>`
@@ -40,7 +41,7 @@ On a Debian/Ubuntu based machine:
 
 To run the Application server:
 
-```sh
+```
 $ git clone [git-repo-url]
 $ cd GameshopAdvance/build/Server
 $ sh ./GSA_server.sh
@@ -48,21 +49,38 @@ $ sh ./GSA_server.sh
 
 To run the Customer client (assuming that the clone step has already been executed):
 
-```sh
+```
 $ cd GameshopAdvance/build/Client\ Customer
 $ sh ./GSA_client_customer.sh
 ```
 
+<h5>On a Windows based machine:</h5>
+
+- Open a Command window
+
+To run the Application server:
+```
+C:\your-home-directory> cd C:\path-to-cloned-GameShopAdvance-directory\build\Server
+C:\path-to-cloned-GameShopAdvance-directory\build\Server> GSA_server.bat
+```
+To run the Employee client
+```
+C:\your-home-directory> cd C:\path-to-cloned-GameShopAdvance-directory\Client Employee
+C:\path-to-cloned-GameShopAdvance-directory\build\Client Employee> GSA_client.bat
+```
+<h4>Warning:</h4>
+
+When a Client is started for the first time must be configured it from the configuration menu in the window. You should insert the IP address of the machine where the application server is running.
 
 License
 ----
 
 MIT
 
-[darkwiz]:https://github.com/mrsalx
-[mrsalx]:https://github.com/mrsalx
-[Loki88]:https://github.com/Loki88
+[@darkwiz]:https://github.com/mrsalx
+[@mrsalx]:https://github.com/mrsalx
+[@Loki88]:https://github.com/Loki88
 [Java Runtime Environment]:http://www.oracle.com/technetwork/java/javase/downloads/jre7-downloads-1880261.html
-[db4o]:ftp://ftp.versant.com/po/db4o/production/db4o-8.0.276.16149-java.zip
+[db4o]:http://supportservices.actian.com/versant/default.html
 [joda]:https://github.com/Joda
 [git-repo-url]:https://github.com/GameShopAdvance/GameShop-Advance.git
