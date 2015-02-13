@@ -1,4 +1,5 @@
-INDEX:
+HOW TO ...
+
 1. Technology constraints
 2. How to run
   2.1. Debian/Ubuntu
