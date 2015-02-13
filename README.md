@@ -74,15 +74,11 @@ If you want to test the customer client, you have to insert products code and qu
 | Product Code  | Product Name | Price |
 |---------------|--------------|-------|
 | ab1           | Half Life 2  | 29.98 |
-|---------------|--------------|-------|
 | ab2           | Enemy Territory: Quake Wars  | 19.99 |
-|---------------|--------------|-------|
 | ab3           | Half Life 2  | 29.98 |
-|---------------|--------------|-------|
 | ab4           | Half Life 2  | 29.98 |
-|---------------|--------------|-------|
 | ab5           | Half Life 2  | 29.98 |
-|---------------|--------------|-------|
+
 
 <h4>Warning:</h4>
 
