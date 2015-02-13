@@ -1,4 +1,16 @@
-﻿### Technology constraints
+INDEX:
+1. Technology constraints
+2. How to run
+  2.1. Debian/Ubuntu
+  2.2. Windows
+3. How to test
+  3.1. Product list
+  3.2. Prenotation
+4. Warning
+
+============================================================================================================
+
+1. Technology constraints
 
 GameShopAdvance needs some open source software to work properly:
 
@@ -6,9 +18,9 @@ GameShopAdvance needs some open source software to work properly:
 * [db4o] - database for objects, Java Version
 * [joda] - Joda-Time is the *de facto* standard date and time library for Java. (2.3 release and greater)
 
-### How to run
+2. How to run
 
-<h5>On a Debian/Ubuntu based machine:</h5>
+2.1. On a Debian/Ubuntu based machine:
 
 - Open your favorite Terminal and run these commands.
 - Open your /etc/hosts as superuser with your favorite editor
@@ -19,63 +31,68 @@ GameShopAdvance needs some open source software to work properly:
 To run the Application server:
 
 ```
-$ git clone [git-repo-url]
 $ cd GameshopAdvance/build/Server
 $ sh ./GSA_server.sh
 ```
 
-To run the Customer client (assuming that the clone step has already been executed):
+To run the Customer client:
 
 ```
 $ cd GameshopAdvance/build/Client\ Customer
 $ sh ./GSA_client_customer.sh
 ```
 
-<h5>On a Windows based machine:</h5>
+2.2. On a Windows based machine:
 
 - Open a Command window
 
 To run the Application server:
 ```
-C:\your-home-directory> cd C:\path-to-cloned-GameShopAdvance-directory\build\Server
-C:\path-to-cloned-GameShopAdvance-directory\build\Server> GSA_server.bat
+C:\your-home-directory> cd C:\path-to-GameShopAdvance-directory\build\Server
+C:\path-to-GameShopAdvance-directory\build\Server> GSA_server.bat
 ```
 To run the Employee client
 ```
-C:\your-home-directory> cd C:\path-to-cloned-GameShopAdvance-directory\Client Employee
-C:\path-to-cloned-GameShopAdvance-directory\build\Client Employee> GSA_client.bat
+C:\your-home-directory> cd C:\path-to-GameShopAdvance-directory\Client Employee
+C:\path-to-GameShopAdvance-directory\build\Client Employee> GSA_client.bat
 ```
-<h4>How to test:</h4>
+3. How to test:
+
+3.1. Product list:
 If you want to test the customer client, you have to insert products code and quantity to conclude a sale. Quantity is just a number, codes at this point of development are just strings but they generally follow some standard. These are the available products and them codes:
 
-| Product Code  | Product Name | Price |
-|---------------|--------------|-------|
-| ab1           | Half Life 2  | 29.98 |
-| ab2           | Enemy Territory: Quake Wars  | 19.99 |
-| ab3           | Diablo 2  | 40.98 |
-| ab4           | Super Mario Galaxy  | 40.98 |
-| ab5           | GTA IV  | 70.98 |
-| ab6           | Guitar Hero III  | 53.73 |
-| ab7           | Minecraft  | 20.00 |
-| ab8           | Il segreto di Monkey Island  | 43.50 |
-| ab9           | NBA Live 2014  | 41.98 |
-| ab10          | Pes 2014  | 30.98 |
-| ab11          | Skyrim  | 40.98 |
-| ab12          | South Park: il bastone della verità  | 50.98 |
-| ab13          | Super Mario Bros U  | 35.98 |
-| ab14          | Watch Dogs  | 60.98 |
-| ab15          | Angry Birds: Star Wars  | 39.98 |
-| ab16          | Call of Duty 4: Modern Warfare  | 30.98 |
-| ab17          | Diablo 3  | 40.98 |
-| ab18          | Doom 2  | 9.99 |
-| ab19          | Metal Gear Solid 5  | 53.73 |
-| cd1           | Xbox One  | 499.99 |
-| cd2           | Joystick PS4  | 40.98 |
-| cd3           | Cuffie Wi-Fi  | 80.98 |
-
+| Product Code  | Product Name                         | Price  |
+|---------------|--------------------------------------|--------|
+| ab1           | Half Life 2                          | 29.98  |
+| ab2           | Enemy Territory: Quake Wars          | 19.99  |
+| ab3           | Diablo 2                             | 40.98  |
+| ab4           | Super Mario Galaxy                   | 40.98  |
+| ab5           | GTA IV                               | 70.98  |
+| ab6           | Guitar Hero III                      | 53.73  |
+| ab7           | Minecraft                            | 20.00  |
+| ab8           | Il segreto di Monkey Island          | 43.50  |
+| ab9           | NBA Live 2014                        | 41.98  |
+| ab10          | Pes 2014                             | 30.98  |
+| ab11          | Skyrim                               | 40.98  |
+| ab12          | South Park: il bastone della verità  | 50.98  |
+| ab13          | Super Mario Bros U                   | 35.98  |
+| ab14          | Watch Dogs                           | 60.98  |
+| ab15          | Angry Birds: Star Wars               | 39.98  |
+| ab16          | Call of Duty 4: Modern Warfare       | 30.98  |
+| ab17          | Diablo 3                             | 40.98  |
+| ab18          | Doom 2                               | 9.99   |
+| ab19          | Metal Gear Solid 5                   | 53.73  |
+| cd1           | Xbox One                             | 499.99 |
+| cd2           | Joystick PS4                         | 40.98  |
+| cd3           | Cuffie Wi-Fi                         | 80.98  |
+|---------------------------------------------------------------|
 NB. Prices are not realistic.
 
-<h4>Warning:</h4>
+3.2. Prenote a product:
+
+
+
+4. Warning:
 
 When a Client is started for the first time must be configured it from the configuration menu in the window. You should insert the IP address of the machine where the application server is running.
 
