@@ -75,10 +75,28 @@ If you want to test the customer client, you have to insert products code and qu
 |---------------|--------------|-------|
 | ab1           | Half Life 2  | 29.98 |
 | ab2           | Enemy Territory: Quake Wars  | 19.99 |
-| ab3           | Half Life 2  | 29.98 |
-| ab4           | Half Life 2  | 29.98 |
-| ab5           | Half Life 2  | 29.98 |
+| ab3           | Diablo 2  | 40.98 |
+| ab4           | Super Mario Galaxy  | 40.98 |
+| ab5           | GTA IV  | 70.98 |
+| ab6           | Guitar Hero III  | 53.73 |
+| ab7           | Minecraft  | 20.00 |
+| ab8           | Il segreto di Monkey Island  | 43.50 |
+| ab9           | NBA Live 2014  | 41.98 |
+| ab10          | Pes 2014  | 30.98 |
+| ab11          | Skyrim  | 40.98 |
+| ab12          | South Park: il bastone della verità  | 50.98 |
+| ab13          | Super Mario Bros U  | 35.98 |
+| ab14          | Watch Dogs  | 60.98 |
+| ab15          | Angry Birds: Star Wars  | 39.98 |
+| ab16          | Call of Duty 4: Modern Warfare  | 30.98 |
+| ab17          | Diablo 3  | 40.98 |
+| ab18          | Doom 2  | 9.99 |
+| ab19          | Metal Gear Solid 5  | 53.73 |
+| cd1           | Xbox One  | 499.99 |
+| cd2           | Joystick PS4  | 40.98 |
+| cd3           | Cuffie Wi-Fi  | 80.98 |
 
+NB. Prices are not realistic.
 
 <h4>Warning:</h4>
 
